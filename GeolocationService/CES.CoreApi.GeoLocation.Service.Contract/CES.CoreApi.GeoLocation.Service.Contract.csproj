@@ -1,0 +1,97 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{E0888526-1DC6-4693-88A3-7347A99BC018}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>CES.CoreApi.GeoLocation.Service.Contract</RootNamespace>
+    <AssemblyName>CES.CoreApi.GeoLocation.Service.Contract</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.ServiceModel" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Enumerations\Confidence.cs" />
+    <Compile Include="Enumerations\DataProvider.cs" />
+    <Compile Include="Enumerations\ImageFormat.cs" />
+    <Compile Include="Enumerations\MapDisplayStyle.cs" />
+    <Compile Include="Enumerations\PinColor.cs" />
+    <Compile Include="Interfaces\IAddressService.cs" />
+    <Compile Include="Interfaces\IGeocodeService.cs" />
+    <Compile Include="Interfaces\IHealthMonitoringService.cs" />
+    <Compile Include="Interfaces\IMapService.cs" />
+    <Compile Include="Interfaces\IRequestValidator.cs" />
+    <Compile Include="Models\AddressRequest.cs" />
+    <Compile Include="Models\AutocompleteAddressRequest.cs" />
+    <Compile Include="Models\AutocompleteAddressResponse.cs" />
+    <Compile Include="Models\AutocompleteAddress.cs" />
+    <Compile Include="Models\ClearCacheResponse.cs" />
+    <Compile Include="Models\GeocodeAddress.cs" />
+    <Compile Include="Models\GeocodeAddressRequest.cs" />
+    <Compile Include="Models\GeocodeAddressResponse.cs" />
+    <Compile Include="Models\GeocodeFormattedAddressRequest.cs" />
+    <Compile Include="Models\GetMapRequest.cs" />
+    <Compile Include="Models\GetMapResponse.cs" />
+    <Compile Include="Models\HealthResponse.cs" />
+    <Compile Include="Models\Location.cs" />
+    <Compile Include="Models\MapOutputParameters.cs" />
+    <Compile Include="Models\MapSize.cs" />
+    <Compile Include="Models\PushPin.cs" />
+    <Compile Include="Models\ReverseGeocodePointRequest.cs" />
+    <Compile Include="Models\ValidateAddressRequest.cs" />
+    <Compile Include="Models\ValidateAddressResponse.cs" />
+    <Compile Include="Models\ValidateFormattedAddressRequest.cs" />
+    <Compile Include="Models\ValidatedAddress.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="ClassDiagram1.cd" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\Foundation\CES.CoreApi.Common\CES.CoreApi.Common.csproj">
+      <Project>{070C7BB2-AF07-4A4C-A9CC-6BFB8CA416E6}</Project>
+      <Name>CES.CoreApi.Common</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Foundation\CES.CoreApi.Foundation.Contract\CES.CoreApi.Foundation.Contract.csproj">
+      <Project>{8DBCFE15-CA3B-4F7C-A7D6-D73F8F0B91AA}</Project>
+      <Name>CES.CoreApi.Foundation.Contract</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Foundation\CES.CoreApi.Foundation\CES.CoreApi.Foundation.csproj">
+      <Project>{E2B71A13-9683-4862-B2EB-31050190AFDC}</Project>
+      <Name>CES.CoreApi.Foundation</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

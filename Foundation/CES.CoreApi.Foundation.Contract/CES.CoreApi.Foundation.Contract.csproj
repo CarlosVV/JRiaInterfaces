@@ -1,0 +1,108 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{8DBCFE15-CA3B-4F7C-A7D6-D73F8F0B91AA}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>CES.CoreApi.Foundation.Contract</RootNamespace>
+    <AssemblyName>CES.CoreApi.Foundation.Contract</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">..\</SolutionDir>
+    <RestorePackages>true</RestorePackages>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.IdentityModel" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.ServiceModel" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Attributes\ErrorMessageAttribute.cs" />
+    <Compile Include="Attributes\SubSystemErrorNumberAttribute.cs" />
+    <Compile Include="Attributes\SystemErrorNumberAttribute.cs" />
+    <Compile Include="Constants\ServiceConfigurationItems.cs" />
+    <Compile Include="Enumerations\Organization.cs" />
+    <Compile Include="Enumerations\ResponseStatus.cs" />
+    <Compile Include="Enumerations\ServiceSecurityMode.cs" />
+    <Compile Include="Enumerations\SubSystemError.cs" />
+    <Compile Include="Enumerations\TechnicalSubSystem.cs" />
+    <Compile Include="Enumerations\TechnicalSystem.cs" />
+    <Compile Include="Exceptions\CoreApiException.cs" />
+    <Compile Include="Interfaces\IApplicationRepository.cs" />
+    <Compile Include="Interfaces\IApplicationAuthenticator.cs" />
+    <Compile Include="Interfaces\IApplicationValidator.cs" />
+    <Compile Include="Interfaces\IAuthenticationManager.cs" />
+    <Compile Include="Interfaces\IAuthorizationAdministrator.cs" />
+    <Compile Include="Interfaces\IAuthorizationManager.cs" />
+    <Compile Include="Interfaces\IClientSecurityContextProvider.cs" />
+    <Compile Include="Interfaces\IConfigurationProvider.cs" />
+    <Compile Include="Interfaces\IHostApplicationProvider.cs" />
+    <Compile Include="Interfaces\IMappingHelper.cs" />
+    <Compile Include="Interfaces\IRequestHeadersProvider.cs" />
+    <Compile Include="Interfaces\IServiceCallHeaderParametersProvider.cs" />
+    <Compile Include="Interfaces\IServiceConfigurationProvider.cs" />
+    <Compile Include="Interfaces\IServiceExceptionHandler.cs" />
+    <Compile Include="Models\BaseRequest.cs" />
+    <Compile Include="Models\BaseResponse.cs" />
+    <Compile Include="Models\BehaviorConfiguration.cs" />
+    <Compile Include="Models\BindingConfiguration.cs" />
+    <Compile Include="Models\CoreApiServiceFault.cs" />
+    <Compile Include="Models\EndpointConfiguration.cs" />
+    <Compile Include="Models\ReaderQuotasConfiguration.cs" />
+    <Compile Include="Models\ReliableSessionConfiguration.cs" />
+    <Compile Include="Models\SecurityConfiguration.cs" />
+    <Compile Include="Models\ServiceCallHeaderParameters.cs" />
+    <Compile Include="Models\ServiceConfiguration.cs" />
+    <Compile Include="Models\ServiceEndpoint.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\CES.CoreApi.Common\CES.CoreApi.Common.csproj">
+      <Project>{070C7BB2-AF07-4A4C-A9CC-6BFB8CA416E6}</Project>
+      <Name>CES.CoreApi.Common</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <Import Project="$(SolutionDir)\.nuget\NuGet.targets" Condition="Exists('$(SolutionDir)\.nuget\NuGet.targets')" />
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>This project references NuGet package(s) that are missing on this computer. Enable NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('$(SolutionDir)\.nuget\NuGet.targets')" Text="$([System.String]::Format('$(ErrorText)', '$(SolutionDir)\.nuget\NuGet.targets'))" />
+  </Target>
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

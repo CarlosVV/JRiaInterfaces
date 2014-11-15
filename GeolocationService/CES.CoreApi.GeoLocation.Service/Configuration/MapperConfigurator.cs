@@ -1,0 +1,41 @@
+﻿using AutoMapper;
+using CES.CoreApi.Common.Interfaces;
+using CES.CoreApi.GeoLocation.Service.Business.Contract.Enumerations;
+using CES.CoreApi.GeoLocation.Service.Business.Contract.Models;
+using CES.CoreApi.GeoLocation.Service.Contract.Enumerations;
+using CES.CoreApi.GeoLocation.Service.Contract.Models;
+
+namespace CES.CoreApi.GeoLocation.Service.Configuration
+{
+    public class MapperConfigurator
+    {
+        public static void Configure(IIocContainer container)
+        {
+            Mapper.CreateMap<AddressRequest, AddressModel>();
+            Mapper.CreateMap<AddressModel, AddressRequest>();
+            Mapper.CreateMap<AddressModel, ValidatedAddress>();
+            Mapper.CreateMap<AddressModel, AutocompleteAddress>();
+            Mapper.CreateMap<AddressModel, GeocodeAddress>();
+            Mapper.CreateMap<Location, LocationModel>();
+            Mapper.CreateMap<MapSize, MapSizeModel>();
+            Mapper.CreateMap<PushPin, PushPinModel>();
+            Mapper.CreateMap<MapOutputParameters, MapOutputParametersModel>();
+            Mapper.CreateMap<Confidence, LevelOfConfidence>();
+            Mapper.CreateMap<LevelOfConfidence, Confidence>();
+            Mapper.CreateMap<PinColor, Color>();
+            Mapper.CreateMap<DataProviderType, DataProvider>();
+            Mapper.CreateMap<LocationModel, Location>();
+            Mapper.CreateMap<ValidateAddressResponseModel, ValidateAddressResponse>().ConstructUsingServiceLocator();
+            Mapper.CreateMap<AutocompleteAddressResponseModel, AutocompleteAddressResponse>().ConstructUsingServiceLocator();
+            Mapper.CreateMap<HealthResponseModel, HealthResponse>().ConstructUsingServiceLocator();
+            Mapper.CreateMap<ClearCacheResponseModel, ClearCacheResponse>().ConstructUsingServiceLocator();
+            Mapper.CreateMap<GeocodeAddressResponseModel, GeocodeAddressResponse>().ConstructUsingServiceLocator();
+            Mapper.CreateMap<GeocodeAddressResponseModel, GeocodeAddressResponse>().ConstructUsingServiceLocator();
+            Mapper.CreateMap<GetMapResponseModel, GetMapResponse>().ConstructUsingServiceLocator();
+
+            Mapper.Configuration.ConstructServicesUsing(container.Resolve);
+
+            //Mapper.AssertConfigurationIsValid();
+        }
+    }
+}
