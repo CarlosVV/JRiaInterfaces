@@ -18,7 +18,7 @@ namespace CES.CoreApi.Logging.Monitors
         /// <param name="dataContainer">Trace log data container instance</param>
         /// <param name="logManager">Log manager instance</param>
         /// <param name="configuration">Trace log configuration </param>
-        public TraceLogMonitor(TraceLogDataContainer dataContainer,
+        public TraceLogMonitor(ITraceLogDataContainer dataContainer,
             ILogManager logManager,
             ILogConfigurationProvider configuration)
         {
@@ -41,7 +41,7 @@ namespace CES.CoreApi.Logging.Monitors
         /// <summary>
         /// Gets or sets trace log data container instance
         /// </summary>
-        public TraceLogDataContainer DataContainer { get; private set; }
+        public ITraceLogDataContainer DataContainer { get; private set; }
 
         #endregion //Properties
 
@@ -72,7 +72,7 @@ namespace CES.CoreApi.Logging.Monitors
                 throw new ApplicationException("Trace Monitor is not running. Start method should be called before Stop.");
             
             _isStarted = false;
-            _logManager.Publish(DataContainer);
+            _logManager.Publish(DataContainer as IDataContainer);
         }
 
         #endregion //Public methods

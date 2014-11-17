@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Globalization;
 using System.Runtime.Serialization;
-using CES.CoreApi.Common.Enumerations;
 
 namespace CES.CoreApi.Common.Models
 {
@@ -12,17 +11,14 @@ namespace CES.CoreApi.Common.Models
     {
         #region Core
 
-        public Application(int id, ApplicationType applicationType, string name, bool isActive)
+        public Application(int id, string name, bool isActive)
         {
             if (id <= 0)
                 throw new ArgumentOutOfRangeException("id", string.Format(CultureInfo.InvariantCulture, "Invalid application ID = '{0}'", id));
-            if (applicationType == ApplicationType.Undefined)
-                throw new ArgumentOutOfRangeException("applicationType", "ApplicationType is undefined.");
             if (string.IsNullOrEmpty(name))
                 throw  new ArgumentNullException("name");
 
             Id = id;
-            ApplicationType = applicationType;
             Name = name;
             IsActive = isActive;
             
@@ -37,9 +33,6 @@ namespace CES.CoreApi.Common.Models
 
         [DataMember]
         public int Id { get; private set; }
-
-        [DataMember]
-        public ApplicationType ApplicationType { get; private set; }
 
         [DataMember]
         public string Name { get; private set; }

@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using CES.CoreApi.Common.Interfaces;
 using CES.CoreApi.Common.Models;
 
 namespace CES.CoreApi.Foundation.Contract.Interfaces
@@ -6,7 +7,7 @@ namespace CES.CoreApi.Foundation.Contract.Interfaces
     public interface IApplicationRepository
     {
         Application GetApplication(int applicationId);
-        HostApplication GetApplication(int applicationId, int serverId);
+        IHostApplication GetApplication(int applicationId, int serverId);
 
         /// <summary>
         /// Gets application configuration items collection

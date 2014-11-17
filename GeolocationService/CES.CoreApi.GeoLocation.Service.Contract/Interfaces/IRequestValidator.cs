@@ -11,5 +11,7 @@ namespace CES.CoreApi.GeoLocation.Service.Contract.Interfaces
         void Validate(GeocodeFormattedAddressRequest request);
         void Validate(ReverseGeocodePointRequest request);
         void Validate(GetMapRequest request);
+        void Validate(GetProviderKeyRequest request);
+        void Validate(LogEventRequest request);
     }
 }

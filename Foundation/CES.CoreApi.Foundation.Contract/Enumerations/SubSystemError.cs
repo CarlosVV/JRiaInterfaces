@@ -102,63 +102,42 @@ namespace CES.CoreApi.Foundation.Contract.Enumerations
         ServiceIntializationConfigurationNotFound,
 
         [SubSystemErrorNumber("00306")]
-        [ErrorMessage("No behaviors defined in configuration.")]
-        ServiceIntializationNoBehaviorsFound,
-
-        [SubSystemErrorNumber("00307")]
-        [ErrorMessage("Binding configuration not found in service configuration. Binding = '{0}'. Binding Configuration Name = '{1}'")]
-        ServiceIntializationBindingConfigurationNotFound,
-
-        [SubSystemErrorNumber("00308")]
         [ErrorMessage("No endpoints defined in configuration for interface. Interface = '{0}'.")]
         ServiceIntializationNoEndpointsFoundForInterface,
         
-
         #endregion
 
         #region Geolocation service related errors
 
         [SubSystemErrorNumber("00400")]
-        [ErrorMessage("Data provider response code was not successfull. Data Provider: {0}, Response Code: {1}.")]
-        GeolocationDataProviderResponseUnSuccessfull,
-
-        //[SubSystemErrorNumber("00401")]
-        //[ErrorMessage("Data provider response XML parsing was not successfull. No XML document root found. Data Provider: {0}, Raw Response: {1}.")]
-        //GeolocationDataProviderResponseXmlDoesNotHaveRoot,
-
-        [SubSystemErrorNumber("00402")]
         [ErrorMessage("Url template not found in configuration. Data Provider: '{0}'. Configuration Name: '{1}'")]
         GeolocationUrlTemplateNotFound,
 
-        [SubSystemErrorNumber("00403")]
-        [ErrorMessage("Url builder is not registered in IoC container. Data Provider: '{0}'. Service Type: '{1}'")]
-        GeolocationUrlBuilderNotRegisteredInContainer,
-
-        [SubSystemErrorNumber("00404")]
+        [SubSystemErrorNumber("00401")]
         [ErrorMessage("Factory entity is not registered in IoC container. Data Provider: '{0}'. Factory Entity: '{1}'")]
         GeolocationFactoryEntityNotRegisteredInContainer,
 
-        [SubSystemErrorNumber("00405")]
+        [SubSystemErrorNumber("00402")]
         [ErrorMessage("The license key was not found in configuration. Data Provider: '{0}'.")]
         GeolocationLicenseKeyNotFound,
 
-        [SubSystemErrorNumber("00406")]
+        [SubSystemErrorNumber("00403")]
         [ErrorMessage("The reverse geocoding is not supported by selected data provider. Data Provider: '{0}'.")]
         GeolocationReverseGeocodingIsNotSupported,
 
-        [SubSystemErrorNumber("00407")]
+        [SubSystemErrorNumber("00404")]
         [ErrorMessage("Data provider for specified service was not found. Data Provider Service Type: '{0}'.")]
         GeolocationDataProviderNotFound,
 
-        [SubSystemErrorNumber("00408")]
+        [SubSystemErrorNumber("00405")]
         [ErrorMessage("Unsupported factory entity detected. Factory Entity: '{0}'.")]
         GeolocationUnsupportedFactoryEntity,
 
-        [SubSystemErrorNumber("00409")]
+        [SubSystemErrorNumber("00406")]
         [ErrorMessage("The mapping is not supported by selected data provider. Data Provider: '{0}'.")]
         GeolocationMappingIsNotSupported,
 
-        [SubSystemErrorNumber("00410")]
+        [SubSystemErrorNumber("00407")]
         [ErrorMessage("The requested location information was not found in data provider response. Data Provider: '{0}'.")]
         GeolocationLocationIsNotFoundInResponse,
         

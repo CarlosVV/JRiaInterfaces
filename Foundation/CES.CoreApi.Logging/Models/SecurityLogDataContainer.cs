@@ -7,6 +7,7 @@ using Newtonsoft.Json.Converters;
 
 namespace CES.CoreApi.Logging.Models
 {
+    [JsonObject(MemberSerialization.OptIn)]
     public class SecurityLogDataContainer : IDataContainer
     {
         #region Core

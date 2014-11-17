@@ -7,7 +7,7 @@ namespace CES.CoreApi.Logging.Interfaces
         /// <summary>
         /// Gets or sets trace log data container instance
         /// </summary>
-        TraceLogDataContainer DataContainer { get; }
+        ITraceLogDataContainer DataContainer { get; }
 
         /// <summary>
         /// Starts performance log monitoring

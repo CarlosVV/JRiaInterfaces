@@ -41,7 +41,11 @@
     <Compile Include="Enumerations\ImageFormat.cs" />
     <Compile Include="Enumerations\MapDisplayStyle.cs" />
     <Compile Include="Enumerations\PinColor.cs" />
+    <Compile Include="Models\LogEventRequest.cs" />
+    <Compile Include="Models\GetProviderKeyRequest.cs" />
+    <Compile Include="Models\GetProviderKeyResponse.cs" />
     <Compile Include="Interfaces\IAddressService.cs" />
+    <Compile Include="Interfaces\IClientSideSupportService.cs" />
     <Compile Include="Interfaces\IGeocodeService.cs" />
     <Compile Include="Interfaces\IHealthMonitoringService.cs" />
     <Compile Include="Interfaces\IMapService.cs" />

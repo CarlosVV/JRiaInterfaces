@@ -7,6 +7,7 @@ using CES.CoreApi.Common.Models;
 using CES.CoreApi.Foundation.Contract.Enumerations;
 using CES.CoreApi.Foundation.Contract.Exceptions;
 using CES.CoreApi.Foundation.Contract.Interfaces;
+using CES.CoreApi.Foundation.Contract.Models;
 using CES.CoreApi.Logging.Interfaces;
 using CES.CoreApi.Logging.Models;
 
@@ -84,22 +85,28 @@ namespace CES.CoreApi.Foundation.Security
 
             var application = _repository.GetApplication(headerParameters.ApplicationId);
 
+            if (application == null)
+            {
+                var exception = new CoreApiException(TechnicalSubSystem.CoreApiData,
+                    SubSystemError.ApplicationNotFoundInDatabase, headerParameters.ApplicationId);
+
+                //Get audit parameters
+                var auditParameters = GetAuditParameters(headerParameters);
+
+                //Log security audit failure
+                _securityAuditLogger.LogFailure(auditParameters, exception.ClientMessage);
+
+                throw exception;
+            }
+
             if (!_applicationValidator.Validate(application))
             {
                 var exception = new CoreApiException(TechnicalSubSystem.Authentication,
                     SubSystemError.ClientApplicationDoesNotExistOrInactive,
                     headerParameters.ApplicationId);
 
-                //Get host application details
-                var hostApplication = _hostApplicationProvider.GetApplication();
-
-                var auditParameters = new SecurityAuditParameters
-                {
-                    ClientApplicationId = headerParameters.ApplicationId,
-                    Operation = headerParameters.OperationName,
-                    ServerId = hostApplication.ServerId,
-                    ServiceApplicationId = hostApplication.Id
-                };
+                //Get audit parameters
+                var auditParameters = GetAuditParameters(headerParameters);
 
                 //Log security audit failure
                 _securityAuditLogger.LogFailure(auditParameters, exception.ClientMessage);
@@ -109,7 +116,26 @@ namespace CES.CoreApi.Foundation.Security
 
             return application;
         }
-        
+
+        /// <summary>
+        /// Get parameters for audit logging
+        /// </summary>
+        /// <param name="headerParameters"></param>
+        /// <returns></returns>
+        private SecurityAuditParameters GetAuditParameters(ServiceCallHeaderParameters headerParameters)
+        {
+            //Get host application details
+            var hostApplication = _hostApplicationProvider.GetApplication();
+
+            return new SecurityAuditParameters
+            {
+                ClientApplicationId = headerParameters.ApplicationId,
+                Operation = headerParameters.OperationName,
+                ServerId = hostApplication.ServerId,
+                ServiceApplicationId = hostApplication.Id
+            };
+        }
+
         #endregion
     }
 }

@@ -80,6 +80,7 @@
     <Compile Include="Interfaces\IGenericArgumentListFormatter.cs" />
     <Compile Include="Interfaces\ILog4NetProxy.cs" />
     <Compile Include="Log4Net\Log4NetProxy.cs" />
+    <Compile Include="Interfaces\ITraceLogDataContainer.cs" />
     <Compile Include="Models\PerformanceLogDataContainer.cs" />
     <Compile Include="Interfaces\IPerformanceLogMonitor.cs" />
     <Compile Include="Models\SecurityAuditParameters.cs" />

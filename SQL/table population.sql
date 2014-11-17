@@ -6,13 +6,7 @@ truncate table Application_ApplicationServer
 delete from [dbo].[ServiceOperation]
 delete from Application
 delete from ApplicationServer
-delete from ApplicationType
 
---Populate application type table
-
-insert into ApplicationType ([ApplicationTypeID], [Description]) values (1, 'Core API service')
-insert into ApplicationType ([ApplicationTypeID], [Description]) values (2, 'Partner API service')
-insert into ApplicationType ([ApplicationTypeID], [Description]) values (3, 'Web application')
 
 --Populate server table
 insert into ApplicationServer ([ApplicationServerID], Name, [Description]) values (1, 'CoreAPISrv1', 'Core API services server #1')
@@ -21,14 +15,14 @@ insert into ApplicationServer ([ApplicationServerID], Name, [Description]) value
 insert into ApplicationServer ([ApplicationServerID], Name, [Description]) values (4, 'CoreAPISrv4', 'Core API services server #4')
 
 --Populate Application table
-insert into [Application] (ApplicationID, ApplicationTypeID, IsActive, Name)
-	values (1, 1, 1, 'Parent application for every Core API service')
-insert into [Application] (ApplicationID, ApplicationTypeID, ParentApplicationID, IsActive, Name)
-	values (1000, 2, 1, 1, 'Geolocation Core API service')
-insert into [Application] (ApplicationID, ApplicationTypeID, ParentApplicationID, IsActive, Name)
-	values (2000, 3, 1, 1, 'Test web application')
-insert into [Application] (ApplicationID, ApplicationTypeID, ParentApplicationID, IsActive, Name)
-	values (3000, 3, 1, 0, 'Test web application #2')
+insert into [Application] (ApplicationID, IsActive, Name)
+	values (1, 1, 'Parent application for every Core API service')
+insert into [Application] (ApplicationID, ParentApplicationID, IsActive, Name)
+	values (1000, 1, 1, 'Geolocation Core API service')
+insert into [Application] (ApplicationID, ParentApplicationID, IsActive, Name)
+	values (2000, 1, 1, 'Test web application')
+insert into [Application] (ApplicationID, ParentApplicationID, IsActive, Name)
+	values (3000, 1, 0, 'Test web application #2')
 
 --Populate Application_ApplicationServer table
 insert into Application_ApplicationServer (ApplicationID, ApplicationServerID, IsActive) values (1, 1, 1)
@@ -86,10 +80,10 @@ insert into Application_ServiceOperation (ApplicationID, ServiceOperationID, IsA
 
 --Populate ApplicationConfiguration
 --Foundation configuration
-insert ApplicationConfiguration (ApplicationID, ConfigurationName, ConfigurationValue, [Description])
-	values(1, 'CacheName', 'CoreAPI', 'Name of Core API region in appFabric cache')
-insert ApplicationConfiguration (ApplicationID, ConfigurationName, ConfigurationValue, [Description])
-	values(1, 'CacheLifetime', '0.01:00:00', 'Core API cache lifetime in days.hours:minutes:seconds')
+--insert ApplicationConfiguration (ApplicationID, ConfigurationName, ConfigurationValue, [Description])
+--	values(1, 'CacheName', 'CoreAPI', 'Name of Core API region in appFabric cache')
+--insert ApplicationConfiguration (ApplicationID, ConfigurationName, ConfigurationValue, [Description])
+--	values(1, 'CacheLifetime', '0.01:00:00', 'Core API cache lifetime in days.hours:minutes:seconds')
 
 --Geolocation configuration
 insert ApplicationConfiguration (ApplicationID, ConfigurationName, ConfigurationValue, [Description])
@@ -200,7 +194,7 @@ insert ApplicationConfiguration (ApplicationID, ConfigurationName, Configuration
 		},
 		{
 			"DataProviderServiceType": "Geocoding",
-			"DataProviderType": "melissadata",
+			"DataProviderType": "google",
 			"Priority": 1
 		},
 		{

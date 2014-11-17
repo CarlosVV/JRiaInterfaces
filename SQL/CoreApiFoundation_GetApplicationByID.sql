@@ -31,8 +31,7 @@ BEGIN
     SET NOCOUNT ON;      
 
 	--Select applicaiton details
-	select	ApplicationTypeID,
-			IsActive,
+	select	IsActive,
 			Name
 	from [Application]
 	where ApplicationID = @applicationId

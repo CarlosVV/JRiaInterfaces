@@ -1,4 +1,5 @@
 ﻿using System;
+using CES.CoreApi.Common.Interfaces;
 using CES.CoreApi.Common.Models;
 using CES.CoreApi.Foundation.Configuration;
 using CES.CoreApi.Foundation.Contract.Constants;
@@ -30,7 +31,7 @@ namespace CES.CoreApi.Foundation.Providers
         /// 1. ApplicationId defined in config file
         /// 2. ServerId defined in config file
         /// </summary>
-        public HostApplication GetApplication()
+        public IHostApplication GetApplication()
         {
             //Get host application ID and server ID from config file and validate them
             var applicationId = ConfigurationTools.ReadAppSettingsValue<int>(ServiceConfigurationItems.AppplicationId);

@@ -3,6 +3,7 @@ using System.Linq;
 using System.Security.Principal;
 using System.ServiceModel;
 using System.Threading;
+using CES.CoreApi.Common.Interfaces;
 using CES.CoreApi.Common.Models;
 using CES.CoreApi.Foundation.Contract.Enumerations;
 using CES.CoreApi.Foundation.Contract.Exceptions;
@@ -127,9 +128,9 @@ namespace CES.CoreApi.Foundation.Security
         /// </summary>
         /// <param name="hostApplication"></param>
         /// <param name="auditParameters"></param>
-        private void ValidateHostApplication(HostApplication hostApplication, SecurityAuditParameters auditParameters)
+        private void ValidateHostApplication(IHostApplication hostApplication, SecurityAuditParameters auditParameters)
         {
-            if (!_applicationValidator.Validate(hostApplication))
+            if (!_applicationValidator.Validate(hostApplication as Application))
             {
                 var exception =  new CoreApiException(TechnicalSubSystem.Authentication,
                     SubSystemError.HostApplicationDoesNotExistOrInactive,
@@ -164,7 +165,7 @@ namespace CES.CoreApi.Foundation.Security
         /// <param name="hostApplication">Host application instance</param>
         /// <param name="operationName">Operation name to validate</param>
         /// <param name="auditParameters"></param>
-        private void ValidateHostApplicationOperation(Application hostApplication, string operationName, SecurityAuditParameters auditParameters)
+        private void ValidateHostApplicationOperation(IHostApplication hostApplication, string operationName, SecurityAuditParameters auditParameters)
         {
             //Validate operation existence
             var operation = hostApplication.Operations.FirstOrDefault(
@@ -205,7 +206,7 @@ namespace CES.CoreApi.Foundation.Security
         /// <param name="operationName">Host service application method name</param>
         /// <param name="clientApplicationId">Client application identifier</param>
         /// <param name="auditParameters"></param>
-        private void ValidateOperationAccess(Application hostApplication, string operationName, int clientApplicationId, SecurityAuditParameters auditParameters)
+        private void ValidateOperationAccess(IHostApplication hostApplication, string operationName, int clientApplicationId, SecurityAuditParameters auditParameters)
         {
             var assignedApplication = (from operation in hostApplication.Operations
                 where operation.Name.Equals(operationName, StringComparison.OrdinalIgnoreCase)

@@ -62,6 +62,7 @@
     <Compile Include="Processors\AddressServiceRequestProcessor.cs" />
     <Compile Include="Parsers\BaseDataResponseParser.cs" />
     <Compile Include="Processors\BaseServiceRequestProcessor.cs" />
+    <Compile Include="Processors\ClientSideSupportServiceProcessor.cs" />
     <Compile Include="Processors\GeocodeServiceRequestProcessor.cs" />
     <Compile Include="Processors\HealthMonitoringProcessor.cs" />
     <Compile Include="Processors\MapServiceRequestProcessor.cs" />

@@ -5,6 +5,7 @@ using System.Linq;
 using CES.CoreApi.Caching.Interfaces;
 using CES.CoreApi.Common.Constants;
 using CES.CoreApi.Common.Enumerations;
+using CES.CoreApi.Common.Interfaces;
 using CES.CoreApi.Common.Models;
 using CES.CoreApi.Foundation.Contract.Enumerations;
 using CES.CoreApi.Foundation.Contract.Exceptions;
@@ -52,9 +53,13 @@ namespace CES.CoreApi.Foundation.Data
         /// <param name="applicationId">Application ID</param>
         /// <param name="serverId">Server ID</param>
         /// <returns></returns>
-        public HostApplication GetApplication(int applicationId, int serverId)
+        public IHostApplication GetApplication(int applicationId, int serverId)
         {
             var application = GetApplication(applicationId);
+
+            if (application == null)
+                throw new CoreApiException(TechnicalSubSystem.CoreApiData, SubSystemError.ApplicationNotFoundInDatabase, applicationId);
+
             var server = application.Servers.FirstOrDefault(s => s.Id == serverId);
 
             return server != null
@@ -70,6 +75,10 @@ namespace CES.CoreApi.Foundation.Data
         public ICollection<ApplicationConfiguration> GetApplicationConfiguration(int applicationId)
         {
             var application = GetApplication(applicationId);
+
+            if (application == null)
+                throw new CoreApiException(TechnicalSubSystem.CoreApiData, SubSystemError.ApplicationNotFoundInDatabase, applicationId);
+
             return application.Configuration;
         }
 
@@ -88,6 +97,8 @@ namespace CES.CoreApi.Foundation.Data
             {
                 //Initialize applicaiton instance
                 var application = InitializeApplication(reader, applicationId);
+                if (application == null)
+                    return null;
                 reader.NextResult();
 
                 //Initialize configuration
@@ -115,11 +126,10 @@ namespace CES.CoreApi.Foundation.Data
             {
                 return new Application(
                     applicationId, 
-                    reader.ReadEnumValueFromInt<ApplicationType>("ApplicationTypeId"),
                     reader.ReadValue<string>("Name"), 
                     reader.ReadValue<bool>("IsActive"));
             }
-            throw new CoreApiException(TechnicalSubSystem.CoreApiData, SubSystemError.ApplicationNotFoundInDatabase, applicationId);
+            return null;
         }
         private static void InitializeConfigurationList(IDataReader reader, Application application)
         {

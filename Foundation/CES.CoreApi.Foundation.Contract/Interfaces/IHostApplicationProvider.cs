@@ -1,4 +1,5 @@
-﻿using CES.CoreApi.Common.Models;
+﻿using CES.CoreApi.Common.Interfaces;
+using CES.CoreApi.Common.Models;
 
 namespace CES.CoreApi.Foundation.Contract.Interfaces
 {
@@ -12,6 +13,6 @@ namespace CES.CoreApi.Foundation.Contract.Interfaces
         /// 4. Application is active itself
         /// 5. Application is active on server defined by serverId
         /// </summary>
-        HostApplication GetApplication();
+        IHostApplication GetApplication();
     }
 }

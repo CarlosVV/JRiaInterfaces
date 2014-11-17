@@ -19,6 +19,7 @@ namespace CES.CoreApi.GeoLocation.Service.UnitTest
         private Mock<IGeocodeServiceRequestProcessor> _geocodeServiceRequestProcessor;
         private Mock<IMapServiceRequestProcessor> _mapServiceRequestProcessor;
         private Mock<IHealthMonitoringProcessor> _healthMonitoringProcessor;
+        private Mock<IClientSideSupportServiceProcessor> _clientSideSupportServiceProcessor;
         private Mock<IRequestValidator> _requestValidator;
         private Mock<IMappingHelper> _mappingHelper;
         private GeoLocationService _geoLocationService;
@@ -30,12 +31,14 @@ namespace CES.CoreApi.GeoLocation.Service.UnitTest
             _geocodeServiceRequestProcessor = new Mock<IGeocodeServiceRequestProcessor>();
             _mapServiceRequestProcessor = new Mock<IMapServiceRequestProcessor>();
             _healthMonitoringProcessor = new Mock<IHealthMonitoringProcessor>();
+            _clientSideSupportServiceProcessor = new Mock<IClientSideSupportServiceProcessor>();
             _requestValidator = new Mock<IRequestValidator>();
             _mappingHelper = new Mock<IMappingHelper>();
 
             _geoLocationService = new GeoLocationService(_addressServiceRequestProcessor.Object,
                 _geocodeServiceRequestProcessor.Object, _mapServiceRequestProcessor.Object,
-                _healthMonitoringProcessor.Object, _mappingHelper.Object, _requestValidator.Object);
+                _healthMonitoringProcessor.Object, _clientSideSupportServiceProcessor.Object, 
+                _mappingHelper.Object, _requestValidator.Object);
         }
 
         #region Constructor tests
@@ -44,7 +47,7 @@ namespace CES.CoreApi.GeoLocation.Service.UnitTest
         public void Constructor_AddressServiceRequestProcessorIsNull_RaiseException()
         {
             ExceptionHelper.CheckException(() => new GeoLocationService(null, _geocodeServiceRequestProcessor.Object, _mapServiceRequestProcessor.Object,
-                _healthMonitoringProcessor.Object, _mappingHelper.Object, _requestValidator.Object),
+                _healthMonitoringProcessor.Object, _clientSideSupportServiceProcessor.Object, _mappingHelper.Object, _requestValidator.Object),
                 SubSystemError.GeneralRequiredParameterIsUndefined, "addressServiceRequestProcessor");
         }
 
@@ -52,7 +55,7 @@ namespace CES.CoreApi.GeoLocation.Service.UnitTest
         public void Constructor_GeocodeServiceRequestProcessorIsNull_RaiseException()
         {
             ExceptionHelper.CheckException(() => new GeoLocationService(_addressServiceRequestProcessor.Object, null, _mapServiceRequestProcessor.Object,
-                _healthMonitoringProcessor.Object, _mappingHelper.Object, _requestValidator.Object),
+                _healthMonitoringProcessor.Object, _clientSideSupportServiceProcessor.Object, _mappingHelper.Object, _requestValidator.Object),
                 SubSystemError.GeneralRequiredParameterIsUndefined, "geocodeServiceRequestProcessor");
         }
 
@@ -60,7 +63,7 @@ namespace CES.CoreApi.GeoLocation.Service.UnitTest
         public void Constructor_MapServiceRequestProcessorIsNull_RaiseException()
         {
             ExceptionHelper.CheckException(() => new GeoLocationService(_addressServiceRequestProcessor.Object, _geocodeServiceRequestProcessor.Object, null,
-                _healthMonitoringProcessor.Object, _mappingHelper.Object, _requestValidator.Object),
+                _healthMonitoringProcessor.Object, _clientSideSupportServiceProcessor.Object, _mappingHelper.Object, _requestValidator.Object),
                 SubSystemError.GeneralRequiredParameterIsUndefined, "mapServiceRequestProcessor");
         }
 
@@ -68,15 +71,23 @@ namespace CES.CoreApi.GeoLocation.Service.UnitTest
         public void Constructor_HealthMonitoringProcessorIsNull_RaiseException()
         {
             ExceptionHelper.CheckException(() => new GeoLocationService(_addressServiceRequestProcessor.Object, _geocodeServiceRequestProcessor.Object,
-                    _mapServiceRequestProcessor.Object, null, _mappingHelper.Object, _requestValidator.Object),
+                    _mapServiceRequestProcessor.Object, null, _clientSideSupportServiceProcessor.Object, _mappingHelper.Object, _requestValidator.Object),
                 SubSystemError.GeneralRequiredParameterIsUndefined, "healthMonitoringProcessor");
+        }
+
+        [TestMethod]
+        public void Constructor_ClientSideSupportServiceProcessorIsNull_RaiseException()
+        {
+            ExceptionHelper.CheckException(() => new GeoLocationService(_addressServiceRequestProcessor.Object, _geocodeServiceRequestProcessor.Object,
+                    _mapServiceRequestProcessor.Object, _healthMonitoringProcessor.Object, null, _mappingHelper.Object, _requestValidator.Object),
+                SubSystemError.GeneralRequiredParameterIsUndefined, "clientSideSupportServiceProcessor");
         }
 
         [TestMethod]
         public void Constructor_MappingHelperIsNull_RaiseException()
         {
             ExceptionHelper.CheckException(() => new GeoLocationService(_addressServiceRequestProcessor.Object, _geocodeServiceRequestProcessor.Object,
-                    _mapServiceRequestProcessor.Object, _healthMonitoringProcessor.Object, null, _requestValidator.Object),
+                    _mapServiceRequestProcessor.Object, _healthMonitoringProcessor.Object, _clientSideSupportServiceProcessor.Object, null, _requestValidator.Object),
                 SubSystemError.GeneralRequiredParameterIsUndefined, "mapper");
         }
 
@@ -84,7 +95,7 @@ namespace CES.CoreApi.GeoLocation.Service.UnitTest
         public void Constructor_RequestValidatorIsNull_RaiseException()
         {
             ExceptionHelper.CheckException(() => new GeoLocationService(_addressServiceRequestProcessor.Object, _geocodeServiceRequestProcessor.Object,
-                    _mapServiceRequestProcessor.Object, _healthMonitoringProcessor.Object, _mappingHelper.Object, null),
+                    _mapServiceRequestProcessor.Object, _healthMonitoringProcessor.Object, _clientSideSupportServiceProcessor.Object, _mappingHelper.Object, null),
                 SubSystemError.GeneralRequiredParameterIsUndefined, "validator");
         }
 
@@ -92,7 +103,8 @@ namespace CES.CoreApi.GeoLocation.Service.UnitTest
         public void Constructor_SuccessPath_NoExceptionRaised()
         {
             ExceptionHelper.CheckHappyPath(() => new GeoLocationService(_addressServiceRequestProcessor.Object, _geocodeServiceRequestProcessor.Object,
-                    _mapServiceRequestProcessor.Object, _healthMonitoringProcessor.Object, _mappingHelper.Object, _requestValidator.Object));
+                    _mapServiceRequestProcessor.Object, _healthMonitoringProcessor.Object, _clientSideSupportServiceProcessor.Object, _mappingHelper.Object, 
+                    _requestValidator.Object));
         }
 
         #endregion
@@ -283,6 +295,41 @@ namespace CES.CoreApi.GeoLocation.Service.UnitTest
 
             _healthMonitoringProcessor.Verify(p => p.Ping(), Times.Exactly(1));
             _mappingHelper.Verify(p => p.ConvertToResponse<HealthResponseModel, HealthResponse>(It.IsAny<HealthResponseModel>()), Times.Exactly(1));
+        }
+
+        [TestMethod]
+        public void GetProviderKey_SuccessPath_NoExceptionRaised()
+        {
+            _requestValidator.Setup(p => p.Validate(It.IsAny<GetProviderKeyRequest>())).Verifiable();
+            
+            _clientSideSupportServiceProcessor.Setup(p => p.GetProviderKey(It.IsAny<DataProviderType>()))
+                .Returns(It.IsAny<GetProviderKeyResponseModel>)
+                .Verifiable();
+            
+            _mappingHelper.Setup(p => p.ConvertToResponse<GetProviderKeyResponseModel, GetProviderKeyResponse>(It.IsAny<GetProviderKeyResponseModel>()))
+                 .Returns(It.IsAny<GetProviderKeyResponse>())
+                 .Verifiable();
+
+            _geoLocationService.GetProviderKey(new GetProviderKeyRequest());
+
+            _requestValidator.Verify(p => p.Validate(It.IsAny<GetProviderKeyRequest>()), Times.Exactly(1));
+
+             _clientSideSupportServiceProcessor.Verify(p => p.GetProviderKey(It.IsAny<DataProviderType>()), Times.Exactly(1));
+             _mappingHelper.Verify(p => p.ConvertToResponse<GetProviderKeyResponseModel, GetProviderKeyResponse>(It.IsAny<GetProviderKeyResponseModel>()), Times.Exactly(1));
+        }
+
+        [TestMethod]
+        public void LogEvent_SuccessPath_NoExceptionRaised()
+        {
+            _requestValidator.Setup(p => p.Validate(It.IsAny<LogEventRequest>())).Verifiable();
+
+            _clientSideSupportServiceProcessor.Setup(p => p.LogEvent(It.IsAny<DataProviderType>(), It.IsAny<string>())).Verifiable();
+
+            _geoLocationService.LogEvent(new LogEventRequest());
+
+            _requestValidator.Verify(p => p.Validate(It.IsAny<LogEventRequest>()), Times.Exactly(1));
+
+            _clientSideSupportServiceProcessor.Verify(p => p.LogEvent(It.IsAny<DataProviderType>(), It.IsAny<string>()), Times.Exactly(1));
         }
     }
 }

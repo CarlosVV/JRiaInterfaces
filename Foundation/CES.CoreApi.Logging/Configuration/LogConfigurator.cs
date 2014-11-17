@@ -85,8 +85,8 @@ namespace CES.CoreApi.Logging.Configuration
              if ((logTypes & LogType.TraceLog) == LogType.TraceLog)
              {
                  _container
-                     .RegisterType<ITraceLogMonitor, TraceLogMonitor>()
-                     .RegisterType<TraceLogDataContainer, TraceLogDataContainer>();
+                     .RegisterType<ITraceLogMonitor, TraceLogMonitor>(LifetimeManagerType.AlwaysNew)
+                     .RegisterType<ITraceLogDataContainer, TraceLogDataContainer>(LifetimeManagerType.AlwaysNew);
              }
 
              //Database performance log related

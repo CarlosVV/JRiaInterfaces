@@ -30,6 +30,7 @@ namespace CES.CoreApi.GeoLocation.Service.UnitTest
         private const int ZoomLevelMaximum = 21;
         private const int Width = 100;
         private const int Height = 100;
+        private const string Message = "Some message";
 
         #region ValidateAddressRequest test methods
 
@@ -919,6 +920,84 @@ namespace CES.CoreApi.GeoLocation.Service.UnitTest
 
             ExceptionHelper.CheckException(() => new RequestValidator().Validate(request),
                 SubSystemError.GeneralRequiredParameterIsUndefined, "pushPin");
+        }
+
+        #endregion
+
+        #region GetProviderKeyRequest test methods
+
+        [TestMethod]
+        public void GetProviderKeyRequest_Success_NoExceptionRaised()
+        {
+            var request = new GetProviderKeyRequest
+            {
+                DataProvider = DataProvider.Google
+            };
+            ExceptionHelper.CheckHappyPath(() => new RequestValidator().Validate(request));
+        }
+
+        [TestMethod]
+        public void GetProviderKeyRequest_RequestIsNull_ExceptionRaised()
+        {
+            ExceptionHelper.CheckException(() => new RequestValidator().Validate(default(GetProviderKeyRequest)),
+               SubSystemError.GeneralRequiredParameterIsUndefined, "request");
+        }
+
+        [TestMethod]
+        public void GetProviderKeyRequest_DataProviderIsUndefined_ExceptionRaised()
+        {
+            var request = new GetProviderKeyRequest
+            {
+                DataProvider = DataProvider.Undefined
+            };
+            ExceptionHelper.CheckException(() => new RequestValidator().Validate(request),
+               SubSystemError.GeneralRequiredParameterIsUndefined, "request.DataProvider");
+        }
+
+        #endregion
+
+        #region LogEventRequest test methods
+
+        [TestMethod]
+        public void LogEventRequest_Success_NoExceptionRaised()
+        {
+            var request = new LogEventRequest
+            {
+                DataProvider = DataProvider.Google,
+                Message = Message
+            };
+            ExceptionHelper.CheckHappyPath(() => new RequestValidator().Validate(request));
+        }
+
+        [TestMethod]
+        public void LogEventRequest_RequestIsNull_ExceptionRaised()
+        {
+            ExceptionHelper.CheckException(() => new RequestValidator().Validate(default(LogEventRequest)),
+               SubSystemError.GeneralRequiredParameterIsUndefined, "request");
+        }
+
+        [TestMethod]
+        public void LogEventRequest_DataProviderIsUndefined_ExceptionRaised()
+        {
+            var request = new LogEventRequest
+            {
+                DataProvider = DataProvider.Undefined,
+                Message = Message
+            };
+            ExceptionHelper.CheckException(() => new RequestValidator().Validate(request),
+               SubSystemError.GeneralRequiredParameterIsUndefined, "request.DataProvider");
+        }
+
+        [TestMethod]
+        public void LogEventRequest_MessageIsNullOrEmpty_ExceptionRaised()
+        {
+            var request = new LogEventRequest
+            {
+                DataProvider = DataProvider.Google,
+                Message = string.Empty
+            };
+            ExceptionHelper.CheckException(() => new RequestValidator().Validate(request),
+               SubSystemError.GeneralRequiredParameterIsUndefined, "request.Message");
         }
 
         #endregion

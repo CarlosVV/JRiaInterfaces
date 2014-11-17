@@ -8,8 +8,8 @@ using Newtonsoft.Json.Converters;
 
 namespace CES.CoreApi.Logging.Models
 {
-    [JsonObject(MemberSerialization.OptIn)]
-    public class TraceLogDataContainer : IDataContainer
+    [JsonObject]
+    public class TraceLogDataContainer : IDataContainer, ITraceLogDataContainer
     {
         #region Core
 
@@ -79,6 +79,18 @@ namespace CES.CoreApi.Logging.Models
         }
 
         /// <summary>
+        /// Gets or sets log record creation time
+        /// </summary>
+        [JsonProperty]
+        public DateTime LogTime
+        {
+            get
+            {
+                return _currentDateTimeProvider.GetCurrentLocal();
+            }
+        }
+
+        /// <summary>
         /// Gets or sets request message length
         /// </summary>
         [JsonProperty]
@@ -131,6 +143,9 @@ namespace CES.CoreApi.Logging.Models
         [JsonProperty]
         public string ProviderType { get; set; }
 
+        [JsonProperty]
+        public string ClientSideMessage { get; set; }
+        
         #endregion //Public properties
 
         #region Overriding

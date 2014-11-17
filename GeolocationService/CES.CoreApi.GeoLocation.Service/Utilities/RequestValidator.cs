@@ -100,7 +100,25 @@ namespace CES.CoreApi.GeoLocation.Service.Utilities
 
             ValidatePushPins(request.PushPins);
         }
-        
+
+        public void Validate(GetProviderKeyRequest request)
+        {
+            ContractValidation.Requires(request != null, TechnicalSubSystem.GeoLocationService,
+                SubSystemError.GeneralRequiredParameterIsUndefined, "request");
+            ContractValidation.Requires(request.DataProvider != DataProvider.Undefined, TechnicalSubSystem.GeoLocationService,
+               SubSystemError.GeneralRequiredParameterIsUndefined, "request.DataProvider");
+        }
+
+        public void Validate(LogEventRequest request)
+        {
+            ContractValidation.Requires(request != null, TechnicalSubSystem.GeoLocationService,
+                SubSystemError.GeneralRequiredParameterIsUndefined, "request");
+            ContractValidation.Requires(request.DataProvider != DataProvider.Undefined, TechnicalSubSystem.GeoLocationService,
+               SubSystemError.GeneralRequiredParameterIsUndefined, "request.DataProvider");
+            ContractValidation.Requires(!string.IsNullOrEmpty(request.Message.Trim()), TechnicalSubSystem.GeoLocationService,
+               SubSystemError.GeneralRequiredParameterIsUndefined, "request.Message");
+        }
+
         #endregion
 
         #region Private methods

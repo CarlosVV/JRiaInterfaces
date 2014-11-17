@@ -55,6 +55,7 @@
     <Compile Include="Interfaces\IAddressVerificationDataProvider.cs" />
     <Compile Include="Interfaces\IBingAddressParser.cs" />
     <Compile Include="Interfaces\IBingPushPinParameterProvider.cs" />
+    <Compile Include="Interfaces\IClientSideSupportServiceProcessor.cs" />
     <Compile Include="Interfaces\ICorrectImageSizeProvider.cs" />
     <Compile Include="Interfaces\ICountryConfigurationProvider.cs" />
     <Compile Include="Interfaces\IEntityFactory.cs" />
@@ -78,6 +79,7 @@
     <Compile Include="Models\DataResponse.cs" />
     <Compile Include="Models\GeocodeAddressResponseModel.cs" />
     <Compile Include="Models\GetMapResponseModel.cs" />
+    <Compile Include="Models\GetProviderKeyResponseModel.cs" />
     <Compile Include="Models\HealthResponseModel.cs" />
     <Compile Include="Models\LocationModel.cs" />
     <Compile Include="Enumerations\LevelOfConfidence.cs" />

@@ -27,6 +27,7 @@ namespace CES.CoreApi.GeoLocation.Service.Configuration
                 .RegisterType<IAddressServiceRequestProcessor, AddressServiceRequestProcessor>()
                 .RegisterType<IGeocodeServiceRequestProcessor, GeocodeServiceRequestProcessor>()
                 .RegisterType<IMapServiceRequestProcessor, MapServiceRequestProcessor>()
+                .RegisterType<IClientSideSupportServiceProcessor, ClientSideSupportServiceProcessor>()
 
                 .RegisterType<IEntityFactory, EntityFactory>(container)
 

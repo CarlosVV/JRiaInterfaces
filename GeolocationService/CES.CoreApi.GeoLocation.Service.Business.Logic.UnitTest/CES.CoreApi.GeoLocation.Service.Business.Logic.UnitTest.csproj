@@ -65,6 +65,7 @@
     <Compile Include="AddressVerificationDataProviderUnitTests.cs" />
     <Compile Include="BingPushPinParameterProviderUnitTests.cs" />
     <Compile Include="BingUrlBuilderUnitTests.cs" />
+    <Compile Include="ClientSideSupportServiceProcessorUnitTests.cs" />
     <Compile Include="CorrectImageSizeProviderUnitTests.cs" />
     <Compile Include="CountryConfigurationProviderUnitTests.cs" />
     <Compile Include="DataResponseProviderUnitTests.cs" />

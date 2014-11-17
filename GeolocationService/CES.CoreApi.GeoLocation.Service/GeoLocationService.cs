@@ -14,7 +14,7 @@ using CES.CoreApi.GeoLocation.Service.Contract.Models;
 namespace CES.CoreApi.GeoLocation.Service
 {
     [ServiceBehavior(Namespace = Namespaces.GeolocationServiceContractNamespace, InstanceContextMode = InstanceContextMode.PerCall)]
-    public class GeoLocationService : IAddressService, IGeocodeService, IMapService, IHealthMonitoringService
+    public class GeoLocationService : IAddressService, IGeocodeService, IMapService, IHealthMonitoringService, IClientSideSupportService
     {
         #region Core
 
@@ -22,6 +22,7 @@ namespace CES.CoreApi.GeoLocation.Service
         private readonly IGeocodeServiceRequestProcessor _geocodeServiceRequestProcessor;
         private readonly IMapServiceRequestProcessor _mapServiceRequestProcessor;
         private readonly IHealthMonitoringProcessor _healthMonitoringProcessor;
+        private readonly IClientSideSupportServiceProcessor _clientSideSupportServiceProcessor;
         private readonly IMappingHelper _mapper;
         private readonly IRequestValidator _validator;
 
@@ -29,6 +30,7 @@ namespace CES.CoreApi.GeoLocation.Service
             IGeocodeServiceRequestProcessor geocodeServiceRequestProcessor,
             IMapServiceRequestProcessor mapServiceRequestProcessor,
             IHealthMonitoringProcessor healthMonitoringProcessor,
+            IClientSideSupportServiceProcessor clientSideSupportServiceProcessor,
             IMappingHelper mapper, IRequestValidator validator)
         {
             if (addressServiceRequestProcessor == null)
@@ -43,6 +45,9 @@ namespace CES.CoreApi.GeoLocation.Service
             if (healthMonitoringProcessor == null)
                 throw new CoreApiException(TechnicalSubSystem.GeoLocationService,
                     SubSystemError.GeneralRequiredParameterIsUndefined, "healthMonitoringProcessor");
+            if (clientSideSupportServiceProcessor == null)
+                throw new CoreApiException(TechnicalSubSystem.GeoLocationService,
+                    SubSystemError.GeneralRequiredParameterIsUndefined, "clientSideSupportServiceProcessor");
             if (mapper == null)
                 throw new CoreApiException(TechnicalSubSystem.GeoLocationService,
                     SubSystemError.GeneralRequiredParameterIsUndefined, "mapper");
@@ -54,6 +59,7 @@ namespace CES.CoreApi.GeoLocation.Service
             _geocodeServiceRequestProcessor = geocodeServiceRequestProcessor;
             _mapServiceRequestProcessor = mapServiceRequestProcessor;
             _healthMonitoringProcessor = healthMonitoringProcessor;
+            _clientSideSupportServiceProcessor = clientSideSupportServiceProcessor;
             _mapper = mapper;
             _validator = validator;
         }
@@ -169,6 +175,28 @@ namespace CES.CoreApi.GeoLocation.Service
         {
             var responseModel = _healthMonitoringProcessor.Ping();
             return _mapper.ConvertToResponse<HealthResponseModel, HealthResponse>(responseModel);
+        }
+
+        #endregion
+
+        #region IClientSideSupportService implementation
+
+        public GetProviderKeyResponse GetProviderKey(GetProviderKeyRequest request)
+        {
+            _validator.Validate(request);
+
+            var responseModel = _clientSideSupportServiceProcessor.GetProviderKey(
+                _mapper.ConvertTo<DataProvider, DataProviderType>(request.DataProvider));
+
+            return _mapper.ConvertToResponse<GetProviderKeyResponseModel, GetProviderKeyResponse>(responseModel);
+        }
+
+        public void LogEvent(LogEventRequest request)
+        {
+            _validator.Validate(request);
+
+            _clientSideSupportServiceProcessor.LogEvent(
+                _mapper.ConvertTo<DataProvider, DataProviderType>(request.DataProvider), request.Message);
         }
 
         #endregion

@@ -2,7 +2,6 @@
 using System.Runtime.Serialization;
 using CES.CoreApi.Common.Constants;
 using CES.CoreApi.Common.Interfaces;
-using CES.CoreApi.Foundation.Contract.Interfaces;
 using CES.CoreApi.Foundation.Contract.Models;
 using CES.CoreApi.GeoLocation.Service.Contract.Enumerations;
 
