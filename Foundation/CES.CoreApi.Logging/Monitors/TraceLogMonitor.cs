@@ -1,6 +1,5 @@
 ﻿using System;
 using CES.CoreApi.Logging.Interfaces;
-using CES.CoreApi.Logging.Models;
 
 namespace CES.CoreApi.Logging.Monitors
 {
