@@ -346,7 +346,7 @@ insert ApplicationConfiguration (ApplicationID, ConfigurationName, Configuration
 		}
 	}],
 	"Behavior": {
-		"IsHttpsEnabled": "false",
+		"IsHttpsEnabled": "true",
 		"IsDebugEnabled": "true",
 		"IsHelpEnabled": "false",
 		"IsWsdlEnabled": "true",

@@ -33,28 +33,28 @@ BEGIN
 	--Select applicaiton details
 	select	IsActive = case when fDisabled = 1 then 0 else 1 end,
 			fName as Name
-	from [systblapp]
+	from [systblapp] with (nolock)
 	where [fAppID] = @applicationId
 	
 	--Select list of application configuration items
 	select	ConfigurationName,
 			ConfigurationValue
-	from ApplicationConfiguration
+	from ApplicationConfiguration with (nolock)
 	where ApplicationID = @applicationId
 
 	--Select list of service operations for application
 	select ServiceOperationID, 
 		   MethodName, 
 		   IsActive
-	from ServiceOperation
+	from ServiceOperation with (nolock)
 	where ApplicationID = @applicationId
 
 	--Select list of applications assigned to operation
 	select aso.ApplicationID,
 		   aso.IsActive,
 		   so.ServiceOperationID
-	from Application_ServiceOperation aso
-	inner join ServiceOperation so
+	from Application_ServiceOperation aso with (nolock)
+	inner join ServiceOperation so with (nolock)
 		on aso.ServiceOperationID = so.ServiceOperationID
 	where so.ApplicationID = @applicationId
 
@@ -62,13 +62,14 @@ BEGIN
 	select s.ApplicationServerID,
 		   s.Name,
 		   aas.IsActive
-	from Application_ApplicationServer aas
-	inner join ApplicationServer s
+	from Application_ApplicationServer aas  with (nolock)
+	inner join ApplicationServer s  with (nolock)
 		on aas.ApplicationServerID = s.ApplicationServerID
 	where aas.ApplicationID = @applicationId
 
 END
 
 GO
+
 --GRANT EXEC on [CoreApiFoundation_GetApplicationByID] to [fxRIAMT_Role] as [dbo]
 --GO
