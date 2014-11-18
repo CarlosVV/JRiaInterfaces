@@ -5,6 +5,7 @@ namespace CES.CoreApi.Foundation.Contract.Enumerations
     public enum SubSystemError
     {
         [SubSystemErrorNumber("00000")]
+        [ErrorMessage("Undefined")]
         Undefined,
 
         #region Generic errors
@@ -63,15 +64,19 @@ namespace CES.CoreApi.Foundation.Contract.Enumerations
 
         [SubSystemErrorNumber("00200")]
         [ErrorMessage("Client application was not authenticated. ApplicationID='{0}'")]
-        ClientApplicationNotAuthenticated,
+        SecurityClientApplicationNotAuthenticated,
 
         [SubSystemErrorNumber("00201")]
         [ErrorMessage("Application is not assigned to service operation. ApplicationID='{0}', Service Operation='{1}'")]
-        ApplicationIsNotAssignedToServiceOperation,
+        SecurityApplicationIsNotAssignedToServiceOperation,
 
         [SubSystemErrorNumber("00202")]
         [ErrorMessage("Application assigned to service operation but it is not active. ApplicationID='{0}', Service Operation='{1}'")]
-        ApplicationAssignedToServiceOperationNotActive,
+        SecurityApplicationAssignedToServiceOperationNotActive,
+
+        [SubSystemErrorNumber("00203")]
+        [ErrorMessage("The caller was not authenticated by the service. See previous exception for details.")]
+        SecurityTheCallerWasNotAuthenticatedByTheService,
 
         #endregion
 

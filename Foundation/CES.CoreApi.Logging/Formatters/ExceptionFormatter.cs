@@ -153,20 +153,46 @@ namespace CES.CoreApi.Logging.Formatters
             }
             else
             {
-                exceptionDetails.Add("Message", exception.Message);    
+                exceptionDetails.Add("Message", exception.Message);
             }
-            
-            exceptionDetails.Add("ExceptionType", exception.GetType());
-            exceptionDetails.Add("TargetSite", exception.TargetSite);
-            exceptionDetails.Add("Source", exception.Source);
-            exceptionDetails.Add("Data", exception.Data);
-            if (!string.IsNullOrEmpty(exception.StackTrace))
-                exceptionDetails.Add("StackTrace", FormatStackTrace(exception.StackTrace));
-          
 
+            AddStackTrace(exception, coreApiException, exceptionDetails);
+
+            var source = !string.IsNullOrEmpty(exception.Source)
+                ? exception.Source
+                : coreApiException != null
+                    ? coreApiException.Source
+                    : string.Empty;
+            exceptionDetails.Add("Source", source);
+
+            var targetSite = exception.TargetSite ?? (coreApiException != null ? coreApiException.TargetSite : null);
+            exceptionDetails.Add("TargetSite", targetSite);
+
+            exceptionDetails.Add("ExceptionType", exception.GetType());
+            exceptionDetails.Add("Data", exception.Data);
+         
             GetExceptionData(exception.Data, exceptionDetails);
 
             return exceptionDetails;
+        }
+
+        private static void AddStackTrace(Exception exception, CoreApiException coreApiException, Dictionary<string, object> exceptionDetails)
+        {
+            var fromCoreApiException = coreApiException != null
+                ? FormatStackTrace(coreApiException.CallStack)
+                : string.Empty;
+
+            var fromException = FormatStackTrace(exception.StackTrace);
+            var stackTraceFormatted = string.Empty;
+
+            if (!string.IsNullOrEmpty(fromException))
+                stackTraceFormatted = fromException;
+
+            if (!string.IsNullOrEmpty(fromCoreApiException))
+                stackTraceFormatted = fromCoreApiException;
+
+            if (!string.IsNullOrEmpty(stackTraceFormatted))
+                exceptionDetails.Add("StackTrace", stackTraceFormatted);
         }
 
         /// <summary>
@@ -176,6 +202,9 @@ namespace CES.CoreApi.Logging.Formatters
         /// <returns></returns>
         private static string FormatStackTrace(string stackTrace)
         {
+            if (string.IsNullOrEmpty(stackTrace))
+                return string.Empty;
+
             var builder = new StringBuilder();
             builder.AppendLine();
 

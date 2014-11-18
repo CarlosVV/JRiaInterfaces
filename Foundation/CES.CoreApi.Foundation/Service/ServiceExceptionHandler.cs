@@ -6,6 +6,7 @@ using System.ServiceModel.Channels;
 using System.ServiceModel.Description;
 using System.ServiceModel.Dispatcher;
 using CES.CoreApi.Common.Interfaces;
+using CES.CoreApi.Foundation.Contract.Enumerations;
 using CES.CoreApi.Foundation.Contract.Exceptions;
 using CES.CoreApi.Foundation.Contract.Interfaces;
 using CES.CoreApi.Foundation.Contract.Models;
@@ -28,7 +29,10 @@ namespace CES.CoreApi.Foundation.Service
         private readonly IClientSecurityContextProvider _clientDetailsProvider;
         private readonly ICurrentDateTimeProvider _currentDateTimeProvider;
         private ExceptionLogDataContainer _dataContainer;
-        private const string ErrorMessageTemplate = "Server error encountered. All details have been logged.";
+        private CoreApiException _coreApiException;
+        private const string ErrorMessage = "Server error encountered. All details have been logged.";
+        private const string WcfSecurityErrorMessage= "The caller was not authenticated by the service.";
+        
 
         public ServiceExceptionHandler(ILogManager logManager, IClientSecurityContextProvider clientDetailsProvider, 
             ICurrentDateTimeProvider currentDateTimeProvider)
@@ -69,12 +73,12 @@ namespace CES.CoreApi.Foundation.Service
         public bool HandleError(Exception exception)
         {
             // Publish exception
-            _logManager.Publish(exception, dataContainer: _dataContainer);
+            _logManager.Publish(_coreApiException, dataContainer: _dataContainer);
 
             // Return true to indicate the Exception has been handled
             return true;
         }
-
+        
         #endregion
 
         #region IServiceBehavior implementation
@@ -100,21 +104,32 @@ namespace CES.CoreApi.Foundation.Service
 
         #region Private methods
 
-        private FaultException<CoreApiServiceFault> BuildFaultException(Exception error)
+        private FaultException<CoreApiServiceFault> BuildFaultException(Exception exception)
         {
-            var coreApiException = error as CoreApiException ?? new CoreApiException(error);
+            //Convert non-CoreApi exception to CoreApi exception
+            //Also covers special case - Any exception happened in WCF authentication-authorization chain
+            //converted to "The caller was not authenticated by the service." automatically by WCF
+            //Original exception was logged also to preserve all details
+            _coreApiException = ConvertToCoreApiException(exception);
 
             var coreApiServiceFault = new CoreApiServiceFault
             {
-                ErrorCode = coreApiException.ErrorCode,
-                ErrorMessage = coreApiException.ClientMessage,
+                ErrorCode = _coreApiException.ErrorCode,
+                ErrorMessage = _coreApiException.ClientMessage,
                 ErrorTime = _currentDateTimeProvider.GetCurrentUtc(),
-                ErrorIdentifier = coreApiException.ErrorId
+                ErrorIdentifier = _coreApiException.ErrorId
             };
 
-            var faultException = new FaultException<CoreApiServiceFault>(coreApiServiceFault, ErrorMessageTemplate,
-                new FaultCode("Server Error"));
-            return faultException;
+            return new FaultException<CoreApiServiceFault>(coreApiServiceFault, ErrorMessage, new FaultCode("Server Error"));
+        }
+        
+        private static CoreApiException ConvertToCoreApiException(Exception exception)
+        {
+            return exception as CoreApiException ??
+                   (exception.Message.Equals(WcfSecurityErrorMessage, StringComparison.OrdinalIgnoreCase)
+                       ? new CoreApiException(exception, TechnicalSubSystem.Authentication,
+                           SubSystemError.SecurityTheCallerWasNotAuthenticatedByTheService)
+                       : new CoreApiException(exception));
         }
 
         #endregion

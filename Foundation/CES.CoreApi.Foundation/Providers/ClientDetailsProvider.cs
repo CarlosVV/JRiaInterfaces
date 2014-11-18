@@ -21,7 +21,10 @@ namespace CES.CoreApi.Foundation.Providers
                 return clientDetails;
 
             if (!OperationContext.Current.IncomingMessageProperties.ContainsKey("Principal"))
+            {
+                clientDetails.Add("Is Authenticated", false);
                 return clientDetails;
+            }
 
             var clientPrincipal = OperationContext.Current.IncomingMessageProperties["Principal"] as IPrincipal;
             var clientIdentity = clientPrincipal != null ? clientPrincipal.Identity : null;

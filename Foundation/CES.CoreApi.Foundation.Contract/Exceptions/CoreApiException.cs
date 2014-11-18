@@ -1,6 +1,7 @@
 ﻿using System;
 using System.ComponentModel;
 using System.Globalization;
+using System.Reflection;
 using CES.CoreApi.Common.Tools;
 using CES.CoreApi.Foundation.Contract.Attributes;
 using CES.CoreApi.Foundation.Contract.Enumerations;
@@ -35,16 +36,25 @@ namespace CES.CoreApi.Foundation.Contract.Exceptions
         }
 
         public CoreApiException(Exception exception)
+            : this(exception, TechnicalSubSystem.Undefined, SubSystemError.Undefined)
+        {
+        }
+
+        public CoreApiException(Exception exception, TechnicalSubSystem subSystem, SubSystemError subSystemError)
         {
             Organization = Organization.Ria;
             System = TechnicalSystem.CoreApi;
-            SubSystem = TechnicalSubSystem.Undefined;
-            SubSystemError = SubSystemError.Undefined;
+            SubSystem = subSystem;
+            SubSystemError = subSystemError;
             ErrorCode = GetErrorCode(Organization, System, SubSystem, SubSystemError);
             ClientMessage = exception.Message;
             ErrorId = Guid.NewGuid();
+            CallStack = exception.StackTrace;
+            Source = exception.Source;
+            TargetSite = exception.TargetSite;
         }
 
+        public string CallStack { get; private set; }
         public string ErrorCode { get; private set; }
         public string ClientMessage { get; private set; }
         public Guid ErrorId { get; private set; }
@@ -52,7 +62,9 @@ namespace CES.CoreApi.Foundation.Contract.Exceptions
         public TechnicalSystem System { get; private set; }
         public TechnicalSubSystem SubSystem { get; private set; }
         public SubSystemError SubSystemError { get; private set; }
-
+        public new string Source { get; private set; }
+        public new MethodBase TargetSite { get; private set; }
+        
         private static string GetErrorCode(Organization organization, TechnicalSystem system,
             TechnicalSubSystem subSystem, SubSystemError error)
         {

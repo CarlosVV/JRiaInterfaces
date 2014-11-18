@@ -31,6 +31,7 @@ namespace CES.CoreApi.Logging.Models
             _currentDateTimeProvider = currentDateTimeProvider;
             _requestMessage = string.Empty;
             _responseMessage = string.Empty;
+            MessageId = Guid.NewGuid();
         }
 
         #endregion
@@ -145,7 +146,10 @@ namespace CES.CoreApi.Logging.Models
 
         [JsonProperty]
         public string ClientSideMessage { get; set; }
-        
+
+        [JsonProperty]
+        public Guid MessageId { get; private set; }
+
         #endregion //Public properties
 
         #region Overriding

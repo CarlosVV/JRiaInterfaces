@@ -21,6 +21,7 @@ namespace CES.CoreApi.Logging.Models
 
             _jsonDataContainerFormatter = jsonDataContainerFormatter;
             AuditTime = currentDateTimeProvider.GetCurrentUtc();
+            MessageId = Guid.NewGuid();
         }
 
         #endregion
@@ -43,12 +44,15 @@ namespace CES.CoreApi.Logging.Models
         [JsonProperty]
         public string Details { get; set; }
         [JsonProperty]
+        public Guid MessageId { get; private set; }
+        
+        [JsonProperty]
         [JsonConverter(typeof(StringEnumConverter))]
         public LogType LogType
         {
             get { return LogType.SecurityAudit; }
         }
-
+        
         #endregion
 
         #region Public methods

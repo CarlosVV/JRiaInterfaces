@@ -112,7 +112,7 @@ namespace CES.CoreApi.Foundation.Security
             if (clientApplicationPrincipal != null && clientApplicationPrincipal.Identity.IsAuthenticated)
                 return;
 
-            var exception = new CoreApiException(TechnicalSubSystem.Authorization, SubSystemError.ClientApplicationNotAuthenticated, clientApplicationId);
+            var exception = new CoreApiException(TechnicalSubSystem.Authorization, SubSystemError.SecurityClientApplicationNotAuthenticated, clientApplicationId);
 
             //Log security audit failure
             _securityAuditLogger.LogFailure(auditParameters, exception.ClientMessage);
@@ -218,7 +218,7 @@ namespace CES.CoreApi.Foundation.Security
             if (assignedApplication == null)
             {
                 var exception = new CoreApiException(TechnicalSubSystem.Authentication,
-                    SubSystemError.ApplicationIsNotAssignedToServiceOperation,
+                    SubSystemError.SecurityApplicationIsNotAssignedToServiceOperation,
                     hostApplication.Id, operationName);
 
                 //Log security audit failure
@@ -230,7 +230,7 @@ namespace CES.CoreApi.Foundation.Security
             if (!assignedApplication.IsActive)
             {
                 var exception = new CoreApiException(TechnicalSubSystem.Authentication,
-                    SubSystemError.ApplicationAssignedToServiceOperationNotActive,
+                    SubSystemError.SecurityApplicationAssignedToServiceOperationNotActive,
                     hostApplication.Id, operationName);
 
                 //Log security audit failure
