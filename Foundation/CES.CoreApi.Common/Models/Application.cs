@@ -3,11 +3,12 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Globalization;
 using System.Runtime.Serialization;
+using CES.CoreApi.Common.Interfaces;
 
 namespace CES.CoreApi.Common.Models
 {
     [DataContract]
-    public class Application
+    public class Application : IApplication
     {
         #region Core
 
@@ -24,7 +25,6 @@ namespace CES.CoreApi.Common.Models
             
             Configuration = new List<ApplicationConfiguration>();
             Operations = new Collection<ServiceOperation>();
-            Servers = new Collection<ApplicationServer>();
         }
 
         #endregion
@@ -45,9 +45,6 @@ namespace CES.CoreApi.Common.Models
         
         [DataMember]
         public ICollection<ServiceOperation> Operations { get; protected set; }
-
-        [DataMember]
-        public ICollection<ApplicationServer> Servers { get; protected set; }
 
         #endregion
     }

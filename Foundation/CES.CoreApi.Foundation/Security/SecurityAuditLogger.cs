@@ -27,7 +27,6 @@ namespace CES.CoreApi.Foundation.Security
             dataContainer.ServiceApplicationId = parameters.ServiceApplicationId;
             dataContainer.ClientApplicationId = parameters.ClientApplicationId;
             dataContainer.Operation = parameters.Operation;
-            dataContainer.ServerId = parameters.ServerId;
             dataContainer.AuditResult = SecurityAuditResult.AccessGranted;
 
             _logManager.Publish(dataContainer);
@@ -41,7 +40,6 @@ namespace CES.CoreApi.Foundation.Security
             dataContainer.ServiceApplicationId = parameters.ServiceApplicationId;
             dataContainer.ClientApplicationId = parameters.ClientApplicationId;
             dataContainer.Operation = parameters.Operation;
-            dataContainer.ServerId = parameters.ServerId;
             dataContainer.AuditResult = SecurityAuditResult.AccessDenied;
             dataContainer.Details = details;
 

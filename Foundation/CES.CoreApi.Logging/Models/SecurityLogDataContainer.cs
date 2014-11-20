@@ -33,8 +33,6 @@ namespace CES.CoreApi.Logging.Models
         [JsonProperty]
         public int ClientApplicationId { get; set; }
         [JsonProperty]
-        public int ServerId { get; set; }
-        [JsonProperty]
         public string Operation { get; set; }
         [JsonProperty]
         [JsonConverter(typeof(StringEnumConverter))]

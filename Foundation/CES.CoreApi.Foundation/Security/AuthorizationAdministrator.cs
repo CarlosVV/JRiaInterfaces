@@ -4,7 +4,6 @@ using System.Security.Principal;
 using System.ServiceModel;
 using System.Threading;
 using CES.CoreApi.Common.Interfaces;
-using CES.CoreApi.Common.Models;
 using CES.CoreApi.Foundation.Contract.Enumerations;
 using CES.CoreApi.Foundation.Contract.Exceptions;
 using CES.CoreApi.Foundation.Contract.Interfaces;
@@ -71,7 +70,6 @@ namespace CES.CoreApi.Foundation.Security
             {
                 ClientApplicationId = clientApplicationId,
                 Operation = headerParameters.OperationName,
-                ServerId = hostApplication.ServerId,
                 ServiceApplicationId = hostApplication.Id
             };
             
@@ -128,33 +126,19 @@ namespace CES.CoreApi.Foundation.Security
         /// </summary>
         /// <param name="hostApplication"></param>
         /// <param name="auditParameters"></param>
-        private void ValidateHostApplication(IHostApplication hostApplication, SecurityAuditParameters auditParameters)
+        private void ValidateHostApplication(IApplication hostApplication, SecurityAuditParameters auditParameters)
         {
-            if (!_applicationValidator.Validate(hostApplication as Application))
-            {
-                var exception =  new CoreApiException(TechnicalSubSystem.Authentication,
-                    SubSystemError.HostApplicationDoesNotExistOrInactive,
-                    hostApplication.Id);
+            if (_applicationValidator.Validate(hostApplication)) 
+                return;
 
-                //Log security audit failure
-                _securityAuditLogger.LogFailure(auditParameters, exception.ClientMessage);
+            var exception =  new CoreApiException(TechnicalSubSystem.Authentication,
+                SubSystemError.HostApplicationDoesNotExistOrInactive,
+                hostApplication.Id);
 
-                throw exception;
-            }
+            //Log security audit failure
+            _securityAuditLogger.LogFailure(auditParameters, exception.ClientMessage);
 
-            //Validate host application IsActive status on particular server
-            var server = hostApplication.Servers.FirstOrDefault(s => s.Id == hostApplication.ServerId && s.IsActive);
-            if (server == null)
-            {
-                var exception = new CoreApiException(TechnicalSubSystem.Authentication,
-                    SubSystemError.HostApplicationDoesNotExistOrInactiveOnServer,
-                    hostApplication.Id, hostApplication.ServerId);
-
-                //Log security audit failure
-                _securityAuditLogger.LogFailure(auditParameters, exception.ClientMessage);
-
-                throw exception;
-            }
+            throw exception;
         }
 
         /// <summary>
@@ -165,7 +149,7 @@ namespace CES.CoreApi.Foundation.Security
         /// <param name="hostApplication">Host application instance</param>
         /// <param name="operationName">Operation name to validate</param>
         /// <param name="auditParameters"></param>
-        private void ValidateHostApplicationOperation(IHostApplication hostApplication, string operationName, SecurityAuditParameters auditParameters)
+        private void ValidateHostApplicationOperation(IApplication hostApplication, string operationName, SecurityAuditParameters auditParameters)
         {
             //Validate operation existence
             var operation = hostApplication.Operations.FirstOrDefault(
@@ -206,7 +190,7 @@ namespace CES.CoreApi.Foundation.Security
         /// <param name="operationName">Host service application method name</param>
         /// <param name="clientApplicationId">Client application identifier</param>
         /// <param name="auditParameters"></param>
-        private void ValidateOperationAccess(IHostApplication hostApplication, string operationName, int clientApplicationId, SecurityAuditParameters auditParameters)
+        private void ValidateOperationAccess(IApplication hostApplication, string operationName, int clientApplicationId, SecurityAuditParameters auditParameters)
         {
             var assignedApplication = (from operation in hostApplication.Operations
                 where operation.Name.Equals(operationName, StringComparison.OrdinalIgnoreCase)

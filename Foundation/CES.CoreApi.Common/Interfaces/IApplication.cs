@@ -4,10 +4,8 @@ using CES.CoreApi.Common.Models;
 
 namespace CES.CoreApi.Common.Interfaces
 {
-    public interface IHostApplication
+    public interface IApplication
     {
-        int ServerId { get; }
-
         [DataMember]
         int Id { get; }
 
@@ -22,8 +20,5 @@ namespace CES.CoreApi.Common.Interfaces
 
         [DataMember]
         ICollection<ServiceOperation> Operations { get; }
-
-        [DataMember]
-        ICollection<ApplicationServer> Servers { get; }
     }
 }
