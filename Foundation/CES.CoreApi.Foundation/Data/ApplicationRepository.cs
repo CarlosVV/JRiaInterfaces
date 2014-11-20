@@ -4,8 +4,6 @@ using System.Data.Common;
 using System.Linq;
 using CES.CoreApi.Caching.Interfaces;
 using CES.CoreApi.Common.Constants;
-using CES.CoreApi.Common.Enumerations;
-using CES.CoreApi.Common.Interfaces;
 using CES.CoreApi.Common.Models;
 using CES.CoreApi.Foundation.Contract.Enumerations;
 using CES.CoreApi.Foundation.Contract.Exceptions;
@@ -45,26 +43,6 @@ namespace CES.CoreApi.Foundation.Data
                     return GetApplication(cmd, applicationId);
                 }
             });
-        }
-
-        /// <summary>
-        /// Gets application instance by ID and ServerID
-        /// </summary>
-        /// <param name="applicationId">Application ID</param>
-        /// <param name="serverId">Server ID</param>
-        /// <returns></returns>
-        public IHostApplication GetApplication(int applicationId, int serverId)
-        {
-            var application = GetApplication(applicationId);
-
-            if (application == null)
-                throw new CoreApiException(TechnicalSubSystem.CoreApiData, SubSystemError.ApplicationNotFoundInDatabase, applicationId);
-
-            var server = application.Servers.FirstOrDefault(s => s.Id == serverId);
-
-            return server != null
-                ? new HostApplication(application, serverId)
-                : null;
         }
 
         /// <summary>
@@ -112,9 +90,6 @@ namespace CES.CoreApi.Foundation.Data
                 //Initialize list of applications assigned to every operation
                 InitializeAssignedApplicationList(reader, application);
                 reader.NextResult();
-
-                //Initialize list of servers where application installed
-                InitializeServerList(reader, application);
 
                 return application;
             });
@@ -168,18 +143,6 @@ namespace CES.CoreApi.Foundation.Data
                     reader.ReadValue<bool>("IsActive"));
 
                 foundOperation.AssignedApplications.Add(applicationOperation);
-            }
-        }
-
-        private static void InitializeServerList(IDataReader reader, Application application)
-        {
-            while (reader.Read())
-            {
-                var server = new ApplicationServer(
-                    reader.ReadValue<int>("ApplicationServerID"),
-                    reader.ReadValue<string>("Name"), 
-                    reader.ReadValue<bool>("IsActive"));
-                application.Servers.Add(server);
             }
         }
 

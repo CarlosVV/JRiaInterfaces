@@ -131,7 +131,6 @@ namespace CES.CoreApi.Foundation.Security
             {
                 ClientApplicationId = headerParameters.ApplicationId,
                 Operation = headerParameters.OperationName,
-                ServerId = hostApplication.ServerId,
                 ServiceApplicationId = hostApplication.Id
             };
         }

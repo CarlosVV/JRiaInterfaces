@@ -20,7 +20,7 @@ namespace CES.CoreApi.GeoLocation.Service.Business.Logic.UnitTest
         private Mock<IHostApplicationProvider> _hostApplicationProvider;
         private Mock<ILogManager> _logManager;
         private Mock<ITraceLogMonitor> _traceLogMonitor;
-        private Mock<IHostApplication> _application;
+        private Mock<IApplication> _application;
         private Mock<ITraceLogDataContainer> _traceLogDataContainer;
         private Mock<ICountryConfigurationProvider> _countryConfigurationProvider;
         private const string BingKey = "Bing Key";
@@ -33,7 +33,7 @@ namespace CES.CoreApi.GeoLocation.Service.Business.Logic.UnitTest
             _hostApplicationProvider = new Mock<IHostApplicationProvider>();
             _logManager = new Mock<ILogManager>();
             _traceLogMonitor = new Mock<ITraceLogMonitor>();
-            _application = new Mock<IHostApplication>();
+            _application = new Mock<IApplication>();
             _traceLogDataContainer = new Mock<ITraceLogDataContainer>();
             _countryConfigurationProvider = new Mock<ICountryConfigurationProvider>();
         }

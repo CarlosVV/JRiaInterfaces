@@ -71,10 +71,8 @@
     <Compile Include="Interfaces\IIocContainerFactory.cs" />
     <Compile Include="Models\Application.cs" />
     <Compile Include="Models\ApplicationConfiguration.cs" />
-    <Compile Include="Models\ApplicationServer.cs" />
     <Compile Include="Models\ApplicationServiceOperation.cs" />
-    <Compile Include="Models\HostApplication.cs" />
-    <Compile Include="Interfaces\IHostApplication.cs" />
+    <Compile Include="Interfaces\IApplication.cs" />
     <Compile Include="Models\ServiceOperation.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Providers\CurrentDateTimeProvider.cs" />

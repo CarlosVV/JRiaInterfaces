@@ -1,4 +1,4 @@
-﻿using CES.CoreApi.Common.Models;
+﻿using CES.CoreApi.Common.Interfaces;
 using CES.CoreApi.Foundation.Contract.Interfaces;
 
 namespace CES.CoreApi.Foundation.Validation
@@ -13,7 +13,7 @@ namespace CES.CoreApi.Foundation.Validation
         /// <param name="application">Application instance to validate</param>
         /// <returns>True if application is existing and active,
         /// otherwise false</returns>
-        public bool Validate(Application application)
+        public bool Validate(IApplication application)
         {
             return application != null && application.IsActive;
         }
