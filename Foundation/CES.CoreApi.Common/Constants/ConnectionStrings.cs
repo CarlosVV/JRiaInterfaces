@@ -2,6 +2,6 @@
 {
     public class ConnectionStrings
     {
-        public const string Main = "Test";
+        public const string Main = "Main";
     }
 }
