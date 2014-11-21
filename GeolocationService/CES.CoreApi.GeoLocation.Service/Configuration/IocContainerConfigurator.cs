@@ -22,6 +22,10 @@ namespace CES.CoreApi.GeoLocation.Service.Configuration
         {
             container
                 .RegisterTypeWithVirtualMethodInterceptor<IAddressService, GeoLocationService>(InterceptionBehaviorType.Performance)
+                .RegisterTypeWithVirtualMethodInterceptor<IGeocodeService, GeoLocationService>(InterceptionBehaviorType.Performance)
+                .RegisterTypeWithVirtualMethodInterceptor<IMapService, GeoLocationService>(InterceptionBehaviorType.Performance)
+                .RegisterTypeWithVirtualMethodInterceptor<IHealthMonitoringService, GeoLocationService>(InterceptionBehaviorType.Performance)
+                .RegisterTypeWithVirtualMethodInterceptor<IClientSideSupportService, GeoLocationService>(InterceptionBehaviorType.Performance)
 
                 .RegisterType<IHealthMonitoringProcessor, HealthMonitoringProcessor>()
                 .RegisterType<IAddressServiceRequestProcessor, AddressServiceRequestProcessor>()

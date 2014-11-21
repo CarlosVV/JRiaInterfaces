@@ -36,7 +36,7 @@ namespace CES.CoreApi.Foundation.Data
         {
             return CacheProvider.GetCacheItem(string.Format("GetApplication-{0}", applicationId), () =>
             {
-                using (var cmd = Database.GetStoredProcCommand("CoreApiFoundation_GetApplicationByID"))
+                using (var cmd = Database.GetStoredProcCommand("coreapi_sp_GetApplicationByID"))
                 {
                     Database.AddInParameter(cmd, "applicationID", DbType.Int32, applicationId);
 
