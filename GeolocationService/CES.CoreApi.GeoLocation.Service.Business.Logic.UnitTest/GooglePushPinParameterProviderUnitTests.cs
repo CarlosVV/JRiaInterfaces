@@ -59,5 +59,14 @@ namespace CES.CoreApi.GeoLocation.Service.Business.Logic.UnitTest
             Assert.IsNotNull(result);
             Assert.AreEqual(expected, result);
         }
+
+        [TestMethod]
+        public void GetPushPinParameter_LabelHasNonAlphaDigit_EmptyLabelSet()
+        {
+            const string expected = "&markers=color:green%7C35.4567,-100.5678&markers=color:red%7Clabel:2%7C36.4567,-101.5678";
+            var result = new GooglePushPinParameterProvider().GetPushPinParameter(TestModelsProvider.GetPushPins(label: "$"));
+            Assert.IsNotNull(result);
+            Assert.AreEqual(expected, result);
+        }
     }
 }
