@@ -21,11 +21,8 @@ namespace CES.CoreApi.GeoLocation.Service.Configuration
         public static void RegisterTypes(IIocContainer container)
         {
             container
+                //We don't need to register every service's interface, one of them is enough
                 .RegisterTypeWithVirtualMethodInterceptor<IAddressService, GeoLocationService>(InterceptionBehaviorType.Performance)
-                .RegisterTypeWithVirtualMethodInterceptor<IGeocodeService, GeoLocationService>(InterceptionBehaviorType.Performance)
-                .RegisterTypeWithVirtualMethodInterceptor<IMapService, GeoLocationService>(InterceptionBehaviorType.Performance)
-                .RegisterTypeWithVirtualMethodInterceptor<IHealthMonitoringService, GeoLocationService>(InterceptionBehaviorType.Performance)
-                .RegisterTypeWithVirtualMethodInterceptor<IClientSideSupportService, GeoLocationService>(InterceptionBehaviorType.Performance)
 
                 .RegisterType<IHealthMonitoringProcessor, HealthMonitoringProcessor>()
                 .RegisterType<IAddressServiceRequestProcessor, AddressServiceRequestProcessor>()
