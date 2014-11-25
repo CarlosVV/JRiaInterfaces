@@ -48,6 +48,10 @@ namespace CES.CoreApi.UnityProxy
             monitor.DataContainer.ReturnValue = message.ReturnValue;
             monitor.Stop();
 
+            //Handle exception since it can be lost if happened on very early configuration stage
+            if (message.Exception != null)
+                _logManager.Publish(message.Exception);
+
             return message;
         }
 
