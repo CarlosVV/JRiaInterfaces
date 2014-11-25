@@ -1,7 +1,8 @@
 ﻿using System.Security.Principal;
+using CES.CoreApi.Common.Enumerations;
+using CES.CoreApi.Common.Exceptions;
 using CES.CoreApi.Common.Models;
 using CES.CoreApi.Foundation.Contract.Enumerations;
-using CES.CoreApi.Foundation.Contract.Exceptions;
 using CES.CoreApi.Foundation.Contract.Models;
 
 namespace CES.CoreApi.Foundation.Security

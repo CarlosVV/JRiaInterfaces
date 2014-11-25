@@ -1,6 +1,7 @@
 ﻿using System;
+using CES.CoreApi.Common.Enumerations;
+using CES.CoreApi.Common.Exceptions;
 using CES.CoreApi.Foundation.Contract.Enumerations;
-using CES.CoreApi.Foundation.Contract.Exceptions;
 using CES.CoreApi.Foundation.Contract.Interfaces;
 using CES.CoreApi.GeoLocation.Service.Business.Contract.Enumerations;
 

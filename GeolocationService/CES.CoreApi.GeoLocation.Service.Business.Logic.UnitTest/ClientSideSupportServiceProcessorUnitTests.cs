@@ -1,4 +1,5 @@
 ﻿using System.Collections.ObjectModel;
+using CES.CoreApi.Common.Enumerations;
 using CES.CoreApi.Common.Interfaces;
 using CES.CoreApi.Common.Models;
 using CES.CoreApi.Foundation.Contract.Enumerations;

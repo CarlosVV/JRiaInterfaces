@@ -57,6 +57,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Attributes\ErrorMessageAttribute.cs" />
+    <Compile Include="Attributes\SubSystemErrorNumberAttribute.cs" />
+    <Compile Include="Attributes\SystemErrorNumberAttribute.cs" />
     <Compile Include="Constants\CommonConstants.cs" />
     <Compile Include="Constants\ConnectionStrings.cs" />
     <Compile Include="Constants\Namespaces.cs" />
@@ -65,7 +68,12 @@
     <Compile Include="Enumerations\LifetimeManagerType.cs" />
     <Compile Include="Enumerations\LogEntryType.cs" />
     <Compile Include="Enumerations\LogType.cs" />
+    <Compile Include="Enumerations\Organization.cs" />
     <Compile Include="Enumerations\SecurityAuditResult.cs" />
+    <Compile Include="Enumerations\SubSystemError.cs" />
+    <Compile Include="Enumerations\TechnicalSubSystem.cs" />
+    <Compile Include="Enumerations\TechnicalSystem.cs" />
+    <Compile Include="Exceptions\CoreApiException.cs" />
     <Compile Include="Interfaces\IAutoMapperProxy.cs" />
     <Compile Include="Interfaces\ICurrentDateTimeProvider.cs" />
     <Compile Include="Interfaces\IHttpClientProxy.cs" />

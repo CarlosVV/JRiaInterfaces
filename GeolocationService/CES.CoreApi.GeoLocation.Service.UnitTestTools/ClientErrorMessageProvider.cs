@@ -1,6 +1,7 @@
 ﻿using System.Globalization;
+using CES.CoreApi.Common.Attributes;
+using CES.CoreApi.Common.Enumerations;
 using CES.CoreApi.Common.Tools;
-using CES.CoreApi.Foundation.Contract.Attributes;
 using CES.CoreApi.Foundation.Contract.Enumerations;
 
 namespace CES.CoreApi.GeoLocation.Service.UnitTestTools

@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace CES.CoreApi.Foundation.Contract.Attributes
+namespace CES.CoreApi.Common.Attributes
 {
     [AttributeUsage(AttributeTargets.Field, AllowMultiple = false)]
     public class ErrorMessageAttribute : Attribute

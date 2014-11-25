@@ -1,7 +1,8 @@
 ﻿using System;
+using CES.CoreApi.Common.Enumerations;
+using CES.CoreApi.Common.Exceptions;
 using CES.CoreApi.Common.Interfaces;
 using CES.CoreApi.Foundation.Contract.Enumerations;
-using CES.CoreApi.Foundation.Contract.Exceptions;
 
 namespace CES.CoreApi.Foundation.Providers
 {

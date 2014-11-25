@@ -2,11 +2,11 @@
 using System.ComponentModel;
 using System.Globalization;
 using System.Reflection;
+using CES.CoreApi.Common.Attributes;
+using CES.CoreApi.Common.Enumerations;
 using CES.CoreApi.Common.Tools;
-using CES.CoreApi.Foundation.Contract.Attributes;
-using CES.CoreApi.Foundation.Contract.Enumerations;
 
-namespace CES.CoreApi.Foundation.Contract.Exceptions
+namespace CES.CoreApi.Common.Exceptions
 {
     [Serializable]
     public class CoreApiException: Exception

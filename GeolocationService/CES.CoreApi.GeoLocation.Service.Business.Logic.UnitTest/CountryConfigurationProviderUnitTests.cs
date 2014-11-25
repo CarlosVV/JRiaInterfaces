@@ -1,4 +1,5 @@
-﻿using CES.CoreApi.Foundation.Contract.Enumerations;
+﻿using CES.CoreApi.Common.Enumerations;
+using CES.CoreApi.Foundation.Contract.Enumerations;
 using CES.CoreApi.Foundation.Contract.Interfaces;
 using CES.CoreApi.GeoLocation.Service.Business.Contract.Configuration;
 using CES.CoreApi.GeoLocation.Service.Business.Logic.Constants;

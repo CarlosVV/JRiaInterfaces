@@ -1,6 +1,6 @@
-﻿using CES.CoreApi.Foundation.Contract.Attributes;
+﻿using CES.CoreApi.Common.Attributes;
 
-namespace CES.CoreApi.Foundation.Contract.Enumerations
+namespace CES.CoreApi.Common.Enumerations
 {
     public enum SubSystemError
     {

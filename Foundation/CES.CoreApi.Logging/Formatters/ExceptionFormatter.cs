@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
 using System.Text;
-using CES.CoreApi.Foundation.Contract.Exceptions;
+using CES.CoreApi.Common.Exceptions;
 using CES.CoreApi.Logging.Interfaces;
 
 namespace CES.CoreApi.Logging.Formatters

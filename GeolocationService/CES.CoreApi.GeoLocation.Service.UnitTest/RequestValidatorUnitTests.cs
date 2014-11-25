@@ -1,5 +1,5 @@
 ﻿using System.Collections.ObjectModel;
-using CES.CoreApi.Foundation.Contract.Enumerations;
+using CES.CoreApi.Common.Enumerations;
 using CES.CoreApi.GeoLocation.Service.Contract.Enumerations;
 using CES.CoreApi.GeoLocation.Service.Contract.Models;
 using CES.CoreApi.GeoLocation.Service.UnitTestTools;

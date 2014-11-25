@@ -1,7 +1,8 @@
 ﻿using System;
 using System.ServiceModel;
+using CES.CoreApi.Common.Enumerations;
+using CES.CoreApi.Common.Exceptions;
 using CES.CoreApi.Foundation.Contract.Enumerations;
-using CES.CoreApi.Foundation.Contract.Exceptions;
 using CES.CoreApi.Foundation.Contract.Interfaces;
 using CES.CoreApi.Logging.Interfaces;
 

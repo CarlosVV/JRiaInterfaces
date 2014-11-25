@@ -46,17 +46,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Attributes\ErrorMessageAttribute.cs" />
-    <Compile Include="Attributes\SubSystemErrorNumberAttribute.cs" />
-    <Compile Include="Attributes\SystemErrorNumberAttribute.cs" />
     <Compile Include="Constants\ServiceConfigurationItems.cs" />
-    <Compile Include="Enumerations\Organization.cs" />
     <Compile Include="Enumerations\ResponseStatus.cs" />
     <Compile Include="Enumerations\ServiceSecurityMode.cs" />
-    <Compile Include="Enumerations\SubSystemError.cs" />
-    <Compile Include="Enumerations\TechnicalSubSystem.cs" />
-    <Compile Include="Enumerations\TechnicalSystem.cs" />
-    <Compile Include="Exceptions\CoreApiException.cs" />
     <Compile Include="Interfaces\IApplicationRepository.cs" />
     <Compile Include="Interfaces\IApplicationAuthenticator.cs" />
     <Compile Include="Interfaces\IApplicationValidator.cs" />
@@ -91,6 +83,7 @@
       <Name>CES.CoreApi.Common</Name>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="$(SolutionDir)\.nuget\NuGet.targets" Condition="Exists('$(SolutionDir)\.nuget\NuGet.targets')" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">

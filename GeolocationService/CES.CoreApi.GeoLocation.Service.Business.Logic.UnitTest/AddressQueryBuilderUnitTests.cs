@@ -1,6 +1,6 @@
 ﻿using System.Globalization;
 using System.Web;
-using CES.CoreApi.Foundation.Contract.Exceptions;
+using CES.CoreApi.Common.Exceptions;
 using CES.CoreApi.GeoLocation.Service.Business.Logic.Builders;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 

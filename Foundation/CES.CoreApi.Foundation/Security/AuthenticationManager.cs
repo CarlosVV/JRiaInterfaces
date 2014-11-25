@@ -3,8 +3,9 @@ using System.Collections.ObjectModel;
 using System.IdentityModel.Policy;
 using System.ServiceModel;
 using System.ServiceModel.Channels;
+using CES.CoreApi.Common.Enumerations;
+using CES.CoreApi.Common.Exceptions;
 using CES.CoreApi.Foundation.Contract.Enumerations;
-using CES.CoreApi.Foundation.Contract.Exceptions;
 using CES.CoreApi.Foundation.Contract.Interfaces;
 using CES.CoreApi.Logging.Interfaces;
 
