@@ -7,7 +7,7 @@
 		<parameterentry match="/configuration/appSettings/add[@key='CacheName']/@value" scope="\\web.config$" kind="XmlFile" />
 	</parameter>
 	<parameter name="AppFabricServers" description="AppFabric Servers" tags="" defaultvalue="__APPFABRICSERVERS__">
-		<parameterentry match="/configuration/dataCacheClients/dataCacheClient/hosts" scope="\\web.config$" kind="XmlFile" />
+		<parameterentry match="/configuration/dataCacheClients/dataCacheClient[@name='default']/hosts/host" scope="\\web.config$" kind="XmlFile" />
 	</parameter>
 	<parameter name="SvcLog" description="SvcLog File Location" tags="" defaultvalue="__SVCLOG__">
 		<parameterentry match="/configuration/system.diagnostics/sharedListeners/add/@initializeData" scope="\\web.config$" kind="XmlFile" />
