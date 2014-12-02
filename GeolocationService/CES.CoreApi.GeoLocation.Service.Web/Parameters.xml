@@ -6,14 +6,33 @@
 	<parameter name="CacheName" description="AppFabric Cache Name" tags="" defaultvalue="__CACHENAME__">
 		<parameterentry match="/configuration/appSettings/add[@key='CacheName']/@value" scope="\\web.config$" kind="XmlFile" />
 	</parameter>
+	<parameter name="RemoveAppFabricServers" description="Removes existing AppFabric Server entries" tags="" defaultvalue="">
+		<parameterValidation kind="AllowEmpty" />
+		<parameterentry match="/configuration/dataCacheClients/dataCacheClient[@name='default']/hosts/host//*" scope="\\web.config$" kind="XmlFile" />
+	</parameter>
 	<parameter name="AppFabricServer1" description="AppFabric Servers" tags="" defaultvalue="&lt;host name='__APPFABRICSERVER1__' cachePort='22233' /&gt;">
-		<parameterentry match="/configuration/dataCacheClients/dataCacheClient[@name='default']/hosts/host" scope="\\web.config$" kind="XmlFile" />
+		<parameterentry match="/configuration/dataCacheClients/dataCacheClient[@name='default']/hosts" scope="\\web.config$" kind="XmlFile" />
 	</parameter>
 	<parameter name="AppFabricServer2" description="AppFabric Servers" tags="" defaultvalue="&lt;host name='__APPFABRICSERVER2__' cachePort='22233' /&gt;">
 		<parameterentry match="/configuration/dataCacheClients/dataCacheClient[@name='default']/hosts" scope="\\web.config$" kind="XmlFile" />
 	</parameter>
 	<parameter name="AppFabricServer3" description="AppFabric Servers" tags="" defaultvalue="&lt;host name='__APPFABRICSERVER3__' cachePort='22233' /&gt;">
 		<parameterentry match="/configuration/dataCacheClients/dataCacheClient[@name='default']/hosts" scope="\\web.config$" kind="XmlFile" />
+	</parameter>
+	<parameter name="AppFabricSecurityMode" description="AppFabric Security Mode" tags="" defaultvalue="__APPFABSECURITYMODE__">
+		<parameterentry match="/configuration/dataCacheClients/dataCacheClient[@name='default']/securityProperties/@mode" scope="\\web.config$" kind="XmlFile" />
+	</parameter>
+	<parameter name="AppFabricProtectionLevel" description="AppFabric Protection Level" tags="" defaultvalue="__APPFABPROTECTIONLEVEL__">
+		<parameterentry match="/configuration/dataCacheClients/dataCacheClient[@name='default']/securityProperties/protectionLevel" scope="\\web.config$" kind="XmlFile" />
+	</parameter>
+	<parameter name="LogEntireMessage" description="Log Entire Message" tags="" defaultvalue="__LOGENTIREMSG__">
+		<parameterentry match="/configuration/system.serviceModel/diagnostics/messageLogging/@logEntireMessage" scope="\\web.config$" kind="XmlFile" />
+	</parameter>
+	<parameter name="LogSvcLevel" description="Log Messages at Service Level" tags="" defaultvalue="__LOGSVCLEVEL__">
+		<parameterentry match="/configuration/system.serviceModel/diagnostics/messageLogging/@logMessagesAtServiceLevel" scope="\\web.config$" kind="XmlFile" />
+	</parameter>
+	<parameter name="LogTransportLevel" description="Log Messages at Transport Level" tags="" defaultvalue="__LOGTRANSPORTLEVEL__">
+		<parameterentry match="/configuration/system.serviceModel/diagnostics/messageLogging/@logMessagesAtTransportLevel" scope="\\web.config$" kind="XmlFile" />
 	</parameter>
 	<parameter name="SvcLog" description="SvcLog File Location" tags="" defaultvalue="__SVCLOG__">
 		<parameterentry match="/configuration/system.diagnostics/sharedListeners/add/@initializeData" scope="\\web.config$" kind="XmlFile" />
