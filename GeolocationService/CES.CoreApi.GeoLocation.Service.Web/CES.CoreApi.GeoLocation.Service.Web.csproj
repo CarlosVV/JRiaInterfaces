@@ -69,10 +69,6 @@
     <Content Include="Web.config">
       <SubType>Designer</SubType>
     </Content>
-<<<<<<< HEAD
-    <None Include="Properties\PublishProfiles\Deploy.pubxml" />
-=======
->>>>>>> parent of f5e2dcc... Revert "Web Deploy"
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
