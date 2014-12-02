@@ -66,11 +66,13 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="GeoLocationService.svc" />
-    <None Include="Parameters.xml" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
     </Content>
+<<<<<<< HEAD
     <None Include="Properties\PublishProfiles\Deploy.pubxml" />
+=======
+>>>>>>> parent of f5e2dcc... Revert "Web Deploy"
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -84,6 +86,12 @@
       <Project>{95de1da5-4826-4fae-be0e-7a4c6ac69c53}</Project>
       <Name>CES.CoreApi.GeoLocation.Service</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Properties\PublishProfiles\Deploy.pubxml" />
+    <None Include="Web.Deploy.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </None>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
