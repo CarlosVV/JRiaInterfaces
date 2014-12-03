@@ -15,10 +15,10 @@
 
 	<parameter name="RemoveAppFabricServers" description="Removes existing AppFabric Server entries" tags="" defaultvalue="">
 		<parameterValidation kind="AllowEmpty" />
-		<parameterentry match="/configuration/dataCacheClients/dataCacheClient[@name='default']/hosts" scope="\\web.config$" kind="XmlFile" />
+		<parameterentry match="/configuration/dataCacheClients/dataCacheClient[@name='default']/hosts/host" scope="\\web.config$" kind="XmlFile" />
 	</parameter>
 
-	<parameter name="AppFabricServer3" description="AppFabric Servers" tags="" defaultvalue="&lt;host name='__APPFABRICSERVER3__' cachePort='22233' /&gt;">
+	<parameter name="AppFabricServer1" description="AppFabric Servers" tags="" defaultvalue="&lt;host name='__APPFABRICSERVER1__' cachePort='22233' /&gt;">
 		<parameterentry match="/configuration/dataCacheClients/dataCacheClient[@name='default']/hosts" scope="\\web.config$" kind="XmlFile" />
 	</parameter>
 
@@ -26,7 +26,7 @@
 		<parameterentry match="/configuration/dataCacheClients/dataCacheClient[@name='default']/hosts" scope="\\web.config$" kind="XmlFile" />
 	</parameter>
 
-	<parameter name="AppFabricServer1" description="AppFabric Servers" tags="" defaultvalue="&lt;host name='__APPFABRICSERVER1__' cachePort='22233' /&gt;">
+	<parameter name="AppFabricServer3" description="AppFabric Servers" tags="" defaultvalue="&lt;host name='__APPFABRICSERVER3__' cachePort='22233' /&gt;">
 		<parameterentry match="/configuration/dataCacheClients/dataCacheClient[@name='default']/hosts" scope="\\web.config$" kind="XmlFile" />
 	</parameter>
 
