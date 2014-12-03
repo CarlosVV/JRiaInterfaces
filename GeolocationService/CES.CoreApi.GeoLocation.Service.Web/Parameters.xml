@@ -1,7 +1,10 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <parameters>
-	<parameter name="CompilationDebug" description="Compilation Debug" tags="" defaultvalue="__COMPILATIONDEBUG__">
+	<parameter name="CompilationDebug" description="Compilation Debug" tags="" defaultvalue="false">
 		<parameterentry match="/configuration/system.web/compilation/@debug" scope="\\web.config$" kind="XmlFile" />
+	</parameter>
+	<parameter name="CustomErrors" description="Custom Errors" tags="" defaultvalue="RemoteOnly">
+		<parameterentry match="/configuration/system.web/customErrors/@mode" scope="\\web.config$" kind="XmlFile" />
 	</parameter>
 	<parameter name="CacheName" description="AppFabric Cache Name" tags="" defaultvalue="__CACHENAME__">
 		<parameterentry match="/configuration/appSettings/add[@key='CacheName']/@value" scope="\\web.config$" kind="XmlFile" />
@@ -10,13 +13,13 @@
 		<parameterValidation kind="AllowEmpty" />
 		<parameterentry match="/configuration/dataCacheClients/dataCacheClient[@name='default']/hosts/host" scope="\\web.config$" kind="XmlFile" />
 	</parameter>
-	<parameter name="AppFabricServer1" description="AppFabric Servers" tags="" defaultvalue="&lt;host name='__APPFABRICSERVER1__' cachePort='22233' /&gt;">
+	<parameter name="AppFabricServer3" description="AppFabric Servers" tags="" defaultvalue="&lt;host name='__APPFABRICSERVER3__' cachePort='22233' /&gt;">
 		<parameterentry match="/configuration/dataCacheClients/dataCacheClient[@name='default']/hosts" scope="\\web.config$" kind="XmlFile" />
 	</parameter>
 	<parameter name="AppFabricServer2" description="AppFabric Servers" tags="" defaultvalue="&lt;host name='__APPFABRICSERVER2__' cachePort='22233' /&gt;">
 		<parameterentry match="/configuration/dataCacheClients/dataCacheClient[@name='default']/hosts" scope="\\web.config$" kind="XmlFile" />
 	</parameter>
-	<parameter name="AppFabricServer3" description="AppFabric Servers" tags="" defaultvalue="&lt;host name='__APPFABRICSERVER3__' cachePort='22233' /&gt;">
+	<parameter name="AppFabricServer1" description="AppFabric Servers" tags="" defaultvalue="&lt;host name='__APPFABRICSERVER1__' cachePort='22233' /&gt;">
 		<parameterentry match="/configuration/dataCacheClients/dataCacheClient[@name='default']/hosts" scope="\\web.config$" kind="XmlFile" />
 	</parameter>
 	<parameter name="AppFabricSecurityMode" description="AppFabric Security Mode" tags="" defaultvalue="__APPFABSECURITYMODE__">
