@@ -110,7 +110,7 @@ namespace CES.CoreApi.Logging.Managers
                 customMessage = string.IsNullOrEmpty(customMessage) ? string.Empty : customMessage;
                 dataContainer = dataContainer ?? _container.Resolve<ExceptionLogDataContainer>();
 
-                dataContainer.Exception = exception;
+                dataContainer.SetException(exception);
                 dataContainer.CustomMessage = customMessage;
 
                 PublishDataContainer(dataContainer);

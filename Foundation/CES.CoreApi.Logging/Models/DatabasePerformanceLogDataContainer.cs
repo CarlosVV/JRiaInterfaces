@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data;
+using System.Runtime.Serialization;
 using System.Threading;
 using CES.CoreApi.Common.Enumerations;
 using CES.CoreApi.Common.Interfaces;
@@ -10,7 +11,7 @@ using Newtonsoft.Json.Converters;
 
 namespace CES.CoreApi.Logging.Models
 {
-    [JsonObject(MemberSerialization.OptIn)]
+    [DataContract]
     public class DatabasePerformanceLogDataContainer : IDataContainer
     {
         #region Core
@@ -34,7 +35,7 @@ namespace CES.CoreApi.Logging.Models
         /// <summary>
         /// Returns time when method was executed
         /// </summary>
-        [JsonProperty]
+        [DataMember]
         public DateTime StartTime
         {
             get;
@@ -44,7 +45,7 @@ namespace CES.CoreApi.Logging.Models
         /// <summary>
         /// Returns elapsed time in milliseconds
         /// </summary>
-        [JsonProperty]
+        [DataMember]
         public long ElapsedMilliseconds
         {
             get;
@@ -54,20 +55,20 @@ namespace CES.CoreApi.Logging.Models
         /// <summary>
         /// Gets or sets database command text
         /// </summary>
-        [JsonProperty]
+        [DataMember]
         public string CommandText
         {
             get;
             set;
         }
 
-        [JsonProperty]
+        [DataMember]
         public DatabaseConnection Connection { get; set; }
 
         /// <summary>
         /// Gets or sets database command type
         /// </summary>
-        [JsonProperty]
+        [DataMember]
         [JsonConverter(typeof(StringEnumConverter))]
         public CommandType CommandType
         {
@@ -78,20 +79,20 @@ namespace CES.CoreApi.Logging.Models
         /// <summary>
         /// Gets or sets database command timeout
         /// </summary>
-        [JsonProperty]
+        [DataMember]
         public int CommandTimeout
         {
             get;
             set;
         }
 
-        [JsonProperty]
+        [DataMember]
         public IEnumerable<DatabaseParameter> Parameters { get; set; }
 
         /// <summary>
         /// Gets or sets thred identifier
         /// </summary>
-        [JsonProperty]
+        [DataMember]
         public int ThreadId
         {
             get;
@@ -114,7 +115,7 @@ namespace CES.CoreApi.Logging.Models
         /// <summary>
         /// Gets log type
         /// </summary>
-        [JsonProperty]
+        [DataMember]
         [JsonConverter(typeof(StringEnumConverter))]
         public LogType LogType
         {

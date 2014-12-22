@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Runtime.Serialization;
 using CES.CoreApi.Common.Enumerations;
 using CES.CoreApi.Common.Interfaces;
 using CES.CoreApi.Logging.Interfaces;
@@ -7,7 +8,7 @@ using Newtonsoft.Json.Converters;
 
 namespace CES.CoreApi.Logging.Models
 {
-    [JsonObject(MemberSerialization.OptIn)]
+    [DataContract]
     public class SecurityLogDataContainer : IDataContainer
     {
         #region Core
@@ -28,23 +29,23 @@ namespace CES.CoreApi.Logging.Models
 
         #region Public properties
 
-        [JsonProperty]
+        [DataMember]
         public int ServiceApplicationId { get; set; }
-        [JsonProperty]
+        [DataMember]
         public int ClientApplicationId { get; set; }
-        [JsonProperty]
+        [DataMember]
         public string Operation { get; set; }
-        [JsonProperty]
+        [DataMember]
         [JsonConverter(typeof(StringEnumConverter))]
         public SecurityAuditResult AuditResult { get; set; }
-        [JsonProperty]
+        [DataMember]
         public DateTime AuditTime { get; private set; }
-        [JsonProperty]
+        [DataMember]
         public string Details { get; set; }
-        [JsonProperty]
+        [DataMember]
         public Guid MessageId { get; private set; }
         
-        [JsonProperty]
+        [DataMember]
         [JsonConverter(typeof(StringEnumConverter))]
         public LogType LogType
         {

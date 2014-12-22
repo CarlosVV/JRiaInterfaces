@@ -1,38 +1,39 @@
-﻿using Newtonsoft.Json;
+﻿using System.Runtime.Serialization;
+using Newtonsoft.Json;
 
 namespace CES.CoreApi.Logging.Models
 {
-    [JsonObject(MemberSerialization.OptIn)]
+    [DataContract]
     public class DatabaseConnection
     {
         /// <summary>
         /// Gets or sets database name
         /// </summary>
-        [JsonProperty]
+        [DataMember]
         public string DatabaseName { get; set; }
 
         /// <summary>
         /// Gets or sets database server name
         /// </summary>
-        [JsonProperty]
+        [DataMember]
         public string ServerName { get; set; }
 
         /// <summary>
         /// Gets or sets database connection string
         /// </summary>
-        [JsonProperty]
+        [DataMember]
         public string ConnectionString { get; set; }
 
         /// <summary>
         /// Gets or sets database connection timeout
         /// </summary>
-        [JsonProperty]
+        [DataMember]
         public int ConnectionTimeout { get; set; }
 
         /// <summary>
         /// Gets or sets database server version
         /// </summary>
-        [JsonProperty]
+        [DataMember]
         public string ServerVersion { get; set; }
     }
 }

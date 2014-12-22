@@ -1,23 +1,24 @@
 ﻿using System.Data;
+using System.Runtime.Serialization;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
 
 namespace CES.CoreApi.Logging.Models
 {
-    [JsonObject(MemberSerialization.OptIn)]
+    [DataContract]
     public class DatabaseParameter
     {
-         [JsonProperty]
+         [DataMember]
         public string Name { get; set; }
 
-         [JsonProperty]
+         [DataMember]
         public object Value { get; set; }
 
-         [JsonProperty]
+         [DataMember]
          [JsonConverter(typeof(StringEnumConverter))]
         public ParameterDirection Direction { get; set; }
 
-         [JsonProperty]
+         [DataMember]
          [JsonConverter(typeof(StringEnumConverter))]
         public DbType DataType { get; set; }
     }
