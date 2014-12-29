@@ -11,27 +11,27 @@ namespace CES.CoreApi.Logging.Providers
         #region Core
 
         private readonly IRemoteClientInformationProvider _remoteClientInformationProvider;
-        private readonly IHtppRequestInformationProvider _htppRequestInformationProvider;
+        private readonly IHttpRequestInformationProvider _httpRequestInformationProvider;
         private readonly IServerInformationProvider _serverInformationProvider;
 
         /// <summary>
         /// Initializes ServiceCallInformationProvider instance
         /// </summary>
         /// <param name="remoteClientInformationProvider">Remote Client Details Provider instance</param>
-        /// <param name="htppRequestInformationProvider">Htpp Request Details Provider instance</param>
+        /// <param name="httpRequestInformationProvider">Htpp Request Details Provider instance</param>
         /// <param name="serverInformationProvider">Server details information provider instance </param>
         public ServiceCallInformationProvider(IRemoteClientInformationProvider remoteClientInformationProvider,
-            IHtppRequestInformationProvider htppRequestInformationProvider, IServerInformationProvider serverInformationProvider)
+            IHttpRequestInformationProvider httpRequestInformationProvider, IServerInformationProvider serverInformationProvider)
         {
             if (remoteClientInformationProvider == null) 
                 throw new ArgumentNullException("remoteClientInformationProvider");
-            if (htppRequestInformationProvider == null) 
-                throw new ArgumentNullException("htppRequestInformationProvider");
+            if (httpRequestInformationProvider == null) 
+                throw new ArgumentNullException("httpRequestInformationProvider");
             if (serverInformationProvider == null) 
                 throw new ArgumentNullException("serverInformationProvider");
 
             _remoteClientInformationProvider = remoteClientInformationProvider;
-            _htppRequestInformationProvider = htppRequestInformationProvider;
+            _httpRequestInformationProvider = httpRequestInformationProvider;
             _serverInformationProvider = serverInformationProvider;
         }
 
@@ -53,7 +53,7 @@ namespace CES.CoreApi.Logging.Providers
             _remoteClientInformationProvider.AddDetails(exceptionLogDataContainer, context, getClientDetails);
 
             //Add http request details to the data container
-            _htppRequestInformationProvider.AddDetails(exceptionLogDataContainer, context);
+            _httpRequestInformationProvider.AddDetails(exceptionLogDataContainer, context);
 
             //Add server details to the data container
             _serverInformationProvider.AddDetails(exceptionLogDataContainer, context);

@@ -68,7 +68,7 @@ namespace CES.CoreApi.Logging.Configuration
                     .RegisterType<IExceptionLogItemGroupTitleFormatter, ExceptionLogItemGroupTitleFormatter>()
                     .RegisterType<IServiceCallInformationProvider, ServiceCallInformationProvider>()
                     .RegisterType<IRemoteClientInformationProvider, RemoteClientInformationProvider>()
-                    .RegisterType<IHtppRequestInformationProvider, HtppRequestInformationProvider>()
+                    .RegisterType<IHttpRequestInformationProvider, HttpRequestInformationProvider>()
                     .RegisterType<IServerInformationProvider, ServerInformationProvider>();
             }
 

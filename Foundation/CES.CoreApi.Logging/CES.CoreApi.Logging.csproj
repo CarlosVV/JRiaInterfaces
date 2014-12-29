@@ -125,8 +125,8 @@
     <Compile Include="Formatters\ValueListFormatter.cs" />
     <Compile Include="Utilities\SkipEmptyContractResolver.cs" />
     <Compile Include="Utilities\TypeExtensions.cs" />
-    <Compile Include="Providers\HtppRequestInformationProvider.cs" />
-    <Compile Include="Interfaces\IHtppRequestInformationProvider.cs" />
+    <Compile Include="Providers\HttpRequestInformationProvider.cs" />
+    <Compile Include="Interfaces\IHttpRequestInformationProvider.cs" />
     <Compile Include="Interfaces\IRemoteClientInformationProvider.cs" />
     <Compile Include="Interfaces\IServerInformationProvider.cs" />
     <Compile Include="Interfaces\IServiceCallInformationProvider.cs" />
