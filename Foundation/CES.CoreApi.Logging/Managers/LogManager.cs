@@ -12,7 +12,7 @@ namespace CES.CoreApi.Logging.Managers
 {
     public class LogManager : ILogManager
     {
-         #region Core
+        #region Core
 
         private readonly IIocContainer _container;
         private readonly ILogConfigurationProvider _configuration;
@@ -58,7 +58,8 @@ namespace CES.CoreApi.Logging.Managers
         /// <param name="context">Service operation context</param>
         /// <param name="getClientDetails"></param>
         /// <returns></returns>
-        public ExceptionLogDataContainer GetExceptionLogDataContainerWithCallDetails(OperationContext context, Func<IDictionary<string, object>> getClientDetails)
+        public ExceptionLogDataContainer GetExceptionLogDataContainerWithCallDetails(OperationContext context,
+            Func<IDictionary<string, object>> getClientDetails)
         {
             ExceptionLogDataContainer dataContainer = null;
 
@@ -73,9 +74,9 @@ namespace CES.CoreApi.Logging.Managers
                 var webServiceCallInformationProvider = _container.Resolve<IServiceCallInformationProvider>();
                 webServiceCallInformationProvider.AddDetails(dataContainer, context, getClientDetails);
             }
-            // ReSharper disable EmptyGeneralCatchClause
+                // ReSharper disable EmptyGeneralCatchClause
             catch (Exception)
-            // ReSharper restore EmptyGeneralCatchClause
+                // ReSharper restore EmptyGeneralCatchClause
             {
             }
             return dataContainer;
@@ -95,14 +96,15 @@ namespace CES.CoreApi.Logging.Managers
             {
                 PublishDataContainer(dataContainer);
             }
-            // ReSharper disable EmptyGeneralCatchClause
+                // ReSharper disable EmptyGeneralCatchClause
             catch (Exception)
-            // ReSharper restore EmptyGeneralCatchClause
+                // ReSharper restore EmptyGeneralCatchClause
             {
             }
         }
 
-        public void Publish(Exception exception, string customMessage = null, ExceptionLogDataContainer dataContainer = null)
+        public void Publish(Exception exception, string customMessage = null,
+            ExceptionLogDataContainer dataContainer = null)
         {
             //Calling application should not fail if logging failed
             try
@@ -115,14 +117,14 @@ namespace CES.CoreApi.Logging.Managers
 
                 PublishDataContainer(dataContainer);
             }
-            // ReSharper disable EmptyGeneralCatchClause
+                // ReSharper disable EmptyGeneralCatchClause
             catch (Exception)
-            // ReSharper restore EmptyGeneralCatchClause
+                // ReSharper restore EmptyGeneralCatchClause
             {
             }
         }
 
-        #endregion 
+        #endregion
 
         #region private methods
 
@@ -165,9 +167,7 @@ namespace CES.CoreApi.Logging.Managers
             }
         }
 
-        #endregion
-
-        public bool IsLogEnabled(LogType logType)
+        private bool IsLogEnabled(LogType logType)
         {
             switch (logType)
             {
@@ -189,7 +189,7 @@ namespace CES.CoreApi.Logging.Managers
             return false;
         }
 
-        public bool IsLogAsynchronous(LogType logType)
+        private bool IsLogAsynchronous(LogType logType)
         {
             switch (logType)
             {
@@ -204,5 +204,7 @@ namespace CES.CoreApi.Logging.Managers
             }
             return false;
         }
+
+        #endregion
     }
 }
