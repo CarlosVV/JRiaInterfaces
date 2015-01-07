@@ -10,8 +10,9 @@ namespace CES.CoreApi.Logging.Formatters
     public class SqlQueryFormatter : ISqlQueryFormatter
     {
         private const string StoredProcedureTemplate = "{0} {1}";
-        private const string InParameterTemplate = "{0} = '{1}'";
-        private const string OutParameterTemplate = "{0} = '{1}' OUTPUT";
+        private const string InParameterTemplate = "{0} = '{1}',";
+        private const string OutParameterTemplate = "{0} = '{1}' OUTPUT,";
+        private const string ParameterSeparator = ",";
 
         public string Format(DatabasePerformanceLogDataContainer container)
         {
@@ -34,10 +35,14 @@ namespace CES.CoreApi.Logging.Formatters
                     parameterListBuilder.AppendFormat(CultureInfo.InvariantCulture, OutParameterTemplate, parameter.Name, parameter.Value);
             }
 
+            var parameterList = parameterListBuilder.Length > 0 
+                ? parameterListBuilder.ToString().TrimEnd(ParameterSeparator.ToCharArray())
+                : string.Empty;
+
             return string.Format(CultureInfo.InvariantCulture,
                 StoredProcedureTemplate,
                 container.CommandText,
-                parameterListBuilder);
+                parameterList);
         }
     }
 }

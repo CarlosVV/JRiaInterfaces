@@ -116,7 +116,7 @@ namespace CES.CoreApi.Logging.Models
         /// Gets SQL query formatted
         /// </summary>
         [DataMember]
-        public string FormattedQuery
+        public string Query
         {
             get { return _sqlQueryFormatter.Format(this); }
         }
