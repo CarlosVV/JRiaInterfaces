@@ -58,6 +58,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Configuration\DatabasePerformanceLogConfiguration.cs" />
+    <Compile Include="Interfaces\ISqlQueryFormatter.cs" />
+    <Compile Include="Formatters\SqlQueryFormatter.cs" />
     <Compile Include="Interfaces\IDatabasePerformanceLogConfiguration.cs" />
     <Compile Include="Interfaces\IDataContainer.cs" />
     <Compile Include="Interfaces\IJsonDataContainerFormatter.cs" />
@@ -74,6 +76,7 @@
     <Compile Include="Managers\LogManager.cs" />
     <Compile Include="Configuration\LogConfigurator.cs" />
     <Compile Include="Configuration\PerformanceLogConfiguration.cs" />
+    <Compile Include="Models\ApplicationContext.cs" />
     <Compile Include="Models\DatabaseConnection.cs" />
     <Compile Include="Models\DatabaseParameter.cs" />
     <Compile Include="Models\DatabasePerformanceLogDataContainer.cs" />

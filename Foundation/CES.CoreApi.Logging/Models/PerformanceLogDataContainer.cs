@@ -34,7 +34,7 @@ namespace CES.CoreApi.Logging.Models
         /// <summary>
         /// Returns time when method was executed
         /// </summary>
-        [DataMember]
+        [DataMember(Name = "timestamp")]
         public DateTime StartTime
         {
             get;

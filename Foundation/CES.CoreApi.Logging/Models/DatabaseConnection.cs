@@ -1,5 +1,4 @@
 ﻿using System.Runtime.Serialization;
-using Newtonsoft.Json;
 
 namespace CES.CoreApi.Logging.Models
 {
@@ -35,5 +34,11 @@ namespace CES.CoreApi.Logging.Models
         /// </summary>
         [DataMember]
         public string ServerVersion { get; set; }
+
+        /// <summary>
+        /// Gets or sets time spent on open connection in msec
+        /// </summary>
+        [DataMember]
+        public long OpenConnectionTime { get; set; }
     }
 }

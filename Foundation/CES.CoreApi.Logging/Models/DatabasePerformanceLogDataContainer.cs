@@ -17,13 +17,16 @@ namespace CES.CoreApi.Logging.Models
         #region Core
 
         private readonly IJsonDataContainerFormatter _formatter;
+        private readonly ISqlQueryFormatter _sqlQueryFormatter;
 
-        public DatabasePerformanceLogDataContainer(ICurrentDateTimeProvider currentDateTimeProvider, IJsonDataContainerFormatter formatter)
+        public DatabasePerformanceLogDataContainer(ICurrentDateTimeProvider currentDateTimeProvider, IJsonDataContainerFormatter formatter, ISqlQueryFormatter sqlQueryFormatter)
         {
             if (currentDateTimeProvider == null) throw new ArgumentNullException("currentDateTimeProvider");
             if (formatter == null) throw new ArgumentNullException("formatter");
+            if (sqlQueryFormatter == null) throw new ArgumentNullException("sqlQueryFormatter");
 
             _formatter = formatter;
+            _sqlQueryFormatter = sqlQueryFormatter;
             StartTime = currentDateTimeProvider.GetCurrentLocal();
             ThreadId = Thread.CurrentThread.ManagedThreadId;
         }
@@ -35,7 +38,7 @@ namespace CES.CoreApi.Logging.Models
         /// <summary>
         /// Returns time when method was executed
         /// </summary>
-        [DataMember]
+        [DataMember(Name = "timestamp")]
         public DateTime StartTime
         {
             get;
@@ -99,6 +102,25 @@ namespace CES.CoreApi.Logging.Models
             private set;
         }
 
+        /// <summary>
+        /// Gets or sets correlation information instance
+        /// </summary>
+        [DataMember]
+        public ApplicationContext ApplicationContext
+        {
+            get;
+            set;
+        }
+
+        /// <summary>
+        /// Gets SQL query formatted
+        /// </summary>
+        [DataMember]
+        public string FormattedQuery
+        {
+            get { return _sqlQueryFormatter.Format(this); }
+        }
+
         #endregion //Public properties
 
         #region Overriding
@@ -109,6 +131,7 @@ namespace CES.CoreApi.Logging.Models
         /// <returns>String representation of the log entry</returns>
         public override string ToString()
         {
+
             return _formatter.Format(this);
         }
 

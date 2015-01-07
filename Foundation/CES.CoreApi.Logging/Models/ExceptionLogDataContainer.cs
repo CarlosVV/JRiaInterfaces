@@ -42,7 +42,7 @@ namespace CES.CoreApi.Logging.Models
         /// <summary>
         /// Gets or sets log record creation time
         /// </summary>
-        [DataMember]
+        [DataMember(Name = "timestamp")]
         public DateTime Timestamp { get; private set; }
 
         /// <summary>

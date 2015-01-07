@@ -38,7 +38,7 @@ namespace CES.CoreApi.Logging.Models
         [DataMember]
         [JsonConverter(typeof(StringEnumConverter))]
         public SecurityAuditResult AuditResult { get; set; }
-        [DataMember]
+        [DataMember(Name = "timestamp")]
         public DateTime AuditTime { get; private set; }
         [DataMember]
         public string Details { get; set; }

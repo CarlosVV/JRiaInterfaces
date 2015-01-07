@@ -94,7 +94,8 @@ namespace CES.CoreApi.Logging.Configuration
              {
                  _container
                      .RegisterType<IDatabasePerformanceLogMonitor, DatabasePerformanceLogMonitor>(LifetimeManagerType.AlwaysNew)
-                     .RegisterType<DatabasePerformanceLogDataContainer, DatabasePerformanceLogDataContainer>(LifetimeManagerType.AlwaysNew);
+                     .RegisterType<DatabasePerformanceLogDataContainer, DatabasePerformanceLogDataContainer>(LifetimeManagerType.AlwaysNew)
+                     .RegisterType<ISqlQueryFormatter, SqlQueryFormatter>();
              }
 
             //Security audit log related
