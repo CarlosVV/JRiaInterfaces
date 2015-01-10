@@ -30,7 +30,7 @@ namespace CES.CoreApi.Logging.Models
             _container = container;
            
             Items = new Collection<ExceptionLogItemGroup>();
-            Timestamp = _container.Resolve<ICurrentDateTimeProvider>().GetCurrentLocal();
+            Timestamp = _container.Resolve<ICurrentDateTimeProvider>().GetCurrentUtc();
             _formatter = _container.Resolve<IJsonDataContainerFormatter>();
             ThreadId = Thread.CurrentThread.ManagedThreadId;
         }

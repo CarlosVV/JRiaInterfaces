@@ -71,7 +71,7 @@ namespace CES.CoreApi.Logging.Models
             }
             set
             {
-                RequestTime = _currentDateTimeProvider.GetCurrentLocal();
+                RequestTime = _currentDateTimeProvider.GetCurrentUtc();
                 value = string.IsNullOrEmpty(value) ? string.Empty : value;
                 RequestMessageLength = value.Length;
                 
@@ -90,7 +90,7 @@ namespace CES.CoreApi.Logging.Models
         {
             get
             {
-                return _currentDateTimeProvider.GetCurrentLocal();
+                return _currentDateTimeProvider.GetCurrentUtc();
             }
         }
 
@@ -116,7 +116,7 @@ namespace CES.CoreApi.Logging.Models
             }
             set
             {
-                ResponseTime = _currentDateTimeProvider.GetCurrentLocal();
+                ResponseTime = _currentDateTimeProvider.GetCurrentUtc();
                 value = string.IsNullOrEmpty(value) ? string.Empty : value;
                 ResponseMessageLength = value.Length;
 

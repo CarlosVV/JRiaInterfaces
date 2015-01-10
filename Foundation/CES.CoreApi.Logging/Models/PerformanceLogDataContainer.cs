@@ -23,7 +23,7 @@ namespace CES.CoreApi.Logging.Models
             if (currentDateTimeProvider == null) throw new ArgumentNullException("currentDateTimeProvider");
 
             _formatter = formatter;
-            StartTime = currentDateTimeProvider.GetCurrentLocal();
+            StartTime = currentDateTimeProvider.GetCurrentUtc();
             ThreadId = Thread.CurrentThread.ManagedThreadId;
         }
 

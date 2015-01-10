@@ -27,7 +27,7 @@ namespace CES.CoreApi.Logging.Models
 
             _formatter = formatter;
             _sqlQueryFormatter = sqlQueryFormatter;
-            StartTime = currentDateTimeProvider.GetCurrentLocal();
+            StartTime = currentDateTimeProvider.GetCurrentUtc();
             ThreadId = Thread.CurrentThread.ManagedThreadId;
         }
 
