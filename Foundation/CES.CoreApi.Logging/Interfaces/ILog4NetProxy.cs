@@ -121,41 +121,41 @@ namespace CES.CoreApi.Logging.Interfaces
         /// <param name="exception">Exception instance</param>
         void PublishFatal(string message, Exception exception);
 
-        /// <summary>
-        /// Checks if this logger is enabled for the Debug level.
-        /// Returns true if this logger is enabled for Debug events, false otherwise.
-        /// </summary>
-        bool IsDebugEnabled { get; }
+        ///// <summary>
+        ///// Checks if this logger is enabled for the Debug level.
+        ///// Returns true if this logger is enabled for Debug events, false otherwise.
+        ///// </summary>
+        //bool IsDebugEnabled { get; }
 
-        /// <summary>
-        /// Checks if this logger is enabled for the Info level.
-        /// Returns true if this logger is enabled for Info events, false otherwise.
-        /// </summary>
-        bool IsInformationEnabled { get; }
+        ///// <summary>
+        ///// Checks if this logger is enabled for the Info level.
+        ///// Returns true if this logger is enabled for Info events, false otherwise.
+        ///// </summary>
+        //bool IsInformationEnabled { get; }
 
-        /// <summary>
-        /// Checks if this logger is enabled for the Warn level.
-        /// Returns true if this logger is enabled for Warn events, false otherwise.
-        /// </summary>
-        bool IsWarningEnabled { get; }
+        ///// <summary>
+        ///// Checks if this logger is enabled for the Warn level.
+        ///// Returns true if this logger is enabled for Warn events, false otherwise.
+        ///// </summary>
+        //bool IsWarningEnabled { get; }
 
-        /// <summary>
-        /// Checks if this logger is enabled for the Error level.
-        /// Returns true if this logger is enabled for Error events, false otherwise.
-        /// </summary>
-        bool IsErrorEnabled { get; }
+        ///// <summary>
+        ///// Checks if this logger is enabled for the Error level.
+        ///// Returns true if this logger is enabled for Error events, false otherwise.
+        ///// </summary>
+        //bool IsErrorEnabled { get; }
 
-        /// <summary>
-        /// Checks if this logger is enabled for the Fatal level.
-        /// Returns true if this logger is enabled for Fatal events, false otherwise.
-        /// </summary>
-        bool IsFatalEnabled { get; }
+        ///// <summary>
+        ///// Checks if this logger is enabled for the Fatal level.
+        ///// Returns true if this logger is enabled for Fatal events, false otherwise.
+        ///// </summary>
+        //bool IsFatalEnabled { get; }
 
-        /// <summary>
-        /// Checks if this logger is enabled for the Notice level.
-        /// Returns true if this logger is enabled for Notice events, false otherwise.
-        /// </summary>
-        bool IsNoticeEnabled { get; }
+        ///// <summary>
+        ///// Checks if this logger is enabled for the Notice level.
+        ///// Returns true if this logger is enabled for Notice events, false otherwise.
+        ///// </summary>
+        //bool IsNoticeEnabled { get; }
 
         /// <summary>
         /// Publishes NOTICE message

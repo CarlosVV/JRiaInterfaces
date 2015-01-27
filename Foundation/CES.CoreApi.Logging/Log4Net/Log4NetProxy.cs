@@ -17,21 +17,22 @@ namespace CES.CoreApi.Logging.Log4Net
 
         /// <summary>
         /// Initializes Log4NetProxy instance
+        /// It declared as static to be able to use it effectively without IoC container also
         /// </summary>
-        public Log4NetProxy()
+        static Log4NetProxy()
         {
             XmlConfigurator.Configure();
-            _log = LogManager.GetLogger(MethodBase.GetCurrentMethod().DeclaringType);
+            Log = LogManager.GetLogger(MethodBase.GetCurrentMethod().DeclaringType);
 
-            IsDebugEnabled = _log.IsDebugEnabled;
-            IsErrorEnabled = _log.IsErrorEnabled;
-            IsFatalEnabled = _log.IsFatalEnabled;
-            IsInformationEnabled = _log.IsInfoEnabled;
-            IsWarningEnabled = _log.IsWarnEnabled;
-            IsNoticeEnabled = _log.Logger.IsEnabledFor(Level.Notice);
+            IsDebugEnabled = Log.IsDebugEnabled;
+            IsErrorEnabled = Log.IsErrorEnabled;
+            IsFatalEnabled = Log.IsFatalEnabled;
+            IsInformationEnabled = Log.IsInfoEnabled;
+            IsWarningEnabled = Log.IsWarnEnabled;
+            IsNoticeEnabled = Log.Logger.IsEnabledFor(Level.Notice);
         }
 
-        private readonly ILog _log;
+        private static readonly ILog Log;
 
         #endregion //Core
 
@@ -86,7 +87,7 @@ namespace CES.CoreApi.Logging.Log4Net
                     {
                         if (!IsErrorAppenderEnabled)
                             MakeSureAppenderEnabled(entryType);
-                        _log.Error(message, exception);
+                        Log.Error(message, exception);
                     }
                     break;
 
@@ -95,7 +96,7 @@ namespace CES.CoreApi.Logging.Log4Net
                     {
                         if (!IsFatalAppenderEnabled)
                             MakeSureAppenderEnabled(entryType);
-                        _log.Fatal(message, exception);
+                        Log.Fatal(message, exception);
                     }
                     break;
 
@@ -104,7 +105,7 @@ namespace CES.CoreApi.Logging.Log4Net
                     {
                         if (!IsInformationAppenderEnabled)
                             MakeSureAppenderEnabled(entryType);
-                        _log.Info(message, exception);
+                        Log.Info(message, exception);
                     }
                     break;
 
@@ -113,7 +114,7 @@ namespace CES.CoreApi.Logging.Log4Net
                     {
                         if (!IsWarningAppenderEnabled)
                             MakeSureAppenderEnabled(entryType);
-                        _log.Warn(message, exception);
+                        Log.Warn(message, exception);
                     }
                     break;
 
@@ -122,7 +123,7 @@ namespace CES.CoreApi.Logging.Log4Net
                     {
                         if (!IsDebugAppenderEnabled)
                             MakeSureAppenderEnabled(entryType);
-                        _log.Debug(message, exception);
+                        Log.Debug(message, exception);
                     }
                     break;
 
@@ -131,7 +132,7 @@ namespace CES.CoreApi.Logging.Log4Net
                     {
                         if (!IsNoticeAppenderEnabled)
                             MakeSureAppenderEnabled(entryType);
-                        _log.Logger.Log(MethodBase.GetCurrentMethod().DeclaringType, Level.Notice, message,
+                        Log.Logger.Log(MethodBase.GetCurrentMethod().DeclaringType, Level.Notice, message,
                                        exception);
                     }
                     break;
@@ -141,7 +142,7 @@ namespace CES.CoreApi.Logging.Log4Net
                     {
                         if (!IsInformationAppenderEnabled)
                             MakeSureAppenderEnabled(entryType);
-                        _log.Info(message, exception);
+                        Log.Info(message, exception);
                     }
                     break;
             }
@@ -339,7 +340,7 @@ namespace CES.CoreApi.Logging.Log4Net
         /// Checks if this logger is enabled for the Debug level.
         /// Returns true if this logger is enabled for Debug events, false otherwise.
         /// </summary>
-        public bool IsDebugEnabled
+        public static bool IsDebugEnabled
         {
             get;
             private set;
@@ -349,7 +350,7 @@ namespace CES.CoreApi.Logging.Log4Net
         /// Checks if this logger is enabled for the Info level.
         /// Returns true if this logger is enabled for Info events, false otherwise.
         /// </summary>
-        public bool IsInformationEnabled
+        public static bool IsInformationEnabled
         {
             get;
             private set;
@@ -359,7 +360,7 @@ namespace CES.CoreApi.Logging.Log4Net
         /// Checks if this logger is enabled for the Warn level.
         /// Returns true if this logger is enabled for Warn events, false otherwise.
         /// </summary>
-        public bool IsWarningEnabled
+        public static bool IsWarningEnabled
         {
             get;
             private set;
@@ -369,7 +370,7 @@ namespace CES.CoreApi.Logging.Log4Net
         /// Checks if this logger is enabled for the Error level.
         /// Returns true if this logger is enabled for Error events, false otherwise.
         /// </summary>
-        public bool IsErrorEnabled
+        public static bool IsErrorEnabled
         {
             get;
             private set;
@@ -379,7 +380,7 @@ namespace CES.CoreApi.Logging.Log4Net
         /// Checks if this logger is enabled for the Fatal level.
         /// Returns true if this logger is enabled for Fatal events, false otherwise.
         /// </summary>
-        public bool IsFatalEnabled
+        public static bool IsFatalEnabled
         {
             get;
             private set;
@@ -389,7 +390,7 @@ namespace CES.CoreApi.Logging.Log4Net
         /// Checks if this logger is enabled for the Notice level.
         /// Returns true if this logger is enabled for Notice events, false otherwise.
         /// </summary>
-        public bool IsNoticeEnabled
+        public static bool IsNoticeEnabled
         {
             get;
             private set;

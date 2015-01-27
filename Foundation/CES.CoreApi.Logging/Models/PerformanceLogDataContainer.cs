@@ -101,6 +101,16 @@ namespace CES.CoreApi.Logging.Models
             set;
         }
 
+        /// <summary>
+        /// Gets or sets correlation information instance
+        /// </summary>
+        [DataMember]
+        public ApplicationContext ApplicationContext
+        {
+            get;
+            set;
+        }
+
         #endregion //Public properties
 
         #region Overriding
