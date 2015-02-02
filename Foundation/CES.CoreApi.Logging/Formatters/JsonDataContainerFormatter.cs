@@ -24,7 +24,9 @@ namespace CES.CoreApi.Logging.Formatters
                 {
                     NullValueHandling = NullValueHandling.Ignore,
                     DefaultValueHandling = DefaultValueHandling.Ignore,
-                    ContractResolver = new SkipEmptyContractResolver()
+                    ContractResolver = new SkipEmptyContractResolver(),
+                    PreserveReferencesHandling = PreserveReferencesHandling.None,
+                    ReferenceLoopHandling = ReferenceLoopHandling.Ignore
                 });
         }
 
