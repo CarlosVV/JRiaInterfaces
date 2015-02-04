@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Data;
 using System.Runtime.Serialization;
 using System.Threading;
@@ -49,6 +50,7 @@ namespace CES.CoreApi.Logging.Models
         /// Returns elapsed time in milliseconds
         /// </summary>
         [DataMember]
+        [DefaultValue(-1)]
         public long ElapsedMilliseconds
         {
             get;
