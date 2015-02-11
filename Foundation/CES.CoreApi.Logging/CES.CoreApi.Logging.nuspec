@@ -10,6 +10,6 @@
     <tags>CoreAPI Logging</tags>
   </metadata>
   <files>
-    <file src="README.txt" target="" />	
+    <file src="readme.txt" target="" />	
   </files>
 </package>
