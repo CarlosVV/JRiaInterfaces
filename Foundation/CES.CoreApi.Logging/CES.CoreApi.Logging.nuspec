@@ -1,0 +1,12 @@
+<?xml version="1.0"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd">
+  <metadata>
+    <id>$id$</id>
+    <version>$version$</version>
+    <authors>Continental Exchange Solutions</authors>
+    <owners>Continental Exchange Solutions</owners>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <description>CoreAPI Logging</description>
+    <tags>CoreAPI Logging</tags>
+  </metadata>
+</package>
