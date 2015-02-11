@@ -4,7 +4,6 @@ using System.Xml.Linq;
 using CES.CoreApi.Common.Enumerations;
 using CES.CoreApi.Common.Exceptions;
 using CES.CoreApi.Common.Tools;
-using CES.CoreApi.Foundation.Contract.Enumerations;
 using CES.CoreApi.GeoLocation.Service.Business.Contract.Enumerations;
 using CES.CoreApi.GeoLocation.Service.Business.Contract.Interfaces;
 using CES.CoreApi.GeoLocation.Service.Business.Contract.Models;
@@ -127,8 +126,8 @@ namespace CES.CoreApi.GeoLocation.Service.Business.Logic.Parsers
                                 from resource in resourceSet.Elements(_responseNamespace + BingConstants.Resources)
                                 from location in resource.Elements(_responseNamespace + BingConstants.Location)
                                 let address = location.Element(_responseNamespace + BingConstants.Address)
-                                select address)
-                .ToList();
+                                select new Tuple<XElement, XElement>(address, location))
+                    .ToList();
 
             //No hints returned
             if (!addressHints.Any())
@@ -136,8 +135,12 @@ namespace CES.CoreApi.GeoLocation.Service.Business.Logic.Parsers
 
             //Populate valid response model
             var responseModel = GetValidAddressAutocompleteResponse();
-            responseModel.Addresses = (from hint in addressHints
-                                       select _addressParser.ParseAddress(hint, _responseNamespace))
+            responseModel.Suggestions = (from hint in addressHints
+                select new AutocompleteSuggestionModel
+                {
+                    Address = _addressParser.ParseAddress(hint.Item1, _responseNamespace),
+                    Location = GetLocation(hint.Item2)
+                })
                 .ToList();
 
             return responseModel;
@@ -206,8 +209,8 @@ namespace CES.CoreApi.GeoLocation.Service.Business.Logic.Parsers
 
             return new LocationModel
             {
-                Latitude = pointElement.GetValue<decimal>(BingConstants.Latitude, _responseNamespace),
-                Longitude = pointElement.GetValue<decimal>(BingConstants.Longitude, _responseNamespace)
+                Latitude = pointElement.GetValue<double>(BingConstants.Latitude, _responseNamespace),
+                Longitude = pointElement.GetValue<double>(BingConstants.Longitude, _responseNamespace)
             };
         }
 

@@ -16,7 +16,7 @@ namespace CES.CoreApi.GeoLocation.Service.Contract.Models
         }
 
         [DataMember(EmitDefaultValue = false)]
-        public List<AutocompleteAddress> Addresses { get; set; }
+        public List<AutocompleteSuggestion> Suggestions { get; set; }
 
         /// <summary>
         /// Specify data provider used to get address hint list

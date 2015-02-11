@@ -53,6 +53,14 @@ namespace CES.CoreApi.GeoLocation.Service.Business.Logic.UnitTest.Helpers
             return new DataResponse(GeocodeAddressRawResponseNoRecords, HttpStatusCode.OK, true);
         }
 
+        public static AutocompleteSuggestionModel GetAutocompleteSuggestionModel()
+        {
+            return new AutocompleteSuggestionModel
+            {
+                Address = GetAddressModel()
+            };
+        }
+
         public static AddressModel GetAddressModel()
         {
             return new AddressModel
@@ -73,8 +81,8 @@ namespace CES.CoreApi.GeoLocation.Service.Business.Logic.UnitTest.Helpers
         {
             return new LocationModel
             {
-                Latitude = (decimal)33.7558,
-                Longitude = (decimal)-118.308570
+                Latitude = 33.7558,
+                Longitude = -118.308570
             };
         }
     }

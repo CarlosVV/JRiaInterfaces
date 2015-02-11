@@ -5,7 +5,6 @@ using System.Xml.Linq;
 using CES.CoreApi.Common.Enumerations;
 using CES.CoreApi.Common.Exceptions;
 using CES.CoreApi.Common.Tools;
-using CES.CoreApi.Foundation.Contract.Enumerations;
 using CES.CoreApi.GeoLocation.Service.Business.Contract.Enumerations;
 using CES.CoreApi.GeoLocation.Service.Business.Contract.Interfaces;
 using CES.CoreApi.GeoLocation.Service.Business.Contract.Models;
@@ -138,9 +137,11 @@ namespace CES.CoreApi.GeoLocation.Service.Business.Logic.Parsers
 
             //Populate valid response model
             var responseModel = GetValidAddressAutocompleteResponse();
-            responseModel.Addresses = (from hint in addressHints
-                select _addressParser.ParseAddress(hint, country, isAutocompleteService: true))
-                .ToList();
+            responseModel.Suggestions = (from hint in addressHints
+                select new AutocompleteSuggestionModel
+                {
+                    Address = _addressParser.ParseAddress(hint, country, isAutocompleteService: true)
+                }).ToList();
 
             return responseModel;
         }
@@ -206,8 +207,8 @@ namespace CES.CoreApi.GeoLocation.Service.Business.Logic.Parsers
         {
             return new LocationModel
             {
-                Latitude = matchRecord.GetValue<decimal>(MelissaConstants.Latitude, _xNamespace),
-                Longitude = matchRecord.GetValue<decimal>(MelissaConstants.Longitude, _xNamespace)
+                Latitude = matchRecord.GetValue<double>(MelissaConstants.Latitude, _xNamespace),
+                Longitude = matchRecord.GetValue<double>(MelissaConstants.Longitude, _xNamespace)
             };
         }
 

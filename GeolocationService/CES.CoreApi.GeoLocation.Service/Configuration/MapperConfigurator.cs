@@ -16,6 +16,7 @@ namespace CES.CoreApi.GeoLocation.Service.Configuration
             Mapper.CreateMap<AddressModel, ValidatedAddress>();
             Mapper.CreateMap<AddressModel, AutocompleteAddress>();
             Mapper.CreateMap<AddressModel, GeocodeAddress>();
+            Mapper.CreateMap<AutocompleteSuggestionModel, AutocompleteSuggestion>();
             Mapper.CreateMap<Location, LocationModel>();
             Mapper.CreateMap<MapSize, MapSizeModel>();
             Mapper.CreateMap<PushPin, PushPinModel>();

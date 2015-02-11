@@ -3,14 +3,12 @@ using System.Globalization;
 using System.Web;
 using CES.CoreApi.Common.Enumerations;
 using CES.CoreApi.Common.Tools;
-using CES.CoreApi.Foundation.Contract.Enumerations;
 using CES.CoreApi.Foundation.Contract.Interfaces;
 using CES.CoreApi.GeoLocation.Service.Business.Contract.Attributes;
 using CES.CoreApi.GeoLocation.Service.Business.Contract.Enumerations;
 using CES.CoreApi.GeoLocation.Service.Business.Contract.Interfaces;
 using CES.CoreApi.GeoLocation.Service.Business.Contract.Models;
 using CES.CoreApi.GeoLocation.Service.Business.Logic.Builders;
-using CES.CoreApi.GeoLocation.Service.Business.Logic.Providers;
 using CES.CoreApi.GeoLocation.Service.UnitTestTools;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
@@ -49,8 +47,8 @@ namespace CES.CoreApi.GeoLocation.Service.Business.Logic.UnitTest
         private const int Width = 100;
         private const int Height = 100;
 
-        private const decimal LatitudeValid = (decimal)36.3456;
-        private const decimal LongitudeValid = (decimal)-170.5453;
+        private const double LatitudeValid = 36.3456;
+        private const double LongitudeValid = -170.5453;
 
         [TestInitialize]
         public void Setup()

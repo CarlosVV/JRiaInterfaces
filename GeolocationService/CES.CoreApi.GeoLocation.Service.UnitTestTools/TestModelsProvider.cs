@@ -182,8 +182,8 @@ namespace CES.CoreApi.GeoLocation.Service.UnitTestTools
                     Label = label,
                     Location = new LocationModel
                     {
-                        Latitude = (decimal) 35.4567,
-                        Longitude = (decimal) -100.5678
+                        Latitude = 35.4567,
+                        Longitude = -100.5678
                     },
                     PinColor = pinColor
                 },
@@ -193,8 +193,8 @@ namespace CES.CoreApi.GeoLocation.Service.UnitTestTools
                     Label = "2",
                     Location = new LocationModel
                     {
-                        Latitude = (decimal) 36.4567,
-                        Longitude = (decimal) -101.5678
+                        Latitude = 36.4567,
+                        Longitude = -101.5678
                     },
                     PinColor = Color.Red
                 }

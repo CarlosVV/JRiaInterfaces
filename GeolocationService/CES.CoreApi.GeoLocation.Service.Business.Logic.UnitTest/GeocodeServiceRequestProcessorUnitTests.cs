@@ -179,8 +179,8 @@ namespace CES.CoreApi.GeoLocation.Service.Business.Logic.UnitTest
         {
             return new LocationModel
             {
-                Latitude = (decimal)33.755802,
-                Longitude = (decimal)-118.308556
+                Latitude = 33.755802,
+                Longitude = -118.308556
             };
         }
 
