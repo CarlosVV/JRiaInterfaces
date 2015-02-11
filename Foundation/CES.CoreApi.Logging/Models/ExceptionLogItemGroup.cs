@@ -2,11 +2,13 @@
 using System.Collections.ObjectModel;
 using System.Globalization;
 using System.Linq;
+using System.Runtime.Serialization;
 using System.Web;
 using CES.CoreApi.Common.Interfaces;
 
 namespace CES.CoreApi.Logging.Models
 {
+    [DataContract]
     public class ExceptionLogItemGroup
     {
         #region Core
@@ -32,11 +34,13 @@ namespace CES.CoreApi.Logging.Models
         /// <summary>
         /// Gets or sets log item group title
         /// </summary>
+        [DataMember]
         public string Title { get; set; }
 
         /// <summary>
         /// Gets list of group items
         /// </summary>
+        [DataMember]
         public Collection<ExceptionLogItem> Items { get; private set; }
 
         #endregion //Public properties

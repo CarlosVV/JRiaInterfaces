@@ -68,7 +68,7 @@ namespace CES.CoreApi.Logging.Configuration
                     .RegisterType<IExceptionLogItemGroupTitleFormatter, ExceptionLogItemGroupTitleFormatter>()
                     .RegisterType<IServiceCallInformationProvider, ServiceCallInformationProvider>()
                     .RegisterType<IRemoteClientInformationProvider, RemoteClientInformationProvider>()
-                    .RegisterType<IHtppRequestInformationProvider, HtppRequestInformationProvider>()
+                    .RegisterType<IHttpRequestInformationProvider, HttpRequestInformationProvider>()
                     .RegisterType<IServerInformationProvider, ServerInformationProvider>();
             }
 
@@ -94,7 +94,8 @@ namespace CES.CoreApi.Logging.Configuration
              {
                  _container
                      .RegisterType<IDatabasePerformanceLogMonitor, DatabasePerformanceLogMonitor>(LifetimeManagerType.AlwaysNew)
-                     .RegisterType<DatabasePerformanceLogDataContainer, DatabasePerformanceLogDataContainer>(LifetimeManagerType.AlwaysNew);
+                     .RegisterType<DatabasePerformanceLogDataContainer, DatabasePerformanceLogDataContainer>(LifetimeManagerType.AlwaysNew)
+                     .RegisterType<ISqlQueryFormatter, SqlQueryFormatter>();
              }
 
             //Security audit log related

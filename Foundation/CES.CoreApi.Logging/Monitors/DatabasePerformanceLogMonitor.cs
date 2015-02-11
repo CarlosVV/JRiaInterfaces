@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Data;
 using System.Data.Common;
 using System.Data.SqlClient;
 using System.Diagnostics;
@@ -115,6 +116,8 @@ namespace CES.CoreApi.Logging.Monitors
             DataContainer.Parameters = GetParametersCollection(command);
 
             if (command.Connection == null)
+                return;
+            if (command.Connection.State != ConnectionState.Open)
                 return;
 
             DataContainer.Connection = new DatabaseConnection

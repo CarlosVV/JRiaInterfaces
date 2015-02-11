@@ -1,5 +1,6 @@
 ﻿using System;
 using CES.CoreApi.Logging.Interfaces;
+using CES.CoreApi.Logging.Utilities;
 using Newtonsoft.Json;
 
 namespace CES.CoreApi.Logging.Formatters
@@ -19,7 +20,14 @@ namespace CES.CoreApi.Logging.Formatters
                 throw new ArgumentNullException("dataContainer");
 
             return JsonConvert.SerializeObject(dataContainer, Formatting.None,
-                new JsonSerializerSettings {NullValueHandling = NullValueHandling.Ignore});
+                new JsonSerializerSettings
+                {
+                    NullValueHandling = NullValueHandling.Ignore,
+                    DefaultValueHandling = DefaultValueHandling.Ignore,
+                    ContractResolver = new SkipEmptyContractResolver(),
+                    PreserveReferencesHandling = PreserveReferencesHandling.None,
+                    ReferenceLoopHandling = ReferenceLoopHandling.Ignore
+                });
         }
 
         #endregion //Public methods

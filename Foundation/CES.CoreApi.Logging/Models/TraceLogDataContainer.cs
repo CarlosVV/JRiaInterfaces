@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
+using System.Runtime.Serialization;
 using CES.CoreApi.Common.Enumerations;
 using CES.CoreApi.Common.Interfaces;
 using CES.CoreApi.Logging.Interfaces;
@@ -8,7 +10,7 @@ using Newtonsoft.Json.Converters;
 
 namespace CES.CoreApi.Logging.Models
 {
-    [JsonObject]
+    [DataContract]
     public class TraceLogDataContainer : IDataContainer, ITraceLogDataContainer
     {
         #region Core
@@ -41,25 +43,26 @@ namespace CES.CoreApi.Logging.Models
         /// <summary>
         /// Gets or sets time when request was sent
         /// </summary>
-        [JsonProperty]
+        [DataMember]
         public DateTime RequestTime { get; private set; }
 
         /// <summary>
         /// Returns time when response was received
         /// </summary>
-        [JsonProperty]
+        [DataMember]
         public DateTime ResponseTime { get; private set; }
 
         /// <summary>
         /// Gets or sets request headers
         /// </summary>
-        [JsonProperty]
+        [DataMember]
         public IDictionary<string, object> Headers { get; set; }
 
         /// <summary>
         /// Gets or sets request message
         /// </summary>
-        [JsonProperty]
+        [DataMember]
+        [DefaultValue("")]
         public string RequestMessage
         {
             get
@@ -68,7 +71,7 @@ namespace CES.CoreApi.Logging.Models
             }
             set
             {
-                RequestTime = _currentDateTimeProvider.GetCurrentLocal();
+                RequestTime = _currentDateTimeProvider.GetCurrentUtc();
                 value = string.IsNullOrEmpty(value) ? string.Empty : value;
                 RequestMessageLength = value.Length;
                 
@@ -82,19 +85,19 @@ namespace CES.CoreApi.Logging.Models
         /// <summary>
         /// Gets or sets log record creation time
         /// </summary>
-        [JsonProperty]
+        [DataMember(Name = "timestamp")]
         public DateTime LogTime
         {
             get
             {
-                return _currentDateTimeProvider.GetCurrentLocal();
+                return _currentDateTimeProvider.GetCurrentUtc();
             }
         }
 
         /// <summary>
         /// Gets or sets request message length
         /// </summary>
-        [JsonProperty]
+        [DataMember]
         public long RequestMessageLength
         {
             get; private set; 
@@ -103,7 +106,8 @@ namespace CES.CoreApi.Logging.Models
         /// <summary>
         /// Gets or sets response message
         /// </summary>
-        [JsonProperty]
+        [DataMember]
+        [DefaultValue("")]
         public string ResponseMessage
         {
             get
@@ -112,7 +116,7 @@ namespace CES.CoreApi.Logging.Models
             }
             set
             {
-                ResponseTime = _currentDateTimeProvider.GetCurrentLocal();
+                ResponseTime = _currentDateTimeProvider.GetCurrentUtc();
                 value = string.IsNullOrEmpty(value) ? string.Empty : value;
                 ResponseMessageLength = value.Length;
 
@@ -126,7 +130,7 @@ namespace CES.CoreApi.Logging.Models
         /// <summary>
         /// Gets or sets response message length
         /// </summary>
-        [JsonProperty]
+        [DataMember]
         public long ResponseMessageLength
         {
             get; private set; 
@@ -135,19 +139,19 @@ namespace CES.CoreApi.Logging.Models
         /// <summary>
         /// Gets or sets binary response message length
         /// </summary>
-        [JsonProperty]
+        [DataMember]
         public long BinaryResponseMessageLength { get; set; }
 
         /// <summary>
         /// Gets or sets data provider type
         /// </summary>
-        [JsonProperty]
+        [DataMember]
         public string ProviderType { get; set; }
 
-        [JsonProperty]
+        [DataMember]
         public string ClientSideMessage { get; set; }
 
-        [JsonProperty]
+        [DataMember]
         public Guid MessageId { get; private set; }
 
         #endregion //Public properties
@@ -166,7 +170,7 @@ namespace CES.CoreApi.Logging.Models
         /// <summary>
         /// Gets log type
         /// </summary>
-        [JsonProperty]
+        [DataMember]
         [JsonConverter(typeof(StringEnumConverter))]
         public LogType LogType
         {

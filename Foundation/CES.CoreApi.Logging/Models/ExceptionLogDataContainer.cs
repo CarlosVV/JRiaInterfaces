@@ -1,18 +1,25 @@
 ﻿using System;
 using System.Collections.ObjectModel;
+using System.ComponentModel;
 using System.Linq;
+using System.Runtime.Serialization;
+using System.Threading;
 using CES.CoreApi.Common.Enumerations;
+using CES.CoreApi.Common.Exceptions;
 using CES.CoreApi.Common.Interfaces;
 using CES.CoreApi.Logging.Interfaces;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Converters;
 
 namespace CES.CoreApi.Logging.Models
 {
+    [DataContract]
     public class ExceptionLogDataContainer : IDataContainer
     {
         #region Core
 
         private readonly IIocContainer _container;
-        private readonly IExceptionLogFormatter _exceptionLogFormatter;
+        private readonly IJsonDataContainerFormatter _formatter;
 
         /// <summary>
         /// Initializes ExceptionLogDataContainer instance
@@ -22,9 +29,10 @@ namespace CES.CoreApi.Logging.Models
             if (container == null) throw new ArgumentNullException("container");
             _container = container;
            
-            _exceptionLogFormatter =  _container.Resolve<IExceptionLogFormatter>();
             Items = new Collection<ExceptionLogItemGroup>();
-            Timestamp = _container.Resolve<ICurrentDateTimeProvider>().GetCurrentLocal();
+            Timestamp = _container.Resolve<ICurrentDateTimeProvider>().GetCurrentUtc();
+            _formatter = _container.Resolve<IJsonDataContainerFormatter>();
+            ThreadId = Thread.CurrentThread.ManagedThreadId;
         }
 
         #endregion //Core
@@ -32,28 +40,41 @@ namespace CES.CoreApi.Logging.Models
         #region Public properties
 
         /// <summary>
+        /// Gets or sets log record creation time
+        /// </summary>
+        [DataMember(Name = "timestamp")]
+        public DateTime Timestamp { get; private set; }
+
+        /// <summary>
         /// Gets list of log item groups
         /// </summary>
+        [DataMember]
         public Collection<ExceptionLogItemGroup> Items { get; private set; }
 
         /// <summary>
-        /// Gets or sets an exception instance
+        /// Gets an exception instance
         /// </summary>
-        public Exception Exception { get; set; }
+        [DataMember]
+        public CoreApiException Exception { get; private set; }
 
         /// <summary>
-        /// Gets exception timestamp
+        /// Gets or sets thred identifier
         /// </summary>
-        public DateTime Timestamp { get; private set; }
+        [DataMember]
+        public int ThreadId { get; private set; }
 
         /// <summary>
         /// Gets an exception message
         /// </summary>
+        [DataMember]
+        [DefaultValue("")]
         public string Message
         {
             get { return Exception == null ? string.Empty : GetExceptionMessage(); }
         }
 
+        [DataMember]
+        [DefaultValue("")]
         public string CustomMessage { get; set; }
 
         #endregion //Public properties
@@ -79,6 +100,15 @@ namespace CES.CoreApi.Logging.Models
             return group;
         }
 
+        public void SetException(Exception exception)
+        {
+            if (exception == null) 
+                throw new ArgumentNullException("exception");
+
+            var coreApiException = exception as CoreApiException ?? new CoreApiException(exception);
+            Exception = coreApiException;
+        }
+
         #endregion //Public methods
 
         #region Overriding
@@ -89,12 +119,14 @@ namespace CES.CoreApi.Logging.Models
         /// <returns>String representation of the log entry</returns>
         public override string ToString()
         {
-            return _exceptionLogFormatter.Format(this);
+            return _formatter.Format(this);
         }
 
         /// <summary>
         /// Gets log type
         /// </summary>
+        [DataMember]
+        [JsonConverter(typeof(StringEnumConverter))]
         public LogType LogType
         {
             get { return LogType.ExceptionLog;}

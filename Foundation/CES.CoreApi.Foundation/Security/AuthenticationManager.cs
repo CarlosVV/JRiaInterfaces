@@ -53,9 +53,10 @@ namespace CES.CoreApi.Foundation.Security
                 if (OperationContext.Current.EndpointDispatcher.IsSystemEndpoint)
                     return authPolicy;
 
-                return OperationContext.Current.ServiceSecurityContext.IsAnonymous
-                    ? _authenticator.Authenticate(authPolicy, listenUri, ref message)
-                    : authPolicy;
+                //return OperationContext.Current.ServiceSecurityContext.IsAnonymous
+                //    ? _authenticator.Authenticate(authPolicy, listenUri, ref message)
+                //    : authPolicy;
+                return _authenticator.Authenticate(authPolicy, listenUri, ref message);
             }
             catch (Exception ex)
             {

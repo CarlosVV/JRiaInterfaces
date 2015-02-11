@@ -1,25 +1,30 @@
 ﻿using System;
 using System.Collections;
+using System.ComponentModel;
+using System.Runtime.Serialization;
 using System.Threading;
 using CES.CoreApi.Common.Enumerations;
 using CES.CoreApi.Common.Interfaces;
 using CES.CoreApi.Logging.Interfaces;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Converters;
 
 namespace CES.CoreApi.Logging.Models
 {
+    [DataContract]
     public class PerformanceLogDataContainer : IDataContainer
     {
         #region Core
 
-        private readonly IPerformanceLogFormatter _performanceLogFormatter;
+        private readonly IJsonDataContainerFormatter _formatter;
 
-        public PerformanceLogDataContainer(IPerformanceLogFormatter performanceLogFormatter, ICurrentDateTimeProvider currentDateTimeProvider)
+        public PerformanceLogDataContainer(IJsonDataContainerFormatter formatter, ICurrentDateTimeProvider currentDateTimeProvider)
         {
-            if (performanceLogFormatter == null) throw new ArgumentNullException("performanceLogFormatter");
+            if (formatter == null) throw new ArgumentNullException("formatter");
             if (currentDateTimeProvider == null) throw new ArgumentNullException("currentDateTimeProvider");
 
-            _performanceLogFormatter = performanceLogFormatter;
-            StartTime = currentDateTimeProvider.GetCurrentLocal();
+            _formatter = formatter;
+            StartTime = currentDateTimeProvider.GetCurrentUtc();
             ThreadId = Thread.CurrentThread.ManagedThreadId;
         }
 
@@ -30,6 +35,7 @@ namespace CES.CoreApi.Logging.Models
         /// <summary>
         /// Returns time when method was executed
         /// </summary>
+        [DataMember(Name = "timestamp")]
         public DateTime StartTime
         {
             get;
@@ -39,6 +45,8 @@ namespace CES.CoreApi.Logging.Models
         /// <summary>
         /// Returns elapsed time in milliseconds
         /// </summary>
+        [DataMember]
+        [DefaultValue(-1)]
         public long ElapsedMilliseconds
         {
             get; 
@@ -48,6 +56,7 @@ namespace CES.CoreApi.Logging.Models
         /// <summary>
         /// Gets or sets thred identifier
         /// </summary>
+        [DataMember]
         public int ThreadId
         {
             get;
@@ -57,6 +66,7 @@ namespace CES.CoreApi.Logging.Models
         /// <summary>
         /// Gets or sets executed method name
         /// </summary>
+        [DataMember]
         public string MethodName
         {
             get; 
@@ -66,6 +76,7 @@ namespace CES.CoreApi.Logging.Models
         /// <summary>
         /// Gets or sets generic argument list
         /// </summary>
+        [DataMember]
         public Type[] GenericArguments
         {
             get; 
@@ -75,6 +86,7 @@ namespace CES.CoreApi.Logging.Models
         /// <summary>
         /// Gets or sets list of method parameters
         /// </summary>
+        [DataMember]
         public IEnumerable Arguments
         {
             get; 
@@ -84,9 +96,20 @@ namespace CES.CoreApi.Logging.Models
         /// <summary>
         /// Gets or sets method return value
         /// </summary>
+        [DataMember]
         public object ReturnValue
         {
             get; 
+            set;
+        }
+
+        /// <summary>
+        /// Gets or sets correlation information instance
+        /// </summary>
+        [DataMember]
+        public ApplicationContext ApplicationContext
+        {
+            get;
             set;
         }
 
@@ -100,12 +123,14 @@ namespace CES.CoreApi.Logging.Models
         /// <returns>String representation of the log entry</returns>
         public override string ToString()
         {
-            return _performanceLogFormatter.Format(this);
+            return _formatter.Format(this);
         }
 
         /// <summary>
         /// Gets log type
         /// </summary>
+        [DataMember]
+        [JsonConverter(typeof(StringEnumConverter))]
         public LogType LogType
         {
             get { return LogType.PerformanceLog; }

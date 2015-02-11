@@ -75,11 +75,6 @@ insert into systblApp_MapObject ([fAppID], [fAppObjectID], [fModified], [fModifi
 
 print 'END'
 
---Select * from systblApp_MapObject
-
-
-
-
 
 
 

@@ -6,7 +6,7 @@ using CES.CoreApi.Logging.Models;
 
 namespace CES.CoreApi.Logging.Providers
 {
-    public class HtppRequestInformationProvider : IHtppRequestInformationProvider
+    public class HttpRequestInformationProvider : IHttpRequestInformationProvider
     {
         #region Core
 
@@ -19,7 +19,7 @@ namespace CES.CoreApi.Logging.Providers
         /// Initializes HtppRequestInformationProvider instance
         /// </summary>
         /// <param name="fileSizeFormatter">File size formatter</param>
-        public HtppRequestInformationProvider(IFileSizeFormatter fileSizeFormatter)
+        public HttpRequestInformationProvider(IFileSizeFormatter fileSizeFormatter)
         {
             if (fileSizeFormatter == null) throw new ArgumentNullException("fileSizeFormatter");
 

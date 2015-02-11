@@ -3,7 +3,7 @@ using CES.CoreApi.Logging.Models;
 
 namespace CES.CoreApi.Logging.Interfaces
 {
-    public interface IHtppRequestInformationProvider
+    public interface IHttpRequestInformationProvider
     {
         /// <summary>
         /// Adds http request details to exception log data container

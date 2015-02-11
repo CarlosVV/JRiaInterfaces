@@ -5,10 +5,12 @@ using System.Reflection;
 using CES.CoreApi.Common.Attributes;
 using CES.CoreApi.Common.Enumerations;
 using CES.CoreApi.Common.Tools;
+using Newtonsoft.Json;
 
 namespace CES.CoreApi.Common.Exceptions
 {
     [Serializable]
+    [JsonObject(MemberSerialization.OptOut)]
     public class CoreApiException: Exception
     {
         private const string ErrorCodeTemplate = "{0}|{1}|{2}|{3}";
@@ -54,17 +56,27 @@ namespace CES.CoreApi.Common.Exceptions
             TargetSite = exception.TargetSite;
         }
 
+        [JsonProperty]
         public string CallStack { get; private set; }
+        [JsonProperty]
         public string ErrorCode { get; private set; }
+        [JsonProperty]
         public string ClientMessage { get; private set; }
+        [JsonProperty]
         public Guid ErrorId { get; private set; }
+        [JsonIgnore]
         public Organization Organization { get; private set; }
+        [JsonIgnore]
         public TechnicalSystem System { get; private set; }
+        [JsonIgnore]
         public TechnicalSubSystem SubSystem { get; private set; }
+        [JsonIgnore]
         public SubSystemError SubSystemError { get; private set; }
+        [JsonProperty]
         public new string Source { get; private set; }
+        [JsonProperty]
         public new MethodBase TargetSite { get; private set; }
-        
+
         private static string GetErrorCode(Organization organization, TechnicalSystem system,
             TechnicalSubSystem subSystem, SubSystemError error)
         {

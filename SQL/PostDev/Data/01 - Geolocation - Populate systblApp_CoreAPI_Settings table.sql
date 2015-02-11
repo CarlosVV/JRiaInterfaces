@@ -11,23 +11,23 @@ select @fAppID = 8000, @fModifiedID = 34177711, @currentTime = GETDATE()
 
 --Bing related configuration
 insert @temp (fCoreAPISettingsID, fAppID, fName, fValue, fDescription, fModified, fModifiedID, fTime)
-	values(1, @fAppID, 'BingAddressGeocodeAndVerificationUrlTemplate', 'http://dev.virtualearth.net/REST/v1/Locations?CountryRegion={0}&adminDistrict={1}&locality={2}&postalCode={3}&addressLine={4}&o=xml&include=ciso2&userIp=127.0.0.1&maxResults=1&key={5}', 
+	values(1, @fAppID, 'BingAddressGeocodeAndVerificationUrlTemplate', 'https://dev.virtualearth.net/REST/v1/Locations?CountryRegion={0}&adminDistrict={1}&locality={2}&postalCode={3}&addressLine={4}&o=xml&include=ciso2&userIp=127.0.0.1&maxResults=1&key={5}', 
 	'Bing address geocode and verification service URL template', @currentTime, @fModifiedID, @currentTime)
 
 insert @temp (fCoreAPISettingsID, fAppID, fName, fValue, fDescription, fModified, fModifiedID, fTime)
-	values(2, @fAppID, 'BingFormattedAddressGeocodeAndVerificationUrlTemplate', 'http://dev.virtualearth.net/REST/v1/Locations?q={0}&o=xml&include=ciso2&userIp=127.0.0.1&maxResults=1&key={1}', 
+	values(2, @fAppID, 'BingFormattedAddressGeocodeAndVerificationUrlTemplate', 'https://dev.virtualearth.net/REST/v1/Locations?q={0}&o=xml&include=ciso2&userIp=127.0.0.1&maxResults=1&key={1}', 
 	'Bing formatted address geocode and verification service URL template', @currentTime, @fModifiedID, @currentTime)
 
 insert @temp (fCoreAPISettingsID, fAppID, fName, fValue, fDescription, fModified, fModifiedID, fTime)
-	values(3, @fAppID, 'BingAddressAutocompleteUrlTemplate', 'http://dev.virtualearth.net/REST/v1/Locations/{0}?o=xml&userIp=127.0.0.1&maxResults={1}&include=ciso2&key={2}',
+	values(3, @fAppID, 'BingAddressAutocompleteUrlTemplate', 'https://dev.virtualearth.net/REST/v1/Locations/{0}?o=xml&userIp=127.0.0.1&maxResults={1}&include=ciso2&key={2}',
 	'Bing address autocomplete service URL template', @currentTime, @fModifiedID, @currentTime)
 
 insert @temp (fCoreAPISettingsID, fAppID, fName, fValue, fDescription, fModified, fModifiedID, fTime)
-	values(4, @fAppID, 'BingReverseGeocodePointUrlTemplate', 'http://dev.virtualearth.net/REST/v1/Locations/{0},{1}?o=xml&include=ciso2&userIp=127.0.0.1&maxResults=1&key={2}', 
+	values(4, @fAppID, 'BingReverseGeocodePointUrlTemplate', 'https://dev.virtualearth.net/REST/v1/Locations/{0},{1}?o=xml&include=ciso2&userIp=127.0.0.1&maxResults=1&key={2}', 
 	'Bing reverse geocode point service URL template', @currentTime, @fModifiedID, @currentTime)
 
 insert @temp (fCoreAPISettingsID, fAppID, fName, fValue, fDescription, fModified, fModifiedID, fTime)
-	values(5, @fAppID, 'BingMappingUrlTemplate', 'http://dev.virtualearth.net/REST/v1/Imagery/Map/{0}/{1},{2}/{3}?mapSize={4},{5}&format={6}{7}&key={8}', 
+	values(5, @fAppID, 'BingMappingUrlTemplate', 'https://dev.virtualearth.net/REST/v1/Imagery/Map/{0}/{1},{2}/{3}?mapSize={4},{5}&format={6}{7}&key={8}', 
 	'Bing map service URL template', @currentTime, @fModifiedID, @currentTime)
 
 insert @temp (fCoreAPISettingsID, fAppID, fName, fValue, fDescription, fModified, fModifiedID, fTime)
@@ -37,15 +37,15 @@ insert @temp (fCoreAPISettingsID, fAppID, fName, fValue, fDescription, fModified
 
 --MelissaData related configuration
 insert @temp (fCoreAPISettingsID, fAppID, fName, fValue, fDescription, fModified, fModifiedID, fTime)
-	values(7, @fAppID, 'MelissaDataAddressGeocodeAndVerificationUrlTemplate', 'http://address.melissadata.net/V3/WEB/GlobalAddress/doGlobalAddress?format=xml&id={0}&a1={1}&a2={2}&loc={3}&admarea{4}&postal={5}&ctry={6}', 
+	values(7, @fAppID, 'MelissaDataAddressGeocodeAndVerificationUrlTemplate', 'https://address.melissadata.net/V3/WEB/GlobalAddress/doGlobalAddress?format=xml&id={0}&a1={1}&a2={2}&loc={3}&admarea{4}&postal={5}&ctry={6}', 
 	'Melissa Data address geocoding and verification service URL template', @currentTime, @fModifiedID, @currentTime)
 
 insert @temp (fCoreAPISettingsID, fAppID, fName, fValue, fDescription, fModified, fModifiedID, fTime)
-	values(8, @fAppID, 'MelissaDataAddressAutocompleteUrlTemplate', 'http://expressentry.melissadata.net/web/GlobalExpressAddress?id={0}&format=xml&address1={1}&administrativearea={2}&Country={3}&maxrecords={4}', 
+	values(8, @fAppID, 'MelissaDataAddressAutocompleteUrlTemplate', 'https://expressentry.melissadata.net/web/GlobalExpressAddress?id={0}&format=xml&address1={1}&administrativearea={2}&Country={3}&maxrecords={4}', 
 	'Melissa Data address autocomplete service URL template', @currentTime, @fModifiedID, @currentTime)
 
 insert @temp (fCoreAPISettingsID, fAppID, fName, fValue, fDescription, fModified, fModifiedID, fTime)
-	values(9, @fAppID, 'MelissaDataFormattedAddressGeocodeAndVerificationUrlTemplate', 'http://address.melissadata.net/V3/WEB/GlobalAddress/doGlobalAddress?format=xml&id={0}&a1={1}&maxrecords=1', 
+	values(9, @fAppID, 'MelissaDataFormattedAddressGeocodeAndVerificationUrlTemplate', 'https://address.melissadata.net/V3/WEB/GlobalAddress/doGlobalAddress?format=xml&id={0}&a1={1}&maxrecords=1', 
 	'Melissa Data formatted address geocoding and verification service URL template', @currentTime, @fModifiedID, @currentTime)
 
 insert @temp (fCoreAPISettingsID, fAppID, fName, fValue, fDescription, fModified, fModifiedID, fTime)
@@ -53,19 +53,19 @@ insert @temp (fCoreAPISettingsID, fAppID, fName, fValue, fDescription, fModified
 
 --Google related configuraiton
 insert @temp (fCoreAPISettingsID, fAppID, fName, fValue, fDescription, fModified, fModifiedID, fTime)
-	values(11, @fAppID, 'GoogleAddressGeocodeAndVerificationUrlTemplate', 'http://maps.googleapis.com/maps/api/geocode/xml?address={0}{1}', 
+	values(11, @fAppID, 'GoogleAddressGeocodeAndVerificationUrlTemplate', 'https://maps.googleapis.com/maps/api/geocode/xml?address={0}{1}', 
 	'Google address geocode and verification service URL template', @currentTime, @fModifiedID, @currentTime)
 
 insert @temp (fCoreAPISettingsID, fAppID, fName, fValue, fDescription, fModified, fModifiedID, fTime)
-	values(12, @fAppID, 'GoogleAddressAutocompleteUrlTemplate', 'http://maps.googleapis.com/maps/api/geocode/xml?address={0}{1}', 
+	values(12, @fAppID, 'GoogleAddressAutocompleteUrlTemplate', 'https://maps.googleapis.com/maps/api/geocode/xml?address={0}{1}', 
 	'Google address autocomplete service URL template', @currentTime, @fModifiedID, @currentTime)
 
 insert @temp (fCoreAPISettingsID, fAppID, fName, fValue, fDescription, fModified, fModifiedID, fTime)
-	values(13, @fAppID, 'GoogleReverseGeocodePointUrlTemplate', 'http://maps.googleapis.com/maps/api/geocode/xml?latlng={0},{1}{2}', 
+	values(13, @fAppID, 'GoogleReverseGeocodePointUrlTemplate', 'https://maps.googleapis.com/maps/api/geocode/xml?latlng={0},{1}{2}', 
 	'Google address reverse geocode service URL template', @currentTime, @fModifiedID, @currentTime)
 
 insert @temp (fCoreAPISettingsID, fAppID, fName, fValue, fDescription, fModified, fModifiedID, fTime)
-	values(14, @fAppID, 'GoogleMappingUrlTemplate', 'http://maps.googleapis.com/maps/api/staticmap?center={0},{1}&zoom={2}&size={3}x{4}&format={5}&maptype={6}{7}{8}', 
+	values(14, @fAppID, 'GoogleMappingUrlTemplate', 'https://maps.googleapis.com/maps/api/staticmap?center={0},{1}&zoom={2}&size={3}x{4}&format={5}&maptype={6}{7}{8}', 
 	'Google mapping service URL template', @currentTime, @fModifiedID, @currentTime)
 
 insert @temp (fCoreAPISettingsID, fAppID, fName, fValue, fDescription, fModified, fModifiedID, fTime)
@@ -96,12 +96,12 @@ insert @temp (fCoreAPISettingsID, fAppID, fName, fValue, fDescription, fModified
 		},
 		{
 			"DataProviderServiceType": "AddressVerification",
-			"DataProviderType": "MelissaData",
+			"DataProviderType": "bing",
 			"Priority": 2
 		},
 		{
 			"DataProviderServiceType": "AddressAutoComplete",
-			"DataProviderType": "MelissaData",
+			"DataProviderType": "bing",
 			"Priority": 1
 		},
 		{
@@ -119,7 +119,7 @@ insert @temp (fCoreAPISettingsID, fAppID, fName, fValue, fDescription, fModified
 		"CountryCode": "US",
 		"DataProviders": [{
 			"DataProviderServiceType": "AddressVerification",
-			"DataProviderType": "MelissaData",
+			"DataProviderType": "bing",
 			"Priority": 1
 		},
 		{
@@ -152,12 +152,12 @@ insert @temp (fCoreAPISettingsID, fAppID, fName, fValue, fDescription, fModified
 		"CountryCode": "CA",
 		"DataProviders": [{
 			"DataProviderServiceType": "AddressVerification",
-			"DataProviderType": "MelissaData",
+			"DataProviderType": "bing",
 			"Priority": 1
 		},
 		{
 			"DataProviderServiceType": "AddressAutoComplete",
-			"DataProviderType": "MelissaData",
+			"DataProviderType": "bing",
 			"Priority": 1
 		},
 		{
@@ -182,70 +182,70 @@ insert @temp (fCoreAPISettingsID, fAppID, fName, fValue, fDescription, fModified
 		"EndpointName": "httpAddressService",
 		"Contract": "CES.CoreApi.GeoLocation.Service.Contract.Interfaces.IAddressService",
 		"Binding": "basicHttpBinding",
-		"BindingfName": "basicHttpBindingConfiguration",
-		"SecurityMode": "None"
+		"BindingConfigurationName": "basicHttpBindingConfiguration",
+		"SecurityMode": "Transport"
 	},
 	{
 		"EndpointName": "httpGeocodeService",
 		"Contract": "CES.CoreApi.GeoLocation.Service.Contract.Interfaces.IGeocodeService",
 		"Binding": "basicHttpBinding",
-		"BindingfName": "basicHttpBindingConfiguration",
-		"SecurityMode": "None"
+		"BindingConfigurationName": "basicHttpBindingConfiguration",
+		"SecurityMode": "Transport"
 	},
 	{
 		"EndpointName": "httpMapService",
 		"Contract": "CES.CoreApi.GeoLocation.Service.Contract.Interfaces.IMapService",
 		"Binding": "basicHttpBinding",
-		"BindingfName": "basicHttpBindingConfiguration",
-		"SecurityMode": "None"
+		"BindingConfigurationName": "basicHttpBindingConfiguration",
+		"SecurityMode": "Transport"
 	},
 	{
 		"EndpointName": "httpHealthMonitoringService",
 		"Contract": "CES.CoreApi.GeoLocation.Service.Contract.Interfaces.IHealthMonitoringService",
 		"Binding": "basicHttpBinding",
-		"BindingfName": "basicHttpBindingConfiguration",
-		"SecurityMode": "None"
+		"BindingConfigurationName": "basicHttpBindingConfiguration",
+		"SecurityMode": "Transport"
 	},
 	{
 		"EndpointName": "httpClientSideSupportService",
 		"Contract": "CES.CoreApi.GeoLocation.Service.Contract.Interfaces.IClientSideSupportService",
 		"Binding": "basicHttpBinding",
-		"BindingfName": "basicHttpBindingConfiguration",
-		"SecurityMode": "None"
+		"BindingConfigurationName": "basicHttpBindingConfiguration",
+		"SecurityMode": "Transport"
 	},
 	{
 		"EndpointName": "tcpAddressService",
 		"Contract": "CES.CoreApi.GeoLocation.Service.Contract.Interfaces.IAddressService",
 		"Binding": "netTcpBinding",
-		"BindingfName": "netTcpBindingConfiguration",
+		"BindingConfigurationName": "netTcpBindingConfiguration",
 		"SecurityMode": "None"
 	},
 	{
 		"EndpointName": "tcpGeocodeService",
 		"Contract": "CES.CoreApi.GeoLocation.Service.Contract.Interfaces.IGeocodeService",
 		"Binding": "netTcpBinding",
-		"BindingfName": "netTcpBindingConfiguration",
+		"BindingConfigurationName": "netTcpBindingConfiguration",
 		"SecurityMode": "None"
 	},
 	{
 		"EndpointName": "tcpMapService",
 		"Contract": "CES.CoreApi.GeoLocation.Service.Contract.Interfaces.IMapService",
 		"Binding": "netTcpBinding",
-		"BindingfName": "netTcpBindingConfiguration",
+		"BindingConfigurationName": "netTcpBindingConfiguration",
 		"SecurityMode": "None"
 	},
 	{
 		"EndpointName": "tcpHealthMonitoringService",
 		"Contract": "CES.CoreApi.GeoLocation.Service.Contract.Interfaces.IHealthMonitoringService",
 		"Binding": "netTcpBinding",
-		"BindingfName": "netTcpBindingConfiguration",
+		"BindingConfigurationName": "netTcpBindingConfiguration",
 		"SecurityMode": "None"
 	},
 	{
 		"EndpointName": "tcpClientSideSupportService",
 		"Contract": "CES.CoreApi.GeoLocation.Service.Contract.Interfaces.IClientSideSupportService",
 		"Binding": "netTcpBinding",
-		"BindingfName": "netTcpBindingConfiguration",
+		"BindingConfigurationName": "netTcpBindingConfiguration",
 		"SecurityMode": "None"
 	}],
 	"Bindings": [
@@ -262,7 +262,7 @@ insert @temp (fCoreAPISettingsID, fAppID, fName, fValue, fDescription, fModified
 			"MaxNameTableCharCount": "2147483647",
 			"MaxStringContentLength": "2147483647"
 		},
-		"Security": "None",
+		"Security": "Transport",
 		"ReliableSession": {
 			"Enabled": "false"
 		}
@@ -289,7 +289,7 @@ insert @temp (fCoreAPISettingsID, fAppID, fName, fValue, fDescription, fModified
 		}
 	}],
 	"Behavior": {
-		"IsHttpsEnabled": "false",
+		"IsHttpsEnabled": "true",
 		"IsDebugEnabled": "true",
 		"IsHelpEnabled": "false",
 		"IsWsdlEnabled": "true",
