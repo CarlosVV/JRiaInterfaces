@@ -5,7 +5,7 @@ namespace CES.CoreApi.GeoLocation.Service.Business.Contract.Models
 {
     public class AutocompleteAddressResponseModel
     {
-        public List<AddressModel> Addresses { get; set; }
+        public List<AutocompleteSuggestionModel> Suggestions { get; set; }
 
         /// <summary>
         /// Specify data provider used to get autocomplete list

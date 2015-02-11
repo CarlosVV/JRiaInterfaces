@@ -4,7 +4,6 @@ using System.Xml.Linq;
 using CES.CoreApi.Common.Enumerations;
 using CES.CoreApi.Common.Exceptions;
 using CES.CoreApi.Common.Tools;
-using CES.CoreApi.Foundation.Contract.Enumerations;
 using CES.CoreApi.GeoLocation.Service.Business.Contract.Enumerations;
 using CES.CoreApi.GeoLocation.Service.Business.Contract.Interfaces;
 using CES.CoreApi.GeoLocation.Service.Business.Contract.Models;
@@ -125,7 +124,9 @@ namespace CES.CoreApi.GeoLocation.Service.Business.Logic.Parsers
         {
             var addressHints = (from result in rootElement.Elements(GoogleConstants.Result)
                                 where result.GetValue<string>(GoogleConstants.FormattedAddress).Length > 0
-                                select result)
+                                let geometry = result.Element(GoogleConstants.Geometry)
+                                let location = geometry.Element(GoogleConstants.Location)
+                                select new Tuple<XElement, XElement>(result, location))
                 .ToList();
 
             //No hints returned
@@ -134,9 +135,12 @@ namespace CES.CoreApi.GeoLocation.Service.Business.Logic.Parsers
 
             //Populate valid response model
             var responseModel = GetValidAddressAutocompleteResponse();
-            responseModel.Addresses = (from hint in addressHints.Take(maxRecords)
-                                       select _addressParser.ParseAddress(hint))
-                .ToList();
+            responseModel.Suggestions = (from hint in addressHints.Take(maxRecords)
+                select new AutocompleteSuggestionModel
+                {
+                    Address = _addressParser.ParseAddress(hint.Item1),
+                    Location = GetLocation(hint.Item2)
+                }).ToList();
 
             return responseModel;
         }
@@ -199,8 +203,8 @@ namespace CES.CoreApi.GeoLocation.Service.Business.Logic.Parsers
         {
             return new LocationModel
             {
-                Latitude = locationRecord.GetValue<decimal>(GoogleConstants.Latitude),
-                Longitude = locationRecord.GetValue<decimal>(GoogleConstants.Longitude)
+                Latitude = locationRecord.GetValue<double>(GoogleConstants.Latitude),
+                Longitude = locationRecord.GetValue<double>(GoogleConstants.Longitude)
             };
         }
 

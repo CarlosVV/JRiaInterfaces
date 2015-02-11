@@ -75,6 +75,7 @@
     <Compile Include="Interfaces\IUrlBuilder.cs" />
     <Compile Include="Models\AutocompleteAddressResponseModel.cs" />
     <Compile Include="Models\AddressModel.cs" />
+    <Compile Include="Models\AutocompleteSuggestionModel.cs" />
     <Compile Include="Models\BinaryDataResponse.cs" />
     <Compile Include="Models\ClearCacheResponseModel.cs" />
     <Compile Include="Models\DataResponse.cs" />

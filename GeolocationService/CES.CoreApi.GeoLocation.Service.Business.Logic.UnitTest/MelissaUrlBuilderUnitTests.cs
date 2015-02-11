@@ -37,8 +37,8 @@ namespace CES.CoreApi.GeoLocation.Service.Business.Logic.UnitTest
         private const int MaxRecords = 15;
         private const string FormattedAddress = "6565 Knott Ave., Buena Park, CA 90620";
 
-        private const decimal LatitudeValid = (decimal)36.3456;
-        private const decimal LongitudeValid = (decimal)-170.5453;
+        private const double LatitudeValid = 36.3456;
+        private const double LongitudeValid = -170.5453;
 
         [TestInitialize]
         public void Setup()

@@ -1,6 +1,5 @@
 ﻿using System.Xml.Linq;
 using CES.CoreApi.Common.Enumerations;
-using CES.CoreApi.Foundation.Contract.Enumerations;
 using CES.CoreApi.GeoLocation.Service.Business.Contract.Enumerations;
 using CES.CoreApi.GeoLocation.Service.Business.Contract.Interfaces;
 using CES.CoreApi.GeoLocation.Service.Business.Contract.Models;
@@ -41,13 +40,15 @@ namespace CES.CoreApi.GeoLocation.Service.Business.Logic.UnitTest
         {
             var dataResponse = BingResponseParserHelper.GetAutomcompleteDataResponse();
 
-            var addressModel = BingResponseParserHelper.GetAddressModel();
-            _bingAddressParser.Setup(p => p.ParseAddress(It.IsAny<XElement>(), It.IsAny<XNamespace>())).Returns(addressModel);
+            var suggestionModel = BingResponseParserHelper.GetAutocompleteSuggestionModel();
+            _bingAddressParser.Setup(p => p.ParseAddress(It.IsAny<XElement>(), It.IsAny<XNamespace>())).Returns(suggestionModel.Address);
 
             var result = new BingResponseParser(_bingAddressParser.Object).Parse(dataResponse, MaxRecords, Country);
 
             Assert.IsNotNull(result);
-            Assert.AreEqual(addressModel, result.Addresses[0]);
+            Assert.AreEqual(suggestionModel.Address, result.Suggestions[0].Address);
+            Assert.AreEqual(suggestionModel.Location.Latitude, result.Suggestions[0].Location.Latitude);
+            Assert.AreEqual(suggestionModel.Location.Longitude, result.Suggestions[0].Location.Longitude);
             Assert.IsTrue(result.IsValid);
             Assert.AreEqual(DataProviderType.Bing, result.DataProvider);
         }
@@ -80,7 +81,7 @@ namespace CES.CoreApi.GeoLocation.Service.Business.Logic.UnitTest
             var result = new BingResponseParser(_bingAddressParser.Object).Parse(dataResponse, MaxRecords, Country);
             
             Assert.IsNotNull(result);
-            Assert.IsNull(result.Addresses);
+            Assert.IsNull(result.Suggestions);
             Assert.IsFalse(result.IsValid);
             Assert.AreEqual(DataProviderType.Bing, result.DataProvider);
         }

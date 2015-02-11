@@ -19,12 +19,12 @@ namespace CES.CoreApi.GeoLocation.Service.UnitTest
         private const string City = "Buena Park";
         private const string PostalCode = "90620";
         private const int MaxRecords = 15;
-        private const decimal LatitudeValid = (decimal) 36.3456;
-        private const decimal LatitudeInValidNegative = (decimal)-90.876;
-        private const decimal LatitudeInValidPositive = (decimal) 95.765;
-        private const decimal LongitudeValid = (decimal) -170.5453;
-        private const decimal LongitudeInValidNegative = (decimal) -180.5453;
-        private const decimal LongitudeInValidPositive = (decimal)180.5453;
+        private const double LatitudeValid = 36.3456;
+        private const double LatitudeInValidNegative = -90.876;
+        private const double LatitudeInValidPositive = 95.765;
+        private const double LongitudeValid = -170.5453;
+        private const double LongitudeInValidNegative = -180.5453;
+        private const double LongitudeInValidPositive = 180.5453;
         private const int ZoomLevelValid = 10;
         private const int ZoomLevelMinimum = 0;
         private const int ZoomLevelMaximum = 21;
@@ -845,8 +845,8 @@ namespace CES.CoreApi.GeoLocation.Service.UnitTest
                         Label = "2",
                         Location = new Location
                         {
-                            Latitude = (decimal) 35.4567,
-                            Longitude = (decimal) -100.5678
+                            Latitude = 35.4567,
+                            Longitude = -100.5678
                         },
                         PinColor = PinColor.Blue
                     }

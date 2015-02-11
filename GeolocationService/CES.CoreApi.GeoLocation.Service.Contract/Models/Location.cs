@@ -10,12 +10,12 @@ namespace CES.CoreApi.GeoLocation.Service.Contract.Models
         /// Representing degrees of longitude.
         /// </summary>
         [DataMember(IsRequired = true)]
-        public decimal Longitude { get; set; }
+        public double Longitude { get; set; }
 
         /// <summary>
         /// Representing degrees of latitude.
         /// </summary>
         [DataMember(IsRequired = true)]
-        public decimal Latitude { get; set; }
+        public double Latitude { get; set; }
     }
 }

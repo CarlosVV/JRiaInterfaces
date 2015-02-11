@@ -1,6 +1,5 @@
 ﻿using System.Xml.Linq;
 using CES.CoreApi.Common.Enumerations;
-using CES.CoreApi.Foundation.Contract.Enumerations;
 using CES.CoreApi.GeoLocation.Service.Business.Contract.Enumerations;
 using CES.CoreApi.GeoLocation.Service.Business.Contract.Interfaces;
 using CES.CoreApi.GeoLocation.Service.Business.Contract.Models;
@@ -57,13 +56,14 @@ namespace CES.CoreApi.GeoLocation.Service.Business.Logic.UnitTest
         {
             var dataResponse = MelissaResponseParserHelper.GetAutomcompleteDataResponse();
 
-            var addressModel = MelissaResponseParserHelper.GetAddressModel();
-            _addressParser.Setup(p => p.ParseAddress(It.IsAny<XElement>(), It.IsAny<XNamespace>(), It.IsAny<string>(), It.IsAny<bool>())).Returns(addressModel);
+            var suggestionModel = MelissaResponseParserHelper.GetAutocompleteSuggestionModel();
+            _addressParser.Setup(p => p.ParseAddress(It.IsAny<XElement>(), It.IsAny<XNamespace>(), It.IsAny<string>(), It.IsAny<bool>())).Returns(suggestionModel.Address);
 
             var result = new MelissaResponseParser(_addressParser.Object, _levelOfConfidenceProvider.Object).Parse(dataResponse, MaxRecords, Country);
 
             Assert.IsNotNull(result);
-            Assert.AreEqual(addressModel, result.Addresses[0]);
+            Assert.AreEqual(suggestionModel.Address, result.Suggestions[0].Address);
+            Assert.IsNull(result.Suggestions[0].Location);
             Assert.IsTrue(result.IsValid);
             Assert.AreEqual(DataProviderType.MelissaData, result.DataProvider);
         }
@@ -96,7 +96,7 @@ namespace CES.CoreApi.GeoLocation.Service.Business.Logic.UnitTest
             var result = new MelissaResponseParser(_addressParser.Object, _levelOfConfidenceProvider.Object).Parse(dataResponse, MaxRecords, Country);
 
             Assert.IsNotNull(result);
-            Assert.IsNull(result.Addresses);
+            Assert.IsNull(result.Suggestions);
             Assert.IsFalse(result.IsValid);
             Assert.AreEqual(DataProviderType.MelissaData, result.DataProvider);
         }
@@ -108,7 +108,7 @@ namespace CES.CoreApi.GeoLocation.Service.Business.Logic.UnitTest
             var result = new MelissaResponseParser(_addressParser.Object, _levelOfConfidenceProvider.Object).Parse(dataResponse, MaxRecords, Country);
 
             Assert.IsNotNull(result);
-            Assert.IsNull(result.Addresses);
+            Assert.IsNull(result.Suggestions);
             Assert.IsFalse(result.IsValid);
             Assert.AreEqual(DataProviderType.MelissaData, result.DataProvider);
         }

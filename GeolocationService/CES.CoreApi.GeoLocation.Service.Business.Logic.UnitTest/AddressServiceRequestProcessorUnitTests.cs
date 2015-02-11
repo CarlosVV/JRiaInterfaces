@@ -1,6 +1,5 @@
 ﻿using System.Collections.Generic;
 using CES.CoreApi.Common.Enumerations;
-using CES.CoreApi.Foundation.Contract.Enumerations;
 using CES.CoreApi.GeoLocation.Service.Business.Contract.Enumerations;
 using CES.CoreApi.GeoLocation.Service.Business.Contract.Interfaces;
 using CES.CoreApi.GeoLocation.Service.Business.Contract.Models;
@@ -393,7 +392,7 @@ namespace CES.CoreApi.GeoLocation.Service.Business.Logic.UnitTest
                 _geocodeServiceRequestProcessor.Object).GetAutocompleteList(Country, AdministrativeArea, FormattedAddress, 10);
 
             Assert.IsNotNull(result);
-            Assert.IsNotNull(result.Addresses);
+            Assert.IsNotNull(result.Suggestions);
             Assert.IsTrue(result.IsValid);
             Assert.AreEqual(DataProviderType.Bing, result.DataProvider);
         }
@@ -416,7 +415,7 @@ namespace CES.CoreApi.GeoLocation.Service.Business.Logic.UnitTest
                 _geocodeServiceRequestProcessor.Object).GetAutocompleteList(Country, AdministrativeArea, FormattedAddress, 0);
 
             Assert.IsNotNull(result);
-            Assert.IsNotNull(result.Addresses);
+            Assert.IsNotNull(result.Suggestions);
             Assert.IsTrue(result.IsValid);
             Assert.AreEqual(DataProviderType.Bing, result.DataProvider);
         }
@@ -439,7 +438,7 @@ namespace CES.CoreApi.GeoLocation.Service.Business.Logic.UnitTest
                 _geocodeServiceRequestProcessor.Object).GetAutocompleteList(Country, AdministrativeArea, FormattedAddress, 100);
 
             Assert.IsNotNull(result);
-            Assert.IsNotNull(result.Addresses);
+            Assert.IsNotNull(result.Suggestions);
             Assert.IsTrue(result.IsValid);
             Assert.AreEqual(DataProviderType.Bing, result.DataProvider);
         }
@@ -474,7 +473,7 @@ namespace CES.CoreApi.GeoLocation.Service.Business.Logic.UnitTest
             {
                 DataProvider = DataProviderType.Bing,
                 IsValid = true,
-                Addresses = new List<AddressModel>()
+                Suggestions = new List<AutocompleteSuggestionModel>()
             };
         }
 
@@ -518,8 +517,8 @@ namespace CES.CoreApi.GeoLocation.Service.Business.Logic.UnitTest
         {
             return new LocationModel
             {
-                Latitude = (decimal)33.755802,
-                Longitude = (decimal)-118.308556
+                Latitude = 33.755802,
+                Longitude = -118.308556
             };
         }
 

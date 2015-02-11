@@ -75,6 +75,15 @@ namespace CES.CoreApi.GeoLocation.Service.Business.Logic.UnitTest.Helpers
             return new BinaryDataResponse(new byte[1024], HttpStatusCode.OK, !isInvalid);
         }
 
+        public static AutocompleteSuggestionModel GetAutocompleteSuggestionModel()
+        {
+            return new AutocompleteSuggestionModel
+            {
+                Address = GetAddressModel(),
+                Location = GetAutocompleteLocationModel()
+            };
+        }
+
         public static AddressModel GetAddressModel()
         {
             return new AddressModel
@@ -95,8 +104,17 @@ namespace CES.CoreApi.GeoLocation.Service.Business.Logic.UnitTest.Helpers
         {
             return new LocationModel
             {
-                Latitude = (decimal) 33.755802,
-                Longitude = (decimal) -118.308556
+                Latitude = 33.755802,
+                Longitude = -118.308556
+            };
+        }
+
+        public static LocationModel GetAutocompleteLocationModel()
+        {
+            return new LocationModel
+            {
+                Latitude = 30.079630985856056,
+                Longitude = -90.511882156133652
             };
         }
     }

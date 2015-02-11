@@ -1,6 +1,5 @@
 ﻿using System.Xml.Linq;
 using CES.CoreApi.Common.Enumerations;
-using CES.CoreApi.Foundation.Contract.Enumerations;
 using CES.CoreApi.GeoLocation.Service.Business.Contract.Enumerations;
 using CES.CoreApi.GeoLocation.Service.Business.Contract.Interfaces;
 using CES.CoreApi.GeoLocation.Service.Business.Contract.Models;
@@ -54,13 +53,15 @@ namespace CES.CoreApi.GeoLocation.Service.Business.Logic.UnitTest
         {
             var dataResponse = GoogleResponseParserHelper.GetAutomcompleteDataResponse();
 
-            var addressModel = GoogleResponseParserHelper.GetAddressModel();
-            _addressParser.Setup(p => p.ParseAddress(It.IsAny<XElement>())).Returns(addressModel);
+            var suggestionModel = GoogleResponseParserHelper.GetAutocompleteSuggestionModel();
+            _addressParser.Setup(p => p.ParseAddress(It.IsAny<XElement>())).Returns(suggestionModel.Address);
 
             var result = new GoogleResponseParser(_addressParser.Object, _levelOfConfidenceProvider.Object).Parse(dataResponse, MaxRecords, Country);
 
             Assert.IsNotNull(result);
-            Assert.AreEqual(addressModel, result.Addresses[0]);
+            Assert.AreEqual(suggestionModel.Address, result.Suggestions[0].Address);
+            Assert.AreEqual(suggestionModel.Location.Latitude, result.Suggestions[0].Location.Latitude);
+            Assert.AreEqual(suggestionModel.Location.Longitude, result.Suggestions[0].Location.Longitude);
             Assert.IsTrue(result.IsValid);
             Assert.AreEqual(DataProviderType.Google, result.DataProvider);
         }
@@ -93,7 +94,7 @@ namespace CES.CoreApi.GeoLocation.Service.Business.Logic.UnitTest
             var result = new GoogleResponseParser(_addressParser.Object, _levelOfConfidenceProvider.Object).Parse(dataResponse, MaxRecords, Country);
 
             Assert.IsNotNull(result);
-            Assert.IsNull(result.Addresses);
+            Assert.IsNull(result.Suggestions);
             Assert.IsFalse(result.IsValid);
             Assert.AreEqual(DataProviderType.Google, result.DataProvider);
         }
