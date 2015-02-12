@@ -1,0 +1,12 @@
+<?xml version="1.0"?>
+<package >
+  <metadata>
+    <id>$id$</id>
+    <version>$version$</version>
+    <authors>Continental Exchange Solutions</authors>
+    <owners>Continental Exchange Solutions</owners>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <description>CoreAPI Foundation</description>
+    <tags>CoreAPI Foundation</tags>
+  </metadata>
+</package>

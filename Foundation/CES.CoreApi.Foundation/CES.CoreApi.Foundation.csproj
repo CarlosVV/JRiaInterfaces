@@ -94,6 +94,7 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />
+    <None Include="CES.CoreApi.Foundation.nuspec" />
     <None Include="packages.config">
       <SubType>Designer</SubType>
     </None>
