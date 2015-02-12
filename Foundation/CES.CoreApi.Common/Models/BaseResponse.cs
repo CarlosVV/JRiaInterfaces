@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Runtime.Serialization;
+using CES.CoreApi.Common.Enumerations;
 using CES.CoreApi.Common.Interfaces;
-using CES.CoreApi.Foundation.Contract.Enumerations;
 
-namespace CES.CoreApi.Foundation.Contract.Models
+namespace CES.CoreApi.Common.Models
 {
     [DataContract]
     public abstract class BaseResponse: IExtensibleDataObject

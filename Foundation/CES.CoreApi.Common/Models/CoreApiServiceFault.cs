@@ -2,7 +2,7 @@
 using System.Runtime.Serialization;
 using CES.CoreApi.Common.Constants;
 
-namespace CES.CoreApi.Foundation.Contract.Models
+namespace CES.CoreApi.Common.Models
 {
     [DataContract(Name = "CoreApiServiceFault", Namespace = Namespaces.ServiceFaultContractAction)]
     public class CoreApiServiceFault

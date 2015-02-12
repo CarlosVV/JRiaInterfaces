@@ -47,7 +47,6 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Constants\ServiceConfigurationItems.cs" />
-    <Compile Include="Enumerations\ResponseStatus.cs" />
     <Compile Include="Enumerations\ServiceSecurityMode.cs" />
     <Compile Include="Interfaces\IApplicationRepository.cs" />
     <Compile Include="Interfaces\IApplicationAuthenticator.cs" />
@@ -63,11 +62,8 @@
     <Compile Include="Interfaces\IServiceCallHeaderParametersProvider.cs" />
     <Compile Include="Interfaces\IServiceConfigurationProvider.cs" />
     <Compile Include="Interfaces\IServiceExceptionHandler.cs" />
-    <Compile Include="Models\BaseRequest.cs" />
-    <Compile Include="Models\BaseResponse.cs" />
     <Compile Include="Models\BehaviorConfiguration.cs" />
     <Compile Include="Models\BindingConfiguration.cs" />
-    <Compile Include="Models\CoreApiServiceFault.cs" />
     <Compile Include="Models\EndpointConfiguration.cs" />
     <Compile Include="Models\ReaderQuotasConfiguration.cs" />
     <Compile Include="Models\ReliableSessionConfiguration.cs" />

@@ -1,4 +1,4 @@
-﻿namespace CES.CoreApi.Foundation.Contract.Enumerations
+﻿namespace CES.CoreApi.Common.Enumerations
 {
     public enum ResponseStatus
     {

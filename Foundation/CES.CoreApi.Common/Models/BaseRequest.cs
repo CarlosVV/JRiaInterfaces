@@ -1,6 +1,6 @@
 ﻿using System.Runtime.Serialization;
 
-namespace CES.CoreApi.Foundation.Contract.Models
+namespace CES.CoreApi.Common.Models
 {
     [DataContract]
     public abstract class BaseRequest : IExtensibleDataObject

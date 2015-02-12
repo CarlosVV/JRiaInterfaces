@@ -1,6 +1,6 @@
 ﻿using System.Runtime.Serialization;
 using CES.CoreApi.Common.Constants;
-using CES.CoreApi.Foundation.Contract.Models;
+using CES.CoreApi.Common.Models;
 using CES.CoreApi.GeoLocation.Service.Contract.Enumerations;
 
 namespace CES.CoreApi.GeoLocation.Service.Contract.Models

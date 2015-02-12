@@ -1,7 +1,7 @@
 ﻿using System.Runtime.Serialization;
 using CES.CoreApi.Common.Constants;
 using CES.CoreApi.Common.Interfaces;
-using CES.CoreApi.Foundation.Contract.Models;
+using CES.CoreApi.Common.Models;
 
 namespace CES.CoreApi.GeoLocation.Service.Contract.Models
 {
