@@ -8,6 +8,9 @@
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <description>CoreAPI Logging</description>
     <tags>CoreAPI Logging</tags>
+		<dependencies>
+			<dependency id="log4net" version="1.2.13.0" />
+		</dependencies>
   </metadata>
   <files>
     <file src="readme.txt" target="" />	
