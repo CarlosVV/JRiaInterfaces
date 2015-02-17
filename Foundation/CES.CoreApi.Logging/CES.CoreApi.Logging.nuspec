@@ -8,10 +8,6 @@
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <description>CoreAPI Logging</description>
     <tags>CoreAPI Logging</tags>
-		<dependencies>
-			<dependency id="log4net" version="2.0.3" />
-			<dependency id="AutoMapper" version="3.3.1" />
-		</dependencies>
   </metadata>
   <files>
     <file src="readme.txt" target="" />	
