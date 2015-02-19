@@ -8,5 +8,8 @@
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <description>CoreAPI Foundation</description>
     <tags>CoreAPI Foundation</tags>
-  </metadata>
+		<dependencies>
+			<dependency id="AutoMapper" version="3.3.1.0" />
+		</dependencies>
+	</metadata>
 </package>
