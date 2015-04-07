@@ -9,14 +9,18 @@ namespace CES.CoreApi.UnityProxy
     {
         #region Core
 
-        private readonly ILogManager _logManager;
+        private readonly IPerformanceLogMonitor _performanceMonitor;
+        private readonly IExceptionLogMonitor _exceptionMonitor;
         private readonly ILogConfigurationProvider _configuration;
 
-        public UnityPerformanceInterceptorBehavior(ILogManager logManager, ILogConfigurationProvider configuration)
+        public UnityPerformanceInterceptorBehavior(IPerformanceLogMonitor performanceMonitor, IExceptionLogMonitor exceptionMonitor, 
+            ILogConfigurationProvider configuration)
         {
-            if (logManager == null) throw new ArgumentNullException("logManager");
+            if (performanceMonitor == null) throw new ArgumentNullException("performanceMonitor");
+            if (exceptionMonitor == null) throw new ArgumentNullException("exceptionMonitor");
             if (configuration == null) throw new ArgumentNullException("configuration");
-            _logManager = logManager;
+            _performanceMonitor = performanceMonitor;
+            _exceptionMonitor = exceptionMonitor;
             _configuration = configuration;
         }
 
@@ -37,20 +41,19 @@ namespace CES.CoreApi.UnityProxy
             if (input.MethodBase.DeclaringType == null) 
                 return default(IMethodReturn);
 
-            var monitor = _logManager.GetMonitorInstance<IPerformanceLogMonitor>();
-            monitor.Start(input.MethodBase);
+            _performanceMonitor.Start(input.MethodBase);
 
             //Invoke method
             var message = getNext()(input, getNext);
 
             //Post method calling
-            monitor.DataContainer.Arguments = input.Arguments;
-            monitor.DataContainer.ReturnValue = message.ReturnValue;
-            monitor.Stop();
+            _performanceMonitor.DataContainer.Arguments = input.Arguments;
+            _performanceMonitor.DataContainer.ReturnValue = message.ReturnValue;
+            _performanceMonitor.Stop();
 
             //Handle exception since it can be lost if happened on very early configuration stage
             if (message.Exception != null)
-                _logManager.Publish(message.Exception);
+                _exceptionMonitor.Publish(message.Exception);
 
             return message;
         }

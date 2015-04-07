@@ -77,6 +77,12 @@ namespace CES.CoreApi.UnityProxy
             return this;
         }
 
+        public IIocContainer RegisterTypeWithInterfaceInterceptor<TFrom, TTo>(LifetimeManagerType lifetimeManagerType, InterceptionBehaviorType injectionMembers) where TTo : TFrom
+        {
+            RegisterType<TFrom, TTo>(lifetimeManagerType, string.Empty, InterceptorType.Undefined, injectionMembers, injectionMembers);
+            return this;
+        }
+
         public IIocContainer RegisterType<TFrom, TTo>(InterceptorType interceptorType, InterceptionBehaviorType interceptionBehaviorType, 
             params object[] injectionMembers) where TTo : TFrom
         {

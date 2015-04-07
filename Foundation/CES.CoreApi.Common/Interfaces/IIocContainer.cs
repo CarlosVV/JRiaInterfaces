@@ -136,5 +136,8 @@ namespace CES.CoreApi.Common.Interfaces
             params object[] injectionMembers) where TTo : TFrom;
 
         IIocContainer RegisterType<TFrom, TTo>(LifetimeManagerType lifetimeManagerType, params object[] injectionMembers) where TTo : TFrom;
+
+        IIocContainer RegisterTypeWithInterfaceInterceptor<TFrom, TTo>(LifetimeManagerType lifetimeManagerType,
+            InterceptionBehaviorType injectionMembers) where TTo : TFrom;
     }
 }

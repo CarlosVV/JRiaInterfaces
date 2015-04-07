@@ -4,7 +4,6 @@ using System.Globalization;
 using System.Linq;
 using System.Runtime.Serialization;
 using System.Web;
-using CES.CoreApi.Common.Interfaces;
 
 namespace CES.CoreApi.Logging.Models
 {
@@ -13,17 +12,11 @@ namespace CES.CoreApi.Logging.Models
     {
         #region Core
 
-        private readonly IIocContainer _container;
-
         /// <summary>
         /// Initializes ExceptionLogItemGroup instance
         /// </summary>
-        public ExceptionLogItemGroup(IIocContainer container)
+        public ExceptionLogItemGroup()
         {
-            if (container == null)
-                throw new ArgumentNullException("container");
-
-            _container = container;
             Items = new Collection<ExceptionLogItem>();
         }
 
@@ -60,7 +53,9 @@ namespace CES.CoreApi.Logging.Models
                 var itemValue = method();
                 AddItem(itemName, itemValue);
             }
+// ReSharper disable EmptyGeneralCatchClause
             catch
+// ReSharper restore EmptyGeneralCatchClause
             {
             }
         }
@@ -75,13 +70,15 @@ namespace CES.CoreApi.Logging.Models
             var item = Items.FirstOrDefault(p => p.ItemName.Equals(itemName, StringComparison.OrdinalIgnoreCase));
             if (item != null) return;
 
-            item = _container.Resolve<ExceptionLogItem>();
-            item.ItemName = itemName == null
-                                ? string.Empty
-                                : HttpUtility.HtmlDecode(itemName);
-            item.ItemValue = itemValue == null
-                                 ? string.Empty
-                                 : HttpUtility.HtmlDecode(itemValue.ToString());
+            item = new ExceptionLogItem
+            {
+                ItemName = itemName == null
+                    ? string.Empty
+                    : HttpUtility.HtmlDecode(itemName),
+                ItemValue = itemValue == null
+                    ? string.Empty
+                    : HttpUtility.HtmlDecode(itemValue.ToString())
+            };
 
             Items.Add(item);
         }
@@ -106,13 +103,15 @@ namespace CES.CoreApi.Logging.Models
                                                              "The exception log sub item '{0}' for item '{1}' already exists.",
                                                              subItemName, itemName));
 
-            subItem = _container.Resolve<ExceptionLogItem>();
-            subItem.ItemName = subItemName == null
-                                   ? string.Empty
-                                   : HttpUtility.HtmlDecode(subItemName);
-            subItem.ItemValue = subItemValue == null
-                                    ? string.Empty
-                                    : HttpUtility.HtmlDecode(subItemValue.ToString());
+            subItem = new ExceptionLogItem
+            {
+                ItemName = subItemName == null
+                    ? string.Empty
+                    : HttpUtility.HtmlDecode(subItemName),
+                ItemValue = subItemValue == null
+                    ? string.Empty
+                    : HttpUtility.HtmlDecode(subItemValue.ToString())
+            };
 
             item.ChildItems.Add(subItem);
         }

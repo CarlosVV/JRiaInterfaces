@@ -76,10 +76,13 @@
     <Compile Include="Enumerations\TechnicalSystem.cs" />
     <Compile Include="Exceptions\CoreApiException.cs" />
     <Compile Include="Interfaces\IAutoMapperProxy.cs" />
+    <Compile Include="Interfaces\ICacheProvider.cs" />
     <Compile Include="Interfaces\ICurrentDateTimeProvider.cs" />
+    <Compile Include="Interfaces\IDataContainer.cs" />
     <Compile Include="Interfaces\IHttpClientProxy.cs" />
     <Compile Include="Interfaces\IIocContainer.cs" />
     <Compile Include="Interfaces\IIocContainerFactory.cs" />
+    <Compile Include="Interfaces\ILoggerProxy.cs" />
     <Compile Include="Models\Application.cs" />
     <Compile Include="Models\ApplicationConfiguration.cs" />
     <Compile Include="Models\ApplicationServiceOperation.cs" />

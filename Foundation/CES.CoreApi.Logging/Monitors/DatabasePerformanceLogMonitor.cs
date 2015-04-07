@@ -6,39 +6,31 @@ using System.Data.Common;
 using System.Data.SqlClient;
 using System.Diagnostics;
 using System.Linq;
+using CES.CoreApi.Common.Interfaces;
 using CES.CoreApi.Logging.Interfaces;
 using CES.CoreApi.Logging.Models;
 
 namespace CES.CoreApi.Logging.Monitors
 {
-    public class DatabasePerformanceLogMonitor : IDatabasePerformanceLogMonitor
+    public class DatabasePerformanceLogMonitor : BaseLogMonitor, IDatabasePerformanceLogMonitor
     {
         #region Core
 
         private readonly Stopwatch _timer;
-        private readonly ILogManager _logManager;
-        private readonly ILogConfigurationProvider _configuration;
 
         /// <summary>
         /// Initializes DatabasePerformanceLogMonitor instance
         /// </summary>
         /// <param name="dataContainer">Trace log data container instance</param>
-        /// <param name="logManager">Log manager instance</param>
         /// <param name="configuration">Performance log configuration </param>
-        public DatabasePerformanceLogMonitor(DatabasePerformanceLogDataContainer dataContainer,
-            ILogManager logManager,
-            ILogConfigurationProvider configuration)
+        /// <param name="logProxy"></param>
+        public DatabasePerformanceLogMonitor(DatabasePerformanceLogDataContainer dataContainer, ILogConfigurationProvider configuration, ILoggerProxy logProxy)
+            : base(logProxy, configuration)
         {
             if (dataContainer == null)
                 throw new ArgumentNullException("dataContainer");
-            if (logManager == null)
-                throw new ArgumentNullException("logManager");
-            if (configuration == null)
-                throw new ArgumentNullException("configuration");
 
             DataContainer = dataContainer;
-            _logManager = logManager;
-            _configuration = configuration;
 
             _timer = new Stopwatch();
         }
@@ -59,7 +51,7 @@ namespace CES.CoreApi.Logging.Monitors
         {
             get
             {
-                return _timer.ElapsedMilliseconds >= _configuration.DatabasePerformanceLogConfiguration.Threshold;
+                return _timer.ElapsedMilliseconds >= Configuration.DatabasePerformanceLogConfiguration.Threshold;
             }
         }
 
@@ -72,7 +64,7 @@ namespace CES.CoreApi.Logging.Monitors
         /// </summary>
         public void Start(DbCommand command)
         {
-            if (!_configuration.PerformanceLogConfiguration.IsEnabled)
+            if (!Configuration.PerformanceLogConfiguration.IsEnabled)
                 return;
             if (command == null)
                 throw new ArgumentNullException("command");
@@ -89,7 +81,7 @@ namespace CES.CoreApi.Logging.Monitors
         /// </summary>
         public void Stop()
         {
-            if (!_configuration.PerformanceLogConfiguration.IsEnabled)
+            if (!Configuration.PerformanceLogConfiguration.IsEnabled)
                 return;
 
             if (!_timer.IsRunning)
@@ -101,7 +93,7 @@ namespace CES.CoreApi.Logging.Monitors
                 return;
 
             DataContainer.ElapsedMilliseconds = _timer.ElapsedMilliseconds;
-            _logManager.Publish(DataContainer);
+            Publish(DataContainer);
         }
 
         #endregion //Public methods

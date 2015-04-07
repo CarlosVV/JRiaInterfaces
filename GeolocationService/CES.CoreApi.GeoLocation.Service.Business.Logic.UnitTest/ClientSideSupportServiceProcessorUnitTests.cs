@@ -2,7 +2,6 @@
 using CES.CoreApi.Common.Enumerations;
 using CES.CoreApi.Common.Interfaces;
 using CES.CoreApi.Common.Models;
-using CES.CoreApi.Foundation.Contract.Enumerations;
 using CES.CoreApi.Foundation.Contract.Interfaces;
 using CES.CoreApi.GeoLocation.Service.Business.Contract.Enumerations;
 using CES.CoreApi.GeoLocation.Service.Business.Contract.Interfaces;
@@ -10,6 +9,7 @@ using CES.CoreApi.GeoLocation.Service.Business.Logic.Constants;
 using CES.CoreApi.GeoLocation.Service.Business.Logic.Processors;
 using CES.CoreApi.GeoLocation.Service.UnitTestTools;
 using CES.CoreApi.Logging.Interfaces;
+using CES.CoreApi.Logging.Models;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
 
@@ -19,10 +19,9 @@ namespace CES.CoreApi.GeoLocation.Service.Business.Logic.UnitTest
     public class ClientSideSupportServiceProcessorUnitTests
     {
         private Mock<IHostApplicationProvider> _hostApplicationProvider;
-        private Mock<ILogManager> _logManager;
         private Mock<ITraceLogMonitor> _traceLogMonitor;
         private Mock<IApplication> _application;
-        private Mock<ITraceLogDataContainer> _traceLogDataContainer;
+        private Mock<TraceLogDataContainer> _traceLogDataContainer;
         private Mock<ICountryConfigurationProvider> _countryConfigurationProvider;
         private const string BingKey = "Bing Key";
         private const string GoogleKey = "Google Key";
@@ -32,10 +31,9 @@ namespace CES.CoreApi.GeoLocation.Service.Business.Logic.UnitTest
         public void Setup()
         {
             _hostApplicationProvider = new Mock<IHostApplicationProvider>();
-            _logManager = new Mock<ILogManager>();
             _traceLogMonitor = new Mock<ITraceLogMonitor>();
             _application = new Mock<IApplication>();
-            _traceLogDataContainer = new Mock<ITraceLogDataContainer>();
+            _traceLogDataContainer = new Mock<TraceLogDataContainer>();
             _countryConfigurationProvider = new Mock<ICountryConfigurationProvider>();
         }
 
@@ -45,14 +43,14 @@ namespace CES.CoreApi.GeoLocation.Service.Business.Logic.UnitTest
         public void Constructor_HappyPath_NoExceptionRaised()
         {
             ExceptionHelper.CheckHappyPath(
-                () => new ClientSideSupportServiceProcessor(_countryConfigurationProvider.Object, _hostApplicationProvider.Object, _logManager.Object));
+                () => new ClientSideSupportServiceProcessor(_countryConfigurationProvider.Object, _hostApplicationProvider.Object, _traceLogMonitor.Object));
         }
 
         [TestMethod]
         public void Constructor_CountryConfigurationProviderIsNull_ExceptionRaised()
         {
             ExceptionHelper.CheckException(
-                () => new ClientSideSupportServiceProcessor(null, _hostApplicationProvider.Object, _logManager.Object),
+                () => new ClientSideSupportServiceProcessor(null, _hostApplicationProvider.Object, _traceLogMonitor.Object),
                  SubSystemError.GeneralRequiredParameterIsUndefined, "configurationProvider");
         }
 
@@ -60,7 +58,7 @@ namespace CES.CoreApi.GeoLocation.Service.Business.Logic.UnitTest
         public void Constructor_HostApplicationProviderIsNull_ExceptionRaised()
         {
             ExceptionHelper.CheckException(
-                () => new ClientSideSupportServiceProcessor(_countryConfigurationProvider.Object, null, _logManager.Object),
+                () => new ClientSideSupportServiceProcessor(_countryConfigurationProvider.Object, null, _traceLogMonitor.Object),
                 SubSystemError.GeneralRequiredParameterIsUndefined, "hostApplicationProvider");
         }
 
@@ -77,16 +75,12 @@ namespace CES.CoreApi.GeoLocation.Service.Business.Logic.UnitTest
         [TestMethod]
         public void LogEvent_HappyPath()
         {
-            _logManager.Setup(p => p.GetMonitorInstance<ITraceLogMonitor>())
-                .Returns(_traceLogMonitor.Object)
-                .Verifiable();
             _traceLogMonitor.Setup(p => p.Start()).Verifiable();
             _traceLogMonitor.Setup(p => p.Stop()).Verifiable();
             _traceLogMonitor.SetupGet(p => p.DataContainer).Returns(_traceLogDataContainer.Object).Verifiable();
 
-            new ClientSideSupportServiceProcessor(_countryConfigurationProvider.Object, _hostApplicationProvider.Object, _logManager.Object).LogEvent(DataProviderType.Google, string.Empty);
+            new ClientSideSupportServiceProcessor(_countryConfigurationProvider.Object, _hostApplicationProvider.Object, _traceLogMonitor.Object).LogEvent(DataProviderType.Google, string.Empty);
 
-            _logManager.Verify(p => p.GetMonitorInstance<ITraceLogMonitor>(), Times.Once);
             _traceLogMonitor.Verify(p => p.DataContainer, Times.Exactly(2));
             _traceLogMonitor.Verify(p => p.Start(), Times.Once);
             _traceLogMonitor.Verify(p => p.Stop(), Times.Once);
@@ -98,7 +92,7 @@ namespace CES.CoreApi.GeoLocation.Service.Business.Logic.UnitTest
             _hostApplicationProvider.Setup(p=>p.GetApplication()).Returns(_application.Object).Verifiable();
             _application.SetupGet(p => p.Configuration).Returns(GetConfiguration()).Verifiable();
 
-            var result = new ClientSideSupportServiceProcessor(_countryConfigurationProvider.Object, _hostApplicationProvider.Object, _logManager.Object).GetProviderKey(
+            var result = new ClientSideSupportServiceProcessor(_countryConfigurationProvider.Object, _hostApplicationProvider.Object, _traceLogMonitor.Object).GetProviderKey(
                 DataProviderType.Google);
 
             Assert.AreEqual(GoogleKey, result.ProviderKey);
@@ -111,7 +105,7 @@ namespace CES.CoreApi.GeoLocation.Service.Business.Logic.UnitTest
             _hostApplicationProvider.Setup(p => p.GetApplication()).Returns(_application.Object).Verifiable();
             _application.SetupGet(p => p.Configuration).Returns(GetConfiguration()).Verifiable();
 
-            var result = new ClientSideSupportServiceProcessor(_countryConfigurationProvider.Object, _hostApplicationProvider.Object, _logManager.Object).GetProviderKey(
+            var result = new ClientSideSupportServiceProcessor(_countryConfigurationProvider.Object, _hostApplicationProvider.Object, _traceLogMonitor.Object).GetProviderKey(
                 DataProviderType.MelissaData);
 
             Assert.AreEqual(MelissaKey, result.ProviderKey);
@@ -124,7 +118,7 @@ namespace CES.CoreApi.GeoLocation.Service.Business.Logic.UnitTest
             _hostApplicationProvider.Setup(p => p.GetApplication()).Returns(_application.Object).Verifiable();
             _application.SetupGet(p => p.Configuration).Returns(GetConfiguration()).Verifiable();
 
-            var result = new ClientSideSupportServiceProcessor(_countryConfigurationProvider.Object, _hostApplicationProvider.Object, _logManager.Object).GetProviderKey(
+            var result = new ClientSideSupportServiceProcessor(_countryConfigurationProvider.Object, _hostApplicationProvider.Object, _traceLogMonitor.Object).GetProviderKey(
                 DataProviderType.Bing);
 
             Assert.AreEqual(BingKey, result.ProviderKey);
@@ -137,7 +131,7 @@ namespace CES.CoreApi.GeoLocation.Service.Business.Logic.UnitTest
             _hostApplicationProvider.Setup(p => p.GetApplication()).Returns(_application.Object).Verifiable();
             _application.SetupGet(p => p.Configuration).Returns(GetConfiguration(false)).Verifiable();
 
-            var result = new ClientSideSupportServiceProcessor(_countryConfigurationProvider.Object, _hostApplicationProvider.Object, _logManager.Object).GetProviderKey(
+            var result = new ClientSideSupportServiceProcessor(_countryConfigurationProvider.Object, _hostApplicationProvider.Object, _traceLogMonitor.Object).GetProviderKey(
                 DataProviderType.Google);
 
             Assert.IsNull(result.ProviderKey);
@@ -151,7 +145,7 @@ namespace CES.CoreApi.GeoLocation.Service.Business.Logic.UnitTest
             _application.SetupGet(p => p.Configuration).Returns(GetConfiguration(false)).Verifiable();
 
             ExceptionHelper.CheckException(
-                () => new ClientSideSupportServiceProcessor(_countryConfigurationProvider.Object, _hostApplicationProvider.Object, _logManager.Object).GetProviderKey(DataProviderType.Undefined),
+                () => new ClientSideSupportServiceProcessor(_countryConfigurationProvider.Object, _hostApplicationProvider.Object, _traceLogMonitor.Object).GetProviderKey(DataProviderType.Undefined),
                 SubSystemError.GeneralInvalidParameterValue, "providerType", DataProviderType.Undefined);
         }
 

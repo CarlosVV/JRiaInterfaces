@@ -2,7 +2,6 @@
 using System.Linq;
 using CES.CoreApi.Common.Enumerations;
 using CES.CoreApi.Common.Exceptions;
-using CES.CoreApi.Foundation.Contract.Enumerations;
 using CES.CoreApi.Foundation.Contract.Interfaces;
 using CES.CoreApi.GeoLocation.Service.Business.Contract.Enumerations;
 using CES.CoreApi.GeoLocation.Service.Business.Contract.Interfaces;
@@ -17,21 +16,21 @@ namespace CES.CoreApi.GeoLocation.Service.Business.Logic.Processors
         #region Core
 
         private readonly IHostApplicationProvider _hostApplicationProvider;
-        private readonly ILogManager _logManager;
+        private readonly ITraceLogMonitor _traceMonitor;
 
         public ClientSideSupportServiceProcessor(ICountryConfigurationProvider configurationProvider, IHostApplicationProvider hostApplicationProvider,
-            ILogManager logManager)
+            ITraceLogMonitor traceMonitor)
             : base(configurationProvider)
         {
             if (hostApplicationProvider == null)
                 throw new CoreApiException(TechnicalSubSystem.GeoLocationService,
                   SubSystemError.GeneralRequiredParameterIsUndefined, "hostApplicationProvider");
-            if (logManager == null)
+            if (traceMonitor == null)
                 throw new CoreApiException(TechnicalSubSystem.GeoLocationService,
-                  SubSystemError.GeneralRequiredParameterIsUndefined, "logManager");
+                  SubSystemError.GeneralRequiredParameterIsUndefined, "traceMonitor");
 
             _hostApplicationProvider = hostApplicationProvider;
-            _logManager = logManager;
+            _traceMonitor = traceMonitor;
         }
 
         #endregion
@@ -60,11 +59,10 @@ namespace CES.CoreApi.GeoLocation.Service.Business.Logic.Processors
 
         public void LogEvent(DataProviderType providerType, string message)
         {
-            var monitor = _logManager.GetMonitorInstance<ITraceLogMonitor>();
-            monitor.DataContainer.ProviderType = providerType.ToString();
-            monitor.DataContainer.ClientSideMessage = message;
-            monitor.Start();
-            monitor.Stop();
+            _traceMonitor.DataContainer.ProviderType = providerType.ToString();
+            _traceMonitor.DataContainer.ClientSideMessage = message;
+            _traceMonitor.Start();
+            _traceMonitor.Stop();
         }
 
         #endregion

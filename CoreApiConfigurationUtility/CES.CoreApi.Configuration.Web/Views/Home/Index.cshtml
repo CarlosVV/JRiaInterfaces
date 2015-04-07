@@ -1,0 +1,28 @@
+﻿@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html ng-app="serviceConfigApp">
+<head>
+    <title>@ViewBag.Title</title>
+    <link href="~/Content/bootstrap.min.css" rel="stylesheet" />
+    @*<link href="Content/app.css" rel="stylesheet" />*@
+
+    <script src="~/Scripts/angular.js"></script>
+    <script src="~/Scripts/angular-route.js"></script>
+    <script src="~/Scripts/angular-ui/ui-bootstrap-tpls.js"></script>
+    <script src="~/app/ServiceConfigApp.js"></script>
+
+    <script src="~/app/DataService.js"></script>
+    <script src="~/app/forms/listController.js"></script>
+    <script src="~/app/forms/permissionsController.js"></script>
+    <script src="~/app/forms/settingsController.js"></script>
+    
+</head>
+<body class="container">
+    <br/>
+    <div ng-view>
+    </div>
+</body>
+</html>

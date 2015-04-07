@@ -1,0 +1,45 @@
+﻿<form class="form-horizontal" name="settingForm" novalidate role="form">
+    <fieldset>
+        <legend>Core API {{serviceName}} Settings</legend>
+        <br />
+        <div class="form-group">
+            <label for="settings" class="col-sm-3 control-label">Setting</label>
+            <div class="col-sm-9">
+                <select name="settings" ng-model="selectedSetting" ng-options="setting.Name for setting in settings" id="settings" class="form-control">
+                    <option value="">Select Setting</option>
+                </select>
+            </div>
+        </div>
+        <div class="form-group" ng-if="settingSelected()">
+            <label for="value" class="col-sm-3 control-label">Value</label>
+            <div class="col-sm-9">
+                <textarea name="value" id="value" class="form-control" rows="5" cols="40"
+                          ng-model="selectedSetting.Value"
+                          ng-required="true"></textarea>
+            </div>
+        </div>
+        <div class="form-group" ng-if="settingSelected()">
+            <label for="description" class="col-sm-3 control-label">Description</label>
+            <div class="col-sm-9">
+                <textarea name="description" id="description" class="form-control" rows="3" cols="40"
+                          ng-model="selectedSetting.Description"
+                          ng-required="true"></textarea>
+            </div>
+        </div>
+    </fieldset>
+    <br />
+    <fieldset>
+        <legend></legend>
+        <div class="col-sm-offset-3 col-sm-9">
+            <input type="button" class="btn btn-default" value="Cancel"
+                   ng-click="cancelForm()" />
+            <input type="reset" class="btn btn-warning" value="Reset"
+                   ng-click="resetForm()" />
+            <input type="submit" class="btn btn-default" value="Save"
+                   ng-click="saveForm()"
+                   ng-if="settingSelected()" />
+            <br />
+            <div class="alert alert-danger" ng-if="hasFormError">{{formErrors}}</div>
+        </div>
+    </fieldset>
+</form>

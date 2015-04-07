@@ -2,7 +2,6 @@
 using System.ServiceModel;
 using System.ServiceModel.Activation;
 using System.ServiceModel.Description;
-using CES.CoreApi.Caching.Interfaces;
 using CES.CoreApi.Caching.Providers;
 using CES.CoreApi.Common.Enumerations;
 using CES.CoreApi.Common.Interfaces;
@@ -42,21 +41,21 @@ namespace CES.CoreApi.Foundation.Service
             Container
                 .RegisterType<IAuthenticationManager, AuthenticationManager>()
                 .RegisterType<IApplicationAuthenticator, ApplicationAuthenticator>()
-                .RegisterTypeWithInterfaceInterceptor<IApplicationRepository, ApplicationRepository>(InterceptionBehaviorType.Performance)
+                .RegisterTypeWithInterfaceInterceptor<IApplicationRepository, ApplicationRepository>(LifetimeManagerType.AlwaysNew, InterceptionBehaviorType.Performance)
                 .RegisterType<IApplicationValidator, ApplicationValidator>()
                 .RegisterType<IRequestHeadersProvider, RequestHeadersProvider>()
                 .RegisterType<IServiceCallHeaderParametersProvider, ServiceCallHeaderParametersProvider>()
-                .RegisterType<IAuthorizationManager, AuthorizationManager>()
+                .RegisterType<IAuthorizationManager, AuthorizationManager>(LifetimeManagerType.AlwaysNew)
                 .RegisterType<IAuthorizationAdministrator, AuthorizationAdministrator>()
                 .RegisterType<ICacheProvider, AppFabricCacheProvider>()
                 .RegisterType<IHostApplicationProvider, HostApplicationProvider>()
                 .RegisterType<IClientSecurityContextProvider, ClientDetailsProvider>()
-                .RegisterType<IServiceExceptionHandler, ServiceExceptionHandler>()
+                .RegisterType<IServiceExceptionHandler, ServiceExceptionHandler>(LifetimeManagerType.AlwaysNew)
                 .RegisterType<IAutoMapperProxy, AutoMapperProxy>()
                 .RegisterType<IHttpClientProxy, HttpClientProxy>()
                 .RegisterType<IConfigurationProvider, ConfigurationProvider>()
                 .RegisterType<IServiceConfigurationProvider, ServiceConfigurationProvider>()
-                .RegisterType<ISecurityAuditLogger, SecurityAuditLogger>();
+                .RegisterType<ISecurityAuditLogger, SecurityAuditLogger>(LifetimeManagerType.AlwaysNew);
 
         }
     }

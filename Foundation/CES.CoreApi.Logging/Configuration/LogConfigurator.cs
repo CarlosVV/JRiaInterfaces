@@ -4,7 +4,6 @@ using CES.CoreApi.Common.Interfaces;
 using CES.CoreApi.Logging.Formatters;
 using CES.CoreApi.Logging.Interfaces;
 using CES.CoreApi.Logging.Log4Net;
-using CES.CoreApi.Logging.Managers;
 using CES.CoreApi.Logging.Models;
 using CES.CoreApi.Logging.Monitors;
 using CES.CoreApi.Logging.Providers;
@@ -39,18 +38,12 @@ namespace CES.CoreApi.Logging.Configuration
         public void ConfigureLog(LogType logTypes)
         {
             //Register common classes
-            _container.RegisterType<ILog4NetProxy, Log4NetProxy>()
-                .RegisterType<ILogManager, LogManager>(_container);
+            _container.RegisterType<ILoggerProxy, Log4NetProxy>();
 
             //Registers common formatters
             _container.RegisterType<IFileSizeFormatter, FileSizeFormatter>()
-                .RegisterType<IExecutionTimeFormatter, ExecutionTimeFormatter>()
-                .RegisterType<IThreadIdFormatter, ThreadIdFormatter>()
                 .RegisterType<IDateTimeFormatter, DateTimeFormatter>()
                 .RegisterType<IFullMethodNameFormatter, FullMethodNameFormatter>()
-                .RegisterType<IBooleanFormatter, BooleanFormatter>()
-                .RegisterType<IValueListFormatter, ValueListFormatter>()
-                .RegisterType<IGenericArgumentListFormatter, GenericArgumentListFormatter>()
                 .RegisterType<IDefaultValueFormatter, DefaultValueFormatter>()
                 .RegisterType<IJsonDataContainerFormatter, JsonDataContainerFormatter>();
 
@@ -58,14 +51,10 @@ namespace CES.CoreApi.Logging.Configuration
             if ((logTypes & LogType.ExceptionLog) == LogType.ExceptionLog)
             {
                 _container
-                    .RegisterType<ExceptionLogDataContainer, ExceptionLogDataContainer>(LifetimeManagerType.AlwaysNew, _container)
-                    .RegisterType<ExceptionLogItemGroup, ExceptionLogItemGroup>(LifetimeManagerType.AlwaysNew, _container)
+                    .RegisterType<IExceptionLogMonitor, ExceptionLogMonitor>(LifetimeManagerType.AlwaysNew)
+                    .RegisterType<IDataContainer, ExceptionLogDataContainer>(LifetimeManagerType.AlwaysNew)
+                    .RegisterType<ExceptionLogItemGroup, ExceptionLogItemGroup>(LifetimeManagerType.AlwaysNew)
                     .RegisterType<ExceptionLogItem, ExceptionLogItem>(LifetimeManagerType.AlwaysNew)
-                    .RegisterType<IExceptionLogFormatter, ExceptionLogFormatter>()
-                    .RegisterType<IExceptionFormatter, ExceptionFormatter>()
-                    .RegisterType<IExceptionLogItemGroupFormatter, ExceptionLogItemGroupFormatter>()
-                    .RegisterType<IExceptionLogItemGroupListFormatter, ExceptionLogItemGroupListFormatter>()
-                    .RegisterType<IExceptionLogItemGroupTitleFormatter, ExceptionLogItemGroupTitleFormatter>()
                     .RegisterType<IServiceCallInformationProvider, ServiceCallInformationProvider>()
                     .RegisterType<IRemoteClientInformationProvider, RemoteClientInformationProvider>()
                     .RegisterType<IHttpRequestInformationProvider, HttpRequestInformationProvider>()
@@ -77,8 +66,7 @@ namespace CES.CoreApi.Logging.Configuration
              {
                  _container
                      .RegisterType<IPerformanceLogMonitor, PerformanceLogMonitor>(LifetimeManagerType.AlwaysNew)
-                     .RegisterType<PerformanceLogDataContainer, PerformanceLogDataContainer>(LifetimeManagerType.AlwaysNew)
-                     .RegisterType<IPerformanceLogFormatter, PerformanceLogFormatter>();
+                     .RegisterType<IDataContainer, PerformanceLogDataContainer>(LifetimeManagerType.AlwaysNew);
              }
 
              //Trace log related
@@ -86,7 +74,7 @@ namespace CES.CoreApi.Logging.Configuration
              {
                  _container
                      .RegisterType<ITraceLogMonitor, TraceLogMonitor>(LifetimeManagerType.AlwaysNew)
-                     .RegisterType<ITraceLogDataContainer, TraceLogDataContainer>(LifetimeManagerType.AlwaysNew);
+                     .RegisterType<IDataContainer, TraceLogDataContainer>(LifetimeManagerType.AlwaysNew);
              }
 
              //Database performance log related
@@ -94,14 +82,15 @@ namespace CES.CoreApi.Logging.Configuration
              {
                  _container
                      .RegisterType<IDatabasePerformanceLogMonitor, DatabasePerformanceLogMonitor>(LifetimeManagerType.AlwaysNew)
-                     .RegisterType<DatabasePerformanceLogDataContainer, DatabasePerformanceLogDataContainer>(LifetimeManagerType.AlwaysNew)
+                     .RegisterType<IDataContainer, DatabasePerformanceLogDataContainer>(LifetimeManagerType.AlwaysNew)
                      .RegisterType<ISqlQueryFormatter, SqlQueryFormatter>();
              }
 
             //Security audit log related
             if ((logTypes & LogType.SecurityAudit) == LogType.SecurityAudit)
             {
-                _container.RegisterType<SecurityLogDataContainer, SecurityLogDataContainer>(LifetimeManagerType.AlwaysNew);
+                _container.RegisterType<IDataContainer, SecurityLogDataContainer>(LifetimeManagerType.AlwaysNew);
+                _container.RegisterType<ISecurityLogMonitor, SecurityLogMonitor>(LifetimeManagerType.AlwaysNew);
             }
 
             //Configuration related

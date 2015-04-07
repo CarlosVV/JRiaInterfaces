@@ -2,12 +2,11 @@
 using System.Data;
 using System.Data.Common;
 using System.Linq;
-using CES.CoreApi.Caching.Interfaces;
 using CES.CoreApi.Common.Constants;
 using CES.CoreApi.Common.Enumerations;
 using CES.CoreApi.Common.Exceptions;
+using CES.CoreApi.Common.Interfaces;
 using CES.CoreApi.Common.Models;
-using CES.CoreApi.Foundation.Contract.Enumerations;
 using CES.CoreApi.Foundation.Contract.Interfaces;
 using CES.CoreApi.Foundation.Data.Base;
 using CES.CoreApi.Foundation.Data.Utility;
@@ -19,8 +18,8 @@ namespace CES.CoreApi.Foundation.Data
     {
         #region Core
 
-        public ApplicationRepository(ICacheProvider cacheProvider,  ILogManager logManager)
-            : base(cacheProvider, logManager, ConnectionStrings.Main)
+        public ApplicationRepository(ICacheProvider cacheProvider,  IDatabasePerformanceLogMonitor performanceMonitor)
+            : base(cacheProvider, performanceMonitor, ConnectionStrings.Main)
         {
         }
 
@@ -35,7 +34,7 @@ namespace CES.CoreApi.Foundation.Data
         /// <returns></returns>
         public Application GetApplication(int applicationId)
         {
-            return CacheProvider.GetCacheItem(string.Format("GetApplication-{0}", applicationId), () =>
+            return CacheProvider.GetItem(string.Format("GetApplication-{0}", applicationId), () =>
             {
                 using (var cmd = Database.GetStoredProcCommand("coreapi_sp_GetApplicationByID"))
                 {

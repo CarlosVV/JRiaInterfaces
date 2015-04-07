@@ -1,0 +1,30 @@
+﻿<form class="form-horizontal" name="serviceListForm" novalidate role="form">
+    <fieldset>
+        <legend>Core API Services Configuration Utility</legend>
+        <br/>
+        <div class="form-group">
+            <label for="service" class="col-sm-3 control-label">Core API Service</label>
+            <div class="col-sm-9">
+                <select name="service" ng-model="selectedService" ng-options="service.Name for service in services" id="service" class="form-control">
+                    <option value="">Select Service</option>
+                </select>
+            </div>
+        </div>
+    </fieldset>
+    <br /><br /><br />
+    <fieldset>
+        <legend></legend>
+        <div class="col-sm-offset-3 col-sm-9">
+            <input type="reset" class="btn btn-warning" value="Reset"
+                   ng-click="resetForm()" />
+             <input type="submit" class="btn btn-default" value="Modify Settings"
+                   ng-click="showSettingsForm()"
+                   ng-if="showNavigation()" />
+            <!--<input type="submit" class="btn btn-primary" value="Modify Permissions"
+                   ng-click="showPermisisonsForm()"
+                   ng-if="showNavigation()" />-->
+            <br/>
+            <div class="alert alert-danger" ng-if="hasFormError">{{formErrors}}</div>
+        </div>
+    </fieldset>
+</form>

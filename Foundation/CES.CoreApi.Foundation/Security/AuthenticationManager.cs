@@ -5,7 +5,6 @@ using System.ServiceModel;
 using System.ServiceModel.Channels;
 using CES.CoreApi.Common.Enumerations;
 using CES.CoreApi.Common.Exceptions;
-using CES.CoreApi.Foundation.Contract.Enumerations;
 using CES.CoreApi.Foundation.Contract.Interfaces;
 using CES.CoreApi.Logging.Interfaces;
 
@@ -16,18 +15,18 @@ namespace CES.CoreApi.Foundation.Security
         #region Core
 
         private readonly IApplicationAuthenticator _authenticator;
-        private readonly ILogManager _logManager;
+        private readonly IExceptionLogMonitor _exceptionMonitor;
 
-        public AuthenticationManager(IApplicationAuthenticator authenticator, ILogManager logManager)
+        public AuthenticationManager(IApplicationAuthenticator authenticator, IExceptionLogMonitor exceptionMonitor)
         {
             if (authenticator == null)
                 throw new CoreApiException(TechnicalSubSystem.GeoLocationService,
                     SubSystemError.GeneralRequiredParameterIsUndefined, "authenticator");
-            if (logManager == null)
+            if (exceptionMonitor == null)
                 throw new CoreApiException(TechnicalSubSystem.GeoLocationService,
-                    SubSystemError.GeneralRequiredParameterIsUndefined, "logManager");
+                    SubSystemError.GeneralRequiredParameterIsUndefined, "exceptionMonitor");
             _authenticator = authenticator;
-            _logManager = logManager;
+            _exceptionMonitor = exceptionMonitor;
         }
 
         #endregion
@@ -60,7 +59,7 @@ namespace CES.CoreApi.Foundation.Security
             }
             catch (Exception ex)
             {
-                _logManager.Publish(ex);
+                _exceptionMonitor.Publish(ex);
                 throw;
             }
         }

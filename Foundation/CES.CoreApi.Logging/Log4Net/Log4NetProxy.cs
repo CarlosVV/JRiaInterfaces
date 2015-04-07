@@ -3,6 +3,7 @@ using System.Globalization;
 using System.Linq;
 using System.Reflection;
 using CES.CoreApi.Common.Enumerations;
+using CES.CoreApi.Common.Interfaces;
 using CES.CoreApi.Logging.Interfaces;
 using log4net;
 using log4net.Appender;
@@ -11,7 +12,7 @@ using log4net.Core;
 
 namespace CES.CoreApi.Logging.Log4Net
 {
-    public class Log4NetProxy : ILog4NetProxy
+    public class Log4NetProxy : ILoggerProxy
     {
         #region Core
 
@@ -36,7 +37,7 @@ namespace CES.CoreApi.Logging.Log4Net
 
         #endregion //Core
 
-        #region Implementation of ILog4NetProxy
+        #region Implementation of ILoggerProxy
 
         #region Parameter manipulation methods
         
@@ -398,7 +399,7 @@ namespace CES.CoreApi.Logging.Log4Net
 
         #endregion
 
-        #endregion //Implementation of ILog4NetProxy
+        #endregion //Implementation of ILoggerProxy
 
         #region Private methods
 

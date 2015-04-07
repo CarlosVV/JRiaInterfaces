@@ -46,16 +46,18 @@
     <Reference Include="System.Core" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Interfaces\ICacheProvider.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Providers\AppFabricCacheProvider.cs" />
-    <Compile Include="Providers\CacheProviderBase.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\CES.CoreApi.Common\CES.CoreApi.Common.csproj">
+      <Project>{070c7bb2-af07-4a4c-a9cc-6bfb8ca416e6}</Project>
+      <Name>CES.CoreApi.Common</Name>
+    </ProjectReference>
     <ProjectReference Include="..\CES.CoreApi.Logging\CES.CoreApi.Logging.csproj">
       <Project>{76762A04-54F0-4147-BD2B-267372034706}</Project>
       <Name>CES.CoreApi.Logging</Name>

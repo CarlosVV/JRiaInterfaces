@@ -1,7 +1,6 @@
 ﻿using CES.CoreApi.Common.Enumerations;
 using CES.CoreApi.Common.Exceptions;
 using CES.CoreApi.Common.Interfaces;
-using CES.CoreApi.Foundation.Contract.Enumerations;
 using CES.CoreApi.Foundation.Contract.Interfaces;
 using CES.CoreApi.GeoLocation.Service.Business.Contract.Enumerations;
 using CES.CoreApi.GeoLocation.Service.Business.Contract.Interfaces;
@@ -15,23 +14,23 @@ namespace CES.CoreApi.GeoLocation.Service.Business.Logic.Providers
         #region Core
 
         private readonly IHttpClientProxy _httpClientProxy;
-        private readonly ILogManager _logManager;
+        private readonly ITraceLogMonitor _traceMonitor;
         private readonly IRequestHeadersProvider _headerProvider;
 
-        public DataResponseProvider(IHttpClientProxy httpClientProxy, ILogManager logManager, IRequestHeadersProvider headerProvider)
+        public DataResponseProvider(IHttpClientProxy httpClientProxy, ITraceLogMonitor traceMonitor, IRequestHeadersProvider headerProvider)
         {
             if (httpClientProxy == null)
                 throw new CoreApiException(TechnicalSubSystem.GeoLocationService,
                    SubSystemError.GeneralRequiredParameterIsUndefined, "httpClientProxy");
-            if (logManager == null)
+            if (traceMonitor == null)
                 throw new CoreApiException(TechnicalSubSystem.GeoLocationService,
-                   SubSystemError.GeneralRequiredParameterIsUndefined, "logManager");
+                   SubSystemError.GeneralRequiredParameterIsUndefined, "traceMonitor");
             if (headerProvider == null)
                 throw new CoreApiException(TechnicalSubSystem.GeoLocationService,
                    SubSystemError.GeneralRequiredParameterIsUndefined, "headerProvider");
 
             _httpClientProxy = httpClientProxy;
-            _logManager = logManager;
+            _traceMonitor = traceMonitor;
             _headerProvider = headerProvider;
         }
 
@@ -107,11 +106,10 @@ namespace CES.CoreApi.GeoLocation.Service.Business.Logic.Providers
 
         private ITraceLogMonitor GetTraceLogMonitor(string requestUrl, DataProviderType providerType)
         {
-            var monitor = _logManager.GetMonitorInstance<ITraceLogMonitor>();
-            monitor.DataContainer.RequestMessage = requestUrl;
-            monitor.DataContainer.Headers = _headerProvider.GetHeaders();
-            monitor.DataContainer.ProviderType = providerType.ToString();
-            return monitor;
+            _traceMonitor.DataContainer.RequestMessage = requestUrl;
+            _traceMonitor.DataContainer.Headers = _headerProvider.GetHeaders();
+            _traceMonitor.DataContainer.ProviderType = providerType.ToString();
+            return _traceMonitor;
         }
 
         #endregion

@@ -1,0 +1,9 @@
+Order,SCR No,Revision No,Filename,SVN Path,Database
+1,1234567,109131,CoreAPI Create User and Role.sql,Platform/Database/Integration/Staging/fxDB6/Data/CoreAPI/,Main
+2,1234567,109132,Geolocation - Populate systblApp_CoreAPI_Settings table.sql,Platform/Database/Integration/Staging/fxDB6/Data/CoreAPI/,Main
+3,1234567,109135,Geolocation - Populate systblConst2 table.sql,Platform/Database/Integration/Staging/fxDB6/Data/CoreAPI/,Main
+4,1234567,109134,Geolocation - Populate systblAppObject table.sql,Platform/Database/Integration/Staging/fxDB6/Data/CoreAPI/,Main
+5,1234567,109133,Geolocation - Populate systblApp_MapObject table.sql,Platform/Database/Integration/Staging/fxDB6/Data/CoreAPI/,Main
+6,1234567,109137,Core API - Create systblApp_CoreAPI_Settings table.sql,Platform/Database/Integration/Staging/fxDB6/Tables/,Main
+7,1234567,109136,Core API - Create systblApp_MapObject table.sql,Platform/Database/Integration/Staging/fxDB6/Tables/,Main
+8,1234567,109097,coreapi_sp_GetApplicationByID.sql,Platform/Database/Integration/Staging/fxDB6/Programmability/Stored Procedures,Main

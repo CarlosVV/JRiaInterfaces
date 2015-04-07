@@ -20,7 +20,8 @@ namespace CES.CoreApi.Logging.Models
         private readonly IJsonDataContainerFormatter _formatter;
         private readonly ISqlQueryFormatter _sqlQueryFormatter;
 
-        public DatabasePerformanceLogDataContainer(ICurrentDateTimeProvider currentDateTimeProvider, IJsonDataContainerFormatter formatter, ISqlQueryFormatter sqlQueryFormatter)
+        public DatabasePerformanceLogDataContainer(ICurrentDateTimeProvider currentDateTimeProvider, IJsonDataContainerFormatter formatter, 
+            ISqlQueryFormatter sqlQueryFormatter)
         {
             if (currentDateTimeProvider == null) throw new ArgumentNullException("currentDateTimeProvider");
             if (formatter == null) throw new ArgumentNullException("formatter");

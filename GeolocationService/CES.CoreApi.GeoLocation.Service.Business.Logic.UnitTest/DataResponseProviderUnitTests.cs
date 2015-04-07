@@ -2,7 +2,6 @@
 using System.Threading.Tasks;
 using CES.CoreApi.Common.Enumerations;
 using CES.CoreApi.Common.Interfaces;
-using CES.CoreApi.Foundation.Contract.Enumerations;
 using CES.CoreApi.Foundation.Contract.Interfaces;
 using CES.CoreApi.GeoLocation.Service.Business.Contract.Enumerations;
 using CES.CoreApi.GeoLocation.Service.Business.Logic.Providers;
@@ -19,7 +18,6 @@ namespace CES.CoreApi.GeoLocation.Service.Business.Logic.UnitTest
         private Mock<IHttpClientProxy> _httpClientProxy;
         private Mock<IRequestHeadersProvider> _headerProvider;
         private Mock<HttpClient> _httpClient;
-        private Mock<ILogManager> _traceLogManager;
         private Mock<HttpResponseMessage> _httpResponseMessage;
         private Mock<ITraceLogMonitor> _traceLogMonitor;
         private Mock<Task<HttpResponseMessage>> _getAsyncResult;
@@ -32,7 +30,6 @@ namespace CES.CoreApi.GeoLocation.Service.Business.Logic.UnitTest
             _httpClientProxy = new Mock<IHttpClientProxy>();
             _httpClient = new Mock<HttpClient>();
             _httpResponseMessage = new Mock<HttpResponseMessage>();
-            _traceLogManager = new Mock<ILogManager>();
             _traceLogMonitor = new Mock<ITraceLogMonitor>();
             _getAsyncResult = new Mock<Task<HttpResponseMessage>>();
             _headerProvider = new Mock<IRequestHeadersProvider>();
@@ -41,7 +38,7 @@ namespace CES.CoreApi.GeoLocation.Service.Business.Logic.UnitTest
         [TestMethod]
         public void Constructor_HttpClientProxyIsNull_ExceptionRaised()
         {
-            ExceptionHelper.CheckException(() => new DataResponseProvider(null, _traceLogManager.Object, _headerProvider.Object),
+            ExceptionHelper.CheckException(() => new DataResponseProvider(null, _traceLogMonitor.Object, _headerProvider.Object),
                SubSystemError.GeneralRequiredParameterIsUndefined, "httpClientProxy");
         }
 
@@ -55,27 +52,27 @@ namespace CES.CoreApi.GeoLocation.Service.Business.Logic.UnitTest
         [TestMethod]
         public void Constructor_HeaderProviderIsNull_ExceptionRaised()
         {
-            ExceptionHelper.CheckException(() => new DataResponseProvider(_httpClientProxy.Object, _traceLogManager.Object, null),
+            ExceptionHelper.CheckException(() => new DataResponseProvider(_httpClientProxy.Object, _traceLogMonitor.Object, null),
                SubSystemError.GeneralRequiredParameterIsUndefined, "headerProvider");
         }
 
         [TestMethod]
         public void Constructor_HappyPath()
         {
-            ExceptionHelper.CheckHappyPath(() => new DataResponseProvider(_httpClientProxy.Object, _traceLogManager.Object, _headerProvider.Object));
+            ExceptionHelper.CheckHappyPath(() => new DataResponseProvider(_httpClientProxy.Object, _traceLogMonitor.Object, _headerProvider.Object));
         }
 
         [TestMethod]
         public void GetResponse_UrlIsNullOrEmpty_ExceptionRaised()
         {
-            ExceptionHelper.CheckException(() => new DataResponseProvider(_httpClientProxy.Object, _traceLogManager.Object, _headerProvider.Object).GetResponse(string.Empty, It.IsAny<DataProviderType>()),
+            ExceptionHelper.CheckException(() => new DataResponseProvider(_httpClientProxy.Object, _traceLogMonitor.Object, _headerProvider.Object).GetResponse(string.Empty, It.IsAny<DataProviderType>()),
               SubSystemError.GeneralRequiredParameterIsUndefined, "requestUrl");
         }
 
         [TestMethod]
         public void GetBinaryResponse_UrlIsNullOrEmpty_ExceptionRaised()
         {
-            ExceptionHelper.CheckException(() => new DataResponseProvider(_httpClientProxy.Object, _traceLogManager.Object, _headerProvider.Object).GetBinaryResponse(string.Empty, It.IsAny<DataProviderType>()),
+            ExceptionHelper.CheckException(() => new DataResponseProvider(_httpClientProxy.Object, _traceLogMonitor.Object, _headerProvider.Object).GetBinaryResponse(string.Empty, It.IsAny<DataProviderType>()),
               SubSystemError.GeneralRequiredParameterIsUndefined, "requestUrl");
         }
 

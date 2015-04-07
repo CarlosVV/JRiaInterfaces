@@ -9,11 +9,8 @@ using CES.CoreApi.Common.Enumerations;
 using CES.CoreApi.Common.Exceptions;
 using CES.CoreApi.Common.Interfaces;
 using CES.CoreApi.Common.Models;
-using CES.CoreApi.Foundation.Contract.Enumerations;
 using CES.CoreApi.Foundation.Contract.Interfaces;
-using CES.CoreApi.Foundation.Contract.Models;
 using CES.CoreApi.Logging.Interfaces;
-using CES.CoreApi.Logging.Models;
 using ServiceEndpoint = System.ServiceModel.Description.ServiceEndpoint;
 
 namespace CES.CoreApi.Foundation.Service
@@ -27,22 +24,21 @@ namespace CES.CoreApi.Foundation.Service
     {
         #region Core
 
-        private readonly ILogManager _logManager;
+        private readonly IExceptionLogMonitor _exceptionMonitor;
         private readonly IClientSecurityContextProvider _clientDetailsProvider;
         private readonly ICurrentDateTimeProvider _currentDateTimeProvider;
-        private ExceptionLogDataContainer _dataContainer;
         private CoreApiException _coreApiException;
         private const string ErrorMessage = "Server error encountered. All details have been logged.";
         private const string WcfSecurityErrorMessage= "The caller was not authenticated by the service.";
         
 
-        public ServiceExceptionHandler(ILogManager logManager, IClientSecurityContextProvider clientDetailsProvider, 
+        public ServiceExceptionHandler(IExceptionLogMonitor exceptionMonitor, IClientSecurityContextProvider clientDetailsProvider, 
             ICurrentDateTimeProvider currentDateTimeProvider)
         {
-            if (logManager == null) throw new ArgumentNullException("logManager");
+            if (exceptionMonitor == null) throw new ArgumentNullException("exceptionMonitor");
             if (clientDetailsProvider == null) throw new ArgumentNullException("clientDetailsProvider");
             if (currentDateTimeProvider == null) throw new ArgumentNullException("currentDateTimeProvider");
-            _logManager = logManager;
+            _exceptionMonitor = exceptionMonitor;
             _clientDetailsProvider = clientDetailsProvider;
             _currentDateTimeProvider = currentDateTimeProvider;
         }
@@ -59,8 +55,7 @@ namespace CES.CoreApi.Foundation.Service
         /// <param name="fault">The System.ServiceModel.Channels.Message object that is returned to the client, or service, in the duplex case.</param>
         public void ProvideFault(Exception error, MessageVersion version, ref Message fault)
         {
-            _dataContainer = _logManager.GetExceptionLogDataContainerWithCallDetails(OperationContext.Current,
-                () => _clientDetailsProvider.GetDetails(OperationContext.Current));
+            _exceptionMonitor.AddServiceCallDetails(OperationContext.Current, () => _clientDetailsProvider.GetDetails(OperationContext.Current));
 
             var faultException = BuildFaultException(error);
             var messageFault = faultException.CreateMessageFault();
@@ -75,7 +70,7 @@ namespace CES.CoreApi.Foundation.Service
         public bool HandleError(Exception exception)
         {
             // Publish exception
-            _logManager.Publish(_coreApiException, dataContainer: _dataContainer);
+            _exceptionMonitor.Publish(_coreApiException);
 
             // Return true to indicate the Exception has been handled
             return true;

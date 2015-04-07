@@ -28,7 +28,7 @@ namespace CES.CoreApi.GeoLocation.Service.Configuration
                 .RegisterType<IAddressServiceRequestProcessor, AddressServiceRequestProcessor>()
                 .RegisterType<IGeocodeServiceRequestProcessor, GeocodeServiceRequestProcessor>()
                 .RegisterType<IMapServiceRequestProcessor, MapServiceRequestProcessor>()
-                .RegisterType<IClientSideSupportServiceProcessor, ClientSideSupportServiceProcessor>()
+                .RegisterType<IClientSideSupportServiceProcessor, ClientSideSupportServiceProcessor>(LifetimeManagerType.AlwaysNew)
 
                 .RegisterType<IEntityFactory, EntityFactory>(container)
 
@@ -44,7 +44,7 @@ namespace CES.CoreApi.GeoLocation.Service.Configuration
                 .RegisterType<ICountryConfigurationProvider, CountryConfigurationProvider>()
                 .RegisterType<IAddressVerificationDataProvider, AddressVerificationDataProvider>()
                 .RegisterType<IMappingDataProvider, MappingDataProvider>()
-                .RegisterTypeWithInterfaceInterceptor<IDataResponseProvider, DataResponseProvider>(InterceptionBehaviorType.Performance)
+                .RegisterTypeWithInterfaceInterceptor<IDataResponseProvider, DataResponseProvider>(LifetimeManagerType.AlwaysNew, InterceptionBehaviorType.Performance)
                 .RegisterType<IMelissaLevelOfConfidenceProvider, MelissaLevelOfConfidenceProvider>()
                 .RegisterType<IGoogleLevelOfConfidenceProvider, GoogleLevelOfConfidenceProvider>()
                 .RegisterType<ICurrentDateTimeProvider, CurrentDateTimeProvider>()

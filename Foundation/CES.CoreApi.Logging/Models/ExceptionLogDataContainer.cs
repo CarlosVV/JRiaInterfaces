@@ -18,20 +18,19 @@ namespace CES.CoreApi.Logging.Models
     {
         #region Core
 
-        private readonly IIocContainer _container;
         private readonly IJsonDataContainerFormatter _formatter;
 
         /// <summary>
         /// Initializes ExceptionLogDataContainer instance
         /// </summary>
-        public ExceptionLogDataContainer(IIocContainer container)
+        public ExceptionLogDataContainer(IJsonDataContainerFormatter formatter, ICurrentDateTimeProvider currentDateTimeProvider)
         {
-            if (container == null) throw new ArgumentNullException("container");
-            _container = container;
-           
+            if (formatter == null) throw new ArgumentNullException("formatter");
+            if (currentDateTimeProvider == null) throw new ArgumentNullException("currentDateTimeProvider");
+
+            _formatter = formatter;
             Items = new Collection<ExceptionLogItemGroup>();
-            Timestamp = _container.Resolve<ICurrentDateTimeProvider>().GetCurrentUtc();
-            _formatter = _container.Resolve<IJsonDataContainerFormatter>();
+            Timestamp = currentDateTimeProvider.GetCurrentUtc();
             ThreadId = Thread.CurrentThread.ManagedThreadId;
         }
 
@@ -93,8 +92,7 @@ namespace CES.CoreApi.Logging.Models
             var group = Items.FirstOrDefault(p => p.Title.Equals(groupTitle, StringComparison.OrdinalIgnoreCase));
             if (group == null)
             {
-                group = _container.Resolve<ExceptionLogItemGroup>();
-                group.Title = groupTitle;
+                group = new ExceptionLogItemGroup {Title = groupTitle};
                 Items.Add(group);
             }
             return group;

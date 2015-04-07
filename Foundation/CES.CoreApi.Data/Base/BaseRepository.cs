@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Data;
 using System.Data.Common;
-using CES.CoreApi.Caching.Interfaces;
+using CES.CoreApi.Common.Interfaces;
 using CES.CoreApi.Logging.Interfaces;
 using Microsoft.Practices.EnterpriseLibrary.Common.Configuration;
 using Microsoft.Practices.EnterpriseLibrary.Data;
@@ -10,7 +10,7 @@ namespace CES.CoreApi.Foundation.Data.Base
 {
     public class BaseRepository 
     {
-        private readonly ILogManager _logManager;
+        private readonly IDatabasePerformanceLogMonitor _performanceMonitor;
 
         static BaseRepository()
         {
@@ -18,13 +18,13 @@ namespace CES.CoreApi.Foundation.Data.Base
             DatabaseFactory.SetDatabaseProviderFactory(new DatabaseProviderFactory(configSource), false);
         }
 
-        public BaseRepository(ICacheProvider cacheProvider, ILogManager logManager, string connectionStringName)
+        public BaseRepository(ICacheProvider cacheProvider, IDatabasePerformanceLogMonitor performanceMonitor, string connectionStringName)
         {
             if (cacheProvider == null) throw new ArgumentNullException("cacheProvider");
-            if (logManager == null) throw new ArgumentNullException("logManager");
+            if (performanceMonitor == null) throw new ArgumentNullException("performanceMonitor");
             if (connectionStringName == null) throw new ArgumentNullException("connectionStringName");
 
-            _logManager = logManager;
+            _performanceMonitor = performanceMonitor;
             CacheProvider = cacheProvider;
             Database = DatabaseFactory.CreateDatabase(connectionStringName);
         }
@@ -46,15 +46,14 @@ namespace CES.CoreApi.Foundation.Data.Base
         {
             TEntity entity;
 
-            var monitor = _logManager.GetMonitorInstance<IDatabasePerformanceLogMonitor>();
-            monitor.Start(command);
+            _performanceMonitor.Start(command);
 
             using (var reader = Database.ExecuteReader(command))
             {
                 entity = shaper(reader);
             }
 
-            monitor.Stop();
+            _performanceMonitor.Stop();
 
             return entity;
         }
