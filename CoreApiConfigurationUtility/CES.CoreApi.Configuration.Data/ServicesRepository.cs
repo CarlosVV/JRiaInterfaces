@@ -27,11 +27,7 @@ namespace CES.CoreApi.Configuration.Data
                     reader.ReadValue<int>("ServiceId"),
                     reader.ReadValue<string>("Name"))
             };
-
-            var x = 0;
-            var y = 1;
-            var z = y / x;
-
+            
             return GetList(request);
         }
 
