@@ -22,14 +22,9 @@ namespace CES.CoreApi.GeoLocation.Service.Business.Contract.Models
         public LevelOfConfidence Confidence { get; set; }
 
         /// <summary>
-        /// Specify data provider used to verify address
+        /// Specify data provider 
         /// </summary>
-        public DataProviderType AddressValidationProvider { get; set; }
-
-        /// <summary>
-        /// Specify data provider used to geocode address
-        /// </summary>
-        public DataProviderType GeocodingProvider { get; set; }
+        public DataProviderType DataProvider { get; set; }
 
         /// <summary>
         /// Address which was really verified by data provider

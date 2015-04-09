@@ -48,7 +48,7 @@ namespace CES.CoreApi.Common.Interfaces
         /// <param name="interceptorType"></param>
         /// <returns></returns>
         IIocContainer RegisterType<TFrom, TTo>(InterceptorType interceptorType,
-            InterceptionBehaviorType interceptionBehaviorType, params object[] injectionMembers) 
+            InterceptionBehaviorType interceptionBehaviorType, params object[] injectionMembers)
             where TTo : TFrom;
 
         /// <summary>
@@ -58,7 +58,7 @@ namespace CES.CoreApi.Common.Interfaces
         /// <typeparam name="TTo">Target type</typeparam>
         /// <param name="lifetimeManagerType">Lifetime manager type</param>
         /// <returns></returns>
-        IIocContainer RegisterType<TFrom, TTo>(LifetimeManagerType lifetimeManagerType) 
+        IIocContainer RegisterType<TFrom, TTo>(LifetimeManagerType lifetimeManagerType)
             where TTo : TFrom;
 
         /// <summary>
@@ -69,7 +69,7 @@ namespace CES.CoreApi.Common.Interfaces
         /// <param name="name">Name of the instance </param>
         /// <param name="injectionMembers">Members injected</param>
         /// <returns></returns>
-        IIocContainer RegisterType<TFrom, TTo>(string name, params object[] injectionMembers) 
+        IIocContainer RegisterType<TFrom, TTo>(string name, params object[] injectionMembers)
             where TTo : TFrom;
 
         /// <summary>
@@ -83,7 +83,7 @@ namespace CES.CoreApi.Common.Interfaces
         /// <param name="injectionMembers"></param>
         /// <returns></returns>
         IIocContainer RegisterType<TFrom, TTo>(string name, InterceptorType interceptorType,
-            InterceptionBehaviorType interceptionBehaviorType, params object[] injectionMembers) 
+            InterceptionBehaviorType interceptionBehaviorType, params object[] injectionMembers)
             where TTo : TFrom;
 
         /// <summary>
@@ -116,7 +116,7 @@ namespace CES.CoreApi.Common.Interfaces
         /// <param name="interceptionBehaviorType"></param>
         /// <param name="injectionMembers">Members injected</param>
         /// <returns></returns>
-        IIocContainer RegisterTypeWithInterfaceInterceptor<TFrom, TTo>(string name, InterceptionBehaviorType interceptionBehaviorType, 
+        IIocContainer RegisterTypeWithInterfaceInterceptor<TFrom, TTo>(string name, InterceptionBehaviorType interceptionBehaviorType,
             params object[] injectionMembers) where TTo : TFrom;
 
         /// <summary>
@@ -136,8 +136,5 @@ namespace CES.CoreApi.Common.Interfaces
             params object[] injectionMembers) where TTo : TFrom;
 
         IIocContainer RegisterType<TFrom, TTo>(LifetimeManagerType lifetimeManagerType, params object[] injectionMembers) where TTo : TFrom;
-
-        IIocContainer RegisterTypeWithInterfaceInterceptor<TFrom, TTo>(LifetimeManagerType lifetimeManagerType,
-            InterceptionBehaviorType injectionMembers) where TTo : TFrom;
     }
 }

@@ -7,12 +7,11 @@ using System.Data.Common;
 using System.Data.SqlClient;
 using CES.CoreApi.Common.Interfaces;
 using CES.CoreApi.Foundation.Data.Utility;
-using CES.CoreApi.Logging.Factories;
 using CES.CoreApi.Logging.Interfaces;
 using Microsoft.Practices.EnterpriseLibrary.Common.Configuration;
 using Microsoft.Practices.EnterpriseLibrary.Data;
 
-namespace CES.CoreApi.Foundation.Data
+namespace CES.CoreApi.Foundation.Data.Base
 {
     public class BaseGenericRepository
     {
@@ -105,6 +104,15 @@ namespace CES.CoreApi.Foundation.Data
 
             var key = request.ToCacheKey();
             return _cacheProvider.GetItem(key, () => ExecuteReaderProcedure(command, request.Shaper), request.CacheDuration);
+        }
+
+        protected void PingDatabase()
+        {
+            using (var connection = _database.CreateConnection())
+            {
+                connection.Open();
+                connection.Close();
+            }
         }
 
         #endregion

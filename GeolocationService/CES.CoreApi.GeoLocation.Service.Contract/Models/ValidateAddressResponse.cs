@@ -44,12 +44,6 @@ namespace CES.CoreApi.GeoLocation.Service.Contract.Models
         /// Specify data provider used to verify address
         /// </summary>
         [DataMember]
-        public DataProvider AddressValidationProvider { get; set; }
-
-        /// <summary>
-        /// Specify data provider used to geocode address
-        /// </summary>
-        [DataMember]
-        public DataProvider GeocodingProvider { get; set; }
+        public DataProvider DataProvider { get; set; }
     }
 }

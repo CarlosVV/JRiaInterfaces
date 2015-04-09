@@ -140,10 +140,18 @@ namespace CES.CoreApi.GeoLocation.Service.UnitTestTools
         {
             return new DataProviderServiceConfiguration
             {
-                CountryConfigurations = new List<CountryConfiguration>
+                ApplicationCountryConfigurations = new List<ApplicationCountryConfiguration>
                 {
-                    GetUsCountryConfiguration(),
-                    GetDefaultCountryConfiguration()
+                    new ApplicationCountryConfiguration()
+                    {
+                        ApplicationId = 1,
+                        CountryConfigurations =
+                            new List<CountryConfiguration>
+                            {
+                                GetUsCountryConfiguration(),
+                                GetDefaultCountryConfiguration()
+                            }
+                    }
                 }
             };
         }

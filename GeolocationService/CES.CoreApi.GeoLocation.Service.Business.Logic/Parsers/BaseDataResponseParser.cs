@@ -55,8 +55,7 @@ namespace CES.CoreApi.GeoLocation.Service.Business.Logic.Parsers
             {
                 Confidence = LevelOfConfidence.NotFound,
                 IsValid = false,
-                AddressValidationProvider = ProviderType,
-                GeocodingProvider = ProviderType
+                DataProvider = ProviderType
             };
         }
 
@@ -66,7 +65,7 @@ namespace CES.CoreApi.GeoLocation.Service.Business.Logic.Parsers
             {
                 Confidence = confidence,
                 IsValid = true,
-                AddressValidationProvider = ProviderType,
+                DataProvider = ProviderType,
             };
         }
 

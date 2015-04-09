@@ -57,13 +57,16 @@
     <Compile Include="Interfaces\IClientSecurityContextProvider.cs" />
     <Compile Include="Interfaces\IConfigurationProvider.cs" />
     <Compile Include="Interfaces\IHostApplicationProvider.cs" />
+    <Compile Include="Interfaces\IIdentityManager.cs" />
     <Compile Include="Interfaces\IMappingHelper.cs" />
     <Compile Include="Interfaces\IRequestHeadersProvider.cs" />
     <Compile Include="Interfaces\IServiceCallHeaderParametersProvider.cs" />
     <Compile Include="Interfaces\IServiceConfigurationProvider.cs" />
     <Compile Include="Interfaces\IServiceExceptionHandler.cs" />
+    <Compile Include="Models\ApplicationPrincipal.cs" />
     <Compile Include="Models\BehaviorConfiguration.cs" />
     <Compile Include="Models\BindingConfiguration.cs" />
+    <Compile Include="Models\ClientApplicationIdentity.cs" />
     <Compile Include="Models\EndpointConfiguration.cs" />
     <Compile Include="Models\ReaderQuotasConfiguration.cs" />
     <Compile Include="Models\ReliableSessionConfiguration.cs" />

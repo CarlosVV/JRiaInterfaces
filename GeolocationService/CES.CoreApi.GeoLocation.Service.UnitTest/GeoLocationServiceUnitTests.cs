@@ -160,7 +160,7 @@ namespace CES.CoreApi.GeoLocation.Service.UnitTest
 
             _requestValidator.Setup(p => p.Validate(request)).Verifiable();
 
-            _addressServiceRequestProcessor.Setup(p => p.GetAutocompleteList(It.IsAny<string>(), It.IsAny<string>(), It.IsAny<string>(), It.IsAny<int>()))
+            _addressServiceRequestProcessor.Setup(p => p.GetAutocompleteList(It.IsAny<string>(), It.IsAny<string>(), It.IsAny<string>(), It.IsAny<int>(), It.IsAny<LevelOfConfidence>()))
                 .Returns(It.IsAny<AutocompleteAddressResponseModel>)
                 .Verifiable();
 
@@ -171,7 +171,7 @@ namespace CES.CoreApi.GeoLocation.Service.UnitTest
             _geoLocationService.GetAutocompleteList(request);
 
             _requestValidator.Verify(p => p.Validate(It.IsAny<AutocompleteAddressRequest>()), Times.Exactly(1));
-            _addressServiceRequestProcessor.Verify(p => p.GetAutocompleteList(It.IsAny<string>(), It.IsAny<string>(), It.IsAny<string>(), It.IsAny<int>()), Times.Exactly(1));
+            _addressServiceRequestProcessor.Verify(p => p.GetAutocompleteList(It.IsAny<string>(), It.IsAny<string>(), It.IsAny<string>(), It.IsAny<int>(), It.IsAny<LevelOfConfidence>()), Times.Exactly(1));
             _mappingHelper.Verify(p => p.ConvertToResponse<AutocompleteAddressResponseModel, AutocompleteAddressResponse>(It.IsAny<AutocompleteAddressResponseModel>()), Times.Exactly(1));
         }
 

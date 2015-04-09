@@ -73,14 +73,12 @@
     <Compile Include="Interfaces\IDatabasePerformanceLogConfiguration.cs" />
     <Compile Include="Interfaces\IJsonDataContainerFormatter.cs" />
     <Compile Include="Formatters\JsonDataContainerFormatter.cs" />
-    <Compile Include="Interfaces\ISecurityAuditLogger.cs" />
     <Compile Include="Interfaces\ITraceLogConfiguration.cs" />
     <Compile Include="Configuration\TraceLogConfiguration.cs" />
     <Compile Include="Interfaces\ILogConfigurationProvider.cs" />
     <Compile Include="Configuration\LogConfigurationProvider.cs" />
     <Compile Include="Interfaces\IPerformanceLogConfiguration.cs" />
     <Compile Include="Monitors\BaseLogMonitor.cs" />
-    <Compile Include="Configuration\LogConfigurator.cs" />
     <Compile Include="Configuration\PerformanceLogConfiguration.cs" />
     <Compile Include="Models\ApplicationContext.cs" />
     <Compile Include="Models\DatabaseConnection.cs" />

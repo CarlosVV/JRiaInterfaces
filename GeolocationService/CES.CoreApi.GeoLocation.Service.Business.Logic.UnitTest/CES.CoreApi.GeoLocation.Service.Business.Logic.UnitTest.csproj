@@ -8,7 +8,7 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>CES.CoreApi.GeoLocation.Service.Business.Logic.UnitTest</RootNamespace>
     <AssemblyName>CES.CoreApi.GeoLocation.Service.Business.Logic.UnitTest</AssemblyName>
-    <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.5.3</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <ProjectTypeGuids>{3AC096D0-A1C2-E12C-1390-A8335801FDAB};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
@@ -70,7 +70,6 @@
     <Compile Include="CorrectImageSizeProviderUnitTests.cs" />
     <Compile Include="CountryConfigurationProviderUnitTests.cs" />
     <Compile Include="DataResponseProviderUnitTests.cs" />
-    <Compile Include="EntityFactoryUnitTests.cs" />
     <Compile Include="GeocodeAddressDataProviderUnitTests.cs" />
     <Compile Include="GeocodeServiceRequestProcessorUnitTests.cs" />
     <Compile Include="GoogleAddressParserUnitTests.cs" />
@@ -91,7 +90,6 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="BingAddressParserUnitTests.cs" />
     <Compile Include="BingResponseParserUnitTests.cs" />
-    <Compile Include="RegistrationNameProviderUnitTests.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />

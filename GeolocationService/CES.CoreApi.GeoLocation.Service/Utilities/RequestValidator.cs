@@ -48,6 +48,7 @@ namespace CES.CoreApi.GeoLocation.Service.Utilities
             
             ContractValidation.Requires(!string.IsNullOrEmpty(request.Address), TechnicalSubSystem.GeoLocationService,
                 SubSystemError.GeneralRequiredParameterIsUndefined, "request.Address");
+            ValidateRequestConfidence(request.MinimumConfidence);
         }
 
         public void Validate(GeocodeAddressRequest request)

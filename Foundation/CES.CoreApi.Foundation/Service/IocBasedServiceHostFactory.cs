@@ -1,25 +1,17 @@
 ﻿using System;
 using System.ServiceModel;
-using System.ServiceModel.Activation;
 using System.ServiceModel.Description;
-using CES.CoreApi.Caching.Providers;
-using CES.CoreApi.Common.Enumerations;
-using CES.CoreApi.Common.Interfaces;
-using CES.CoreApi.Common.Proxies;
-using CES.CoreApi.Foundation.Contract.Interfaces;
-using CES.CoreApi.Foundation.Data;
 using CES.CoreApi.Foundation.Providers;
-using CES.CoreApi.Foundation.Security;
-using CES.CoreApi.Foundation.Validation;
-using CES.CoreApi.Logging.Interfaces;
+using SimpleInjector;
+using SimpleInjector.Integration.Wcf;
 
 namespace CES.CoreApi.Foundation.Service
 {
-    public abstract class IocBasedServiceHostFactory : ServiceHostFactory
+    public abstract class IocBasedServiceHostFactory : SimpleInjectorServiceHostFactory
     {
-        protected IocBasedServiceHostFactory(IIocContainer container)
+        protected IocBasedServiceHostFactory(Container container)
         {
-            if (container == null) 
+            if (container == null)
                 throw new ArgumentNullException("container");
 
             new IocContainerProvider().Initialize(container);
@@ -28,35 +20,36 @@ namespace CES.CoreApi.Foundation.Service
 
         protected override ServiceHost CreateServiceHost(Type serviceType, Uri[] baseAddresses)
         {
-            var host = new IocBasedServiceHost(Container, serviceType, baseAddresses);
-            host.Description.Behaviors.Add((IServiceBehavior) Container.Resolve<IServiceExceptionHandler>());
+            var host = new IocBasedServiceHost(Container, serviceType, baseAddresses); 
+            
+            ApplyServiceBehaviors(host);
+            ApplyContractBehaviors(host);
+
+            var serviceAuthorizationBehavior = host.Description.Behaviors.Find<ServiceAuthorizationBehavior>();
+            serviceAuthorizationBehavior.PrincipalPermissionMode = PrincipalPermissionMode.Custom;
+
             return host;
         }
 
-        protected static IIocContainer Container { get; private set; }
-
-        protected virtual void RegisterTypes()
+        private static void ApplyServiceBehaviors(ServiceHostBase host)
         {
-            //Register common foundation classes
-            Container
-                .RegisterType<IAuthenticationManager, AuthenticationManager>()
-                .RegisterType<IApplicationAuthenticator, ApplicationAuthenticator>()
-                .RegisterTypeWithInterfaceInterceptor<IApplicationRepository, ApplicationRepository>(LifetimeManagerType.AlwaysNew, InterceptionBehaviorType.Performance)
-                .RegisterType<IApplicationValidator, ApplicationValidator>()
-                .RegisterType<IRequestHeadersProvider, RequestHeadersProvider>()
-                .RegisterType<IServiceCallHeaderParametersProvider, ServiceCallHeaderParametersProvider>()
-                .RegisterType<IAuthorizationManager, AuthorizationManager>(LifetimeManagerType.AlwaysNew)
-                .RegisterType<IAuthorizationAdministrator, AuthorizationAdministrator>()
-                .RegisterType<ICacheProvider, AppFabricCacheProvider>()
-                .RegisterType<IHostApplicationProvider, HostApplicationProvider>()
-                .RegisterType<IClientSecurityContextProvider, ClientDetailsProvider>()
-                .RegisterType<IServiceExceptionHandler, ServiceExceptionHandler>(LifetimeManagerType.AlwaysNew)
-                .RegisterType<IAutoMapperProxy, AutoMapperProxy>()
-                .RegisterType<IHttpClientProxy, HttpClientProxy>()
-                .RegisterType<IConfigurationProvider, ConfigurationProvider>()
-                .RegisterType<IServiceConfigurationProvider, ServiceConfigurationProvider>()
-                .RegisterType<ISecurityAuditLogger, SecurityAuditLogger>(LifetimeManagerType.AlwaysNew);
-
+            foreach (var behavior in Container.GetAllInstances<IServiceBehavior>())
+            {
+                host.Description.Behaviors.Add(behavior);
+            }
         }
+
+        private static void ApplyContractBehaviors(SimpleInjectorServiceHost host)
+        {
+            foreach (var behavior in Container.GetAllInstances<IContractBehavior>())
+            {
+                foreach (var contract in host.GetImplementedContracts())
+                {
+                    contract.Behaviors.Add(behavior);
+                }
+            }
+        }
+        
+        protected static Container Container { get; private set; }
     }
 }

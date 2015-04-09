@@ -59,7 +59,7 @@ namespace CES.CoreApi.GeoLocation.Service.Business.Logic.UnitTest
             var suggestionModel = MelissaResponseParserHelper.GetAutocompleteSuggestionModel();
             _addressParser.Setup(p => p.ParseAddress(It.IsAny<XElement>(), It.IsAny<XNamespace>(), It.IsAny<string>(), It.IsAny<bool>())).Returns(suggestionModel.Address);
 
-            var result = new MelissaResponseParser(_addressParser.Object, _levelOfConfidenceProvider.Object).Parse(dataResponse, MaxRecords, Country);
+            var result = new MelissaResponseParser(_addressParser.Object, _levelOfConfidenceProvider.Object).ParseAutocompleteAddressResponse(dataResponse, MaxRecords, LevelOfConfidence.High, Country);
 
             Assert.IsNotNull(result);
             Assert.AreEqual(suggestionModel.Address, result.Suggestions[0].Address);
@@ -71,7 +71,7 @@ namespace CES.CoreApi.GeoLocation.Service.Business.Logic.UnitTest
         [TestMethod]
         public void Parse_DataResponseIsNull_InvalidAddressAutocompleteResponseReturned()
         {
-            var result = new MelissaResponseParser(_addressParser.Object, _levelOfConfidenceProvider.Object).Parse(null, MaxRecords, Country);
+            var result = new MelissaResponseParser(_addressParser.Object, _levelOfConfidenceProvider.Object).ParseAutocompleteAddressResponse(null, MaxRecords, LevelOfConfidence.High, Country);
 
             Assert.IsNotNull(result);
             Assert.IsFalse(result.IsValid);
@@ -82,7 +82,7 @@ namespace CES.CoreApi.GeoLocation.Service.Business.Logic.UnitTest
         public void Parse_DataResponseIsInvalid_InvalidAddressAutocompleteResponseReturned()
         {
             var dataResponse = MelissaResponseParserHelper.GetAutomcompleteDataResponse(true);
-            var result = new MelissaResponseParser(_addressParser.Object, _levelOfConfidenceProvider.Object).Parse(dataResponse, MaxRecords, Country);
+            var result = new MelissaResponseParser(_addressParser.Object, _levelOfConfidenceProvider.Object).ParseAutocompleteAddressResponse(dataResponse, MaxRecords, LevelOfConfidence.High, Country);
 
             Assert.IsNotNull(result);
             Assert.IsFalse(result.IsValid);
@@ -93,7 +93,7 @@ namespace CES.CoreApi.GeoLocation.Service.Business.Logic.UnitTest
         public void Parse_NoAddressInResponse_InvalidAddressAutocompleteResponseReturned()
         {
             var dataResponse = MelissaResponseParserHelper.GetAutomcompleteDataResponseNoAddress();
-            var result = new MelissaResponseParser(_addressParser.Object, _levelOfConfidenceProvider.Object).Parse(dataResponse, MaxRecords, Country);
+            var result = new MelissaResponseParser(_addressParser.Object, _levelOfConfidenceProvider.Object).ParseAutocompleteAddressResponse(dataResponse, MaxRecords, LevelOfConfidence.High, Country);
 
             Assert.IsNotNull(result);
             Assert.IsNull(result.Suggestions);
@@ -105,7 +105,7 @@ namespace CES.CoreApi.GeoLocation.Service.Business.Logic.UnitTest
         public void Parse_NoResultsInResponse_InvalidAddressAutocompleteResponseReturned()
         {
             var dataResponse = MelissaResponseParserHelper.GetAutomcompleteDataResponseNoResults();
-            var result = new MelissaResponseParser(_addressParser.Object, _levelOfConfidenceProvider.Object).Parse(dataResponse, MaxRecords, Country);
+            var result = new MelissaResponseParser(_addressParser.Object, _levelOfConfidenceProvider.Object).ParseAutocompleteAddressResponse(dataResponse, MaxRecords, LevelOfConfidence.High, Country);
 
             Assert.IsNotNull(result);
             Assert.IsNull(result.Suggestions);
@@ -128,13 +128,12 @@ namespace CES.CoreApi.GeoLocation.Service.Business.Logic.UnitTest
 
             var locationModel = MelissaResponseParserHelper.GetLocationModel();
 
-            var result = new MelissaResponseParser(_addressParser.Object, _levelOfConfidenceProvider.Object).Parse(dataResponse, LevelOfConfidence.High, true);
+            var result = new MelissaResponseParser(_addressParser.Object, _levelOfConfidenceProvider.Object).ParseValidateAddressResponse(dataResponse, LevelOfConfidence.High);
 
             Assert.IsNotNull(result);
             Assert.AreEqual(addressModel, result.Address);
             Assert.IsTrue(result.IsValid);
-            Assert.AreEqual(DataProviderType.MelissaData, result.AddressValidationProvider);
-            Assert.AreEqual(DataProviderType.MelissaData, result.GeocodingProvider);
+            Assert.AreEqual(DataProviderType.MelissaData, result.DataProvider);
             Assert.AreEqual(LevelOfConfidence.High, result.Confidence);
             Assert.AreEqual(locationModel.Latitude, result.Location.Latitude);
             Assert.AreEqual(locationModel.Longitude, result.Location.Longitude);
@@ -149,13 +148,12 @@ namespace CES.CoreApi.GeoLocation.Service.Business.Logic.UnitTest
             _addressParser.Setup(p => p.ParseAddress(It.IsAny<XElement>(), It.IsAny<XNamespace>(), It.IsAny<string>(), It.IsAny<bool>())).Returns(addressModel);
             _levelOfConfidenceProvider.Setup(p => p.GetLevelOfConfidence(It.IsAny<string>())).Returns(LevelOfConfidence.High);
 
-            var result = new MelissaResponseParser(_addressParser.Object, _levelOfConfidenceProvider.Object).Parse(dataResponse, LevelOfConfidence.High, false);
+            var result = new MelissaResponseParser(_addressParser.Object, _levelOfConfidenceProvider.Object).ParseValidateAddressResponse(dataResponse, LevelOfConfidence.High);
 
             Assert.IsNotNull(result);
             Assert.AreEqual(addressModel, result.Address);
             Assert.IsTrue(result.IsValid);
-            Assert.AreEqual(DataProviderType.MelissaData, result.AddressValidationProvider);
-            Assert.AreEqual(DataProviderType.Undefined, result.GeocodingProvider);
+            Assert.AreEqual(DataProviderType.MelissaData, result.DataProvider);
             Assert.AreEqual(LevelOfConfidence.High, result.Confidence);
             Assert.IsNull(result.Location);
         }
@@ -163,12 +161,11 @@ namespace CES.CoreApi.GeoLocation.Service.Business.Logic.UnitTest
         [TestMethod]
         public void Parse_DataResponseIsNull_InvalidValidateAddressResponseReturned()
         {
-            var result = new MelissaResponseParser(_addressParser.Object, _levelOfConfidenceProvider.Object).Parse(null, LevelOfConfidence.High, true);
+            var result = new MelissaResponseParser(_addressParser.Object, _levelOfConfidenceProvider.Object).ParseValidateAddressResponse(null, LevelOfConfidence.High);
 
             Assert.IsNotNull(result);
             Assert.IsFalse(result.IsValid);
-            Assert.AreEqual(DataProviderType.MelissaData, result.AddressValidationProvider);
-            Assert.AreEqual(DataProviderType.MelissaData, result.GeocodingProvider);
+            Assert.AreEqual(DataProviderType.MelissaData, result.DataProvider);
             Assert.IsNull(result.Location);
             Assert.IsNull(result.Address);
         }
@@ -177,12 +174,11 @@ namespace CES.CoreApi.GeoLocation.Service.Business.Logic.UnitTest
         public void Parse_DataResponseIsInvalid_InvalidValidateAddressResponseReturned()
         {
             var dataResponse = MelissaResponseParserHelper.GetValidateAddressDataResponse(true);
-            var result = new MelissaResponseParser(_addressParser.Object, _levelOfConfidenceProvider.Object).Parse(dataResponse, LevelOfConfidence.High, true);
+            var result = new MelissaResponseParser(_addressParser.Object, _levelOfConfidenceProvider.Object).ParseValidateAddressResponse(dataResponse, LevelOfConfidence.High);
 
             Assert.IsNotNull(result);
             Assert.IsFalse(result.IsValid);
-            Assert.AreEqual(DataProviderType.MelissaData, result.AddressValidationProvider);
-            Assert.AreEqual(DataProviderType.MelissaData, result.GeocodingProvider);
+            Assert.AreEqual(DataProviderType.MelissaData, result.DataProvider);
             Assert.IsNull(result.Location);
             Assert.IsNull(result.Address);
         }
@@ -191,12 +187,11 @@ namespace CES.CoreApi.GeoLocation.Service.Business.Logic.UnitTest
         public void Parse_NoAddressInResponse_InvalidValidateAddressResponseReturned()
         {
             var dataResponse = MelissaResponseParserHelper.GetValidateAddressDataResponseNoAddress();
-            var result = new MelissaResponseParser(_addressParser.Object, _levelOfConfidenceProvider.Object).Parse(dataResponse, LevelOfConfidence.High, true);
+            var result = new MelissaResponseParser(_addressParser.Object, _levelOfConfidenceProvider.Object).ParseValidateAddressResponse(dataResponse, LevelOfConfidence.High);
 
             Assert.IsNotNull(result);
             Assert.IsFalse(result.IsValid);
-            Assert.AreEqual(DataProviderType.MelissaData, result.AddressValidationProvider);
-            Assert.AreEqual(DataProviderType.MelissaData, result.GeocodingProvider);
+            Assert.AreEqual(DataProviderType.MelissaData, result.DataProvider);
             Assert.IsNull(result.Location);
             Assert.IsNull(result.Address);
         }
@@ -211,12 +206,11 @@ namespace CES.CoreApi.GeoLocation.Service.Business.Logic.UnitTest
             _levelOfConfidenceProvider.Setup(p => p.GetLevelOfConfidence(It.IsAny<string>())).Returns(LevelOfConfidence.Low);
 
 
-            var result = new MelissaResponseParser(_addressParser.Object, _levelOfConfidenceProvider.Object).Parse(dataResponse, LevelOfConfidence.High, true);
+            var result = new MelissaResponseParser(_addressParser.Object, _levelOfConfidenceProvider.Object).ParseValidateAddressResponse(dataResponse, LevelOfConfidence.High);
 
             Assert.IsNotNull(result);
             Assert.IsFalse(result.IsValid);
-            Assert.AreEqual(DataProviderType.MelissaData, result.AddressValidationProvider);
-            Assert.AreEqual(DataProviderType.MelissaData, result.GeocodingProvider);
+            Assert.AreEqual(DataProviderType.MelissaData, result.DataProvider);
             Assert.IsNull(result.Location);
             Assert.IsNull(result.Address);
         }
@@ -236,7 +230,7 @@ namespace CES.CoreApi.GeoLocation.Service.Business.Logic.UnitTest
 
             var locationModel = MelissaResponseParserHelper.GetLocationModel();
 
-            var result = new MelissaResponseParser(_addressParser.Object, _levelOfConfidenceProvider.Object).Parse(dataResponse, LevelOfConfidence.High);
+            var result = new MelissaResponseParser(_addressParser.Object, _levelOfConfidenceProvider.Object).ParseGeocodeAddressResponse(dataResponse, LevelOfConfidence.High);
 
             Assert.IsNotNull(result);
             Assert.AreEqual(addressModel, result.Address);
@@ -250,7 +244,7 @@ namespace CES.CoreApi.GeoLocation.Service.Business.Logic.UnitTest
         [TestMethod]
         public void Parse_DataResponseIsNull_InvalidGeocodeAddressResponseReturned()
         {
-            var result = new MelissaResponseParser(_addressParser.Object, _levelOfConfidenceProvider.Object).Parse(null, LevelOfConfidence.High);
+            var result = new MelissaResponseParser(_addressParser.Object, _levelOfConfidenceProvider.Object).ParseGeocodeAddressResponse(null, LevelOfConfidence.High);
 
             Assert.IsNotNull(result);
             Assert.IsFalse(result.IsValid);
@@ -263,7 +257,7 @@ namespace CES.CoreApi.GeoLocation.Service.Business.Logic.UnitTest
         public void Parse_DataResponseIsInvalid_InvalidGeocodeAddressResponseReturned()
         {
             var dataResponse = MelissaResponseParserHelper.GetGeocodeAddressDataResponse(true);
-            var result = new MelissaResponseParser(_addressParser.Object, _levelOfConfidenceProvider.Object).Parse(dataResponse, LevelOfConfidence.High);
+            var result = new MelissaResponseParser(_addressParser.Object, _levelOfConfidenceProvider.Object).ParseGeocodeAddressResponse(dataResponse, LevelOfConfidence.High);
 
             Assert.IsNotNull(result);
             Assert.IsFalse(result.IsValid);
@@ -276,7 +270,7 @@ namespace CES.CoreApi.GeoLocation.Service.Business.Logic.UnitTest
         public void Parse_NoAddressInResponse_InvalidGeocodeAddressResponseReturned()
         {
             var dataResponse = MelissaResponseParserHelper.GetGeocodeAddressDataResponseNoAddress();
-            var result = new MelissaResponseParser(_addressParser.Object, _levelOfConfidenceProvider.Object).Parse(dataResponse, LevelOfConfidence.High);
+            var result = new MelissaResponseParser(_addressParser.Object, _levelOfConfidenceProvider.Object).ParseGeocodeAddressResponse(dataResponse, LevelOfConfidence.High);
 
             Assert.IsNotNull(result);
             Assert.IsFalse(result.IsValid);
@@ -290,7 +284,7 @@ namespace CES.CoreApi.GeoLocation.Service.Business.Logic.UnitTest
         {
             var dataResponse = MelissaResponseParserHelper.GetGeocodeAddressDataResponse();
             _levelOfConfidenceProvider.Setup(p => p.GetLevelOfConfidence(It.IsAny<string>())).Returns(LevelOfConfidence.Low);
-            var result = new MelissaResponseParser(_addressParser.Object, _levelOfConfidenceProvider.Object).Parse(dataResponse, LevelOfConfidence.High);
+            var result = new MelissaResponseParser(_addressParser.Object, _levelOfConfidenceProvider.Object).ParseGeocodeAddressResponse(dataResponse, LevelOfConfidence.High);
 
             Assert.IsNotNull(result);
             Assert.IsFalse(result.IsValid);
@@ -306,7 +300,7 @@ namespace CES.CoreApi.GeoLocation.Service.Business.Logic.UnitTest
         [TestMethod]
         public void Parse_GetMapResponseModelReturned_HappyPath()
         {
-            ExceptionHelper.CheckException(() => new MelissaResponseParser(_addressParser.Object, _levelOfConfidenceProvider.Object).Parse(It.IsAny<BinaryDataResponse>()),
+            ExceptionHelper.CheckException(() => new MelissaResponseParser(_addressParser.Object, _levelOfConfidenceProvider.Object).ParseMapResponse(It.IsAny<BinaryDataResponse>()),
                 SubSystemError.GeolocationMappingIsNotSupported, DataProviderType.MelissaData);
         }
         

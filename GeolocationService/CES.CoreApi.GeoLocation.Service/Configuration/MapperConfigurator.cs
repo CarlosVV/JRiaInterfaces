@@ -1,15 +1,15 @@
 ﻿using AutoMapper;
-using CES.CoreApi.Common.Interfaces;
 using CES.CoreApi.GeoLocation.Service.Business.Contract.Enumerations;
 using CES.CoreApi.GeoLocation.Service.Business.Contract.Models;
 using CES.CoreApi.GeoLocation.Service.Contract.Enumerations;
 using CES.CoreApi.GeoLocation.Service.Contract.Models;
+using SimpleInjector;
 
 namespace CES.CoreApi.GeoLocation.Service.Configuration
 {
     public class MapperConfigurator
     {
-        public static void Configure(IIocContainer container)
+        public static void Configure(Container container)
         {
             Mapper.CreateMap<AddressRequest, AddressModel>();
             Mapper.CreateMap<AddressModel, AddressRequest>();
@@ -35,7 +35,7 @@ namespace CES.CoreApi.GeoLocation.Service.Configuration
             Mapper.CreateMap<GetMapResponseModel, GetMapResponse>().ConstructUsingServiceLocator();
             Mapper.CreateMap<GetProviderKeyResponseModel, GetProviderKeyResponse>().ConstructUsingServiceLocator();
 
-            Mapper.Configuration.ConstructServicesUsing(container.Resolve);
+            Mapper.Configuration.ConstructServicesUsing(container.GetInstance);
 
             //Mapper.AssertConfigurationIsValid();
         }

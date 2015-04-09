@@ -3,7 +3,7 @@ using System.ServiceModel;
 using System.ServiceModel.Channels;
 using System.ServiceModel.Description;
 using System.ServiceModel.Dispatcher;
-using CES.CoreApi.Common.Interfaces;
+using SimpleInjector;
 
 namespace CES.CoreApi.Foundation.Service
 {
@@ -12,9 +12,9 @@ namespace CES.CoreApi.Foundation.Service
         #region Core
 
         private readonly Type _serviceType;
-        private readonly IIocContainer _container;
+        private readonly Container _container;
 
-        public IocBasedInstanceProvider(IIocContainer container, Type serviceType)
+        public IocBasedInstanceProvider(Container container, Type serviceType)
         {
             if (container == null) 
                 throw new ArgumentNullException("container");
@@ -36,7 +36,7 @@ namespace CES.CoreApi.Foundation.Service
 
         public object GetInstance(InstanceContext instanceContext)
         {
-            return _container.Resolve(_serviceType);
+            return _container.GetInstance(_serviceType);
         }
 
         public void ReleaseInstance(InstanceContext instanceContext, object instance)

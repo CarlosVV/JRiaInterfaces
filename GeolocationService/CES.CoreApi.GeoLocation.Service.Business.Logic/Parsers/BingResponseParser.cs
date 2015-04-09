@@ -37,15 +37,16 @@ namespace CES.CoreApi.GeoLocation.Service.Business.Logic.Parsers
         /// </summary>
         /// <param name="dataResponse">Data response instance</param>
         /// <param name="maxRecords">Number of records to return</param>
+        /// <param name="confidence"></param>
         /// <param name="country">Country code</param>
         /// <returns></returns>
-        public AutocompleteAddressResponseModel Parse(DataResponse dataResponse, int maxRecords, string country = null)
+        public AutocompleteAddressResponseModel ParseAutocompleteAddressResponse(DataResponse dataResponse, int maxRecords, LevelOfConfidence confidence, string country = null)
         {
             var resourceSets = GetResourceSets(dataResponse);
 
             return resourceSets == null
                 ? GetInvalidAddressAutocompleteResponse()
-                : GetAddressAutocompleteResponse(resourceSets);
+                : GetAddressAutocompleteResponse(resourceSets, confidence);
         }
 
         /// <summary>
@@ -53,16 +54,14 @@ namespace CES.CoreApi.GeoLocation.Service.Business.Logic.Parsers
         /// </summary>
         /// <param name="dataResponse">Data response instance</param>
         /// <param name="acceptableConfidence">Acceptable level of confidence</param>
-        /// <param name="includeLocation">Defines whether location information should be populated</param>
         /// <returns></returns>
-        public ValidateAddressResponseModel Parse(DataResponse dataResponse, LevelOfConfidence acceptableConfidence,
-            bool includeLocation)
+        public ValidateAddressResponseModel ParseValidateAddressResponse(DataResponse dataResponse, LevelOfConfidence acceptableConfidence)
         {
             var resourceSets = GetResourceSets(dataResponse);
 
             return resourceSets == null
                 ? GetInvalidAddressVerificationResponse()
-                : GetAddressVerificationResponse(resourceSets, acceptableConfidence, includeLocation);
+                : GetAddressVerificationResponse(resourceSets, acceptableConfidence);
         }
 
         /// <summary>
@@ -71,7 +70,7 @@ namespace CES.CoreApi.GeoLocation.Service.Business.Logic.Parsers
         /// <param name="dataResponse">Data response instance</param>
         /// <param name="acceptableConfidence">Acceptable level of confidence</param>
         /// <returns></returns>
-        public GeocodeAddressResponseModel Parse(DataResponse dataResponse, LevelOfConfidence acceptableConfidence)
+        public GeocodeAddressResponseModel ParseGeocodeAddressResponse(DataResponse dataResponse, LevelOfConfidence acceptableConfidence)
         {
             var resourceSets = GetResourceSets(dataResponse);
 
@@ -85,7 +84,7 @@ namespace CES.CoreApi.GeoLocation.Service.Business.Logic.Parsers
         /// </summary>
         /// <param name="dataResponse">Data response containing map image</param>
         /// <returns></returns>
-        public GetMapResponseModel Parse(BinaryDataResponse dataResponse)
+        public GetMapResponseModel ParseMapResponse(BinaryDataResponse dataResponse)
         {
             return dataResponse == null || !dataResponse.IsSuccessStatusCode
                 ? GetInvalidMapResponse()
@@ -117,16 +116,21 @@ namespace CES.CoreApi.GeoLocation.Service.Business.Logic.Parsers
         /// Gets address autcomplete response model
         /// </summary>
         /// <param name="resourceSets">ResourceSets element from response XML</param>
+        /// <param name="acceptableConfidence">Acceptable level of confidence</param>
         /// <returns></returns>
-        private AutocompleteAddressResponseModel GetAddressAutocompleteResponse(XContainer resourceSets)
+        private AutocompleteAddressResponseModel GetAddressAutocompleteResponse(XContainer resourceSets, LevelOfConfidence acceptableConfidence)
         {
+            var acceptableConfidenceLevels = GetAcceptableConfidenceLevels(acceptableConfidence);
+
             var addressHints = (from resourceSet in resourceSets.Elements(_responseNamespace + BingConstants.ResourceSet)
                                 let estimatedTotal = resourceSet.GetValue<int>(BingConstants.EstimatedTotal, _responseNamespace)
                                 where estimatedTotal > 0
                                 from resource in resourceSet.Elements(_responseNamespace + BingConstants.Resources)
                                 from location in resource.Elements(_responseNamespace + BingConstants.Location)
                                 let address = location.Element(_responseNamespace + BingConstants.Address)
-                                select new Tuple<XElement, XElement>(address, location))
+                                let confidence = location.GetValue<string>(BingConstants.Confidence, _responseNamespace).ConvertValue<LevelOfConfidence>()
+                                where acceptableConfidenceLevels.Contains((int)confidence)
+                                select new Tuple<LevelOfConfidence, XElement, XElement>(confidence, address, location))
                     .ToList();
 
             //No hints returned
@@ -138,9 +142,11 @@ namespace CES.CoreApi.GeoLocation.Service.Business.Logic.Parsers
             responseModel.Suggestions = (from hint in addressHints
                 select new AutocompleteSuggestionModel
                 {
-                    Address = _addressParser.ParseAddress(hint.Item1, _responseNamespace),
-                    Location = GetLocation(hint.Item2)
+                    Confidence = hint.Item1,
+                    Address = _addressParser.ParseAddress(hint.Item2, _responseNamespace),
+                    Location = GetLocation(hint.Item3)
                 })
+                .OrderByDescending(p => p.Confidence)
                 .ToList();
 
             return responseModel;
@@ -151,9 +157,8 @@ namespace CES.CoreApi.GeoLocation.Service.Business.Logic.Parsers
         /// </summary>
         /// <param name="resourceSets">ResourceSets element from response XML</param>
         /// <param name="acceptableConfidence">Acceptable level of confidence</param>
-        /// <param name="includeLocation">Defines whether location information should be populated</param>
         /// <returns></returns>
-        private ValidateAddressResponseModel GetAddressVerificationResponse(XContainer resourceSets, LevelOfConfidence acceptableConfidence, bool includeLocation)
+        private ValidateAddressResponseModel GetAddressVerificationResponse(XContainer resourceSets, LevelOfConfidence acceptableConfidence)
         {
             var matchRecord = GetMatchRecord(resourceSets, acceptableConfidence);
 
@@ -163,12 +168,8 @@ namespace CES.CoreApi.GeoLocation.Service.Business.Logic.Parsers
             var responseModel = GetValidAddressVerificationResponse(matchRecord.Item1);
             responseModel.Address = _addressParser.ParseAddress(matchRecord.Item3, _responseNamespace);
          
-            if (!includeLocation) 
-                return responseModel;
-
             //Populates location of verified address
             responseModel.Location = GetLocation(matchRecord.Item2);
-            responseModel.GeocodingProvider = ProviderType;
 
             return responseModel;
         }

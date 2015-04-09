@@ -17,7 +17,6 @@ namespace CES.CoreApi.GeoLocation.Service.Business.Logic.UnitTest
         private Mock<ICountryConfigurationProvider> _configurationProvider;
         private Mock<IAddressVerificationDataProvider> _addressVerificationDataProvider;
         private Mock<IAddressAutocompleteDataProvider> _addressAutocompleteDataProvider;
-        private Mock<IGeocodeServiceRequestProcessor> _geocodeServiceRequestProcessor;
 
         private const string Address1 = "Address1";
         private const string Address2 = "Address2";
@@ -33,7 +32,6 @@ namespace CES.CoreApi.GeoLocation.Service.Business.Logic.UnitTest
             _configurationProvider = new Mock<ICountryConfigurationProvider>();
             _addressAutocompleteDataProvider = new Mock<IAddressAutocompleteDataProvider>();
             _addressVerificationDataProvider = new Mock<IAddressVerificationDataProvider>();
-            _geocodeServiceRequestProcessor = new Mock<IGeocodeServiceRequestProcessor>();
         }
 
         #region Constructor tests
@@ -43,7 +41,7 @@ namespace CES.CoreApi.GeoLocation.Service.Business.Logic.UnitTest
         {
             ExceptionHelper.CheckException(
                 () => new AddressServiceRequestProcessor(null, _addressVerificationDataProvider.Object,
-                        _addressAutocompleteDataProvider.Object, _geocodeServiceRequestProcessor.Object),
+                        _addressAutocompleteDataProvider.Object),
                 SubSystemError.GeneralRequiredParameterIsUndefined, "configurationProvider");
         }
 
@@ -52,7 +50,7 @@ namespace CES.CoreApi.GeoLocation.Service.Business.Logic.UnitTest
         {
             ExceptionHelper.CheckException(
                 () => new AddressServiceRequestProcessor(_configurationProvider.Object, null,
-                        _addressAutocompleteDataProvider.Object, _geocodeServiceRequestProcessor.Object),
+                        _addressAutocompleteDataProvider.Object),
                 SubSystemError.GeneralRequiredParameterIsUndefined, "addressVerificationDataProvider");
         }
 
@@ -61,17 +59,8 @@ namespace CES.CoreApi.GeoLocation.Service.Business.Logic.UnitTest
         {
             ExceptionHelper.CheckException(
                 () => new AddressServiceRequestProcessor(_configurationProvider.Object, _addressVerificationDataProvider.Object,
-                        null, _geocodeServiceRequestProcessor.Object), SubSystemError.GeneralRequiredParameterIsUndefined, 
+                        null), SubSystemError.GeneralRequiredParameterIsUndefined, 
                         "addressAutocompleteDataProvider");
-        }
-
-        [TestMethod]
-        public void Constructor_GeocodeServiceRequestProcessorIsNull_ExceptionRaised()
-        {
-            ExceptionHelper.CheckException(
-                () => new AddressServiceRequestProcessor(_configurationProvider.Object, _addressVerificationDataProvider.Object,
-                        _addressAutocompleteDataProvider.Object, null), SubSystemError.GeneralRequiredParameterIsUndefined,
-                        "geocodeServiceRequestProcessor");
         }
 
         #endregion
@@ -86,63 +75,53 @@ namespace CES.CoreApi.GeoLocation.Service.Business.Logic.UnitTest
             _configurationProvider.Setup(p=>p.ConfigurationProvider.Read<int>(ConfigurationConstants.NumberOfProvidersToProcessResult)).Returns(2);
             _configurationProvider.Setup(p => p.GetProviderConfigurationByCountry(Country)).Returns(TestModelsProvider.GetUsCountryConfiguration());
             _addressVerificationDataProvider.Setup(
-                p => p.Verify(It.IsAny<AddressModel>(), It.IsAny<DataProviderType>(), It.IsAny<LevelOfConfidence>(),
-                    It.IsAny<bool>())).Returns(GetValidateAddressResponseModel());
+                p => p.Verify(It.IsAny<AddressModel>(), It.IsAny<DataProviderType>(), It.IsAny<LevelOfConfidence>())).Returns(GetValidateAddressResponseModel());
 
             var result = new AddressServiceRequestProcessor(_configurationProvider.Object,
-                _addressVerificationDataProvider.Object, _addressAutocompleteDataProvider.Object, 
-                _geocodeServiceRequestProcessor.Object).ValidateAddress(addressModel, LevelOfConfidence.High);
+                _addressVerificationDataProvider.Object, _addressAutocompleteDataProvider.Object).ValidateAddress(addressModel, LevelOfConfidence.High);
 
             Assert.IsNotNull(result);
             Assert.IsNotNull(result.Address);
             Assert.IsNotNull(result.Location);
             Assert.IsTrue(result.IsValid);
-            Assert.AreEqual(DataProviderType.Bing, result.AddressValidationProvider);
-            Assert.AreEqual(DataProviderType.Bing, result.GeocodingProvider);
+            Assert.AreEqual(DataProviderType.Bing, result.DataProvider);
         }
 
         [TestMethod]
         public void ValidateAddress_DifferentGeocodingProvider_HappyPath()
         {
             var addressModel = GetAddressModel();
-            var geocodeResponseModel = GetGeocodeResponseModel();
             var countryConfiguration = TestModelsProvider.GetUsCountryConfiguration(true);
             var validValidateAddressResponseModel = GetValidateAddressResponseModel(false);
 
             _configurationProvider.Setup(p => p.ConfigurationProvider.Read<int>(ConfigurationConstants.NumberOfProvidersToProcessResult)).Returns(2);
             _configurationProvider.Setup(p => p.GetProviderConfigurationByCountry(Country)).Returns(countryConfiguration);
-            _addressVerificationDataProvider.Setup(p => p.Verify(It.IsAny<AddressModel>(), It.IsAny<DataProviderType>(), It.IsAny<LevelOfConfidence>(), It.IsAny<bool>())).Returns(validValidateAddressResponseModel);
-            _geocodeServiceRequestProcessor.Setup(p => p.GeocodeAddress(It.IsAny<AddressModel>(), It.IsAny<LevelOfConfidence>())).Returns(geocodeResponseModel);
+            _addressVerificationDataProvider.Setup(p => p.Verify(It.IsAny<AddressModel>(), It.IsAny<DataProviderType>(), It.IsAny<LevelOfConfidence>())).Returns(validValidateAddressResponseModel);
 
             var result = new AddressServiceRequestProcessor(_configurationProvider.Object,
-                _addressVerificationDataProvider.Object, _addressAutocompleteDataProvider.Object,
-                _geocodeServiceRequestProcessor.Object).ValidateAddress(addressModel, LevelOfConfidence.High);
+                _addressVerificationDataProvider.Object, _addressAutocompleteDataProvider.Object).ValidateAddress(addressModel, LevelOfConfidence.High);
 
             Assert.IsNotNull(result);
             Assert.IsNotNull(result.Address);
             Assert.IsNotNull(result.Location);
             Assert.IsTrue(result.IsValid);
-            Assert.AreEqual(DataProviderType.Bing, result.AddressValidationProvider);
-            Assert.AreEqual(DataProviderType.Google, result.GeocodingProvider);
+            Assert.AreEqual(DataProviderType.Bing, result.DataProvider);
         }
 
         [TestMethod]
         public void ValidateAddress_NoProvidersFound_ExceptionRaised()
         {
             var addressModel = GetAddressModel();
-            var geocodeResponseModel = GetGeocodeResponseModel();
             var countryConfiguration = TestModelsProvider.GetCountryConfigurationWithoutProviders();
             var validValidateAddressResponseModel = GetValidateAddressResponseModel(false);
 
             _configurationProvider.Setup(p => p.ConfigurationProvider.Read<int>(ConfigurationConstants.NumberOfProvidersToProcessResult)).Returns(2);
             _configurationProvider.Setup(p => p.GetProviderConfigurationByCountry(Country)).Returns(countryConfiguration);
-            _addressVerificationDataProvider.Setup(p => p.Verify(It.IsAny<AddressModel>(), It.IsAny<DataProviderType>(), It.IsAny<LevelOfConfidence>(), It.IsAny<bool>())).Returns(validValidateAddressResponseModel);
-            _geocodeServiceRequestProcessor.Setup(p => p.GeocodeAddress(It.IsAny<AddressModel>(), It.IsAny<LevelOfConfidence>())).Returns(geocodeResponseModel);
+            _addressVerificationDataProvider.Setup(p => p.Verify(It.IsAny<AddressModel>(), It.IsAny<DataProviderType>(), It.IsAny<LevelOfConfidence>())).Returns(validValidateAddressResponseModel);
 
             ExceptionHelper.CheckException(
                 () => new AddressServiceRequestProcessor(_configurationProvider.Object,
-                _addressVerificationDataProvider.Object, _addressAutocompleteDataProvider.Object,
-                _geocodeServiceRequestProcessor.Object).ValidateAddress(addressModel, LevelOfConfidence.High),
+                _addressVerificationDataProvider.Object, _addressAutocompleteDataProvider.Object).ValidateAddress(addressModel, LevelOfConfidence.High),
                 SubSystemError.GeolocationDataProviderNotFound, DataProviderServiceType.AddressVerification);
         }
 
@@ -150,79 +129,67 @@ namespace CES.CoreApi.GeoLocation.Service.Business.Logic.UnitTest
         public void ValidateAddress_GeocodeResponseIsInvalid_EmptyLocationReturnedAndGeocodeProviderIsUndefined()
         {
             var addressModel = GetAddressModel();
-            var geocodeResponseModel = GetInvalidGeocodeResponseModel();
             var countryConfiguration = TestModelsProvider.GetUsCountryConfiguration(true);
             var validValidateAddressResponseModel = GetValidateAddressResponseModel(false);
 
             _configurationProvider.Setup(p => p.ConfigurationProvider.Read<int>(ConfigurationConstants.NumberOfProvidersToProcessResult)).Returns(2);
             _configurationProvider.Setup(p => p.GetProviderConfigurationByCountry(Country)).Returns(countryConfiguration);
-            _addressVerificationDataProvider.Setup(p => p.Verify(It.IsAny<AddressModel>(), It.IsAny<DataProviderType>(), It.IsAny<LevelOfConfidence>(), It.IsAny<bool>())).Returns(validValidateAddressResponseModel);
-            _geocodeServiceRequestProcessor.Setup(p => p.GeocodeAddress(It.IsAny<AddressModel>(), It.IsAny<LevelOfConfidence>())).Returns(geocodeResponseModel);
+            _addressVerificationDataProvider.Setup(p => p.Verify(It.IsAny<AddressModel>(), It.IsAny<DataProviderType>(), It.IsAny<LevelOfConfidence>())).Returns(validValidateAddressResponseModel);
 
             var result = new AddressServiceRequestProcessor(_configurationProvider.Object,
-                _addressVerificationDataProvider.Object, _addressAutocompleteDataProvider.Object,
-                _geocodeServiceRequestProcessor.Object).ValidateAddress(addressModel, LevelOfConfidence.High);
+                _addressVerificationDataProvider.Object, _addressAutocompleteDataProvider.Object).ValidateAddress(addressModel, LevelOfConfidence.High);
 
             Assert.IsNotNull(result);
             Assert.IsNotNull(result.Address);
             Assert.IsNull(result.Location);
             Assert.IsTrue(result.IsValid);
-            Assert.AreEqual(DataProviderType.Bing, result.AddressValidationProvider);
-            Assert.AreEqual(DataProviderType.Undefined, result.GeocodingProvider);
+            Assert.AreEqual(DataProviderType.Bing, result.DataProvider);
         }
 
         [TestMethod]
         public void ValidateAddress_FirstProviderAddressVerificaitonResponseIsInvalid_SecondProviderUsed()
         {
             var addressModel = GetAddressModel();
-            var geocodeResponseModel = GetGeocodeResponseModel();
             var countryConfiguration = TestModelsProvider.GetUsCountryConfiguration();
             var invalidValidateAddressResponseModel = GetValidateAddressResponseModel(true, true);
             var validateAddressResponseModel = GetValidateAddressResponseModel(addressValidationProvider: DataProviderType.Google);
 
             _configurationProvider.Setup(p => p.ConfigurationProvider.Read<int>(ConfigurationConstants.NumberOfProvidersToProcessResult)).Returns(2);
             _configurationProvider.Setup(p => p.GetProviderConfigurationByCountry(Country)).Returns(countryConfiguration);
-            _addressVerificationDataProvider.Setup(p => p.Verify(addressModel, DataProviderType.Bing, LevelOfConfidence.High, true)).Returns(invalidValidateAddressResponseModel);
-            _addressVerificationDataProvider.Setup(p => p.Verify(addressModel, DataProviderType.Google, LevelOfConfidence.High, true)).Returns(validateAddressResponseModel);
-            _geocodeServiceRequestProcessor.Setup(p => p.GeocodeAddress(It.IsAny<AddressModel>(), It.IsAny<LevelOfConfidence>())).Returns(geocodeResponseModel);
+            _addressVerificationDataProvider.Setup(p => p.Verify(addressModel, DataProviderType.Bing, LevelOfConfidence.High)).Returns(invalidValidateAddressResponseModel);
+            _addressVerificationDataProvider.Setup(p => p.Verify(addressModel, DataProviderType.Google, LevelOfConfidence.High)).Returns(validateAddressResponseModel);
 
             var result = new AddressServiceRequestProcessor(_configurationProvider.Object,
-                _addressVerificationDataProvider.Object, _addressAutocompleteDataProvider.Object,
-                _geocodeServiceRequestProcessor.Object).ValidateAddress(addressModel, LevelOfConfidence.High);
+                _addressVerificationDataProvider.Object, _addressAutocompleteDataProvider.Object).ValidateAddress(addressModel, LevelOfConfidence.High);
 
             Assert.IsNotNull(result);
             Assert.IsNotNull(result.Address);
             Assert.IsNotNull(result.Location);
             Assert.IsTrue(result.IsValid);
-            Assert.AreEqual(DataProviderType.Google, result.AddressValidationProvider);
-            Assert.AreEqual(DataProviderType.Bing, result.GeocodingProvider);
+            Assert.AreEqual(DataProviderType.Google, result.DataProvider);
         }
 
         [TestMethod]
         public void ValidateAddress_AllProviderAddressVerificaitonResponseIsInvalid_NoAddressOrLocationPopulated()
         {
             var addressModel = GetAddressModel();
-            var geocodeResponseModel = GetGeocodeResponseModel();
             var countryConfiguration = TestModelsProvider.GetUsCountryConfiguration();
             var invalidValidateAddressResponseModel1 = GetValidateAddressResponseModel(true, true);
             var invalidValidateAddressResponseModel2 = GetValidateAddressResponseModel(true, true, DataProviderType.Google);
 
             _configurationProvider.Setup(p => p.ConfigurationProvider.Read<int>(ConfigurationConstants.NumberOfProvidersToProcessResult)).Returns(2);
             _configurationProvider.Setup(p => p.GetProviderConfigurationByCountry(Country)).Returns(countryConfiguration);
-            _addressVerificationDataProvider.Setup(p => p.Verify(addressModel, DataProviderType.Bing, LevelOfConfidence.High, true)).Returns(invalidValidateAddressResponseModel1);
-            _addressVerificationDataProvider.Setup(p => p.Verify(addressModel, DataProviderType.Google, LevelOfConfidence.High, true)).Returns(invalidValidateAddressResponseModel2);
-            _geocodeServiceRequestProcessor.Setup(p => p.GeocodeAddress(It.IsAny<AddressModel>(), It.IsAny<LevelOfConfidence>())).Returns(geocodeResponseModel);
+            _addressVerificationDataProvider.Setup(p => p.Verify(addressModel, DataProviderType.Bing, LevelOfConfidence.High)).Returns(invalidValidateAddressResponseModel1);
+            _addressVerificationDataProvider.Setup(p => p.Verify(addressModel, DataProviderType.Google, LevelOfConfidence.High)).Returns(invalidValidateAddressResponseModel2);
 
             var result = new AddressServiceRequestProcessor(_configurationProvider.Object,
-                _addressVerificationDataProvider.Object, _addressAutocompleteDataProvider.Object,
-                _geocodeServiceRequestProcessor.Object).ValidateAddress(addressModel, LevelOfConfidence.High);
+                _addressVerificationDataProvider.Object, _addressAutocompleteDataProvider.Object).ValidateAddress(addressModel, LevelOfConfidence.High);
 
             Assert.IsNotNull(result);
             Assert.IsNotNull(result.Address);
             Assert.IsNotNull(result.Location);
             Assert.IsTrue(!result.IsValid);
-            Assert.AreEqual(DataProviderType.Google, result.AddressValidationProvider);
-            Assert.AreEqual(DataProviderType.Bing, result.GeocodingProvider);
+            Assert.AreEqual(DataProviderType.Google, result.DataProvider);
         }
 
         #endregion
@@ -234,140 +201,117 @@ namespace CES.CoreApi.GeoLocation.Service.Business.Logic.UnitTest
         {
             _configurationProvider.Setup(p => p.ConfigurationProvider.Read<int>(ConfigurationConstants.NumberOfProvidersToProcessResult)).Returns(2);
             _configurationProvider.Setup(p => p.GetProviderConfigurationByCountry(Country)).Returns(TestModelsProvider.GetUsCountryConfiguration());
-            _addressVerificationDataProvider.Setup(p => p.Verify(It.IsAny<string>(), It.IsAny<DataProviderType>(), It.IsAny<LevelOfConfidence>(),
-                    It.IsAny<bool>())).Returns(GetValidateAddressResponseModel());
+            _addressVerificationDataProvider.Setup(p => p.Verify(It.IsAny<string>(), It.IsAny<DataProviderType>(), It.IsAny<LevelOfConfidence>())).Returns(GetValidateAddressResponseModel());
 
             var result = new AddressServiceRequestProcessor(_configurationProvider.Object,
-                _addressVerificationDataProvider.Object, _addressAutocompleteDataProvider.Object,
-                _geocodeServiceRequestProcessor.Object).ValidateAddress(FormattedAddress, Country, LevelOfConfidence.High);
+                _addressVerificationDataProvider.Object, _addressAutocompleteDataProvider.Object).ValidateAddress(FormattedAddress, Country, LevelOfConfidence.High);
 
             Assert.IsNotNull(result);
             Assert.IsNotNull(result.Address);
             Assert.IsNotNull(result.Location);
             Assert.IsTrue(result.IsValid);
-            Assert.AreEqual(DataProviderType.Bing, result.AddressValidationProvider);
-            Assert.AreEqual(DataProviderType.Bing, result.GeocodingProvider);
+            Assert.AreEqual(DataProviderType.Bing, result.DataProvider);
         }
 
         [TestMethod]
         public void ValidateFormattedAddress_DifferentGeocodingProvider_HappyPath()
         {
-            var geocodeResponseModel = GetGeocodeResponseModel();
             var countryConfiguration = TestModelsProvider.GetUsCountryConfiguration(true);
             var validValidateAddressResponseModel = GetValidateAddressResponseModel(false);
 
             _configurationProvider.Setup(p => p.ConfigurationProvider.Read<int>(ConfigurationConstants.NumberOfProvidersToProcessResult)).Returns(2);
             _configurationProvider.Setup(p => p.GetProviderConfigurationByCountry(Country)).Returns(countryConfiguration);
-            _addressVerificationDataProvider.Setup(p => p.Verify(It.IsAny<string>(), It.IsAny<DataProviderType>(), It.IsAny<LevelOfConfidence>(), 
-                It.IsAny<bool>())).Returns(validValidateAddressResponseModel);
-            _geocodeServiceRequestProcessor.Setup(p => p.GeocodeAddress(It.IsAny<string>(), It.IsAny<string>(), It.IsAny<LevelOfConfidence>())).Returns(geocodeResponseModel);
+            _addressVerificationDataProvider.Setup(p => p.Verify(It.IsAny<string>(), It.IsAny<DataProviderType>(), It.IsAny<LevelOfConfidence>())).Returns(validValidateAddressResponseModel);
 
             var result = new AddressServiceRequestProcessor(_configurationProvider.Object,
-                _addressVerificationDataProvider.Object, _addressAutocompleteDataProvider.Object,
-                _geocodeServiceRequestProcessor.Object).ValidateAddress(FormattedAddress, Country, LevelOfConfidence.High);
+                _addressVerificationDataProvider.Object, _addressAutocompleteDataProvider.Object).ValidateAddress(FormattedAddress, Country, LevelOfConfidence.High);
 
             Assert.IsNotNull(result);
             Assert.IsNotNull(result.Address);
             Assert.IsNotNull(result.Location);
             Assert.IsTrue(result.IsValid);
-            Assert.AreEqual(DataProviderType.Bing, result.AddressValidationProvider);
-            Assert.AreEqual(DataProviderType.Google, result.GeocodingProvider);
+            Assert.AreEqual(DataProviderType.Bing, result.DataProvider);
         }
 
         [TestMethod]
         public void ValidateFormattedAddress_NoProvidersFound_ExceptionRaised()
         {
-            var geocodeResponseModel = GetGeocodeResponseModel();
             var countryConfiguration = TestModelsProvider.GetCountryConfigurationWithoutProviders();
             var validValidateAddressResponseModel = GetValidateAddressResponseModel(false);
 
             _configurationProvider.Setup(p => p.ConfigurationProvider.Read<int>(ConfigurationConstants.NumberOfProvidersToProcessResult)).Returns(2);
             _configurationProvider.Setup(p => p.GetProviderConfigurationByCountry(Country)).Returns(countryConfiguration);
-            _addressVerificationDataProvider.Setup(p => p.Verify(It.IsAny<AddressModel>(), It.IsAny<DataProviderType>(), It.IsAny<LevelOfConfidence>(), It.IsAny<bool>())).Returns(validValidateAddressResponseModel);
-            _geocodeServiceRequestProcessor.Setup(p => p.GeocodeAddress(It.IsAny<string>(), It.IsAny<string>(), It.IsAny<LevelOfConfidence>())).Returns(geocodeResponseModel);
+            _addressVerificationDataProvider.Setup(p => p.Verify(It.IsAny<AddressModel>(), It.IsAny<DataProviderType>(), It.IsAny<LevelOfConfidence>())).Returns(validValidateAddressResponseModel);
 
             ExceptionHelper.CheckException(
                 () => new AddressServiceRequestProcessor(_configurationProvider.Object,
-                _addressVerificationDataProvider.Object, _addressAutocompleteDataProvider.Object,
-                _geocodeServiceRequestProcessor.Object).ValidateAddress(FormattedAddress, Country, LevelOfConfidence.High),
+                _addressVerificationDataProvider.Object, _addressAutocompleteDataProvider.Object).ValidateAddress(FormattedAddress, Country, LevelOfConfidence.High),
                 SubSystemError.GeolocationDataProviderNotFound, DataProviderServiceType.AddressVerification);
         }
 
         [TestMethod]
         public void ValidateFormattedAddress_GeocodeResponseIsInvalid_EmptyLocationReturnedAndGeocodeProviderIsUndefined()
         {
-            var geocodeResponseModel = GetInvalidGeocodeResponseModel();
             var countryConfiguration = TestModelsProvider.GetUsCountryConfiguration(true);
             var validValidateAddressResponseModel = GetValidateAddressResponseModel(false);
 
             _configurationProvider.Setup(p => p.ConfigurationProvider.Read<int>(ConfigurationConstants.NumberOfProvidersToProcessResult)).Returns(2);
             _configurationProvider.Setup(p => p.GetProviderConfigurationByCountry(Country)).Returns(countryConfiguration);
-            _addressVerificationDataProvider.Setup(p => p.Verify(It.IsAny<string>(), It.IsAny<DataProviderType>(), It.IsAny<LevelOfConfidence>(), It.IsAny<bool>()))
+            _addressVerificationDataProvider.Setup(p => p.Verify(It.IsAny<string>(), It.IsAny<DataProviderType>(), It.IsAny<LevelOfConfidence>()))
                 .Returns(validValidateAddressResponseModel);
-            _geocodeServiceRequestProcessor.Setup(p => p.GeocodeAddress(It.IsAny<string>(), It.IsAny<string>(), It.IsAny<LevelOfConfidence>())).Returns(geocodeResponseModel);
 
             var result = new AddressServiceRequestProcessor(_configurationProvider.Object,
-                _addressVerificationDataProvider.Object, _addressAutocompleteDataProvider.Object,
-                _geocodeServiceRequestProcessor.Object).ValidateAddress(FormattedAddress, Country, LevelOfConfidence.High);
+                _addressVerificationDataProvider.Object, _addressAutocompleteDataProvider.Object).ValidateAddress(FormattedAddress, Country, LevelOfConfidence.High);
 
             Assert.IsNotNull(result);
             Assert.IsNotNull(result.Address);
             Assert.IsNull(result.Location);
             Assert.IsTrue(result.IsValid);
-            Assert.AreEqual(DataProviderType.Bing, result.AddressValidationProvider);
-            Assert.AreEqual(DataProviderType.Undefined, result.GeocodingProvider);
+            Assert.AreEqual(DataProviderType.Bing, result.DataProvider);
         }
 
         [TestMethod]
         public void ValidateFormattedAddress_FirstProviderAddressVerificaitonResponseIsInvalid_SecondProviderUsed()
         {
-            var geocodeResponseModel = GetGeocodeResponseModel();
             var countryConfiguration = TestModelsProvider.GetUsCountryConfiguration();
             var invalidValidateAddressResponseModel = GetValidateAddressResponseModel(true, true);
             var validateAddressResponseModel = GetValidateAddressResponseModel(addressValidationProvider: DataProviderType.Google);
 
             _configurationProvider.Setup(p => p.ConfigurationProvider.Read<int>(ConfigurationConstants.NumberOfProvidersToProcessResult)).Returns(2);
             _configurationProvider.Setup(p => p.GetProviderConfigurationByCountry(Country)).Returns(countryConfiguration);
-            _addressVerificationDataProvider.Setup(p => p.Verify(FormattedAddress, DataProviderType.Bing, LevelOfConfidence.High, true)).Returns(invalidValidateAddressResponseModel);
-            _addressVerificationDataProvider.Setup(p => p.Verify(FormattedAddress, DataProviderType.Google, LevelOfConfidence.High, true)).Returns(validateAddressResponseModel);
-            _geocodeServiceRequestProcessor.Setup(p => p.GeocodeAddress(It.IsAny<string>(), It.IsAny<string>(), It.IsAny<LevelOfConfidence>())).Returns(geocodeResponseModel);
+            _addressVerificationDataProvider.Setup(p => p.Verify(FormattedAddress, DataProviderType.Bing, LevelOfConfidence.High)).Returns(invalidValidateAddressResponseModel);
+            _addressVerificationDataProvider.Setup(p => p.Verify(FormattedAddress, DataProviderType.Google, LevelOfConfidence.High)).Returns(validateAddressResponseModel);
 
             var result = new AddressServiceRequestProcessor(_configurationProvider.Object,
-                _addressVerificationDataProvider.Object, _addressAutocompleteDataProvider.Object,
-                _geocodeServiceRequestProcessor.Object).ValidateAddress(FormattedAddress, Country, LevelOfConfidence.High);
+                _addressVerificationDataProvider.Object, _addressAutocompleteDataProvider.Object).ValidateAddress(FormattedAddress, Country, LevelOfConfidence.High);
 
             Assert.IsNotNull(result);
             Assert.IsNotNull(result.Address);
             Assert.IsNotNull(result.Location);
             Assert.IsTrue(result.IsValid);
-            Assert.AreEqual(DataProviderType.Google, result.AddressValidationProvider);
-            Assert.AreEqual(DataProviderType.Bing, result.GeocodingProvider);
+            Assert.AreEqual(DataProviderType.Google, result.DataProvider);
         }
 
         [TestMethod]
         public void ValidateFormattedAddress_AllProviderAddressVerificaitonResponseIsInvalid_NoAddressOrLocationPopulated()
         {
-            var geocodeResponseModel = GetGeocodeResponseModel();
             var countryConfiguration = TestModelsProvider.GetUsCountryConfiguration();
             var invalidValidateAddressResponseModel1 = GetValidateAddressResponseModel(true, true);
             var invalidValidateAddressResponseModel2 = GetValidateAddressResponseModel(true, true, DataProviderType.Google);
 
             _configurationProvider.Setup(p => p.ConfigurationProvider.Read<int>(ConfigurationConstants.NumberOfProvidersToProcessResult)).Returns(2);
             _configurationProvider.Setup(p => p.GetProviderConfigurationByCountry(Country)).Returns(countryConfiguration);
-            _addressVerificationDataProvider.Setup(p => p.Verify(FormattedAddress, DataProviderType.Bing, LevelOfConfidence.High, true)).Returns(invalidValidateAddressResponseModel1);
-            _addressVerificationDataProvider.Setup(p => p.Verify(FormattedAddress, DataProviderType.Google, LevelOfConfidence.High, true)).Returns(invalidValidateAddressResponseModel2);
-            _geocodeServiceRequestProcessor.Setup(p => p.GeocodeAddress(It.IsAny<string>(), It.IsAny<string>(), It.IsAny<LevelOfConfidence>())).Returns(geocodeResponseModel);
+            _addressVerificationDataProvider.Setup(p => p.Verify(FormattedAddress, DataProviderType.Bing, LevelOfConfidence.High)).Returns(invalidValidateAddressResponseModel1);
+            _addressVerificationDataProvider.Setup(p => p.Verify(FormattedAddress, DataProviderType.Google, LevelOfConfidence.High)).Returns(invalidValidateAddressResponseModel2);
 
             var result = new AddressServiceRequestProcessor(_configurationProvider.Object,
-                _addressVerificationDataProvider.Object, _addressAutocompleteDataProvider.Object,
-                _geocodeServiceRequestProcessor.Object).ValidateAddress(FormattedAddress, Country, LevelOfConfidence.High);
+                _addressVerificationDataProvider.Object, _addressAutocompleteDataProvider.Object).ValidateAddress(FormattedAddress, Country, LevelOfConfidence.High);
 
             Assert.IsNotNull(result);
             Assert.IsNotNull(result.Address);
             Assert.IsNotNull(result.Location);
             Assert.IsTrue(!result.IsValid);
-            Assert.AreEqual(DataProviderType.Google, result.AddressValidationProvider);
-            Assert.AreEqual(DataProviderType.Bing, result.GeocodingProvider);
+            Assert.AreEqual(DataProviderType.Google, result.DataProvider);
         }
 
         #endregion
@@ -385,11 +329,10 @@ namespace CES.CoreApi.GeoLocation.Service.Business.Logic.UnitTest
             _configurationProvider.Setup(p => p.GetProviderConfigurationByCountry(Country)).Returns(countryConfiguration);
 
             _addressAutocompleteDataProvider.Setup(p => p.GetAddressHintList(It.IsAny<string>(), It.IsAny<string>(), It.IsAny<string>(), It.IsAny<int>(),
-                        It.IsAny<DataProviderType>())).Returns(autocompleteResponseModel);
+                        It.IsAny<DataProviderType>(), It.IsAny<LevelOfConfidence>())).Returns(autocompleteResponseModel);
 
             var result = new AddressServiceRequestProcessor(_configurationProvider.Object,
-                _addressVerificationDataProvider.Object, _addressAutocompleteDataProvider.Object,
-                _geocodeServiceRequestProcessor.Object).GetAutocompleteList(Country, AdministrativeArea, FormattedAddress, 10);
+                _addressVerificationDataProvider.Object, _addressAutocompleteDataProvider.Object).GetAutocompleteList(Country, AdministrativeArea, FormattedAddress, 10, LevelOfConfidence.High);
 
             Assert.IsNotNull(result);
             Assert.IsNotNull(result.Suggestions);
@@ -408,11 +351,10 @@ namespace CES.CoreApi.GeoLocation.Service.Business.Logic.UnitTest
             _configurationProvider.Setup(p => p.GetProviderConfigurationByCountry(Country)).Returns(countryConfiguration);
 
             _addressAutocompleteDataProvider.Setup(p => p.GetAddressHintList(It.IsAny<string>(), It.IsAny<string>(), It.IsAny<string>(), It.IsAny<int>(),
-                        It.IsAny<DataProviderType>())).Returns(autocompleteResponseModel);
+                        It.IsAny<DataProviderType>(), It.IsAny<LevelOfConfidence>())).Returns(autocompleteResponseModel);
 
             var result = new AddressServiceRequestProcessor(_configurationProvider.Object,
-                _addressVerificationDataProvider.Object, _addressAutocompleteDataProvider.Object,
-                _geocodeServiceRequestProcessor.Object).GetAutocompleteList(Country, AdministrativeArea, FormattedAddress, 0);
+                _addressVerificationDataProvider.Object, _addressAutocompleteDataProvider.Object).GetAutocompleteList(Country, AdministrativeArea, FormattedAddress, 0, LevelOfConfidence.High);
 
             Assert.IsNotNull(result);
             Assert.IsNotNull(result.Suggestions);
@@ -431,11 +373,10 @@ namespace CES.CoreApi.GeoLocation.Service.Business.Logic.UnitTest
             _configurationProvider.Setup(p => p.GetProviderConfigurationByCountry(Country)).Returns(countryConfiguration);
 
             _addressAutocompleteDataProvider.Setup(p => p.GetAddressHintList(It.IsAny<string>(), It.IsAny<string>(), It.IsAny<string>(), It.IsAny<int>(),
-                        It.IsAny<DataProviderType>())).Returns(autocompleteResponseModel);
+                        It.IsAny<DataProviderType>(), It.IsAny<LevelOfConfidence>())).Returns(autocompleteResponseModel);
 
             var result = new AddressServiceRequestProcessor(_configurationProvider.Object,
-                _addressVerificationDataProvider.Object, _addressAutocompleteDataProvider.Object,
-                _geocodeServiceRequestProcessor.Object).GetAutocompleteList(Country, AdministrativeArea, FormattedAddress, 100);
+                _addressVerificationDataProvider.Object, _addressAutocompleteDataProvider.Object).GetAutocompleteList(Country, AdministrativeArea, FormattedAddress, 100, LevelOfConfidence.High);
 
             Assert.IsNotNull(result);
             Assert.IsNotNull(result.Suggestions);
@@ -454,12 +395,11 @@ namespace CES.CoreApi.GeoLocation.Service.Business.Logic.UnitTest
             _configurationProvider.Setup(p => p.GetProviderConfigurationByCountry(Country)).Returns(countryConfiguration);
 
             _addressAutocompleteDataProvider.Setup(p => p.GetAddressHintList(It.IsAny<string>(), It.IsAny<string>(), It.IsAny<string>(), It.IsAny<int>(),
-                        It.IsAny<DataProviderType>())).Returns(autocompleteResponseModel);
+                        It.IsAny<DataProviderType>(), It.IsAny<LevelOfConfidence>())).Returns(autocompleteResponseModel);
 
             ExceptionHelper.CheckException(
                 () => new AddressServiceRequestProcessor(_configurationProvider.Object,
-                _addressVerificationDataProvider.Object, _addressAutocompleteDataProvider.Object,
-                _geocodeServiceRequestProcessor.Object).GetAutocompleteList(Country, AdministrativeArea, FormattedAddress, 10),
+                _addressVerificationDataProvider.Object, _addressAutocompleteDataProvider.Object).GetAutocompleteList(Country, AdministrativeArea, FormattedAddress, 10, LevelOfConfidence.High),
                 SubSystemError.GeolocationDataProviderNotFound, DataProviderServiceType.AddressAutoComplete);
         }
 
@@ -477,38 +417,13 @@ namespace CES.CoreApi.GeoLocation.Service.Business.Logic.UnitTest
             };
         }
 
-        private static GeocodeAddressResponseModel GetGeocodeResponseModel()
-        {
-            return new GeocodeAddressResponseModel
-            {
-                Address = GetAddressModel(),
-                Confidence = LevelOfConfidence.High,
-                DataProvider = DataProviderType.Google,
-                IsValid = true,
-                Location = GetLocationModel()
-            };
-        }
-
-        private static GeocodeAddressResponseModel GetInvalidGeocodeResponseModel()
-        {
-            return new GeocodeAddressResponseModel
-            {
-                Address = GetAddressModel(),
-                Confidence = LevelOfConfidence.High,
-                DataProvider = DataProviderType.Google,
-                IsValid = false,
-                Location = GetLocationModel()
-            };
-        }
-
         private static ValidateAddressResponseModel GetValidateAddressResponseModel(bool includeLocation = true, bool isInvalid = false, DataProviderType addressValidationProvider = DataProviderType.Undefined)
         {
             return new ValidateAddressResponseModel
             {
                 Address = GetAddressModel(),
-                AddressValidationProvider = addressValidationProvider == DataProviderType.Undefined ? DataProviderType.Bing : addressValidationProvider,
+                DataProvider = addressValidationProvider == DataProviderType.Undefined ? DataProviderType.Bing : addressValidationProvider,
                 Confidence = LevelOfConfidence.High,
-                GeocodingProvider = DataProviderType.Bing,
                 IsValid = !isInvalid,
                 Location = includeLocation ? GetLocationModel() : null
             };

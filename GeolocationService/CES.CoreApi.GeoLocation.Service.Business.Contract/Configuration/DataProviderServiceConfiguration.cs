@@ -4,6 +4,6 @@ namespace CES.CoreApi.GeoLocation.Service.Business.Contract.Configuration
 {
     public class DataProviderServiceConfiguration
     {
-        public List<CountryConfiguration> CountryConfigurations { get; set; }
+        public List<ApplicationCountryConfiguration> ApplicationCountryConfigurations { get; set; }
     }
 }

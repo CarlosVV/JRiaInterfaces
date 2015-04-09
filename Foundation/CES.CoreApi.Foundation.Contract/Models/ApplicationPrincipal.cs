@@ -1,7 +1,7 @@
 ﻿using System.Security.Principal;
 using System.Threading;
 
-namespace CES.CoreApi.Foundation.Security
+namespace CES.CoreApi.Foundation.Contract.Models
 {
     public class ApplicationPrincipal : IPrincipal
     {

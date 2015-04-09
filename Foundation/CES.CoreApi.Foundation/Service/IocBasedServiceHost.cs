@@ -5,32 +5,32 @@ using System.ServiceModel;
 using System.ServiceModel.Description;
 using CES.CoreApi.Common.Enumerations;
 using CES.CoreApi.Common.Exceptions;
-using CES.CoreApi.Common.Interfaces;
-using CES.CoreApi.Foundation.Contract.Enumerations;
 using CES.CoreApi.Foundation.Contract.Interfaces;
 using CES.CoreApi.Foundation.Contract.Models;
 using CES.CoreApi.Foundation.Providers;
+using SimpleInjector;
+using SimpleInjector.Integration.Wcf;
 using ServiceConfiguration = CES.CoreApi.Foundation.Contract.Models.ServiceConfiguration;
 using ServiceEndpoint = System.ServiceModel.Description.ServiceEndpoint;
 
 namespace CES.CoreApi.Foundation.Service
 {
-    public class IocBasedServiceHost : ServiceHost
+    public class IocBasedServiceHost : SimpleInjectorServiceHost
     {
         #region Core
 
         private const string MexAddress = "mex";
 
-        public IocBasedServiceHost(IIocContainer container, Type serviceType, params Uri[] baseAddresses)
-            : base(serviceType, baseAddresses)
+        public IocBasedServiceHost(Container container, Type serviceType, params Uri[] baseAddresses)
+            : base(container, serviceType, baseAddresses)
         {
-            if (container == null)
-                throw new ArgumentNullException("container");
+            //if (container == null)
+            //    throw new ArgumentNullException("container");
 
-            foreach (var description in ImplementedContracts.Values)
-            {
-                description.Behaviors.Add(new IocBasedInstanceProvider(container, serviceType));
-            }
+            //foreach (var description in ImplementedContracts.Values)
+            //{
+            //    description.Behaviors.Add(new IocBasedInstanceProvider(container, serviceType));
+            //}
         }
 
         #endregion
@@ -44,7 +44,7 @@ namespace CES.CoreApi.Foundation.Service
             var interfaces = Description.ServiceType.GetInterfaces();
         
             //Get service configuration
-            var serviceConfigurationProvider = IocContainerProvider.Instance.Resolve<IServiceConfigurationProvider>();
+            var serviceConfigurationProvider = IocContainerProvider.Instance.GetInstance<IServiceConfigurationProvider>();
             var serviceConfiguration = serviceConfigurationProvider.GetConfiguration();
 
             //Add endpoints
@@ -61,8 +61,8 @@ namespace CES.CoreApi.Foundation.Service
             }
 
             //Configure authentication and authorization
-            Authentication.ServiceAuthenticationManager = (ServiceAuthenticationManager)IocContainerProvider.Instance.Resolve<IAuthenticationManager>();
-            Authorization.ServiceAuthorizationManager = (ServiceAuthorizationManager)IocContainerProvider.Instance.Resolve<IAuthorizationManager>();
+            Authentication.ServiceAuthenticationManager = (ServiceAuthenticationManager)IocContainerProvider.Instance.GetInstance<IAuthenticationManager>();
+            Authorization.ServiceAuthorizationManager = (ServiceAuthorizationManager)IocContainerProvider.Instance.GetInstance<IAuthorizationManager>();
 
             ConfigureServiceBehavior(serviceConfiguration.Behavior);
         }

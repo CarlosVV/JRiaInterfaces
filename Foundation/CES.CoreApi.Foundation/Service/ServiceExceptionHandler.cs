@@ -24,7 +24,7 @@ namespace CES.CoreApi.Foundation.Service
     {
         #region Core
 
-        private readonly IExceptionLogMonitor _exceptionMonitor;
+        private readonly IExceptionLogMonitor _exceptionLogMonitor;
         private readonly IClientSecurityContextProvider _clientDetailsProvider;
         private readonly ICurrentDateTimeProvider _currentDateTimeProvider;
         private CoreApiException _coreApiException;
@@ -32,15 +32,15 @@ namespace CES.CoreApi.Foundation.Service
         private const string WcfSecurityErrorMessage= "The caller was not authenticated by the service.";
         
 
-        public ServiceExceptionHandler(IExceptionLogMonitor exceptionMonitor, IClientSecurityContextProvider clientDetailsProvider, 
+        public ServiceExceptionHandler(ILogMonitorFactory logMonitorFactory, IClientSecurityContextProvider clientDetailsProvider, 
             ICurrentDateTimeProvider currentDateTimeProvider)
         {
-            if (exceptionMonitor == null) throw new ArgumentNullException("exceptionMonitor");
+            if (logMonitorFactory == null) throw new ArgumentNullException("logMonitorFactory");
             if (clientDetailsProvider == null) throw new ArgumentNullException("clientDetailsProvider");
             if (currentDateTimeProvider == null) throw new ArgumentNullException("currentDateTimeProvider");
-            _exceptionMonitor = exceptionMonitor;
             _clientDetailsProvider = clientDetailsProvider;
             _currentDateTimeProvider = currentDateTimeProvider;
+            _exceptionLogMonitor = logMonitorFactory.CreateNew<IExceptionLogMonitor>();
         }
 
         #endregion
@@ -55,7 +55,7 @@ namespace CES.CoreApi.Foundation.Service
         /// <param name="fault">The System.ServiceModel.Channels.Message object that is returned to the client, or service, in the duplex case.</param>
         public void ProvideFault(Exception error, MessageVersion version, ref Message fault)
         {
-            _exceptionMonitor.AddServiceCallDetails(OperationContext.Current, () => _clientDetailsProvider.GetDetails(OperationContext.Current));
+            _exceptionLogMonitor.AddServiceCallDetails(OperationContext.Current, () => _clientDetailsProvider.GetDetails(OperationContext.Current));
 
             var faultException = BuildFaultException(error);
             var messageFault = faultException.CreateMessageFault();
@@ -70,7 +70,7 @@ namespace CES.CoreApi.Foundation.Service
         public bool HandleError(Exception exception)
         {
             // Publish exception
-            _exceptionMonitor.Publish(_coreApiException);
+            _exceptionLogMonitor.Publish(_coreApiException);
 
             // Return true to indicate the Exception has been handled
             return true;

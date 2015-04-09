@@ -14,23 +14,23 @@ namespace CES.CoreApi.GeoLocation.Service.Business.Logic.Providers
         #region Core
 
         private readonly IHttpClientProxy _httpClientProxy;
-        private readonly ITraceLogMonitor _traceMonitor;
+        private readonly ILogMonitorFactory _logMonitorFactory;
         private readonly IRequestHeadersProvider _headerProvider;
 
-        public DataResponseProvider(IHttpClientProxy httpClientProxy, ITraceLogMonitor traceMonitor, IRequestHeadersProvider headerProvider)
+        public DataResponseProvider(IHttpClientProxy httpClientProxy, ILogMonitorFactory logMonitorFactory, IRequestHeadersProvider headerProvider)
         {
             if (httpClientProxy == null)
                 throw new CoreApiException(TechnicalSubSystem.GeoLocationService,
                    SubSystemError.GeneralRequiredParameterIsUndefined, "httpClientProxy");
-            if (traceMonitor == null)
+            if (logMonitorFactory == null)
                 throw new CoreApiException(TechnicalSubSystem.GeoLocationService,
-                   SubSystemError.GeneralRequiredParameterIsUndefined, "traceMonitor");
+                   SubSystemError.GeneralRequiredParameterIsUndefined, "logMonitorFactory");
             if (headerProvider == null)
                 throw new CoreApiException(TechnicalSubSystem.GeoLocationService,
                    SubSystemError.GeneralRequiredParameterIsUndefined, "headerProvider");
 
             _httpClientProxy = httpClientProxy;
-            _traceMonitor = traceMonitor;
+            _logMonitorFactory = logMonitorFactory;
             _headerProvider = headerProvider;
         }
 
@@ -106,10 +106,11 @@ namespace CES.CoreApi.GeoLocation.Service.Business.Logic.Providers
 
         private ITraceLogMonitor GetTraceLogMonitor(string requestUrl, DataProviderType providerType)
         {
-            _traceMonitor.DataContainer.RequestMessage = requestUrl;
-            _traceMonitor.DataContainer.Headers = _headerProvider.GetHeaders();
-            _traceMonitor.DataContainer.ProviderType = providerType.ToString();
-            return _traceMonitor;
+            var traceLogMonitor = _logMonitorFactory.CreateNew<ITraceLogMonitor>();
+            traceLogMonitor.DataContainer.RequestMessage = requestUrl;
+            traceLogMonitor.DataContainer.Headers = _headerProvider.GetHeaders();
+            traceLogMonitor.DataContainer.ProviderType = providerType.ToString();
+            return traceLogMonitor;
         }
 
         #endregion

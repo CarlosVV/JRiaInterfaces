@@ -53,7 +53,8 @@
     <Compile Include="Builders\BingUrlBuilder.cs" />
     <Compile Include="Builders\GoogleUrlBuilder.cs" />
     <Compile Include="Builders\MelissaUrlBuilder.cs" />
-    <Compile Include="Factories\EntityFactory.cs" />
+    <Compile Include="Factories\ResponseParserFactory.cs" />
+    <Compile Include="Factories\UrlBuilderFactory.cs" />
     <Compile Include="Parsers\BingAddressParser.cs" />
     <Compile Include="Parsers\BingResponseParser.cs" />
     <Compile Include="Parsers\GoogleAddressParser.cs" />
@@ -79,7 +80,6 @@
     <Compile Include="Providers\GooglePushPinParameterProvider.cs" />
     <Compile Include="Providers\MappingDataProvider.cs" />
     <Compile Include="Providers\MelissaLevelOfConfidenceProvider.cs" />
-    <Compile Include="Providers\RegistrationNameProvider.cs" />
     <Compile Include="Constants\BingConstants.cs" />
     <Compile Include="Constants\ConfigurationConstants.cs" />
     <Compile Include="Constants\GoogleConstants.cs" />
@@ -97,6 +97,10 @@
     <ProjectReference Include="..\..\Foundation\CES.CoreApi.Foundation.Contract\CES.CoreApi.Foundation.Contract.csproj">
       <Project>{8DBCFE15-CA3B-4F7C-A7D6-D73F8F0B91AA}</Project>
       <Name>CES.CoreApi.Foundation.Contract</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Foundation\CES.CoreApi.Foundation\CES.CoreApi.Foundation.csproj">
+      <Project>{E2B71A13-9683-4862-B2EB-31050190AFDC}</Project>
+      <Name>CES.CoreApi.Foundation</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\Foundation\CES.CoreApi.Logging\CES.CoreApi.Logging.csproj">
       <Project>{76762A04-54F0-4147-BD2B-267372034706}</Project>

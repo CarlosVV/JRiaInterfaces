@@ -56,7 +56,7 @@ namespace CES.CoreApi.GeoLocation.Service.Business.Logic.UnitTest
             var suggestionModel = GoogleResponseParserHelper.GetAutocompleteSuggestionModel();
             _addressParser.Setup(p => p.ParseAddress(It.IsAny<XElement>())).Returns(suggestionModel.Address);
 
-            var result = new GoogleResponseParser(_addressParser.Object, _levelOfConfidenceProvider.Object).Parse(dataResponse, MaxRecords, Country);
+            var result = new GoogleResponseParser(_addressParser.Object, _levelOfConfidenceProvider.Object).ParseAutocompleteAddressResponse(dataResponse, MaxRecords, LevelOfConfidence.High, country: Country);
 
             Assert.IsNotNull(result);
             Assert.AreEqual(suggestionModel.Address, result.Suggestions[0].Address);
@@ -69,7 +69,7 @@ namespace CES.CoreApi.GeoLocation.Service.Business.Logic.UnitTest
         [TestMethod]
         public void Parse_DataResponseIsNull_InvalidAddressAutocompleteResponseReturned()
         {
-            var result = new GoogleResponseParser(_addressParser.Object, _levelOfConfidenceProvider.Object).Parse(null, MaxRecords, Country);
+            var result = new GoogleResponseParser(_addressParser.Object, _levelOfConfidenceProvider.Object).ParseAutocompleteAddressResponse(null, MaxRecords, LevelOfConfidence.High, country: Country);
 
             Assert.IsNotNull(result);
             Assert.IsFalse(result.IsValid);
@@ -80,7 +80,7 @@ namespace CES.CoreApi.GeoLocation.Service.Business.Logic.UnitTest
         public void Parse_DataResponseIsInvalid_InvalidAddressAutocompleteResponseReturned()
         {
             var dataResponse = GoogleResponseParserHelper.GetAutomcompleteDataResponse(true);
-            var result = new GoogleResponseParser(_addressParser.Object, _levelOfConfidenceProvider.Object).Parse(dataResponse, MaxRecords, Country);
+            var result = new GoogleResponseParser(_addressParser.Object, _levelOfConfidenceProvider.Object).ParseAutocompleteAddressResponse(dataResponse, MaxRecords, LevelOfConfidence.High, country: Country);
 
             Assert.IsNotNull(result);
             Assert.IsFalse(result.IsValid);
@@ -91,7 +91,7 @@ namespace CES.CoreApi.GeoLocation.Service.Business.Logic.UnitTest
         public void Parse_NoAddressInResponse_InvalidAddressAutocompleteResponseReturned()
         {
             var dataResponse = GoogleResponseParserHelper.GetAutomcompleteDataResponseNoAddress();
-            var result = new GoogleResponseParser(_addressParser.Object, _levelOfConfidenceProvider.Object).Parse(dataResponse, MaxRecords, Country);
+            var result = new GoogleResponseParser(_addressParser.Object, _levelOfConfidenceProvider.Object).ParseAutocompleteAddressResponse(dataResponse, MaxRecords, LevelOfConfidence.High, country: Country);
 
             Assert.IsNotNull(result);
             Assert.IsNull(result.Suggestions);
@@ -114,13 +114,12 @@ namespace CES.CoreApi.GeoLocation.Service.Business.Logic.UnitTest
 
             var locationModel = GoogleResponseParserHelper.GetLocationModel();
 
-            var result = new GoogleResponseParser(_addressParser.Object, _levelOfConfidenceProvider.Object).Parse(dataResponse, LevelOfConfidence.High, true);
+            var result = new GoogleResponseParser(_addressParser.Object, _levelOfConfidenceProvider.Object).ParseGeocodeAddressResponse(dataResponse, LevelOfConfidence.High);
 
             Assert.IsNotNull(result);
             Assert.AreEqual(addressModel, result.Address);
             Assert.IsTrue(result.IsValid);
-            Assert.AreEqual(DataProviderType.Google, result.AddressValidationProvider);
-            Assert.AreEqual(DataProviderType.Google, result.GeocodingProvider);
+            Assert.AreEqual(DataProviderType.Google, result.DataProvider);
             Assert.AreEqual(LevelOfConfidence.High, result.Confidence);
             Assert.AreEqual(locationModel.Latitude, result.Location.Latitude);
             Assert.AreEqual(locationModel.Longitude, result.Location.Longitude);
@@ -135,13 +134,12 @@ namespace CES.CoreApi.GeoLocation.Service.Business.Logic.UnitTest
             _addressParser.Setup(p => p.ParseAddress(It.IsAny<XElement>())).Returns(addressModel);
             _levelOfConfidenceProvider.Setup(p => p.GetLevelOfConfidence(It.IsAny<string>())).Returns(LevelOfConfidence.High);
 
-            var result = new GoogleResponseParser(_addressParser.Object, _levelOfConfidenceProvider.Object).Parse(dataResponse, LevelOfConfidence.High, false);
+            var result = new GoogleResponseParser(_addressParser.Object, _levelOfConfidenceProvider.Object).ParseGeocodeAddressResponse(dataResponse, LevelOfConfidence.High);
 
             Assert.IsNotNull(result);
             Assert.AreEqual(addressModel, result.Address);
             Assert.IsTrue(result.IsValid);
-            Assert.AreEqual(DataProviderType.Google, result.AddressValidationProvider);
-            Assert.AreEqual(DataProviderType.Undefined, result.GeocodingProvider);
+            Assert.AreEqual(DataProviderType.Google, result.DataProvider);
             Assert.AreEqual(LevelOfConfidence.High, result.Confidence);
             Assert.IsNull(result.Location);
         }
@@ -149,12 +147,11 @@ namespace CES.CoreApi.GeoLocation.Service.Business.Logic.UnitTest
         [TestMethod]
         public void Parse_DataResponseIsNull_InvalidValidateAddressResponseReturned()
         {
-            var result = new GoogleResponseParser(_addressParser.Object, _levelOfConfidenceProvider.Object).Parse(null, LevelOfConfidence.High, true);
+            var result = new GoogleResponseParser(_addressParser.Object, _levelOfConfidenceProvider.Object).ParseGeocodeAddressResponse(null, LevelOfConfidence.High);
 
             Assert.IsNotNull(result);
             Assert.IsFalse(result.IsValid);
-            Assert.AreEqual(DataProviderType.Google, result.AddressValidationProvider);
-            Assert.AreEqual(DataProviderType.Google, result.GeocodingProvider);
+            Assert.AreEqual(DataProviderType.Google, result.DataProvider);
             Assert.IsNull(result.Location);
             Assert.IsNull(result.Address);
         }
@@ -163,12 +160,11 @@ namespace CES.CoreApi.GeoLocation.Service.Business.Logic.UnitTest
         public void Parse_DataResponseIsInvalid_InvalidValidateAddressResponseReturned()
         {
             var dataResponse = GoogleResponseParserHelper.GetValidateAddressDataResponse(true);
-            var result = new GoogleResponseParser(_addressParser.Object, _levelOfConfidenceProvider.Object).Parse(dataResponse, LevelOfConfidence.High, true);
+            var result = new GoogleResponseParser(_addressParser.Object, _levelOfConfidenceProvider.Object).ParseGeocodeAddressResponse(dataResponse, LevelOfConfidence.High);
 
             Assert.IsNotNull(result);
             Assert.IsFalse(result.IsValid);
-            Assert.AreEqual(DataProviderType.Google, result.AddressValidationProvider);
-            Assert.AreEqual(DataProviderType.Google, result.GeocodingProvider);
+            Assert.AreEqual(DataProviderType.Google, result.DataProvider);
             Assert.IsNull(result.Location);
             Assert.IsNull(result.Address);
         }
@@ -177,12 +173,11 @@ namespace CES.CoreApi.GeoLocation.Service.Business.Logic.UnitTest
         public void Parse_NoAddressInResponse_InvalidValidateAddressResponseReturned()
         {
             var dataResponse = GoogleResponseParserHelper.GetValidateAddressDataResponseNoAddress();
-            var result = new GoogleResponseParser(_addressParser.Object, _levelOfConfidenceProvider.Object).Parse(dataResponse, LevelOfConfidence.High, true);
+            var result = new GoogleResponseParser(_addressParser.Object, _levelOfConfidenceProvider.Object).ParseGeocodeAddressResponse(dataResponse, LevelOfConfidence.High);
 
             Assert.IsNotNull(result);
             Assert.IsFalse(result.IsValid);
-            Assert.AreEqual(DataProviderType.Google, result.AddressValidationProvider);
-            Assert.AreEqual(DataProviderType.Google, result.GeocodingProvider);
+            Assert.AreEqual(DataProviderType.Google, result.DataProvider);
             Assert.IsNull(result.Location);
             Assert.IsNull(result.Address);
         }
@@ -202,7 +197,7 @@ namespace CES.CoreApi.GeoLocation.Service.Business.Logic.UnitTest
 
             var locationModel = GoogleResponseParserHelper.GetLocationModel();
 
-            var result = new GoogleResponseParser(_addressParser.Object, _levelOfConfidenceProvider.Object).Parse(dataResponse, LevelOfConfidence.High);
+            var result = new GoogleResponseParser(_addressParser.Object, _levelOfConfidenceProvider.Object).ParseGeocodeAddressResponse(dataResponse, LevelOfConfidence.High);
 
             Assert.IsNotNull(result);
             Assert.AreEqual(addressModel, result.Address);
@@ -216,7 +211,7 @@ namespace CES.CoreApi.GeoLocation.Service.Business.Logic.UnitTest
         [TestMethod]
         public void Parse_DataResponseIsNull_InvalidGeocodeAddressResponseReturned()
         {
-            var result = new GoogleResponseParser(_addressParser.Object, _levelOfConfidenceProvider.Object).Parse(null, LevelOfConfidence.High);
+            var result = new GoogleResponseParser(_addressParser.Object, _levelOfConfidenceProvider.Object).ParseGeocodeAddressResponse(null, LevelOfConfidence.High);
 
             Assert.IsNotNull(result);
             Assert.IsFalse(result.IsValid);
@@ -229,7 +224,7 @@ namespace CES.CoreApi.GeoLocation.Service.Business.Logic.UnitTest
         public void Parse_DataResponseIsInvalid_InvalidGeocodeAddressResponseReturned()
         {
             var dataResponse = GoogleResponseParserHelper.GetGeocodeAddressDataResponse(true);
-            var result = new GoogleResponseParser(_addressParser.Object, _levelOfConfidenceProvider.Object).Parse(dataResponse, LevelOfConfidence.High);
+            var result = new GoogleResponseParser(_addressParser.Object, _levelOfConfidenceProvider.Object).ParseGeocodeAddressResponse(dataResponse, LevelOfConfidence.High);
 
             Assert.IsNotNull(result);
             Assert.IsFalse(result.IsValid);
@@ -242,7 +237,7 @@ namespace CES.CoreApi.GeoLocation.Service.Business.Logic.UnitTest
         public void Parse_NoAddressInResponse_InvalidGeocodeAddressResponseReturned()
         {
             var dataResponse = GoogleResponseParserHelper.GetGeocodeAddressDataResponseNoAddress();
-            var result = new GoogleResponseParser(_addressParser.Object, _levelOfConfidenceProvider.Object).Parse(dataResponse, LevelOfConfidence.High);
+            var result = new GoogleResponseParser(_addressParser.Object, _levelOfConfidenceProvider.Object).ParseGeocodeAddressResponse(dataResponse, LevelOfConfidence.High);
 
             Assert.IsNotNull(result);
             Assert.IsFalse(result.IsValid);
@@ -259,7 +254,7 @@ namespace CES.CoreApi.GeoLocation.Service.Business.Logic.UnitTest
         public void Parse_GetMapResponseModelReturned_HappyPath()
         {
             var dataResponse = GoogleResponseParserHelper.GetMapDataResponse();
-            var result = new GoogleResponseParser(_addressParser.Object, _levelOfConfidenceProvider.Object).Parse(dataResponse);
+            var result = new GoogleResponseParser(_addressParser.Object, _levelOfConfidenceProvider.Object).ParseMapResponse(dataResponse);
 
             Assert.IsNotNull(result);
             Assert.IsNotNull(result.MapData);
@@ -272,7 +267,7 @@ namespace CES.CoreApi.GeoLocation.Service.Business.Logic.UnitTest
         {
             BinaryDataResponse response = null;
             // ReSharper disable ExpressionIsAlwaysNull
-            var result = new GoogleResponseParser(_addressParser.Object, _levelOfConfidenceProvider.Object).Parse(response);
+            var result = new GoogleResponseParser(_addressParser.Object, _levelOfConfidenceProvider.Object).ParseMapResponse(response);
             // ReSharper restore ExpressionIsAlwaysNull
 
             Assert.IsNotNull(result);
@@ -284,7 +279,7 @@ namespace CES.CoreApi.GeoLocation.Service.Business.Logic.UnitTest
         public void Parse_DataResponseIsInvalid_InvalidGetMapResponseReturned()
         {
             var dataResponse = GoogleResponseParserHelper.GetMapDataResponse(true);
-            var result = new GoogleResponseParser(_addressParser.Object, _levelOfConfidenceProvider.Object).Parse(dataResponse);
+            var result = new GoogleResponseParser(_addressParser.Object, _levelOfConfidenceProvider.Object).ParseMapResponse(dataResponse);
 
             Assert.IsNotNull(result);
             Assert.IsFalse(result.IsValid);

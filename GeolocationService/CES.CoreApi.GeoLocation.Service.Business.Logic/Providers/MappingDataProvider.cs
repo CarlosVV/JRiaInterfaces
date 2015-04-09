@@ -1,7 +1,6 @@
 ﻿using System.Collections.Generic;
 using CES.CoreApi.Common.Enumerations;
 using CES.CoreApi.Common.Exceptions;
-using CES.CoreApi.Foundation.Contract.Enumerations;
 using CES.CoreApi.GeoLocation.Service.Business.Contract.Enumerations;
 using CES.CoreApi.GeoLocation.Service.Business.Contract.Interfaces;
 using CES.CoreApi.GeoLocation.Service.Business.Contract.Models;
@@ -12,19 +11,24 @@ namespace CES.CoreApi.GeoLocation.Service.Business.Logic.Providers
     {
         #region Core
 
-        private readonly IEntityFactory _entityFactory;
+        private readonly IUrlBuilderFactory _urlBuilderFactory;
         private readonly IDataResponseProvider _responseProvider;
+        private readonly IResponseParserFactory _responseParserFactory;
 
-        public MappingDataProvider(IEntityFactory entityFactory, IDataResponseProvider responseProvider)
+        public MappingDataProvider(IUrlBuilderFactory urlBuilderFactory, IDataResponseProvider responseProvider, IResponseParserFactory responseParserFactory)
         {
-            if (entityFactory == null)
+            if (urlBuilderFactory == null)
                 throw new CoreApiException(TechnicalSubSystem.GeoLocationService,
-                   SubSystemError.GeneralRequiredParameterIsUndefined, "entityFactory");
+                   SubSystemError.GeneralRequiredParameterIsUndefined, "urlBuilderFactory");
             if (responseProvider == null)
                 throw new CoreApiException(TechnicalSubSystem.GeoLocationService,
                     SubSystemError.GeneralRequiredParameterIsUndefined, "responseProvider");
-            _entityFactory = entityFactory;
+            if (responseParserFactory == null)
+                throw new CoreApiException(TechnicalSubSystem.GeoLocationService,
+                    SubSystemError.GeneralRequiredParameterIsUndefined, "responseParserFactory");
+            _urlBuilderFactory = urlBuilderFactory;
             _responseProvider = responseProvider;
+            _responseParserFactory = responseParserFactory;
         }
 
         #endregion
@@ -35,15 +39,15 @@ namespace CES.CoreApi.GeoLocation.Service.Business.Logic.Providers
             ICollection<PushPinModel> pushPins, DataProviderType providerType)
         {
             //Build data provider URL
-            var urlBuilder = _entityFactory.GetInstance<IUrlBuilder>(providerType, FactoryEntity.UrlBuilder);
+            var urlBuilder = _urlBuilderFactory.GetInstance<IUrlBuilder>(providerType, FactoryEntity.UrlBuilder);
             var url = urlBuilder.BuildUrl(center, size, outputParameters, pushPins);
 
             //Get raw response from data provider
             var rawResponse = _responseProvider.GetBinaryResponse(url, providerType);
 
             //Parse raw response
-            var parser = _entityFactory.GetInstance<IResponseParser>(providerType, FactoryEntity.Parser);
-            var responseModel = parser.Parse(rawResponse);
+            var parser = _responseParserFactory.GetInstance<IResponseParser>(providerType, FactoryEntity.Parser);
+            var responseModel = parser.ParseMapResponse(rawResponse);
 
             return responseModel;
         }

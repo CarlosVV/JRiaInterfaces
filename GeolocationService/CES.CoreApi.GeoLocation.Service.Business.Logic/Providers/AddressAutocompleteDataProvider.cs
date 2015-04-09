@@ -1,6 +1,5 @@
 ﻿using CES.CoreApi.Common.Enumerations;
 using CES.CoreApi.Common.Exceptions;
-using CES.CoreApi.Foundation.Contract.Enumerations;
 using CES.CoreApi.GeoLocation.Service.Business.Contract.Enumerations;
 using CES.CoreApi.GeoLocation.Service.Business.Contract.Interfaces;
 using CES.CoreApi.GeoLocation.Service.Business.Contract.Models;
@@ -11,18 +10,23 @@ namespace CES.CoreApi.GeoLocation.Service.Business.Logic.Providers
     {
         #region Core
 
-        private readonly IEntityFactory _entityFactory;
+        private readonly IUrlBuilderFactory _urlBuilderFactory;
+        private readonly IResponseParserFactory _responseParserFactory;
         private readonly IDataResponseProvider _responseProvider;
 
-        public AddressAutocompleteDataProvider(IEntityFactory entityFactory, IDataResponseProvider responseProvider)
+        public AddressAutocompleteDataProvider(IUrlBuilderFactory urlBuilderFactory, IResponseParserFactory responseParserFactory,  IDataResponseProvider responseProvider)
         {
-            if (entityFactory == null)
+            if (urlBuilderFactory == null)
                 throw new CoreApiException(TechnicalSubSystem.GeoLocationService,
-                   SubSystemError.GeneralRequiredParameterIsUndefined, "entityFactory");
+                   SubSystemError.GeneralRequiredParameterIsUndefined, "urlBuilderFactory");
             if (responseProvider == null)
                 throw new CoreApiException(TechnicalSubSystem.GeoLocationService,
                   SubSystemError.GeneralRequiredParameterIsUndefined, "responseProvider");
-            _entityFactory = entityFactory;
+            if (responseParserFactory == null)
+                throw new CoreApiException(TechnicalSubSystem.GeoLocationService,
+                  SubSystemError.GeneralRequiredParameterIsUndefined, "responseParserFactory");
+            _urlBuilderFactory = urlBuilderFactory;
+            _responseParserFactory = responseParserFactory;
             _responseProvider = responseProvider;
         }
 
@@ -30,18 +34,19 @@ namespace CES.CoreApi.GeoLocation.Service.Business.Logic.Providers
 
         #region Public methods
 
-        public AutocompleteAddressResponseModel GetAddressHintList(string country, string administrativeArea, string address, int maxRecords, DataProviderType providerType)
+        public AutocompleteAddressResponseModel GetAddressHintList(string country, string administrativeArea, string address, int maxRecords, 
+            DataProviderType providerType, LevelOfConfidence confidence)
         {
             //Build data provider URL
-            var urlBuilder = _entityFactory.GetInstance<IUrlBuilder>(providerType, FactoryEntity.UrlBuilder);
+            var urlBuilder = _urlBuilderFactory.GetInstance<IUrlBuilder>(providerType, FactoryEntity.UrlBuilder);
             var url = urlBuilder.BuildUrl(address, administrativeArea, country, maxRecords);
 
             //Get raw response from data provider
             var rawResponse = _responseProvider.GetResponse(url, providerType);
 
             //Parse raw response
-            var parser = _entityFactory.GetInstance<IResponseParser>(providerType, FactoryEntity.Parser);
-            var responseModel = parser.Parse(rawResponse, maxRecords, country);
+            var parser = _responseParserFactory.GetInstance<IResponseParser>(providerType, FactoryEntity.Parser);
+            var responseModel = parser.ParseAutocompleteAddressResponse(rawResponse, maxRecords, confidence, country);
 
             return responseModel;
         }

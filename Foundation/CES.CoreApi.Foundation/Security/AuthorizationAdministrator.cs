@@ -2,12 +2,11 @@
 using System.Linq;
 using System.Security.Principal;
 using System.ServiceModel;
-using System.Threading;
 using CES.CoreApi.Common.Enumerations;
 using CES.CoreApi.Common.Exceptions;
 using CES.CoreApi.Common.Interfaces;
-using CES.CoreApi.Foundation.Contract.Enumerations;
 using CES.CoreApi.Foundation.Contract.Interfaces;
+using CES.CoreApi.Foundation.Contract.Models;
 using CES.CoreApi.Logging.Interfaces;
 using CES.CoreApi.Logging.Models;
 
@@ -20,11 +19,12 @@ namespace CES.CoreApi.Foundation.Security
         private readonly IApplicationValidator _applicationValidator;
         private readonly IServiceCallHeaderParametersProvider _parametersProvider;
         private readonly IHostApplicationProvider _hostApplicationProvider;
-        private readonly ISecurityAuditLogger _securityAuditLogger;
+        private readonly IIdentityManager _identityManager;
+        private readonly ISecurityLogMonitor _securityLogMonitor;
 
         public AuthorizationAdministrator(IApplicationValidator applicationValidator,
-            IServiceCallHeaderParametersProvider parametersProvider, IHostApplicationProvider hostApplicationProvider, 
-            ISecurityAuditLogger securityAuditLogger)
+            IServiceCallHeaderParametersProvider parametersProvider, IHostApplicationProvider hostApplicationProvider,
+            ILogMonitorFactory logMonitorFactory, IIdentityManager identityManager)
         {
             if (applicationValidator == null)
                 throw new CoreApiException(TechnicalSubSystem.GeoLocationService,
@@ -35,14 +35,18 @@ namespace CES.CoreApi.Foundation.Security
             if (hostApplicationProvider == null)
                 throw new CoreApiException(TechnicalSubSystem.GeoLocationService,
                     SubSystemError.GeneralRequiredParameterIsUndefined, "hostApplicationProvider");
-            if (securityAuditLogger == null)
+            if (logMonitorFactory == null)
                 throw new CoreApiException(TechnicalSubSystem.GeoLocationService,
-                    SubSystemError.GeneralRequiredParameterIsUndefined, "securityAuditLogger");
+                    SubSystemError.GeneralRequiredParameterIsUndefined, "logMonitorFactory");
+            if (identityManager == null)
+                throw new CoreApiException(TechnicalSubSystem.GeoLocationService,
+                    SubSystemError.GeneralRequiredParameterIsUndefined, "identityManager");
 
             _applicationValidator = applicationValidator;
             _parametersProvider = parametersProvider;
             _hostApplicationProvider = hostApplicationProvider;
-            _securityAuditLogger = securityAuditLogger;
+            _identityManager = identityManager;
+            _securityLogMonitor = logMonitorFactory.CreateNew<ISecurityLogMonitor>();
         }
 
         #endregion
@@ -54,7 +58,7 @@ namespace CES.CoreApi.Foundation.Security
             var clientApplicationPrincipal = operationContext.IncomingMessageProperties["Principal"] as IPrincipal;
 
             var clientApplicationIdentity = clientApplicationPrincipal != null
-                ? clientApplicationPrincipal.Identity as ServiceIdentity
+                ? clientApplicationPrincipal.Identity as ClientApplicationIdentity
                 : null;
 
             var clientApplicationId = clientApplicationIdentity != null
@@ -87,11 +91,11 @@ namespace CES.CoreApi.Foundation.Security
             ValidateOperationAccess(hostApplication, headerParameters.OperationName, clientApplicationId, auditParameters);
 
             //Set principal
-            Thread.CurrentPrincipal = clientApplicationPrincipal;
-            operationContext.ServiceSecurityContext.AuthorizationContext.Properties["Principal"] = Thread.CurrentPrincipal;
+            _identityManager.SetCurrentPrincipal(clientApplicationPrincipal);
+            operationContext.ServiceSecurityContext.AuthorizationContext.Properties["Principal"] = _identityManager.GetCurrentPrincipal();
 
             //Log security audit success
-            _securityAuditLogger.LogSuccess(auditParameters);
+            _securityLogMonitor.LogSuccess(auditParameters);
 
             return true;
         }
@@ -114,7 +118,7 @@ namespace CES.CoreApi.Foundation.Security
             var exception = new CoreApiException(TechnicalSubSystem.Authorization, SubSystemError.SecurityClientApplicationNotAuthenticated, clientApplicationId);
 
             //Log security audit failure
-            _securityAuditLogger.LogFailure(auditParameters, exception.ClientMessage);
+            _securityLogMonitor.LogFailure(auditParameters, exception.ClientMessage);
 
             throw exception;
         }
@@ -137,7 +141,7 @@ namespace CES.CoreApi.Foundation.Security
                 hostApplication.Id);
 
             //Log security audit failure
-            _securityAuditLogger.LogFailure(auditParameters, exception.ClientMessage);
+            _securityLogMonitor.LogFailure(auditParameters, exception.ClientMessage);
 
             throw exception;
         }
@@ -163,7 +167,7 @@ namespace CES.CoreApi.Foundation.Security
                     hostApplication.Id, operationName);
 
                 //Log security audit failure
-                _securityAuditLogger.LogFailure(auditParameters, exception.ClientMessage);
+                _securityLogMonitor.LogFailure(auditParameters, exception.ClientMessage);
 
                 throw exception;
             }
@@ -176,7 +180,7 @@ namespace CES.CoreApi.Foundation.Security
                     hostApplication.Id, operationName);
 
                 //Log security audit failure
-                _securityAuditLogger.LogFailure(auditParameters, exception.ClientMessage);
+                _securityLogMonitor.LogFailure(auditParameters, exception.ClientMessage);
 
                 throw exception;
             }
@@ -207,7 +211,7 @@ namespace CES.CoreApi.Foundation.Security
                     hostApplication.Id, operationName);
 
                 //Log security audit failure
-                _securityAuditLogger.LogFailure(auditParameters, exception.ClientMessage);
+                _securityLogMonitor.LogFailure(auditParameters, exception.ClientMessage);
 
                 throw exception;
             }
@@ -219,7 +223,7 @@ namespace CES.CoreApi.Foundation.Security
                     hostApplication.Id, operationName);
 
                 //Log security audit failure
-                _securityAuditLogger.LogFailure(auditParameters, exception.ClientMessage);
+                _securityLogMonitor.LogFailure(auditParameters, exception.ClientMessage);
 
                 throw exception;
             }

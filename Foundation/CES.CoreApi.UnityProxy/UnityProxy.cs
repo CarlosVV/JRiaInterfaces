@@ -77,13 +77,7 @@ namespace CES.CoreApi.UnityProxy
             return this;
         }
 
-        public IIocContainer RegisterTypeWithInterfaceInterceptor<TFrom, TTo>(LifetimeManagerType lifetimeManagerType, InterceptionBehaviorType injectionMembers) where TTo : TFrom
-        {
-            RegisterType<TFrom, TTo>(lifetimeManagerType, string.Empty, InterceptorType.Undefined, injectionMembers, injectionMembers);
-            return this;
-        }
-
-        public IIocContainer RegisterType<TFrom, TTo>(InterceptorType interceptorType, InterceptionBehaviorType interceptionBehaviorType, 
+        public IIocContainer RegisterType<TFrom, TTo>(InterceptorType interceptorType, InterceptionBehaviorType interceptionBehaviorType,
             params object[] injectionMembers) where TTo : TFrom
         {
             RegisterType<TFrom, TTo>(LifetimeManagerType.Container, string.Empty, interceptorType, interceptionBehaviorType, injectionMembers);
@@ -141,7 +135,7 @@ namespace CES.CoreApi.UnityProxy
         /// <param name="injectionMembers">Members injected</param>
         /// <param name="interceptorType"></param>
         /// <returns></returns>
-        public IIocContainer RegisterType<TFrom, TTo>(string name, InterceptorType interceptorType, 
+        public IIocContainer RegisterType<TFrom, TTo>(string name, InterceptorType interceptorType,
             InterceptionBehaviorType interceptionBehaviorType, params object[] injectionMembers) where TTo : TFrom
         {
             RegisterType<TFrom, TTo>(LifetimeManagerType.Container, name, interceptorType, interceptionBehaviorType, injectionMembers);
@@ -157,7 +151,7 @@ namespace CES.CoreApi.UnityProxy
         /// <param name="interceptionBehaviorType"></param>
         /// <param name="injectionMembers">Members injected</param>
         /// <returns></returns>
-        public IIocContainer RegisterTypeWithInterfaceInterceptor<TFrom, TTo>(string name, InterceptionBehaviorType interceptionBehaviorType, 
+        public IIocContainer RegisterTypeWithInterfaceInterceptor<TFrom, TTo>(string name, InterceptionBehaviorType interceptionBehaviorType,
             params object[] injectionMembers) where TTo : TFrom
         {
             RegisterType<TFrom, TTo>(LifetimeManagerType.Container, name, InterceptorType.InterfaceInterceptor, interceptionBehaviorType, injectionMembers);
@@ -176,7 +170,6 @@ namespace CES.CoreApi.UnityProxy
         /// <returns></returns>
         public IIocContainer RegisterTypeWithInterfaceInterceptor<TFrom, TTo>(LifetimeManagerType lifetimeManagerType,
             string name, InterceptionBehaviorType interceptionBehaviorType, params object[] injectionMembers) where TTo : TFrom
-
         {
             RegisterType<TFrom, TTo>(lifetimeManagerType, name, InterceptorType.InterfaceInterceptor,
                 interceptionBehaviorType, injectionMembers);
@@ -196,7 +189,7 @@ namespace CES.CoreApi.UnityProxy
         /// <returns></returns>
         public IIocContainer RegisterType<TFrom, TTo>(LifetimeManagerType lifetimeManagerType,
                                                       string name,
-                                                      InterceptorType interceptorType, 
+                                                      InterceptorType interceptorType,
                                                       InterceptionBehaviorType interceptionBehaviorType,
                                                       params object[] injectionMembers) where TTo : TFrom
         {

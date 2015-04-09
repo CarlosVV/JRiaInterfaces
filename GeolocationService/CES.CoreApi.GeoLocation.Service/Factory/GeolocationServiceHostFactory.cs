@@ -1,17 +1,15 @@
-﻿using CES.CoreApi.Common.Enumerations;
-using CES.CoreApi.Foundation.Service;
+﻿using CES.CoreApi.Foundation.Service;
 using CES.CoreApi.GeoLocation.Service.Configuration;
-using CES.CoreApi.UnityProxy;
+using SimpleInjector;
 
 namespace CES.CoreApi.GeoLocation.Service.Factory
 {
     public sealed class GeolocationServiceHostFactory : IocBasedServiceHostFactory
     {
         public GeolocationServiceHostFactory()
-            : base(new UnityContainerFactory().GetInstance(InterceptionBehaviorType.Performance))
+            : base(new Container())
         {
-            RegisterTypes();
-            IocContainerConfigurator.RegisterTypes(Container);
+            CompositionRoot.RegisterDependencies(Container);
             MapperConfigurator.Configure(Container);
         }
     }

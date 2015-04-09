@@ -44,6 +44,7 @@
   <ItemGroup>
     <Compile Include="Attributes\GoogleImageFormatAttribute.cs" />
     <Compile Include="Attributes\GoogleMapTypeAttribute.cs" />
+    <Compile Include="Configuration\ApplicationCountryConfiguration.cs" />
     <Compile Include="Configuration\CountryConfiguration.cs" />
     <Compile Include="Configuration\DataProviderConfiguration.cs" />
     <Compile Include="Configuration\DataProviderServiceConfiguration.cs" />
@@ -59,7 +60,6 @@
     <Compile Include="Interfaces\IClientSideSupportServiceProcessor.cs" />
     <Compile Include="Interfaces\ICorrectImageSizeProvider.cs" />
     <Compile Include="Interfaces\ICountryConfigurationProvider.cs" />
-    <Compile Include="Interfaces\IEntityFactory.cs" />
     <Compile Include="Interfaces\IGeocodeAddressDataProvider.cs" />
     <Compile Include="Interfaces\IGeocodeServiceRequestProcessor.cs" />
     <Compile Include="Interfaces\IGoogleAddressParser.cs" />
@@ -70,9 +70,10 @@
     <Compile Include="Interfaces\IMapServiceRequestProcessor.cs" />
     <Compile Include="Interfaces\IMelissaAddressParser.cs" />
     <Compile Include="Interfaces\IMelissaLevelOfConfidenceProvider.cs" />
-    <Compile Include="Interfaces\IRegistrationNameProvider.cs" />
     <Compile Include="Interfaces\IResponseParser.cs" />
+    <Compile Include="Interfaces\IResponseParserFactory.cs" />
     <Compile Include="Interfaces\IUrlBuilder.cs" />
+    <Compile Include="Interfaces\IUrlBuilderFactory.cs" />
     <Compile Include="Models\AutocompleteAddressResponseModel.cs" />
     <Compile Include="Models\AddressModel.cs" />
     <Compile Include="Models\AutocompleteSuggestionModel.cs" />

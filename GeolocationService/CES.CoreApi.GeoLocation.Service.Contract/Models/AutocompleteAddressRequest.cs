@@ -1,6 +1,7 @@
 ﻿using System.Runtime.Serialization;
 using CES.CoreApi.Common.Constants;
 using CES.CoreApi.Common.Models;
+using CES.CoreApi.GeoLocation.Service.Contract.Enumerations;
 
 namespace CES.CoreApi.GeoLocation.Service.Contract.Models
 {
@@ -18,5 +19,10 @@ namespace CES.CoreApi.GeoLocation.Service.Contract.Models
 
         [DataMember]
         public string AdministrativeArea { get; set; }
+        /// <summary>
+        /// Specifying the minimum confidence required for the result.
+        /// </summary>
+        [DataMember(IsRequired = true)]
+        public Confidence MinimumConfidence { get; set; }
     }
 }

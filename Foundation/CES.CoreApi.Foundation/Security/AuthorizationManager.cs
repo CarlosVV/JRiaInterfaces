@@ -7,7 +7,7 @@ using CES.CoreApi.Logging.Interfaces;
 
 namespace CES.CoreApi.Foundation.Security
 {
-    public class AuthorizationManager : ServiceAuthorizationManager, IAuthorizationManager
+    public class AuthorizationManager : ServiceAuthorizationManager, IAuthorizationManager 
     {
         #region Core
 

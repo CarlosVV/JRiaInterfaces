@@ -40,17 +40,24 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\packages\AutoMapper.3.3.1\lib\net40\AutoMapper.Net4.dll</HintPath>
     </Reference>
-    <Reference Include="Microsoft.Practices.EnterpriseLibrary.Common, Version=6.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\packages\EnterpriseLibrary.Common.6.0.1304.0\lib\NET45\Microsoft.Practices.EnterpriseLibrary.Common.dll</HintPath>
-    </Reference>
-    <Reference Include="Microsoft.Practices.EnterpriseLibrary.Data, Version=6.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\packages\EnterpriseLibrary.Data.6.0.1304.0\lib\NET45\Microsoft.Practices.EnterpriseLibrary.Data.dll</HintPath>
-    </Reference>
     <Reference Include="Newtonsoft.Json, Version=6.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\packages\Newtonsoft.Json.6.0.8\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="SimpleInjector">
+      <HintPath>..\..\packages\SimpleInjector.2.7.3\lib\net45\SimpleInjector.dll</HintPath>
+    </Reference>
+    <Reference Include="SimpleInjector.Diagnostics">
+      <HintPath>..\..\packages\SimpleInjector.2.7.3\lib\net45\SimpleInjector.Diagnostics.dll</HintPath>
+    </Reference>
+    <Reference Include="SimpleInjector.Extensions.ExecutionContextScoping">
+      <HintPath>..\..\packages\SimpleInjector.Extensions.ExecutionContextScoping.2.7.3\lib\net45\SimpleInjector.Extensions.ExecutionContextScoping.dll</HintPath>
+    </Reference>
+    <Reference Include="SimpleInjector.Extensions.LifetimeScoping">
+      <HintPath>..\..\packages\SimpleInjector.Extensions.LifetimeScoping.2.7.3\lib\net40-client\SimpleInjector.Extensions.LifetimeScoping.dll</HintPath>
+    </Reference>
+    <Reference Include="SimpleInjector.Integration.Wcf">
+      <HintPath>..\..\packages\SimpleInjector.Integration.Wcf.2.7.3\lib\net40\SimpleInjector.Integration.Wcf.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Configuration" />
@@ -67,7 +74,7 @@
   <ItemGroup>
     <Compile Include="Configuration\ConfigurationTools.cs" />
     <Compile Include="Data\ApplicationRepository.cs" />
-    <Compile Include="Security\SecurityAuditLogger.cs" />
+    <Compile Include="Security\IdentityManager.cs" />
     <Compile Include="Service\MessageInspector.cs" />
     <Compile Include="Tools\MappingHelper.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -76,8 +83,6 @@
     <Compile Include="Providers\HostApplicationProvider.cs" />
     <Compile Include="Providers\ServiceCallHeaderParametersProvider.cs" />
     <Compile Include="Providers\ServiceConfigurationProvider.cs" />
-    <Compile Include="Security\ServiceIdentity.cs" />
-    <Compile Include="Security\ApplicationPrincipal.cs" />
     <Compile Include="Security\ApplicationAuthenticator.cs" />
     <Compile Include="Security\AuthenticationManager.cs" />
     <Compile Include="Security\AuthorizationAdministrator.cs" />

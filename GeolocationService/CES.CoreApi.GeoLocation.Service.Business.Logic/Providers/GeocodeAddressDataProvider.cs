@@ -1,6 +1,5 @@
 ﻿using CES.CoreApi.Common.Enumerations;
 using CES.CoreApi.Common.Exceptions;
-using CES.CoreApi.Foundation.Contract.Enumerations;
 using CES.CoreApi.GeoLocation.Service.Business.Contract.Enumerations;
 using CES.CoreApi.GeoLocation.Service.Business.Contract.Interfaces;
 using CES.CoreApi.GeoLocation.Service.Business.Contract.Models;
@@ -12,19 +11,24 @@ namespace CES.CoreApi.GeoLocation.Service.Business.Logic.Providers
          #region Core
 
         private readonly IDataResponseProvider _responseProvider;
-        private readonly IEntityFactory _entityFactory;
+        private readonly IUrlBuilderFactory _urlBuilderFactory;
+        private readonly IResponseParserFactory _responseParserFactory;
 
-        public GeocodeAddressDataProvider(IDataResponseProvider responseProvider, IEntityFactory entityFactory)
+        public GeocodeAddressDataProvider(IDataResponseProvider responseProvider, IUrlBuilderFactory urlBuilderFactory, IResponseParserFactory responseParserFactory)
         {
             if (responseProvider == null)
                 throw new CoreApiException(TechnicalSubSystem.GeoLocationService,
                   SubSystemError.GeneralRequiredParameterIsUndefined, "responseProvider");
-            if (entityFactory == null)
+            if (urlBuilderFactory == null)
                 throw new CoreApiException(TechnicalSubSystem.GeoLocationService,
-                  SubSystemError.GeneralRequiredParameterIsUndefined, "entityFactory");
+                  SubSystemError.GeneralRequiredParameterIsUndefined, "urlBuilderFactory");
+            if (responseParserFactory == null)
+                throw new CoreApiException(TechnicalSubSystem.GeoLocationService,
+                  SubSystemError.GeneralRequiredParameterIsUndefined, "responseParserFactory");
 
             _responseProvider = responseProvider;
-            _entityFactory = entityFactory;
+            _urlBuilderFactory = urlBuilderFactory;
+            _responseParserFactory = responseParserFactory;
         }
 
         #endregion
@@ -34,7 +38,7 @@ namespace CES.CoreApi.GeoLocation.Service.Business.Logic.Providers
         public GeocodeAddressResponseModel Geocode(AddressModel address, DataProviderType providerType, LevelOfConfidence acceptableConfidence)
         {
             //Build data provider URL
-            var urlBuilder = _entityFactory.GetInstance<IUrlBuilder>(providerType, FactoryEntity.UrlBuilder);
+            var urlBuilder = _urlBuilderFactory.GetInstance<IUrlBuilder>(providerType, FactoryEntity.UrlBuilder);
             var url = urlBuilder.BuildUrl(address);
 
             return Process(providerType, acceptableConfidence, url);
@@ -43,7 +47,7 @@ namespace CES.CoreApi.GeoLocation.Service.Business.Logic.Providers
         public GeocodeAddressResponseModel Geocode(string address, DataProviderType providerType, LevelOfConfidence acceptableConfidence)
         {
             //Build data provider URL
-            var urlBuilder = _entityFactory.GetInstance<IUrlBuilder>(providerType, FactoryEntity.UrlBuilder);
+            var urlBuilder = _urlBuilderFactory.GetInstance<IUrlBuilder>(providerType, FactoryEntity.UrlBuilder);
             var url = urlBuilder.BuildUrl(address);
 
             return Process(providerType, acceptableConfidence, url);
@@ -52,7 +56,7 @@ namespace CES.CoreApi.GeoLocation.Service.Business.Logic.Providers
         public GeocodeAddressResponseModel ReverseGeocode(LocationModel location, DataProviderType providerType, LevelOfConfidence acceptableConfidence)
         {
             //Build data provider URL
-            var urlBuilder = _entityFactory.GetInstance<IUrlBuilder>(providerType, FactoryEntity.UrlBuilder);
+            var urlBuilder = _urlBuilderFactory.GetInstance<IUrlBuilder>(providerType, FactoryEntity.UrlBuilder);
             var url = urlBuilder.BuildUrl(location);
 
             return Process(providerType, acceptableConfidence, url);
@@ -68,8 +72,8 @@ namespace CES.CoreApi.GeoLocation.Service.Business.Logic.Providers
             var rawResponse = _responseProvider.GetResponse(url, providerType);
 
             //Parse raw response
-            var parser = _entityFactory.GetInstance<IResponseParser>(providerType, FactoryEntity.Parser);
-            var responseModel = parser.Parse(rawResponse, acceptableConfidence);
+            var parser = _responseParserFactory.GetInstance<IResponseParser>(providerType, FactoryEntity.Parser);
+            var responseModel = parser.ParseGeocodeAddressResponse(rawResponse, acceptableConfidence);
 
             return responseModel;
         }

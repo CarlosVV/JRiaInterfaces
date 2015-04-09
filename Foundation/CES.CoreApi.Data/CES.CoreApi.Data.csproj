@@ -55,8 +55,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="BaseGenericRepository.cs" />
-    <Compile Include="Base\BaseRepository.cs" />
+    <Compile Include="Base\BaseGenericRepository.cs" />
     <Compile Include="DatabaseRequest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Utility\DatabaseRequestExtensions.cs" />

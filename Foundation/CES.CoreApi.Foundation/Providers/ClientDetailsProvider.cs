@@ -2,7 +2,7 @@
 using System.Security.Principal;
 using System.ServiceModel;
 using CES.CoreApi.Foundation.Contract.Interfaces;
-using CES.CoreApi.Foundation.Security;
+using CES.CoreApi.Foundation.Contract.Models;
 
 namespace CES.CoreApi.Foundation.Providers
 {
@@ -36,7 +36,7 @@ namespace CES.CoreApi.Foundation.Providers
             clientDetails.Add("Is Authenticated", clientIdentity.IsAuthenticated);
             clientDetails.Add("Authentication Type", clientIdentity.AuthenticationType);
 
-            var serviceIdentity = clientIdentity as ServiceIdentity;
+            var serviceIdentity = clientIdentity as ClientApplicationIdentity;
             if (serviceIdentity != null)
                 clientDetails.Add("Application ID", serviceIdentity.ApplicationId);
 

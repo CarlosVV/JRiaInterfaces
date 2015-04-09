@@ -2,18 +2,16 @@
 using CES.CoreApi.Common.Enumerations;
 using CES.CoreApi.Common.Exceptions;
 using CES.CoreApi.Common.Models;
-using CES.CoreApi.Foundation.Contract.Enumerations;
-using CES.CoreApi.Foundation.Contract.Models;
 
-namespace CES.CoreApi.Foundation.Security
+namespace CES.CoreApi.Foundation.Contract.Models
 {
-    public class ServiceIdentity : IIdentity
+    public class ClientApplicationIdentity : IIdentity
     {
         #region Core
 
         private readonly Application _application;
 
-        public ServiceIdentity(Application application)
+        public ClientApplicationIdentity(Application application)
         {
             if (application == null)
                 throw new CoreApiException(TechnicalSubSystem.GeoLocationService,

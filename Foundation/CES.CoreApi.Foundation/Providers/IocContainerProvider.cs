@@ -1,21 +1,21 @@
 ﻿using System;
 using CES.CoreApi.Common.Enumerations;
 using CES.CoreApi.Common.Exceptions;
-using CES.CoreApi.Common.Interfaces;
-using CES.CoreApi.Foundation.Contract.Enumerations;
+using SimpleInjector;
 
 namespace CES.CoreApi.Foundation.Providers
 {
     internal class IocContainerProvider
     {
-        private static IIocContainer _instance;
-        public void Initialize(IIocContainer container)
+        private static Container _instance;
+        public void Initialize(Container container)
         {
-            if (container == null) throw new ArgumentNullException("container");
+            if (container == null) 
+                throw new ArgumentNullException("container");
             Instance = container;
         }
 
-        public static IIocContainer Instance
+        public static Container Instance
         {
             get
             {

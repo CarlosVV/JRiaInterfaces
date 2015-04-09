@@ -26,14 +26,14 @@ namespace CES.CoreApi.GeoLocation.Service.Business.Logic.UnitTest
         [TestMethod]
         public void Constructor_ConfigurationProviderIsNull_ExceptionRaised()
         {
-            ExceptionHelper.CheckException(() => new CountryConfigurationProvider(null),
+            ExceptionHelper.CheckException(() => new CountryConfigurationProvider(null, null),
                SubSystemError.GeneralRequiredParameterIsUndefined, "configurationProvider");
         }
 
         [TestMethod]
         public void Constructor_HappyPath()
         {
-            ExceptionHelper.CheckHappyPath(() => new CountryConfigurationProvider(_configurationProvider.Object));
+            ExceptionHelper.CheckHappyPath(() => new CountryConfigurationProvider(_configurationProvider.Object, null));
         }
 
         [TestMethod]
@@ -43,7 +43,7 @@ namespace CES.CoreApi.GeoLocation.Service.Business.Logic.UnitTest
                 ConfigurationConstants.DataProviderServiceConfiguration))
                 .Returns(TestModelsProvider.GetCountryConfigurations());
             
-            var result = new CountryConfigurationProvider(_configurationProvider.Object).GetProviderConfigurationByCountry(FoundCountry);
+            var result = new CountryConfigurationProvider(_configurationProvider.Object, null).GetProviderConfigurationByCountry(FoundCountry);
 
             Assert.IsNotNull(result);
             Assert.AreEqual(FoundCountry, result.CountryCode);
@@ -56,7 +56,7 @@ namespace CES.CoreApi.GeoLocation.Service.Business.Logic.UnitTest
                 ConfigurationConstants.DataProviderServiceConfiguration))
                 .Returns(TestModelsProvider.GetCountryConfigurations());
 
-            var result = new CountryConfigurationProvider(_configurationProvider.Object).GetProviderConfigurationByCountry(NotFoundCountry);
+            var result = new CountryConfigurationProvider(_configurationProvider.Object, null).GetProviderConfigurationByCountry(NotFoundCountry);
 
             Assert.IsNotNull(result);
             Assert.AreEqual("Default", result.CountryCode, true);

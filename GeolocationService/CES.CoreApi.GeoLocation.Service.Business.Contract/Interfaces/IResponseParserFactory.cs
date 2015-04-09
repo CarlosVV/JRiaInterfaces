@@ -2,8 +2,8 @@
 
 namespace CES.CoreApi.GeoLocation.Service.Business.Contract.Interfaces
 {
-    public interface IRegistrationNameProvider
+    public interface IResponseParserFactory
     {
-        string GetRegistrationName(DataProviderType providerType, FactoryEntity entity);
+        T GetInstance<T>(DataProviderType providerType, FactoryEntity entity) where T : class;
     }
 }

@@ -6,7 +6,6 @@ using System.ServiceModel.Channels;
 using CES.CoreApi.Common.Enumerations;
 using CES.CoreApi.Common.Exceptions;
 using CES.CoreApi.Common.Models;
-using CES.CoreApi.Foundation.Contract.Enumerations;
 using CES.CoreApi.Foundation.Contract.Interfaces;
 using CES.CoreApi.Foundation.Contract.Models;
 using CES.CoreApi.Logging.Interfaces;
@@ -21,12 +20,12 @@ namespace CES.CoreApi.Foundation.Security
         private readonly IApplicationValidator _applicationValidator;
         private readonly IApplicationRepository _repository;
         private readonly IServiceCallHeaderParametersProvider _parametersProvider;
-        private readonly ISecurityAuditLogger _securityAuditLogger;
+        private readonly ISecurityLogMonitor _securityLogMonitor;
         private readonly IHostApplicationProvider _hostApplicationProvider;
 
         public ApplicationAuthenticator(IApplicationValidator applicationValidator,
             IApplicationRepository repository, IServiceCallHeaderParametersProvider parametersProvider,
-            ISecurityAuditLogger securityAuditLogger, IHostApplicationProvider hostApplicationProvider)
+            ILogMonitorFactory logMonitorFactory, IHostApplicationProvider hostApplicationProvider)
         {
             if (applicationValidator == null)
                 throw new CoreApiException(TechnicalSubSystem.GeoLocationService,
@@ -37,9 +36,9 @@ namespace CES.CoreApi.Foundation.Security
             if (parametersProvider == null)
                 throw new CoreApiException(TechnicalSubSystem.GeoLocationService,
                     SubSystemError.GeneralRequiredParameterIsUndefined, "parametersProvider");
-            if (securityAuditLogger == null)
+            if (logMonitorFactory == null)
                 throw new CoreApiException(TechnicalSubSystem.GeoLocationService,
-                    SubSystemError.GeneralRequiredParameterIsUndefined, "securityAuditLogger");
+                    SubSystemError.GeneralRequiredParameterIsUndefined, "logMonitorFactory");
             if (hostApplicationProvider == null)
                 throw new CoreApiException(TechnicalSubSystem.GeoLocationService,
                     SubSystemError.GeneralRequiredParameterIsUndefined, "hostApplicationProvider");
@@ -47,8 +46,8 @@ namespace CES.CoreApi.Foundation.Security
             _applicationValidator = applicationValidator;
             _repository = repository;
             _parametersProvider = parametersProvider;
-            _securityAuditLogger = securityAuditLogger;
             _hostApplicationProvider = hostApplicationProvider;
+            _securityLogMonitor = logMonitorFactory.CreateNew<ISecurityLogMonitor>();
         }
 
         #endregion
@@ -70,7 +69,7 @@ namespace CES.CoreApi.Foundation.Security
 
         private static void SetApplicationPrincipal(Message message, Application clientApplication)
         {
-            var identity = new ServiceIdentity(clientApplication);
+            var identity = new ClientApplicationIdentity(clientApplication);
             IPrincipal applicationPrincipal = new ApplicationPrincipal(identity);
             message.Properties["Principal"] = applicationPrincipal;
         }
@@ -95,7 +94,7 @@ namespace CES.CoreApi.Foundation.Security
                 var auditParameters = GetAuditParameters(headerParameters);
 
                 //Log security audit failure
-                _securityAuditLogger.LogFailure(auditParameters, exception.ClientMessage);
+                _securityLogMonitor.LogFailure(auditParameters, exception.ClientMessage);
 
                 throw exception;
             }
@@ -110,7 +109,7 @@ namespace CES.CoreApi.Foundation.Security
                 var auditParameters = GetAuditParameters(headerParameters);
 
                 //Log security audit failure
-                _securityAuditLogger.LogFailure(auditParameters, exception.ClientMessage);
+                _securityLogMonitor.LogFailure(auditParameters, exception.ClientMessage);
 
                 throw exception;
             }

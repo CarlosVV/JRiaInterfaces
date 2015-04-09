@@ -1,5 +1,4 @@
 ﻿using CES.CoreApi.Common.Enumerations;
-using CES.CoreApi.Foundation.Contract.Enumerations;
 using CES.CoreApi.GeoLocation.Service.Business.Contract.Enumerations;
 using CES.CoreApi.GeoLocation.Service.Business.Contract.Interfaces;
 using CES.CoreApi.GeoLocation.Service.Business.Contract.Models;
@@ -13,7 +12,8 @@ namespace CES.CoreApi.GeoLocation.Service.Business.Logic.UnitTest
     [TestClass]
     public class AddressVerificationDataProviderUnitTests
     {
-        private Mock<IEntityFactory> _entityFactory;
+        private Mock<IUrlBuilderFactory> _urlBuilderFactory;
+        private Mock<IResponseParserFactory> _responseParserFactory;
         private Mock<IDataResponseProvider> _responseProvider;
         private Mock<IUrlBuilder> _urlBuilder;
         private Mock<IResponseParser> _responseParser;
@@ -21,7 +21,8 @@ namespace CES.CoreApi.GeoLocation.Service.Business.Logic.UnitTest
         [TestInitialize]
         public void Setup()
         {
-            _entityFactory = new Mock<IEntityFactory>();
+            _urlBuilderFactory = new Mock<IUrlBuilderFactory>();
+            _responseParserFactory = new Mock<IResponseParserFactory>();
             _responseProvider = new Mock<IDataResponseProvider>();
             _urlBuilder = new Mock<IUrlBuilder>();
             _responseParser = new Mock<IResponseParser>();
@@ -30,10 +31,10 @@ namespace CES.CoreApi.GeoLocation.Service.Business.Logic.UnitTest
         #region Constructor tests
 
         [TestMethod]
-        public void Constructor_EntityFactoryIsNull_ExceptionRaised()
+        public void Constructor_UrlBuilderFactoryIsNull_ExceptionRaised()
         {
             ExceptionHelper.CheckException(
-                () => new AddressVerificationDataProvider(_responseProvider.Object, null),
+                () => new AddressVerificationDataProvider(_responseProvider.Object, null, _responseParserFactory.Object),
                 SubSystemError.GeneralRequiredParameterIsUndefined, "entityFactory");
         }
 
@@ -41,7 +42,7 @@ namespace CES.CoreApi.GeoLocation.Service.Business.Logic.UnitTest
         public void Constructor_ResponseProviderIsNull_ExceptionRaised()
         {
             ExceptionHelper.CheckException(
-                () => new AddressVerificationDataProvider(null, _entityFactory.Object),
+                () => new AddressVerificationDataProvider(null, _urlBuilderFactory.Object, _responseParserFactory.Object),
                 SubSystemError.GeneralRequiredParameterIsUndefined, "responseProvider");
         }
 
@@ -49,7 +50,7 @@ namespace CES.CoreApi.GeoLocation.Service.Business.Logic.UnitTest
         public void Constructor_HappyPath()
         {
             ExceptionHelper.CheckHappyPath(
-                () => new AddressVerificationDataProvider(_responseProvider.Object, _entityFactory.Object));
+                () => new AddressVerificationDataProvider(_responseProvider.Object, _urlBuilderFactory.Object, _responseParserFactory.Object));
         }
 
         #endregion
@@ -57,7 +58,7 @@ namespace CES.CoreApi.GeoLocation.Service.Business.Logic.UnitTest
         [TestMethod]
         public void Verify_AddressModel_HappyPath()
         {
-            _entityFactory.Setup(
+            _urlBuilderFactory.Setup(
                 p => p.GetInstance<IUrlBuilder>(It.IsAny<DataProviderType>(), It.IsAny<FactoryEntity>()))
                 .Returns(_urlBuilder.Object);
 
@@ -69,27 +70,27 @@ namespace CES.CoreApi.GeoLocation.Service.Business.Logic.UnitTest
                .Returns(It.IsAny<DataResponse>())
                .Verifiable();
             
-            _entityFactory.Setup(
+            _urlBuilderFactory.Setup(
                 p => p.GetInstance<IResponseParser>(It.IsAny<DataProviderType>(), It.IsAny<FactoryEntity>()))
                 .Returns(_responseParser.Object);
             
-            _responseParser.Setup(p => p.Parse(It.IsAny<DataResponse>(), It.IsAny<LevelOfConfidence>(), It.IsAny<bool>()))
+            _responseParser.Setup(p => p.ParseValidateAddressResponse(It.IsAny<DataResponse>(), It.IsAny<LevelOfConfidence>()))
                 .Returns(new ValidateAddressResponseModel())
                 .Verifiable();
 
-            var result = new AddressVerificationDataProvider(_responseProvider.Object, _entityFactory.Object).Verify(
-                It.IsAny<AddressModel>(), It.IsAny<DataProviderType>(), It.IsAny<LevelOfConfidence>(), It.IsAny<bool>());
+            var result = new AddressVerificationDataProvider(_responseProvider.Object, _urlBuilderFactory.Object, _responseParserFactory.Object).Verify(
+                It.IsAny<AddressModel>(), It.IsAny<DataProviderType>(), It.IsAny<LevelOfConfidence>());
 
             _urlBuilder.Verify(p => p.BuildUrl(It.IsAny<AddressModel>()), Times.Once);
             _responseProvider.Verify(p => p.GetResponse(It.IsAny<string>(), It.IsAny<DataProviderType>()), Times.Once);
-            _responseParser.Verify(p => p.Parse(It.IsAny<DataResponse>(), It.IsAny<LevelOfConfidence>(), It.IsAny<bool>()), Times.Once);
+            _responseParser.Verify(p => p.ParseValidateAddressResponse(It.IsAny<DataResponse>(), It.IsAny<LevelOfConfidence>()), Times.Once);
             Assert.IsNotNull(result);
         }
 
         [TestMethod]
         public void Verify_FormattedAddress_HappyPath()
         {
-            _entityFactory.Setup(
+            _urlBuilderFactory.Setup(
                 p => p.GetInstance<IUrlBuilder>(It.IsAny<DataProviderType>(), It.IsAny<FactoryEntity>()))
                 .Returns(_urlBuilder.Object);
 
@@ -101,20 +102,20 @@ namespace CES.CoreApi.GeoLocation.Service.Business.Logic.UnitTest
                .Returns(It.IsAny<DataResponse>())
                .Verifiable();
 
-            _entityFactory.Setup(
+            _urlBuilderFactory.Setup(
                 p => p.GetInstance<IResponseParser>(It.IsAny<DataProviderType>(), It.IsAny<FactoryEntity>()))
                 .Returns(_responseParser.Object);
 
-            _responseParser.Setup(p => p.Parse(It.IsAny<DataResponse>(), It.IsAny<LevelOfConfidence>(), It.IsAny<bool>()))
+            _responseParser.Setup(p => p.ParseValidateAddressResponse(It.IsAny<DataResponse>(), It.IsAny<LevelOfConfidence>()))
                 .Returns(new ValidateAddressResponseModel())
                 .Verifiable();
 
-            var result = new AddressVerificationDataProvider(_responseProvider.Object, _entityFactory.Object).Verify(
-                It.IsAny<string>(), It.IsAny<DataProviderType>(), It.IsAny<LevelOfConfidence>(), It.IsAny<bool>());
+            var result = new AddressVerificationDataProvider(_responseProvider.Object, _urlBuilderFactory.Object, _responseParserFactory.Object).Verify(
+                It.IsAny<string>(), It.IsAny<DataProviderType>(), It.IsAny<LevelOfConfidence>());
 
             _urlBuilder.Verify(p => p.BuildUrl(It.IsAny<string>()), Times.Once);
             _responseProvider.Verify(p => p.GetResponse(It.IsAny<string>(), It.IsAny<DataProviderType>()), Times.Once);
-            _responseParser.Verify(p => p.Parse(It.IsAny<DataResponse>(), It.IsAny<LevelOfConfidence>(), It.IsAny<bool>()), Times.Once);
+            _responseParser.Verify(p => p.ParseValidateAddressResponse(It.IsAny<DataResponse>(), It.IsAny<LevelOfConfidence>()), Times.Once);
             Assert.IsNotNull(result);
         }
     }

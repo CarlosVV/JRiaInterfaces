@@ -45,9 +45,10 @@ namespace CES.CoreApi.GeoLocation.Service.Business.Logic.Parsers
         /// </summary>
         /// <param name="dataResponse">Data response instance</param>
         /// <param name="maxRecords">Number of records to return</param>
+        /// <param name="confidence"></param>
         /// <param name="country">Country code</param>
         /// <returns></returns>
-        public AutocompleteAddressResponseModel Parse(DataResponse dataResponse, int maxRecords, string country = null)
+        public AutocompleteAddressResponseModel ParseAutocompleteAddressResponse(DataResponse dataResponse, int maxRecords, LevelOfConfidence confidence, string country = null)
         {
             var rootElement = GetResponseDocument(dataResponse);
 
@@ -61,16 +62,14 @@ namespace CES.CoreApi.GeoLocation.Service.Business.Logic.Parsers
         /// </summary>
         /// <param name="dataResponse">Data response instance</param>
         /// <param name="acceptableConfidence">Acceptable level of confidence</param>
-        /// <param name="includeLocation">Defines whether location information should be populated</param>
         /// <returns></returns>
-        public ValidateAddressResponseModel Parse(DataResponse dataResponse, LevelOfConfidence acceptableConfidence,
-            bool includeLocation)
+        public ValidateAddressResponseModel ParseValidateAddressResponse(DataResponse dataResponse, LevelOfConfidence acceptableConfidence)
         {
             var rootElement = GetResponseDocument(dataResponse);
 
             return rootElement == null
                 ? GetInvalidAddressVerificationResponse()
-                : GetAddressVerificationResponse(rootElement, acceptableConfidence, includeLocation);
+                : GetAddressVerificationResponse(rootElement, acceptableConfidence);
         }
 
         /// <summary>
@@ -79,7 +78,7 @@ namespace CES.CoreApi.GeoLocation.Service.Business.Logic.Parsers
         /// <param name="dataResponse">Data response instance</param>
         /// <param name="acceptableConfidence">Acceptable level of confidence</param>
         /// <returns></returns>
-        public GeocodeAddressResponseModel Parse(DataResponse dataResponse, LevelOfConfidence acceptableConfidence)
+        public GeocodeAddressResponseModel ParseGeocodeAddressResponse(DataResponse dataResponse, LevelOfConfidence acceptableConfidence)
         {
             var rootElement = GetResponseDocument(dataResponse);
 
@@ -88,7 +87,7 @@ namespace CES.CoreApi.GeoLocation.Service.Business.Logic.Parsers
                 : GetGeocodeAddressResponse(rootElement, acceptableConfidence);
         }
 
-        public GetMapResponseModel Parse(BinaryDataResponse dataResponse)
+        public GetMapResponseModel ParseMapResponse(BinaryDataResponse dataResponse)
         {
             throw new CoreApiException(TechnicalSubSystem.GeoLocationService,
                 SubSystemError.GeolocationMappingIsNotSupported,
@@ -140,8 +139,11 @@ namespace CES.CoreApi.GeoLocation.Service.Business.Logic.Parsers
             responseModel.Suggestions = (from hint in addressHints
                 select new AutocompleteSuggestionModel
                 {
+                    Confidence = LevelOfConfidence.NotFound,
                     Address = _addressParser.ParseAddress(hint, country, isAutocompleteService: true)
-                }).ToList();
+                })
+                .OrderByDescending(p => p.Confidence)
+                .ToList();
 
             return responseModel;
         }
@@ -151,10 +153,8 @@ namespace CES.CoreApi.GeoLocation.Service.Business.Logic.Parsers
         /// </summary>
         /// <param name="rootElement">Response data root XML element</param>
         /// <param name="acceptableConfidence">Acceptable level of confidence</param>
-        /// <param name="includeLocation">Defines whether location information should be populated</param>
         /// <returns></returns>
-        private ValidateAddressResponseModel GetAddressVerificationResponse(XContainer rootElement,
-            LevelOfConfidence acceptableConfidence, bool includeLocation)
+        private ValidateAddressResponseModel GetAddressVerificationResponse(XContainer rootElement, LevelOfConfidence acceptableConfidence)
         {
             var records = rootElement.Elements(_xNamespace + MelissaConstants.Records).ToList();
             if (!records.Any())
@@ -168,12 +168,8 @@ namespace CES.CoreApi.GeoLocation.Service.Business.Logic.Parsers
             var responseModel = GetValidAddressVerificationResponse(matchRecord.Item1);
             responseModel.Address = _addressParser.ParseAddress(matchRecord.Item2, _xNamespace);
 
-            if (!includeLocation)
-                return responseModel;
-
             //Populates location of verified address
             responseModel.Location = GetLocation(matchRecord.Item2);
-            responseModel.GeocodingProvider = ProviderType;
 
             return responseModel;
         }

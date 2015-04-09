@@ -3,7 +3,6 @@ using System.ServiceModel;
 using CES.CoreApi.Common.Constants;
 using CES.CoreApi.Common.Enumerations;
 using CES.CoreApi.Common.Exceptions;
-using CES.CoreApi.Foundation.Contract.Enumerations;
 using CES.CoreApi.Foundation.Contract.Interfaces;
 using CES.CoreApi.GeoLocation.Service.Business.Contract.Enumerations;
 using CES.CoreApi.GeoLocation.Service.Business.Contract.Interfaces;
@@ -100,7 +99,8 @@ namespace CES.CoreApi.GeoLocation.Service
                 request.Country,
                 request.AdministrativeArea,
                 request.Address,
-                request.MaxRecords);
+                request.MaxRecords,
+                _mapper.ConvertTo<Confidence, LevelOfConfidence>(request.MinimumConfidence));
 
             return _mapper.ConvertToResponse<AutocompleteAddressResponseModel, AutocompleteAddressResponse>(responseModel);
         }

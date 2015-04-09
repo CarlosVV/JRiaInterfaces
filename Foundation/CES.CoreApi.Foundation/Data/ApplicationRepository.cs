@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Data;
-using System.Data.Common;
+using System.Data.SqlClient;
 using System.Linq;
 using CES.CoreApi.Common.Constants;
 using CES.CoreApi.Common.Enumerations;
@@ -14,12 +15,12 @@ using CES.CoreApi.Logging.Interfaces;
 
 namespace CES.CoreApi.Foundation.Data
 {
-    public class ApplicationRepository: BaseRepository, IApplicationRepository
+    public class ApplicationRepository: BaseGenericRepository, IApplicationRepository
     {
         #region Core
 
-        public ApplicationRepository(ICacheProvider cacheProvider,  IDatabasePerformanceLogMonitor performanceMonitor)
-            : base(cacheProvider, performanceMonitor, ConnectionStrings.Main)
+        public ApplicationRepository(ICacheProvider cacheProvider, ILogMonitorFactory logMonitorFactory)
+            : base(cacheProvider, logMonitorFactory, ConnectionStrings.Main)
         {
         }
 
@@ -34,15 +35,18 @@ namespace CES.CoreApi.Foundation.Data
         /// <returns></returns>
         public Application GetApplication(int applicationId)
         {
-            return CacheProvider.GetItem(string.Format("GetApplication-{0}", applicationId), () =>
+            var request = new DatabaseRequest<Application>
             {
-                using (var cmd = Database.GetStoredProcCommand("coreapi_sp_GetApplicationByID"))
+                ProcedureName = "coreapi_sp_GetApplicationByID",
+                IsCacheable = true,
+                Parameters = new Collection<SqlParameter>
                 {
-                    Database.AddInParameter(cmd, "applicationID", DbType.Int32, applicationId);
+                    new SqlParameter("@applicationID", applicationId)
+                },
+                Shaper = reader => GetApplication(reader, applicationId)
+            };
 
-                    return GetApplication(cmd, applicationId);
-                }
-            });
+            return Get(request);
         }
 
         /// <summary>
@@ -69,30 +73,27 @@ namespace CES.CoreApi.Foundation.Data
 
         #region Private methods
 
-        private Application GetApplication(DbCommand cmd, int applicationId)
+        private Application GetApplication(IDataReader reader, int applicationId)
         {
-            return ExecuteReader(cmd, reader =>
-            {
-                //Initialize applicaiton instance
-                var application = InitializeApplication(reader, applicationId);
-                if (application == null)
-                    return null;
-                reader.NextResult();
+            //Initialize applicaiton instance
+            var application = InitializeApplication(reader, applicationId);
+            if (application == null)
+                return null;
+            reader.NextResult();
 
-                //Initialize configuration
-                InitializeConfigurationList(reader, application);
-                reader.NextResult();
+            //Initialize configuration
+            InitializeConfigurationList(reader, application);
+            reader.NextResult();
 
-                //Initialize service operations
-                InitializeOperationList(reader, application);
-                reader.NextResult();
+            //Initialize service operations
+            InitializeOperationList(reader, application);
+            reader.NextResult();
 
-                //Initialize list of applications assigned to every operation
-                InitializeAssignedApplicationList(reader, application);
-                reader.NextResult();
+            //Initialize list of applications assigned to every operation
+            InitializeAssignedApplicationList(reader, application);
+            reader.NextResult();
 
-                return application;
-            });
+            return application;
         }
 
         private static Application InitializeApplication(IDataReader reader, int applicationId)
