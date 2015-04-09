@@ -36,7 +36,7 @@ namespace CES.CoreApi.GeoLocation.Service.Business.Logic.UnitTest
         {
             ExceptionHelper.CheckException(
                 () => new MappingDataProvider(null, _responseProvider.Object, _responseParserFactory.Object),
-                SubSystemError.GeneralRequiredParameterIsUndefined, "entityFactory");
+                SubSystemError.GeneralRequiredParameterIsUndefined, "urlBuilderFactory");
         }
 
         [TestMethod]

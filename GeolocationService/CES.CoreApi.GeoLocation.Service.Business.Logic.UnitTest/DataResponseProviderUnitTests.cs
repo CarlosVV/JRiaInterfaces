@@ -43,10 +43,10 @@ namespace CES.CoreApi.GeoLocation.Service.Business.Logic.UnitTest
         }
 
         [TestMethod]
-        public void Constructor_LogManagerIsNull_ExceptionRaised()
+        public void Constructor_LogMonitorFactoryIsNull_ExceptionRaised()
         {
             ExceptionHelper.CheckException(() => new DataResponseProvider(_httpClientProxy.Object, null, _headerProvider.Object),
-               SubSystemError.GeneralRequiredParameterIsUndefined, "logManager");
+               SubSystemError.GeneralRequiredParameterIsUndefined, "logMonitorFactory");
         }
 
         [TestMethod]

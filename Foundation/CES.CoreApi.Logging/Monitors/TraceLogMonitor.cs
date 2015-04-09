@@ -26,7 +26,7 @@ namespace CES.CoreApi.Logging.Monitors
         /// <summary>
         /// Gets or sets trace log data container instance
         /// </summary>
-        public TraceLogDataContainer DataContainer { get; private set; }
+        public ITraceLogDataContainer DataContainer { get; private set; }
 
         #endregion
 

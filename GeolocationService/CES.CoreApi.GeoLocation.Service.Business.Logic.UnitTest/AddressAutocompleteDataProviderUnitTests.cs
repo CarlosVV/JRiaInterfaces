@@ -35,7 +35,7 @@ namespace CES.CoreApi.GeoLocation.Service.Business.Logic.UnitTest
         {
             ExceptionHelper.CheckException(
                 () => new AddressAutocompleteDataProvider(null, _responseParserFactory.Object, _responseProvider.Object),
-                SubSystemError.GeneralRequiredParameterIsUndefined, "entityFactory");
+                SubSystemError.GeneralRequiredParameterIsUndefined, "urlBuilderFactory");
         }
 
         [TestMethod]

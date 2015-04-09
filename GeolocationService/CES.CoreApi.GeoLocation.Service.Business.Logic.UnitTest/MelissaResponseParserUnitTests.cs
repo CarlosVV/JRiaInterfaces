@@ -140,25 +140,6 @@ namespace CES.CoreApi.GeoLocation.Service.Business.Logic.UnitTest
         }
 
         [TestMethod]
-        public void Parse_ValidateAddressResponseModelReturned_HappyPathWithoutLocation()
-        {
-            var dataResponse = MelissaResponseParserHelper.GetValidateAddressDataResponse();
-
-            var addressModel = MelissaResponseParserHelper.GetAddressModel();
-            _addressParser.Setup(p => p.ParseAddress(It.IsAny<XElement>(), It.IsAny<XNamespace>(), It.IsAny<string>(), It.IsAny<bool>())).Returns(addressModel);
-            _levelOfConfidenceProvider.Setup(p => p.GetLevelOfConfidence(It.IsAny<string>())).Returns(LevelOfConfidence.High);
-
-            var result = new MelissaResponseParser(_addressParser.Object, _levelOfConfidenceProvider.Object).ParseValidateAddressResponse(dataResponse, LevelOfConfidence.High);
-
-            Assert.IsNotNull(result);
-            Assert.AreEqual(addressModel, result.Address);
-            Assert.IsTrue(result.IsValid);
-            Assert.AreEqual(DataProviderType.MelissaData, result.DataProvider);
-            Assert.AreEqual(LevelOfConfidence.High, result.Confidence);
-            Assert.IsNull(result.Location);
-        }
-
-        [TestMethod]
         public void Parse_DataResponseIsNull_InvalidValidateAddressResponseReturned()
         {
             var result = new MelissaResponseParser(_addressParser.Object, _levelOfConfidenceProvider.Object).ParseValidateAddressResponse(null, LevelOfConfidence.High);

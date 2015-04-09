@@ -86,28 +86,7 @@ namespace CES.CoreApi.GeoLocation.Service.Business.Logic.UnitTest
             Assert.IsTrue(result.IsValid);
             Assert.AreEqual(DataProviderType.Bing, result.DataProvider);
         }
-
-        [TestMethod]
-        public void ValidateAddress_DifferentGeocodingProvider_HappyPath()
-        {
-            var addressModel = GetAddressModel();
-            var countryConfiguration = TestModelsProvider.GetUsCountryConfiguration(true);
-            var validValidateAddressResponseModel = GetValidateAddressResponseModel(false);
-
-            _configurationProvider.Setup(p => p.ConfigurationProvider.Read<int>(ConfigurationConstants.NumberOfProvidersToProcessResult)).Returns(2);
-            _configurationProvider.Setup(p => p.GetProviderConfigurationByCountry(Country)).Returns(countryConfiguration);
-            _addressVerificationDataProvider.Setup(p => p.Verify(It.IsAny<AddressModel>(), It.IsAny<DataProviderType>(), It.IsAny<LevelOfConfidence>())).Returns(validValidateAddressResponseModel);
-
-            var result = new AddressServiceRequestProcessor(_configurationProvider.Object,
-                _addressVerificationDataProvider.Object, _addressAutocompleteDataProvider.Object).ValidateAddress(addressModel, LevelOfConfidence.High);
-
-            Assert.IsNotNull(result);
-            Assert.IsNotNull(result.Address);
-            Assert.IsNotNull(result.Location);
-            Assert.IsTrue(result.IsValid);
-            Assert.AreEqual(DataProviderType.Bing, result.DataProvider);
-        }
-
+        
         [TestMethod]
         public void ValidateAddress_NoProvidersFound_ExceptionRaised()
         {
@@ -212,27 +191,7 @@ namespace CES.CoreApi.GeoLocation.Service.Business.Logic.UnitTest
             Assert.IsTrue(result.IsValid);
             Assert.AreEqual(DataProviderType.Bing, result.DataProvider);
         }
-
-        [TestMethod]
-        public void ValidateFormattedAddress_DifferentGeocodingProvider_HappyPath()
-        {
-            var countryConfiguration = TestModelsProvider.GetUsCountryConfiguration(true);
-            var validValidateAddressResponseModel = GetValidateAddressResponseModel(false);
-
-            _configurationProvider.Setup(p => p.ConfigurationProvider.Read<int>(ConfigurationConstants.NumberOfProvidersToProcessResult)).Returns(2);
-            _configurationProvider.Setup(p => p.GetProviderConfigurationByCountry(Country)).Returns(countryConfiguration);
-            _addressVerificationDataProvider.Setup(p => p.Verify(It.IsAny<string>(), It.IsAny<DataProviderType>(), It.IsAny<LevelOfConfidence>())).Returns(validValidateAddressResponseModel);
-
-            var result = new AddressServiceRequestProcessor(_configurationProvider.Object,
-                _addressVerificationDataProvider.Object, _addressAutocompleteDataProvider.Object).ValidateAddress(FormattedAddress, Country, LevelOfConfidence.High);
-
-            Assert.IsNotNull(result);
-            Assert.IsNotNull(result.Address);
-            Assert.IsNotNull(result.Location);
-            Assert.IsTrue(result.IsValid);
-            Assert.AreEqual(DataProviderType.Bing, result.DataProvider);
-        }
-
+        
         [TestMethod]
         public void ValidateFormattedAddress_NoProvidersFound_ExceptionRaised()
         {

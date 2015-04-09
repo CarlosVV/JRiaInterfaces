@@ -35,7 +35,7 @@ namespace CES.CoreApi.GeoLocation.Service.Business.Logic.UnitTest
         {
             ExceptionHelper.CheckException(
                 () => new AddressVerificationDataProvider(_responseProvider.Object, null, _responseParserFactory.Object),
-                SubSystemError.GeneralRequiredParameterIsUndefined, "entityFactory");
+                SubSystemError.GeneralRequiredParameterIsUndefined, "urlBuilderFactory");
         }
 
         [TestMethod]
@@ -78,8 +78,10 @@ namespace CES.CoreApi.GeoLocation.Service.Business.Logic.UnitTest
                 .Returns(new ValidateAddressResponseModel())
                 .Verifiable();
 
-            var result = new AddressVerificationDataProvider(_responseProvider.Object, _urlBuilderFactory.Object, _responseParserFactory.Object).Verify(
-                It.IsAny<AddressModel>(), It.IsAny<DataProviderType>(), It.IsAny<LevelOfConfidence>());
+            _responseParserFactory.Setup(p => p.GetInstance<IResponseParser>(It.IsAny<DataProviderType>(), It.IsAny<FactoryEntity>())).Returns(_responseParser.Object);
+
+            var result = new AddressVerificationDataProvider(_responseProvider.Object, _urlBuilderFactory.Object, _responseParserFactory.Object)
+                .Verify(It.IsAny<AddressModel>(), It.IsAny<DataProviderType>(), It.IsAny<LevelOfConfidence>());
 
             _urlBuilder.Verify(p => p.BuildUrl(It.IsAny<AddressModel>()), Times.Once);
             _responseProvider.Verify(p => p.GetResponse(It.IsAny<string>(), It.IsAny<DataProviderType>()), Times.Once);
@@ -109,6 +111,8 @@ namespace CES.CoreApi.GeoLocation.Service.Business.Logic.UnitTest
             _responseParser.Setup(p => p.ParseValidateAddressResponse(It.IsAny<DataResponse>(), It.IsAny<LevelOfConfidence>()))
                 .Returns(new ValidateAddressResponseModel())
                 .Verifiable();
+
+            _responseParserFactory.Setup(p => p.GetInstance<IResponseParser>(It.IsAny<DataProviderType>(), It.IsAny<FactoryEntity>())).Returns(_responseParser.Object);
 
             var result = new AddressVerificationDataProvider(_responseProvider.Object, _urlBuilderFactory.Object, _responseParserFactory.Object).Verify(
                 It.IsAny<string>(), It.IsAny<DataProviderType>(), It.IsAny<LevelOfConfidence>());

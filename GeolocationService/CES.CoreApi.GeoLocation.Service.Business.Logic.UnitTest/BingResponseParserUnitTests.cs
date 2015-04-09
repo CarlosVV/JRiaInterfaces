@@ -43,7 +43,7 @@ namespace CES.CoreApi.GeoLocation.Service.Business.Logic.UnitTest
             var suggestionModel = BingResponseParserHelper.GetAutocompleteSuggestionModel();
             _bingAddressParser.Setup(p => p.ParseAddress(It.IsAny<XElement>(), It.IsAny<XNamespace>())).Returns(suggestionModel.Address);
 
-            var result = new BingResponseParser(_bingAddressParser.Object).ParseAutocompleteAddressResponse(dataResponse, MaxRecords, LevelOfConfidence.High, country: Country);
+            var result = new BingResponseParser(_bingAddressParser.Object).ParseAutocompleteAddressResponse(dataResponse, MaxRecords, LevelOfConfidence.Low, Country);
 
             Assert.IsNotNull(result);
             Assert.AreEqual(suggestionModel.Address, result.Suggestions[0].Address);
@@ -56,7 +56,7 @@ namespace CES.CoreApi.GeoLocation.Service.Business.Logic.UnitTest
         [TestMethod]
         public void Parse_DataResponseIsNull_InvalidAddressAutocompleteResponseReturned()
         {
-            var result = new BingResponseParser(_bingAddressParser.Object).ParseAutocompleteAddressResponse(null, MaxRecords, LevelOfConfidence.High, country: Country);
+            var result = new BingResponseParser(_bingAddressParser.Object).ParseAutocompleteAddressResponse(null, MaxRecords, LevelOfConfidence.High, Country);
 
             Assert.IsNotNull(result);
             Assert.IsFalse(result.IsValid);
@@ -67,7 +67,7 @@ namespace CES.CoreApi.GeoLocation.Service.Business.Logic.UnitTest
         public void Parse_DataResponseIsInvalid_InvalidAddressAutocompleteResponseReturned()
         {
             var dataResponse = BingResponseParserHelper.GetAutomcompleteDataResponse(true);
-            var result = new BingResponseParser(_bingAddressParser.Object).ParseAutocompleteAddressResponse(dataResponse, MaxRecords, LevelOfConfidence.High, country: Country);
+            var result = new BingResponseParser(_bingAddressParser.Object).ParseAutocompleteAddressResponse(dataResponse, MaxRecords, LevelOfConfidence.High, Country);
 
             Assert.IsNotNull(result);
             Assert.IsFalse(result.IsValid);
@@ -78,7 +78,7 @@ namespace CES.CoreApi.GeoLocation.Service.Business.Logic.UnitTest
         public void Parse_NoAddressInResponse_InvalidAddressAutocompleteResponseReturned()
         {
             var dataResponse = BingResponseParserHelper.GetAutomcompleteDataResponseNoAddress();
-            var result = new BingResponseParser(_bingAddressParser.Object).ParseAutocompleteAddressResponse(dataResponse, MaxRecords, LevelOfConfidence.High, country: Country);
+            var result = new BingResponseParser(_bingAddressParser.Object).ParseAutocompleteAddressResponse(dataResponse, MaxRecords, LevelOfConfidence.High, Country);
             
             Assert.IsNotNull(result);
             Assert.IsNull(result.Suggestions);
@@ -110,25 +110,7 @@ namespace CES.CoreApi.GeoLocation.Service.Business.Logic.UnitTest
             Assert.AreEqual(locationModel.Latitude, result.Location.Latitude);
             Assert.AreEqual(locationModel.Longitude, result.Location.Longitude);
         }
-
-        [TestMethod]
-        public void Parse_ValidateAddressResponseModelReturned_HappyPathWithoutLocation()
-        {
-            var dataResponse = BingResponseParserHelper.GetValidateAddressDataResponse();
-
-            var addressModel = BingResponseParserHelper.GetAddressModel();
-            _bingAddressParser.Setup(p => p.ParseAddress(It.IsAny<XElement>(), It.IsAny<XNamespace>())).Returns(addressModel);
-
-            var result = new BingResponseParser(_bingAddressParser.Object).ParseGeocodeAddressResponse(dataResponse, LevelOfConfidence.High);
-
-            Assert.IsNotNull(result);
-            Assert.AreEqual(addressModel, result.Address);
-            Assert.IsTrue(result.IsValid);
-            Assert.AreEqual(DataProviderType.Bing, result.DataProvider);
-            Assert.AreEqual(LevelOfConfidence.High, result.Confidence);
-            Assert.IsNull(result.Location);
-        }
-
+        
         [TestMethod]
         public void Parse_DataResponseIsNull_InvalidValidateAddressResponseReturned()
         {

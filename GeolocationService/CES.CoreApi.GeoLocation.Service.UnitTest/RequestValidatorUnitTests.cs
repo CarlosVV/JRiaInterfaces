@@ -216,7 +216,8 @@ namespace CES.CoreApi.GeoLocation.Service.UnitTest
                 Address = Address1,
                 Country = ValidCountry,
                 AdministrativeArea = AdministrativeArea,
-                MaxRecords = MaxRecords
+                MaxRecords = MaxRecords,
+                MinimumConfidence = Confidence.High
             };
 
             ExceptionHelper.CheckHappyPath(() => new RequestValidator().Validate(request));

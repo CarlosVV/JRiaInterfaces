@@ -11,7 +11,7 @@ using Newtonsoft.Json.Converters;
 namespace CES.CoreApi.Logging.Models
 {
     [DataContract]
-    public class TraceLogDataContainer : IDataContainer
+    public class TraceLogDataContainer : IDataContainer, ITraceLogDataContainer
     {
         #region Core
 

@@ -16,21 +16,21 @@ namespace CES.CoreApi.GeoLocation.Service.Business.Logic.Processors
         #region Core
 
         private readonly IHostApplicationProvider _hostApplicationProvider;
-        private readonly ITraceLogMonitor _traceMonitor;
+        private readonly ILogMonitorFactory _logMonitorFactory;
 
         public ClientSideSupportServiceProcessor(ICountryConfigurationProvider configurationProvider, IHostApplicationProvider hostApplicationProvider,
-            ITraceLogMonitor traceMonitor)
+            ILogMonitorFactory logMonitorFactory)
             : base(configurationProvider)
         {
             if (hostApplicationProvider == null)
                 throw new CoreApiException(TechnicalSubSystem.GeoLocationService,
                   SubSystemError.GeneralRequiredParameterIsUndefined, "hostApplicationProvider");
-            if (traceMonitor == null)
+            if (logMonitorFactory == null)
                 throw new CoreApiException(TechnicalSubSystem.GeoLocationService,
-                  SubSystemError.GeneralRequiredParameterIsUndefined, "traceMonitor");
+                  SubSystemError.GeneralRequiredParameterIsUndefined, "logMonitorFactory");
 
             _hostApplicationProvider = hostApplicationProvider;
-            _traceMonitor = traceMonitor;
+            _logMonitorFactory = logMonitorFactory;
         }
 
         #endregion
@@ -59,10 +59,11 @@ namespace CES.CoreApi.GeoLocation.Service.Business.Logic.Processors
 
         public void LogEvent(DataProviderType providerType, string message)
         {
-            _traceMonitor.DataContainer.ProviderType = providerType.ToString();
-            _traceMonitor.DataContainer.ClientSideMessage = message;
-            _traceMonitor.Start();
-            _traceMonitor.Stop();
+            var traceMonitor = _logMonitorFactory.CreateNew<ITraceLogMonitor>();
+            traceMonitor.DataContainer.ProviderType = providerType.ToString();
+            traceMonitor.DataContainer.ClientSideMessage = message;
+            traceMonitor.Start();
+            traceMonitor.Stop();
         }
 
         #endregion

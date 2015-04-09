@@ -45,7 +45,7 @@ namespace CES.CoreApi.GeoLocation.Service.Business.Logic.UnitTest
         {
             ExceptionHelper.CheckException(
                 () => new GeocodeAddressDataProvider(_responseProvider.Object, null, _responseParserFactory.Object),
-                SubSystemError.GeneralRequiredParameterIsUndefined, "entityFactory");
+                SubSystemError.GeneralRequiredParameterIsUndefined, "urlBuilderFactory");
         }
 
         [TestMethod]
