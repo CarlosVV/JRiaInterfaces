@@ -19,9 +19,9 @@ namespace CES.CoreApi.GeoLocation.Service.Business.Logic.Factories
 
         #region Public methods
 
-        public T GetInstance<T>(DataProviderType providerType, FactoryEntity entity) where T : class
+        public T GetInstance<T>(DataProviderType providerType) where T : class
         {
-            var name = GetRegistrationName(providerType, entity);
+            var name = GetRegistrationName(providerType);
             return this[name]() as T;
         }
 
@@ -29,17 +29,12 @@ namespace CES.CoreApi.GeoLocation.Service.Business.Logic.Factories
 
         #region private methods
 
-        private static string GetRegistrationName(DataProviderType providerType, FactoryEntity entity)
+        private static string GetRegistrationName(DataProviderType providerType)
         {
             if (providerType == DataProviderType.Undefined)
                 throw new CoreApiException(TechnicalSubSystem.GeoLocationService,
                     SubSystemError.GeneralInvalidParameterValue,
                     "providerType", providerType);
-
-            if (entity == FactoryEntity.Undefined)
-                throw new CoreApiException(TechnicalSubSystem.GeoLocationService,
-                    SubSystemError.GeneralInvalidParameterValue,
-                    "entity", entity);
 
             return string.Format(
                 CultureInfo.InvariantCulture,

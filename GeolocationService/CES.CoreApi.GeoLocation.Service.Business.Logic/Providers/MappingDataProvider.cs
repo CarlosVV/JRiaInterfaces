@@ -46,7 +46,7 @@ namespace CES.CoreApi.GeoLocation.Service.Business.Logic.Providers
             var rawResponse = _responseProvider.GetBinaryResponse(url, providerType);
 
             //Parse raw response
-            var parser = _responseParserFactory.GetInstance<IResponseParser>(providerType, FactoryEntity.Parser);
+            var parser = _responseParserFactory.GetInstance<IResponseParser>(providerType);
             var responseModel = parser.ParseMapResponse(rawResponse);
 
             return responseModel;

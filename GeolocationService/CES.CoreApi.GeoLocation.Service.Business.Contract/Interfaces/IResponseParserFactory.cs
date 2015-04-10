@@ -4,6 +4,6 @@ namespace CES.CoreApi.GeoLocation.Service.Business.Contract.Interfaces
 {
     public interface IResponseParserFactory
     {
-        T GetInstance<T>(DataProviderType providerType, FactoryEntity entity) where T : class;
+        T GetInstance<T>(DataProviderType providerType) where T : class;
     }
 }

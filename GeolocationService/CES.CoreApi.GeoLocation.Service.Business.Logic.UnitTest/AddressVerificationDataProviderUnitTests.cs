@@ -78,7 +78,7 @@ namespace CES.CoreApi.GeoLocation.Service.Business.Logic.UnitTest
                 .Returns(new ValidateAddressResponseModel())
                 .Verifiable();
 
-            _responseParserFactory.Setup(p => p.GetInstance<IResponseParser>(It.IsAny<DataProviderType>(), It.IsAny<FactoryEntity>())).Returns(_responseParser.Object);
+            _responseParserFactory.Setup(p => p.GetInstance<IResponseParser>(It.IsAny<DataProviderType>())).Returns(_responseParser.Object);
 
             var result = new AddressVerificationDataProvider(_responseProvider.Object, _urlBuilderFactory.Object, _responseParserFactory.Object)
                 .Verify(It.IsAny<AddressModel>(), It.IsAny<DataProviderType>(), It.IsAny<LevelOfConfidence>());
@@ -112,7 +112,7 @@ namespace CES.CoreApi.GeoLocation.Service.Business.Logic.UnitTest
                 .Returns(new ValidateAddressResponseModel())
                 .Verifiable();
 
-            _responseParserFactory.Setup(p => p.GetInstance<IResponseParser>(It.IsAny<DataProviderType>(), It.IsAny<FactoryEntity>())).Returns(_responseParser.Object);
+            _responseParserFactory.Setup(p => p.GetInstance<IResponseParser>(It.IsAny<DataProviderType>())).Returns(_responseParser.Object);
 
             var result = new AddressVerificationDataProvider(_responseProvider.Object, _urlBuilderFactory.Object, _responseParserFactory.Object).Verify(
                 It.IsAny<string>(), It.IsAny<DataProviderType>(), It.IsAny<LevelOfConfidence>());

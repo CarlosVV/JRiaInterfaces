@@ -74,7 +74,7 @@ namespace CES.CoreApi.GeoLocation.Service.Business.Logic.UnitTest
                 .Verifiable();
 
             _responseParserFactory.Setup(
-                p => p.GetInstance<IResponseParser>(It.IsAny<DataProviderType>(), It.IsAny<FactoryEntity>()))
+                p => p.GetInstance<IResponseParser>(It.IsAny<DataProviderType>()))
                 .Returns(_responseParser.Object)
                 .Verifiable();
 
@@ -89,7 +89,7 @@ namespace CES.CoreApi.GeoLocation.Service.Business.Logic.UnitTest
             _urlBuilderFactory.Verify(p => p.GetInstance<IUrlBuilder>(It.IsAny<DataProviderType>(), It.IsAny<FactoryEntity>()), Times.Once);
             _urlBuilder.Verify(p => p.BuildUrl(It.IsAny<LocationModel>(), It.IsAny<MapSizeModel>(), It.IsAny<MapOutputParametersModel>(), It.IsAny<ICollection<PushPinModel>>()), Times.Once());
             _responseProvider.Verify(p => p.GetBinaryResponse(It.IsAny<string>(), It.IsAny<DataProviderType>()), Times.Once);
-            _responseParserFactory.Verify(p => p.GetInstance<IResponseParser>(It.IsAny<DataProviderType>(), It.IsAny<FactoryEntity>()), Times.Once);
+            _responseParserFactory.Verify(p => p.GetInstance<IResponseParser>(It.IsAny<DataProviderType>()), Times.Once);
             _responseParser.Verify(p => p.ParseMapResponse(It.IsAny<BinaryDataResponse>()), Times.Once);
         }
 

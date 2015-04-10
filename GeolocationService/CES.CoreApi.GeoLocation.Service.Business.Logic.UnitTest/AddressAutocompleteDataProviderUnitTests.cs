@@ -63,7 +63,7 @@ namespace CES.CoreApi.GeoLocation.Service.Business.Logic.UnitTest
                 .Returns(_urlBuilder.Object);
 
             _responseParserFactory.Setup(
-                p => p.GetInstance<IResponseParser>(It.IsAny<DataProviderType>(), It.IsAny<FactoryEntity>()))
+                p => p.GetInstance<IResponseParser>(It.IsAny<DataProviderType>()))
                 .Returns(_responseParser.Object);
 
             _urlBuilder.Setup(

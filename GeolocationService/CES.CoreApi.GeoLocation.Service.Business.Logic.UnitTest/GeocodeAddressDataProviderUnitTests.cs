@@ -68,7 +68,7 @@ namespace CES.CoreApi.GeoLocation.Service.Business.Logic.UnitTest
             _responseProvider.Setup(p => p.GetResponse(It.IsAny<string>(), It.IsAny<DataProviderType>()))
                 .Returns(It.IsAny<DataResponse>())
                 .Verifiable();
-            _responseParserFactory.Setup(p => p.GetInstance<IResponseParser>(It.IsAny<DataProviderType>(), FactoryEntity.Parser))
+            _responseParserFactory.Setup(p => p.GetInstance<IResponseParser>(It.IsAny<DataProviderType>()))
                 .Returns(_responseParser.Object)
                 .Verifiable();
             _responseParser.Setup(p => p.ParseGeocodeAddressResponse(It.IsAny<DataResponse>(), It.IsAny<LevelOfConfidence>()))
@@ -81,7 +81,7 @@ namespace CES.CoreApi.GeoLocation.Service.Business.Logic.UnitTest
             _urlBuilderFactory.Verify(p => p.GetInstance<IUrlBuilder>(It.IsAny<DataProviderType>(), FactoryEntity.UrlBuilder), Times.Once);
             _urlBuilder.Verify(p => p.BuildUrl(It.IsAny<AddressModel>()), Times.Once);
             _responseProvider.Verify(p => p.GetResponse(It.IsAny<string>(), It.IsAny<DataProviderType>()), Times.Once);
-            _responseParserFactory.Verify(p => p.GetInstance<IResponseParser>(It.IsAny<DataProviderType>(), FactoryEntity.Parser), Times.Once);
+            _responseParserFactory.Verify(p => p.GetInstance<IResponseParser>(It.IsAny<DataProviderType>()), Times.Once);
             _responseParser.Verify(p => p.ParseGeocodeAddressResponse(It.IsAny<DataResponse>(), It.IsAny<LevelOfConfidence>()), Times.Once());
             Assert.IsNotNull(result);
         }
@@ -98,7 +98,7 @@ namespace CES.CoreApi.GeoLocation.Service.Business.Logic.UnitTest
             _responseProvider.Setup(p => p.GetResponse(It.IsAny<string>(), It.IsAny<DataProviderType>()))
                 .Returns(It.IsAny<DataResponse>())
                 .Verifiable();
-            _responseParserFactory.Setup(p => p.GetInstance<IResponseParser>(It.IsAny<DataProviderType>(), FactoryEntity.Parser))
+            _responseParserFactory.Setup(p => p.GetInstance<IResponseParser>(It.IsAny<DataProviderType>()))
                 .Returns(_responseParser.Object)
                 .Verifiable();
             _responseParser.Setup(p => p.ParseGeocodeAddressResponse(It.IsAny<DataResponse>(), It.IsAny<LevelOfConfidence>()))
@@ -111,7 +111,7 @@ namespace CES.CoreApi.GeoLocation.Service.Business.Logic.UnitTest
             _urlBuilderFactory.Verify(p => p.GetInstance<IUrlBuilder>(It.IsAny<DataProviderType>(), FactoryEntity.UrlBuilder), Times.Once);
             _urlBuilder.Verify(p => p.BuildUrl(It.IsAny<string>()), Times.Once);
             _responseProvider.Verify(p => p.GetResponse(It.IsAny<string>(), It.IsAny<DataProviderType>()), Times.Once);
-            _responseParserFactory.Verify(p => p.GetInstance<IResponseParser>(It.IsAny<DataProviderType>(), FactoryEntity.Parser), Times.Once);
+            _responseParserFactory.Verify(p => p.GetInstance<IResponseParser>(It.IsAny<DataProviderType>()), Times.Once);
             _responseParser.Verify(p => p.ParseGeocodeAddressResponse(It.IsAny<DataResponse>(), It.IsAny<LevelOfConfidence>()), Times.Once());
             Assert.IsNotNull(result);
         }
@@ -128,7 +128,7 @@ namespace CES.CoreApi.GeoLocation.Service.Business.Logic.UnitTest
             _responseProvider.Setup(p => p.GetResponse(It.IsAny<string>(), It.IsAny<DataProviderType>()))
                 .Returns(It.IsAny<DataResponse>())
                 .Verifiable();
-            _responseParserFactory.Setup(p => p.GetInstance<IResponseParser>(It.IsAny<DataProviderType>(), FactoryEntity.Parser))
+            _responseParserFactory.Setup(p => p.GetInstance<IResponseParser>(It.IsAny<DataProviderType>()))
                 .Returns(_responseParser.Object)
                 .Verifiable();
             _responseParser.Setup(p => p.ParseGeocodeAddressResponse(It.IsAny<DataResponse>(), It.IsAny<LevelOfConfidence>()))
@@ -141,7 +141,7 @@ namespace CES.CoreApi.GeoLocation.Service.Business.Logic.UnitTest
             _urlBuilderFactory.Verify(p => p.GetInstance<IUrlBuilder>(It.IsAny<DataProviderType>(), FactoryEntity.UrlBuilder), Times.Once);
             _urlBuilder.Verify(p => p.BuildUrl(It.IsAny<LocationModel>()), Times.Once);
             _responseProvider.Verify(p => p.GetResponse(It.IsAny<string>(), It.IsAny<DataProviderType>()), Times.Once);
-            _responseParserFactory.Verify(p => p.GetInstance<IResponseParser>(It.IsAny<DataProviderType>(), FactoryEntity.Parser), Times.Once);
+            _responseParserFactory.Verify(p => p.GetInstance<IResponseParser>(It.IsAny<DataProviderType>()), Times.Once);
             _responseParser.Verify(p => p.ParseGeocodeAddressResponse(It.IsAny<DataResponse>(), It.IsAny<LevelOfConfidence>()), Times.Once());
             Assert.IsNotNull(result);
         }
