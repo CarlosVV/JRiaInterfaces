@@ -59,11 +59,7 @@ namespace CES.CoreApi.Foundation.Service
 
                 ConfigureWebHttpBindingBehavior(serviceEndpoint, serviceConfiguration.Behavior);
             }
-
-            //Configure authentication and authorization
-            Authentication.ServiceAuthenticationManager = (ServiceAuthenticationManager)IocContainerProvider.Instance.GetInstance<IAuthenticationManager>();
-            Authorization.ServiceAuthorizationManager = (ServiceAuthorizationManager)IocContainerProvider.Instance.GetInstance<IAuthorizationManager>();
-
+            
             ConfigureServiceBehavior(serviceConfiguration.Behavior);
         }
         

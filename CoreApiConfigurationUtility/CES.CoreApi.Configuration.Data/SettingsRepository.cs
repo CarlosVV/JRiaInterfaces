@@ -6,8 +6,8 @@ using CES.CoreApi.Common.Interfaces;
 using CES.CoreApi.Configuration.Model.DomainEntities;
 using CES.CoreApi.Configuration.Model.Interfaces;
 using CES.CoreApi.Foundation.Data;
+using CES.CoreApi.Foundation.Data.Base;
 using CES.CoreApi.Foundation.Data.Utility;
-using CES.CoreApi.Logging.Factories;
 using CES.CoreApi.Logging.Interfaces;
 
 namespace CES.CoreApi.Configuration.Data

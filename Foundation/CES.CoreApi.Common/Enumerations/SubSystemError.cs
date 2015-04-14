@@ -145,6 +145,10 @@ namespace CES.CoreApi.Common.Enumerations
         [SubSystemErrorNumber("00407")]
         [ErrorMessage("The requested location information was not found in data provider response. Data Provider: '{0}'.")]
         GeolocationLocationIsNotFoundInResponse,
+
+        [SubSystemErrorNumber("00408")]
+        [ErrorMessage("The country configuration was not found in the database. Application ID = '{0}'. Country Code: '{1}'.")]
+        GeolocationContryConfigurationIsNotFound,
         
 
         #endregion

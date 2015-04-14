@@ -34,7 +34,7 @@ namespace CES.CoreApi.GeoLocation.Service.Business.Logic.Processors
             var addressVerificationProviders = CountryConfiguration(country).DataProviders
                 .Where(p => p.DataProviderServiceType == serviceType)
                 .OrderBy(p => p.Priority)
-                .DistinctBy(p => new {p.DataProviderType, p.DataProviderServiceType}) //in case if same provider defined multiple times in configuration
+                .DistinctBy(p => new {p.DataProviderType, p.DataProviderServiceType})  //in case if same provider defined multiple times in configuration
                 .Take(numberOfProviders);
 
             return addressVerificationProviders;

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.ServiceModel;
 using System.ServiceModel.Description;
+using CES.CoreApi.Foundation.Contract.Interfaces;
 using CES.CoreApi.Foundation.Providers;
 using SimpleInjector;
 using SimpleInjector.Integration.Wcf;
@@ -20,11 +21,16 @@ namespace CES.CoreApi.Foundation.Service
 
         protected override ServiceHost CreateServiceHost(Type serviceType, Uri[] baseAddresses)
         {
-            var host = new IocBasedServiceHost(Container, serviceType, baseAddresses); 
-            
+            var host = new IocBasedServiceHost(Container, serviceType, baseAddresses);
+
+            host.Description.Behaviors.Add((IServiceBehavior) Container.GetInstance<IServiceExceptionHandler>());
+
             ApplyServiceBehaviors(host);
             ApplyContractBehaviors(host);
 
+            //Configure authentication and authorization
+            host.Authentication.ServiceAuthenticationManager = (ServiceAuthenticationManager)IocContainerProvider.Instance.GetInstance<IAuthenticationManager>();
+            host.Authorization.ServiceAuthorizationManager = (ServiceAuthorizationManager)IocContainerProvider.Instance.GetInstance<IAuthorizationManager>();
             var serviceAuthorizationBehavior = host.Description.Behaviors.Find<ServiceAuthorizationBehavior>();
             serviceAuthorizationBehavior.PrincipalPermissionMode = PrincipalPermissionMode.Custom;
 

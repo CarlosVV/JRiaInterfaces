@@ -38,8 +38,21 @@ namespace CES.CoreApi.GeoLocation.Service.Business.Logic.Providers
 
         public CountryConfiguration GetProviderConfigurationByCountry(string countryCode)
         {
-            return GetCountryConfiguration(countryCode) ??
-                   GetCountryConfiguration(DefaultCountry);
+            var clientApplicationIdentity = _identityManager.GetClientApplicationIdentity();
+
+            if (clientApplicationIdentity == null)
+                throw new CoreApiException(TechnicalSubSystem.Authorization, SubSystemError.SecurityClientApplicationNotAuthenticated, -1);
+
+            var applicationId = clientApplicationIdentity.ApplicationId;
+
+            var countryConfiguration = GetCountryConfiguration(countryCode, applicationId) ??
+                                       GetCountryConfiguration(DefaultCountry, applicationId);
+
+            if (countryConfiguration == null)
+                throw new CoreApiException(TechnicalSubSystem.GeoLocationService,
+                    SubSystemError.GeolocationContryConfigurationIsNotFound, applicationId, countryCode);
+
+            return countryConfiguration;
         }
 
         /// <summary>
@@ -51,15 +64,10 @@ namespace CES.CoreApi.GeoLocation.Service.Business.Logic.Providers
 
         #region Private methods
 
-        private CountryConfiguration GetCountryConfiguration(string countryCode)
+        private CountryConfiguration GetCountryConfiguration(string countryCode, int applicationId)
         {
-            var clientApplicationIdentity = _identityManager.GetClientApplicationIdentity();
-           
-            if (clientApplicationIdentity == null)
-                throw new CoreApiException(TechnicalSubSystem.Authorization, SubSystemError.SecurityClientApplicationNotAuthenticated, -1);
-
             return (from appConfig in _configurationProvider.ApplicationCountryConfigurations
-                    where appConfig.ApplicationId == clientApplicationIdentity.ApplicationId
+                    where appConfig.ApplicationId == applicationId
                 from country in appConfig.CountryConfigurations
                 where country.CountryCode.Equals(countryCode, StringComparison.OrdinalIgnoreCase)
                 select country)

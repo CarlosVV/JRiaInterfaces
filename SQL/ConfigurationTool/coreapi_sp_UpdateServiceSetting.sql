@@ -36,12 +36,15 @@ AS
 BEGIN
     SET NOCOUNT ON;      
 
+	declare @currentTime as datetime
+	set @currentTime = GETUTCDATE()
+
 	update [dbo].[systblApp_CoreAPI_Settings]
 	set [fValue] = @value,
 		[fDescription] = @description,
-		[fModified] = 1,
+		[fModified] = @currentTime,
 		[fModifiedID] = @lUserNameID, 
-		[fTime] = GETUTCDATE()
+		[fTime] = @currentTime
 	where [fCoreApiSettingsID] = @settingId
 
 END
