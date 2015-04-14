@@ -130,6 +130,7 @@ namespace CES.CoreApi.GeoLocation.Service.Business.Logic.Parsers
                                 let address = location.Element(_responseNamespace + BingConstants.Address)
                                 let confidence = location.GetValue<string>(BingConstants.Confidence, _responseNamespace).ConvertValue<LevelOfConfidence>()
                                 where acceptableConfidenceLevels.Contains((int)confidence)
+                                orderby (int)confidence descending 
                                 select new Tuple<LevelOfConfidence, XElement, XElement>(confidence, address, location))
                     .ToList();
 
@@ -146,7 +147,6 @@ namespace CES.CoreApi.GeoLocation.Service.Business.Logic.Parsers
                     Address = _addressParser.ParseAddress(hint.Item2, _responseNamespace),
                     Location = GetLocation(hint.Item3)
                 })
-                .OrderByDescending(p => p.Confidence)
                 .ToList();
 
             return responseModel;

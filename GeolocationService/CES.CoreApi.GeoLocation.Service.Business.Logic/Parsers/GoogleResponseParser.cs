@@ -130,6 +130,7 @@ namespace CES.CoreApi.GeoLocation.Service.Business.Logic.Parsers
                                 let location = geometry.Element(GoogleConstants.Location)
                                 let confidence = _levelOfConfidenceProvider.GetLevelOfConfidence(geometry.GetValue<string>(GoogleConstants.LocationType))
                                 where acceptableConfidenceLevels.Contains((int)confidence)
+                                orderby (int)confidence descending 
                                 select new Tuple<LevelOfConfidence, XElement, XElement>(confidence, result, location))
                 .ToList();
 
@@ -146,7 +147,6 @@ namespace CES.CoreApi.GeoLocation.Service.Business.Logic.Parsers
                     Address = _addressParser.ParseAddress(hint.Item2),
                     Location = GetLocation(hint.Item3)
                 })
-                .OrderByDescending(p => p.Confidence)
                 .ToList();
 
             return responseModel;
