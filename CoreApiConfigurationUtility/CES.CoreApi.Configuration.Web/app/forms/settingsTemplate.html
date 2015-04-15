@@ -10,20 +10,24 @@
                 </select>
             </div>
         </div>
-        <div class="form-group" ng-if="settingSelected()">
+        <div class="form-group" ng-if="settingSelected()" ng-class="{ 'has-error' : settingForm.value.$invalid }">
             <label for="value" class="col-sm-3 control-label">Value</label>
             <div class="col-sm-9">
                 <textarea name="value" id="value" class="form-control" rows="5" cols="40"
                           ng-model="selectedSetting.Value"
                           ng-required="true"></textarea>
+                <span class="help-block"
+                      ng-if="settingForm.value.$error.required">Value is required</span>
             </div>
         </div>
-        <div class="form-group" ng-if="settingSelected()">
+        <div class="form-group" ng-if="settingSelected()" ng-class="{ 'has-error' : settingForm.description.$invalid }">
             <label for="description" class="col-sm-3 control-label">Description</label>
             <div class="col-sm-9">
                 <textarea name="description" id="description" class="form-control" rows="3" cols="40"
                           ng-model="selectedSetting.Description"
                           ng-required="true"></textarea>
+                <span class="help-block"
+                      ng-if="settingForm.description.$error.required">Description is required</span>
             </div>
         </div>
     </fieldset>
@@ -34,11 +38,12 @@
             <input type="button" class="btn btn-default" value="Cancel"
                    ng-click="cancelForm()" />
             <input type="reset" class="btn btn-warning" value="Reset"
-                   ng-click="resetForm()" />
-            <input type="submit" class="btn btn-default" value="Save"
-                   ng-click="saveForm()"
+                   ng-click="resetForm()"
                    ng-if="settingSelected()" />
-            <br />
+            <input type="submit" class="btn btn-primary" value="Save"
+                   ng-click="saveForm()"
+                   ng-if="settingSelected()"
+                   ng-disabled="settingForm.$invalid" />
             <div class="alert alert-danger" ng-if="hasFormError">{{formErrors}}</div>
         </div>
     </fieldset>

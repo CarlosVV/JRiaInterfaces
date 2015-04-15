@@ -10,18 +10,23 @@ namespace CES.CoreApi.Configuration.Web
             bundles.Add(new ScriptBundle("~/bundles/jquery").Include(
                         "~/Scripts/jquery-{version}.js"));
 
-            // Use the development version of Modernizr to develop with and learn from. Then, when you're
-            // ready for production, use the build tool at http://modernizr.com to pick only the tests you need.
-            bundles.Add(new ScriptBundle("~/bundles/modernizr").Include(
-                        "~/Scripts/modernizr-*"));
+            bundles.Add(new StyleBundle("~/bundles/mini-spa/style").Include(
+                      "~/Content/bootstrap.min.css",
+                      "~/Content/app.css"));
 
-            bundles.Add(new ScriptBundle("~/bundles/bootstrap").Include(
-                      "~/Scripts/bootstrap.js",
-                      "~/Scripts/respond.js"));
+            bundles.Add(new ScriptBundle("~/bundles/mini-spa/script").Include(
+                      "~/Scripts/angular.min.js",
+                      "~/Scripts/angular-route.min.js",
+                      "~/Scripts/angular-ui/ui-bootstrap-tpls.min.js",
+                      "~/app/ServiceConfigApp.js",
+                      "~/app/DataService.js",
+                      "~/app/forms/listController.js",
+                      "~/app/forms/permissionsController.js",
+                      "~/app/forms/settingsController.js"));
 
-            bundles.Add(new StyleBundle("~/Content/css").Include(
-                      "~/Content/bootstrap.css",
-                      "~/Content/site.css"));
+            // Set EnableOptimizations to false for debugging. For more information,
+            // visit http://go.microsoft.com/fwlink/?LinkId=301862
+            BundleTable.EnableOptimizations = true;
         }
     }
 }
