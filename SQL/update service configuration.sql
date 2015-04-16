@@ -7,70 +7,70 @@ set fValue = '
 		"Contract": "CES.CoreApi.GeoLocation.Service.Contract.Interfaces.IAddressService",
 		"Binding": "basicHttpBinding",
 		"BindingConfigurationName": "basicHttpBindingConfiguration",
-		"SecurityMode": "Transport"
+		"SecurityMode": "None"
 	},
 	{
 		"EndpointName": "httpGeocodeService",
 		"Contract": "CES.CoreApi.GeoLocation.Service.Contract.Interfaces.IGeocodeService",
 		"Binding": "basicHttpBinding",
 		"BindingConfigurationName": "basicHttpBindingConfiguration",
-		"SecurityMode": "Transport"
+		"SecurityMode": "None"
 	},
 	{
 		"EndpointName": "httpMapService",
 		"Contract": "CES.CoreApi.GeoLocation.Service.Contract.Interfaces.IMapService",
 		"Binding": "basicHttpBinding",
 		"BindingConfigurationName": "basicHttpBindingConfiguration",
-		"SecurityMode": "Transport"
+		"SecurityMode": "None"
 	},
 	{
 		"EndpointName": "httpHealthMonitoringService",
 		"Contract": "CES.CoreApi.GeoLocation.Service.Contract.Interfaces.IHealthMonitoringService",
 		"Binding": "basicHttpBinding",
 		"BindingConfigurationName": "basicHttpBindingConfiguration",
-		"SecurityMode": "Transport"
+		"SecurityMode": "None"
 	},
 	{
 		"EndpointName": "httpClientSideSupportService",
 		"Contract": "CES.CoreApi.GeoLocation.Service.Contract.Interfaces.IClientSideSupportService",
 		"Binding": "basicHttpBinding",
 		"BindingConfigurationName": "basicHttpBindingConfiguration",
-		"SecurityMode": "Transport"
+		"SecurityMode": "None"
 	},
 	{
 		"EndpointName": "tcpAddressService",
 		"Contract": "CES.CoreApi.GeoLocation.Service.Contract.Interfaces.IAddressService",
 		"Binding": "netTcpBinding",
 		"BindingConfigurationName": "netTcpBindingConfiguration",
-		"SecurityMode": "Transport"
+		"SecurityMode": "None"
 	},
 	{
 		"EndpointName": "tcpGeocodeService",
 		"Contract": "CES.CoreApi.GeoLocation.Service.Contract.Interfaces.IGeocodeService",
 		"Binding": "netTcpBinding",
 		"BindingConfigurationName": "netTcpBindingConfiguration",
-		"SecurityMode": "Transport"
+		"SecurityMode": "None"
 	},
 	{
 		"EndpointName": "tcpMapService",
 		"Contract": "CES.CoreApi.GeoLocation.Service.Contract.Interfaces.IMapService",
 		"Binding": "netTcpBinding",
 		"BindingConfigurationName": "netTcpBindingConfiguration",
-		"SecurityMode": "Transport"
+		"SecurityMode": "None"
 	},
 	{
 		"EndpointName": "tcpHealthMonitoringService",
 		"Contract": "CES.CoreApi.GeoLocation.Service.Contract.Interfaces.IHealthMonitoringService",
 		"Binding": "netTcpBinding",
 		"BindingConfigurationName": "netTcpBindingConfiguration",
-		"SecurityMode": "Transport"
+		"SecurityMode": "None"
 	},
 	{
 		"EndpointName": "tcpClientSideSupportService",
 		"Contract": "CES.CoreApi.GeoLocation.Service.Contract.Interfaces.IClientSideSupportService",
 		"Binding": "netTcpBinding",
 		"BindingConfigurationName": "netTcpBindingConfiguration",
-		"SecurityMode": "Transport"
+		"SecurityMode": "None"
 	}],
 	"Bindings": [
 	{
@@ -113,7 +113,7 @@ set fValue = '
 		}
 	}],
 	"Behavior": {
-		"IsHttpsEnabled": "true",
+		"IsHttpsEnabled": "false",
 		"IsDebugEnabled": "true",
 		"IsHelpEnabled": "false",
 		"IsWsdlEnabled": "true",
