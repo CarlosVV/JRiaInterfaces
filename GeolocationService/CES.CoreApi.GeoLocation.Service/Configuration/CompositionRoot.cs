@@ -1,4 +1,5 @@
-﻿using AutoMapper;
+﻿using System.Configuration;
+using AutoMapper;
 using AutoMapper.Mappers;
 using CES.CoreApi.Caching.Providers;
 using CES.CoreApi.Common.Interfaces;
@@ -55,6 +56,8 @@ namespace CES.CoreApi.GeoLocation.Service.Configuration
 
         private static void RegisterFoundation(Container container)
         {
+            var cacheName = ConfigurationManager.AppSettings["cacheName"];
+
             container.RegisterSingle<IAuthenticationManager, AuthenticationManager>();
             container.RegisterSingle<IApplicationAuthenticator, ApplicationAuthenticator>();
             container.RegisterSingle<IApplicationRepository, ApplicationRepository>(); 
@@ -63,7 +66,7 @@ namespace CES.CoreApi.GeoLocation.Service.Configuration
             container.RegisterSingle<IServiceCallHeaderParametersProvider, ServiceCallHeaderParametersProvider>();
             container.RegisterSingle<IAuthorizationManager, AuthorizationManager>();
             container.RegisterSingle<IAuthorizationAdministrator, AuthorizationAdministrator>();
-            container.RegisterSingle<ICacheProvider>(() => new AppFabricCacheProvider(container.GetInstance<ILogMonitorFactory>(), "CoreAPIDev"));
+            container.RegisterSingle<ICacheProvider>(() => new AppFabricCacheProvider(container.GetInstance<ILogMonitorFactory>(), cacheName));
             container.RegisterSingle<IHostApplicationProvider, HostApplicationProvider>();
             container.RegisterSingle<IClientSecurityContextProvider, ClientDetailsProvider>();
             container.RegisterSingle<IServiceExceptionHandler, ServiceExceptionHandler>();
