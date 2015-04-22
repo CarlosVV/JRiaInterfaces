@@ -14,6 +14,7 @@
             dataService.getSettings($routeParams.id)
                 .then(function(response) {
                     $scope.settings = response.data;
+                    $scope.editableSettings = angular.copy($scope.settings);
                 }, function(response) {
                     $scope.hasFormError = true;
                     $scope.formErrors = response.statusText;
@@ -29,6 +30,7 @@
         $scope.resetForm = function () {
             $scope.$broadcast('hide-errors-event');
             $scope.selectedSetting = initializeselectedSetting();
+            $scope.settings = angular.copy($scope.editableSettings);
         }
 
         $scope.saveForm = function () {

@@ -44,7 +44,8 @@ BEGIN
 		[fDescription] = @description,
 		[fModified] = @currentTime,
 		[fModifiedID] = @lUserNameID, 
-		[fTime] = @currentTime
+		[fTime] = @currentTime,
+		[fChanged] = 1
 	where [fCoreApiSettingsID] = @settingId
 
 END
