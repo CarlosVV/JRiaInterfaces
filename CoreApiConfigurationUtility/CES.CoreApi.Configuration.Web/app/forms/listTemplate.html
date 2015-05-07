@@ -17,13 +17,15 @@
         <div class="col-sm-offset-3 col-sm-9">
             <input type="reset" class="btn btn-warning" value="Reset"
                    ng-click="resetForm()" />
-             <input type="submit" class="btn btn-primary" value="Modify Settings"
+            <input type="submit" class="btn btn-primary" value="Modify Settings"
                    ng-click="showSettingsForm()"
                    ng-if="showNavigation()" />
             <!--<input type="submit" class="btn btn-primary" value="Modify Permissions"
-                   ng-click="showPermisisonsForm()"
-                   ng-if="showNavigation()" />-->
-            <div class="alert alert-danger" ng-if="hasFormError">{{formErrors}}</div>
+                       ng-click="showPermisisonsForm()"
+                       ng-if="showNavigation()" />-->
+            <div class="appalert">
+                <div class="alert alert-danger" ng-if="hasFormError">{{formErrors}}</div>
+            </div>
         </div>
     </fieldset>
 </form>

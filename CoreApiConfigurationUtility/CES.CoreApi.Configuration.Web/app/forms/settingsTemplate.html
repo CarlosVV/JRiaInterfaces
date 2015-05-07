@@ -1,5 +1,5 @@
-﻿<form class="form-horizontal" name="settingForm" novalidate role="form">
-    <fieldset>
+﻿<form class="form-horizontal" name="settingForm" novalidate role="form" >
+    <fieldset ng-disabled="isSaveMode">
         <legend>Core API {{serviceName}} Settings</legend>
         <br />
         <div class="form-group">
@@ -32,7 +32,7 @@
         </div>
     </fieldset>
     <br />
-    <fieldset>
+    <fieldset ng-disabled="isSaveMode">
         <legend></legend>
         <div class="col-sm-offset-3 col-sm-9">
             <input type="button" class="btn btn-default" value="Cancel"
@@ -44,7 +44,10 @@
                    ng-click="saveForm()"
                    ng-if="settingSelected()"
                    ng-disabled="settingForm.$invalid" />
-            <div class="alert alert-danger" ng-if="hasFormError">{{formErrors}}</div>
+            <div class="appalert">
+                <div class="alert alert-danger" ng-if="hasFormError">{{formErrors}}</div>
+                <div class="alert alert-success" ng-if="showSuccessAlert"><strong>Done!</strong> {{successTextMessage}}</div>
+            </div>
         </div>
     </fieldset>
 </form>

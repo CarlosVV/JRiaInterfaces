@@ -12,7 +12,6 @@ namespace CES.CoreApi.Configuration.Web
             // Web API configuration and services
             config.Services.Replace(typeof(IExceptionLogger), logger);
             
-
             // Web API routes
             config.MapHttpAttributeRoutes();
 

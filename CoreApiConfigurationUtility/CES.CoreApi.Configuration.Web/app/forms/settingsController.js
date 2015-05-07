@@ -1,8 +1,9 @@
 ﻿serviceConfigApp.controller("SettingsController",
-    ["$scope", "$window", "$location", "$routeParams", "DataService",
-    function ($scope, $window, $location, $routeParams, dataService) {
+[
+    "$scope", "$window", "$location", "$routeParams", "$timeout", "DataService",
+    function($scope, $window, $location, $routeParams, $timeout, dataService) {
 
-        var initializeselectedSetting = function () {
+        var initializeselectedSetting = function() {
             return { Id: 0, Name: '', Value: '', Description: '' };
         };
 
@@ -10,7 +11,7 @@
 
         $scope.serviceName = $routeParams.name;
 
-        var getSettings = function () {
+        var getSettings = function() {
             dataService.getSettings($routeParams.id)
                 .then(function(response) {
                     $scope.settings = response.data;
@@ -23,38 +24,49 @@
 
         getSettings();
 
-        $scope.cancelForm = function () {
+        $scope.cancelForm = function() {
             $window.history.back();
         };
 
-        $scope.resetForm = function () {
+        $scope.resetForm = function() {
             $scope.$broadcast('hide-errors-event');
             $scope.selectedSetting = initializeselectedSetting();
             $scope.settings = angular.copy($scope.editableSettings);
-        }
+        };
 
-        $scope.saveForm = function () {
-
+        $scope.saveForm = function() {
+            $scope.isSaveMode = true;
             $scope.$broadcast('show-errors-event');
 
-            if ($scope.settingForm.$invalid)
+            if ($scope.settingForm.$invalid) {
+                $scope.isSaveMode = false;
                 return;
+            }
 
             dataService.updateSetting($scope.selectedSetting)
                 .then(
-                    function () {
-                        $window.history.back();
+                    function(results) {
+                        $scope.showSuccessAlert = true;
+                        $scope.successTextMessage = results.data;
+                        $timeout(hideMessageAndReturn, 1000);
+
                     },
-                    function (results) {
+                    function(results) {
                         $scope.hasFormError = true;
                         $scope.formErrors = results.statusText;
                     });
+
+            var hideMessageAndReturn = function() {
+                $scope.showSuccessAlert = false;
+                $scope.successTextMessage = '';
+                $window.history.back();
+            };
         };
 
-        $scope.settingSelected = function () {
+        $scope.settingSelected = function() {
             return $scope.selectedSetting != null &&
                 $scope.selectedSetting.Id != null &&
                 $scope.selectedSetting.Id != "0";
-        }
-
-    }]);
+        };
+    }
+]);

@@ -23,6 +23,8 @@ namespace CES.CoreApi.Configuration.Web.Controllers
 
         #endregion
 
+        #region Public methods
+
         public IEnumerable<SettingModel> Get(int serviceId)
         {
             return _manager
@@ -43,5 +45,7 @@ namespace CES.CoreApi.Configuration.Web.Controllers
             }
             return new HttpResponseMessage(HttpStatusCode.BadRequest);
         }
+
+        #endregion
     }
 }
