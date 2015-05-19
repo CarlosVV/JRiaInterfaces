@@ -55,7 +55,7 @@
         </member>
         <member name="M:SimpleInjector.Integration.Wcf.WcfOperationLifestyle.CreateCurrentScopeProvider(SimpleInjector.Container)">
             <summary>
-            Creates a delegate that that upon invocation return the current <see cref="T:SimpleInjector.Scope"/> for this
+            Creates a delegate that upon invocation return the current <see cref="T:SimpleInjector.Scope"/> for this
             lifestyle and the given <paramref name="container"/>, or null when the delegate is executed outside
             the context of such scope.
             </summary>
@@ -96,7 +96,7 @@
         </member>
         <member name="M:SimpleInjector.SimpleInjectorWcfExtensions.EnablePerWcfOperationLifestyle(SimpleInjector.Container)">
             <summary>
-            Allows the container to resolve instances with a Per Wcf Operation lifestyle for the given 
+            Allows the container to resolve instances with a Per WCF Operation lifestyle for the given 
             <paramref name="container"/>. This is 
             enabled automatically when services get registered using one of the <b>RegisterPerWcfRequest</b>
             overloads or when the container passed onto the 

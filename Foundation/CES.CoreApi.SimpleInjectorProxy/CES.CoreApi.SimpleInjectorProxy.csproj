@@ -37,19 +37,16 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\packages\Castle.Core.3.3.3\lib\net45\Castle.Core.dll</HintPath>
     </Reference>
-    <Reference Include="SimpleInjector, Version=2.7.3.0, Culture=neutral, PublicKeyToken=984cb50dea722e99, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\packages\SimpleInjector.2.7.3\lib\net45\SimpleInjector.dll</HintPath>
-    </Reference>
-    <Reference Include="SimpleInjector.Diagnostics">
-      <HintPath>..\..\packages\SimpleInjector.2.7.3\lib\net45\SimpleInjector.Diagnostics.dll</HintPath>
+    <Reference Include="SimpleInjector, Version=2.8.0.0, Culture=neutral, PublicKeyToken=984cb50dea722e99, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\SimpleInjector.2.8.0\lib\net45\SimpleInjector.dll</HintPath>
+      <Private>True</Private>
     </Reference>
     <Reference Include="SimpleInjector.Extensions.ExecutionContextScoping">
-      <HintPath>..\..\packages\SimpleInjector.Extensions.ExecutionContextScoping.2.7.3\lib\net45\SimpleInjector.Extensions.ExecutionContextScoping.dll</HintPath>
+      <HintPath>..\..\packages\SimpleInjector.Extensions.ExecutionContextScoping.2.8.0\lib\net45\SimpleInjector.Extensions.ExecutionContextScoping.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="SimpleInjector.Extensions.LifetimeScoping">
-      <HintPath>..\..\packages\SimpleInjector.Extensions.LifetimeScoping.2.7.3\lib\net40-client\SimpleInjector.Extensions.LifetimeScoping.dll</HintPath>
+      <HintPath>..\..\packages\SimpleInjector.Extensions.LifetimeScoping.2.8.0\lib\net40-client\SimpleInjector.Extensions.LifetimeScoping.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="System" />
@@ -69,7 +66,9 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />
-    <None Include="packages.config" />
+    <None Include="packages.config">
+      <SubType>Designer</SubType>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\CES.CoreApi.Common\CES.CoreApi.Common.csproj">

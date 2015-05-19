@@ -9,6 +9,8 @@ namespace CES.CoreApi.Common.Enumerations
         [Description("AUTH")] Authorization = 2,
         [Description("AUTHT")] Authentication = 3,
         [Description("CAPID")] CoreApiData = 4,
-        [Description("GLCS")] GeoLocationService = 5
+        [Description("GLCS")] GeoLocationService = 5,
+        [Description("OVLDS")] OrderValidationService = 6,
+        [Description("OPRCS")] OrderProcessService = 7
     }
 }
