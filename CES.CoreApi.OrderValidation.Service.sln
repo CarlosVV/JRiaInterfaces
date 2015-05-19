@@ -1,0 +1,101 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2013
+VisualStudioVersion = 12.0.31101.0
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CES.CoreApi.OrderValidation.Service", "OrderValidationService\CES.CoreApi.OrderValidation.Service\CES.CoreApi.OrderValidation.Service.csproj", "{3519B325-C3EF-4B94-B4AA-9BEBA31999E1}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CES.CoreApi.OrderValidation.Service.Web", "OrderValidationService\CES.CoreApi.OrderValidation.Service.Web\CES.CoreApi.OrderValidation.Service.Web.csproj", "{16E181F7-3CC7-4DF6-A305-7B568B1BAC86}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CES.CoreApi.OrderValidation.Service.Contract", "OrderValidationService\CES.CoreApi.OrderValidation.Service.Contract\CES.CoreApi.OrderValidation.Service.Contract.csproj", "{B69EDE40-1901-4D7B-895F-0B2AB7EBEC1C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CES.CoreApi.OrderValidation.Service.Business.Logic", "OrderValidationService\CES.CoreApi.OrderValidation.Service.Business.Logic\CES.CoreApi.OrderValidation.Service.Business.Logic.csproj", "{6C914866-A018-4DD9-B90B-BEFCCD9BD69D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CES.CoreApi.OrderValidation.Service.Business.Contract", "OrderValidationService\CES.CoreApi.OrderValidation.Service.Business.Contract\CES.CoreApi.OrderValidation.Service.Business.Contract.csproj", "{D36D989D-EC75-4B8A-B2E9-B05018F57A3C}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Common", "Common", "{25CF099F-4F65-4A0B-A626-AA5C68F0A30F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CES.CoreApi.SimpleInjectorProxy", "Foundation\CES.CoreApi.SimpleInjectorProxy\CES.CoreApi.SimpleInjectorProxy.csproj", "{02BEAA68-76A1-4ED6-BF6C-7B6935165AD6}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CES.CoreApi.Logging", "Foundation\CES.CoreApi.Logging\CES.CoreApi.Logging.csproj", "{76762A04-54F0-4147-BD2B-267372034706}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CES.CoreApi.Foundation.Contract", "Foundation\CES.CoreApi.Foundation.Contract\CES.CoreApi.Foundation.Contract.csproj", "{8DBCFE15-CA3B-4F7C-A7D6-D73F8F0B91AA}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CES.CoreApi.Foundation", "Foundation\CES.CoreApi.Foundation\CES.CoreApi.Foundation.csproj", "{E2B71A13-9683-4862-B2EB-31050190AFDC}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CES.CoreApi.Data", "Foundation\CES.CoreApi.Data\CES.CoreApi.Data.csproj", "{1AA5BA90-02CC-4FD1-81F2-615C374C83A5}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CES.CoreApi.Common", "Foundation\CES.CoreApi.Common\CES.CoreApi.Common.csproj", "{070C7BB2-AF07-4A4C-A9CC-6BFB8CA416E6}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CES.CoreApi.Caching", "Foundation\CES.CoreApi.Caching\CES.CoreApi.Caching.csproj", "{9FCF40A8-23F1-4272-9CAE-EFF674145F57}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{0B8FC6B8-6D63-4121-88D0-BA8939C3E88B}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{3519B325-C3EF-4B94-B4AA-9BEBA31999E1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3519B325-C3EF-4B94-B4AA-9BEBA31999E1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3519B325-C3EF-4B94-B4AA-9BEBA31999E1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3519B325-C3EF-4B94-B4AA-9BEBA31999E1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{16E181F7-3CC7-4DF6-A305-7B568B1BAC86}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{16E181F7-3CC7-4DF6-A305-7B568B1BAC86}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{16E181F7-3CC7-4DF6-A305-7B568B1BAC86}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{16E181F7-3CC7-4DF6-A305-7B568B1BAC86}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B69EDE40-1901-4D7B-895F-0B2AB7EBEC1C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B69EDE40-1901-4D7B-895F-0B2AB7EBEC1C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B69EDE40-1901-4D7B-895F-0B2AB7EBEC1C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B69EDE40-1901-4D7B-895F-0B2AB7EBEC1C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6C914866-A018-4DD9-B90B-BEFCCD9BD69D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6C914866-A018-4DD9-B90B-BEFCCD9BD69D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6C914866-A018-4DD9-B90B-BEFCCD9BD69D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6C914866-A018-4DD9-B90B-BEFCCD9BD69D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D36D989D-EC75-4B8A-B2E9-B05018F57A3C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D36D989D-EC75-4B8A-B2E9-B05018F57A3C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D36D989D-EC75-4B8A-B2E9-B05018F57A3C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D36D989D-EC75-4B8A-B2E9-B05018F57A3C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{02BEAA68-76A1-4ED6-BF6C-7B6935165AD6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{02BEAA68-76A1-4ED6-BF6C-7B6935165AD6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{02BEAA68-76A1-4ED6-BF6C-7B6935165AD6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{02BEAA68-76A1-4ED6-BF6C-7B6935165AD6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{76762A04-54F0-4147-BD2B-267372034706}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{76762A04-54F0-4147-BD2B-267372034706}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{76762A04-54F0-4147-BD2B-267372034706}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{76762A04-54F0-4147-BD2B-267372034706}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8DBCFE15-CA3B-4F7C-A7D6-D73F8F0B91AA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8DBCFE15-CA3B-4F7C-A7D6-D73F8F0B91AA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8DBCFE15-CA3B-4F7C-A7D6-D73F8F0B91AA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8DBCFE15-CA3B-4F7C-A7D6-D73F8F0B91AA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E2B71A13-9683-4862-B2EB-31050190AFDC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E2B71A13-9683-4862-B2EB-31050190AFDC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E2B71A13-9683-4862-B2EB-31050190AFDC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E2B71A13-9683-4862-B2EB-31050190AFDC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1AA5BA90-02CC-4FD1-81F2-615C374C83A5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1AA5BA90-02CC-4FD1-81F2-615C374C83A5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1AA5BA90-02CC-4FD1-81F2-615C374C83A5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1AA5BA90-02CC-4FD1-81F2-615C374C83A5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{070C7BB2-AF07-4A4C-A9CC-6BFB8CA416E6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{070C7BB2-AF07-4A4C-A9CC-6BFB8CA416E6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{070C7BB2-AF07-4A4C-A9CC-6BFB8CA416E6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{070C7BB2-AF07-4A4C-A9CC-6BFB8CA416E6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9FCF40A8-23F1-4272-9CAE-EFF674145F57}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9FCF40A8-23F1-4272-9CAE-EFF674145F57}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9FCF40A8-23F1-4272-9CAE-EFF674145F57}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9FCF40A8-23F1-4272-9CAE-EFF674145F57}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{02BEAA68-76A1-4ED6-BF6C-7B6935165AD6} = {25CF099F-4F65-4A0B-A626-AA5C68F0A30F}
+		{76762A04-54F0-4147-BD2B-267372034706} = {25CF099F-4F65-4A0B-A626-AA5C68F0A30F}
+		{8DBCFE15-CA3B-4F7C-A7D6-D73F8F0B91AA} = {25CF099F-4F65-4A0B-A626-AA5C68F0A30F}
+		{E2B71A13-9683-4862-B2EB-31050190AFDC} = {25CF099F-4F65-4A0B-A626-AA5C68F0A30F}
+		{1AA5BA90-02CC-4FD1-81F2-615C374C83A5} = {25CF099F-4F65-4A0B-A626-AA5C68F0A30F}
+		{070C7BB2-AF07-4A4C-A9CC-6BFB8CA416E6} = {25CF099F-4F65-4A0B-A626-AA5C68F0A30F}
+		{9FCF40A8-23F1-4272-9CAE-EFF674145F57} = {25CF099F-4F65-4A0B-A626-AA5C68F0A30F}
+	EndGlobalSection
+EndGlobal
