@@ -109,6 +109,22 @@ namespace CES.CoreApi.Common.Enumerations
         [SubSystemErrorNumber("00306")]
         [ErrorMessage("No endpoints defined in configuration for interface. Interface = '{0}'.")]
         ServiceIntializationNoEndpointsFoundForInterface,
+
+        [SubSystemErrorNumber("00307")]
+        [ErrorMessage("Error occurred while trying to read client endpoints configuration.")]
+        ServiceIntializationClientEndpointConfigurationParseError,
+
+        [SubSystemErrorNumber("00308")]
+        [ErrorMessage("Client endpoints configuration not found.")]
+        ServiceIntializationClientEndpointConfigurationNotFound,
+
+        [SubSystemErrorNumber("00309")]
+        [ErrorMessage("No client endpoints defined in configuration.")]
+        ServiceIntializationNoClientEndpointsFound,
+
+        [SubSystemErrorNumber("00310")]
+        [ErrorMessage("No client endpoint found in configuration. Service Interface: '{0}'.")]
+        ServiceIntializationNoClientEndpointFound,
         
         #endregion
 
@@ -150,6 +166,29 @@ namespace CES.CoreApi.Common.Enumerations
         [ErrorMessage("The country configuration was not found in the database. Application ID = '{0}'. Country Code: '{1}'.")]
         GeolocationContryConfigurationIsNotFound,
         
+        #endregion
+
+        #region Order Validaiton service related errors
+
+        [SubSystemErrorNumber("00500")]
+        [ErrorMessage("The {0} OFAC match found. CustomerID = '{1}'. FirstName: '{2}'. MiddleName: '{3}'. LastName1: '{4}'. LastName2: '{5}'.")]
+        OrderValidationOfacMatchFound,
+
+        [SubSystemErrorNumber("00501")]
+        [ErrorMessage("The SAR validation failed. CustomerID = '{0}'. BeneficiaryID: '{1}'. OrderDate: '{2}'. AmountTotal: '{3}'.")]
+        OrderValidationSarValidationFailed,
+
+        [SubSystemErrorNumber("00502")]
+        [ErrorMessage("The customer is on hold. CustomerID = '{0}'.")]
+        OrderValidationCustomerIsOnHold,
+
+        [SubSystemErrorNumber("00503")]
+        [ErrorMessage("The beneficiary is blocked. BeneficiaryID [fBenNameID] = '{0}'. CorrespondentID = '{1}'.")]
+        OrderValidationBeneficiaryIsBlocked,
+
+        [SubSystemErrorNumber("00504")]
+        [ErrorMessage("Duplicated order found. CustomerID = '{0}'. PayAgentId = '{1}'. RecAgentLocationId = '{2}'. RecAgentId = '{3}'. AmountLocal = '{4}'. Currency = '{5}'.")]
+        OrderValidationOrderDuplicationFound,
 
         #endregion
     }

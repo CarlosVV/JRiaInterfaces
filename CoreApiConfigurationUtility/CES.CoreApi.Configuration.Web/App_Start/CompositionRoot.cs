@@ -87,7 +87,7 @@ namespace CES.CoreApi.Configuration.Web
         private static void RegisterOthers(Container container)
         {
             container.RegisterSingle<IAutoMapperProxy, AutoMapperProxy>();
-            container.RegisterSingle<ICacheProvider>(() => new AppFabricCacheProvider(container.GetInstance<ILogMonitorFactory>(), "CoreAPIDev"));
+            container.RegisterSingle<ICacheProvider>(() => new AppFabricCacheProvider(container.GetInstance<ILogMonitorFactory>(), container.GetInstance<IIdentityManager>(), "CoreAPIDev"));
             container.RegisterSingle<ICurrentDateTimeProvider, CurrentDateTimeProvider>();
         }
 

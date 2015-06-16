@@ -3,6 +3,7 @@ using AutoMapper;
 using AutoMapper.Mappers;
 using CES.CoreApi.Caching.Providers;
 using CES.CoreApi.Common.Interfaces;
+using CES.CoreApi.Common.Managers;
 using CES.CoreApi.Common.Providers;
 using CES.CoreApi.Common.Proxies;
 using CES.CoreApi.Foundation.Contract.Interfaces;
@@ -66,7 +67,7 @@ namespace CES.CoreApi.GeoLocation.Service.Configuration
             container.RegisterSingle<IServiceCallHeaderParametersProvider, ServiceCallHeaderParametersProvider>();
             container.RegisterSingle<IAuthorizationManager, AuthorizationManager>();
             container.RegisterSingle<IAuthorizationAdministrator, AuthorizationAdministrator>();
-            container.RegisterSingle<ICacheProvider>(() => new AppFabricCacheProvider(container.GetInstance<ILogMonitorFactory>(), cacheName));
+            container.RegisterSingle<ICacheProvider>(() => new AppFabricCacheProvider(container.GetInstance<ILogMonitorFactory>(), container.GetInstance<IIdentityManager>(), cacheName));
             container.RegisterSingle<IHostApplicationProvider, HostApplicationProvider>();
             container.RegisterSingle<IClientSecurityContextProvider, ClientDetailsProvider>();
             container.RegisterSingle<IServiceExceptionHandler, ServiceExceptionHandler>();

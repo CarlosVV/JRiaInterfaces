@@ -1,10 +1,6 @@
 ﻿using System;
-using System.ComponentModel;
-using System.Globalization;
 using System.Reflection;
-using CES.CoreApi.Common.Attributes;
 using CES.CoreApi.Common.Enumerations;
-using CES.CoreApi.Common.Tools;
 using Newtonsoft.Json;
 
 namespace CES.CoreApi.Common.Exceptions
@@ -13,13 +9,13 @@ namespace CES.CoreApi.Common.Exceptions
     [JsonObject(MemberSerialization.OptOut)]
     public class CoreApiException: Exception
     {
-        private const string ErrorCodeTemplate = "{0}|{1}|{2}|{3}";
+        private static readonly ExceptionHelper Helper = new ExceptionHelper();
 
         public CoreApiException(TechnicalSubSystem subSystem, SubSystemError subSystemError, Exception ex, params object[] parameters)
             : this(Organization.Ria, TechnicalSystem.CoreApi, subSystem, subSystemError, parameters)
         {
         }
-
+        
         public CoreApiException(TechnicalSubSystem subSystem, SubSystemError subSystemError, params object[] parameters)
             : this(Organization.Ria, TechnicalSystem.CoreApi, subSystem, subSystemError, parameters)
         {
@@ -29,7 +25,7 @@ namespace CES.CoreApi.Common.Exceptions
             TechnicalSubSystem subSystem, SubSystemError error, params object[] parameters)
         {
             ErrorCode = GetErrorCode(organization, system, subSystem, error);
-            ClientMessage = string.Format(CultureInfo.InvariantCulture, error.GetAttributeValue<ErrorMessageAttribute, string>(x => x.Message), parameters);
+            ClientMessage = Helper.GenerateMessage(error, parameters);
             ErrorId = Guid.NewGuid();
             Organization = organization;
             System = system;
@@ -80,12 +76,7 @@ namespace CES.CoreApi.Common.Exceptions
         private static string GetErrorCode(Organization organization, TechnicalSystem system,
             TechnicalSubSystem subSystem, SubSystemError error)
         {
-            return string.Format(CultureInfo.InvariantCulture,
-                ErrorCodeTemplate,
-                organization.GetAttributeValue<DescriptionAttribute, string>(x => x.Description),
-                system.GetAttributeValue<DescriptionAttribute, string>(x => x.Description),
-                subSystem.GetAttributeValue<DescriptionAttribute, string>(x => x.Description),
-                error.GetAttributeValue<SubSystemErrorNumberAttribute, string>(x => x.ErrorNumber));
+            return Helper.GenerateExceptionCode(organization, system, subSystem, error);
         }
     }
 }

@@ -45,6 +45,10 @@
       <HintPath>..\..\packages\Castle.Core.3.3.3\lib\net45\Castle.Core.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="FluentValidation, Version=5.5.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\FluentValidation.5.5.0.0\lib\Net40\FluentValidation.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="SimpleInjector, Version=2.8.0.0, Culture=neutral, PublicKeyToken=984cb50dea722e99, processorArchitecture=MSIL">
       <HintPath>..\..\packages\SimpleInjector.2.8.0\lib\net45\SimpleInjector.dll</HintPath>
       <Private>True</Private>
@@ -122,6 +126,10 @@
     <ProjectReference Include="..\CES.CoreApi.OrderValidation.Service.Contract\CES.CoreApi.OrderValidation.Service.Contract.csproj">
       <Project>{b69ede40-1901-4d7b-895f-0b2ab7ebec1c}</Project>
       <Name>CES.CoreApi.OrderValidation.Service.Contract</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\CES.CoreApi.OrderValidation.Service.Data\CES.CoreApi.OrderValidation.Service.Data.csproj">
+      <Project>{CF6379C1-A294-4B99-9F01-EA90622F5BA9}</Project>
+      <Name>CES.CoreApi.OrderValidation.Service.Data</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

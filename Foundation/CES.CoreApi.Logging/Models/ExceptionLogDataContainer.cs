@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Linq;
@@ -75,6 +76,16 @@ namespace CES.CoreApi.Logging.Models
         [DataMember]
         [DefaultValue("")]
         public string CustomMessage { get; set; }
+
+        /// <summary>
+        /// Gets or sets application context information
+        /// </summary>
+        [DataMember]
+        public dynamic ApplicationContext
+        {
+            get;
+            set;
+        }
 
         #endregion //Public properties
 

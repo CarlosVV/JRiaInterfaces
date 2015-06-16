@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Runtime.Serialization;
 using CES.CoreApi.Common.Enumerations;
 using CES.CoreApi.Common.Interfaces;
@@ -50,6 +51,16 @@ namespace CES.CoreApi.Logging.Models
         public LogType LogType
         {
             get { return LogType.SecurityAudit; }
+        }
+
+        /// <summary>
+        /// Gets or sets application context information
+        /// </summary>
+        [DataMember]
+        public dynamic ApplicationContext
+        {
+            get;
+            set;
         }
         
         #endregion

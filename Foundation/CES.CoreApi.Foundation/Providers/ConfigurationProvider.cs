@@ -34,6 +34,9 @@ namespace CES.CoreApi.Foundation.Providers
 
         public T ReadFromJson<T>(string name)
         {
+            if (string.IsNullOrEmpty(name))
+                return default(T);
+
             var item = Read<string>(name);
 
             return string.IsNullOrEmpty(item)

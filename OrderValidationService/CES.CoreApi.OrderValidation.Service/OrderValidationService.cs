@@ -1,6 +1,4 @@
-﻿using System;
-using System.ServiceModel;
-using CES.CoreApi.Common.Constants;
+﻿using System.ServiceModel;
 using CES.CoreApi.Common.Enumerations;
 using CES.CoreApi.Common.Exceptions;
 using CES.CoreApi.Foundation.Contract.Interfaces;
@@ -8,6 +6,7 @@ using CES.CoreApi.OrderValidation.Service.Business.Contract.Interfaces;
 using CES.CoreApi.OrderValidation.Service.Contract.Interfaces;
 using CES.CoreApi.OrderValidation.Service.Contract.Models;
 using CES.CoreApi.OrderValidation.Service.Interfaces;
+using Namespaces = CES.CoreApi.OrderValidation.Service.Contract.Constants.Namespaces;
 
 namespace CES.CoreApi.OrderValidation.Service
 {
@@ -45,6 +44,8 @@ namespace CES.CoreApi.OrderValidation.Service
         public OrderValidateResponse ValidateOrder(OrderValidateRequest request)
         {
             _requestValidator.Validate(request);
+
+            _orderValidateRequestProcessor.ValidateOrder(432324324);
 
             //var responseModel = _addressServiceRequestProcessor.ValidateAddress(
             //    request.FormattedAddress,

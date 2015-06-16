@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Linq;
 using System.ServiceModel;
+using CES.CoreApi.Common.Models;
 using CES.CoreApi.Common.Tools;
+using CES.CoreApi.Foundation.Contract.Constants;
 using CES.CoreApi.Foundation.Contract.Interfaces;
 using CES.CoreApi.Foundation.Contract.Models;
 
@@ -12,13 +14,7 @@ namespace CES.CoreApi.Foundation.Providers
         #region Core
 
         private readonly IRequestHeadersProvider _headerProvider;
-
-        private const string ApplicationIdHeader = "ApplicationId";
-        private const string ApplicationSessionIdHeader = "ApplicationSessionId";
-        private const string ReferenceNumberHeader = "ReferenceNumber";
-        private const string ReferenceNumberTypeHeader = "ReferenceNumberType";
-        private const string TimestampHeader = "Timestamp";
-
+        
         public ServiceCallHeaderParametersProvider(IRequestHeadersProvider headerProvider)
         {
             if (headerProvider == null)
@@ -36,12 +32,13 @@ namespace CES.CoreApi.Foundation.Providers
             var headers = _headerProvider.GetHeaders(bindingName);
 
             var parameters = new ServiceCallHeaderParameters(
-                headers.GetValue<int>(ApplicationIdHeader),
+                headers.GetValue<int>(CustomHeaderItems.ApplicationIdHeader),
                 GetServiceOperationName(bindingName),
-                headers.GetValue<DateTime>(TimestampHeader),
-                headers.GetValue<string>(ApplicationSessionIdHeader),
-                headers.GetValue<string>(ReferenceNumberHeader),
-                headers.GetValue<string>(ReferenceNumberTypeHeader));
+                headers.GetValue<DateTime>(CustomHeaderItems.TimestampHeader),
+                headers.GetValue<string>(CustomHeaderItems.ApplicationSessionIdHeader),
+                headers.GetValue<string>(CustomHeaderItems.ReferenceNumberHeader),
+                headers.GetValue<string>(CustomHeaderItems.ReferenceNumberTypeHeader),
+                headers.GetValue<string>(CustomHeaderItems.CorrelationId));
             return parameters;
         }
 

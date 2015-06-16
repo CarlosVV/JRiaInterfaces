@@ -1,10 +1,10 @@
 ﻿using System.Collections.Generic;
 using System.Runtime.Serialization;
-using CES.CoreApi.Common.Constants;
+using Namespaces = CES.CoreApi.GeoLocation.Service.Contract.Constants.Namespaces;
 
 namespace CES.CoreApi.GeoLocation.Service.Contract.Models
 {
-    [DataContract(Namespace = Namespaces.GeolocationDataContractNamespace, Name = "Address")]
+    [DataContract(Namespace = Namespaces.GeolocationServiceDataContractNamespace, Name = "Address")]
     public class AutocompleteAddress
     {
         [DataMember(EmitDefaultValue = false)]

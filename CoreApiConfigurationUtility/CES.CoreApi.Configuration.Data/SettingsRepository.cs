@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Data.SqlClient;
-using CES.CoreApi.Common.Constants;
+using CES.CoreApi.Common.Enumerations;
 using CES.CoreApi.Common.Interfaces;
 using CES.CoreApi.Configuration.Model.DomainEntities;
 using CES.CoreApi.Configuration.Model.Interfaces;
@@ -14,8 +14,8 @@ namespace CES.CoreApi.Configuration.Data
 {
     public class SettingsRepository : BaseGenericRepository, ISettingsRepository
     {
-        public SettingsRepository(ICacheProvider cacheProvider, ILogMonitorFactory logMonitorFactory)
-            : base(cacheProvider, logMonitorFactory, ConnectionStrings.Main)
+        public SettingsRepository(ICacheProvider cacheProvider, ILogMonitorFactory logMonitorFactory, IIdentityManager identityManager)
+            : base(cacheProvider, logMonitorFactory, identityManager, DatabaseType.Main)
         {
         }
 

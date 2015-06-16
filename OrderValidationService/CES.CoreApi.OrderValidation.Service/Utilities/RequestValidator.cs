@@ -8,7 +8,7 @@ namespace CES.CoreApi.OrderValidation.Service.Utilities
     {
         public void Validate(OrderValidateRequest request)
         {
-            throw new NotImplementedException();
+            
         }
     }
 }

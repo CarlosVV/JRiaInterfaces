@@ -11,6 +11,8 @@ namespace CES.CoreApi.Common.Enumerations
         [Description("CAPID")] CoreApiData = 4,
         [Description("GLCS")] GeoLocationService = 5,
         [Description("OVLDS")] OrderValidationService = 6,
-        [Description("OPRCS")] OrderProcessService = 7
+        [Description("OPRCS")] OrderProcessService = 7,
+        [Description("CUSTS")] CustomerService = 8,
+        [Description("SETS")] SettingsService = 9
     }
 }

@@ -42,7 +42,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Constants\Namespaces.cs" />
     <Compile Include="Interfaces\IOrderValidationService.cs" />
+    <Compile Include="Models\Beneficiary.cs" />
+    <Compile Include="Models\Correspondent.cs" />
+    <Compile Include="Models\OrderAmount.cs" />
     <Compile Include="Models\OrderValidateRequest.cs" />
     <Compile Include="Models\OrderValidateResponse.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

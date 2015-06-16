@@ -3,7 +3,6 @@ using System.Collections.ObjectModel;
 using System.Data;
 using System.Data.SqlClient;
 using System.Linq;
-using CES.CoreApi.Common.Constants;
 using CES.CoreApi.Common.Enumerations;
 using CES.CoreApi.Common.Exceptions;
 using CES.CoreApi.Common.Interfaces;
@@ -19,8 +18,8 @@ namespace CES.CoreApi.Foundation.Data
     {
         #region Core
 
-        public ApplicationRepository(ICacheProvider cacheProvider, ILogMonitorFactory logMonitorFactory)
-            : base(cacheProvider, logMonitorFactory, ConnectionStrings.Main)
+        public ApplicationRepository(ICacheProvider cacheProvider, ILogMonitorFactory logMonitorFactory, IIdentityManager identityManager)
+            : base(cacheProvider, logMonitorFactory, identityManager, DatabaseType.Main)
         {
         }
 
@@ -64,9 +63,9 @@ namespace CES.CoreApi.Foundation.Data
             return application.Configuration;
         }
 
-        public void Ping()
+        public DatabasePingModel Ping()
         {
-            PingDatabase();
+            return PingDatabase();
         }
 
         #endregion

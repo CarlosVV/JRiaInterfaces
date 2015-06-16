@@ -5,7 +5,7 @@ using CES.CoreApi.OrderValidation.Service.Contract.Models;
 
 namespace CES.CoreApi.OrderValidation.Service.Contract.Interfaces
 {
-     [ServiceContract(Namespace = Namespaces.OrderValidationServiceContractNamespace)]
+     [ServiceContract(Namespace = Constants.Namespaces.OrderValidationServiceContractNamespace)]
      public interface IOrderValidationService
      {
          [OperationContract(Name = "ValidateOrder")]

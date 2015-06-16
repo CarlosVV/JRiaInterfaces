@@ -6,7 +6,7 @@ using CES.CoreApi.Common.Interfaces;
 namespace CES.CoreApi.Common.Models
 {
     [DataContract]
-    public abstract class BaseResponse: IExtensibleDataObject
+    public abstract class BaseResponse : ExtensibleObject
     {
         protected BaseResponse(ICurrentDateTimeProvider currentDateTimeProvider)
         {
@@ -33,11 +33,5 @@ namespace CES.CoreApi.Common.Models
         /// </summary>
         [DataMember]
         public DateTime ResponseTime { get; private set; }
-
-        /// <summary>
-        /// To implement the IExtensibleDataObject interface, you must implement the ExtensionData property.
-        /// The property holds data from future versions of the class for backward compatibility.
-        /// </summary>
-        public ExtensionDataObject ExtensionData  { get; set; }
     }
 }

@@ -1,8 +1,8 @@
-﻿using System.Security.Principal;
+﻿using System;
 using CES.CoreApi.Common.Enumerations;
+using CES.CoreApi.Common.Interfaces;
 using CES.CoreApi.Common.Models;
 using CES.CoreApi.Foundation.Contract.Interfaces;
-using CES.CoreApi.Foundation.Contract.Models;
 using CES.CoreApi.GeoLocation.Service.Business.Contract.Configuration;
 using CES.CoreApi.GeoLocation.Service.Business.Logic.Constants;
 using CES.CoreApi.GeoLocation.Service.Business.Logic.Providers;
@@ -44,7 +44,8 @@ namespace CES.CoreApi.GeoLocation.Service.Business.Logic.UnitTest
         public void GetProviderConfigurationByCountry_CountryIsFound_HappyPath()
         {
             var application = new Application(1, "Test", true);
-            var applicationIdentity = new ClientApplicationIdentity(application);
+            var header = new ServiceCallHeaderParameters(1,"Test",DateTime.Now, "123456", "ABC12345", "transactionID", Guid.NewGuid().ToString());
+            var applicationIdentity = new ClientApplicationIdentity(application,header);
 
             _configurationProvider.Setup(p => p.ReadFromJson<DataProviderServiceConfiguration>(
                 ConfigurationConstants.DataProviderServiceConfiguration))
@@ -61,7 +62,8 @@ namespace CES.CoreApi.GeoLocation.Service.Business.Logic.UnitTest
         public void GetProviderConfigurationByCountry_DefaultCountryUsed_HappyPath()
         {
             var application = new Application(1, "Test", true);
-            var applicationIdentity = new ClientApplicationIdentity(application);
+            var header = new ServiceCallHeaderParameters(1, "Test", DateTime.Now, "123456", "ABC12345", "transactionID", Guid.NewGuid().ToString());
+            var applicationIdentity = new ClientApplicationIdentity(application, header);
 
             _configurationProvider.Setup(p => p.ReadFromJson<DataProviderServiceConfiguration>(
                 ConfigurationConstants.DataProviderServiceConfiguration))

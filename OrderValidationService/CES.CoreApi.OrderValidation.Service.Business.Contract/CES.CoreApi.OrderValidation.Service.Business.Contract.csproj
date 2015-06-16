@@ -40,7 +40,22 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Enumerations\CustomerValidationEntityType.cs" />
+    <Compile Include="Enumerations\SarResponseType.cs" />
     <Compile Include="Interfaces\IOrderValidateRequestProcessor.cs" />
+    <Compile Include="Interfaces\IValidationMainRepository.cs" />
+    <Compile Include="Interfaces\IValidationReadOnlyRepository.cs" />
+    <Compile Include="Models\BeneficiaryStatusValidationModel.cs" />
+    <Compile Include="Models\CustomerStatusValidationModel.cs" />
+    <Compile Include="Models\OfacValidationRequestModel.cs" />
+    <Compile Include="Models\OrderDuplicateValidationRequestModel.cs" />
+    <Compile Include="Models\SarValidationRequestAmountModel.cs" />
+    <Compile Include="Models\SarValidationRequestBeneficiaryModel.cs" />
+    <Compile Include="Models\SarValidationRequestCorrespondentModel.cs" />
+    <Compile Include="Models\SarValidationRequestModel.cs" />
+    <Compile Include="Models\SarValidationResponseModel.cs" />
+    <Compile Include="Models\ValidationRequest.cs" />
+    <Compile Include="Models\ValidationResponse.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

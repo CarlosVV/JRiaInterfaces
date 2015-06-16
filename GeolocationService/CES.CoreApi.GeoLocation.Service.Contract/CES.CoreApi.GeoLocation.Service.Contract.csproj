@@ -37,6 +37,7 @@
     <Reference Include="System.ServiceModel" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Constants\Namespaces.cs" />
     <Compile Include="Enumerations\Confidence.cs" />
     <Compile Include="Enumerations\DataProvider.cs" />
     <Compile Include="Enumerations\ImageFormat.cs" />

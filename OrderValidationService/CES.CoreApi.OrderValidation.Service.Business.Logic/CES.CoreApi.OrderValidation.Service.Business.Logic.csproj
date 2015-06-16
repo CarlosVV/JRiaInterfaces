@@ -12,6 +12,8 @@
     <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <TargetFrameworkProfile />
+    <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">..\..\</SolutionDir>
+    <RestorePackages>true</RestorePackages>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -31,8 +33,13 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="FluentValidation, Version=5.5.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\FluentValidation.5.5.0.0\lib\Net40\FluentValidation.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -42,14 +49,41 @@
   <ItemGroup>
     <Compile Include="Processors\OrderValidateRequestProcessor.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Validators\BeneficiaryStatusValidator.cs" />
+    <Compile Include="Validators\CustomerStatusValidator.cs" />
+    <Compile Include="Validators\OfacValidator.cs" />
+    <Compile Include="Validators\OrderDuplicateValidator.cs" />
+    <Compile Include="Validators\SarValidator.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\CustomerService\CES.CoreApi.Customer.Service.Contract\CES.CoreApi.Customer.Service.Contract.csproj">
+      <Project>{77345622-3d1c-4a0a-b13b-a0609101f479}</Project>
+      <Name>CES.CoreApi.Customer.Service.Contract</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Foundation\CES.CoreApi.Common\CES.CoreApi.Common.csproj">
+      <Project>{070C7BB2-AF07-4A4C-A9CC-6BFB8CA416E6}</Project>
+      <Name>CES.CoreApi.Common</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Foundation\CES.CoreApi.Foundation.Contract\CES.CoreApi.Foundation.Contract.csproj">
+      <Project>{8DBCFE15-CA3B-4F7C-A7D6-D73F8F0B91AA}</Project>
+      <Name>CES.CoreApi.Foundation.Contract</Name>
+    </ProjectReference>
     <ProjectReference Include="..\CES.CoreApi.OrderValidation.Service.Business.Contract\CES.CoreApi.OrderValidation.Service.Business.Contract.csproj">
       <Project>{D36D989D-EC75-4B8A-B2E9-B05018F57A3C}</Project>
       <Name>CES.CoreApi.OrderValidation.Service.Business.Contract</Name>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <Import Project="$(SolutionDir)\.nuget\NuGet.targets" Condition="Exists('$(SolutionDir)\.nuget\NuGet.targets')" />
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>This project references NuGet package(s) that are missing on this computer. Enable NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('$(SolutionDir)\.nuget\NuGet.targets')" Text="$([System.String]::Format('$(ErrorText)', '$(SolutionDir)\.nuget\NuGet.targets'))" />
+  </Target>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
   <Target Name="BeforeBuild">

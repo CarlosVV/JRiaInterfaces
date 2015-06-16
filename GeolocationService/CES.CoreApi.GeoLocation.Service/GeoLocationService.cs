@@ -10,6 +10,7 @@ using CES.CoreApi.GeoLocation.Service.Business.Contract.Models;
 using CES.CoreApi.GeoLocation.Service.Contract.Enumerations;
 using CES.CoreApi.GeoLocation.Service.Contract.Interfaces;
 using CES.CoreApi.GeoLocation.Service.Contract.Models;
+using Namespaces = CES.CoreApi.GeoLocation.Service.Contract.Constants.Namespaces;
 
 namespace CES.CoreApi.GeoLocation.Service
 {

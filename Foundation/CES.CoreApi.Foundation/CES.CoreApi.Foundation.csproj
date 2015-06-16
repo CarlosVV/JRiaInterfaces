@@ -75,7 +75,6 @@
   <ItemGroup>
     <Compile Include="Configuration\ConfigurationTools.cs" />
     <Compile Include="Data\ApplicationRepository.cs" />
-    <Compile Include="Security\IdentityManager.cs" />
     <Compile Include="Service\MessageInspector.cs" />
     <Compile Include="Tools\MappingHelper.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -95,6 +94,7 @@
     <Compile Include="Service\ServiceEndpointBehavior.cs" />
     <Compile Include="Service\ServiceExceptionHandler.cs" />
     <Compile Include="Providers\RequestHeadersProvider.cs" />
+    <Compile Include="Tools\ServiceHelper.cs" />
     <Compile Include="Validation\ContractValidation.cs" />
     <Compile Include="Validation\ApplicationValidator.cs" />
   </ItemGroup>
