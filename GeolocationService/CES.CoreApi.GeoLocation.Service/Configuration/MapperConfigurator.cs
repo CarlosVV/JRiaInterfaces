@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using CES.CoreApi.Common.Models;
 using CES.CoreApi.GeoLocation.Service.Business.Contract.Enumerations;
 using CES.CoreApi.GeoLocation.Service.Business.Contract.Models;
 using CES.CoreApi.GeoLocation.Service.Contract.Enumerations;
@@ -28,16 +29,16 @@ namespace CES.CoreApi.GeoLocation.Service.Configuration
             Mapper.CreateMap<LocationModel, Location>();
             Mapper.CreateMap<ValidateAddressResponseModel, ValidateAddressResponse>().ConstructUsingServiceLocator();
             Mapper.CreateMap<AutocompleteAddressResponseModel, AutocompleteAddressResponse>().ConstructUsingServiceLocator();
-            Mapper.CreateMap<HealthResponseModel, HealthResponse>().ConstructUsingServiceLocator();
-            Mapper.CreateMap<ClearCacheResponseModel, ClearCacheResponse>().ConstructUsingServiceLocator();
-            Mapper.CreateMap<GeocodeAddressResponseModel, GeocodeAddressResponse>().ConstructUsingServiceLocator();
+           Mapper.CreateMap<GeocodeAddressResponseModel, GeocodeAddressResponse>().ConstructUsingServiceLocator();
             Mapper.CreateMap<GeocodeAddressResponseModel, GeocodeAddressResponse>().ConstructUsingServiceLocator();
             Mapper.CreateMap<GetMapResponseModel, GetMapResponse>().ConstructUsingServiceLocator();
             Mapper.CreateMap<GetProviderKeyResponseModel, GetProviderKeyResponse>().ConstructUsingServiceLocator();
 
-            Mapper.Configuration.ConstructServicesUsing(container.GetInstance);
+            Mapper.CreateMap<PingResponseModel, PingResponse>().ConstructUsingServiceLocator();
+            Mapper.CreateMap<ClearCacheResponseModel, ClearCacheResponse>().ConstructUsingServiceLocator();
+            Mapper.CreateMap<DatabasePingModel, DatabasePingResponse>();
 
-            //Mapper.AssertConfigurationIsValid();
+            Mapper.Configuration.ConstructServicesUsing(container.GetInstance);
         }
     }
 }

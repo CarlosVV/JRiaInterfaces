@@ -5,25 +5,25 @@ namespace CES.CoreApi.Settings.Service.Business.Contract.Models
 {
     public class ScannerSettingsModel
     {
-        [CountrySettingCode("ComplAllowNoneForCustomerTaxID")]
+        [CountrySetting("ComplAllowNoneForCustomerTaxID")]
         public int ComplianceAllowNoneForCustomerTaxId { get; set; }
 
-        [CountrySettingCode("ComplDefaultCustomerTaxIdLabelWhenNone")]
+        [CountrySetting("ComplDefaultCustomerTaxIdLabelWhenNone")]
         public string ComplianceDefaultCustomerTaxIdLabelWhenNone { get; set; }
 
         /// <summary>
         /// Get the scanning resolution configured to use when use a scan function
         /// </summary>
-        [CountrySettingCode("DefaultIdScanResolution")]
+        [CountrySetting("DefaultIdScanResolution")]
         public int DefaultIdScanResolution { get; set; }
 
-        [CountrySettingCode("DefaultDocumentScanResolution")]
+        [CountrySetting("DefaultDocumentScanResolution")]
         public int DefaultDocumentScanResolution { get; set; }
 
-        [CountrySettingCode("DocumentScanResolutionRange")]
+        [CountrySetting("DocumentScanResolutionRange", true, "|")]
         public List<int> DocumentScanResolutionRange { get; set; }
 
-        [CountrySettingCode("EnableDocumentScanResolutionRange")]
+        [CountrySetting("EnableDocumentScanResolutionRange")]
         public bool EnableDocumentScanResolutionRange { get; set; }
     }
 }

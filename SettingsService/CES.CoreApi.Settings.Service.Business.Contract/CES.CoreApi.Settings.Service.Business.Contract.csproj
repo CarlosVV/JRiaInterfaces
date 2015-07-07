@@ -41,7 +41,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Attributes\CountrySettingCodeAttribute.cs" />
+    <Compile Include="Attributes\CountrySettingAttribute.cs" />
     <Compile Include="Enumerations\AccountReceivableLimitDisplayOptionType.cs" />
     <Compile Include="Enumerations\BeneficiaryConsolidationSettingType.cs" />
     <Compile Include="Enumerations\ComplianceWarningPeriodicityType.cs" />

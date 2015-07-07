@@ -14,13 +14,13 @@ namespace CES.CoreApi.Settings.Service.Business.Contract.Models
             LimitDepositTime = new DateTime(1, 1, 1, LimitDepositTimeHourPart, 0, 0);
         }
 
-        [CountrySettingCode("ARLimitDisplayOption")]
+        [CountrySetting("ARLimitDisplayOption")]
         public AccountReceivableLimitDisplayOptionType LimitDisplayOption { get; set; }
 
-        [CountrySettingCode("ARLimitDepositTime")]
+        [CountrySetting("ARLimitDepositTime")]
         public DateTime LimitDepositTime { get; set; }
 
-        [CountrySettingCode("ARFaxNo")]
+        [CountrySetting("ARFaxNo")]
         public string FaxNo { get; set; }
     }
 }

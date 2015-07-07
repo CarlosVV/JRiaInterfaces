@@ -11,13 +11,13 @@ namespace CES.CoreApi.Settings.Service.Business.Contract.Models
             EnableRecurrent = RecurrentBeneficiarySettingType.Disabled;
         }
 
-        [CountrySettingCode("MTEnableRecurrentBeneficiary")]
+        [CountrySetting("MTEnableRecurrentBeneficiary")]
         public RecurrentBeneficiarySettingType EnableRecurrent { get; set; }
 
-        [CountrySettingCode("MTShowBeneficiariesTabFxOnline")]
+        [CountrySetting("MTShowBeneficiariesTabFxOnline")]
         public RecurrentBeneficiarySettingType EnableRecurrentTab { get; set; }
 
-        [CountrySettingCode("MTBeneficiaryConsolidation")]
+        [CountrySetting("MTBeneficiaryConsolidation")]
         public BeneficiaryConsolidationSettingType EnableConsolidation { get; set; }
     }
 }

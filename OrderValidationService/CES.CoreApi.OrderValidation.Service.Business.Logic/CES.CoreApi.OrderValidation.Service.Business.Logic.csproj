@@ -47,12 +47,16 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Constants\CommonConstants.cs" />
     <Compile Include="Processors\OrderValidateRequestProcessor.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Validators\BeneficiaryStatusValidator.cs" />
-    <Compile Include="Validators\CustomerStatusValidator.cs" />
+    <Compile Include="Validators\BaseAbstractValidator.cs" />
+    <Compile Include="Validators\BeneficiaryValidator.cs" />
+    <Compile Include="Validators\CountryCodeValidator.cs" />
+    <Compile Include="Validators\CustomerValidator.cs" />
     <Compile Include="Validators\OfacValidator.cs" />
     <Compile Include="Validators\OrderDuplicateValidator.cs" />
+    <Compile Include="Validators\PayingAgentValidator.cs" />
     <Compile Include="Validators\SarValidator.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -67,6 +71,14 @@
     <ProjectReference Include="..\..\Foundation\CES.CoreApi.Foundation.Contract\CES.CoreApi.Foundation.Contract.csproj">
       <Project>{8DBCFE15-CA3B-4F7C-A7D6-D73F8F0B91AA}</Project>
       <Name>CES.CoreApi.Foundation.Contract</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\ReferenceDataService\CES.CoreApi.ReferenceData.Service.Contract\CES.CoreApi.ReferenceData.Service.Contract.csproj">
+      <Project>{B1BBA975-35BE-4725-8B66-BD282746A7BB}</Project>
+      <Name>CES.CoreApi.ReferenceData.Service.Contract</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\SettingsService\CES.CoreApi.Settings.Service.Contract\CES.CoreApi.Settings.Service.Contract.csproj">
+      <Project>{A6A0FF21-AE22-4099-8939-E588F3A7E2E1}</Project>
+      <Name>CES.CoreApi.Settings.Service.Contract</Name>
     </ProjectReference>
     <ProjectReference Include="..\CES.CoreApi.OrderValidation.Service.Business.Contract\CES.CoreApi.OrderValidation.Service.Business.Contract.csproj">
       <Project>{D36D989D-EC75-4B8A-B2E9-B05018F57A3C}</Project>

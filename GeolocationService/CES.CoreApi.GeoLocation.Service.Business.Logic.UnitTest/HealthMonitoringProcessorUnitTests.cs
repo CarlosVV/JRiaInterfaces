@@ -1,7 +1,8 @@
 ﻿using System;
+using System.Linq;
 using CES.CoreApi.Common.Enumerations;
 using CES.CoreApi.Common.Interfaces;
-using CES.CoreApi.Foundation.Contract.Enumerations;
+using CES.CoreApi.Common.Models;
 using CES.CoreApi.Foundation.Contract.Interfaces;
 using CES.CoreApi.GeoLocation.Service.Business.Logic.Processors;
 using CES.CoreApi.GeoLocation.Service.UnitTestTools;
@@ -57,7 +58,8 @@ namespace CES.CoreApi.GeoLocation.Service.Business.Logic.UnitTest
             
             _cacheProvider.Verify(p => p.ClearCache(), Times.Once);
             Assert.IsNotNull(result);
-            Assert.AreEqual("Core API Geolocation service cache successfully cleaned up.", result.Message);
+            Assert.AreEqual("Core API services cache successfully cleaned up.", result.Message);
+            Assert.IsTrue(result.IsOk);
         }
 
         [TestMethod]
@@ -70,31 +72,23 @@ namespace CES.CoreApi.GeoLocation.Service.Business.Logic.UnitTest
 
             _cacheProvider.Verify(p => p.ClearCache(), Times.Once);
             Assert.IsNotNull(result);
-            Assert.AreEqual("Test Exception", result.Message);
+            Assert.AreEqual("Core API services cache clean up failed. Exception details were logged out.", result.Message);
+            Assert.IsFalse(result.IsOk);
         }
 
         [TestMethod]
         public void Ping_HappyPath()
         {
-            _applicationRepository.Setup(p => p.Ping()).Verifiable();
+            var pingModel = new DatabasePingModel {Database = DatabaseType.Main, IsOk = true};
+            _applicationRepository.Setup(p => p.Ping()).Returns(pingModel).Verifiable();
 
-            var result = new HealthMonitoringProcessor(_cacheProvider.Object, _applicationRepository.Object).Ping();
-
+            var processor = new HealthMonitoringProcessor(_cacheProvider.Object, _applicationRepository.Object);
+            
+            var result = processor.Ping();
             _applicationRepository.Verify(p => p.Ping(), Times.Once);
             Assert.IsNotNull(result);
-            Assert.AreEqual("OK", result.MainDatabaseStatus);
-        }
-
-        [TestMethod]
-        public void Ping_ExceptionRaisedAndExceptionMessageReturned()
-        {
-            _applicationRepository.Setup(p => p.Ping()).Throws(new ApplicationException("Test Exception")).Verifiable();
-
-            var result = new HealthMonitoringProcessor(_cacheProvider.Object, _applicationRepository.Object).Ping();
-
-            _applicationRepository.Verify(p => p.Ping(), Times.Once);
-            Assert.IsNotNull(result);
-            Assert.AreEqual("Test Exception", result.MainDatabaseStatus);
+            Assert.IsTrue(result.Databases.ToList()[0].IsOk);
+            Assert.AreEqual(DatabaseType.Main, result.Databases.ToList()[0].Database);
         }
     }
 }

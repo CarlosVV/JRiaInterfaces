@@ -24,7 +24,7 @@ using CES.CoreApi.Logging.Monitors;
 using CES.CoreApi.Logging.Providers;
 using CES.CoreApi.Settings.Service.Business.Contract.Interfaces;
 using CES.CoreApi.Settings.Service.Business.Logic.Processors;
-using CES.CoreApi.Settings.Service.Data;
+using CES.CoreApi.Settings.Service.Data.Repositories;
 using CES.CoreApi.Settings.Service.Interfaces;
 using CES.CoreApi.Settings.Service.Utilities;
 using CES.CoreApi.SimpleInjectorProxy;

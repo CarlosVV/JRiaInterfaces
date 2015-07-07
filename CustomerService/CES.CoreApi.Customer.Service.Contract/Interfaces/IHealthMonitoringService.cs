@@ -14,6 +14,6 @@ namespace CES.CoreApi.Customer.Service.Contract.Interfaces
 
         [OperationContract]
         [FaultContract(typeof(CoreApiServiceFault), Action = Common.Constants.Namespaces.ServiceFaultContractAction)]
-        HealthResponse Ping();
+        PingResponse Ping();
     }
 }

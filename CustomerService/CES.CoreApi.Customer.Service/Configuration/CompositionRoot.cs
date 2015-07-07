@@ -44,7 +44,6 @@ namespace CES.CoreApi.Customer.Service.Configuration
             RegisterOthers(container);
             RegisterLoggging(container);
             RegisterInterceptions(container);
-            //RegisterFactories(container);
             RegisterProcessors(container);
             RegisterProviders(container);
 

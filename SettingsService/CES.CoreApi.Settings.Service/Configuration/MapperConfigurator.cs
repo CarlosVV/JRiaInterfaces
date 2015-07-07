@@ -21,9 +21,11 @@ namespace CES.CoreApi.Settings.Service.Configuration
                 .ForMember(p => p.CountryList, map => map.MapFrom(dto => Mapper.Map<IEnumerable<CountryModel>, IEnumerable<CountryResponse>>(dto)))
                 .ConstructUsingServiceLocator();
 
+            Mapper.CreateMap<CountrySettingsModel, GetCountrySettingsResponse>()
+                .ConstructUsingServiceLocator();
+
             Mapper.CreateMap<CountryModel, CountryResponse>();
-
-
+            
             Mapper.CreateMap<AccountReceivableSettingsModel, AccountReceivableSettings>();
             Mapper.CreateMap<BeneficiarySettingsModel, BeneficiarySettings>();
             Mapper.CreateMap<CorporateSettingsModel, CorporateSettings>();
@@ -34,8 +36,10 @@ namespace CES.CoreApi.Settings.Service.Configuration
             Mapper.CreateMap<ScannerSettingsModel, ScannerSettings>();
             Mapper.CreateMap<CustomerConfidentialSettingsModel, CustomerConfidentialSettings>();
 
+            Mapper.CreateMap<PingResponseModel, PingResponse>().ConstructUsingServiceLocator();
             Mapper.CreateMap<ClearCacheResponseModel, ClearCacheResponse>().ConstructUsingServiceLocator();
-
+            Mapper.CreateMap<DatabasePingModel, DatabasePingResponse>();
+            
             Mapper.CreateMap<AccountReceivableLimitDisplayOptionType, AccountReceivableLimitDisplayOption>();
             Mapper.CreateMap<BeneficiaryConsolidationSettingType, BeneficiaryConsolidationSetting>();
             Mapper.CreateMap<RecurrentBeneficiarySettingType, RecurrentBeneficiarySetting>();
@@ -44,30 +48,7 @@ namespace CES.CoreApi.Settings.Service.Configuration
             Mapper.CreateMap<PossibleDuplicateCustomerActionSettingType, PossibleDuplicateCustomerActionSetting>();
             Mapper.CreateMap<WatchListPayoutSettingType, WatchListPayoutSetting>();
             Mapper.CreateMap<ComplianceWarningPeriodicityType, ComplianceWarningPeriodicity>();
-            
-
-            //Mapper.CreateMap<AddressModel, AddressRequest>();
-            //Mapper.CreateMap<AddressModel, ValidatedAddress>();
-            //Mapper.CreateMap<AddressModel, AutocompleteAddress>();
-            //Mapper.CreateMap<AddressModel, GeocodeAddress>();
-            //Mapper.CreateMap<AutocompleteSuggestionModel, AutocompleteSuggestion>();
-            //Mapper.CreateMap<Location, LocationModel>();
-            //Mapper.CreateMap<MapSize, MapSizeModel>();
-            //Mapper.CreateMap<PushPin, PushPinModel>();
-            //Mapper.CreateMap<MapOutputParameters, MapOutputParametersModel>();
-            //Mapper.CreateMap<Confidence, LevelOfConfidence>();
-            //Mapper.CreateMap<LevelOfConfidence, Confidence>();
-            //Mapper.CreateMap<PinColor, Color>();
-            //Mapper.CreateMap<DataProviderType, DataProvider>();
-            //Mapper.CreateMap<LocationModel, Location>();
-            //Mapper.CreateMap<CountryModel, GetCountryResponse>().ConstructUsingServiceLocator();
-            //Mapper.CreateMap<IEnumerable<CountryModel>, GetCountryListResponse>().ConstructUsingServiceLocator();
-           // Mapper.CreateMap<CountrySettingsModel, GetCountrySettingsResponse>().ConstructUsingServiceLocator();
-            //
-            //Mapper.CreateMap<GeocodeAddressResponseModel, GeocodeAddressResponse>().ConstructUsingServiceLocator();
-            //Mapper.CreateMap<GeocodeAddressResponseModel, GeocodeAddressResponse>().ConstructUsingServiceLocator();
-            //Mapper.CreateMap<GetMapResponseModel, GetMapResponse>().ConstructUsingServiceLocator();
-            //Mapper.CreateMap<GetProviderKeyResponseModel, GetProviderKeyResponse>().ConstructUsingServiceLocator();
+      
 
             Mapper.Configuration.ConstructServicesUsing(container.GetInstance);
         }

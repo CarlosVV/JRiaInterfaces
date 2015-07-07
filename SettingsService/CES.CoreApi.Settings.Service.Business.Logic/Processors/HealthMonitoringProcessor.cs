@@ -40,7 +40,7 @@ namespace CES.CoreApi.Settings.Service.Business.Logic.Processors
                 _cacheProvider.ClearCache();
                 response.IsOk = true;
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 response.IsOk = false;
             }
@@ -48,9 +48,9 @@ namespace CES.CoreApi.Settings.Service.Business.Logic.Processors
             return response;
         }
 
-        public HealthResponseModel Ping()
+        public PingResponseModel Ping()
         {
-            var response = new HealthResponseModel();
+            var response = new PingResponseModel();
 
             response.Databases.Add(_countryRepository.Ping());
 

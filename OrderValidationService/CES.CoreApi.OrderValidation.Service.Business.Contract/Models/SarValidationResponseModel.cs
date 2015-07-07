@@ -24,5 +24,6 @@ namespace CES.CoreApi.OrderValidation.Service.Business.Contract.Models
 
         public bool GotIdLevel2 { get; set; }
         public SarResponseType ResponseType { get; set; }
+        public string ExceptionCode { get; set; }
     }
 }

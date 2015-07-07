@@ -46,7 +46,7 @@ namespace CES.CoreApi.Settings.Service.Contract.Models
         /// Gets or sets the code.
         /// </summary>
         /// <value>The code.</value>
-        [DataMember]
+        [DataMember(EmitDefaultValue = false)]
         public string Code
         {
             get;
@@ -58,7 +58,7 @@ namespace CES.CoreApi.Settings.Service.Contract.Models
         /// Gets or sets the ISO code.
         /// </summary>
         /// <value>The ISO code.</value>
-        [DataMember]
+        [DataMember(EmitDefaultValue = false)]
         public string IsoCode
         {
             get;
@@ -106,7 +106,7 @@ namespace CES.CoreApi.Settings.Service.Contract.Models
         /// Gets or sets the ISO code_ alpha3.
         /// </summary>
         /// <value>The ISO code_ alpha3.</value>
-        [DataMember]
+        [DataMember(EmitDefaultValue = false)]
         public string IsoCodeAlpha3
         {
             get;
@@ -118,7 +118,7 @@ namespace CES.CoreApi.Settings.Service.Contract.Models
         /// Gets or sets the country currency.
         /// </summary>
         /// <value>The country currency.</value>
-        [DataMember]
+        [DataMember(EmitDefaultValue = false)]
         public string Currency
         {
             get;

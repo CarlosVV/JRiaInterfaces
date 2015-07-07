@@ -19,20 +19,10 @@ namespace CES.CoreApi.Customer.Service.Configuration
             Mapper.CreateMap<LocationModel, Location>();
             Mapper.CreateMap<AddressValidationResult, AddressValidationStatus>();
             Mapper.CreateMap<TelephoneKind, TelephoneType>();
-            //Mapper.CreateMap<MapOutputParameters, MapOutputParametersModel>();
-            //Mapper.CreateMap<Confidence, LevelOfConfidence>();
-            //Mapper.CreateMap<LevelOfConfidence, Confidence>();
-            //Mapper.CreateMap<PinColor, Color>();
-            //Mapper.CreateMap<DataProviderType, DataProvider>();
-            //Mapper.CreateMap<LocationModel, Location>();
-            //Mapper.CreateMap<ValidateAddressResponseModel, ValidateAddressResponse>().ConstructUsingServiceLocator();
             Mapper.CreateMap<CustomerModel, CustomerGetResponse>().ConstructUsingServiceLocator();
-            Mapper.CreateMap<HealthResponseModel, HealthResponse>().ConstructUsingServiceLocator();
+            Mapper.CreateMap<PingResponseModel, PingResponse>().ConstructUsingServiceLocator();
             Mapper.CreateMap<ClearCacheResponseModel, ClearCacheResponse>().ConstructUsingServiceLocator();
-            //Mapper.CreateMap<GeocodeAddressResponseModel, GeocodeAddressResponse>().ConstructUsingServiceLocator();
-            //Mapper.CreateMap<GeocodeAddressResponseModel, GeocodeAddressResponse>().ConstructUsingServiceLocator();
-            //Mapper.CreateMap<GetMapResponseModel, GetMapResponse>().ConstructUsingServiceLocator();
-            //Mapper.CreateMap<GetProviderKeyResponseModel, GetProviderKeyResponse>().ConstructUsingServiceLocator();
+            Mapper.CreateMap<DatabasePingModel, DatabasePingResponse>();
 
             Mapper.Configuration.ConstructServicesUsing(container.GetInstance);
         }

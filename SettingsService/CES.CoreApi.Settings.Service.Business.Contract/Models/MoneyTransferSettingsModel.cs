@@ -20,58 +20,58 @@ namespace CES.CoreApi.Settings.Service.Business.Contract.Models
             OrderFilesAllowUploadFileType = allowedUploadFileTypeList;
         }
 
-        [CountrySettingCode("MTReqScannedID")]
+        [CountrySetting("MTReqScannedID")]
         public bool RequireScannedId { get; set; }
 
-        [CountrySettingCode("MTOrderIDAmt1")]
-        public decimal OrderIdAmt1 { get; set; }
+        [CountrySetting("MTOrderIDAmt1")]
+        public decimal OrderIdAmount1 { get; set; }
 
-        [CountrySettingCode("MTOrderIDAmt2")]
-        public decimal OrderIdAmt2 { get; set; }
+        [CountrySetting("MTOrderIDAmt2")]
+        public decimal OrderIdAmount2 { get; set; }
 
-        [CountrySettingCode("MTNumOrdersDailyCancellationLimit")]
+        [CountrySetting("MTNumOrdersDailyCancellationLimit")]
         public int NumberOrdersDailyCancellationLimit { get; set; }
 
-        [CountrySettingCode("MTAmountDailyCancellationLimit")]
+        [CountrySetting("MTAmountDailyCancellationLimit")]
         public decimal AmountDailyCancellationLimit { get; set; }
 
-        [CountrySettingCode("MTCustomerIdentificationAllowUploadFileType")]
+        [CountrySetting("MTCustomerIdentificationAllowUploadFileType", true, ",")]
         public IList<string> CustomerIdentificationAllowUploadFileType { get; set; }
 
-        [CountrySettingCode("MTCustomerIdentificationUploadedFileMaxSize")]
+        [CountrySetting("MTCustomerIdentificationUploadedFileMaxSize")]
         public int CustomerIdentificationUploadedFileMaxSize { get; set; }
 
-        [CountrySettingCode("MTSameCityPayoutRestricted")]
+        [CountrySetting("MTSameCityPayoutRestricted")]
         public bool SameCityPayoutRestricted { get; set; }
 
-        [CountrySettingCode("MTRequireImageIdentificationForRiaLink")]
+        [CountrySetting("MTRequireImageIdentificationForRiaLink")]
         public bool RequireImageIdentificationForRiaLink { get; set; }
 
-        [CountrySettingCode("MTRequireDoBToSearchCustomers")]
+        [CountrySetting("MTRequireDoBToSearchCustomers")]
         public bool RequireDoBToSearchCustomers { get; set; }
 
-        [CountrySettingCode("MTGenerateRefundCode")]
+        [CountrySetting("MTGenerateRefundCode")]
         public bool GenerateRefundCode { get; set; }
 
-        [CountrySettingCode("MTRefundPINMaxFailedAttempts")]
+        [CountrySetting("MTRefundPINMaxFailedAttempts")]
         public int RefundPinMaxFailedAttempts { get; set; }
 
-        [CountrySettingCode("MTCustPhoneSearch_ForceExactMatch")]
+        [CountrySetting("MTCustPhoneSearch_ForceExactMatch")]
         public bool CustomerPhoneSearchForceExactMatch { get; set; }
 
-        [CountrySettingCode("MTOrderFilesAllowUploadFileType")]
+        [CountrySetting("MTOrderFilesAllowUploadFileType", true, ",")]
         public IList<string> OrderFilesAllowUploadFileType { get; set; }
 
-        [CountrySettingCode("MTOrdersFilesUploadedMaxFileSize")]
+        [CountrySetting("MTOrdersFilesUploadedMaxFileSize")]
         public int OrderFilesUploadedMaxFileSize { get; set; }
 
-        [CountrySettingCode("MTAllowToChangeIdentificationExpDateWhenExpired")]
+        [CountrySetting("MTAllowToChangeIdentificationExpDateWhenExpired")]
         public bool AllowToChangeIdentificationExpireDateWhenExpired { get; set; }
 
-        [CountrySettingCode("MTRequireSMSServiceNotifications")]
+        [CountrySetting("MTRequireSMSServiceNotifications")]
         public bool RequireSmsServiceNotifications { get; set; }
 
-        [CountrySettingCode("MTDefCountryTo")]
+        [CountrySetting("MTDefCountryTo")]
         public string DefaultCountryTo { get; set; }
     }
 }

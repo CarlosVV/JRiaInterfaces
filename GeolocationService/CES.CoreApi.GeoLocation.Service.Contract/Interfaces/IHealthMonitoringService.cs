@@ -14,6 +14,6 @@ namespace CES.CoreApi.GeoLocation.Service.Contract.Interfaces
 
         [OperationContract]
         [FaultContract(typeof(CoreApiServiceFault), Action = Namespaces.ServiceFaultContractAction)]
-        HealthResponse Ping();
+        PingResponse Ping();
     }
 }

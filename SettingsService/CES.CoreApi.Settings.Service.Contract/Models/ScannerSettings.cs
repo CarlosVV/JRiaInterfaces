@@ -8,22 +8,22 @@ namespace CES.CoreApi.Settings.Service.Contract.Models
     [DataContract(Namespace = Namespaces.SettingsServiceDataContractNamespace)]
     public class ScannerSettings : ExtensibleObject
     {
-        [DataMember]
+        [DataMember(EmitDefaultValue = false)]
         public int ComplianceAllowNoneForCustomerTaxId { get; set; }
 
-        [DataMember]
+        [DataMember(EmitDefaultValue = false)]
         public string ComplianceDefaultCustomerTaxIdLabelWhenNone { get; set; }
 
-        [DataMember]
+        [DataMember(EmitDefaultValue = false)]
         public int DefaultIdScanResolution { get; set; }
 
-        [DataMember]
+        [DataMember(EmitDefaultValue = false)]
         public int DefaultDocumentScanResolution { get; set; }
 
-        [DataMember]
+        [DataMember(EmitDefaultValue = false)]
         public List<int> DocumentScanResolutionRange { get; set; }
 
-        [DataMember]
+        [DataMember(EmitDefaultValue = false)]
         public bool EnableDocumentScanResolutionRange { get; set; }
     }
 }

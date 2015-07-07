@@ -5,19 +5,19 @@ namespace CES.CoreApi.Settings.Service.Business.Contract.Models
 {
     public class DigitalReceiptSettingsModel
     {
-        [CountrySettingCode("DigitalReceiptAllowUploadFileType")]
-        public string AllowUploadFileType { get; set; }
+        [CountrySetting("DigitalReceiptAllowUploadFileType", true, ",")]
+        public List<string> AllowUploadFileType { get; set; }
 
-        [CountrySettingCode("DigitalReceiptUploadedMaxFileSize")]
+        [CountrySetting("DigitalReceiptUploadedMaxFileSize")]
         public int UploadedMaxFileSize { get; set; }
 
-        [CountrySettingCode("DigitalReceiptScannResolutionsRange")]
+        [CountrySetting("DigitalReceiptScannResolutionsRange", true, "|")]
         public List<int> ScanResolutionsRange { get; set; }
 
-        [CountrySettingCode("DigitalReceiptBulkFileTypes")]
-        public string BulkFileTypes { get; set; }
+        [CountrySetting("DigitalReceiptBulkFileTypes", true, ",")]
+        public List<string> BulkFileTypes { get; set; }
 
-        [CountrySettingCode("DigitalReceiptMaxBulkFileSize")]
+        [CountrySetting("DigitalReceiptMaxBulkFileSize")]
         public int MaxBulkFileSize { get; set; }
     }
 }

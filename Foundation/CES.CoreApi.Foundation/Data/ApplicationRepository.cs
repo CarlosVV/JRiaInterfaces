@@ -72,7 +72,7 @@ namespace CES.CoreApi.Foundation.Data
 
         #region Private methods
 
-        private Application GetApplication(IDataReader reader, int applicationId)
+        private static Application GetApplication(IDataReader reader, int applicationId)
         {
             //Initialize applicaiton instance
             var application = InitializeApplication(reader, applicationId);
@@ -97,15 +97,12 @@ namespace CES.CoreApi.Foundation.Data
 
         private static Application InitializeApplication(IDataReader reader, int applicationId)
         {
-            if (reader.Read())
-            {
-                return new Application(
-                    applicationId, 
-                    reader.ReadValue<string>("Name"), 
-                    reader.ReadValue<bool>("IsActive"));
-            }
-            return null;
+            return new Application(
+                applicationId,
+                reader.ReadValue<string>("Name"),
+                reader.ReadValue<bool>("IsActive"));
         }
+
         private static void InitializeConfigurationList(IDataReader reader, Application application)
         {
             while (reader.Read())

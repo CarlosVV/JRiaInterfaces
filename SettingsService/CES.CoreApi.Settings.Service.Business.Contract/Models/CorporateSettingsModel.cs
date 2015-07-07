@@ -4,43 +4,43 @@ namespace CES.CoreApi.Settings.Service.Business.Contract.Models
 {
     public class CorporateSettingsModel
     {
-        [CountrySettingCode("CorporateCustomerServiceNumber")]
+        [CountrySetting("CorporateCustomerServiceNumber")]
         public string CustomerServiceNumber { get; set; }
 
-        [CountrySettingCode("CorporateHelpDeskNumber")]
+        [CountrySetting("CorporateHelpDeskNumber")]
         public string HelpDeskNumber { get; set; }
 
-        [CountrySettingCode("CorporateARNumber")]
+        [CountrySetting("CorporateARNumber")]
         public string AccountReceivableNumber { get; set; }
 
-        [CountrySettingCode("CorporateComplianceNumber")]
+        [CountrySetting("CorporateComplianceNumber")]
         public string ComplianceNumber { get; set; }
 
-        [CountrySettingCode("CorporateAgentSupportNumber")]
+        [CountrySetting("CorporateAgentSupportNumber")]
         public string AgentSupportNumber { get; set; }
 
-        [CountrySettingCode("CorporateEmailAR")]
+        [CountrySetting("CorporateEmailAR")]
         public string EmailAccountReceivable { get; set; }
 
-        [CountrySettingCode("CorporateEmailAgentSupport")]
+        [CountrySetting("CorporateEmailAgentSupport")]
         public string EmailAgentSupport { get; set; }
 
-        [CountrySettingCode("CorporateEmailCheckCashing")]
+        [CountrySetting("CorporateEmailCheckCashing")]
         public string EmailCheckCashing { get; set; }
 
-        [CountrySettingCode("CorporateEmailCompliance")]
+        [CountrySetting("CorporateEmailCompliance")]
         public string EmailCompliance { get; set; }
 
-        [CountrySettingCode("CorporateEmailCustomerService")]
+        [CountrySetting("CorporateEmailCustomerService")]
         public string EmailCustomerService { get; set; }
 
-        [CountrySettingCode("CorporateEmailWebSupport")]
+        [CountrySetting("CorporateEmailWebSupport")]
         public string EmailWebSupport { get; set; }
 
-        [CountrySettingCode("CorporateCustomerServiceFaxNumber")]
+        [CountrySetting("CorporateCustomerServiceFaxNumber")]
         public string CustomerServiceFaxNumber { get; set; }
 
-        [CountrySettingCode("CorporateCustomerServiceRefundEmail")]
+        [CountrySetting("CorporateCustomerServiceRefundEmail")]
         public string CustomerServiceRefundEmail { get; set; }
     }
 }

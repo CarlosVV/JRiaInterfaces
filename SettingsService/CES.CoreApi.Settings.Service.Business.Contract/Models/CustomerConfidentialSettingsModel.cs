@@ -4,28 +4,28 @@ namespace CES.CoreApi.Settings.Service.Business.Contract.Models
 {
     public class CustomerConfidentialSettingsModel
     {
-        [CountrySettingCode("ComplUseCustomerValidation")]
+        [CountrySetting("ComplUseCustomerValidation")]
         public bool UseCustomerValidation { get; set; }
 
-        [CountrySettingCode("ComplValidationMethod")]
+        [CountrySetting("ComplValidationMethod")]
         public int ValidationMethod { get; set; }
 
-        [CountrySettingCode("ComplAmountThresholdForValidation")]
+        [CountrySetting("ComplAmountThresholdForValidation")]
         public decimal AmountThresholdForValidation { get; set; }
 
-        [CountrySettingCode("ComplCustomerValidationLegalDeptEmailAddress")]
+        [CountrySetting("ComplCustomerValidationLegalDeptEmailAddress")]
         public string ValidationLegalDepatmentEmailAddress { get; set; }
 
-        [CountrySettingCode("ComplCustomerValidationMaximumOfRetries")]
+        [CountrySetting("ComplCustomerValidationMaximumOfRetries")]
         public int ValidationMaxDobRetries { get; set; }
 
-        [CountrySettingCode("ComplCustomerValidationAlertWhenValidationFail")]
+        [CountrySetting("ComplCustomerValidationAlertWhenValidationFail")]
         public bool ValidationAlertOnFailedAttempts { get; set; }
 
-        [CountrySettingCode("ComplUseCustomerValidationWhenSendFromThisState")]
+        [CountrySetting("ComplUseCustomerValidationWhenSendFromThisState")]
         public bool ValidationForThisStateEnabled { get; set; }
 
-        [CountrySettingCode("ComplUseCustomerValidationWhenSendToThisCountry")]
+        [CountrySetting("ComplUseCustomerValidationWhenSendToThisCountry")]
         public bool ValidationForThisCountryEnabled { get; set; }
     }
 }

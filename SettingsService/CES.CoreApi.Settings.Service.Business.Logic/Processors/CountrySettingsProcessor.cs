@@ -54,7 +54,9 @@ namespace CES.CoreApi.Settings.Service.Business.Logic.Processors
         public CountrySettingsModel GetCountrySettings(string countryAbbreviation)
         {
             var countryModel = GetCountry(countryAbbreviation, 0);
-            return _settingsRepository.GetCountyrSettings(countryModel.Id);
+            return countryModel == null
+                ? null
+                : _settingsRepository.GetCountyrSettings(countryModel.Id);
         }
 
         #endregion

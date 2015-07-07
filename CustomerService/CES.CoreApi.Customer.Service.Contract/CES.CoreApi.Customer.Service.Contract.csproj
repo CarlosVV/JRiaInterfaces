@@ -49,7 +49,8 @@
     <Compile Include="Models\CustomerGetResponse.cs" />
     <Compile Include="Interfaces\ICustomerService.cs" />
     <Compile Include="Models\CustomerGetRequest.cs" />
-    <Compile Include="Models\HealthResponse.cs" />
+    <Compile Include="Models\DatabasePingResponse.cs" />
+    <Compile Include="Models\PingResponse.cs" />
     <Compile Include="Models\Location.cs" />
     <Compile Include="Models\CustomerName.cs" />
     <Compile Include="Models\Telephone.cs" />

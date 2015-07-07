@@ -35,31 +35,31 @@ namespace CES.CoreApi.Settings.Service.Business.Contract.Models
         public ScannerSettingsModel ScannerSettings { get; set; }
         public CustomerConfidentialSettingsModel CustomerConfidentialSettings { get; set; }
 
-        [CountrySettingCodeAttribute("CheckCashingTelephoneNumber")]
+        [CountrySetting("CheckCashingTelephoneNumber")]
         public string CheckCashingTelephoneNumber { get; set; }
 
-        [CountrySettingCodeAttribute("ComplianceWarningPeriodicity")]
+        [CountrySetting("ComplianceWarningPeriodicity")]
         public ComplianceWarningPeriodicityType ComplianceWarningPeriodicity { get; set; }
 
-        [CountrySettingCodeAttribute("BillPayApplyTax")]
+        [CountrySetting("BillPayApplyTax")]
         public string BillPayApplyTax { get; set; }
 
-        [CountrySettingCodeAttribute("EnableCitiesServed")]
+        [CountrySetting("EnableCitiesServed")]
         public bool CityServedEnabled { get; set; }
 
-        [CountrySettingCodeAttribute("ComplCheckWatchListWhenPayingOut")]
+        [CountrySetting("ComplCheckWatchListWhenPayingOut")]
         public WatchListPayoutSettingType WatchListPayoutCountrySetting { get; set; }
 
-        [CountrySettingCode("FxOnlineNotification_Correspondents_SendIfCompanyLocationNotSetup")]
+        [CountrySetting("FxOnlineNotification_Correspondents_SendIfCompanyLocationNotSetup")]
         public bool NotificationCorrespondentsSendIfCompanyLocationNotSetup { get; set; }
 
-        [CountrySettingCode("FxOnlineNotification_Correspondents_SendIfBaseCurrencyNotSetup")]
+        [CountrySetting("FxOnlineNotification_Correspondents_SendIfBaseCurrencyNotSetup")]
         public bool NotificationCorrespondentsSendIfBaseCurrencyNotSetup { get; set; }
 
-        [CountrySettingCode("AllowViewCustomerIdentificationImages")]
+        [CountrySetting("AllowViewCustomerIdentificationImages")]
         public bool AllowViewCustomerIdentificationImages { get; set; }
 
-        [CountrySettingCode("OCRIdentificationScanningResolutionRange")]
+        [CountrySetting("OCRIdentificationScanningResolutionRange", true, "|")]
         public List<int> OcrIdentificationScanningResolutionRange { get; set; }
     }
 }

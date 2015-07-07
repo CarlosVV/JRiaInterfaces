@@ -12,10 +12,10 @@ namespace CES.CoreApi.Settings.Service.Contract.Models
         [DataMember]
         public AccountReceivableLimitDisplayOption LimitDisplayOption { get; set; }
 
-        [DataMember]
+        [DataMember(EmitDefaultValue = false)]
         public DateTime LimitDepositTime { get; set; }
 
-        [DataMember]
+        [DataMember(EmitDefaultValue = false)]
         public string FaxNo { get; set; }
     }
 }

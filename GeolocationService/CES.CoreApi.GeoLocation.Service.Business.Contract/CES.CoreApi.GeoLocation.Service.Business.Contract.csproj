@@ -78,12 +78,10 @@
     <Compile Include="Models\AddressModel.cs" />
     <Compile Include="Models\AutocompleteSuggestionModel.cs" />
     <Compile Include="Models\BinaryDataResponse.cs" />
-    <Compile Include="Models\ClearCacheResponseModel.cs" />
     <Compile Include="Models\DataResponse.cs" />
     <Compile Include="Models\GeocodeAddressResponseModel.cs" />
     <Compile Include="Models\GetMapResponseModel.cs" />
     <Compile Include="Models\GetProviderKeyResponseModel.cs" />
-    <Compile Include="Models\HealthResponseModel.cs" />
     <Compile Include="Models\LocationModel.cs" />
     <Compile Include="Enumerations\LevelOfConfidence.cs" />
     <Compile Include="Enumerations\DataProviderType.cs" />
@@ -98,6 +96,10 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\Foundation\CES.CoreApi.Common\CES.CoreApi.Common.csproj">
+      <Project>{070C7BB2-AF07-4A4C-A9CC-6BFB8CA416E6}</Project>
+      <Name>CES.CoreApi.Common</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\Foundation\CES.CoreApi.Foundation.Contract\CES.CoreApi.Foundation.Contract.csproj">
       <Project>{8DBCFE15-CA3B-4F7C-A7D6-D73F8F0B91AA}</Project>
       <Name>CES.CoreApi.Foundation.Contract</Name>

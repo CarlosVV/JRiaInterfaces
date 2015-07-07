@@ -73,10 +73,10 @@ namespace CES.CoreApi.Customer.Service
             return _mapper.ConvertToResponse<ClearCacheResponseModel, ClearCacheResponse>(responseModel);
         }
 
-        public HealthResponse Ping()
+        public PingResponse Ping()
         {
             var responseModel = _healthMonitoringProcessor.Ping();
-            return _mapper.ConvertToResponse<HealthResponseModel, HealthResponse>(responseModel);
+            return _mapper.ConvertToResponse<PingResponseModel, PingResponse>(responseModel);
         }
 
         #endregion

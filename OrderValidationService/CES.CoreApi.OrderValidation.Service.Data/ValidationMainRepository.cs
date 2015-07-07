@@ -25,8 +25,8 @@ namespace CES.CoreApi.OrderValidation.Service.Data
                 ProcedureName = "coreapi_sp_OrderDuplicateValidation",
                 IsCacheable = false,
                 Parameters = new Collection<SqlParameter>()
-                    .Add("@RecAgentID", model.RecAgentId)
-                    .Add("@RecAgentLocationID", model.RecAgentLocationId)
+                    .Add("@RecAgentID", model.ReceivingAgentId)
+                    .Add("@RecAgentLocationID", model.ReceivingAgentLocationId)
                     .Add("@CustomerID", model.CustomerId)
                     .Add("@PayAgentID", model.PayAgentId)
                     .Add("@AmountLocal", model.AmountLocal)

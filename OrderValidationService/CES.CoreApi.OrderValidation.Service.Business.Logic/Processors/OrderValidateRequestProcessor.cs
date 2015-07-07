@@ -45,7 +45,10 @@ namespace CES.CoreApi.OrderValidation.Service.Business.Logic.Processors
             //Order duplicate 
             //OrderDuplicateValidator
 
-
+            //CustomerIdentificationCardValidator
+            //CustomerNameAndAddressValidator
+            //CustomerAmountValidator
+            //BeneficiaryNameAndCountryValidator
         }
     }
 }

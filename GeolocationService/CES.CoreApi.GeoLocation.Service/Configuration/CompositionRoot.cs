@@ -179,7 +179,7 @@ namespace CES.CoreApi.GeoLocation.Service.Configuration
             container.Register<ValidateAddressResponse, ValidateAddressResponse>();
             container.Register<ClearCacheResponse, ClearCacheResponse>();
             container.Register<AutocompleteAddressResponse, AutocompleteAddressResponse>();
-            container.Register<HealthResponse, HealthResponse>();
+            container.Register<PingResponse, PingResponse>();
             container.Register<GetMapResponse, GetMapResponse>();
         }
 

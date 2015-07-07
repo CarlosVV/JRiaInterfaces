@@ -41,14 +41,17 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Enumerations\CustomerValidationEntityType.cs" />
+    <Compile Include="Enumerations\PayingAgentStatusType.cs" />
     <Compile Include="Enumerations\SarResponseType.cs" />
+    <Compile Include="Interfaces\ICountryCodeValidator.cs" />
     <Compile Include="Interfaces\IOrderValidateRequestProcessor.cs" />
     <Compile Include="Interfaces\IValidationMainRepository.cs" />
     <Compile Include="Interfaces\IValidationReadOnlyRepository.cs" />
-    <Compile Include="Models\BeneficiaryStatusValidationModel.cs" />
-    <Compile Include="Models\CustomerStatusValidationModel.cs" />
+    <Compile Include="Models\BeneficiaryValidationModel.cs" />
+    <Compile Include="Models\CustomerValidationModel.cs" />
     <Compile Include="Models\OfacValidationRequestModel.cs" />
     <Compile Include="Models\OrderDuplicateValidationRequestModel.cs" />
+    <Compile Include="Models\PayingAgentValidationModel.cs" />
     <Compile Include="Models\SarValidationRequestAmountModel.cs" />
     <Compile Include="Models\SarValidationRequestBeneficiaryModel.cs" />
     <Compile Include="Models\SarValidationRequestCorrespondentModel.cs" />

@@ -6,6 +6,6 @@ namespace CES.CoreApi.OrderValidation.Service.Business.Contract.Interfaces
     {
         bool IsOfacWatchListMatched(OfacValidationRequestModel input);
         SarValidationResponseModel ValidateSar(SarValidationRequestModel input);
-        bool IsBeneficiaryBlocked(BeneficiaryStatusValidationModel model);
+        bool IsBeneficiaryBlocked(int beneficiaryId, int correspondentId);
     }
 }

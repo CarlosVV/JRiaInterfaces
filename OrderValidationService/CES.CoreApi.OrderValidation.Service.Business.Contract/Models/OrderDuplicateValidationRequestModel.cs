@@ -2,9 +2,9 @@ namespace CES.CoreApi.OrderValidation.Service.Business.Contract.Models
 {
     public class OrderDuplicateValidationRequestModel
     {
-        public int RecAgentId { get; set; }
+        public int ReceivingAgentId { get; set; }
 
-        public int RecAgentLocationId { get; set; }
+        public int ReceivingAgentLocationId { get; set; }
 
         public int CustomerId { get; set; }
 

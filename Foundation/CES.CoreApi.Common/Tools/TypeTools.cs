@@ -89,6 +89,11 @@ namespace CES.CoreApi.Common.Tools
             return Convert.ChangeType(value, type);
         }
 
+        public static bool IsList(this Type type)
+        {
+            return null != type.GetInterface("IEnumerable`1");
+        }
+
         private static object GetDefault(Type type)
         {
             return type.IsValueType ? Activator.CreateInstance(type) : null;

@@ -22,6 +22,10 @@ namespace CES.CoreApi.Common.Enumerations
         [ErrorMessage("Invalid parameter value. Parameter name = '{0}'. Parameter value = '{1}'")]
         GeneralInvalidParameterValue,
 
+        [SubSystemErrorNumber("00004")]
+        [ErrorMessage("Required parameter is undefined. Class Name = '{0}'. Parameter name = '{1}'.")]
+        GeneralRequiredParameterIsUndefinedExtended,
+
         #endregion
 
         #region Application registration, validation and identification related errors
@@ -189,6 +193,116 @@ namespace CES.CoreApi.Common.Enumerations
         [SubSystemErrorNumber("00504")]
         [ErrorMessage("Duplicated order found. CustomerID = '{0}'. PayAgentId = '{1}'. RecAgentLocationId = '{2}'. RecAgentId = '{3}'. AmountLocal = '{4}'. Currency = '{5}'.")]
         OrderValidationOrderDuplicationFound,
+
+        [SubSystemErrorNumber("00505")]
+        [ErrorMessage("Order over limit require customer ID. CustomerID = '{0}'. PayAgentId = '{1}'. RecAgentLocationId = '{2}'. RecAgentId = '{3}'. AmountLocal = '{4}'. Currency = '{5}'.")]
+        OrderValidationOrderOverLimitRequireId,
+
+        [SubSystemErrorNumber("00506")]
+        [ErrorMessage("Customer ID image not found.")]
+        OrderValidationCustomerIdImageNotFound,
+        
+        [SubSystemErrorNumber("00507")]
+        [ErrorMessage("Customer first name is required.")]
+        OrderValidationCustomerFirstNameIsRequired,
+
+        [SubSystemErrorNumber("00508")]
+        [ErrorMessage("Customer last name 1 is required.")]
+        OrderValidationCustomerLastName1IsRequired,
+
+        [SubSystemErrorNumber("00509")]
+        [ErrorMessage("Customer country code is empty or invalid. Country code should be exactly {0} characters length.")]
+        OrderValidationCustomerCountryCodeIsEmptyOrInvalid,
+
+        [SubSystemErrorNumber("00510")]
+        [ErrorMessage("Customer address is required.")]
+        OrderValidationCustomerAddressIsRequired,
+
+        [SubSystemErrorNumber("00510")]
+        [ErrorMessage("Customer address too long. Maximum address length is {0} characters.")]
+        OrderValidationCustomerAddressTooLong,
+
+        [SubSystemErrorNumber("00511")]
+        [ErrorMessage("Customer tax country code is invalid. Country code should be exactly {0} characters length.")]
+        OrderValidationCustomerTaxCountryCodeIsInvalid,
+
+        [SubSystemErrorNumber("00512")]
+        [ErrorMessage("Customer 'finance country from' not found. Country = '{0}'.")]
+        OrderValidationCustomerFinanceCountryFromNotFound,
+
+        [SubSystemErrorNumber("00513")]
+        [ErrorMessage("Finance customer amount empty or below minimum. CustomerAmount = '{0}'.")]
+        OrderValidationFinanceCustomerAmountEmptyOrBelowMin,
+
+        [SubSystemErrorNumber("00514")]
+        [ErrorMessage("Beneficiary first name is required.")]
+        OrderValidationBeneficiaryFirstNameIsRequired,
+
+        [SubSystemErrorNumber("00515")]
+        [ErrorMessage("Beneficiary last name 1 is required.")]
+        OrderValidationBeneficiaryLastName1IsRequired,
+
+        [SubSystemErrorNumber("00516")]
+        [ErrorMessage("Beneficiary country code is empty or invalid. Country code should be exactly {0} characters length.")]
+        OrderValidationBeneficiaryCountryIsInvalid,
+
+        [SubSystemErrorNumber("00517")]
+        [ErrorMessage("Beneficiary identification number is required.")]
+        OrderValidationBeneficiaryIdentificationNumberIsRequired,
+
+        [SubSystemErrorNumber("00518")]
+        [ErrorMessage("Beneficiary cedula Id is required.")]
+        OrderValidationBeneficiaryCedulaIdIsRequired,
+
+        [SubSystemErrorNumber("00519")]
+        [ErrorMessage("Beneficiary 'finance country to' not found in the database. Country = '{0}'.")]
+        OrderValidationBeneficiaryFinanceCountryToNotFound,
+
+        [SubSystemErrorNumber("00520")]
+        [ErrorMessage("Beneficiary first name is too long. Maximum first name length is {0} characters.")]
+        OrderValidationBeneficiaryFirstNameTooLong,
+
+        [SubSystemErrorNumber("00521")]
+        [ErrorMessage("Beneficiary LastName1 is too long. Maximum last name 1 length is {0} characters.")]
+        OrderValidationBeneficiaryLastName1TooLong,
+
+        [SubSystemErrorNumber("00522")]
+        [ErrorMessage("Beneficiary country code is required.")]
+        OrderValidationBeneficiaryCountryIsRequired,
+
+        [SubSystemErrorNumber("00523")]
+        [ErrorMessage("Customer tax country code is not found in the database. TaxCountry = '{0}'.")]
+        OrderValidationCustomerTaxCountryNotFound,
+
+        [SubSystemErrorNumber("00524")]
+        [ErrorMessage("Customer first name is too long. Maximum first name length is {0} characters.")]
+        OrderValidationCustomerFirstNameTooLong,
+
+        [SubSystemErrorNumber("00525")]
+        [ErrorMessage("Customer LastName1 is too long. Maximum last name 1 length is {0} characters.")]
+        OrderValidationCustomerLastName1TooLong,
+
+        [SubSystemErrorNumber("00526")]
+        [ErrorMessage("Customer Country is required.")]
+        OrderValidationCustomerCountryIsRequired,
+
+        [SubSystemErrorNumber("00527")]
+        [ErrorMessage("The paying agent is on hold. PayingAgentID = '{0}'.")]
+        OrderValidationPayingAgentIsOnHold,
+
+        [SubSystemErrorNumber("00528")]
+        [ErrorMessage("The paying agent status is invalid. PayingAgentID = '{0}'. PayingAgentStatus = '{1}'.")]
+        OrderValidationPayingAgentStatusInvalid,
+
+        [SubSystemErrorNumber("00529")]
+        [ErrorMessage("The paying agent location is on hold. PayingAgentID = '{0}'.")]
+        OrderValidationPayingAgentLocationOnHold,
+
+        [SubSystemErrorNumber("00530")]
+        [ErrorMessage("The paying agent location is disabled. PayingAgentID = '{0}'.")]
+        OrderValidationPayingAgentLocationDisabled,
+
+        
 
         #endregion
     }

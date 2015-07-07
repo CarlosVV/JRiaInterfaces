@@ -196,7 +196,9 @@ namespace CES.CoreApi.Foundation.Data.Base
 
             using (var reader = _database.ExecuteReader(command))
             {
-                entity = shaper(reader);
+                entity = reader.Read() 
+                    ? shaper(reader) 
+                    : default (TEntity);
             }
 
             if (outputShaper != null)

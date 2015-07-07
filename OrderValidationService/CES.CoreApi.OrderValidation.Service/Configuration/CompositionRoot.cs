@@ -26,6 +26,7 @@ using CES.CoreApi.Logging.Monitors;
 using CES.CoreApi.Logging.Providers;
 using CES.CoreApi.OrderValidation.Service.Business.Contract.Interfaces;
 using CES.CoreApi.OrderValidation.Service.Business.Logic.Processors;
+using CES.CoreApi.OrderValidation.Service.Business.Logic.Validators;
 using CES.CoreApi.OrderValidation.Service.Contract.Models;
 using CES.CoreApi.OrderValidation.Service.Data;
 using CES.CoreApi.OrderValidation.Service.Interfaces;
@@ -53,6 +54,7 @@ namespace CES.CoreApi.OrderValidation.Service.Configuration
             //RegisterUrlBuilders(container);
             //RegisterParsers(container);
             RegisterProviders(container);
+            RegisterValidators(container);
 
             container.Verify();
         }
@@ -165,16 +167,20 @@ namespace CES.CoreApi.OrderValidation.Service.Configuration
             // (proxy) instance will be a singleton as well.
             container.RegisterSingle<PerformanceInterceptor>();
 
-            container.RegisterSingle<IRequestValidator, RequestValidator>();
             container.RegisterSingle<IMappingHelper, MappingHelper>();
             container.RegisterSingle<IExceptionHelper, ExceptionHelper>();
             container.RegisterSingle<IServiceHelper, ServiceHelper>();
             container.RegisterSingle<IValidationReadOnlyRepository, ValidationReadOnlyRepository>();
             container.RegisterSingle<IValidationMainRepository, ValidationMainRepository>();
+        }
 
-            //Register validators
+        private static void RegisterValidators(Container container)
+        {
             var assemblies = AppDomain.CurrentDomain.GetAssemblies().ToList();
-            container.RegisterManyForOpenGeneric(typeof(IValidator<>), assemblies);
+            container.RegisterManyForOpenGeneric(typeof (IValidator<>), assemblies);
+
+            container.RegisterSingle<ICountryCodeValidator, CountryCodeValidator>();
+            container.RegisterSingle<IRequestValidator, RequestValidator>();
         }
 
         private static void RegisterInterceptions(Container container)

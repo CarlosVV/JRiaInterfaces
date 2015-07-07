@@ -116,15 +116,15 @@ namespace CES.CoreApi.OrderValidation.Service.Data
             return Get(request);
         }
 
-        public bool IsBeneficiaryBlocked(BeneficiaryStatusValidationModel model)
+        public bool IsBeneficiaryBlocked(int beneficiaryId, int correspondentId)
         {
             var request = new DatabaseRequest<bool>
             {
                 ProcedureName = "cust_sp_Beneficiary_Blocked_Status",
                 IsCacheable = false,
                 Parameters = new Collection<SqlParameter>()
-                    .Add("@fBenNameID", model.BeneficiaryId)
-                    .Add("@fPayAgentID", model.CorrespondentId),
+                    .Add("@fBenNameID", beneficiaryId)
+                    .Add("@fPayAgentID", correspondentId),
                 Shaper = reader => reader.ReadValue<bool>("blocked")
             };
 

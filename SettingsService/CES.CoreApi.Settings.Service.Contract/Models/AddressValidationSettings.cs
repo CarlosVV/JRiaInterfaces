@@ -7,28 +7,28 @@ namespace CES.CoreApi.Settings.Service.Contract.Models
     [DataContract(Namespace = Namespaces.SettingsServiceDataContractNamespace)]
     public class AddressValidationSettings : ExtensibleObject
     {
-        [DataMember]
+        [DataMember(EmitDefaultValue = false)]
         public bool OnWeb { get; set; }
 
-        [DataMember]
+        [DataMember(EmitDefaultValue = false)]
         public bool FromOn { get; set; }
 
-        [DataMember]
+        [DataMember(EmitDefaultValue = false)]
         public bool FromOnStores { get; set; }
 
-        [DataMember]
+        [DataMember(EmitDefaultValue = false)]
         public bool FromOnAgents { get; set; }
 
-        [DataMember]
+        [DataMember(EmitDefaultValue = false)]
         public bool FromNewCustomerOnly { get; set; }
 
-        [DataMember]
+        [DataMember(EmitDefaultValue = false)]
         public bool FromOnlyWhenIdRequired { get; set; }
 
-        [DataMember]
+        [DataMember(EmitDefaultValue = false)]
         public bool FromRejectInvalid { get; set; }
 
-        [DataMember]
+        [DataMember(EmitDefaultValue = false)]
         public bool FromOnHoldInvalid { get; set; }
     }
 }

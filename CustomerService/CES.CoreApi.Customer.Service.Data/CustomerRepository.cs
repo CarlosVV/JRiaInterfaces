@@ -20,7 +20,8 @@ namespace CES.CoreApi.Customer.Service.Data
     {
         #region Core
 
-        public CustomerRepository(ICacheProvider cacheProvider, ILogMonitorFactory monitorFactory, IIdentityManager identityManager) 
+        public CustomerRepository(ICacheProvider cacheProvider, ILogMonitorFactory monitorFactory,
+            IIdentityManager identityManager)
             : base(cacheProvider, monitorFactory, identityManager, DatabaseType.ReadOnly)
         {
         }
@@ -53,28 +54,24 @@ namespace CES.CoreApi.Customer.Service.Data
 
         private static CustomerModel GetCustomerDetails(IDataReader reader)
         {
-            if (reader.Read())
+            return new CustomerModel
             {
-                return new CustomerModel
-                {
-                    Id = reader.ReadValue<int>("fNameID"),
-                    CustomerId = reader.ReadValue<string>("fCustIDNumber"),
-                    ExternalCustomerId = reader.ReadValue<string>("fExternalCustID"),
-                    AgentId = reader.ReadValue<int>("fNameIDAgent"),
-                    AgentLocationId = reader.ReadValue<int>("fRecAgentLocID"),
-                    ReferredBy = reader.ReadValue<string>("fReferred"),
-                    Note = reader.ReadValue<string>("fNote"),
-                    IsOnHold = reader.ReadValue<bool>("fOnHold"),
-                    IsDisabled = reader.ReadValue<bool>("fDisabled"),
-                    DateCreated = reader.ReadValue<DateTime>("fDateCreated"),
-                    LastUsed = reader.ReadValue<DateTime>("fLastUsed"),
-                    StatusId = reader.ReadValue<int>("fStatusID"), //should be an enum
-                    Address = GetAddressDetails(reader),
-                    Name = GetNameDetails(reader),
-                    Contact = GetContactDetails(reader)
-                };
-            }
-            return null;
+                Id = reader.ReadValue<int>("fNameID"),
+                CustomerId = reader.ReadValue<string>("fCustIDNumber"),
+                ExternalCustomerId = reader.ReadValue<string>("fExternalCustID"),
+                AgentId = reader.ReadValue<int>("fNameIDAgent"),
+                AgentLocationId = reader.ReadValue<int>("fRecAgentLocID"),
+                ReferredBy = reader.ReadValue<string>("fReferred"),
+                Note = reader.ReadValue<string>("fNote"),
+                IsOnHold = reader.ReadValue<bool>("fOnHold"),
+                IsDisabled = reader.ReadValue<bool>("fDisabled"),
+                DateCreated = reader.ReadValue<DateTime>("fDateCreated"),
+                LastUsed = reader.ReadValue<DateTime>("fLastUsed"),
+                StatusId = reader.ReadValue<int>("fStatusID"), //should be an enum
+                Address = GetAddressDetails(reader),
+                Name = GetNameDetails(reader),
+                Contact = GetContactDetails(reader)
+            };
         }
 
         private static NameModel GetNameDetails(IDataReader reader)

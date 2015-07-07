@@ -24,49 +24,49 @@ namespace CES.CoreApi.Settings.Service.Business.Contract.Models
             CustomerActionById = PossibleDuplicateCustomerActionSettingType.OnHold;
         }
 
-        [CountrySettingCode("ComplCheckPossibleDuplicationByNames")]
+        [CountrySetting("ComplCheckPossibleDuplicationByNames")]
         public PossibleDuplicateSettingType ByNames { get; set; }
 
-        [CountrySettingCode("ComplCheckPossibleDuplicationByNamesDOB")]
+        [CountrySetting("ComplCheckPossibleDuplicationByNamesDOB")]
         public PossibleDuplicateSettingType ByNamesDob { get; set; }
 
-        [CountrySettingCode("ComplCheckPossibleDuplicationByNamesDOBID")]
+        [CountrySetting("ComplCheckPossibleDuplicationByNamesDOBID")]
         public PossibleDuplicateSettingType ByNamesDobId { get; set; }
 
-        [CountrySettingCode("ComplCheckPossibleDuplicationByNamesID")]
+        [CountrySetting("ComplCheckPossibleDuplicationByNamesID")]
         public PossibleDuplicateSettingType ByNamesId { get; set; }
 
-        [CountrySettingCode("ComplCheckPossibleDuplicationByID")]
+        [CountrySetting("ComplCheckPossibleDuplicationByID")]
         public PossibleDuplicateSettingType ById { get; set; }
 
-        [CountrySettingCode("ComplCreateCustomerWhenPossibleDuplicationByNames")]
+        [CountrySetting("ComplCreateCustomerWhenPossibleDuplicationByNames")]
         public PossibleDuplicateCustomerCreationSettingType CustomerCreateByNames { get; set; }
 
-        [CountrySettingCode("ComplCreateCustomerWhenPossibleDuplicationByNamesDOB")]
+        [CountrySetting("ComplCreateCustomerWhenPossibleDuplicationByNamesDOB")]
         public PossibleDuplicateCustomerCreationSettingType CustomerCreateByNamesDob { get; set; }
 
-        [CountrySettingCode("ComplCreateCustomerWhenPossibleDuplicationByNamesDOBID")]
+        [CountrySetting("ComplCreateCustomerWhenPossibleDuplicationByNamesDOBID")]
         public PossibleDuplicateCustomerCreationSettingType CustomerCreateByNamesDobId { get; set; }
 
-        [CountrySettingCode("ComplCreateCustomerWhenPossibleDuplicationByNamesID")]
+        [CountrySetting("ComplCreateCustomerWhenPossibleDuplicationByNamesID")]
         public PossibleDuplicateCustomerCreationSettingType CustomerCreateByNamesId { get; set; }
 
-        [CountrySettingCode("ComplCreateCustomerWhenPossibleDuplicationByID")]
+        [CountrySetting("ComplCreateCustomerWhenPossibleDuplicationByID")]
         public PossibleDuplicateCustomerCreationSettingType CustomerCreateById { get; set; }
 
-        [CountrySettingCode("ComplActionWhenPossibleDuplicationByNames")]
+        [CountrySetting("ComplActionWhenPossibleDuplicationByNames")]
         public PossibleDuplicateCustomerActionSettingType CustomerActionByNames { get; set; }
 
-        [CountrySettingCode("ComplActionWhenPossibleDuplicationByNamesDOB")]
+        [CountrySetting("ComplActionWhenPossibleDuplicationByNamesDOB")]
         public PossibleDuplicateCustomerActionSettingType CustomerActionByNamesDob { get; set; }
 
-        [CountrySettingCode("ComplActionWhenPossibleDuplicationByNamesDOBID")]
+        [CountrySetting("ComplActionWhenPossibleDuplicationByNamesDOBID")]
         public PossibleDuplicateCustomerActionSettingType CustomerActionByNamesDobId { get; set; }
 
-        [CountrySettingCode("ComplActionWhenPossibleDuplicationByNamesID")]
+        [CountrySetting("ComplActionWhenPossibleDuplicationByNamesID")]
         public PossibleDuplicateCustomerActionSettingType CustomerActionByNamesId { get; set; }
 
-        [CountrySettingCode("ComplActionWhenPossibleDuplicationByID")]
+        [CountrySetting("ComplActionWhenPossibleDuplicationByID")]
         public PossibleDuplicateCustomerActionSettingType CustomerActionById { get; set; }
     }
 }

@@ -13,6 +13,10 @@ namespace CES.CoreApi.Common.Enumerations
         [Description("OVLDS")] OrderValidationService = 6,
         [Description("OPRCS")] OrderProcessService = 7,
         [Description("CUSTS")] CustomerService = 8,
-        [Description("SETS")] SettingsService = 9
+        [Description("SETS")] SettingsService = 9,
+        [Description("RDTS")] ReferenceDataService = 10,
+        [Description("LVRFS")] LimitVerificationService = 11,
+        [Description("AGNTS")] AgentService = 12,
+        [Description("ACNTS")] AccountingService = 13,
     }
 }

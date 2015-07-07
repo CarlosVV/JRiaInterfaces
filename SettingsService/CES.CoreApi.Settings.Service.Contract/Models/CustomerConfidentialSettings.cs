@@ -7,28 +7,28 @@ namespace CES.CoreApi.Settings.Service.Contract.Models
     [DataContract(Namespace = Namespaces.SettingsServiceDataContractNamespace)]
     public class CustomerConfidentialSettings : ExtensibleObject
     {
-        [DataMember]
+        [DataMember(EmitDefaultValue = false)]
         public bool UseCustomerValidation { get; set; }
 
-        [DataMember]
+        [DataMember(EmitDefaultValue = false)]
         public int ValidationMethod { get; set; }
 
-        [DataMember]
+        [DataMember(EmitDefaultValue = false)]
         public decimal AmountThresholdForValidation { get; set; }
 
-        [DataMember]
+        [DataMember(EmitDefaultValue = false)]
         public string ValidationLegalDepatmentEmailAddress { get; set; }
 
-        [DataMember]
+        [DataMember(EmitDefaultValue = false)]
         public int ValidationMaxDobRetries { get; set; }
 
-        [DataMember]
+        [DataMember(EmitDefaultValue = false)]
         public bool ValidationAlertOnFailedAttempts { get; set; }
 
-        [DataMember]
+        [DataMember(EmitDefaultValue = false)]
         public bool ValidationForThisStateEnabled { get; set; }
 
-        [DataMember]
+        [DataMember(EmitDefaultValue = false)]
         public bool ValidationForThisCountryEnabled { get; set; }
     }
 }
