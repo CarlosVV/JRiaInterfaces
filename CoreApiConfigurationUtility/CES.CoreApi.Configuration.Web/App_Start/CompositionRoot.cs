@@ -1,4 +1,5 @@
-﻿using System.Reflection;
+﻿using System.Configuration;
+using System.Reflection;
 using System.Web.Http;
 using System.Web.Http.ExceptionHandling;
 using System.Web.Mvc;
@@ -6,6 +7,7 @@ using AutoMapper;
 using AutoMapper.Mappers;
 using CES.CoreApi.Caching.Providers;
 using CES.CoreApi.Common.Interfaces;
+using CES.CoreApi.Common.Managers;
 using CES.CoreApi.Common.Providers;
 using CES.CoreApi.Common.Proxies;
 using CES.CoreApi.Configuration.Business.Services;
@@ -52,7 +54,6 @@ namespace CES.CoreApi.Configuration.Web
             container.RegisterSingle<ConfigurationStore>();
             container.Register<IConfiguration>(container.GetInstance<ConfigurationStore>);
             container.Register<IConfigurationProvider>(container.GetInstance<ConfigurationStore>);
-           // container.Register<IMappingEngine, MappingEngine>();
         }
 
         private static void SetResolver(Container container)
@@ -86,8 +87,14 @@ namespace CES.CoreApi.Configuration.Web
 
         private static void RegisterOthers(Container container)
         {
+            var cacheName = ConfigurationManager.AppSettings["cacheName"];
+
+            container.RegisterSingle<IIdentityManager, IdentityManager>();
             container.RegisterSingle<IAutoMapperProxy, AutoMapperProxy>();
-            container.RegisterSingle<ICacheProvider>(() => new AppFabricCacheProvider(container.GetInstance<ILogMonitorFactory>(), container.GetInstance<IIdentityManager>(), "CoreAPIDev"));
+            container.RegisterSingle<ICacheProvider>(
+                () =>
+                    new AppFabricCacheProvider(container.GetInstance<ILogMonitorFactory>(),
+                        container.GetInstance<IIdentityManager>(), cacheName));
             container.RegisterSingle<ICurrentDateTimeProvider, CurrentDateTimeProvider>();
         }
 

@@ -13,21 +13,25 @@ using CES.CoreApi.Foundation.Contract.Interfaces;
 namespace CES.CoreApi.Agent.Service
 {
     [ServiceBehavior(Namespace = Namespaces.AgentServiceContractNamespace, InstanceContextMode = InstanceContextMode.PerCall)]
-    public class AgentService : IAgentCurrencyService, IHealthMonitoringService
+    public class AgentService : IAgentCurrencyService, IAgentUserService, IHealthMonitoringService
     {
         #region Core
 
         private readonly IAgentCurrencyProcessor _currencyProcessor;
+        private readonly IAgentUserProcessor _agentUserProcessor;
         private readonly IHealthMonitoringProcessor _healthMonitoringProcessor;
         private readonly IMappingHelper _mapper;
         private readonly IRequestValidator _requestValidator;
 
-        public AgentService(IAgentCurrencyProcessor currencyProcessor, IHealthMonitoringProcessor healthMonitoringProcessor, 
-            IMappingHelper mapper, IRequestValidator requestValidator)
+        public AgentService(IAgentCurrencyProcessor currencyProcessor, IAgentUserProcessor agentUserProcessor, 
+            IHealthMonitoringProcessor healthMonitoringProcessor, IMappingHelper mapper, IRequestValidator requestValidator)
         {
             if (currencyProcessor == null)
                 throw new CoreApiException(TechnicalSubSystem.AgentService,
                     SubSystemError.GeneralRequiredParameterIsUndefined, "currencyProcessor");
+            if (agentUserProcessor == null)
+                throw new CoreApiException(TechnicalSubSystem.AgentService,
+                    SubSystemError.GeneralRequiredParameterIsUndefined, "AgentUserProcessor");
             if (healthMonitoringProcessor == null)
                 throw new CoreApiException(TechnicalSubSystem.AgentService,
                     SubSystemError.GeneralRequiredParameterIsUndefined, "healthMonitoringProcessor");
@@ -39,6 +43,7 @@ namespace CES.CoreApi.Agent.Service
                     SubSystemError.GeneralRequiredParameterIsUndefined, "requestValidator");
 
             _currencyProcessor = currencyProcessor;
+            _agentUserProcessor = agentUserProcessor;
             _healthMonitoringProcessor = healthMonitoringProcessor;
             _mapper = mapper;
             _requestValidator = requestValidator;
@@ -70,6 +75,18 @@ namespace CES.CoreApi.Agent.Service
             var responseModel = _healthMonitoringProcessor.Ping();
             return _mapper.ConvertToResponse<PingResponseModel, PingResponse>(responseModel);
         }
+
+        #endregion
+
+        #region IAgentUserService implementation
+
+        public ProcessSignatureResponse ProcessSignature(ProcessSignatureRequest request)
+        {
+            _requestValidator.Validate(request);
+            var requestModel = _mapper.ConvertTo<ProcessSignatureRequest, ProcessSignatureRequestModel>(request);
+            var responseModel = _agentUserProcessor.ProcessSignature(requestModel);
+            return _mapper.ConvertToResponse<ProcessSignatureResponseModel, ProcessSignatureResponse>(responseModel);
+        } 
 
         #endregion
     }

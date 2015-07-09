@@ -22,6 +22,18 @@ namespace CES.CoreApi.Customer.Service.Utilities
             throw new System.NotImplementedException();
         }
 
+        public void Validate(CustomerProcessSignatureRequest request)
+        {
+            ContractValidation.Requires(request != null, TechnicalSubSystem.CustomerService,
+                SubSystemError.GeneralRequiredParameterIsUndefined, "request");
+            ContractValidation.Requires(request.OrderId > 0, TechnicalSubSystem.CustomerService,
+                SubSystemError.GeneralInvalidParameterValue, "request.OrderId", request.OrderId);
+            ContractValidation.Requires(request.Signature != null, TechnicalSubSystem.CustomerService,
+                SubSystemError.GeneralRequiredParameterIsUndefined, "request.Signature", request.Signature);
+            ContractValidation.Requires(request.Signature.Length > 0, TechnicalSubSystem.CustomerService,
+                SubSystemError.GeneralInvalidParameterValue, "request.Signature", request.Signature);
+        }
+
         // ReSharper restore PossibleNullReferenceException
     }
 }

@@ -40,12 +40,14 @@
     <Compile Include="Interfaces\ICustomerRepository.cs" />
     <Compile Include="Interfaces\ICustomerRequestProcessor.cs" />
     <Compile Include="Interfaces\IHealthMonitoringProcessor.cs" />
+    <Compile Include="Interfaces\IImageRepository.cs" />
     <Compile Include="Models\AddressModel.cs" />
     <Compile Include="Models\ContactModel.cs" />
     <Compile Include="Models\CustomerCreateResponseModel.cs" />
     <Compile Include="Models\CustomerModel.cs" />
     <Compile Include="Models\LocationModel.cs" />
     <Compile Include="Models\NameModel.cs" />
+    <Compile Include="Models\ProcessSignatureModel.cs" />
     <Compile Include="Models\TelephoneModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

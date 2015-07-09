@@ -6,5 +6,6 @@ namespace CES.CoreApi.Customer.Service.Interfaces
     {
         void Validate(CustomerGetRequest request);
         void Validate(CustomerCreateRequest request);
+        void Validate(CustomerProcessSignatureRequest request);
     }
 }

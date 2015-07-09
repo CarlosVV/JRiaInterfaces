@@ -18,6 +18,8 @@ namespace CES.CoreApi.Agent.Service.Configuration
             Mapper.CreateMap<ClearCacheResponseModel, ClearCacheResponse>().ConstructUsingServiceLocator();
             Mapper.CreateMap<PingResponseModel, PingResponse>().ConstructUsingServiceLocator();
             Mapper.CreateMap<DatabasePingModel, DatabasePingResponse>();
+            Mapper.CreateMap<ProcessSignatureRequest, ProcessSignatureRequestModel>();
+            Mapper.CreateMap<ProcessSignatureResponseModel, ProcessSignatureResponse>().ConstructUsingServiceLocator();
           
             Mapper.Configuration.ConstructServicesUsing(container.GetInstance);
         }

@@ -11,6 +11,7 @@ using CES.CoreApi.Customer.Service.Business.Contract.Interfaces;
 using CES.CoreApi.Customer.Service.Business.Logic.Processors;
 using CES.CoreApi.Customer.Service.Contract.Models;
 using CES.CoreApi.Customer.Service.Data;
+using CES.CoreApi.Customer.Service.Data.Repositories;
 using CES.CoreApi.Customer.Service.Interfaces;
 using CES.CoreApi.Customer.Service.Utilities;
 using CES.CoreApi.Foundation.Contract.Interfaces;
@@ -46,6 +47,7 @@ namespace CES.CoreApi.Customer.Service.Configuration
             RegisterInterceptions(container);
             RegisterProcessors(container);
             RegisterProviders(container);
+            RegisterRepositories(container);
 
             container.Verify();
         }
@@ -160,7 +162,12 @@ namespace CES.CoreApi.Customer.Service.Configuration
             container.RegisterSingle<IRequestValidator, RequestValidator>();
             container.RegisterSingle<IMappingHelper, MappingHelper>();
             container.RegisterSingle<IExceptionHelper, ExceptionHelper>();
+        }
+
+        private static void RegisterRepositories(Container container)
+        {
             container.RegisterSingle<ICustomerRepository, CustomerRepository>();
+            container.RegisterSingle<IImageRepository, ImageRepository>();
         }
 
         private static void RegisterInterceptions(Container container)

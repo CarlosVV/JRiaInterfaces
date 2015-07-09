@@ -14,7 +14,7 @@ using CES.CoreApi.Foundation.Data.Base;
 using CES.CoreApi.Foundation.Data.Utility;
 using CES.CoreApi.Logging.Interfaces;
 
-namespace CES.CoreApi.Customer.Service.Data
+namespace CES.CoreApi.Customer.Service.Data.Repositories
 {
     public class CustomerRepository : BaseGenericRepository, ICustomerRepository
     {

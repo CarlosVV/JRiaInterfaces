@@ -1,7 +1,6 @@
 ﻿using System;
 using CES.CoreApi.Common.Enumerations;
 using CES.CoreApi.Common.Exceptions;
-using CES.CoreApi.Foundation.Contract.Enumerations;
 
 namespace CES.CoreApi.Foundation.Validation
 {

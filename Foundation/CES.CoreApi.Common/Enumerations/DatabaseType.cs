@@ -10,5 +10,6 @@ namespace CES.CoreApi.Common.Enumerations
         [EnumMember] [ConnectionName("Main")] Main,
         [EnumMember] [ConnectionName("ReadOnly")] ReadOnly,
         [EnumMember] [ConnectionName("FrontEnd")] FrontEnd,
+        [EnumMember] [ConnectionName("Image")] Image,
     }
 }

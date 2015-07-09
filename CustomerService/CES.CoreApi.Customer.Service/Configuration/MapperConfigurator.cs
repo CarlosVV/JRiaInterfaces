@@ -23,6 +23,7 @@ namespace CES.CoreApi.Customer.Service.Configuration
             Mapper.CreateMap<PingResponseModel, PingResponse>().ConstructUsingServiceLocator();
             Mapper.CreateMap<ClearCacheResponseModel, ClearCacheResponse>().ConstructUsingServiceLocator();
             Mapper.CreateMap<DatabasePingModel, DatabasePingResponse>();
+            Mapper.CreateMap<ProcessSignatureModel, CustomerProcessSignatureResponse>().ConstructUsingServiceLocator();
 
             Mapper.Configuration.ConstructServicesUsing(container.GetInstance);
         }

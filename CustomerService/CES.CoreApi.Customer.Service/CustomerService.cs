@@ -63,6 +63,13 @@ namespace CES.CoreApi.Customer.Service
             return null;
         }
 
+        public CustomerProcessSignatureResponse ProcessSignature(CustomerProcessSignatureRequest request)
+        {
+            _requestValidator.Validate(request);
+            var responseModel = _customerRequestProcessor.ProcessSignature(request.OrderId, request.Signature);
+            return _mapper.ConvertToResponse<ProcessSignatureModel, CustomerProcessSignatureResponse>(responseModel);
+        }
+
         #endregion
 
         #region IHealthMonitoringService implementation

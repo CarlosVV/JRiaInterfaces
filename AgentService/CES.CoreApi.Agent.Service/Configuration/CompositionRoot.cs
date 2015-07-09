@@ -45,6 +45,7 @@ namespace CES.CoreApi.Agent.Service.Configuration
             RegisterInterceptions(container);
             RegisterProcessors(container);
             RegisterProviders(container);
+            RegisterRepositories(container);
 
             container.Verify();
         }
@@ -57,6 +58,7 @@ namespace CES.CoreApi.Agent.Service.Configuration
         private static void RegisterProcessors(Container container)
         {
             container.RegisterSingle<IAgentCurrencyProcessor, AgentCurrencyProcessor>();
+            container.RegisterSingle<IAgentUserProcessor, AgentUserProcessor>();
             container.RegisterSingle<IHealthMonitoringProcessor, HealthMonitoringProcessor>();
         }
 
@@ -159,14 +161,22 @@ namespace CES.CoreApi.Agent.Service.Configuration
             container.RegisterSingle<IRequestValidator, RequestValidator>();
             container.RegisterSingle<IMappingHelper, MappingHelper>();
             container.RegisterSingle<IExceptionHelper, ExceptionHelper>();
+        }
+
+        private static void RegisterRepositories(Container container)
+        {
             container.RegisterSingle<IAgentCurrencyRepository, AgentCurrencyRepository>();
+            container.RegisterSingle<IImageRepository, ImageRepository>();
         }
 
         private static void RegisterInterceptions(Container container)
         {
             container.InterceptWith<PerformanceInterceptor>(type => type == typeof(IApplicationRepository));
             container.InterceptWith<PerformanceInterceptor>(type => type == typeof(IAgentCurrencyRepository));
+            container.InterceptWith<PerformanceInterceptor>(type => type == typeof(IImageRepository));
             container.InterceptWith<PerformanceInterceptor>(type => type == typeof(IHealthMonitoringProcessor));
+            container.InterceptWith<PerformanceInterceptor>(type => type == typeof(IAgentCurrencyProcessor));
+            container.InterceptWith<PerformanceInterceptor>(type => type == typeof(IAgentUserProcessor));
         }
 
         private static void RegisterResponses(Container container)

@@ -38,6 +38,12 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{69B569
 		.nuget\NuGet.targets = .nuget\NuGet.targets
 	EndProjectSection
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{C85AFC13-C02A-43CB-81C9-6D707088937A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CES.CoreApi.Customer.Service.UnitTests", "..\CustomerService\CES.CoreApi.Customer.Service.UnitTests\CES.CoreApi.Customer.Service.UnitTests.csproj", "{3E5042E9-2EA4-48F4-901B-68513F28D61C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CES.CoreApi.Customer.Service.Business.Logic.UnitTests", "..\CustomerService\CES.CoreApi.Customer.Service.Business.Logic.UnitTests\CES.CoreApi.Customer.Service.Business.Logic.UnitTests.csproj", "{CB1B11C4-2964-4BFF-88AE-8B500DBBE3B2}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -96,6 +102,14 @@ Global
 		{02BEAA68-76A1-4ED6-BF6C-7B6935165AD6}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{02BEAA68-76A1-4ED6-BF6C-7B6935165AD6}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{02BEAA68-76A1-4ED6-BF6C-7B6935165AD6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3E5042E9-2EA4-48F4-901B-68513F28D61C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3E5042E9-2EA4-48F4-901B-68513F28D61C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3E5042E9-2EA4-48F4-901B-68513F28D61C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3E5042E9-2EA4-48F4-901B-68513F28D61C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CB1B11C4-2964-4BFF-88AE-8B500DBBE3B2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CB1B11C4-2964-4BFF-88AE-8B500DBBE3B2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CB1B11C4-2964-4BFF-88AE-8B500DBBE3B2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CB1B11C4-2964-4BFF-88AE-8B500DBBE3B2}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -108,5 +122,7 @@ Global
 		{8DBCFE15-CA3B-4F7C-A7D6-D73F8F0B91AA} = {FBA1699D-AFE4-47CB-880C-9CF22757EA69}
 		{76762A04-54F0-4147-BD2B-267372034706} = {FBA1699D-AFE4-47CB-880C-9CF22757EA69}
 		{02BEAA68-76A1-4ED6-BF6C-7B6935165AD6} = {FBA1699D-AFE4-47CB-880C-9CF22757EA69}
+		{3E5042E9-2EA4-48F4-901B-68513F28D61C} = {C85AFC13-C02A-43CB-81C9-6D707088937A}
+		{CB1B11C4-2964-4BFF-88AE-8B500DBBE3B2} = {C85AFC13-C02A-43CB-81C9-6D707088937A}
 	EndGlobalSection
 EndGlobal

@@ -49,6 +49,8 @@
     <Compile Include="Models\CustomerGetResponse.cs" />
     <Compile Include="Interfaces\ICustomerService.cs" />
     <Compile Include="Models\CustomerGetRequest.cs" />
+    <Compile Include="Models\CustomerProcessSignatureRequest.cs" />
+    <Compile Include="Models\CustomerProcessSignatureResponse.cs" />
     <Compile Include="Models\DatabasePingResponse.cs" />
     <Compile Include="Models\PingResponse.cs" />
     <Compile Include="Models\Location.cs" />

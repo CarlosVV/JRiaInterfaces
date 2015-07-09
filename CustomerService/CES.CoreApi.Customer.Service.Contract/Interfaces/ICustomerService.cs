@@ -15,5 +15,9 @@ namespace CES.CoreApi.Customer.Service.Contract.Interfaces
         [OperationContract(Name = "Create")]
         [FaultContract(typeof(CoreApiServiceFault), Action = Common.Constants.Namespaces.ServiceFaultContractAction)]
         CustomerCreateResponse Create(CustomerCreateRequest request);
+
+        [OperationContract(Name = "ProcessSignature")]
+        [FaultContract(typeof(CoreApiServiceFault), Action = Common.Constants.Namespaces.ServiceFaultContractAction)]
+        CustomerProcessSignatureResponse ProcessSignature(CustomerProcessSignatureRequest request);
     }
 }
