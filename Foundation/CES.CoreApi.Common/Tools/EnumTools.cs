@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 
 namespace CES.CoreApi.Common.Tools
@@ -29,11 +30,29 @@ namespace CES.CoreApi.Common.Tools
                 ? default(TExpected)
                 : expression(attribute);
         }
-        
+
         public static IEnumerable<TOut> GetValues<TEnum, TOut>()
         {
             return Enum.GetValues(typeof (TEnum)).Cast<TOut>();
         }
 
+        public static T GetEnumValueFromDescription<T>(this string description)
+        {
+            var type = typeof(T);
+            if (!type.IsEnum)
+                throw new ArgumentException();
+            
+            var fields = type.GetFields();
+
+            var field = fields
+                .SelectMany(f => f.GetCustomAttributes(typeof (DescriptionAttribute), false),
+                    (f, a) => new {Field = f, Att = a})
+                .SingleOrDefault(a => ((DescriptionAttribute) a.Att)
+                    .Description == description);
+
+            return field == null
+                ? default(T)
+                : (T) field.Field.GetRawConstantValue();
+        }
     }
 }

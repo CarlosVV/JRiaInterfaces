@@ -1,11 +1,16 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.ComponentModel;
 using System.Configuration;
 using System.Data;
 using System.Data.Common;
 using System.Data.SqlClient;
+using CES.CoreApi.Common.Attributes;
+using CES.CoreApi.Common.Enumerations;
 using CES.CoreApi.Common.Interfaces;
+using CES.CoreApi.Common.Models;
+using CES.CoreApi.Common.Tools;
 using CES.CoreApi.Foundation.Data.Utility;
 using CES.CoreApi.Logging.Interfaces;
 using Microsoft.Practices.EnterpriseLibrary.Common.Configuration;
@@ -13,7 +18,7 @@ using Microsoft.Practices.EnterpriseLibrary.Data;
 
 namespace CES.CoreApi.Foundation.Data.Base
 {
-    public class BaseGenericRepository
+    public abstract class BaseGenericRepository
     {
         #region Core
 
@@ -23,6 +28,7 @@ namespace CES.CoreApi.Foundation.Data.Base
         private readonly Database _database;
         private readonly ICacheProvider _cacheProvider;
         private readonly ILogMonitorFactory _monitorFactory;
+        private readonly IIdentityManager _identityManager;
 
         static BaseGenericRepository()
         {
@@ -34,15 +40,19 @@ namespace CES.CoreApi.Foundation.Data.Base
             UserNameId = int.Parse(ConfigurationManager.AppSettings["UserNameID"]);
         }
 
-        public BaseGenericRepository(ICacheProvider cacheProvider, ILogMonitorFactory monitorFactory, string connectionStringName)
+        protected BaseGenericRepository(ICacheProvider cacheProvider, ILogMonitorFactory monitorFactory, IIdentityManager identityManager, DatabaseType databaseType)
         {
             if (cacheProvider == null) throw new ArgumentNullException("cacheProvider");
             if (monitorFactory == null) throw new ArgumentNullException("monitorFactory");
-            if (connectionStringName == null) throw new ArgumentNullException("connectionStringName");
+            if (identityManager == null) throw new ArgumentNullException("identityManager");
+            if (databaseType == DatabaseType.Undefined) throw new InvalidEnumArgumentException("databaseType", (int)databaseType, typeof(DatabaseType));
 
             _cacheProvider = cacheProvider;
             _monitorFactory = monitorFactory;
-            _database = DatabaseFactory.CreateDatabase(connectionStringName);
+            _identityManager = identityManager;
+            DatabaseType = databaseType;
+            var connectionName = databaseType.GetAttributeValue<ConnectionNameAttribute, string>(x => x.Name);
+            _database = DatabaseFactory.CreateDatabase(connectionName);
         }
 
         #endregion
@@ -93,30 +103,52 @@ namespace CES.CoreApi.Foundation.Data.Base
             ExecuteNonQueryProcedure(command);
         }
 
-        protected TEntity Get<TEntity>(DatabaseRequest<TEntity> request) where TEntity : class
+        protected TEntity Get<TEntity>(DatabaseRequest<TEntity> request)// where TEntity : class
         {
             ValidateRequest(request);
 
             var command = GetDbCommand(request);
 
             if (!request.IsCacheable) 
-                return ExecuteReaderProcedure(command, request.Shaper);
+                return ExecuteReaderProcedure(command, request.Shaper, request.OutputShaper);
 
             var key = request.ToCacheKey();
-            return _cacheProvider.GetItem(key, () => ExecuteReaderProcedure(command, request.Shaper), request.CacheDuration);
+            return _cacheProvider.GetItem(key, () => ExecuteReaderProcedure(command, request.Shaper, request.OutputShaper), request.CacheDuration);
         }
 
-        protected void PingDatabase()
+        protected DatabasePingModel PingDatabase()
         {
-            using (var connection = _database.CreateConnection())
+            var databasePing = new DatabasePingModel
             {
-                connection.Open();
-                connection.Close();
+                Database = DatabaseType
+            };
+
+            try
+            {
+                using (var connection = _database.CreateConnection())
+                {
+                    connection.Open();
+                    connection.Close();
+                }
+                databasePing.IsOk = true;
             }
+            catch (Exception ex)
+            {
+                HandleException(ex);
+                databasePing.IsOk = false;
+            }
+            
+            return databasePing;
         }
 
         #endregion
 
+        #region Public methods
+
+        public DatabaseType DatabaseType { get; private set; }
+
+        #endregion
+        
         #region private methods
 
         #region Stored procedure execution related methods
@@ -154,8 +186,9 @@ namespace CES.CoreApi.Foundation.Data.Base
         /// <typeparam name="TEntity">Type of entity to materialize</typeparam>
         /// <param name="command">Database command to execute</param>
         /// <param name="shaper">Shaper to materialize entity</param>
+        /// <param name="outputShaper">Output shaper, uses output SP parameters to update entity</param>
         /// <returns>Entity TEntity</returns>
-        private TEntity ExecuteReaderProcedure<TEntity>(DbCommand command, Func<IDataReader, TEntity> shaper)
+        private TEntity ExecuteReaderProcedure<TEntity>(DbCommand command, Func<IDataReader, TEntity> shaper, Action<DbParameterCollection, TEntity> outputShaper)
         {
             TEntity entity;
 
@@ -163,9 +196,14 @@ namespace CES.CoreApi.Foundation.Data.Base
 
             using (var reader = _database.ExecuteReader(command))
             {
-                entity = shaper(reader);
+                entity = reader.Read() 
+                    ? shaper(reader) 
+                    : default (TEntity);
             }
-            
+
+            if (outputShaper != null)
+                outputShaper(command.Parameters, entity);
+
             performanceMonitor.Stop();
 
             return entity;
@@ -239,10 +277,18 @@ namespace CES.CoreApi.Foundation.Data.Base
         private IDatabasePerformanceLogMonitor GetPerformanceMonitor(DbCommand command)
         {
             var performanceMonitor = _monitorFactory.CreateNew<IDatabasePerformanceLogMonitor>();
+            performanceMonitor.DataContainer.ApplicationContext = _identityManager.GetClientApplicationIdentity();
             performanceMonitor.Start(command);
             return performanceMonitor;
         }
 
+        private void HandleException(Exception ex)
+        {
+            var exceptionLogMonitor = _monitorFactory.CreateNew<IExceptionLogMonitor>();
+            exceptionLogMonitor.DataContainer.ApplicationContext = _identityManager.GetClientApplicationIdentity();
+            exceptionLogMonitor.Publish(ex);
+        }
+        
         #endregion
     }
 }

@@ -5,6 +5,7 @@ using System.Security.Principal;
 using System.ServiceModel.Channels;
 using CES.CoreApi.Common.Enumerations;
 using CES.CoreApi.Common.Exceptions;
+using CES.CoreApi.Common.Interfaces;
 using CES.CoreApi.Common.Models;
 using CES.CoreApi.Foundation.Contract.Interfaces;
 using CES.CoreApi.Foundation.Contract.Models;
@@ -58,18 +59,20 @@ namespace CES.CoreApi.Foundation.Security
             ReadOnlyCollection<IAuthorizationPolicy> authPolicy,
             Uri listenUri, ref Message message)
         {
+            var headerParameters = _parametersProvider.GetParameters();
+
             //Validate client application
-            var clientApplication = ValidateClientApplication();
+            var clientApplication = ValidateClientApplication(headerParameters);
 
             //Set application principal
-            SetApplicationPrincipal(message, clientApplication);
+            SetApplicationPrincipal(message, clientApplication, headerParameters);
             
             return authPolicy;
         }
 
-        private static void SetApplicationPrincipal(Message message, Application clientApplication)
+        private static void SetApplicationPrincipal(Message message, IApplication clientApplication, ServiceCallHeaderParameters headerParameters)
         {
-            var identity = new ClientApplicationIdentity(clientApplication);
+            var identity = new ClientApplicationIdentity(clientApplication, headerParameters);
             IPrincipal applicationPrincipal = new ApplicationPrincipal(identity);
             message.Properties["Principal"] = applicationPrincipal;
         }
@@ -79,10 +82,9 @@ namespace CES.CoreApi.Foundation.Security
         /// 1. ApplicationId passed in message header
         /// 2. Application exists and active
         /// </summary>
-        private Application ValidateClientApplication()
+        /// <param name="headerParameters"></param>
+        private Application ValidateClientApplication(ServiceCallHeaderParameters headerParameters)
         {
-            var headerParameters = _parametersProvider.GetParameters();
-
             var application = _repository.GetApplication(headerParameters.ApplicationId);
 
             if (application == null)

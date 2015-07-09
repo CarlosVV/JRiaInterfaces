@@ -154,6 +154,16 @@ namespace CES.CoreApi.Logging.Models
         [DataMember]
         public Guid MessageId { get; private set; }
 
+        /// <summary>
+        /// Gets or sets application context information
+        /// </summary>
+        [DataMember]
+        public dynamic ApplicationContext
+        {
+            get;
+            set;
+        }
+
         #endregion //Public properties
 
         #region Overriding

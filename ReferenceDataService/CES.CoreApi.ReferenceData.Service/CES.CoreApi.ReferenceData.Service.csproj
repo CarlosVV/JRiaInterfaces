@@ -1,0 +1,146 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{1B87FD9C-DCE1-4DE3-A7BB-5F42ED872E18}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>CES.CoreApi.ReferenceData.Service</RootNamespace>
+    <AssemblyName>CES.CoreApi.ReferenceData.Service</AssemblyName>
+    <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">..\..\Solutions\</SolutionDir>
+    <RestorePackages>true</RestorePackages>
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="AutoMapper, Version=3.3.1.0, Culture=neutral, PublicKeyToken=be96cd2c38ef1005, processorArchitecture=MSIL">
+      <HintPath>..\..\Solutions\packages\AutoMapper.3.3.1\lib\net40\AutoMapper.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="AutoMapper.Net4, Version=3.3.1.0, Culture=neutral, PublicKeyToken=be96cd2c38ef1005, processorArchitecture=MSIL">
+      <HintPath>..\..\Solutions\packages\AutoMapper.3.3.1\lib\net40\AutoMapper.Net4.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Castle.Core, Version=3.3.0.0, Culture=neutral, PublicKeyToken=407dd0808d44fbdc, processorArchitecture=MSIL">
+      <HintPath>..\..\Solutions\packages\Castle.Core.3.3.3\lib\net45\Castle.Core.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="SimpleInjector, Version=2.8.0.0, Culture=neutral, PublicKeyToken=984cb50dea722e99, processorArchitecture=MSIL">
+      <HintPath>..\..\Solutions\packages\SimpleInjector.2.8.0\lib\net45\SimpleInjector.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="SimpleInjector.Extensions.ExecutionContextScoping, Version=2.4.0.0, Culture=neutral, PublicKeyToken=984cb50dea722e99, processorArchitecture=MSIL">
+      <HintPath>..\..\Solutions\packages\SimpleInjector.Extensions.ExecutionContextScoping.2.8.0\lib\net45\SimpleInjector.Extensions.ExecutionContextScoping.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="SimpleInjector.Extensions.LifetimeScoping, Version=2.8.0.0, Culture=neutral, PublicKeyToken=984cb50dea722e99, processorArchitecture=MSIL">
+      <HintPath>..\..\Solutions\packages\SimpleInjector.Extensions.LifetimeScoping.2.8.0\lib\net40-client\SimpleInjector.Extensions.LifetimeScoping.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="SimpleInjector.Integration.Wcf, Version=2.8.0.0, Culture=neutral, PublicKeyToken=984cb50dea722e99, processorArchitecture=MSIL">
+      <HintPath>..\..\Solutions\packages\SimpleInjector.Integration.Wcf.2.8.0\lib\net40\SimpleInjector.Integration.Wcf.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.ServiceModel" />
+    <Reference Include="System.ServiceModel.Activation" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Configuration\CompositionRoot.cs" />
+    <Compile Include="Configuration\MapperConfigurator.cs" />
+    <Compile Include="Factory\ReferenceDataServiceHostFactory.cs" />
+    <Compile Include="Interfaces\IRequestValidator.cs" />
+    <Compile Include="ReferenceDataService.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Utilities\RequestValidator.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\Foundation\CES.CoreApi.Caching\CES.CoreApi.Caching.csproj">
+      <Project>{9fcf40a8-23f1-4272-9cae-eff674145f57}</Project>
+      <Name>CES.CoreApi.Caching</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Foundation\CES.CoreApi.Common\CES.CoreApi.Common.csproj">
+      <Project>{070c7bb2-af07-4a4c-a9cc-6bfb8ca416e6}</Project>
+      <Name>CES.CoreApi.Common</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Foundation\CES.CoreApi.Data\CES.CoreApi.Data.csproj">
+      <Project>{1aa5ba90-02cc-4fd1-81f2-615c374c83a5}</Project>
+      <Name>CES.CoreApi.Data</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Foundation\CES.CoreApi.Foundation.Contract\CES.CoreApi.Foundation.Contract.csproj">
+      <Project>{8dbcfe15-ca3b-4f7c-a7d6-d73f8f0b91aa}</Project>
+      <Name>CES.CoreApi.Foundation.Contract</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Foundation\CES.CoreApi.Foundation\CES.CoreApi.Foundation.csproj">
+      <Project>{e2b71a13-9683-4862-b2eb-31050190afdc}</Project>
+      <Name>CES.CoreApi.Foundation</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Foundation\CES.CoreApi.Logging\CES.CoreApi.Logging.csproj">
+      <Project>{76762a04-54f0-4147-bd2b-267372034706}</Project>
+      <Name>CES.CoreApi.Logging</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Foundation\CES.CoreApi.SimpleInjectorProxy\CES.CoreApi.SimpleInjectorProxy.csproj">
+      <Project>{02beaa68-76a1-4ed6-bf6c-7b6935165ad6}</Project>
+      <Name>CES.CoreApi.SimpleInjectorProxy</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\CES.CoreApi.ReferenceData.Service.Business.Contract\CES.CoreApi.ReferenceData.Service.Business.Contract.csproj">
+      <Project>{EA5E2469-589F-4DFE-8ED5-CBE027BC886C}</Project>
+      <Name>CES.CoreApi.ReferenceData.Service.Business.Contract</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\CES.CoreApi.ReferenceData.Service.Business.Logic\CES.CoreApi.ReferenceData.Service.Business.Logic.csproj">
+      <Project>{30C7FF73-3FC3-4824-A363-57FED29D1373}</Project>
+      <Name>CES.CoreApi.ReferenceData.Service.Business.Logic</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\CES.CoreApi.ReferenceData.Service.Contract\CES.CoreApi.ReferenceData.Service.Contract.csproj">
+      <Project>{B1BBA975-35BE-4725-8B66-BD282746A7BB}</Project>
+      <Name>CES.CoreApi.ReferenceData.Service.Contract</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\CES.CoreApi.ReferenceData.Service.Data\CES.CoreApi.ReferenceData.Service.Data.csproj">
+      <Project>{0DBF2BEB-1E42-4898-B6AE-D8ED4BD5CF90}</Project>
+      <Name>CES.CoreApi.ReferenceData.Service.Data</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup />
+  <ItemGroup>
+    <None Include="packages.config" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <Import Project="$(SolutionDir)\.nuget\NuGet.targets" Condition="Exists('$(SolutionDir)\.nuget\NuGet.targets')" />
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>This project references NuGet package(s) that are missing on this computer. Enable NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('$(SolutionDir)\.nuget\NuGet.targets')" Text="$([System.String]::Format('$(ErrorText)', '$(SolutionDir)\.nuget\NuGet.targets'))" />
+  </Target>
+  <Import Project="..\..\Solutions\packages\AutoMapper.3.3.1\tools\AutoMapper.targets" Condition="Exists('..\..\Solutions\packages\AutoMapper.3.3.1\tools\AutoMapper.targets')" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

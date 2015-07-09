@@ -120,7 +120,7 @@ namespace CES.CoreApi.Foundation.Service
         /// <param name="serviceConfiguration">Service configuration</param>
         /// <param name="interfaceName">Interface name</param>
         /// <returns></returns>
-        private static IEnumerable<EndpointConfiguration> GetEndpointsForInterface(ServiceConfiguration serviceConfiguration, string interfaceName)
+        private static IEnumerable<ServiceEndpointConfiguration> GetEndpointsForInterface(ServiceConfiguration serviceConfiguration, string interfaceName)
         {
             var endpoints = serviceConfiguration.Endpoints.Where(
                 p =>

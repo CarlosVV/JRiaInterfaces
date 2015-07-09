@@ -1,9 +1,10 @@
-﻿using CES.CoreApi.Foundation.Contract.Models;
+﻿using CES.CoreApi.Foundation.Contract.Enumerations;
+using CES.CoreApi.Foundation.Contract.Models;
 
 namespace CES.CoreApi.Foundation.Contract.Interfaces
 {
     public interface IServiceConfigurationProvider
     {
-        ServiceConfiguration GetConfiguration();
+        ServiceConfiguration GetConfiguration(ServiceConfigurationType configurationType = ServiceConfigurationType.ServiceEndpoints);
     }
 }

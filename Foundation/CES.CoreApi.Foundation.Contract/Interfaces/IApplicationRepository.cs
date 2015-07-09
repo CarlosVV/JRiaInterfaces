@@ -14,6 +14,6 @@ namespace CES.CoreApi.Foundation.Contract.Interfaces
         /// <returns></returns>
         ICollection<ApplicationConfiguration> GetApplicationConfiguration(int applicationId);
 
-        void Ping();
+        DatabasePingModel Ping();
     }
 }

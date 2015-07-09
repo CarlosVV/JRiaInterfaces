@@ -3,5 +3,6 @@
     public class ConnectionStrings
     {
         public const string Main = "Main";
+        public const string ReadOnly = "ReadOnly";
     }
 }

@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using CES.CoreApi.Common.Enumerations;
+using CES.CoreApi.Common.Models;
 using CES.CoreApi.Foundation.Contract.Interfaces;
 using CES.CoreApi.GeoLocation.Service.Business.Contract.Enumerations;
 using CES.CoreApi.GeoLocation.Service.Business.Contract.Interfaces;
@@ -285,16 +286,16 @@ namespace CES.CoreApi.GeoLocation.Service.UnitTest
         [TestMethod]
         public void Ping_SuccessPath_AllDependenciesCalledNoExceptionRaised()
         {
-            _healthMonitoringProcessor.Setup(p => p.Ping()).Returns(It.IsAny<HealthResponseModel>).Verifiable();
+            _healthMonitoringProcessor.Setup(p => p.Ping()).Returns(It.IsAny<PingResponseModel>).Verifiable();
 
-            _mappingHelper.Setup(p => p.ConvertToResponse<HealthResponseModel, HealthResponse>(It.IsAny<HealthResponseModel>()))
-                 .Returns(It.IsAny<HealthResponse>())
+            _mappingHelper.Setup(p => p.ConvertToResponse<PingResponseModel, PingResponse>(It.IsAny<PingResponseModel>()))
+                 .Returns(It.IsAny<PingResponse>())
                  .Verifiable();
 
             _geoLocationService.Ping();
 
             _healthMonitoringProcessor.Verify(p => p.Ping(), Times.Exactly(1));
-            _mappingHelper.Verify(p => p.ConvertToResponse<HealthResponseModel, HealthResponse>(It.IsAny<HealthResponseModel>()), Times.Exactly(1));
+            _mappingHelper.Verify(p => p.ConvertToResponse<PingResponseModel, PingResponse>(It.IsAny<PingResponseModel>()), Times.Exactly(1));
         }
 
         [TestMethod]

@@ -1,12 +1,13 @@
 ﻿using System.Collections.Generic;
 using System.ServiceModel;
-using CES.CoreApi.Common.Constants;
 using CES.CoreApi.Common.Enumerations;
 using CES.CoreApi.Common.Exceptions;
+using CES.CoreApi.Common.Models;
 using CES.CoreApi.Foundation.Contract.Interfaces;
 using CES.CoreApi.GeoLocation.Service.Business.Contract.Enumerations;
 using CES.CoreApi.GeoLocation.Service.Business.Contract.Interfaces;
 using CES.CoreApi.GeoLocation.Service.Business.Contract.Models;
+using CES.CoreApi.GeoLocation.Service.Contract.Constants;
 using CES.CoreApi.GeoLocation.Service.Contract.Enumerations;
 using CES.CoreApi.GeoLocation.Service.Contract.Interfaces;
 using CES.CoreApi.GeoLocation.Service.Contract.Models;
@@ -172,10 +173,10 @@ namespace CES.CoreApi.GeoLocation.Service
             return _mapper.ConvertToResponse<ClearCacheResponseModel, ClearCacheResponse>(responseModel);
         }
 
-        public virtual HealthResponse Ping()
+        public virtual PingResponse Ping()
         {
             var responseModel = _healthMonitoringProcessor.Ping();
-            return _mapper.ConvertToResponse<HealthResponseModel, HealthResponse>(responseModel);
+            return _mapper.ConvertToResponse<PingResponseModel, PingResponse>(responseModel);
         }
 
         #endregion

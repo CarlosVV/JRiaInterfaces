@@ -1,12 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.ServiceModel;
 using System.ServiceModel.Channels;
 using System.Xml;
 using CES.CoreApi.Common.Enumerations;
 using CES.CoreApi.Common.Exceptions;
-using CES.CoreApi.Foundation.Contract.Constants;
+using CES.CoreApi.Common.Tools;
 using CES.CoreApi.Foundation.Contract.Enumerations;
 using CES.CoreApi.Foundation.Contract.Interfaces;
 using CES.CoreApi.Foundation.Contract.Models;
@@ -34,25 +35,29 @@ namespace CES.CoreApi.Foundation.Providers
         /// 
         /// </summary>
         /// <returns></returns>
-        public ServiceConfiguration GetConfiguration()
+        public ServiceConfiguration GetConfiguration(ServiceConfigurationType configurationType = ServiceConfigurationType.ServiceEndpoints)
         {
             ServiceConfiguration serviceConfig;
 
             try
             {
+                var configItemName = configurationType.GetAttributeValue<DescriptionAttribute, string>(x => x.Description);
+
                 //Get configuration
-                serviceConfig = _configurationProvider.ReadFromJson<ServiceConfiguration>(ServiceConfigurationItems.ServiceConfiguration);
+                serviceConfig = _configurationProvider.ReadFromJson<ServiceConfiguration>(configItemName);
             }
             catch (Exception ex)
             {
                 throw new CoreApiException(
                     TechnicalSubSystem.CoreApi,
-                    SubSystemError.ServiceIntializationConfigurationParseError,
+                    configurationType == ServiceConfigurationType.ServiceEndpoints
+                        ? SubSystemError.ServiceIntializationConfigurationParseError
+                        : SubSystemError.ServiceIntializationClientEndpointConfigurationParseError,
                     ex);
             }
             
             //Validate configuration
-            ValidateServiceConfiguration(serviceConfig);
+            ValidateServiceConfiguration(serviceConfig, configurationType);
 
             //Configure endpoints
             ConfigureEndpoints(serviceConfig);
@@ -68,15 +73,20 @@ namespace CES.CoreApi.Foundation.Providers
         /// Validates that major service configuration elements populated
         /// </summary>
         /// <param name="serviceConfig">Service configuration</param>
-        private static void ValidateServiceConfiguration(ServiceConfiguration serviceConfig)
+        /// <param name="configurationType"></param>
+        private static void ValidateServiceConfiguration(ServiceConfiguration serviceConfig, ServiceConfigurationType configurationType)
         {
             if (serviceConfig == null)
                 throw new CoreApiException(TechnicalSubSystem.CoreApi,
-                    SubSystemError.ServiceIntializationConfigurationNotFound);
+                    configurationType == ServiceConfigurationType.ServiceEndpoints
+                        ? SubSystemError.ServiceIntializationConfigurationNotFound
+                        : SubSystemError.ServiceIntializationClientEndpointConfigurationNotFound);
 
             if (!serviceConfig.Endpoints.Any())
                 throw new CoreApiException(TechnicalSubSystem.CoreApi,
-                    SubSystemError.ServiceIntializationNoEndpointsFound);
+                    configurationType == ServiceConfigurationType.ServiceEndpoints
+                        ? SubSystemError.ServiceIntializationNoEndpointsFound
+                        : SubSystemError.ServiceIntializationNoClientEndpointsFound);
         }
 
         /// <summary>
@@ -100,7 +110,7 @@ namespace CES.CoreApi.Foundation.Providers
         /// </summary>
         /// <param name="configuration">Service configuration</param>
         /// <param name="endpoint">Endpoint instance to configure</param>
-        private static void ConfigureBinding(ServiceConfiguration configuration, EndpointConfiguration endpoint)
+        private static void ConfigureBinding(ServiceConfiguration configuration, ServiceEndpointConfiguration endpoint)
         {
             //Check if same binding already configured for another endpoint
             var configuredBinding = GetBindingAlreadyConfigured(
@@ -133,7 +143,7 @@ namespace CES.CoreApi.Foundation.Providers
         /// <param name="binding">Binding type</param>
         /// <param name="bindingConfigurationName">Binding configuration name</param>
         /// <returns></returns>
-        private static Binding GetBindingAlreadyConfigured(IEnumerable<EndpointConfiguration> configuration, string binding, string bindingConfigurationName)
+        private static Binding GetBindingAlreadyConfigured(IEnumerable<ServiceEndpointConfiguration> configuration, string binding, string bindingConfigurationName)
         {
             var configuredBinding = configuration
                 .Where(endpoint => endpoint.ConfiguredBinding != null &&
@@ -168,7 +178,7 @@ namespace CES.CoreApi.Foundation.Providers
         /// </summary>
         /// <param name="endpoint">Endpoint instance</param>
         /// <param name="isHttps">Defines whether HTTPS enabled</param>
-        private static void ConfigureEndpointSecurity(EndpointConfiguration endpoint, bool isHttps)
+        private static void ConfigureEndpointSecurity(ServiceEndpointConfiguration endpoint, bool isHttps)
         {
             switch (endpoint.Binding.ToUpperInvariant())
             {
@@ -195,7 +205,7 @@ namespace CES.CoreApi.Foundation.Providers
         /// </summary>
         /// <param name="endpoint">Endpoint instance</param>
         /// <param name="isHttps">Defines whether HTTPS enabled</param>
-        private static void ConfigureNetTcpEndpointSecurity(EndpointConfiguration endpoint, bool isHttps)
+        private static void ConfigureNetTcpEndpointSecurity(ServiceEndpointConfiguration endpoint, bool isHttps)
         {
             var netTcpBinding = endpoint.ConfiguredBinding as NetTcpBinding;
 
@@ -227,7 +237,7 @@ namespace CES.CoreApi.Foundation.Providers
         /// </summary>
         /// <param name="endpoint">Endpoint instance</param>
         /// <param name="isHttps">Defines whether HTTPS enabled</param>
-        private static void ConfigureWebHttpEndpointSecurity(EndpointConfiguration endpoint, bool isHttps)
+        private static void ConfigureWebHttpEndpointSecurity(ServiceEndpointConfiguration endpoint, bool isHttps)
         {
             var webHttpBinding = endpoint.ConfiguredBinding as WebHttpBinding;
 
@@ -255,7 +265,7 @@ namespace CES.CoreApi.Foundation.Providers
         /// </summary>
         /// <param name="endpoint">Endpoint instance</param>
         /// <param name="isHttps">Defines whether HTTPS enabled</param>
-        private static void ConfigureBasicHttpEndpointSecurity(EndpointConfiguration endpoint, bool isHttps)
+        private static void ConfigureBasicHttpEndpointSecurity(ServiceEndpointConfiguration endpoint, bool isHttps)
         {
             var basicBinding = endpoint.ConfiguredBinding as BasicHttpBinding;
 
@@ -287,7 +297,7 @@ namespace CES.CoreApi.Foundation.Providers
         /// </summary>
         /// <param name="endpoint">Endpoint instance</param>
         /// <param name="isHttps">Defines whether HTTPS enabled</param>
-        private static void ConfigureWsHttpEndpointSecurity(EndpointConfiguration endpoint, bool isHttps)
+        private static void ConfigureWsHttpEndpointSecurity(ServiceEndpointConfiguration endpoint, bool isHttps)
         {
             var wsHttpBinding = endpoint.ConfiguredBinding as WSHttpBinding;
 

@@ -5,7 +5,7 @@ using CES.CoreApi.GeoLocation.Service.Contract.Models;
 
 namespace CES.CoreApi.GeoLocation.Service.Contract.Interfaces
 {
-    [ServiceContract(Namespace = Namespaces.GeolocationServiceContractNamespace)]
+    [ServiceContract(Namespace = Constants.Namespaces.GeolocationServiceContractNamespace)]
     public interface IHealthMonitoringService
     {
         [OperationContract]
@@ -14,6 +14,6 @@ namespace CES.CoreApi.GeoLocation.Service.Contract.Interfaces
 
         [OperationContract]
         [FaultContract(typeof(CoreApiServiceFault), Action = Namespaces.ServiceFaultContractAction)]
-        HealthResponse Ping();
+        PingResponse Ping();
     }
 }
