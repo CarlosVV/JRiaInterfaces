@@ -71,11 +71,6 @@
     <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.ServiceModel" />
     <Reference Include="System.ServiceModel.Activation" />
-    <Reference Include="System.Xml.Linq" />
-    <Reference Include="System.Data.DataSetExtensions" />
-    <Reference Include="Microsoft.CSharp" />
-    <Reference Include="System.Data" />
-    <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Configuration\CompositionRoot.cs" />
@@ -128,7 +123,7 @@
       <Name>CES.CoreApi.OrderValidation.Service.Contract</Name>
     </ProjectReference>
     <ProjectReference Include="..\CES.CoreApi.OrderValidation.Service.Data\CES.CoreApi.OrderValidation.Service.Data.csproj">
-      <Project>{CF6379C1-A294-4B99-9F01-EA90622F5BA9}</Project>
+      <Project>{cf6379c1-a294-4b99-9f01-ea90622f5ba9}</Project>
       <Name>CES.CoreApi.OrderValidation.Service.Data</Name>
     </ProjectReference>
   </ItemGroup>
