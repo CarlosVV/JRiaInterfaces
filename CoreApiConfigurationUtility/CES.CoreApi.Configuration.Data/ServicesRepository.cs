@@ -1,5 +1,5 @@
 ﻿using System.Collections.Generic;
-using CES.CoreApi.Common.Constants;
+using CES.CoreApi.Common.Enumerations;
 using CES.CoreApi.Common.Interfaces;
 using CES.CoreApi.Configuration.Model.DomainEntities;
 using CES.CoreApi.Configuration.Model.Interfaces;
@@ -12,8 +12,8 @@ namespace CES.CoreApi.Configuration.Data
 {
     public class ServicesRepository : BaseGenericRepository, IServicesRepository
     {
-        public ServicesRepository(ICacheProvider cacheProvider, ILogMonitorFactory logMonitorFactory)
-            : base(cacheProvider, logMonitorFactory, ConnectionStrings.Main)
+        public ServicesRepository(ICacheProvider cacheProvider, ILogMonitorFactory logMonitorFactory, IIdentityManager identityManager)
+            : base(cacheProvider, logMonitorFactory, identityManager, DatabaseType.Main)
         {
         }
 

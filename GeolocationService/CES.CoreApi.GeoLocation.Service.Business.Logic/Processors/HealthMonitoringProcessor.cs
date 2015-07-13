@@ -2,9 +2,9 @@
 using CES.CoreApi.Common.Enumerations;
 using CES.CoreApi.Common.Exceptions;
 using CES.CoreApi.Common.Interfaces;
+using CES.CoreApi.Common.Models;
 using CES.CoreApi.Foundation.Contract.Interfaces;
 using CES.CoreApi.GeoLocation.Service.Business.Contract.Interfaces;
-using CES.CoreApi.GeoLocation.Service.Business.Contract.Models;
 
 namespace CES.CoreApi.GeoLocation.Service.Business.Logic.Processors
 {
@@ -14,7 +14,6 @@ namespace CES.CoreApi.GeoLocation.Service.Business.Logic.Processors
 
         private readonly ICacheProvider _cacheProvider;
         private readonly IApplicationRepository _applicationRepository;
-        private const string ClearCacheMessageSuccess = "Core API Geolocation service cache successfully cleaned up.";
 
         public HealthMonitoringProcessor(ICacheProvider cacheProvider, IApplicationRepository applicationRepository)
         {
@@ -39,30 +38,21 @@ namespace CES.CoreApi.GeoLocation.Service.Business.Logic.Processors
             try
             {
                 _cacheProvider.ClearCache();
-                response.Message = ClearCacheMessageSuccess;
+                response.IsOk = true;
             }
-            catch (Exception ex)
+            catch (Exception)
             {
-                response.Message = ex.Message;
+                response.IsOk = false;
             }
 
             return response;
         }
 
-        public HealthResponseModel Ping()
+        public PingResponseModel Ping()
         {
-            var response = new HealthResponseModel();
+            var response = new PingResponseModel();
 
-            try
-            {
-                _applicationRepository.Ping();
-                response.MainDatabaseStatus = "OK";
-
-            }
-            catch (Exception ex)
-            {
-                response.MainDatabaseStatus = ex.Message;
-            }
+            response.Databases.Add(_applicationRepository.Ping());
 
             return response;
         }

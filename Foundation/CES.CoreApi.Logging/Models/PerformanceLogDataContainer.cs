@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections;
+using System.Collections.Generic;
 using System.ComponentModel;
 using System.Runtime.Serialization;
 using System.Threading;
@@ -104,10 +105,10 @@ namespace CES.CoreApi.Logging.Models
         }
 
         /// <summary>
-        /// Gets or sets correlation information instance
+        /// Gets or sets application context information
         /// </summary>
         [DataMember]
-        public ApplicationContext ApplicationContext
+        public dynamic ApplicationContext
         {
             get;
             set;

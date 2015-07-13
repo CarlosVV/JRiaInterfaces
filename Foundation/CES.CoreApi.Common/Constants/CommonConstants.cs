@@ -13,5 +13,10 @@
             public const string StringOne = "1";
             public const string StringZero = "0";
         }
+        
+        public class StringLength
+        {
+            public const int Currency = 3;
+        }
     }
 }

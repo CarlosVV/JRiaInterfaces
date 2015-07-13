@@ -36,17 +36,12 @@
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.IdentityModel" />
-    <Reference Include="System.Net.Http" />
-    <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.ServiceModel" />
-    <Reference Include="System.Xml.Linq" />
-    <Reference Include="System.Data.DataSetExtensions" />
-    <Reference Include="Microsoft.CSharp" />
-    <Reference Include="System.Data" />
-    <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Constants\CustomHeaderItems.cs" />
     <Compile Include="Constants\ServiceConfigurationItems.cs" />
+    <Compile Include="Enumerations\ServiceConfigurationType.cs" />
     <Compile Include="Enumerations\ServiceSecurityMode.cs" />
     <Compile Include="Interfaces\IApplicationRepository.cs" />
     <Compile Include="Interfaces\IApplicationAuthenticator.cs" />
@@ -57,21 +52,19 @@
     <Compile Include="Interfaces\IClientSecurityContextProvider.cs" />
     <Compile Include="Interfaces\IConfigurationProvider.cs" />
     <Compile Include="Interfaces\IHostApplicationProvider.cs" />
-    <Compile Include="Interfaces\IIdentityManager.cs" />
     <Compile Include="Interfaces\IMappingHelper.cs" />
     <Compile Include="Interfaces\IRequestHeadersProvider.cs" />
     <Compile Include="Interfaces\IServiceCallHeaderParametersProvider.cs" />
     <Compile Include="Interfaces\IServiceConfigurationProvider.cs" />
     <Compile Include="Interfaces\IServiceExceptionHandler.cs" />
+    <Compile Include="Interfaces\IServiceHelper.cs" />
     <Compile Include="Models\ApplicationPrincipal.cs" />
     <Compile Include="Models\BehaviorConfiguration.cs" />
     <Compile Include="Models\BindingConfiguration.cs" />
-    <Compile Include="Models\ClientApplicationIdentity.cs" />
-    <Compile Include="Models\EndpointConfiguration.cs" />
+    <Compile Include="Models\ServiceEndpointConfiguration.cs" />
     <Compile Include="Models\ReaderQuotasConfiguration.cs" />
     <Compile Include="Models\ReliableSessionConfiguration.cs" />
     <Compile Include="Models\SecurityConfiguration.cs" />
-    <Compile Include="Models\ServiceCallHeaderParameters.cs" />
     <Compile Include="Models\ServiceConfiguration.cs" />
     <Compile Include="Models\ServiceEndpoint.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

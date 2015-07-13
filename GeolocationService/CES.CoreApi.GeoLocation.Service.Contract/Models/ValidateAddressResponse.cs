@@ -1,12 +1,12 @@
 ﻿using System.Runtime.Serialization;
-using CES.CoreApi.Common.Constants;
 using CES.CoreApi.Common.Interfaces;
 using CES.CoreApi.Common.Models;
 using CES.CoreApi.GeoLocation.Service.Contract.Enumerations;
+using Namespaces = CES.CoreApi.GeoLocation.Service.Contract.Constants.Namespaces;
 
 namespace CES.CoreApi.GeoLocation.Service.Contract.Models
 {
-    [DataContract(Namespace = Namespaces.GeolocationDataContractNamespace)]
+    [DataContract(Namespace = Namespaces.GeolocationServiceDataContractNamespace)]
     public class ValidateAddressResponse : BaseResponse
     {
         public ValidateAddressResponse(ICurrentDateTimeProvider currentDateTimeProvider) 

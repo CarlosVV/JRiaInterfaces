@@ -1,0 +1,5 @@
+﻿<%@ ServiceHost 
+    Language="C#" 
+    Debug="true" 
+    Service="CES.CoreApi.Accounting.Service.AccountingService" 
+    Factory="CES.CoreApi.Accounting.Service.Factory.AccountingServiceHostFactory" %>

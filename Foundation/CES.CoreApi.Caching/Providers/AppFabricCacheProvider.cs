@@ -4,7 +4,6 @@ using System.Globalization;
 using System.Reflection;
 using System.Threading.Tasks;
 using CES.CoreApi.Common.Interfaces;
-using CES.CoreApi.Logging.Factories;
 using CES.CoreApi.Logging.Interfaces;
 using Microsoft.ApplicationServer.Caching;
 
@@ -12,24 +11,28 @@ namespace CES.CoreApi.Caching.Providers
 {
     public class AppFabricCacheProvider : ICacheProvider
     {
-        private readonly ILogMonitorFactory _monitorFactory;
-
         #region Core
 
-        private const string AddItemMessageTemplate = "{0}: key='{1}', timeout='{2}', value='{3}'";
-        private const string GetItemMessageTemplate = "{0}: key='{1}', timeout='{2}', getDataFunc='{3}'";
-        private const string RemoveItemMessageTemplate = "{0}: key='{1}'";
-        private const string ClearCacheMessageTemplate = "{0}";
+        private readonly ILogMonitorFactory _monitorFactory;
+        private readonly IIdentityManager _identityManager;
+
+        private const string AddItemMessageTemplate = "{0}.{1}: key='{2}', timeout='{3}', value='{4}'";
+        private const string GetItemMessageTemplate = "{0}.{1}: key='{2}', timeout='{3}', getDataFunc='{4}'";
+        private const string RemoveItemMessageTemplate = "{0}.{1}: key='{2}'";
+        private const string ClearCacheMessageTemplate = "{0}.{1}";
         
         private static DataCache _cache;
         private static readonly DataCacheFactory CacheFactory;
         protected static readonly string CacheName;
         protected static readonly TimeSpan CacheLifetime;
 
-        public AppFabricCacheProvider(ILogMonitorFactory monitorFactory, string cacheName = null)
+        public AppFabricCacheProvider(ILogMonitorFactory monitorFactory, IIdentityManager identityManager, string cacheName = null)
         {
             if (monitorFactory == null) throw new ArgumentNullException("monitorFactory");
+            if (identityManager == null) throw new ArgumentNullException("identityManager");
+
             _monitorFactory = monitorFactory;
+            _identityManager = identityManager;
 
             cacheName = string.IsNullOrEmpty(cacheName)
                 ? CacheName
@@ -59,7 +62,7 @@ namespace CES.CoreApi.Caching.Providers
         public void AddItem(string key, object value, TimeSpan timeout)
         {
             var message = string.Format(CultureInfo.InvariantCulture, AddItemMessageTemplate,
-                MethodBase.GetCurrentMethod().Name, key, timeout, value);
+                GetType().Name, MethodBase.GetCurrentMethod().Name, key, timeout, value);
 
             try
             {
@@ -88,7 +91,7 @@ namespace CES.CoreApi.Caching.Providers
         {
             object result;
             var message = string.Format(CultureInfo.InvariantCulture, GetItemMessageTemplate,
-                MethodBase.GetCurrentMethod().Name, key, timeout, getDataFunc);
+                GetType().Name, MethodBase.GetCurrentMethod().Name, key, timeout, getDataFunc);
 
             try
             {
@@ -120,7 +123,7 @@ namespace CES.CoreApi.Caching.Providers
         public void RemoveItem(string key)
         {
             var message = string.Format(CultureInfo.InvariantCulture, RemoveItemMessageTemplate,
-                MethodBase.GetCurrentMethod().Name, key);
+                GetType().Name, MethodBase.GetCurrentMethod().Name, key);
 
             try
             {
@@ -139,7 +142,7 @@ namespace CES.CoreApi.Caching.Providers
 
         public void ClearCache()
         {
-            var message = string.Format(CultureInfo.InvariantCulture, ClearCacheMessageTemplate, MethodBase.GetCurrentMethod().Name);
+            var message = string.Format(CultureInfo.InvariantCulture, ClearCacheMessageTemplate, GetType().Name, MethodBase.GetCurrentMethod().Name);
 
             try
             {
@@ -166,12 +169,14 @@ namespace CES.CoreApi.Caching.Providers
         private void PublishException(Exception ex, string message)
         {
             var exceptionMonitor = _monitorFactory.CreateNew<IExceptionLogMonitor>();
+            exceptionMonitor.DataContainer.ApplicationContext = _identityManager.GetClientApplicationIdentity();
             exceptionMonitor.Publish(ex, message);
         }
         
         private IPerformanceLogMonitor GetPerformanceMonitor(string message)
         {
             var performanceMonitor = _monitorFactory.CreateNew<IPerformanceLogMonitor>();
+            performanceMonitor.DataContainer.ApplicationContext = _identityManager.GetClientApplicationIdentity();
             performanceMonitor.Start(message);
             return performanceMonitor;
         }

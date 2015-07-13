@@ -1,0 +1,5 @@
+﻿<%@ ServiceHost 
+    Language="C#" 
+    Debug="true" 
+    Service="CES.CoreApi.ReferenceData.Service.ReferenceDataService" 
+    Factory="CES.CoreApi.ReferenceData.Service.Factory.ReferenceDataServiceHostFactory" %>

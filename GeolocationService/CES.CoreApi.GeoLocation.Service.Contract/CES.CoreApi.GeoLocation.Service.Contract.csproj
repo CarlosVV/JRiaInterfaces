@@ -37,12 +37,14 @@
     <Reference Include="System.ServiceModel" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Constants\Namespaces.cs" />
     <Compile Include="Enumerations\Confidence.cs" />
     <Compile Include="Enumerations\DataProvider.cs" />
     <Compile Include="Enumerations\ImageFormat.cs" />
     <Compile Include="Enumerations\MapDisplayStyle.cs" />
     <Compile Include="Enumerations\PinColor.cs" />
     <Compile Include="Models\AutocompleteSuggestion.cs" />
+    <Compile Include="Models\DatabasePingResponse.cs" />
     <Compile Include="Models\LogEventRequest.cs" />
     <Compile Include="Models\GetProviderKeyRequest.cs" />
     <Compile Include="Models\GetProviderKeyResponse.cs" />
@@ -63,7 +65,7 @@
     <Compile Include="Models\GeocodeFormattedAddressRequest.cs" />
     <Compile Include="Models\GetMapRequest.cs" />
     <Compile Include="Models\GetMapResponse.cs" />
-    <Compile Include="Models\HealthResponse.cs" />
+    <Compile Include="Models\PingResponse.cs" />
     <Compile Include="Models\Location.cs" />
     <Compile Include="Models\MapOutputParameters.cs" />
     <Compile Include="Models\MapSize.cs" />

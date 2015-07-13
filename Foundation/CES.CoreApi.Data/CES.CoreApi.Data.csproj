@@ -33,10 +33,6 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="CES.CoreApi.Foundation.Data, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\CoreApiConfigurationUtility\CES.CoreApi.Configuration.Web\Bin\CES.CoreApi.Foundation.Data.dll</HintPath>
-    </Reference>
     <Reference Include="Microsoft.Practices.EnterpriseLibrary.Common, Version=6.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\packages\EnterpriseLibrary.Common.6.0.1304.0\lib\NET45\Microsoft.Practices.EnterpriseLibrary.Common.dll</HintPath>
@@ -48,18 +44,16 @@
     <Reference Include="System" />
     <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
-    <Reference Include="System.Xml.Linq" />
-    <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Data" />
-    <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Base\BaseGenericRepository.cs" />
     <Compile Include="DatabaseRequest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Utility\DatabaseRequestExtensions.cs" />
-    <Compile Include="Utility\DataTools.cs" />
+    <Compile Include="Utility\DataReaderExtensions.cs" />
+    <Compile Include="Utility\ParametersCollectionExtensions.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />
@@ -67,10 +61,6 @@
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>
-    <ProjectReference Include="..\CES.CoreApi.Caching\CES.CoreApi.Caching.csproj">
-      <Project>{9FCF40A8-23F1-4272-9CAE-EFF674145F57}</Project>
-      <Name>CES.CoreApi.Caching</Name>
-    </ProjectReference>
     <ProjectReference Include="..\CES.CoreApi.Common\CES.CoreApi.Common.csproj">
       <Project>{070C7BB2-AF07-4A4C-A9CC-6BFB8CA416E6}</Project>
       <Name>CES.CoreApi.Common</Name>

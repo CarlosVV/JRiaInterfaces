@@ -2,5 +2,6 @@
 {
     public interface IOrderValidateRequestProcessor
     {
+        void ValidateOrder(int customerId);
     }
 }

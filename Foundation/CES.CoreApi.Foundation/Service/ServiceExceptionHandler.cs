@@ -26,6 +26,7 @@ namespace CES.CoreApi.Foundation.Service
 
         private readonly IExceptionLogMonitor _exceptionLogMonitor;
         private readonly IClientSecurityContextProvider _clientDetailsProvider;
+        private readonly IIdentityManager _identityManager;
         private readonly ICurrentDateTimeProvider _currentDateTimeProvider;
         private CoreApiException _coreApiException;
         private const string ErrorMessage = "Server error encountered. All details have been logged.";
@@ -33,12 +34,15 @@ namespace CES.CoreApi.Foundation.Service
         
 
         public ServiceExceptionHandler(ILogMonitorFactory logMonitorFactory, IClientSecurityContextProvider clientDetailsProvider, 
-            ICurrentDateTimeProvider currentDateTimeProvider)
+            IIdentityManager identityManager, ICurrentDateTimeProvider currentDateTimeProvider)
         {
             if (logMonitorFactory == null) throw new ArgumentNullException("logMonitorFactory");
             if (clientDetailsProvider == null) throw new ArgumentNullException("clientDetailsProvider");
+            if (identityManager == null) throw new ArgumentNullException("identityManager");
             if (currentDateTimeProvider == null) throw new ArgumentNullException("currentDateTimeProvider");
+
             _clientDetailsProvider = clientDetailsProvider;
+            _identityManager = identityManager;
             _currentDateTimeProvider = currentDateTimeProvider;
             _exceptionLogMonitor = logMonitorFactory.CreateNew<IExceptionLogMonitor>();
         }
@@ -56,6 +60,7 @@ namespace CES.CoreApi.Foundation.Service
         public void ProvideFault(Exception error, MessageVersion version, ref Message fault)
         {
             _exceptionLogMonitor.AddServiceCallDetails(OperationContext.Current, () => _clientDetailsProvider.GetDetails(OperationContext.Current));
+            _exceptionLogMonitor.DataContainer.ApplicationContext = _identityManager.GetClientApplicationIdentity();
 
             var faultException = BuildFaultException(error);
             var messageFault = faultException.CreateMessageFault();

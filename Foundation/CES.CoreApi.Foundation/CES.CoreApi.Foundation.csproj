@@ -33,13 +33,6 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="AutoMapper">
-      <HintPath>..\..\packages\AutoMapper.3.3.1\lib\net40\AutoMapper.dll</HintPath>
-    </Reference>
-    <Reference Include="AutoMapper.Net4, Version=3.3.1.0, Culture=neutral, PublicKeyToken=be96cd2c38ef1005, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\packages\AutoMapper.3.3.1\lib\net40\AutoMapper.Net4.dll</HintPath>
-    </Reference>
     <Reference Include="Newtonsoft.Json, Version=6.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\packages\Newtonsoft.Json.6.0.8\lib\net45\Newtonsoft.Json.dll</HintPath>
@@ -75,7 +68,6 @@
   <ItemGroup>
     <Compile Include="Configuration\ConfigurationTools.cs" />
     <Compile Include="Data\ApplicationRepository.cs" />
-    <Compile Include="Security\IdentityManager.cs" />
     <Compile Include="Service\MessageInspector.cs" />
     <Compile Include="Tools\MappingHelper.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -95,6 +87,7 @@
     <Compile Include="Service\ServiceEndpointBehavior.cs" />
     <Compile Include="Service\ServiceExceptionHandler.cs" />
     <Compile Include="Providers\RequestHeadersProvider.cs" />
+    <Compile Include="Tools\ServiceHelper.cs" />
     <Compile Include="Validation\ContractValidation.cs" />
     <Compile Include="Validation\ApplicationValidator.cs" />
   </ItemGroup>
@@ -106,10 +99,6 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\CES.CoreApi.Caching\CES.CoreApi.Caching.csproj">
-      <Project>{9FCF40A8-23F1-4272-9CAE-EFF674145F57}</Project>
-      <Name>CES.CoreApi.Caching</Name>
-    </ProjectReference>
     <ProjectReference Include="..\CES.CoreApi.Common\CES.CoreApi.Common.csproj">
       <Project>{070C7BB2-AF07-4A4C-A9CC-6BFB8CA416E6}</Project>
       <Name>CES.CoreApi.Common</Name>
@@ -136,7 +125,6 @@
     </PropertyGroup>
     <Error Condition="!Exists('$(SolutionDir)\.nuget\NuGet.targets')" Text="$([System.String]::Format('$(ErrorText)', '$(SolutionDir)\.nuget\NuGet.targets'))" />
   </Target>
-  <Import Project="..\..\packages\AutoMapper.3.3.1\tools\AutoMapper.targets" Condition="Exists('..\..\packages\AutoMapper.3.3.1\tools\AutoMapper.targets')" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
   <Target Name="BeforeBuild">
