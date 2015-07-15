@@ -37,9 +37,12 @@
     <Reference Include="System.ServiceModel" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Constants\Namespaces.cs" />
     <Compile Include="Interfaces\IOrderProcessService.cs" />
     <Compile Include="Models\OrderCreateRequest.cs" />
     <Compile Include="Models\OrderCreateResponse.cs" />
+    <Compile Include="Models\OrderGetRequest.cs" />
+    <Compile Include="Models\OrderGetResponse.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

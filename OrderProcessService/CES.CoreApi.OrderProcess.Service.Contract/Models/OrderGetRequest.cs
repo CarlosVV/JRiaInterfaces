@@ -1,16 +1,17 @@
 using System.Runtime.Serialization;
-using CES.CoreApi.Common.Interfaces;
 using CES.CoreApi.Common.Models;
 using CES.CoreApi.OrderProcess.Service.Contract.Constants;
 
 namespace CES.CoreApi.OrderProcess.Service.Contract.Models
 {
     [DataContract(Namespace = Namespaces.OrderProcessDataContractNamespace)]
-    public class OrderCreateResponse : BaseResponse
+    public class OrderGetRequest: BaseRequest
     {
-        public OrderCreateResponse(ICurrentDateTimeProvider currentDateTimeProvider) 
-            : base(currentDateTimeProvider)
-        {
-        }
+        [DataMember(IsRequired = true)]
+        public int OrderId { get; set; }
+        [DataMember]
+        public bool CheckMainDatabase { get; set; }
+        [DataMember]
+        public int DatabaseId { get; set; }
     }
 }
