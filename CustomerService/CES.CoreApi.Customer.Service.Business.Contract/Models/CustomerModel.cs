@@ -1,4 +1,5 @@
 using System;
+using CES.CoreApi.Common.Models.Shared;
 
 namespace CES.CoreApi.Customer.Service.Business.Contract.Models
 {

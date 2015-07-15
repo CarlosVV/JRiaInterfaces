@@ -71,6 +71,7 @@
     <Compile Include="Enumerations\Organization.cs" />
     <Compile Include="Enumerations\ResponseStatus.cs" />
     <Compile Include="Enumerations\SecurityAuditResult.cs" />
+    <Compile Include="Enumerations\Shared\AddressValidationResult.cs" />
     <Compile Include="Enumerations\Shared\TelephoneKind.cs" />
     <Compile Include="Enumerations\SubSystemError.cs" />
     <Compile Include="Enumerations\TechnicalSubSystem.cs" />
@@ -102,6 +103,7 @@
     <Compile Include="Models\ServiceOperation.cs" />
     <Compile Include="Models\Shared\AddressModel.cs" />
     <Compile Include="Models\Shared\ContactModel.cs" />
+    <Compile Include="Models\Shared\LocationModel.cs" />
     <Compile Include="Models\Shared\NameModel.cs" />
     <Compile Include="Models\Shared\TelephoneModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

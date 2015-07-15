@@ -1,4 +1,4 @@
-﻿namespace CES.CoreApi.Customer.Service.Business.Contract.Enumerations
+﻿namespace CES.CoreApi.Common.Enumerations.Shared
 {
     public enum AddressValidationResult
     {

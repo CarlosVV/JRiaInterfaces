@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
+using CES.CoreApi.Common.Enumerations.Shared;
 using CES.CoreApi.Common.Models;
-using CES.CoreApi.Customer.Service.Business.Contract.Enumerations;
+using CES.CoreApi.Common.Models.Shared;
 using CES.CoreApi.Customer.Service.Business.Contract.Models;
 using CES.CoreApi.Customer.Service.Contract.Enumerations;
 using CES.CoreApi.Customer.Service.Contract.Models;

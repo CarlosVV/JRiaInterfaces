@@ -1,4 +1,4 @@
-﻿namespace CES.CoreApi.Customer.Service.Business.Contract.Models
+﻿namespace CES.CoreApi.Common.Models.Shared
 {
     public class LocationModel
     {
