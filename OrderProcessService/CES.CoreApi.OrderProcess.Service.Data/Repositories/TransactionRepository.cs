@@ -12,28 +12,28 @@ using CES.CoreApi.Foundation.Data.Utility;
 
 namespace CES.CoreApi.OrderProcess.Service.Data.Repositories
 {
-    public class OrderRepository : BaseGenericRepository, IOrderRepository
+    public class TransactionRepository : BaseGenericRepository, ITransactionRepository
     {
         #region Core
 
-        public OrderRepository(ICacheProvider cacheProvider, ILogMonitorFactory monitorFactory, IIdentityManager identityManager)
+        public TransactionRepository(ICacheProvider cacheProvider, ILogMonitorFactory monitorFactory, IIdentityManager identityManager)
             : base(cacheProvider, monitorFactory, identityManager, DatabaseType.Main)
         {
         } 
 
         #endregion
 
-        #region IOrderRepository implementation
+        #region ITransactionRepository implementation
 
-        public OrderModel GetOrder(int orderId)
+        public TransactionDetailsModel GetOrder(int orderId)
         {
-            var request = new DatabaseRequest<OrderModel>
+            var request = new DatabaseRequest<TransactionDetailsModel>
             {
                 ProcedureName = "ol_sp_oltblOrdersToPost_GetByOrderID",
                 IsCacheable = true,
                 Parameters = new Collection<SqlParameter>()
                     .Add("@orderId", orderId),
-                Shaper = reader => GetOrderDetails(reader)
+                Shaper = reader => GetTransactionDetails(reader)
             };
 
             return Get(request);
@@ -43,7 +43,7 @@ namespace CES.CoreApi.OrderProcess.Service.Data.Repositories
 
         #region Private methods
 
-        private OrderModel GetOrderDetails(IDataReader reader)
+        private TransactionDetailsModel GetTransactionDetails(IDataReader reader)
         {
             throw new System.NotImplementedException();
         } 

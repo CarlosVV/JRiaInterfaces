@@ -3,6 +3,7 @@ using CES.CoreApi.Common.Exceptions;
 using CES.CoreApi.Customer.Service.Business.Contract.Interfaces;
 using CES.CoreApi.Customer.Service.Business.Contract.Models;
 using CES.CoreApi.Customer.Service.Data.Repositories;
+using CES.CoreApi.Shared.Business.Contract.Models;
 
 namespace CES.CoreApi.Customer.Service.Business.Logic.Processors
 {

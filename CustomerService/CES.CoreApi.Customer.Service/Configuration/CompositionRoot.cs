@@ -10,7 +10,6 @@ using CES.CoreApi.Common.Proxies;
 using CES.CoreApi.Customer.Service.Business.Contract.Interfaces;
 using CES.CoreApi.Customer.Service.Business.Logic.Processors;
 using CES.CoreApi.Customer.Service.Contract.Models;
-using CES.CoreApi.Customer.Service.Data;
 using CES.CoreApi.Customer.Service.Data.Repositories;
 using CES.CoreApi.Customer.Service.Interfaces;
 using CES.CoreApi.Customer.Service.Utilities;

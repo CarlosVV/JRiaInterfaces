@@ -53,6 +53,10 @@
       <Project>{76762A04-54F0-4147-BD2B-267372034706}</Project>
       <Name>CES.CoreApi.Logging</Name>
     </ProjectReference>
+    <ProjectReference Include="..\..\Shared\CES.CoreApi.Shared.Business.Contract\CES.CoreApi.Shared.Business.Contract.csproj">
+      <Project>{AE43A830-4DE7-4B13-A462-9C3F85FBE7D4}</Project>
+      <Name>CES.CoreApi.Shared.Business.Contract</Name>
+    </ProjectReference>
     <ProjectReference Include="..\CES.CoreApi.Customer.Service.Business.Contract\CES.CoreApi.Customer.Service.Business.Contract.csproj">
       <Project>{3D164AE8-F27C-4C34-8EFB-53352B761E6A}</Project>
       <Name>CES.CoreApi.Customer.Service.Business.Contract</Name>

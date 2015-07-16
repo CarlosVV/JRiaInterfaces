@@ -4,16 +4,15 @@ using System.Collections.ObjectModel;
 using System.Data;
 using System.Data.SqlClient;
 using CES.CoreApi.Common.Enumerations;
-using CES.CoreApi.Common.Enumerations.Shared;
 using CES.CoreApi.Common.Interfaces;
 using CES.CoreApi.Common.Models;
-using CES.CoreApi.Common.Models.Shared;
 using CES.CoreApi.Customer.Service.Business.Contract.Interfaces;
-using CES.CoreApi.Customer.Service.Business.Contract.Models;
 using CES.CoreApi.Foundation.Data;
 using CES.CoreApi.Foundation.Data.Base;
 using CES.CoreApi.Foundation.Data.Utility;
 using CES.CoreApi.Logging.Interfaces;
+using CES.CoreApi.Shared.Business.Contract.Enumerations;
+using CES.CoreApi.Shared.Business.Contract.Models;
 
 namespace CES.CoreApi.Customer.Service.Data.Repositories
 {
@@ -61,7 +60,6 @@ namespace CES.CoreApi.Customer.Service.Data.Repositories
                 CustomerId = reader.ReadValue<string>("fCustIDNumber"),
                 ExternalCustomerId = reader.ReadValue<string>("fExternalCustID"),
                 AgentId = reader.ReadValue<int>("fNameIDAgent"),
-                AgentLocationId = reader.ReadValue<int>("fRecAgentLocID"),
                 ReferredBy = reader.ReadValue<string>("fReferred"),
                 Note = reader.ReadValue<string>("fNote"),
                 IsOnHold = reader.ReadValue<bool>("fOnHold"),
@@ -82,27 +80,29 @@ namespace CES.CoreApi.Customer.Service.Data.Repositories
                 FirstName = reader.ReadValue<string>("fNameFirst"),
                 MiddleName = reader.ReadValue<string>("fNameMid"),
                 LastName1 = reader.ReadValue<string>("fNameLast1"),
-                Name = reader.ReadValue<string>("fName"),
+                FullName = reader.ReadValue<string>("fName"),
             };
         }
 
         private static AddressModel GetAddressDetails(IDataReader reader)
         {
-            return new AddressModel
+            var address = new AddressModel
             {
-                Address = reader.ReadValue<string>("fAddress"),
+                Address1 = reader.ReadValue<string>("fAddress"),
                 City = reader.ReadValue<string>("fCity"),
                 State = reader.ReadValue<string>("fState"),
                 Country = reader.ReadValue<string>("fCountry"),
                 PostalCode = reader.ReadValue<string>("fPostalCode"),
                 UnitNumber = reader.ReadValue<string>("fUnitNumber"),
-                Location = new LocationModel
-                {
-                    Latitude = reader.ReadValue<double>("fLatitude"),
-                    Longitude = reader.ReadValue<double>("fLongitude"),
-                },
                 ValidationResult = reader.ReadValue<AddressValidationResult>("fAddressValidationStatusID")
             };
+            var longitude = reader.ReadValue<double?>("fLongitude");
+            var latitude = reader.ReadValue<double?>("fLatitude");
+
+            if (longitude != null || latitude != null)
+                address.Geolocation = new GeolocationModel {Longitude = longitude, Latitude = latitude};
+            
+            return address;
         }
 
         private static ContactModel GetContactDetails(IDataReader reader)
@@ -111,7 +111,7 @@ namespace CES.CoreApi.Customer.Service.Data.Repositories
             {
                 PhoneList = new Collection<TelephoneModel>(),
                 Email = reader.ReadValue<string>("fEmailAddress", true),
-                NoSms = reader.ReadValue<bool>("fCellNo_SMS_Receive")
+                NoSms = reader.ReadValue<bool?>("fCellNo_SMS_Receive")
             };
 
             AddPhone(reader, model.PhoneList, TelephoneKind.Home, "fTel_Number");

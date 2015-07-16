@@ -6,7 +6,7 @@ using CES.CoreApi.Customer.Service.Contract.Constants;
 namespace CES.CoreApi.Customer.Service.Contract.Models
 {
     [DataContract(Namespace = Namespaces.CustomerServiceDataContractNamespace)]
-    public class CustomerCreateRequest: BaseRequest
+    public class Customer : ExtensibleObject
     {
         [DataMember(EmitDefaultValue = false)]
         public int Id { get; set; }
@@ -39,13 +39,10 @@ namespace CES.CoreApi.Customer.Service.Contract.Models
         public int AgentId { get; set; }
 
         [DataMember(EmitDefaultValue = false)]
-        public int AgentLocationId { get; set; }
+        public bool? IsOnHold { get; set; }
 
         [DataMember(EmitDefaultValue = false)]
-        public bool IsOnHold { get; set; }
-
-        [DataMember(EmitDefaultValue = false)]
-        public bool IsDisabled { get; set; }
+        public bool? IsDisabled { get; set; }
 
         [DataMember(EmitDefaultValue = false)]
         public string Note { get; set; }

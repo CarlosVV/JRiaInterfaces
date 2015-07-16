@@ -44,6 +44,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CES.CoreApi.Customer.Servic
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CES.CoreApi.Customer.Service.Business.Logic.UnitTests", "..\CustomerService\CES.CoreApi.Customer.Service.Business.Logic.UnitTests\CES.CoreApi.Customer.Service.Business.Logic.UnitTests.csproj", "{CB1B11C4-2964-4BFF-88AE-8B500DBBE3B2}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Shared", "Shared", "{58194104-1BCE-4F23-8AF6-D04C38BE36BD}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CES.CoreApi.Shared.Business.Contract", "..\Shared\CES.CoreApi.Shared.Business.Contract\CES.CoreApi.Shared.Business.Contract.csproj", "{AE43A830-4DE7-4B13-A462-9C3F85FBE7D4}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -110,6 +114,10 @@ Global
 		{CB1B11C4-2964-4BFF-88AE-8B500DBBE3B2}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{CB1B11C4-2964-4BFF-88AE-8B500DBBE3B2}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{CB1B11C4-2964-4BFF-88AE-8B500DBBE3B2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AE43A830-4DE7-4B13-A462-9C3F85FBE7D4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AE43A830-4DE7-4B13-A462-9C3F85FBE7D4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AE43A830-4DE7-4B13-A462-9C3F85FBE7D4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AE43A830-4DE7-4B13-A462-9C3F85FBE7D4}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -124,5 +132,6 @@ Global
 		{02BEAA68-76A1-4ED6-BF6C-7B6935165AD6} = {FBA1699D-AFE4-47CB-880C-9CF22757EA69}
 		{3E5042E9-2EA4-48F4-901B-68513F28D61C} = {C85AFC13-C02A-43CB-81C9-6D707088937A}
 		{CB1B11C4-2964-4BFF-88AE-8B500DBBE3B2} = {C85AFC13-C02A-43CB-81C9-6D707088937A}
+		{AE43A830-4DE7-4B13-A462-9C3F85FBE7D4} = {58194104-1BCE-4F23-8AF6-D04C38BE36BD}
 	EndGlobalSection
 EndGlobal

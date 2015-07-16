@@ -9,6 +9,7 @@ using CES.CoreApi.Customer.Service.Contract.Interfaces;
 using CES.CoreApi.Customer.Service.Contract.Models;
 using CES.CoreApi.Customer.Service.Interfaces;
 using CES.CoreApi.Foundation.Contract.Interfaces;
+using CES.CoreApi.Shared.Business.Contract.Models;
 
 namespace CES.CoreApi.Customer.Service
 {

@@ -4,11 +4,11 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{759506F1-8C00-4B0A-91ED-548582333A7B}</ProjectGuid>
+    <ProjectGuid>{AE43A830-4DE7-4B13-A462-9C3F85FBE7D4}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>CES.CoreApi.OrderProcess.Service.Data</RootNamespace>
-    <AssemblyName>CES.CoreApi.OrderProcess.Service.Data</AssemblyName>
+    <RootNamespace>CES.CoreApi.Shared.Business.Contract</RootNamespace>
+    <AssemblyName>CES.CoreApi.Shared.Business.Contract</AssemblyName>
     <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <TargetFrameworkProfile />
@@ -33,29 +33,27 @@
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Core" />
-    <Reference Include="System.Data" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Enumerations\AddressValidationResult.cs" />
+    <Compile Include="Enumerations\AgentTypeEnum.cs" />
+    <Compile Include="Enumerations\DeliveryMethodEnum.cs" />
+    <Compile Include="Enumerations\GenderEnum.cs" />
+    <Compile Include="Enumerations\TelephoneKind.cs" />
+    <Compile Include="Models\AgentLocationModel.cs" />
+    <Compile Include="Models\AddressModel.cs" />
+    <Compile Include="Models\AgentModel.cs" />
+    <Compile Include="Models\BeneficiaryModel.cs" />
+    <Compile Include="Models\BirthInformationModel.cs" />
+    <Compile Include="Models\ContactModel.cs" />
+    <Compile Include="Models\CustomerModel.cs" />
+    <Compile Include="Models\IdentificationModel.cs" />
+    <Compile Include="Models\GeolocationModel.cs" />
+    <Compile Include="Models\NameModel.cs" />
+    <Compile Include="Models\PersonModel.cs" />
+    <Compile Include="Models\TaxInformationModel.cs" />
+    <Compile Include="Models\TelephoneModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Repositories\TransactionRepository.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\..\Foundation\CES.CoreApi.Common\CES.CoreApi.Common.csproj">
-      <Project>{070C7BB2-AF07-4A4C-A9CC-6BFB8CA416E6}</Project>
-      <Name>CES.CoreApi.Common</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\Foundation\CES.CoreApi.Data\CES.CoreApi.Data.csproj">
-      <Project>{1aa5ba90-02cc-4fd1-81f2-615c374c83a5}</Project>
-      <Name>CES.CoreApi.Data</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\Foundation\CES.CoreApi.Logging\CES.CoreApi.Logging.csproj">
-      <Project>{76762A04-54F0-4147-BD2B-267372034706}</Project>
-      <Name>CES.CoreApi.Logging</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\CES.CoreApi.OrderProcess.Service.Business.Contract\CES.CoreApi.OrderProcess.Service.Business.Contract.csproj">
-      <Project>{e56c96b1-b5ae-4243-a552-c43e0a422de3}</Project>
-      <Name>CES.CoreApi.OrderProcess.Service.Business.Contract</Name>
-    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

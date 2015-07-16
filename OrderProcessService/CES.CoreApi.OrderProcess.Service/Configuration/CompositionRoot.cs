@@ -58,7 +58,7 @@ namespace CES.CoreApi.OrderProcess.Service.Configuration
 
         private static void RegisterProcessors(Container container)
         {
-            container.RegisterSingle<IOrderProcessor, OrderProcessor>();
+            container.RegisterSingle<ITransactionProcessor, TransactionProcessor>();
             //container.RegisterSingle<IHealthMonitoringProcessor, HealthMonitoringProcessor>();
         }
 
@@ -165,16 +165,16 @@ namespace CES.CoreApi.OrderProcess.Service.Configuration
 
         private static void RegisterRepositories(Container container)
         {
-            container.RegisterSingle<IOrderRepository, OrderRepository>();
+            container.RegisterSingle<ITransactionRepository, TransactionRepository>();
             //container.RegisterSingle<IImageRepository, ImageRepository>();
         }
 
         private static void RegisterInterceptions(Container container)
         {
             container.InterceptWith<PerformanceInterceptor>(type => type == typeof(IApplicationRepository));
-            container.InterceptWith<PerformanceInterceptor>(type => type == typeof(IOrderRepository));
+            container.InterceptWith<PerformanceInterceptor>(type => type == typeof(ITransactionRepository));
             //container.InterceptWith<PerformanceInterceptor>(type => type == typeof(IHealthMonitoringProcessor));
-            container.InterceptWith<PerformanceInterceptor>(type => type == typeof(IOrderProcessor));
+            container.InterceptWith<PerformanceInterceptor>(type => type == typeof(ITransactionProcessor));
         }
 
         private static void RegisterResponses(Container container)

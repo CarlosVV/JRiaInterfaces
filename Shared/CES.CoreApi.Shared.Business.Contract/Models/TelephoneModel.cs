@@ -1,6 +1,6 @@
-﻿using CES.CoreApi.Common.Enumerations.Shared;
+﻿using CES.CoreApi.Shared.Business.Contract.Enumerations;
 
-namespace CES.CoreApi.Common.Models.Shared
+namespace CES.CoreApi.Shared.Business.Contract.Models
 {
     public class TelephoneModel
     {

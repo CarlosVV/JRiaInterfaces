@@ -1,4 +1,4 @@
-﻿namespace CES.CoreApi.Common.Models.Shared
+﻿namespace CES.CoreApi.Shared.Business.Contract.Models
 {
     public class NameModel
     {
@@ -10,6 +10,6 @@
 
         public string MiddleName { get; set; }
 
-        public string Name { get; set; }
+        public string FullName { get; set; }
     }
 }

@@ -33,6 +33,10 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{31AD8D80
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CES.CoreApi.OrderProcess.Service.Data", "..\OrderProcessService\CES.CoreApi.OrderProcess.Service.Data\CES.CoreApi.OrderProcess.Service.Data.csproj", "{759506F1-8C00-4B0A-91ED-548582333A7B}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CES.CoreApi.Shared.Business.Contract", "..\Shared\CES.CoreApi.Shared.Business.Contract\CES.CoreApi.Shared.Business.Contract.csproj", "{AE43A830-4DE7-4B13-A462-9C3F85FBE7D4}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Shared", "Shared", "{DD5A8D81-0C5C-40C4-9922-E6F9061C2321}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -91,6 +95,10 @@ Global
 		{759506F1-8C00-4B0A-91ED-548582333A7B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{759506F1-8C00-4B0A-91ED-548582333A7B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{759506F1-8C00-4B0A-91ED-548582333A7B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AE43A830-4DE7-4B13-A462-9C3F85FBE7D4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AE43A830-4DE7-4B13-A462-9C3F85FBE7D4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AE43A830-4DE7-4B13-A462-9C3F85FBE7D4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AE43A830-4DE7-4B13-A462-9C3F85FBE7D4}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -103,5 +111,6 @@ Global
 		{8DBCFE15-CA3B-4F7C-A7D6-D73F8F0B91AA} = {06FA35CB-E91B-49CD-BFA3-612817A570A6}
 		{76762A04-54F0-4147-BD2B-267372034706} = {06FA35CB-E91B-49CD-BFA3-612817A570A6}
 		{02BEAA68-76A1-4ED6-BF6C-7B6935165AD6} = {06FA35CB-E91B-49CD-BFA3-612817A570A6}
+		{AE43A830-4DE7-4B13-A462-9C3F85FBE7D4} = {DD5A8D81-0C5C-40C4-9922-E6F9061C2321}
 	EndGlobalSection
 EndGlobal

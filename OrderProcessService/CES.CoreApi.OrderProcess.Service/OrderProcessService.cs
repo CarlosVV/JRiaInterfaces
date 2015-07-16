@@ -16,15 +16,15 @@ namespace CES.CoreApi.OrderProcess.Service
     {
         #region Core
 
-        private readonly IOrderProcessor _orderProcessor;
+        private readonly ITransactionProcessor _transactionProcessor;
         private readonly IMappingHelper _mapper;
         private readonly IRequestValidator _requestValidator;
 
-        public OrderProcessService(IOrderProcessor orderProcessor, IMappingHelper mapper, IRequestValidator requestValidator)
+        public OrderProcessService(ITransactionProcessor transactionProcessor, IMappingHelper mapper, IRequestValidator requestValidator)
         {
-            if (orderProcessor == null)
+            if (transactionProcessor == null)
                 throw new CoreApiException(TechnicalSubSystem.OrderProcessService,
-                    SubSystemError.GeneralRequiredParameterIsUndefined, "orderProcessor");
+                    SubSystemError.GeneralRequiredParameterIsUndefined, "TransactionProcessor");
             //if (healthMonitoringProcessor == null)
             //    throw new CoreApiException(TechnicalSubSystem.CustomerService,
             //        SubSystemError.GeneralRequiredParameterIsUndefined, "healthMonitoringProcessor");
@@ -35,7 +35,7 @@ namespace CES.CoreApi.OrderProcess.Service
                 throw new CoreApiException(TechnicalSubSystem.OrderProcessService,
                     SubSystemError.GeneralRequiredParameterIsUndefined, "requestValidator");
 
-            _orderProcessor = orderProcessor;
+            _transactionProcessor = transactionProcessor;
             _mapper = mapper;
             _requestValidator = requestValidator;
         }
@@ -47,8 +47,8 @@ namespace CES.CoreApi.OrderProcess.Service
         public OrderGetResponse Get(OrderGetRequest request)
         {
             _requestValidator.Validate(request);
-            var responseModel = _orderProcessor.GetOrder(request.OrderId, request.CheckMainDatabase, request.DatabaseId);
-            return _mapper.ConvertToResponse<OrderModel, OrderGetResponse>(responseModel);
+            var responseModel = _transactionProcessor.GetOrder(request.OrderId, request.CheckMainDatabase, request.DatabaseId);
+            return _mapper.ConvertToResponse<TransactionDetailsModel, OrderGetResponse>(responseModel);
         }
 
         public OrderCreateResponse Create(OrderCreateRequest request)

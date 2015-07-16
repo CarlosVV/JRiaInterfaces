@@ -41,9 +41,9 @@
     <Compile Include="Enumerations\AddressValidationStatus.cs" />
     <Compile Include="Enumerations\TelephoneType.cs" />
     <Compile Include="Interfaces\IHealthMonitoringService.cs" />
-    <Compile Include="Models\CustomerAddress.cs" />
+    <Compile Include="Models\Address.cs" />
     <Compile Include="Models\ClearCacheResponse.cs" />
-    <Compile Include="Models\CustomerContact.cs" />
+    <Compile Include="Models\Contact.cs" />
     <Compile Include="Models\CustomerCreateRequest.cs" />
     <Compile Include="Models\CustomerCreateResponse.cs" />
     <Compile Include="Models\CustomerGetResponse.cs" />
@@ -51,10 +51,11 @@
     <Compile Include="Models\CustomerGetRequest.cs" />
     <Compile Include="Models\CustomerProcessSignatureRequest.cs" />
     <Compile Include="Models\CustomerProcessSignatureResponse.cs" />
+    <Compile Include="Models\Customer.cs" />
     <Compile Include="Models\DatabasePingResponse.cs" />
     <Compile Include="Models\PingResponse.cs" />
-    <Compile Include="Models\Location.cs" />
-    <Compile Include="Models\CustomerName.cs" />
+    <Compile Include="Models\Geolocation.cs" />
+    <Compile Include="Models\Name.cs" />
     <Compile Include="Models\Telephone.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

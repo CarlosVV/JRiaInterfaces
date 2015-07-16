@@ -40,17 +40,28 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Interfaces\IOrderProcessor.cs" />
-    <Compile Include="Interfaces\IOrderRepository.cs" />
+    <Compile Include="Enumerations\TransactionStatusEnum.cs" />
+    <Compile Include="Interfaces\ITransactionProcessor.cs" />
+    <Compile Include="Interfaces\ITransactionRepository.cs" />
     <Compile Include="Models\BankAccountModel.cs" />
-    <Compile Include="Models\BeneficiaryModel.cs" />
-    <Compile Include="Models\OrderModel.cs" />
+    <Compile Include="Models\BankDepositModel.cs" />
+    <Compile Include="Models\BankModel.cs" />
+    <Compile Include="Models\ComplianceInformationModel.cs" />
+    <Compile Include="Models\MonetaryInformationModel.cs" />
+    <Compile Include="Models\MoneyTransferDetailsModel.cs" />
+    <Compile Include="Models\ProcessingInformationModel.cs" />
+    <Compile Include="Models\TransactionStatusModel.cs" />
+    <Compile Include="Models\TransactionDetailsModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\Foundation\CES.CoreApi.Common\CES.CoreApi.Common.csproj">
       <Project>{070C7BB2-AF07-4A4C-A9CC-6BFB8CA416E6}</Project>
       <Name>CES.CoreApi.Common</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Shared\CES.CoreApi.Shared.Business.Contract\CES.CoreApi.Shared.Business.Contract.csproj">
+      <Project>{AE43A830-4DE7-4B13-A462-9C3F85FBE7D4}</Project>
+      <Name>CES.CoreApi.Shared.Business.Contract</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

@@ -1,4 +1,4 @@
-﻿namespace CES.CoreApi.Common.Enumerations.Shared
+﻿namespace CES.CoreApi.Shared.Business.Contract.Enumerations
 {
     public enum TelephoneKind
     {

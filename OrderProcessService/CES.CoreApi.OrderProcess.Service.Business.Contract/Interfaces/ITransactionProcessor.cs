@@ -2,8 +2,8 @@
 
 namespace CES.CoreApi.OrderProcess.Service.Business.Contract.Interfaces
 {
-    public interface IOrderRepository
+    public interface ITransactionProcessor
     {
-        OrderModel GetOrder(int orderId);
+        TransactionDetailsModel GetOrder(int orderId, bool checkMainDatabase, int databaseId);
     }
 }
