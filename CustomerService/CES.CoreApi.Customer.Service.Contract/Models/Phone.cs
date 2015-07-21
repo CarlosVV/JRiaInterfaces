@@ -6,7 +6,7 @@ using CES.CoreApi.Customer.Service.Contract.Enumerations;
 namespace CES.CoreApi.Customer.Service.Contract.Models
 {
     [DataContract(Namespace = Namespaces.CustomerServiceDataContractNamespace)]
-    public class Telephone : ExtensibleObject
+    public class Phone : ExtensibleObject
     {
         [DataMember(EmitDefaultValue = false)]
         public string CountryCode { get; set; }
@@ -18,6 +18,6 @@ namespace CES.CoreApi.Customer.Service.Contract.Models
         public string Number { get; set; }
 
         [DataMember(EmitDefaultValue = false)]
-        public TelephoneType Type { get; set; }
+        public TelephoneType PhoneType { get; set; }
     }
 }

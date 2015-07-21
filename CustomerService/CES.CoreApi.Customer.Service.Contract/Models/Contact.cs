@@ -9,7 +9,7 @@ namespace CES.CoreApi.Customer.Service.Contract.Models
     public class Contact : ExtensibleObject
     {
         [DataMember(EmitDefaultValue = false)]
-        public ICollection<Telephone> PhoneList { get; set; }
+        public ICollection<Phone> PhoneList { get; set; }
 
         [DataMember(EmitDefaultValue = false)]
         public string Email { get; set; }

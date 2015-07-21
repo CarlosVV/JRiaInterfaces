@@ -24,9 +24,9 @@ namespace CES.CoreApi.OrderProcess.Service.Business.Logic.Processors
 
         #region ITransactionProcessor implementation
         
-        public TransactionDetailsModel GetOrder(int orderId, bool checkMainDatabase, int databaseId)
+        public TransactionDetailsModel GetDetails(int orderId, int databaseId)
         {
-            return _transactionRepository.GetOrder(orderId, databaseId);
+            return _transactionRepository.GetDetails(orderId, databaseId);
         } 
 
         #endregion

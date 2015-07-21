@@ -4,6 +4,6 @@ namespace CES.CoreApi.OrderProcess.Service.Business.Contract.Interfaces
 {
     public interface ITransactionProcessor
     {
-        TransactionDetailsModel GetOrder(int orderId, bool checkMainDatabase, int databaseId);
+        TransactionDetailsModel GetDetails(int orderId, int databaseId);
     }
 }

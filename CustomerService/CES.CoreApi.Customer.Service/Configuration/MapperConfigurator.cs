@@ -14,12 +14,12 @@ namespace CES.CoreApi.Customer.Service.Configuration
         public static void Configure(Container container)
         {
             Mapper.CreateMap<AddressModel, Address>();
-            Mapper.CreateMap<TelephoneModel, Telephone>();
+            Mapper.CreateMap<TelephoneModel, Phone>();
             Mapper.CreateMap<NameModel, Name>();
             Mapper.CreateMap<ContactModel, Contact>();
             Mapper.CreateMap<GeolocationModel, Geolocation>();
             Mapper.CreateMap<AddressValidationResult, AddressValidationStatus>();
-            Mapper.CreateMap<TelephoneKind, TelephoneType>();
+            Mapper.CreateMap<PhoneType, TelephoneType>();
             Mapper.CreateMap<CustomerModel, Contract.Models.Customer>();
 
             Mapper.CreateMap<CustomerModel, CustomerGetResponse>()

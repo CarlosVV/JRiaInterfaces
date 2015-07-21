@@ -39,7 +39,7 @@
     <Compile Include="Enumerations\AgentTypeEnum.cs" />
     <Compile Include="Enumerations\DeliveryMethodEnum.cs" />
     <Compile Include="Enumerations\GenderEnum.cs" />
-    <Compile Include="Enumerations\TelephoneKind.cs" />
+    <Compile Include="Enumerations\PhoneType.cs" />
     <Compile Include="Models\AgentLocationModel.cs" />
     <Compile Include="Models\AddressModel.cs" />
     <Compile Include="Models\AgentModel.cs" />

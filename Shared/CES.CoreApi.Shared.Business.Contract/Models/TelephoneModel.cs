@@ -7,6 +7,6 @@ namespace CES.CoreApi.Shared.Business.Contract.Models
         public string CountryCode { get; set; }
         public string AreaCode { get; set; }
         public string Number { get; set; }
-        public TelephoneKind Type { get; set; }
+        public PhoneType PhoneType { get; set; }
     }
 }

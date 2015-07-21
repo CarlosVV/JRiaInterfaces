@@ -56,7 +56,7 @@
     <Compile Include="Models\PingResponse.cs" />
     <Compile Include="Models\Geolocation.cs" />
     <Compile Include="Models\Name.cs" />
-    <Compile Include="Models\Telephone.cs" />
+    <Compile Include="Models\Phone.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

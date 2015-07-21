@@ -10,8 +10,6 @@ namespace CES.CoreApi.OrderProcess.Service.Contract.Models
         [DataMember(IsRequired = true)]
         public int OrderId { get; set; }
         [DataMember]
-        public bool CheckMainDatabase { get; set; }
-        [DataMember]
         public int DatabaseId { get; set; }
     }
 }

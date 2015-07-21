@@ -47,7 +47,7 @@ namespace CES.CoreApi.OrderProcess.Service
         public OrderGetResponse Get(OrderGetRequest request)
         {
             _requestValidator.Validate(request);
-            var responseModel = _transactionProcessor.GetOrder(request.OrderId, request.CheckMainDatabase, request.DatabaseId);
+            var responseModel = _transactionProcessor.GetDetails(request.OrderId, request.DatabaseId);
             return _mapper.ConvertToResponse<TransactionDetailsModel, OrderGetResponse>(responseModel);
         }
 

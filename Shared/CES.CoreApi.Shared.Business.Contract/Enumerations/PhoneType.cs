@@ -1,6 +1,6 @@
 ﻿namespace CES.CoreApi.Shared.Business.Contract.Enumerations
 {
-    public enum TelephoneKind
+    public enum PhoneType
     {
         Undefined = 0,
         Home = 1,

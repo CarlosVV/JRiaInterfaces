@@ -110,15 +110,15 @@ namespace CES.CoreApi.Customer.Service.Data.Repositories
                 NoSms = reader.ReadValue<bool?>("fCellNo_SMS_Receive")
             };
 
-            AddPhone(reader, model.PhoneList, TelephoneKind.Home, "fTel_Number");
-            AddPhone(reader, model.PhoneList, TelephoneKind.Fax, "fFaxNo");
-            AddPhone(reader, model.PhoneList, TelephoneKind.Cell, "fCellNo");
-            AddPhone(reader, model.PhoneList, TelephoneKind.Work, "fTelNo_Work");
+            AddPhone(reader, model.PhoneList, PhoneType.Home, "fTel_Number");
+            AddPhone(reader, model.PhoneList, PhoneType.Fax, "fFaxNo");
+            AddPhone(reader, model.PhoneList, PhoneType.Cell, "fCellNo");
+            AddPhone(reader, model.PhoneList, PhoneType.Work, "fTelNo_Work");
             
             return model;
         }
 
-        private static void AddPhone(IDataReader reader, ICollection<TelephoneModel> phoneList, TelephoneKind phoneType, string fieldName)
+        private static void AddPhone(IDataReader reader, ICollection<TelephoneModel> phoneList, PhoneType phoneType, string fieldName)
         {
             var phoneNumber = reader.ReadValue<string>(fieldName);
             if (string.IsNullOrEmpty(phoneNumber))
@@ -127,10 +127,10 @@ namespace CES.CoreApi.Customer.Service.Data.Repositories
             var phone = new TelephoneModel
             {
                 Number = phoneNumber,
-                Type = phoneType
+                PhoneType = phoneType
             };
 
-            if (phoneType == TelephoneKind.Home)
+            if (phoneType == PhoneType.Home)
             {
                 phone.CountryCode = reader.ReadValue<string>("fTel_CountryCode");
                 phone.AreaCode = reader.ReadValue<string>("fTel_AreaCode");
