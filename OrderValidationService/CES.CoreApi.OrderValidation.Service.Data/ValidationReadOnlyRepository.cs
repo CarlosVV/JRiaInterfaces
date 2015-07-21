@@ -3,8 +3,9 @@ using System.Data.SqlClient;
 using CES.CoreApi.Common.Enumerations;
 using CES.CoreApi.Common.Interfaces;
 using CES.CoreApi.Common.Tools;
-using CES.CoreApi.Foundation.Data;
 using CES.CoreApi.Foundation.Data.Base;
+using CES.CoreApi.Foundation.Data.Interfaces;
+using CES.CoreApi.Foundation.Data.Models;
 using CES.CoreApi.Foundation.Data.Utility;
 using CES.CoreApi.Logging.Interfaces;
 using CES.CoreApi.OrderValidation.Service.Business.Contract.Enumerations;
@@ -15,8 +16,9 @@ namespace CES.CoreApi.OrderValidation.Service.Data
 {
     public class ValidationReadOnlyRepository : BaseGenericRepository, IValidationReadOnlyRepository
     {
-        public ValidationReadOnlyRepository(ICacheProvider cacheProvider, ILogMonitorFactory monitorFactory, IIdentityManager identityManager)
-            : base(cacheProvider, monitorFactory, identityManager, DatabaseType.ReadOnly)
+        public ValidationReadOnlyRepository(ICacheProvider cacheProvider, ILogMonitorFactory monitorFactory, IIdentityManager identityManager,
+            IDatabaseInstanceProvider instanceProvider)
+            : base(cacheProvider, monitorFactory, identityManager, instanceProvider)
         {
         }
 
@@ -26,6 +28,7 @@ namespace CES.CoreApi.OrderValidation.Service.Data
             {
                 ProcedureName = "coreapi_sp_WatchListMatchNameCheckWrapper",
                 IsCacheable = false,
+                DatabaseType = DatabaseType.ReadOnly,
                 Parameters = new Collection<SqlParameter>()
                     .Add("@fAppID", 0)
                     .Add("@fAppObjectID", 0)
@@ -46,6 +49,7 @@ namespace CES.CoreApi.OrderValidation.Service.Data
             {
                 ProcedureName = "compl_sp_Filter_Transaction_Check_Entry_Wrapper",
                 IsCacheable = false,
+                DatabaseType = DatabaseType.ReadOnly,
                 Parameters = new Collection<SqlParameter>()
                     .Add("@RecAgentID", input.ReceivingAgentId)
                     .Add("@RecAgentLocID", input.ReceivingAgentLocationId)
@@ -122,6 +126,7 @@ namespace CES.CoreApi.OrderValidation.Service.Data
             {
                 ProcedureName = "cust_sp_Beneficiary_Blocked_Status",
                 IsCacheable = false,
+                DatabaseType = DatabaseType.ReadOnly,
                 Parameters = new Collection<SqlParameter>()
                     .Add("@fBenNameID", beneficiaryId)
                     .Add("@fPayAgentID", correspondentId),

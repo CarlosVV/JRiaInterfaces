@@ -44,6 +44,10 @@
       <Project>{070C7BB2-AF07-4A4C-A9CC-6BFB8CA416E6}</Project>
       <Name>CES.CoreApi.Common</Name>
     </ProjectReference>
+    <ProjectReference Include="..\..\Foundation\CES.CoreApi.Data\CES.CoreApi.Data.csproj">
+      <Project>{1AA5BA90-02CC-4FD1-81F2-615C374C83A5}</Project>
+      <Name>CES.CoreApi.Data</Name>
+    </ProjectReference>
     <ProjectReference Include="..\CES.CoreApi.ReferenceData.Service.Business.Contract\CES.CoreApi.ReferenceData.Service.Business.Contract.csproj">
       <Project>{EA5E2469-589F-4DFE-8ED5-CBE027BC886C}</Project>
       <Name>CES.CoreApi.ReferenceData.Service.Business.Contract</Name>

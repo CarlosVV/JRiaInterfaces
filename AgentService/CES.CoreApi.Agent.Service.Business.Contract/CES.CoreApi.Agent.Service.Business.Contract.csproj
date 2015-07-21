@@ -38,7 +38,7 @@
     <Compile Include="Interfaces\IAgentCurrencyProcessor.cs" />
     <Compile Include="Interfaces\IAgentCurrencyRepository.cs" />
     <Compile Include="Interfaces\IAgentUserProcessor.cs" />
-    <Compile Include="Interfaces\IImageRepository.cs" />
+    <Compile Include="Interfaces\IAgentUserRepository.cs" />
     <Compile Include="Interfaces\IHealthMonitoringProcessor.cs" />
     <Compile Include="Models\PayingAgentCurrencyModel.cs" />
     <Compile Include="Models\ProcessSignatureRequestModel.cs" />

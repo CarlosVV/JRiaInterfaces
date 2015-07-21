@@ -4,9 +4,9 @@ using CES.CoreApi.Agent.Service.Business.Contract.Interfaces;
 using CES.CoreApi.Agent.Service.Business.Contract.Models;
 using CES.CoreApi.Common.Enumerations;
 using CES.CoreApi.Common.Interfaces;
-using CES.CoreApi.Common.Models;
-using CES.CoreApi.Foundation.Data;
 using CES.CoreApi.Foundation.Data.Base;
+using CES.CoreApi.Foundation.Data.Interfaces;
+using CES.CoreApi.Foundation.Data.Models;
 using CES.CoreApi.Foundation.Data.Utility;
 using CES.CoreApi.Logging.Interfaces;
 
@@ -16,8 +16,9 @@ namespace CES.CoreApi.Agent.Service.Data.Repositories
     {
         #region Core
 
-        public AgentCurrencyRepository(ICacheProvider cacheProvider, ILogMonitorFactory monitorFactory, IIdentityManager identityManager)
-            : base(cacheProvider, monitorFactory, identityManager, DatabaseType.ReadOnly)
+        public AgentCurrencyRepository(ICacheProvider cacheProvider, ILogMonitorFactory monitorFactory, IIdentityManager identityManager, 
+            IDatabaseInstanceProvider instanceProvider)
+            : base(cacheProvider, monitorFactory, identityManager, instanceProvider)
         {
         } 
 
@@ -31,6 +32,7 @@ namespace CES.CoreApi.Agent.Service.Data.Repositories
             {
                 ProcedureName = "ol_sp_lttblPayAgentsCurs_Get",
                 IsCacheable = true,
+                DatabaseType = DatabaseType.ReadOnly,
                 Parameters = new Collection<SqlParameter>()
                     .Add("@fNameID", correspondentId)
                     .Add("@fSymbol", symbol),
@@ -45,11 +47,6 @@ namespace CES.CoreApi.Agent.Service.Data.Repositories
             };
 
             return Get(request);
-        }
-
-        public DatabasePingModel Ping()
-        {
-            return PingDatabase();
         }
 
         #endregion

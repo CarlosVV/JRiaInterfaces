@@ -9,6 +9,8 @@ using CES.CoreApi.Common.Interfaces;
 using CES.CoreApi.Common.Models;
 using CES.CoreApi.Foundation.Contract.Interfaces;
 using CES.CoreApi.Foundation.Data.Base;
+using CES.CoreApi.Foundation.Data.Interfaces;
+using CES.CoreApi.Foundation.Data.Models;
 using CES.CoreApi.Foundation.Data.Utility;
 using CES.CoreApi.Logging.Interfaces;
 
@@ -18,8 +20,9 @@ namespace CES.CoreApi.Foundation.Data
     {
         #region Core
 
-        public ApplicationRepository(ICacheProvider cacheProvider, ILogMonitorFactory logMonitorFactory, IIdentityManager identityManager)
-            : base(cacheProvider, logMonitorFactory, identityManager, DatabaseType.Main)
+        public ApplicationRepository(ICacheProvider cacheProvider, ILogMonitorFactory logMonitorFactory, IIdentityManager identityManager, 
+            IDatabaseInstanceProvider instanceProvider)
+            : base(cacheProvider, logMonitorFactory, identityManager, instanceProvider)
         {
         }
 
@@ -38,6 +41,7 @@ namespace CES.CoreApi.Foundation.Data
             {
                 ProcedureName = "coreapi_sp_GetApplicationByID",
                 IsCacheable = true,
+                DatabaseType = DatabaseType.Main,
                 Parameters = new Collection<SqlParameter>
                 {
                     new SqlParameter("@applicationID", applicationId)
@@ -62,12 +66,7 @@ namespace CES.CoreApi.Foundation.Data
 
             return application.Configuration;
         }
-
-        public DatabasePingModel Ping()
-        {
-            return PingDatabase();
-        }
-
+       
         #endregion
 
         #region Private methods

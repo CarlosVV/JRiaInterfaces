@@ -21,6 +21,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CES.CoreApi.Configuration.C
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CES.CoreApi.Configuration.Business", "..\CoreApiConfigurationUtility\CES.CoreApi.Configuration.Business\CES.CoreApi.Configuration.Business.csproj", "{BB52011D-2765-4413-80FC-0EE67D73588C}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CES.CoreApi.SimpleInjectorProxy", "..\Foundation\CES.CoreApi.SimpleInjectorProxy\CES.CoreApi.SimpleInjectorProxy.csproj", "{02BEAA68-76A1-4ED6-BF6C-7B6935165AD6}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -59,6 +61,10 @@ Global
 		{BB52011D-2765-4413-80FC-0EE67D73588C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{BB52011D-2765-4413-80FC-0EE67D73588C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{BB52011D-2765-4413-80FC-0EE67D73588C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{02BEAA68-76A1-4ED6-BF6C-7B6935165AD6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{02BEAA68-76A1-4ED6-BF6C-7B6935165AD6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{02BEAA68-76A1-4ED6-BF6C-7B6935165AD6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{02BEAA68-76A1-4ED6-BF6C-7B6935165AD6}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -68,5 +74,6 @@ Global
 		{9FCF40A8-23F1-4272-9CAE-EFF674145F57} = {C9364700-7A1B-445C-8447-2C5CA315417E}
 		{070C7BB2-AF07-4A4C-A9CC-6BFB8CA416E6} = {C9364700-7A1B-445C-8447-2C5CA315417E}
 		{76762A04-54F0-4147-BD2B-267372034706} = {C9364700-7A1B-445C-8447-2C5CA315417E}
+		{02BEAA68-76A1-4ED6-BF6C-7B6935165AD6} = {C9364700-7A1B-445C-8447-2C5CA315417E}
 	EndGlobalSection
 EndGlobal

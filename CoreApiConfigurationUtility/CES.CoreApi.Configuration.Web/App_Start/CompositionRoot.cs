@@ -13,6 +13,8 @@ using CES.CoreApi.Common.Proxies;
 using CES.CoreApi.Configuration.Business.Services;
 using CES.CoreApi.Configuration.Data;
 using CES.CoreApi.Configuration.Model.Interfaces;
+using CES.CoreApi.Foundation.Data.Interfaces;
+using CES.CoreApi.Foundation.Data.Providers;
 using CES.CoreApi.Logging.Configuration;
 using CES.CoreApi.Logging.Factories;
 using CES.CoreApi.Logging.Formatters;
@@ -22,6 +24,7 @@ using CES.CoreApi.Logging.Models;
 using CES.CoreApi.Logging.Monitors;
 using CES.CoreApi.Logging.Providers;
 using CES.CoreApi.Logging.Utilities;
+using CES.CoreApi.SimpleInjectorProxy;
 using SimpleInjector;
 using SimpleInjector.Integration.Web.Mvc;
 using SimpleInjector.Integration.WebApi;
@@ -35,12 +38,13 @@ namespace CES.CoreApi.Configuration.Web
             var container = new Container();
 
             RegisterMvcControllers(container);
-            RegisterRepositories(container);
+            RegisterDataAccess(container);
             RegisterManagers(container);
             RegisterFilters(container);
             RegisterAutomapper(container);
             RegisterOthers(container);
             RegisterLoggging(container);
+            RegisterInterceptions(container);
 
             container.Verify();
 
@@ -73,10 +77,13 @@ namespace CES.CoreApi.Configuration.Web
             container.RegisterWebApiControllers(GlobalConfiguration.Configuration);
         }
         
-        private static void RegisterRepositories(Container container)
+        private static void RegisterDataAccess(Container container)
         {
             container.RegisterSingle<IServicesRepository, ServicesRepository>();
             container.RegisterSingle<ISettingsRepository, SettingsRepository>();
+            container.RegisterSingle<IDatabaseConfigurationProvider, DatabaseConfigurationProvider>();
+            container.RegisterSingle<IDatabaseInstanceProvider, DatabaseInstanceProvider>();
+            container.RegisterSingle<IDatabasePingProvider, DatabasePingProvider>();
         }
 
         private static void RegisterManagers(Container container)
@@ -96,6 +103,7 @@ namespace CES.CoreApi.Configuration.Web
                     new AppFabricCacheProvider(container.GetInstance<ILogMonitorFactory>(),
                         container.GetInstance<IIdentityManager>(), cacheName));
             container.RegisterSingle<ICurrentDateTimeProvider, CurrentDateTimeProvider>();
+            container.RegisterSingle<PerformanceInterceptor>();
         }
 
         private static void RegisterLoggging(Container container)
@@ -151,6 +159,14 @@ namespace CES.CoreApi.Configuration.Web
             //Web API exception logger
             container.RegisterSingle<IExceptionLogger, WebApiGlobalExceptionLogger>();
             container.RegisterSingle<IWebApiCallInformationProvider, WebApiCallInformationProvider>();
+        }
+
+        private static void RegisterInterceptions(Container container)
+        {
+            container.InterceptWith<PerformanceInterceptor>(type => type == typeof(IServicesRepository));
+            container.InterceptWith<PerformanceInterceptor>(type => type == typeof(ISettingsRepository));
+            container.InterceptWith<PerformanceInterceptor>(type => type == typeof(IServiceManager));
+            container.InterceptWith<PerformanceInterceptor>(type => type == typeof(ISettingManager));
         }
     }
 }

@@ -9,6 +9,8 @@ using CES.CoreApi.Common.Providers;
 using CES.CoreApi.Common.Proxies;
 using CES.CoreApi.Foundation.Contract.Interfaces;
 using CES.CoreApi.Foundation.Data;
+using CES.CoreApi.Foundation.Data.Interfaces;
+using CES.CoreApi.Foundation.Data.Providers;
 using CES.CoreApi.Foundation.Providers;
 using CES.CoreApi.Foundation.Security;
 using CES.CoreApi.Foundation.Service;
@@ -44,6 +46,7 @@ namespace CES.CoreApi.LimitVerfication.Service.Configuration
             RegisterInterceptions(container);
             RegisterProcessors(container);
             RegisterProviders(container);
+            RegisterDataAccess(container);
 
             container.Verify();
         }
@@ -178,5 +181,14 @@ namespace CES.CoreApi.LimitVerfication.Service.Configuration
             //container.Register<HealthResponse, HealthResponse>();
             //container.Register<ClearCacheResponse, ClearCacheResponse>();
         }
+
+        private static void RegisterDataAccess(Container container)
+        {
+            //container.RegisterSingle<ICustomerRepository, CustomerRepository>();
+            container.RegisterSingle<IDatabaseConfigurationProvider, DatabaseConfigurationProvider>();
+            container.RegisterSingle<IDatabaseInstanceProvider, DatabaseInstanceProvider>();
+            container.RegisterSingle<IDatabasePingProvider, DatabasePingProvider>();
+        }
+
     }
 }

@@ -67,6 +67,10 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\Foundation\CES.CoreApi.Data\CES.CoreApi.Data.csproj">
+      <Project>{1aa5ba90-02cc-4fd1-81f2-615c374c83a5}</Project>
+      <Name>CES.CoreApi.Data</Name>
+    </ProjectReference>
     <ProjectReference Include="..\CES.CoreApi.Customer.Service\CES.CoreApi.Customer.Service.csproj">
       <Project>{8d3642d1-b070-4e3b-afd8-2017c7af017a}</Project>
       <Name>CES.CoreApi.Customer.Service</Name>

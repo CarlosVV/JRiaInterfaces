@@ -9,8 +9,9 @@ using System.Reflection;
 using CES.CoreApi.Common.Enumerations;
 using CES.CoreApi.Common.Interfaces;
 using CES.CoreApi.Common.Tools;
-using CES.CoreApi.Foundation.Data;
 using CES.CoreApi.Foundation.Data.Base;
+using CES.CoreApi.Foundation.Data.Interfaces;
+using CES.CoreApi.Foundation.Data.Models;
 using CES.CoreApi.Foundation.Data.Utility;
 using CES.CoreApi.Logging.Interfaces;
 using CES.CoreApi.Settings.Service.Business.Contract.Attributes;
@@ -25,8 +26,8 @@ namespace CES.CoreApi.Settings.Service.Data.Repositories
         #region Core
 
         public CountrySettingsRepository(ICacheProvider cacheProvider, ILogMonitorFactory monitorFactory,
-            IIdentityManager identityManager)
-            : base(cacheProvider, monitorFactory, identityManager, DatabaseType.ReadOnly)
+            IIdentityManager identityManager, IDatabaseInstanceProvider instanceProvider)
+            : base(cacheProvider, monitorFactory, identityManager, instanceProvider)
         {
         }
 
@@ -40,6 +41,7 @@ namespace CES.CoreApi.Settings.Service.Data.Repositories
             {
                 ProcedureName = "ol_sp_systblSetting_Country_GetByCountryID",
                 IsCacheable = true,
+                DatabaseType = DatabaseType.ReadOnly,
                 Parameters = new Collection<SqlParameter>()
                     .Add("@fCountryID", countryId),
                 Shaper = reader => GetCountrySettingsDetails(reader, countryId)

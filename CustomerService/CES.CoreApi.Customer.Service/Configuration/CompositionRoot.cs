@@ -15,6 +15,9 @@ using CES.CoreApi.Customer.Service.Interfaces;
 using CES.CoreApi.Customer.Service.Utilities;
 using CES.CoreApi.Foundation.Contract.Interfaces;
 using CES.CoreApi.Foundation.Data;
+using CES.CoreApi.Foundation.Data.Configuration;
+using CES.CoreApi.Foundation.Data.Interfaces;
+using CES.CoreApi.Foundation.Data.Providers;
 using CES.CoreApi.Foundation.Providers;
 using CES.CoreApi.Foundation.Security;
 using CES.CoreApi.Foundation.Service;
@@ -46,7 +49,7 @@ namespace CES.CoreApi.Customer.Service.Configuration
             RegisterInterceptions(container);
             RegisterProcessors(container);
             RegisterProviders(container);
-            RegisterRepositories(container);
+            RegisterDataAccess(container);
 
             container.Verify();
         }
@@ -163,10 +166,12 @@ namespace CES.CoreApi.Customer.Service.Configuration
             container.RegisterSingle<IExceptionHelper, ExceptionHelper>();
         }
 
-        private static void RegisterRepositories(Container container)
+        private static void RegisterDataAccess(Container container)
         {
             container.RegisterSingle<ICustomerRepository, CustomerRepository>();
-            container.RegisterSingle<IImageRepository, ImageRepository>();
+            container.RegisterSingle<IDatabaseConfigurationProvider, DatabaseConfigurationProvider>();
+            container.RegisterSingle<IDatabaseInstanceProvider, DatabaseInstanceProvider>();
+            container.RegisterSingle<IDatabasePingProvider, DatabasePingProvider>();
         }
 
         private static void RegisterInterceptions(Container container)

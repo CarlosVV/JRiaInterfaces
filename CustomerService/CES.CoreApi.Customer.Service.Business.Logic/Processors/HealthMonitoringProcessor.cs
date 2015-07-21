@@ -4,7 +4,7 @@ using CES.CoreApi.Common.Exceptions;
 using CES.CoreApi.Common.Interfaces;
 using CES.CoreApi.Common.Models;
 using CES.CoreApi.Customer.Service.Business.Contract.Interfaces;
-using CES.CoreApi.Foundation.Contract.Interfaces;
+using CES.CoreApi.Foundation.Data.Interfaces;
 
 namespace CES.CoreApi.Customer.Service.Business.Logic.Processors
 {
@@ -13,25 +13,19 @@ namespace CES.CoreApi.Customer.Service.Business.Logic.Processors
         #region Core
 
         private readonly ICacheProvider _cacheProvider;
-        private readonly ICustomerRepository _customerRepository;
-        private readonly IApplicationRepository _applicationRepository;
+        private readonly IDatabasePingProvider _pingProvider;
 
-        public HealthMonitoringProcessor(ICacheProvider cacheProvider, ICustomerRepository customerRepository, 
-            IApplicationRepository applicationRepository)
+        public HealthMonitoringProcessor(ICacheProvider cacheProvider, IDatabasePingProvider pingProvider)
         {
             if (cacheProvider == null)
                 throw new CoreApiException(TechnicalSubSystem.CustomerService,
                   SubSystemError.GeneralRequiredParameterIsUndefined, "cacheProvider");
-            if (customerRepository == null)
+            if (pingProvider == null)
                 throw new CoreApiException(TechnicalSubSystem.CustomerService,
-                  SubSystemError.GeneralRequiredParameterIsUndefined, "customerRepository");
-            if (applicationRepository == null)
-                throw new CoreApiException(TechnicalSubSystem.CustomerService,
-                  SubSystemError.GeneralRequiredParameterIsUndefined, "applicationRepository");
-
+                  SubSystemError.GeneralRequiredParameterIsUndefined, "pingProvider");
+         
             _cacheProvider = cacheProvider;
-            _customerRepository = customerRepository;
-            _applicationRepository = applicationRepository;
+            _pingProvider = pingProvider;
         }
 
         #endregion
@@ -57,12 +51,7 @@ namespace CES.CoreApi.Customer.Service.Business.Logic.Processors
 
         public PingResponseModel Ping()
         {
-            var response = new PingResponseModel();
-
-            response.Databases.Add(_applicationRepository.Ping());
-            response.Databases.Add(_customerRepository.Ping());
-                        
-            return response;
+            return _pingProvider.PingDatabases();
         }
 
         #endregion

@@ -1,5 +1,4 @@
 ﻿using System.Collections.Generic;
-using CES.CoreApi.Common.Models;
 using CES.CoreApi.Settings.Service.Business.Contract.Models;
 
 namespace CES.CoreApi.Settings.Service.Business.Contract.Interfaces
@@ -8,6 +7,5 @@ namespace CES.CoreApi.Settings.Service.Business.Contract.Interfaces
     {
         IEnumerable<CountryModel> GetAll(int languageId, string abbreviationList);
         IEnumerable<CountryModel> GetAll(string culture, string abbreviationList);
-        DatabasePingModel Ping();
     }
 }

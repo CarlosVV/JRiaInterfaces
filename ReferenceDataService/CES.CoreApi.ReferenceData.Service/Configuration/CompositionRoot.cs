@@ -9,6 +9,8 @@ using CES.CoreApi.Common.Providers;
 using CES.CoreApi.Common.Proxies;
 using CES.CoreApi.Foundation.Contract.Interfaces;
 using CES.CoreApi.Foundation.Data;
+using CES.CoreApi.Foundation.Data.Interfaces;
+using CES.CoreApi.Foundation.Data.Providers;
 using CES.CoreApi.Foundation.Providers;
 using CES.CoreApi.Foundation.Security;
 using CES.CoreApi.Foundation.Service;
@@ -46,6 +48,7 @@ namespace CES.CoreApi.ReferenceData.Service.Configuration
             RegisterInterceptions(container);
             RegisterProcessors(container);
             RegisterProviders(container);
+            RegisterDataAccess(container);
 
             container.Verify();
         }
@@ -163,7 +166,6 @@ namespace CES.CoreApi.ReferenceData.Service.Configuration
             container.RegisterSingle<IMappingHelper, MappingHelper>();
             container.RegisterSingle<IExceptionHelper, ExceptionHelper>();
             container.RegisterSingle<IServiceHelper, ServiceHelper>();
-            container.RegisterSingle<IReferenceDataRepository, ReferenceDataRepository>();
         }
 
         private static void RegisterInterceptions(Container container)
@@ -179,6 +181,14 @@ namespace CES.CoreApi.ReferenceData.Service.Configuration
             container.Register<GetIdentificationTypeResponse, GetIdentificationTypeResponse>();
             container.Register<PingResponse, PingResponse>();
             container.Register<ClearCacheResponse, ClearCacheResponse>();
+        }
+
+        private static void RegisterDataAccess(Container container)
+        {
+            container.RegisterSingle<IReferenceDataRepository, ReferenceDataRepository>();
+            container.RegisterSingle<IDatabaseConfigurationProvider, DatabaseConfigurationProvider>();
+            container.RegisterSingle<IDatabaseInstanceProvider, DatabaseInstanceProvider>();
+            container.RegisterSingle<IDatabasePingProvider, DatabasePingProvider>();
         }
     }
 }

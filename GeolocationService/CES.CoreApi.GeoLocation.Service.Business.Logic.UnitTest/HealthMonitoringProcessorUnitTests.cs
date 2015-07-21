@@ -1,9 +1,10 @@
 ﻿using System;
+using System.Collections.ObjectModel;
 using System.Linq;
 using CES.CoreApi.Common.Enumerations;
 using CES.CoreApi.Common.Interfaces;
 using CES.CoreApi.Common.Models;
-using CES.CoreApi.Foundation.Contract.Interfaces;
+using CES.CoreApi.Foundation.Data.Interfaces;
 using CES.CoreApi.GeoLocation.Service.Business.Logic.Processors;
 using CES.CoreApi.GeoLocation.Service.UnitTestTools;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
@@ -15,13 +16,13 @@ namespace CES.CoreApi.GeoLocation.Service.Business.Logic.UnitTest
     public class HealthMonitoringProcessorUnitTests
     {
         private Mock<ICacheProvider> _cacheProvider;
-        private Mock<IApplicationRepository> _applicationRepository;
+        private Mock<IDatabasePingProvider> _databasePingProvider;
 
         [TestInitialize]
         public void Setup()
         {
             _cacheProvider = new Mock<ICacheProvider>();
-            _applicationRepository = new Mock<IApplicationRepository>();
+            _databasePingProvider = new Mock<IDatabasePingProvider>();
         }
         #region Constructor tests
 
@@ -29,22 +30,22 @@ namespace CES.CoreApi.GeoLocation.Service.Business.Logic.UnitTest
         public void Constructor_CacheProviderIsNull_ExceptionRaised()
         {
             ExceptionHelper.CheckException(
-                () => new HealthMonitoringProcessor(null, _applicationRepository.Object),
+                () => new HealthMonitoringProcessor(null, _databasePingProvider.Object),
                  SubSystemError.GeneralRequiredParameterIsUndefined, "cacheProvider");
         }
 
         [TestMethod]
-        public void Constructor_GeocodeAddressDataProviderIsNull_ExceptionRaised()
+        public void Constructor_DatabasePingProviderIsNull_ExceptionRaised()
         {
             ExceptionHelper.CheckException(
                 () => new HealthMonitoringProcessor(_cacheProvider.Object, null),
-                SubSystemError.GeneralRequiredParameterIsUndefined, "applicationRepository");
+                SubSystemError.GeneralRequiredParameterIsUndefined, "pingProvider");
         }
 
         [TestMethod]
         public void Constructor_HappyPath()
         {
-            ExceptionHelper.CheckHappyPath(() => new HealthMonitoringProcessor(_cacheProvider.Object, _applicationRepository.Object));
+            ExceptionHelper.CheckHappyPath(() => new HealthMonitoringProcessor(_cacheProvider.Object, _databasePingProvider.Object));
         }
 
         #endregion
@@ -54,7 +55,7 @@ namespace CES.CoreApi.GeoLocation.Service.Business.Logic.UnitTest
         {
             _cacheProvider.Setup(p => p.ClearCache()).Verifiable();
 
-            var result = new HealthMonitoringProcessor(_cacheProvider.Object, _applicationRepository.Object).ClearCache();
+            var result = new HealthMonitoringProcessor(_cacheProvider.Object, _databasePingProvider.Object).ClearCache();
             
             _cacheProvider.Verify(p => p.ClearCache(), Times.Once);
             Assert.IsNotNull(result);
@@ -68,7 +69,7 @@ namespace CES.CoreApi.GeoLocation.Service.Business.Logic.UnitTest
             
             _cacheProvider.Setup(p => p.ClearCache()).Throws(new ApplicationException("Test Exception")).Verifiable();
 
-            var result = new HealthMonitoringProcessor(_cacheProvider.Object, _applicationRepository.Object).ClearCache();
+            var result = new HealthMonitoringProcessor(_cacheProvider.Object, _databasePingProvider.Object).ClearCache();
 
             _cacheProvider.Verify(p => p.ClearCache(), Times.Once);
             Assert.IsNotNull(result);
@@ -79,16 +80,22 @@ namespace CES.CoreApi.GeoLocation.Service.Business.Logic.UnitTest
         [TestMethod]
         public void Ping_HappyPath()
         {
-            var pingModel = new DatabasePingModel {Database = DatabaseType.Main, IsOk = true};
-            _applicationRepository.Setup(p => p.Ping()).Returns(pingModel).Verifiable();
+            var pingModel = new PingResponseModel
+            {
+                Databases = new Collection<DatabasePingModel>
+                {
+                    new DatabasePingModel {Database = DatabaseType.Main.ToString(), IsOk = true}
+                }
+            };
+            _databasePingProvider.Setup(p => p.PingDatabases()).Returns(pingModel).Verifiable();
 
-            var processor = new HealthMonitoringProcessor(_cacheProvider.Object, _applicationRepository.Object);
+            var processor = new HealthMonitoringProcessor(_cacheProvider.Object, _databasePingProvider.Object);
             
             var result = processor.Ping();
-            _applicationRepository.Verify(p => p.Ping(), Times.Once);
+            _databasePingProvider.Verify(p => p.PingDatabases(), Times.Once);
             Assert.IsNotNull(result);
             Assert.IsTrue(result.Databases.ToList()[0].IsOk);
-            Assert.AreEqual(DatabaseType.Main, result.Databases.ToList()[0].Database);
+            Assert.AreEqual(DatabaseType.Main.ToString(), result.Databases.ToList()[0].Database);
         }
     }
 }

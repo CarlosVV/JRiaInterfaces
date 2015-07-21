@@ -9,15 +9,15 @@ namespace CES.CoreApi.Agent.Service.Business.Logic.Processors
     {
         #region Core
 
-        private readonly IImageRepository _imageRepository;
+        private readonly IAgentUserRepository _agentUserRepository;
 
-        public AgentUserProcessor(IImageRepository imageRepository)
+        public AgentUserProcessor(IAgentUserRepository agentUserRepository)
         {
-            if (imageRepository == null)
+            if (agentUserRepository == null)
                 throw new CoreApiException(TechnicalSubSystem.AgentService,
-                   SubSystemError.GeneralRequiredParameterIsUndefined, "imageRepository");
+                   SubSystemError.GeneralRequiredParameterIsUndefined, "AgentUserRepository");
 
-            _imageRepository = imageRepository;
+            _agentUserRepository = agentUserRepository;
         }
 
         #endregion
@@ -26,7 +26,7 @@ namespace CES.CoreApi.Agent.Service.Business.Logic.Processors
 
         public ProcessSignatureResponseModel ProcessSignature(ProcessSignatureRequestModel requestModel)
         {
-            //do whatever needs to be done to save agent signature to database, use _imageRepository to access Image DB
+            //do whatever needs to be done to save agent signature to database, use _agentUserRepository to access Image DB
 
             return new ProcessSignatureResponseModel {IsCompleted = true};
         } 

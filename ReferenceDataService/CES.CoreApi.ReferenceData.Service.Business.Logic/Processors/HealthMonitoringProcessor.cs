@@ -3,6 +3,7 @@ using CES.CoreApi.Common.Enumerations;
 using CES.CoreApi.Common.Exceptions;
 using CES.CoreApi.Common.Interfaces;
 using CES.CoreApi.Common.Models;
+using CES.CoreApi.Foundation.Data.Interfaces;
 using CES.CoreApi.ReferenceData.Service.Business.Contract.Interfaces;
 
 namespace CES.CoreApi.ReferenceData.Service.Business.Logic.Processors
@@ -12,19 +13,19 @@ namespace CES.CoreApi.ReferenceData.Service.Business.Logic.Processors
         #region Core
 
         private readonly ICacheProvider _cacheProvider;
-        private readonly IReferenceDataRepository _referenceDataRepository;
+        private readonly IDatabasePingProvider _pingProvider;
 
-        public HealthMonitoringProcessor(ICacheProvider cacheProvider, IReferenceDataRepository referenceDataRepository)
+        public HealthMonitoringProcessor(ICacheProvider cacheProvider, IDatabasePingProvider pingProvider)
         {
             if (cacheProvider == null)
                 throw new CoreApiException(TechnicalSubSystem.ReferenceDataService,
                   SubSystemError.GeneralRequiredParameterIsUndefined, "cacheProvider");
-            if (referenceDataRepository == null)
+            if (pingProvider == null)
                 throw new CoreApiException(TechnicalSubSystem.ReferenceDataService,
-                  SubSystemError.GeneralRequiredParameterIsUndefined, "referenceDataRepository");
+                  SubSystemError.GeneralRequiredParameterIsUndefined, "pingProvider");
 
             _cacheProvider = cacheProvider;
-            _referenceDataRepository = referenceDataRepository;
+            _pingProvider = pingProvider;
         }
 
         #endregion
@@ -50,11 +51,7 @@ namespace CES.CoreApi.ReferenceData.Service.Business.Logic.Processors
 
         public PingResponseModel Ping()
         {
-            var response = new PingResponseModel();
-
-            response.Databases.Add(_referenceDataRepository.Ping());
-
-            return response;
+            return _pingProvider.PingDatabases();
         }
 
         #endregion

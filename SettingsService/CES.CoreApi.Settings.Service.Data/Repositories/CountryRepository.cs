@@ -4,9 +4,9 @@ using System.Data;
 using System.Data.SqlClient;
 using CES.CoreApi.Common.Enumerations;
 using CES.CoreApi.Common.Interfaces;
-using CES.CoreApi.Common.Models;
-using CES.CoreApi.Foundation.Data;
 using CES.CoreApi.Foundation.Data.Base;
+using CES.CoreApi.Foundation.Data.Interfaces;
+using CES.CoreApi.Foundation.Data.Models;
 using CES.CoreApi.Foundation.Data.Utility;
 using CES.CoreApi.Logging.Interfaces;
 using CES.CoreApi.Settings.Service.Business.Contract.Interfaces;
@@ -18,8 +18,9 @@ namespace CES.CoreApi.Settings.Service.Data.Repositories
     {
         #region Core
 
-        public CountryRepository(ICacheProvider cacheProvider, ILogMonitorFactory monitorFactory, IIdentityManager identityManager) :
-            base(cacheProvider, monitorFactory, identityManager, DatabaseType.ReadOnly)
+        public CountryRepository(ICacheProvider cacheProvider, ILogMonitorFactory monitorFactory, IIdentityManager identityManager, 
+            IDatabaseInstanceProvider instanceProvider) :
+            base(cacheProvider, monitorFactory, identityManager, instanceProvider)
         {
         }
 
@@ -33,6 +34,7 @@ namespace CES.CoreApi.Settings.Service.Data.Repositories
             {
                 ProcedureName = "ol_sp_systblRegCountries_GetByAbbrevCsvAndLanguageID",
                 IsCacheable = true,
+                DatabaseType = DatabaseType.ReadOnly,
                 Parameters = new Collection<SqlParameter>()
                     .Add("@flanguageID", languageId)
                     .Add("@sCountryAbbrevCsv", abbreviationList),
@@ -48,6 +50,7 @@ namespace CES.CoreApi.Settings.Service.Data.Repositories
             {
                 ProcedureName = "ol_sp_systblRegCountries_GetByAbbrevCsvAndCulture",
                 IsCacheable = true,
+                DatabaseType = DatabaseType.ReadOnly,
                 Parameters = new Collection<SqlParameter>()
                     .Add("@sCulture", culture)
                     .Add("@sCountryAbbrevCsv", abbreviationList),
@@ -55,11 +58,6 @@ namespace CES.CoreApi.Settings.Service.Data.Repositories
             };
 
             return GetList(request);
-        }
-
-        public DatabasePingModel Ping()
-        {
-            return PingDatabase();
         }
 
         #endregion

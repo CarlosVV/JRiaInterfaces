@@ -2,7 +2,6 @@
 using CES.CoreApi.Common.Exceptions;
 using CES.CoreApi.Customer.Service.Business.Contract.Interfaces;
 using CES.CoreApi.Customer.Service.Business.Contract.Models;
-using CES.CoreApi.Customer.Service.Data.Repositories;
 using CES.CoreApi.Shared.Business.Contract.Models;
 
 namespace CES.CoreApi.Customer.Service.Business.Logic.Processors
@@ -12,18 +11,13 @@ namespace CES.CoreApi.Customer.Service.Business.Logic.Processors
         #region Core
 
         private readonly ICustomerRepository _customerRepository;
-        private readonly IImageRepository _imageRepository;
 
-        public CustomerRequestProcessor(ICustomerRepository customerRepository, IImageRepository imageRepository)
+        public CustomerRequestProcessor(ICustomerRepository customerRepository)
         {
             if (customerRepository == null)
                 throw new CoreApiException(TechnicalSubSystem.CustomerService,
                    SubSystemError.GeneralRequiredParameterIsUndefined, "customerRepository");
-            if (imageRepository == null)
-                throw new CoreApiException(TechnicalSubSystem.CustomerService,
-                   SubSystemError.GeneralRequiredParameterIsUndefined, "imageRepository");
             _customerRepository = customerRepository;
-            _imageRepository = imageRepository;
         }
 
         #endregion

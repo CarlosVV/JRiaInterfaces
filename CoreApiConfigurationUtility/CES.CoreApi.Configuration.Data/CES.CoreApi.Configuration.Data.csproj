@@ -33,11 +33,7 @@
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Core" />
-    <Reference Include="System.Xml.Linq" />
-    <Reference Include="System.Data.DataSetExtensions" />
-    <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Data" />
-    <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ServicesRepository.cs" />
@@ -45,10 +41,6 @@
     <Compile Include="SettingsRepository.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\Foundation\CES.CoreApi.Caching\CES.CoreApi.Caching.csproj">
-      <Project>{9FCF40A8-23F1-4272-9CAE-EFF674145F57}</Project>
-      <Name>CES.CoreApi.Caching</Name>
-    </ProjectReference>
     <ProjectReference Include="..\..\Foundation\CES.CoreApi.Common\CES.CoreApi.Common.csproj">
       <Project>{070c7bb2-af07-4a4c-a9cc-6bfb8ca416e6}</Project>
       <Name>CES.CoreApi.Common</Name>

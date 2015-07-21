@@ -49,8 +49,20 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Base\BaseGenericRepository.cs" />
-    <Compile Include="DatabaseRequest.cs" />
+    <Compile Include="Configuration\DataAccessConfiguration.cs" />
+    <Compile Include="Providers\DatabaseConfigurationProvider.cs" />
+    <Compile Include="Configuration\DatabaseServerGroups.cs" />
+    <Compile Include="Configuration\DatabaseServer.cs" />
+    <Compile Include="Configuration\DatabaseServerGroup.cs" />
+    <Compile Include="Interfaces\IDatabaseConfigurationProvider.cs" />
+    <Compile Include="Models\ConnectionConfiguration.cs" />
+    <Compile Include="Models\CommandContext.cs" />
+    <Compile Include="Models\DatabaseRequest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Providers\DatabaseInstanceProvider.cs" />
+    <Compile Include="Interfaces\IDatabaseInstanceProvider.cs" />
+    <Compile Include="Providers\DatabasePingProvider.cs" />
+    <Compile Include="Interfaces\IDatabasePingProvider.cs" />
     <Compile Include="Utility\DatabaseRequestExtensions.cs" />
     <Compile Include="Utility\DataReaderExtensions.cs" />
     <Compile Include="Utility\ParametersCollectionExtensions.cs" />

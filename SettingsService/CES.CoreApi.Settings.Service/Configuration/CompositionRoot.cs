@@ -9,6 +9,8 @@ using CES.CoreApi.Common.Providers;
 using CES.CoreApi.Common.Proxies;
 using CES.CoreApi.Foundation.Contract.Interfaces;
 using CES.CoreApi.Foundation.Data;
+using CES.CoreApi.Foundation.Data.Interfaces;
+using CES.CoreApi.Foundation.Data.Providers;
 using CES.CoreApi.Foundation.Providers;
 using CES.CoreApi.Foundation.Security;
 using CES.CoreApi.Foundation.Service;
@@ -24,6 +26,7 @@ using CES.CoreApi.Logging.Monitors;
 using CES.CoreApi.Logging.Providers;
 using CES.CoreApi.Settings.Service.Business.Contract.Interfaces;
 using CES.CoreApi.Settings.Service.Business.Logic.Processors;
+using CES.CoreApi.Settings.Service.Contract.Models;
 using CES.CoreApi.Settings.Service.Data.Repositories;
 using CES.CoreApi.Settings.Service.Interfaces;
 using CES.CoreApi.Settings.Service.Utilities;
@@ -43,10 +46,8 @@ namespace CES.CoreApi.Settings.Service.Configuration
             RegisterOthers(container);
             RegisterLoggging(container);
             RegisterInterceptions(container);
-            //RegisterFactories(container);
             RegisterProcessors(container);
-            //RegisterUrlBuilders(container);
-            //RegisterParsers(container);
+            RegisterDataAccess(container);
             RegisterProviders(container);
 
             container.Verify();
@@ -165,8 +166,6 @@ namespace CES.CoreApi.Settings.Service.Configuration
             container.RegisterSingle<IMappingHelper, MappingHelper>();
             container.RegisterSingle<IExceptionHelper, ExceptionHelper>();
             container.RegisterSingle<IServiceHelper, ServiceHelper>();
-            container.RegisterSingle<ICountryRepository, CountryRepository>();
-            container.RegisterSingle<ICountrySettingsRepository, CountrySettingsRepository>();
         }
 
         private static void RegisterInterceptions(Container container)
@@ -179,7 +178,20 @@ namespace CES.CoreApi.Settings.Service.Configuration
 
         private static void RegisterResponses(Container container)
         {
-            //container.Register<OrderValidateResponse, OrderValidateResponse>();
+            container.Register<GetCountryListResponse, GetCountryListResponse>();
+            container.Register<ClearCacheResponse, ClearCacheResponse>();
+            container.Register<GetCountryResponse, GetCountryResponse>();
+            container.Register<PingResponse, PingResponse>();
+            container.Register<GetCountrySettingsResponse, GetCountrySettingsResponse>();
+        }
+
+        private static void RegisterDataAccess(Container container)
+        {
+            container.RegisterSingle<ICountryRepository, CountryRepository>();
+            container.RegisterSingle<ICountrySettingsRepository, CountrySettingsRepository>();
+            container.RegisterSingle<IDatabaseConfigurationProvider, DatabaseConfigurationProvider>();
+            container.RegisterSingle<IDatabaseInstanceProvider, DatabaseInstanceProvider>();
+            container.RegisterSingle<IDatabasePingProvider, DatabasePingProvider>();
         }
     }
 }

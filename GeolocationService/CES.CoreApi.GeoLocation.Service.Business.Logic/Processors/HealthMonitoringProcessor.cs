@@ -3,7 +3,7 @@ using CES.CoreApi.Common.Enumerations;
 using CES.CoreApi.Common.Exceptions;
 using CES.CoreApi.Common.Interfaces;
 using CES.CoreApi.Common.Models;
-using CES.CoreApi.Foundation.Contract.Interfaces;
+using CES.CoreApi.Foundation.Data.Interfaces;
 using CES.CoreApi.GeoLocation.Service.Business.Contract.Interfaces;
 
 namespace CES.CoreApi.GeoLocation.Service.Business.Logic.Processors
@@ -13,18 +13,18 @@ namespace CES.CoreApi.GeoLocation.Service.Business.Logic.Processors
         #region Core
 
         private readonly ICacheProvider _cacheProvider;
-        private readonly IApplicationRepository _applicationRepository;
+        private readonly IDatabasePingProvider _pingProvider;
 
-        public HealthMonitoringProcessor(ICacheProvider cacheProvider, IApplicationRepository applicationRepository)
+        public HealthMonitoringProcessor(ICacheProvider cacheProvider, IDatabasePingProvider pingProvider)
         {
             if (cacheProvider == null)
                 throw new CoreApiException(TechnicalSubSystem.GeoLocationService,
                   SubSystemError.GeneralRequiredParameterIsUndefined, "cacheProvider");
-            if (applicationRepository == null)
+            if (pingProvider == null)
                 throw new CoreApiException(TechnicalSubSystem.GeoLocationService,
-                  SubSystemError.GeneralRequiredParameterIsUndefined, "applicationRepository");
+                  SubSystemError.GeneralRequiredParameterIsUndefined, "pingProvider");
             _cacheProvider = cacheProvider;
-            _applicationRepository = applicationRepository;
+            _pingProvider = pingProvider;
         }
 
         #endregion
@@ -50,11 +50,7 @@ namespace CES.CoreApi.GeoLocation.Service.Business.Logic.Processors
 
         public PingResponseModel Ping()
         {
-            var response = new PingResponseModel();
-
-            response.Databases.Add(_applicationRepository.Ping());
-
-            return response;
+            return _pingProvider.PingDatabases();
         }
 
         #endregion

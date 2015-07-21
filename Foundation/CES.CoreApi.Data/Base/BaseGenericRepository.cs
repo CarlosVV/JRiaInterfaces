@@ -6,11 +6,10 @@ using System.Configuration;
 using System.Data;
 using System.Data.Common;
 using System.Data.SqlClient;
-using CES.CoreApi.Common.Attributes;
 using CES.CoreApi.Common.Enumerations;
 using CES.CoreApi.Common.Interfaces;
-using CES.CoreApi.Common.Models;
-using CES.CoreApi.Common.Tools;
+using CES.CoreApi.Foundation.Data.Interfaces;
+using CES.CoreApi.Foundation.Data.Models;
 using CES.CoreApi.Foundation.Data.Utility;
 using CES.CoreApi.Logging.Interfaces;
 using Microsoft.Practices.EnterpriseLibrary.Common.Configuration;
@@ -25,10 +24,10 @@ namespace CES.CoreApi.Foundation.Data.Base
         private static readonly int ApplicationId;
         private static readonly int AppObjectId;
         private static readonly int UserNameId;
-        private readonly Database _database;
         private readonly ICacheProvider _cacheProvider;
         private readonly ILogMonitorFactory _monitorFactory;
         private readonly IIdentityManager _identityManager;
+        private readonly IDatabaseInstanceProvider _instanceProvider;
 
         static BaseGenericRepository()
         {
@@ -40,19 +39,18 @@ namespace CES.CoreApi.Foundation.Data.Base
             UserNameId = int.Parse(ConfigurationManager.AppSettings["UserNameID"]);
         }
 
-        protected BaseGenericRepository(ICacheProvider cacheProvider, ILogMonitorFactory monitorFactory, IIdentityManager identityManager, DatabaseType databaseType)
+        protected BaseGenericRepository(ICacheProvider cacheProvider, ILogMonitorFactory monitorFactory, IIdentityManager identityManager,
+            IDatabaseInstanceProvider instanceProvider)
         {
             if (cacheProvider == null) throw new ArgumentNullException("cacheProvider");
             if (monitorFactory == null) throw new ArgumentNullException("monitorFactory");
             if (identityManager == null) throw new ArgumentNullException("identityManager");
-            if (databaseType == DatabaseType.Undefined) throw new InvalidEnumArgumentException("databaseType", (int)databaseType, typeof(DatabaseType));
-
+            if (instanceProvider == null) throw new ArgumentNullException("instanceProvider");
+            
             _cacheProvider = cacheProvider;
             _monitorFactory = monitorFactory;
             _identityManager = identityManager;
-            DatabaseType = databaseType;
-            var connectionName = databaseType.GetAttributeValue<ConnectionNameAttribute, string>(x => x.Name);
-            _database = DatabaseFactory.CreateDatabase(connectionName);
+            _instanceProvider = instanceProvider;
         }
 
         #endregion
@@ -116,37 +114,6 @@ namespace CES.CoreApi.Foundation.Data.Base
             return _cacheProvider.GetItem(key, () => ExecuteReaderProcedure(command, request.Shaper, request.OutputShaper), request.CacheDuration);
         }
 
-        protected DatabasePingModel PingDatabase()
-        {
-            var databasePing = new DatabasePingModel
-            {
-                Database = DatabaseType
-            };
-
-            try
-            {
-                using (var connection = _database.CreateConnection())
-                {
-                    connection.Open();
-                    connection.Close();
-                }
-                databasePing.IsOk = true;
-            }
-            catch (Exception ex)
-            {
-                HandleException(ex);
-                databasePing.IsOk = false;
-            }
-            
-            return databasePing;
-        }
-
-        #endregion
-
-        #region Public methods
-
-        public DatabaseType DatabaseType { get; private set; }
-
         #endregion
         
         #region private methods
@@ -157,16 +124,16 @@ namespace CES.CoreApi.Foundation.Data.Base
         /// Executes stored procedure, return list of entities of type TEntity
         /// </summary>
         /// <typeparam name="TEntity">Type of entity to materialize</typeparam>
-        /// <param name="command">Database command to execute</param>
+        /// <param name="commandContext">Database command context to execute</param>
         /// <param name="shaper">Shaper to materialize entity</param>
         /// <returns>List of entities TEntity</returns>
-        private IEnumerable<TEntity> ExecuteListReaderProcedure<TEntity>(DbCommand command, Func<IDataReader, TEntity> shaper)
+        private IEnumerable<TEntity> ExecuteListReaderProcedure<TEntity>(CommandContext commandContext, Func<IDataReader, TEntity> shaper)
         {
             var entitList = new Collection<TEntity>();
 
-            var performanceMonitor = GetPerformanceMonitor(command);
+            var performanceMonitor = GetPerformanceMonitor(commandContext.Command);
 
-            using (var reader = _database.ExecuteReader(command))
+            using (var reader = commandContext.Database.ExecuteReader(commandContext.Command))
             {
                 while (reader.Read())
                 {
@@ -184,17 +151,17 @@ namespace CES.CoreApi.Foundation.Data.Base
         /// Executes stored procedure, return entity of type T
         /// </summary>
         /// <typeparam name="TEntity">Type of entity to materialize</typeparam>
-        /// <param name="command">Database command to execute</param>
+        /// <param name="commandContext">Database command context to execute</param>
         /// <param name="shaper">Shaper to materialize entity</param>
         /// <param name="outputShaper">Output shaper, uses output SP parameters to update entity</param>
         /// <returns>Entity TEntity</returns>
-        private TEntity ExecuteReaderProcedure<TEntity>(DbCommand command, Func<IDataReader, TEntity> shaper, Action<DbParameterCollection, TEntity> outputShaper)
+        private TEntity ExecuteReaderProcedure<TEntity>(CommandContext commandContext, Func<IDataReader, TEntity> shaper, Action<DbParameterCollection, TEntity> outputShaper)
         {
             TEntity entity;
 
-            var performanceMonitor = GetPerformanceMonitor(command);
+            var performanceMonitor = GetPerformanceMonitor(commandContext.Command);
 
-            using (var reader = _database.ExecuteReader(command))
+            using (var reader = commandContext.Database.ExecuteReader(commandContext.Command))
             {
                 entity = reader.Read() 
                     ? shaper(reader) 
@@ -202,7 +169,7 @@ namespace CES.CoreApi.Foundation.Data.Base
             }
 
             if (outputShaper != null)
-                outputShaper(command.Parameters, entity);
+                outputShaper(commandContext.Command.Parameters, entity);
 
             performanceMonitor.Stop();
 
@@ -212,12 +179,12 @@ namespace CES.CoreApi.Foundation.Data.Base
         /// <summary>
         /// Executes stored procedure
         /// </summary>
-        /// <param name="command">Database command to execute</param>
-        private void ExecuteNonQueryProcedure(DbCommand command)
+        /// <param name="commandContext">Database command context to execute</param>
+        private void ExecuteNonQueryProcedure(CommandContext commandContext)
         {
-            var performanceMonitor = GetPerformanceMonitor(command);
+            var performanceMonitor = GetPerformanceMonitor(commandContext.Command);
 
-            _database.ExecuteNonQuery(command);
+            commandContext.Database.ExecuteNonQuery(commandContext.Command);
 
             performanceMonitor.Stop();
         }
@@ -225,12 +192,12 @@ namespace CES.CoreApi.Foundation.Data.Base
         /// <summary>
         /// Executes stored procedure and returns scalar value
         /// </summary>
-        /// <param name="command">Database command to execute</param>
-        private object ExecuteScalarProcedure(DbCommand command)
+        /// <param name="commandContext">Database command context to execute</param>
+        private object ExecuteScalarProcedure(CommandContext commandContext)
         {
-            var performanceMonitor = GetPerformanceMonitor(command);
+            var performanceMonitor = GetPerformanceMonitor(commandContext.Command);
 
-            var result = _database.ExecuteScalar(command);
+            var result = commandContext.Database.ExecuteScalar(commandContext.Command);
 
             performanceMonitor.Stop();
 
@@ -239,20 +206,27 @@ namespace CES.CoreApi.Foundation.Data.Base
         
         #endregion //Stored procedure execution related methods
 
-        private DbCommand GetDbCommand<TEntity>(DatabaseRequest<TEntity> databaseRequest)
+        #region Helper methods
+
+        private CommandContext GetDbCommand<TEntity>(DatabaseRequest<TEntity> databaseRequest)
         {
-            using (var command = _database.GetStoredProcCommand(databaseRequest.ProcedureName))
+            var databaseCommand = new CommandContext
             {
-                AddConventionParameters(databaseRequest, command);
+                Database = _instanceProvider.GetDatabase(databaseRequest.DatabaseType, databaseRequest.DatabaseId)
+            };
+
+            using (databaseCommand.Command = databaseCommand.Database.GetStoredProcCommand(databaseRequest.ProcedureName))
+            {
+                AddConventionParameters(databaseRequest, databaseCommand.Command);
                 
                 if (databaseRequest.Parameters == null)
-                    return command;
+                    return databaseCommand;
 
                 foreach (var parameter in databaseRequest.Parameters)
                 {
-                    command.Parameters.Add(parameter);
+                    databaseCommand.Command.Parameters.Add(parameter);
                 }
-                return command;
+                return databaseCommand;
             }
         }
 
@@ -270,6 +244,10 @@ namespace CES.CoreApi.Foundation.Data.Base
         {
             if (databaseRequest == null) 
                 throw new ArgumentNullException("databaseRequest");
+            if (databaseRequest.DatabaseType == DatabaseType.Undefined)
+                // ReSharper disable NotResolvedInText
+                throw new InvalidEnumArgumentException("databaseRequest.DatabaseType", (int)databaseRequest.DatabaseType, typeof(DatabaseType));
+                // ReSharper restore NotResolvedInText
             if (string.IsNullOrEmpty(databaseRequest.ProcedureName))
                 throw new ApplicationException("databaseRequest.ProcedureName is empty.");
         }
@@ -282,13 +260,8 @@ namespace CES.CoreApi.Foundation.Data.Base
             return performanceMonitor;
         }
 
-        private void HandleException(Exception ex)
-        {
-            var exceptionLogMonitor = _monitorFactory.CreateNew<IExceptionLogMonitor>();
-            exceptionLogMonitor.DataContainer.ApplicationContext = _identityManager.GetClientApplicationIdentity();
-            exceptionLogMonitor.Publish(ex);
-        }
-        
+        #endregion
+
         #endregion
     }
 }

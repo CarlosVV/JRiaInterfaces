@@ -5,9 +5,9 @@ using CES.CoreApi.Accounting.Service.Business.Contract.Interfaces;
 using CES.CoreApi.Accounting.Service.Business.Contract.Models;
 using CES.CoreApi.Common.Enumerations;
 using CES.CoreApi.Common.Interfaces;
-using CES.CoreApi.Common.Models;
-using CES.CoreApi.Foundation.Data;
 using CES.CoreApi.Foundation.Data.Base;
+using CES.CoreApi.Foundation.Data.Interfaces;
+using CES.CoreApi.Foundation.Data.Models;
 using CES.CoreApi.Foundation.Data.Utility;
 using CES.CoreApi.Logging.Interfaces;
 
@@ -17,8 +17,9 @@ namespace CES.CoreApi.Accounting.Service.Data.Repositories
     {
         #region Core
 
-        public TransactionInformationRepository(ICacheProvider cacheProvider, ILogMonitorFactory monitorFactory, IIdentityManager identityManager)
-            : base(cacheProvider, monitorFactory, identityManager, DatabaseType.FrontEnd)
+        public TransactionInformationRepository(ICacheProvider cacheProvider, ILogMonitorFactory monitorFactory, IIdentityManager identityManager,
+            IDatabaseInstanceProvider instanceProvider)
+            : base(cacheProvider, monitorFactory, identityManager, instanceProvider)
         {
         } 
 
@@ -34,6 +35,7 @@ namespace CES.CoreApi.Accounting.Service.Data.Repositories
                     ? "ol_sp_compltblTransaction_ForFilters_GetSumByRecAgentLoc"
                     : "ol_sp_compltblTransaction_ForFilters_GetSumByCorrespLoc",
                 IsCacheable = false,
+                DatabaseType = DatabaseType.FrontEnd,
                 Parameters = new Collection<SqlParameter>()
                     .Add("@fRecAgentID", requestData.AgentId)
                     .Add("@fRecAgentLocID", requestData.LocationId)
@@ -45,11 +47,6 @@ namespace CES.CoreApi.Accounting.Service.Data.Repositories
             };
 
             return Get(request);
-        }
-
-        public DatabasePingModel Ping()
-        {
-            return PingDatabase();
         }
 
         #endregion

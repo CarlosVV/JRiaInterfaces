@@ -4,6 +4,7 @@ using CES.CoreApi.Common.Enumerations;
 using CES.CoreApi.Common.Exceptions;
 using CES.CoreApi.Common.Interfaces;
 using CES.CoreApi.Common.Models;
+using CES.CoreApi.Foundation.Data.Interfaces;
 
 namespace CES.CoreApi.Agent.Service.Business.Logic.Processors
 {
@@ -12,19 +13,19 @@ namespace CES.CoreApi.Agent.Service.Business.Logic.Processors
         #region Core
 
         private readonly ICacheProvider _cacheProvider;
-        private readonly IAgentCurrencyRepository _agentCurrencyRepository;
+        private readonly IDatabasePingProvider _pingProvider;
 
-        public HealthMonitoringProcessor(ICacheProvider cacheProvider, IAgentCurrencyRepository agentCurrencyRepository)
+        public HealthMonitoringProcessor(ICacheProvider cacheProvider, IDatabasePingProvider pingProvider)
         {
             if (cacheProvider == null)
                 throw new CoreApiException(TechnicalSubSystem.AgentService,
                   SubSystemError.GeneralRequiredParameterIsUndefined, "cacheProvider");
-            if (agentCurrencyRepository == null)
+            if (pingProvider == null)
                 throw new CoreApiException(TechnicalSubSystem.AgentService,
-                  SubSystemError.GeneralRequiredParameterIsUndefined, "agentCurrencyRepository");
+                  SubSystemError.GeneralRequiredParameterIsUndefined, "pingProvider");
 
             _cacheProvider = cacheProvider;
-            _agentCurrencyRepository = agentCurrencyRepository;
+            _pingProvider = pingProvider;
         }
 
         #endregion
@@ -50,11 +51,7 @@ namespace CES.CoreApi.Agent.Service.Business.Logic.Processors
 
         public PingResponseModel Ping()
         {
-            var response = new PingResponseModel();
-
-            response.Databases.Add(_agentCurrencyRepository.Ping());
-
-            return response;
+            return _pingProvider.PingDatabases();
         }
 
         #endregion

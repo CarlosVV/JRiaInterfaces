@@ -3,6 +3,7 @@ using CES.CoreApi.Common.Enumerations;
 using CES.CoreApi.Common.Exceptions;
 using CES.CoreApi.Common.Interfaces;
 using CES.CoreApi.Common.Models;
+using CES.CoreApi.Foundation.Data.Interfaces;
 using CES.CoreApi.Settings.Service.Business.Contract.Interfaces;
 
 namespace CES.CoreApi.Settings.Service.Business.Logic.Processors
@@ -12,19 +13,19 @@ namespace CES.CoreApi.Settings.Service.Business.Logic.Processors
         #region Core
 
         private readonly ICacheProvider _cacheProvider;
-        private readonly ICountryRepository _countryRepository;
+        private readonly IDatabasePingProvider _pingProvider;
 
-        public HealthMonitoringProcessor(ICacheProvider cacheProvider, ICountryRepository countryRepository)
+        public HealthMonitoringProcessor(ICacheProvider cacheProvider, IDatabasePingProvider pingProvider)
         {
             if (cacheProvider == null)
                 throw new CoreApiException(TechnicalSubSystem.CustomerService,
                   SubSystemError.GeneralRequiredParameterIsUndefined, "cacheProvider");
-            if (countryRepository == null)
+            if (pingProvider == null)
                 throw new CoreApiException(TechnicalSubSystem.CustomerService,
-                  SubSystemError.GeneralRequiredParameterIsUndefined, "countryRepository");
+                  SubSystemError.GeneralRequiredParameterIsUndefined, "pingProvider");
         
             _cacheProvider = cacheProvider;
-            _countryRepository = countryRepository;
+            _pingProvider = pingProvider;
         }
 
         #endregion
@@ -50,11 +51,7 @@ namespace CES.CoreApi.Settings.Service.Business.Logic.Processors
 
         public PingResponseModel Ping()
         {
-            var response = new PingResponseModel();
-
-            response.Databases.Add(_countryRepository.Ping());
-
-            return response;
+            return _pingProvider.PingDatabases();
         }
 
         #endregion

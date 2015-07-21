@@ -69,7 +69,7 @@ namespace CES.CoreApi.Accounting.Service
         public HealthMonitoringResponse Ping()
         {
             var responseModel = _healthMonitoringProcessor.Ping();
-            return _mapper.ConvertToResponse<HealthResponseModel, HealthMonitoringResponse>(responseModel);
+            return _mapper.ConvertToResponse<PingResponseModel, PingResponse>(responseModel);
         }
 
         #endregion

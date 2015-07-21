@@ -2,8 +2,9 @@
 using System.Data.SqlClient;
 using CES.CoreApi.Common.Enumerations;
 using CES.CoreApi.Common.Interfaces;
-using CES.CoreApi.Foundation.Data;
 using CES.CoreApi.Foundation.Data.Base;
+using CES.CoreApi.Foundation.Data.Interfaces;
+using CES.CoreApi.Foundation.Data.Models;
 using CES.CoreApi.Foundation.Data.Utility;
 using CES.CoreApi.Logging.Interfaces;
 using CES.CoreApi.OrderValidation.Service.Business.Contract.Interfaces;
@@ -13,8 +14,9 @@ namespace CES.CoreApi.OrderValidation.Service.Data
 {
     public class ValidationMainRepository : BaseGenericRepository, IValidationMainRepository
     {
-        public ValidationMainRepository(ICacheProvider cacheProvider, ILogMonitorFactory monitorFactory, IIdentityManager identityManager)
-            : base(cacheProvider, monitorFactory, identityManager, DatabaseType.Main)
+        public ValidationMainRepository(ICacheProvider cacheProvider, ILogMonitorFactory monitorFactory, IIdentityManager identityManager,
+            IDatabaseInstanceProvider instanceProvider)
+            : base(cacheProvider, monitorFactory, identityManager, instanceProvider)
         {
         }
 
@@ -24,6 +26,7 @@ namespace CES.CoreApi.OrderValidation.Service.Data
             {
                 ProcedureName = "coreapi_sp_OrderDuplicateValidation",
                 IsCacheable = false,
+                DatabaseType = DatabaseType.Main,
                 Parameters = new Collection<SqlParameter>()
                     .Add("@RecAgentID", model.ReceivingAgentId)
                     .Add("@RecAgentLocationID", model.ReceivingAgentLocationId)

@@ -11,6 +11,8 @@ using CES.CoreApi.Common.Providers;
 using CES.CoreApi.Common.Proxies;
 using CES.CoreApi.Foundation.Contract.Interfaces;
 using CES.CoreApi.Foundation.Data;
+using CES.CoreApi.Foundation.Data.Interfaces;
+using CES.CoreApi.Foundation.Data.Providers;
 using CES.CoreApi.Foundation.Providers;
 using CES.CoreApi.Foundation.Security;
 using CES.CoreApi.Foundation.Service;
@@ -49,10 +51,8 @@ namespace CES.CoreApi.OrderValidation.Service.Configuration
             RegisterOthers(container);
             RegisterLoggging(container);
             RegisterInterceptions(container);
-            //RegisterFactories(container);
             RegisterProcessors(container);
-            //RegisterUrlBuilders(container);
-            //RegisterParsers(container);
+            RegisterDataAccess(container);
             RegisterProviders(container);
             RegisterValidators(container);
 
@@ -170,8 +170,6 @@ namespace CES.CoreApi.OrderValidation.Service.Configuration
             container.RegisterSingle<IMappingHelper, MappingHelper>();
             container.RegisterSingle<IExceptionHelper, ExceptionHelper>();
             container.RegisterSingle<IServiceHelper, ServiceHelper>();
-            container.RegisterSingle<IValidationReadOnlyRepository, ValidationReadOnlyRepository>();
-            container.RegisterSingle<IValidationMainRepository, ValidationMainRepository>();
         }
 
         private static void RegisterValidators(Container container)
@@ -194,6 +192,15 @@ namespace CES.CoreApi.OrderValidation.Service.Configuration
         private static void RegisterResponses(Container container)
         {
             container.Register<OrderValidateResponse, OrderValidateResponse>();
+        }
+
+        private static void RegisterDataAccess(Container container)
+        {
+            container.RegisterSingle<IValidationReadOnlyRepository, ValidationReadOnlyRepository>();
+            container.RegisterSingle<IValidationMainRepository, ValidationMainRepository>();
+            container.RegisterSingle<IDatabaseConfigurationProvider, DatabaseConfigurationProvider>();
+            container.RegisterSingle<IDatabaseInstanceProvider, DatabaseInstanceProvider>();
+            container.RegisterSingle<IDatabasePingProvider, DatabasePingProvider>();
         }
     }
 }

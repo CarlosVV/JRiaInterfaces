@@ -1,10 +1,8 @@
-﻿using CES.CoreApi.Common.Enumerations;
-
-namespace CES.CoreApi.Common.Models
+﻿namespace CES.CoreApi.Common.Models
 {
     public class DatabasePingModel
     {
-        public DatabaseType Database { get; set; }
+        public string Database { get; set; }
         public bool IsOk { get; set; }
     }
 }

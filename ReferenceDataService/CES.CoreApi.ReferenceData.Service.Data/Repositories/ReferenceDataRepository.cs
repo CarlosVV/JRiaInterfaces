@@ -5,9 +5,9 @@ using System.Data;
 using System.Data.SqlClient;
 using CES.CoreApi.Common.Enumerations;
 using CES.CoreApi.Common.Interfaces;
-using CES.CoreApi.Common.Models;
-using CES.CoreApi.Foundation.Data;
 using CES.CoreApi.Foundation.Data.Base;
+using CES.CoreApi.Foundation.Data.Interfaces;
+using CES.CoreApi.Foundation.Data.Models;
 using CES.CoreApi.Foundation.Data.Utility;
 using CES.CoreApi.Logging.Interfaces;
 using CES.CoreApi.ReferenceData.Service.Business.Contract.Enumerations;
@@ -22,8 +22,9 @@ namespace CES.CoreApi.ReferenceData.Service.Data.Repositories
 
         private const int OneHourTimeout = 1;
 
-        public ReferenceDataRepository(ICacheProvider cacheProvider, ILogMonitorFactory monitorFactory, IIdentityManager identityManager)
-            : base(cacheProvider, monitorFactory, identityManager, DatabaseType.Main)
+        public ReferenceDataRepository(ICacheProvider cacheProvider, ILogMonitorFactory monitorFactory, IIdentityManager identityManager,
+            IDatabaseInstanceProvider instanceProvider)
+            : base(cacheProvider, monitorFactory, identityManager, instanceProvider)
         {
         }
 
@@ -37,6 +38,7 @@ namespace CES.CoreApi.ReferenceData.Service.Data.Repositories
             {
                 ProcedureName = "ol_sp_systblUserConst_GetAllByfKey1",
                 IsCacheable = true,
+                DatabaseType = DatabaseType.Main,
                 CacheDuration = TimeSpan.FromHours(OneHourTimeout),
                 Parameters = new Collection<SqlParameter>()
                     .Add("@fID", locationDepartmentId)
@@ -45,11 +47,6 @@ namespace CES.CoreApi.ReferenceData.Service.Data.Repositories
             };
 
             return GetList(request);
-        }
-
-        public DatabasePingModel Ping()
-        {
-            return PingDatabase();
         }
 
         #endregion

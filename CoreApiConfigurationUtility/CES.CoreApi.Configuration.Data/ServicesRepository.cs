@@ -3,8 +3,9 @@ using CES.CoreApi.Common.Enumerations;
 using CES.CoreApi.Common.Interfaces;
 using CES.CoreApi.Configuration.Model.DomainEntities;
 using CES.CoreApi.Configuration.Model.Interfaces;
-using CES.CoreApi.Foundation.Data;
 using CES.CoreApi.Foundation.Data.Base;
+using CES.CoreApi.Foundation.Data.Interfaces;
+using CES.CoreApi.Foundation.Data.Models;
 using CES.CoreApi.Foundation.Data.Utility;
 using CES.CoreApi.Logging.Interfaces;
 
@@ -12,8 +13,9 @@ namespace CES.CoreApi.Configuration.Data
 {
     public class ServicesRepository : BaseGenericRepository, IServicesRepository
     {
-        public ServicesRepository(ICacheProvider cacheProvider, ILogMonitorFactory logMonitorFactory, IIdentityManager identityManager)
-            : base(cacheProvider, logMonitorFactory, identityManager, DatabaseType.Main)
+        public ServicesRepository(ICacheProvider cacheProvider, ILogMonitorFactory logMonitorFactory, IIdentityManager identityManager,
+             IDatabaseInstanceProvider instanceProvider)
+            : base(cacheProvider, logMonitorFactory, identityManager, instanceProvider)
         {
         }
 
@@ -23,6 +25,7 @@ namespace CES.CoreApi.Configuration.Data
             {
                 ProcedureName = "coreapi_sp_GetServiceList",
                 IsCacheable = true,
+                DatabaseType = DatabaseType.Main,
                 Shaper = reader => new Service(
                     reader.ReadValue<int>("ServiceId"),
                     reader.ReadValue<string>("Name"))

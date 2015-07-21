@@ -1,5 +1,6 @@
 ﻿using System.Globalization;
 using System.Text;
+using CES.CoreApi.Foundation.Data.Models;
 
 namespace CES.CoreApi.Foundation.Data.Utility
 {
