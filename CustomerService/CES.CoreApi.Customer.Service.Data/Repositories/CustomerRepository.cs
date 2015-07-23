@@ -90,7 +90,7 @@ namespace CES.CoreApi.Customer.Service.Data.Repositories
                 Country = reader.ReadValue<string>("fCountry"),
                 PostalCode = reader.ReadValue<string>("fPostalCode"),
                 UnitNumber = reader.ReadValue<string>("fUnitNumber"),
-                ValidationResult = reader.ReadValue<AddressValidationResult>("fAddressValidationStatusID")
+                ValidationStatus = reader.ReadValue<AddressValidationResult>("fAddressValidationStatusID")
             };
             var longitude = reader.ReadValue<double?>("fLongitude");
             var latitude = reader.ReadValue<double?>("fLatitude");

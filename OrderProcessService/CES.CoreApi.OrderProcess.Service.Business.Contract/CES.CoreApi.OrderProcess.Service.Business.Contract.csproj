@@ -41,15 +41,20 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Enumerations\TransactionStatusEnum.cs" />
+    <Compile Include="Enumerations\UnitaryAccountType.cs" />
     <Compile Include="Interfaces\ITransactionProcessor.cs" />
     <Compile Include="Interfaces\ITransactionRepository.cs" />
+    <Compile Include="Models\AmountDetailsModel.cs" />
     <Compile Include="Models\BankAccountModel.cs" />
     <Compile Include="Models\BankDepositModel.cs" />
     <Compile Include="Models\BankModel.cs" />
+    <Compile Include="Models\CommissionDetailsModel.cs" />
     <Compile Include="Models\ComplianceInformationModel.cs" />
+    <Compile Include="Models\CurrencyDetailsModel.cs" />
     <Compile Include="Models\MonetaryInformationModel.cs" />
     <Compile Include="Models\MoneyTransferDetailsModel.cs" />
     <Compile Include="Models\ProcessingInformationModel.cs" />
+    <Compile Include="Models\RateDetailsModel.cs" />
     <Compile Include="Models\TransactionStatusModel.cs" />
     <Compile Include="Models\TransactionDetailsModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

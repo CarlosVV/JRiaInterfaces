@@ -1,10 +1,10 @@
-﻿using System.Runtime.Serialization;
+using System.Runtime.Serialization;
 using CES.CoreApi.Common.Models;
-using CES.CoreApi.Customer.Service.Contract.Constants;
+using CES.CoreApi.OrderProcess.Service.Contract.Constants;
 
-namespace CES.CoreApi.Customer.Service.Contract.Models
+namespace CES.CoreApi.OrderProcess.Service.Contract.Models
 {
-    [DataContract(Namespace = Namespaces.CustomerServiceDataContractNamespace)]
+    [DataContract(Namespace = Namespaces.OrderProcessDataContractNamespace)]
     public class Phone : ExtensibleObject
     {
         [DataMember(EmitDefaultValue = false)]

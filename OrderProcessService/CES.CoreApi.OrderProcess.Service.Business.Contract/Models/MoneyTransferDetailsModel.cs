@@ -1,6 +1,5 @@
 ﻿using System;
 using CES.CoreApi.Shared.Business.Contract.Enumerations;
-using CES.CoreApi.Shared.Business.Contract.Models;
 
 namespace CES.CoreApi.OrderProcess.Service.Business.Contract.Models
 {
@@ -13,7 +12,6 @@ namespace CES.CoreApi.OrderProcess.Service.Business.Contract.Models
         public string Pin { get; set; }
         public int ReceivingAgentSequentialId { get; set; }
         public int PayingAgentSequentialId { get; set; }
-        public ComplianceInformationModel ComplianceInformation { get; set; }
         public BankDepositModel Deposit { get; set; }
         public MonetaryInformationModel MonetaryInformation { get; set; }
     }

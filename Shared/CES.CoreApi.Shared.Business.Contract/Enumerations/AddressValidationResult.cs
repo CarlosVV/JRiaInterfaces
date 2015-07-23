@@ -3,6 +3,7 @@
     public enum AddressValidationResult
     {
         Undefined = 0,
-        Verified = 1
+        Valid = 1,
+        NotValid = 2
     }
 }

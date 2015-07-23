@@ -16,6 +16,6 @@ namespace CES.CoreApi.Shared.Business.Contract.Models
         public string Country { get; set; }
         public int? CountryId { get; set; }
         public GeolocationModel Geolocation { get; set; }
-        public AddressValidationResult ValidationResult { get; set; }
+        public AddressValidationResult ValidationStatus { get; set; }
     }
 }
