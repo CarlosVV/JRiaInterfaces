@@ -29,19 +29,19 @@ namespace CES.CoreApi.Foundation.Security
             ILogMonitorFactory logMonitorFactory, IHostApplicationProvider hostApplicationProvider)
         {
             if (applicationValidator == null)
-                throw new CoreApiException(TechnicalSubSystem.GeoLocationService,
+                throw new CoreApiException(TechnicalSubSystem.Authentication,
                     SubSystemError.GeneralRequiredParameterIsUndefined, "applicationValidator");
             if (repository == null)
-                throw new CoreApiException(TechnicalSubSystem.GeoLocationService,
+                throw new CoreApiException(TechnicalSubSystem.Authentication,
                     SubSystemError.GeneralRequiredParameterIsUndefined, "repository");
             if (parametersProvider == null)
-                throw new CoreApiException(TechnicalSubSystem.GeoLocationService,
+                throw new CoreApiException(TechnicalSubSystem.Authentication,
                     SubSystemError.GeneralRequiredParameterIsUndefined, "parametersProvider");
             if (logMonitorFactory == null)
-                throw new CoreApiException(TechnicalSubSystem.GeoLocationService,
+                throw new CoreApiException(TechnicalSubSystem.Authentication,
                     SubSystemError.GeneralRequiredParameterIsUndefined, "logMonitorFactory");
             if (hostApplicationProvider == null)
-                throw new CoreApiException(TechnicalSubSystem.GeoLocationService,
+                throw new CoreApiException(TechnicalSubSystem.Authentication,
                     SubSystemError.GeneralRequiredParameterIsUndefined, "hostApplicationProvider");
 
             _applicationValidator = applicationValidator;

@@ -11,7 +11,6 @@ namespace CES.CoreApi.Shared.Business.Contract.Models
         public AgentTypeEnum AgentType { get; set; }
         public AgentLocationModel Location { get; set; }
         public string Number { get; set; }
-
         public bool IsRiaStore { get; set; }
     }
 }

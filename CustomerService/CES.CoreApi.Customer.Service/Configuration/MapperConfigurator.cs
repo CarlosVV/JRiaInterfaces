@@ -2,6 +2,7 @@
 using CES.CoreApi.Common.Models;
 using CES.CoreApi.Customer.Service.Business.Contract.Models;
 using CES.CoreApi.Customer.Service.Contract.Models;
+using CES.CoreApi.Shared.Business.Contract.Enumerations;
 using CES.CoreApi.Shared.Business.Contract.Models;
 using SimpleInjector;
 
@@ -21,6 +22,17 @@ namespace CES.CoreApi.Customer.Service.Configuration
             Mapper.CreateMap<CustomerModel, CustomerGetResponse>()
                .ForMember(p => p.Customer, map => map.MapFrom(dto => Mapper.Map<CustomerModel, Contract.Models.Customer>(dto)))
                .ConstructUsingServiceLocator();
+
+            Mapper.CreateMap<GenderEnum, string>()
+               .ConvertUsing(src => src == default(GenderEnum) ? null : src.ToString());
+            Mapper.CreateMap<AddressValidationResult, string>()
+                .ConvertUsing(src => src.ToString());
+            Mapper.CreateMap<AgentTypeEnum, string>()
+                .ConvertUsing(src => src == default(AgentTypeEnum) ? null : src.ToString());
+            Mapper.CreateMap<DeliveryMethodType, string>()
+                .ConvertUsing(src => src == default(DeliveryMethodType) ? null : src.ToString());
+            Mapper.CreateMap<PhoneType, string>()
+                .ConvertUsing(src => src == default(PhoneType) ? null : src.ToString());
 
             Mapper.CreateMap<PingResponseModel, PingResponse>().ConstructUsingServiceLocator();
             Mapper.CreateMap<ClearCacheResponseModel, ClearCacheResponse>().ConstructUsingServiceLocator();

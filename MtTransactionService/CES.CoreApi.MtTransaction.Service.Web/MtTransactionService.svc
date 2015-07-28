@@ -1,0 +1,5 @@
+﻿<%@ ServiceHost 
+    Language="C#" 
+    Debug="true" 
+    Service="CES.CoreApi.MtTransaction.Service.MtTransactionService" 
+    Factory="CES.CoreApi.MtTransaction.Service.Factory.MtTransactionServiceHostFactory" %>

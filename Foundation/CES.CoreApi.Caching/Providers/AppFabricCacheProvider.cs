@@ -23,8 +23,8 @@ namespace CES.CoreApi.Caching.Providers
         
         private static DataCache _cache;
         private static readonly DataCacheFactory CacheFactory;
-        protected static readonly string CacheName;
-        protected static readonly TimeSpan CacheLifetime;
+        private static readonly string CacheName;
+        private static readonly TimeSpan CacheLifetime;
 
         public AppFabricCacheProvider(ILogMonitorFactory monitorFactory, IIdentityManager identityManager, string cacheName = null)
         {
@@ -87,7 +87,7 @@ namespace CES.CoreApi.Caching.Providers
             return GetItem(key, getDataFunc, CacheLifetime);
         }
 
-        public T GetItem<T>(string key, Func<T> getDataFunc, TimeSpan timeout)
+        public T GetItem<T>(string key, Func<T> getDataFunc, TimeSpan timeout, Func<T, bool> isCacheValid = null)
         {
             object result;
             var message = string.Format(CultureInfo.InvariantCulture, GetItemMessageTemplate,
@@ -106,9 +106,15 @@ namespace CES.CoreApi.Caching.Providers
                 PublishException(ex, message);
                 throw;
             }
-
+            
             if (result != null)
-                return (T) result;
+            {
+                var typifiedResult = (T) result;
+
+                if (isCacheValid == null || isCacheValid(typifiedResult))
+                    return (T) result;
+                RemoveItem(key);
+            }
 
             result = getDataFunc();
 

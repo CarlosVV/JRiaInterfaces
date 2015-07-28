@@ -110,8 +110,11 @@ namespace CES.CoreApi.Foundation.Data.Base
             if (!request.IsCacheable) 
                 return ExecuteReaderProcedure(command, request.Shaper, request.OutputShaper);
 
-            var key = request.ToCacheKey();
-            return _cacheProvider.GetItem(key, () => ExecuteReaderProcedure(command, request.Shaper, request.OutputShaper), request.CacheDuration);
+            var key = request.ToCacheKey(request.CacheKeySuffix);
+            return _cacheProvider.GetItem(key,
+                () => ExecuteReaderProcedure(command, request.Shaper, request.OutputShaper),
+                request.CacheDuration,
+                request.CacheInvalidator);
         }
 
         #endregion
@@ -140,6 +143,7 @@ namespace CES.CoreApi.Foundation.Data.Base
                     var entity = shaper(reader);
                     entitList.Add(entity);
                 }
+                performanceMonitor.UpdateConnectionDetails(commandContext.Command);
             }
 
             performanceMonitor.Stop();
@@ -166,6 +170,8 @@ namespace CES.CoreApi.Foundation.Data.Base
                 entity = reader.Read() 
                     ? shaper(reader) 
                     : default (TEntity);
+
+                performanceMonitor.UpdateConnectionDetails(commandContext.Command);
             }
 
             if (outputShaper != null)

@@ -17,10 +17,10 @@ namespace CES.CoreApi.Foundation.Security
         public AuthorizationManager(IAuthorizationAdministrator authorizationAdministrator, IExceptionLogMonitor exceptionMonitor)
         {
             if (authorizationAdministrator == null)
-                throw new CoreApiException(TechnicalSubSystem.GeoLocationService,
+                throw new CoreApiException(TechnicalSubSystem.Authorization,
                    SubSystemError.GeneralRequiredParameterIsUndefined, "authorizationAdministrator");
             if (exceptionMonitor == null)
-                throw new CoreApiException(TechnicalSubSystem.GeoLocationService,
+                throw new CoreApiException(TechnicalSubSystem.Authorization,
                   SubSystemError.GeneralRequiredParameterIsUndefined, "exceptionMonitor");
             _authorizationAdministrator = authorizationAdministrator;
             _exceptionMonitor = exceptionMonitor;

@@ -20,10 +20,10 @@ namespace CES.CoreApi.Foundation.Security
         public AuthenticationManager(IApplicationAuthenticator authenticator, IExceptionLogMonitor exceptionMonitor)
         {
             if (authenticator == null)
-                throw new CoreApiException(TechnicalSubSystem.GeoLocationService,
+                throw new CoreApiException(TechnicalSubSystem.Authentication,
                     SubSystemError.GeneralRequiredParameterIsUndefined, "authenticator");
             if (exceptionMonitor == null)
-                throw new CoreApiException(TechnicalSubSystem.GeoLocationService,
+                throw new CoreApiException(TechnicalSubSystem.Authentication,
                     SubSystemError.GeneralRequiredParameterIsUndefined, "exceptionMonitor");
             _authenticator = authenticator;
             _exceptionMonitor = exceptionMonitor;

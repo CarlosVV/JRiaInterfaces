@@ -19,5 +19,7 @@ namespace CES.CoreApi.Logging.Interfaces
         /// Stops performance log monitoring
         /// </summary>
         void Stop();
+
+        void UpdateConnectionDetails(DbCommand command);
     }
 }

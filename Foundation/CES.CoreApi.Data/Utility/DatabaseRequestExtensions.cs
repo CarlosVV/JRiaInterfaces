@@ -6,13 +6,13 @@ namespace CES.CoreApi.Foundation.Data.Utility
 {
     public static class DatabaseRequestExtensions
     {
-        private const string KeyTemplate = "{0}_{1}";
+        private const string KeyTemplate = "{0}_{1}_{2}";
         private const string SqlParameterKeyTemplate = "{0}_{1}_";
 
-        public static string ToCacheKey<TEntity>(this DatabaseRequest<TEntity> request)
+        public static string ToCacheKey<TEntity>(this DatabaseRequest<TEntity> request, string cacheKeySuffix = null)
         {
             var parameters = SerializeParameters(request);
-            return string.Format(CultureInfo.InvariantCulture, KeyTemplate, request.ProcedureName, parameters);
+            return string.Format(CultureInfo.InvariantCulture, KeyTemplate, request.ProcedureName, parameters, cacheKeySuffix);
         }
 
         private static string SerializeParameters<TEntity>(DatabaseRequest<TEntity> request)

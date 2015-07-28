@@ -19,5 +19,7 @@ namespace CES.CoreApi.Foundation.Data.Models
         public string CacheRegion { get; set; }
         public DatabaseType DatabaseType { get; set; }
         public int DatabaseId { get; set; }
+        public Func<TEntity, bool> CacheInvalidator { get; set; }
+        public string CacheKeySuffix { get; set; }
     }
 }

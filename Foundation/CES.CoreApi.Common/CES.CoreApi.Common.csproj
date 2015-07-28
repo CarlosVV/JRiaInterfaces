@@ -109,6 +109,7 @@
     <Compile Include="Tools\DictionaryTools.cs" />
     <Compile Include="Tools\EnumTools.cs" />
     <Compile Include="Tools\EnumerableTools.cs" />
+    <Compile Include="Tools\StringTools.cs" />
     <Compile Include="Tools\TypeTools.cs" />
     <Compile Include="Tools\XmlTools.cs" />
   </ItemGroup>

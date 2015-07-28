@@ -7,7 +7,6 @@ using CES.CoreApi.Common.Exceptions;
 using CES.CoreApi.Common.Interfaces;
 using CES.CoreApi.Common.Models;
 using CES.CoreApi.Foundation.Contract.Interfaces;
-using CES.CoreApi.Foundation.Contract.Models;
 using CES.CoreApi.Logging.Interfaces;
 using CES.CoreApi.Logging.Models;
 
@@ -28,19 +27,19 @@ namespace CES.CoreApi.Foundation.Security
             ILogMonitorFactory logMonitorFactory, IIdentityManager identityManager)
         {
             if (applicationValidator == null)
-                throw new CoreApiException(TechnicalSubSystem.GeoLocationService,
+                throw new CoreApiException(TechnicalSubSystem.Authorization,
                     SubSystemError.GeneralRequiredParameterIsUndefined, "applicationValidator");
             if (parametersProvider == null)
-                throw new CoreApiException(TechnicalSubSystem.GeoLocationService,
+                throw new CoreApiException(TechnicalSubSystem.Authorization,
                     SubSystemError.GeneralRequiredParameterIsUndefined, "parametersProvider");
             if (hostApplicationProvider == null)
-                throw new CoreApiException(TechnicalSubSystem.GeoLocationService,
+                throw new CoreApiException(TechnicalSubSystem.Authorization,
                     SubSystemError.GeneralRequiredParameterIsUndefined, "hostApplicationProvider");
             if (logMonitorFactory == null)
-                throw new CoreApiException(TechnicalSubSystem.GeoLocationService,
+                throw new CoreApiException(TechnicalSubSystem.Authorization,
                     SubSystemError.GeneralRequiredParameterIsUndefined, "logMonitorFactory");
             if (identityManager == null)
-                throw new CoreApiException(TechnicalSubSystem.GeoLocationService,
+                throw new CoreApiException(TechnicalSubSystem.Authorization,
                     SubSystemError.GeneralRequiredParameterIsUndefined, "identityManager");
 
             _applicationValidator = applicationValidator;

@@ -7,6 +7,7 @@ using System.Data.SqlClient;
 using System.Diagnostics;
 using System.Linq;
 using CES.CoreApi.Common.Interfaces;
+using CES.CoreApi.Common.Tools;
 using CES.CoreApi.Logging.Interfaces;
 using CES.CoreApi.Logging.Models;
 
@@ -75,7 +76,19 @@ namespace CES.CoreApi.Logging.Monitors
 
             _timer.Start();
         }
-        
+
+        public void UpdateConnectionDetails(DbCommand command)
+        {
+            if (!Configuration.PerformanceLogConfiguration.IsEnabled)
+                return;
+            if (command == null)
+                throw new ArgumentNullException("command");
+            if (!_timer.IsRunning)
+                throw new ApplicationException("Database Performance Monitor is not running. Start method should be called before Stop.");
+            
+            SetConnectionDetails(command);
+        }
+
         /// <summary>
         /// Stops performance log monitoring
         /// </summary>
@@ -107,6 +120,11 @@ namespace CES.CoreApi.Logging.Monitors
             DataContainer.CommandType = command.CommandType;
             DataContainer.Parameters = GetParametersCollection(command);
 
+            SetConnectionDetails(command);
+        }
+
+        private void SetConnectionDetails(DbCommand command)
+        {
             if (command.Connection == null)
                 return;
             if (command.Connection.State != ConnectionState.Open)
@@ -114,7 +132,7 @@ namespace CES.CoreApi.Logging.Monitors
 
             DataContainer.Connection = new DatabaseConnection
             {
-                ConnectionString = command.Connection.ConnectionString,
+                ConnectionString = command.Connection.ConnectionString.RemoveSecurityCredentials(),
                 ConnectionTimeout = command.Connection.ConnectionTimeout,
                 DatabaseName = command.Connection.Database,
                 ServerName = command.Connection.DataSource,
