@@ -45,7 +45,7 @@ namespace CES.CoreApi.OrderValidation.Service
         {
             _requestValidator.Validate(request);
 
-            _orderValidateRequestProcessor.ValidateOrder(432324324);
+            _orderValidateRequestProcessor.ValidateOrder(request.CustomerId);
 
             //var responseModel = _addressServiceRequestProcessor.ValidateAddress(
             //    request.FormattedAddress,

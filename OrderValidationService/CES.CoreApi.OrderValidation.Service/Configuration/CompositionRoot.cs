@@ -27,6 +27,8 @@ using CES.CoreApi.Logging.Models;
 using CES.CoreApi.Logging.Monitors;
 using CES.CoreApi.Logging.Providers;
 using CES.CoreApi.OrderValidation.Service.Business.Contract.Interfaces;
+using CES.CoreApi.OrderValidation.Service.Business.Contract.Models;
+using CES.CoreApi.OrderValidation.Service.Business.Logic.Factories;
 using CES.CoreApi.OrderValidation.Service.Business.Logic.Processors;
 using CES.CoreApi.OrderValidation.Service.Business.Logic.Validators;
 using CES.CoreApi.OrderValidation.Service.Contract.Models;
@@ -174,9 +176,23 @@ namespace CES.CoreApi.OrderValidation.Service.Configuration
 
         private static void RegisterValidators(Container container)
         {
-            var assemblies = AppDomain.CurrentDomain.GetAssemblies().ToList();
-            container.RegisterManyForOpenGeneric(typeof (IValidator<>), assemblies);
+            container.RegisterSingle<PayingAgentValidator>();
+            container.RegisterSingle<BeneficiaryValidator>();
+            container.RegisterSingle<CustomerValidator>();
+            container.RegisterSingle<OfacValidator>();
+            container.RegisterSingle<OrderDuplicateValidator>();
+            container.RegisterSingle<SarValidator>();
 
+            container.RegisterSingle<Business.Contract.Interfaces.IValidatorFactory>(new ValidatorFactory
+            {
+                {"PayingAgentValidator", container.GetInstance<PayingAgentValidator>},
+                {"BeneficiaryValidator", container.GetInstance<BeneficiaryValidator>},
+                {"CustomerValidator", container.GetInstance<CustomerValidator>},
+                {"OfacValidator", container.GetInstance<OfacValidator>},
+                {"OrderDuplicateValidator", container.GetInstance<OrderDuplicateValidator>},
+                {"SarValidator", container.GetInstance<SarValidator>}
+            });
+            
             container.RegisterSingle<ICountryCodeValidator, CountryCodeValidator>();
             container.RegisterSingle<IRequestValidator, RequestValidator>();
         }

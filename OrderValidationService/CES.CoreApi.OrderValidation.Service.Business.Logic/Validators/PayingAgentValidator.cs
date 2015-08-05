@@ -11,7 +11,6 @@ namespace CES.CoreApi.OrderValidation.Service.Business.Logic.Validators
         public PayingAgentValidator(IExceptionHelper exceptionHelper) 
             : base(exceptionHelper)
         {
-            
             //Validate if paying agent is on hold
             RuleFor(p => p.IsOnHold)
                 .Equal(false)

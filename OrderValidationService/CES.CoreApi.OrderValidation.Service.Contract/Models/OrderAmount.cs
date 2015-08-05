@@ -8,37 +8,37 @@ namespace CES.CoreApi.OrderValidation.Service.Contract.Models
     [DataContract(Namespace = Namespaces.OrderValidationServiceDataContractNamespace)]
     public class OrderAmount : ExtensibleObject
     {
-        [DataMember(EmitDefaultValue = false)]
+        [DataMember(IsRequired = true)]
         public decimal LocalAmount { get; set; }
-        
-        [DataMember(EmitDefaultValue = false)]
+
+        [DataMember(IsRequired = true)]
         public decimal ForeignAmount { get; set; }
 
-        [DataMember(EmitDefaultValue = false)]
+        [DataMember(IsRequired = true)]
         public string CurrencyFrom { get; set; }
 
-        [DataMember(EmitDefaultValue = false)]
+        [DataMember(IsRequired = true)]
         public string CurrencyTo { get; set; }
 
-        [DataMember(EmitDefaultValue = false)]
+        [DataMember(IsRequired = true)]
         public decimal CustomerRate { get; set; }
 
-        [DataMember(EmitDefaultValue = false)]
+        [DataMember(IsRequired = true)]
         public decimal CustomerFee { get; set; }
 
-        [DataMember(EmitDefaultValue = false)]
+        [DataMember(IsRequired = true)]
         public decimal SurchargeFee { get; set; }
 
-        [DataMember(EmitDefaultValue = false)]
+        [DataMember(IsRequired = true)]
         public decimal Tax { get; set; }
 
-        [DataMember(EmitDefaultValue = false)]
+        [DataMember(IsRequired = true)]
         public bool ManualCustomerFee { get; set; }
 
-        [DataMember(EmitDefaultValue = false)]
-        public decimal TotalAmount
-        {
-            get { return LocalAmount + CustomerFee + SurchargeFee + Tax; }
-        }
+        //[DataMember(IsRequired = true)]
+        //public decimal TotalAmount
+        //{
+        //    get { return LocalAmount + CustomerFee + SurchargeFee + Tax; }
+        //}
     }
 }

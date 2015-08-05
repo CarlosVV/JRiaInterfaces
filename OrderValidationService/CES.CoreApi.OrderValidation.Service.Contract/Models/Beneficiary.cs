@@ -8,19 +8,19 @@ namespace CES.CoreApi.OrderValidation.Service.Contract.Models
     [DataContract(Namespace = Namespaces.OrderValidationServiceDataContractNamespace)]
     public class Beneficiary: ExtensibleObject
     {
-        [DataMember(EmitDefaultValue = false)]
+        [DataMember(IsRequired = true)]
         public int CustomerId { get; set; }
 
-        [DataMember(EmitDefaultValue = false)]
+        [DataMember(IsRequired = true)]
         public string FirstName { get; set; }
 
-        [DataMember(EmitDefaultValue = false)]
+        [DataMember(IsRequired = true)]
         public string LastName1 { get; set; }
 
-        [DataMember(EmitDefaultValue = false)]
+        [DataMember(IsRequired = true)]
         public string LastName2 { get; set; }
 
-        [DataMember(EmitDefaultValue = false)]
+        [DataMember(IsRequired = true)]
         public string MiddleName { get; set; }
     }
 }
