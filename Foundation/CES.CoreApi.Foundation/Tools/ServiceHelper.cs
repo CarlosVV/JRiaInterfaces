@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Linq;
 using System.ServiceModel;
+using System.Threading.Tasks;
 using CES.CoreApi.Common.Constants;
 using CES.CoreApi.Common.Enumerations;
 using CES.CoreApi.Common.Exceptions;
@@ -46,6 +47,17 @@ namespace CES.CoreApi.Foundation.Tools
             {
                 var result = proxy.Execute(serviceDelegate, AddCustomHeaders);
                 return result;
+            }
+        }
+
+        public async Task<TResult> ExecuteAsync<TService, TResult>(Func<TService, TResult> serviceDelegate)
+           where TService : class
+        {
+            var endpoint = GetEndpoint<TService>();
+
+            using (var proxy = new ServiceProxy<TService>(endpoint.ConfiguredBinding, endpoint.Address))
+            {
+                return await proxy.ExecuteAsync(serviceDelegate, AddCustomHeaders);
             }
         }
 

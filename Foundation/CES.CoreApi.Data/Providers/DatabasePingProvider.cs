@@ -38,7 +38,7 @@ namespace CES.CoreApi.Foundation.Data.Providers
             return new PingResponseModel
             {
                 Databases = from name in _configurationProvider.GetDatabaseNameList()
-                    select PingDatabase(name)
+                            select PingDatabase(name)
             };
         }
         

@@ -39,6 +39,7 @@ namespace CES.CoreApi.MtTransaction.Service.Configuration
             Mapper.CreateMap<CurrencyDetailsModel, CurrencyDetails>();
             Mapper.CreateMap<AgentLocationModel, AgentLocation>();
             Mapper.CreateMap<TransactionDetailsModel, TransactionDetails>();
+            Mapper.CreateMap<TransactionCreateModel, MtTransactionCreateResponse>();
 
             Mapper.CreateMap<GenderEnum, string>()
                 .ConvertUsing(src => src == default(GenderEnum) ? null : src.ToString());

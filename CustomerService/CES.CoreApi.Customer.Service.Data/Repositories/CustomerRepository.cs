@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Data;
 using System.Data.SqlClient;
+using System.Threading.Tasks;
 using CES.CoreApi.Common.Enumerations;
 using CES.CoreApi.Common.Interfaces;
 using CES.CoreApi.Customer.Service.Business.Contract.Interfaces;
@@ -30,7 +31,7 @@ namespace CES.CoreApi.Customer.Service.Data.Repositories
 
         #region ICustomerRepository implementation
 
-        public CustomerModel GetCustomer(int customerId)
+        public async Task<CustomerModel> GetCustomer(int customerId)
         {
             var request = new DatabaseRequest<CustomerModel>
             {
@@ -41,7 +42,7 @@ namespace CES.CoreApi.Customer.Service.Data.Repositories
                 Shaper = reader => GetCustomerDetails(reader)
             };
 
-            return Get(request);
+            return await Task.Run(() => Get(request));
         }
         
         #endregion

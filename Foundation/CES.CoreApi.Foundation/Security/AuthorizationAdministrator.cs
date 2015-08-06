@@ -69,7 +69,7 @@ namespace CES.CoreApi.Foundation.Security
             var headerParameters = _parametersProvider.GetParameters();
 
             //Get host application details
-            var hostApplication = _hostApplicationProvider.GetApplication();
+            var hostApplication = _hostApplicationProvider.GetApplication().Result;
 
             var auditParameters = new SecurityAuditParameters
             {

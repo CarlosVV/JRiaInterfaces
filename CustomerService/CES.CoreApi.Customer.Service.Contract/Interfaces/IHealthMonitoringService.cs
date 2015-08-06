@@ -1,4 +1,5 @@
 ﻿using System.ServiceModel;
+using System.Threading.Tasks;
 using CES.CoreApi.Common.Models;
 using CES.CoreApi.Customer.Service.Contract.Constants;
 using CES.CoreApi.Customer.Service.Contract.Models;
@@ -10,10 +11,10 @@ namespace CES.CoreApi.Customer.Service.Contract.Interfaces
     {
         [OperationContract]
         [FaultContract(typeof(CoreApiServiceFault), Action = Common.Constants.Namespaces.ServiceFaultContractAction)]
-        ClearCacheResponse ClearCache();
+        Task<ClearCacheResponse> ClearCache();
 
         [OperationContract]
         [FaultContract(typeof(CoreApiServiceFault), Action = Common.Constants.Namespaces.ServiceFaultContractAction)]
-        PingResponse Ping();
+        Task<PingResponse> Ping();
     }
 }

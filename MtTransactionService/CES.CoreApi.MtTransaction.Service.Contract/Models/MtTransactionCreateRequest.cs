@@ -7,5 +7,6 @@ namespace CES.CoreApi.MtTransaction.Service.Contract.Models
     [DataContract(Namespace = Namespaces.MtTransactionServiceDataContractNamespace)]
     public class MtTransactionCreateRequest : BaseRequest
     {
+        public int CustomerId { get; set; }
     }
 }

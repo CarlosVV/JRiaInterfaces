@@ -3,6 +3,7 @@ using System.Collections.ObjectModel;
 using System.IdentityModel.Policy;
 using System.Security.Principal;
 using System.ServiceModel.Channels;
+using System.Threading.Tasks;
 using CES.CoreApi.Common.Enumerations;
 using CES.CoreApi.Common.Exceptions;
 using CES.CoreApi.Common.Interfaces;
@@ -62,7 +63,7 @@ namespace CES.CoreApi.Foundation.Security
             var headerParameters = _parametersProvider.GetParameters();
 
             //Validate client application
-            var clientApplication = ValidateClientApplication(headerParameters);
+            var clientApplication = ValidateClientApplication(headerParameters).Result;
 
             //Set application principal
             SetApplicationPrincipal(message, clientApplication, headerParameters);
@@ -83,9 +84,9 @@ namespace CES.CoreApi.Foundation.Security
         /// 2. Application exists and active
         /// </summary>
         /// <param name="headerParameters"></param>
-        private Application ValidateClientApplication(ServiceCallHeaderParameters headerParameters)
+        private async Task<Application> ValidateClientApplication(ServiceCallHeaderParameters headerParameters)
         {
-            var application = _repository.GetApplication(headerParameters.ApplicationId);
+            var application = await _repository.GetApplication(headerParameters.ApplicationId);
 
             if (application == null)
             {

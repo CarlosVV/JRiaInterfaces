@@ -1,10 +1,10 @@
 ﻿using System;
+using System.Threading.Tasks;
 using CES.CoreApi.Common.Enumerations;
 using CES.CoreApi.Common.Exceptions;
 using CES.CoreApi.Common.Interfaces;
 using CES.CoreApi.Foundation.Configuration;
 using CES.CoreApi.Foundation.Contract.Constants;
-using CES.CoreApi.Foundation.Contract.Enumerations;
 using CES.CoreApi.Foundation.Contract.Interfaces;
 
 namespace CES.CoreApi.Foundation.Providers
@@ -30,7 +30,7 @@ namespace CES.CoreApi.Foundation.Providers
         /// Gets host application instance and validates that:
         /// 1. ApplicationId defined in config file
         /// </summary>
-        public IApplication GetApplication()
+        public async Task<IApplication> GetApplication()
         {
             //Get host application ID from config file and validate them
             var applicationId = ConfigurationTools.ReadAppSettingsValue<int>(ServiceConfigurationItems.AppplicationId);
@@ -38,7 +38,7 @@ namespace CES.CoreApi.Foundation.Providers
                 throw new CoreApiException(Organization.Ria, TechnicalSystem.CoreApi,
                     TechnicalSubSystem.Authentication, SubSystemError.ApplicationIdNotFoundInConfigFile);
 
-            return _repository.GetApplication(applicationId);
+            return await _repository.GetApplication(applicationId);
         }
 
         #endregion

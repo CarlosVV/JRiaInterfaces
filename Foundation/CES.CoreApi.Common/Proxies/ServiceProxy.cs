@@ -1,6 +1,7 @@
 ﻿using System;
 using System.ServiceModel;
 using System.ServiceModel.Channels;
+using System.Threading.Tasks;
 
 namespace CES.CoreApi.Common.Proxies
 {
@@ -26,8 +27,7 @@ namespace CES.CoreApi.Common.Proxies
         {
             using (new OperationContextScope((IContextChannel)Channel))
             {
-                if (addCustomHeader != null)
-                    addCustomHeader();
+                addCustomHeader?.Invoke();
 
                 serviceMethod.Invoke(Channel);
             }
@@ -37,12 +37,25 @@ namespace CES.CoreApi.Common.Proxies
         {
             using (new OperationContextScope((IContextChannel) Channel))
             {
-                if (addCustomHeader != null)
-                    addCustomHeader();
+                addCustomHeader?.Invoke();
 
                 return serviceMethod.Invoke(Channel);
             }
         }
+        
+        public async Task<TResult> ExecuteAsync<TResult>(Func<TContract, TResult> serviceMethod, Action addCustomHeader = null)
+        {
+            return await Task.Run(() =>
+            {
+                using (new OperationContextScope((IContextChannel) Channel))
+                {
+                    addCustomHeader?.Invoke();
+
+                    return serviceMethod.Invoke(Channel);
+                }
+            });
+        }
+
         public void Dispose()
         {
             try
@@ -71,14 +84,8 @@ namespace CES.CoreApi.Common.Proxies
 
         #region Private methods
 
-        private TContract Channel
-        {
-            get
-            {
-                return _channel ?? (_channel = _channelFactory.CreateChannel());
-            }
-        }
-        
+        private TContract Channel => _channel ?? (_channel = _channelFactory.CreateChannel());
+
         #endregion
     }
 }

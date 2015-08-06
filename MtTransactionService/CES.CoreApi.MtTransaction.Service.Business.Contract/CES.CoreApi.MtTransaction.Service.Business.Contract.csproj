@@ -47,6 +47,7 @@
     <Compile Include="Interfaces\ITransactionDetailsMaterializer.cs" />
     <Compile Include="Interfaces\ITransactionProcessor.cs" />
     <Compile Include="Interfaces\ITransactionRepository.cs" />
+    <Compile Include="Models\TransactionCreateModel.cs" />
     <Compile Include="Models\AmountDetailsModel.cs" />
     <Compile Include="Models\BankAccountModel.cs" />
     <Compile Include="Models\BankDepositModel.cs" />

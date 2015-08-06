@@ -1,10 +1,11 @@
-﻿using CES.CoreApi.Common.Models;
+﻿using System.Threading.Tasks;
+using CES.CoreApi.Common.Models;
 
 namespace CES.CoreApi.Customer.Service.Business.Contract.Interfaces
 {
     public interface IHealthMonitoringProcessor
     {
-        ClearCacheResponseModel ClearCache();
-        PingResponseModel Ping();
+        Task<ClearCacheResponseModel> ClearCache();
+        Task<PingResponseModel> Ping();
     }
 }

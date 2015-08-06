@@ -5,5 +5,6 @@ namespace CES.CoreApi.MtTransaction.Service.Interfaces
     public interface IRequestValidator
     {
         void Validate(MtTransactionGetRequest request);
+        void Validate(MtTransactionCreateRequest request);
     }
 }

@@ -60,7 +60,9 @@ namespace CES.CoreApi.MtTransaction.Service
 
         public MtTransactionCreateResponse Create(MtTransactionCreateRequest request)
         {
-            throw new System.NotImplementedException();
+            _requestValidator.Validate(request);
+            var responseModel = _transactionProcessor.CreateTransaction(request.CustomerId);
+            return _mapper.ConvertToResponse<TransactionCreateModel, MtTransactionCreateResponse>(responseModel);
         }
 
         #endregion

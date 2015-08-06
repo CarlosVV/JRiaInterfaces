@@ -1,4 +1,5 @@
-﻿using CES.CoreApi.Common.Enumerations;
+﻿using System.Threading.Tasks;
+using CES.CoreApi.Common.Enumerations;
 using CES.CoreApi.Common.Exceptions;
 using CES.CoreApi.Customer.Service.Contract.Interfaces;
 using CES.CoreApi.Customer.Service.Contract.Models;
@@ -28,10 +29,13 @@ namespace CES.CoreApi.OrderValidation.Service.Business.Logic.Processors
 
         #endregion
 
-        public void ValidateOrder(int customerId)
+        public async void ValidateOrder(int customerId)
         {
             var request = new CustomerGetRequest { CustomerId = customerId };
-            var customer = _serviceHelper.Execute<ICustomerService, CustomerGetResponse>(p => p.Get(request));
+            var customerTask =  await _serviceHelper.ExecuteAsync<ICustomerService, CustomerGetResponse>(p => p.Get(request));
+
+            var customer = customerTask;
+
 
             var paval = _validatorFactory.GetInstance<PayingAgentValidator>();
             
@@ -46,11 +50,11 @@ namespace CES.CoreApi.OrderValidation.Service.Business.Logic.Processors
             var r2 = paval.Validate(m2);
 
 
-            foreach (var name in _validatorFactory.RegisteredValidators())
-            {
-                var val = _validatorFactory.GetInstance(name);
-                var r3 = val.Validate(m1);
-            }
+            //foreach (var name in _validatorFactory.RegisteredValidators())
+            //{
+            //    var val = _validatorFactory.GetInstance(name);
+            //    var r3 = val.Validate(m1);
+            //}
 
             //validate customer onhold status
             //CustomerStatusValidator
@@ -75,6 +79,15 @@ namespace CES.CoreApi.OrderValidation.Service.Business.Logic.Processors
             //CustomerAmountValidator
             //BeneficiaryNameAndCountryValidator
         }
+
+        //public Task<string> CallService(string Parameter)
+        //{
+        //    ProxyClient client = new ProxyClient(new BasicHttpBiding(), new EndpointAddress("http://host/service"));
+        //    return Task<string>.Factory.FromAsync(
+        //            ((Proxy)client.InnerChannel).BeginCall,
+        //            ((Proxy)client.InnerChannel).EndCall,
+        //            Parameter, null);
+        //}
 
         private void ValidateCustomer(CustomerGetResponse customer)
         {

@@ -3,6 +3,7 @@ using System.Collections.ObjectModel;
 using System.Data;
 using System.Data.SqlClient;
 using System.Linq;
+using System.Threading.Tasks;
 using CES.CoreApi.Common.Enumerations;
 using CES.CoreApi.Common.Exceptions;
 using CES.CoreApi.Common.Interfaces;
@@ -35,7 +36,7 @@ namespace CES.CoreApi.Foundation.Data
         /// </summary>
         /// <param name="applicationId">Application ID</param>
         /// <returns></returns>
-        public Application GetApplication(int applicationId)
+        public async Task<Application> GetApplication(int applicationId)
         {
             var request = new DatabaseRequest<Application>
             {
@@ -49,7 +50,7 @@ namespace CES.CoreApi.Foundation.Data
                 Shaper = reader => GetApplication(reader, applicationId)
             };
 
-            return Get(request);
+            return await Task.Run(() => Get(request));
         }
 
         /// <summary>
@@ -57,9 +58,9 @@ namespace CES.CoreApi.Foundation.Data
         /// </summary>
         /// <param name="applicationId">Application identifier</param>
         /// <returns></returns>
-        public ICollection<ApplicationConfiguration> GetApplicationConfiguration(int applicationId)
+        public async Task<ICollection<ApplicationConfiguration>> GetApplicationConfiguration(int applicationId)
         {
-            var application = GetApplication(applicationId);
+            var application = await GetApplication(applicationId);
 
             if (application == null)
                 throw new CoreApiException(TechnicalSubSystem.CoreApiData, SubSystemError.ApplicationNotFoundInDatabase, applicationId);

@@ -1,4 +1,5 @@
 ﻿using System.ServiceModel;
+using System.Threading.Tasks;
 using CES.CoreApi.Common.Enumerations;
 using CES.CoreApi.Common.Exceptions;
 using CES.CoreApi.Common.Models;
@@ -49,14 +50,14 @@ namespace CES.CoreApi.Customer.Service
 
         #region ICustomerService implementation
 
-        public CustomerGetResponse Get(CustomerGetRequest request)
+        public async Task<CustomerGetResponse> Get(CustomerGetRequest request)
         {
             _requestValidator.Validate(request);
-            var responseModel = _customerRequestProcessor.GetCustomer(request.CustomerId);
+            var responseModel = await _customerRequestProcessor.GetCustomer(request.CustomerId);
             return _mapper.ConvertToResponse<CustomerModel, CustomerGetResponse>(responseModel);
         }
 
-        public CustomerCreateResponse Create(CustomerCreateRequest request)
+        public async Task<CustomerCreateResponse> Create(CustomerCreateRequest request)
         {
             _requestValidator.Validate(request);
             //var responseModel = _customerRequestProcessor.GetCustomer(request.CustomerId);
@@ -64,10 +65,10 @@ namespace CES.CoreApi.Customer.Service
             return null;
         }
 
-        public CustomerProcessSignatureResponse ProcessSignature(CustomerProcessSignatureRequest request)
+        public async Task<CustomerProcessSignatureResponse> ProcessSignature(CustomerProcessSignatureRequest request)
         {
             _requestValidator.Validate(request);
-            var responseModel = _customerRequestProcessor.ProcessSignature(request.OrderId, request.Signature);
+            var responseModel = await _customerRequestProcessor.ProcessSignature(request.OrderId, request.Signature);
             return _mapper.ConvertToResponse<ProcessSignatureModel, CustomerProcessSignatureResponse>(responseModel);
         }
 
@@ -75,15 +76,15 @@ namespace CES.CoreApi.Customer.Service
 
         #region IHealthMonitoringService implementation
 
-        public ClearCacheResponse ClearCache()
+        public async Task<ClearCacheResponse> ClearCache()
         {
-            var responseModel = _healthMonitoringProcessor.ClearCache();
+            var responseModel = await _healthMonitoringProcessor.ClearCache();
             return _mapper.ConvertToResponse<ClearCacheResponseModel, ClearCacheResponse>(responseModel);
         }
 
-        public PingResponse Ping()
+        public async Task<PingResponse> Ping()
         {
-            var responseModel = _healthMonitoringProcessor.Ping();
+            var responseModel = await _healthMonitoringProcessor.Ping();
             return _mapper.ConvertToResponse<PingResponseModel, PingResponse>(responseModel);
         }
 

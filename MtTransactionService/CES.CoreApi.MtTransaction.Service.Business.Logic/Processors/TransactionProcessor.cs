@@ -27,7 +27,12 @@ namespace CES.CoreApi.MtTransaction.Service.Business.Logic.Processors
         public TransactionDetailsModel GetDetails(int orderId, int databaseId, InformationGroup detalizationLevel)
         {
             return _transactionRepository.GetDetails(orderId, detalizationLevel, databaseId);
-        } 
+        }
+
+        public TransactionCreateModel CreateTransaction(int customerId)
+        {
+            
+        }
 
         #endregion
     }

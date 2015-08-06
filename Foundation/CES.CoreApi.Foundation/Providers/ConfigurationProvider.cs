@@ -19,7 +19,7 @@ namespace CES.CoreApi.Foundation.Providers
             if (applicationRepository == null) throw new ArgumentNullException("applicationRepository");
             
             var applicationId = ConfigurationTools.ReadAppSettingsValue<int>(ServiceConfigurationItems.AppplicationId);
-            _configuration = applicationRepository.GetApplicationConfiguration(applicationId);
+            _configuration = applicationRepository.GetApplicationConfiguration(applicationId).Result;
         }
 
         public T Read<T>(string name)

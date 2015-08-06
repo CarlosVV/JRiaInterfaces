@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Threading.Tasks;
 using CES.CoreApi.Common.Enumerations;
 using CES.CoreApi.Common.Exceptions;
 using CES.CoreApi.Common.Interfaces;
@@ -32,26 +33,29 @@ namespace CES.CoreApi.Customer.Service.Business.Logic.Processors
 
         #region Public methods
 
-        public ClearCacheResponseModel ClearCache()
+        public async Task<ClearCacheResponseModel> ClearCache()
         {
-            var response = new ClearCacheResponseModel();
-
-            try
+            return await Task.Run(() =>
             {
-                _cacheProvider.ClearCache();
-                response.IsOk = true;
-            }
-            catch (Exception)
-            {
-                response.IsOk = false;
-            }
+                var response = new ClearCacheResponseModel();
 
-            return response;
+                try
+                {
+                    _cacheProvider.ClearCache();
+                    response.IsOk = true;
+                }
+                catch (Exception)
+                {
+                    response.IsOk = false;
+                }
+
+                return response;
+            });
         }
 
-        public PingResponseModel Ping()
+        public async Task<PingResponseModel> Ping()
         {
-            return _pingProvider.PingDatabases();
+            return await Task.Run(() => _pingProvider.PingDatabases());
         }
 
         #endregion

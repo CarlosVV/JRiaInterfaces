@@ -19,7 +19,12 @@ namespace CES.CoreApi.MtTransaction.Service.Utilities
             ContractValidation.Requires(request.DetalizationLevel != TransactionInformationGroup.Undefined, TechnicalSubSystem.MtTransactionService,
                 SubSystemError.GeneralInvalidParameterValue, "request.DetalizationLevel", request.DetalizationLevel);
         }
-        
+
+        public void Validate(MtTransactionCreateRequest request)
+        {
+            
+        }
+
         // ReSharper restore PossibleNullReferenceException
     }
 }
