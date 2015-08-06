@@ -1,4 +1,5 @@
 ﻿using System.ServiceModel;
+using System.Threading.Tasks;
 using CES.CoreApi.Agent.Service.Contract.Constants;
 using CES.CoreApi.Agent.Service.Contract.Models;
 using CES.CoreApi.Common.Models;
@@ -10,6 +11,6 @@ namespace CES.CoreApi.Agent.Service.Contract.Interfaces
     {
         [OperationContract(Name = "GetAgentCurrency")]
         [FaultContract(typeof(CoreApiServiceFault), Action = Common.Constants.Namespaces.ServiceFaultContractAction)]
-        GetAgentCurrencyResponse GetAgentCurrency(GetAgentCurrencyRequest request);
+        Task<GetAgentCurrencyResponse> GetAgentCurrency(GetAgentCurrencyRequest request);
     }
 }

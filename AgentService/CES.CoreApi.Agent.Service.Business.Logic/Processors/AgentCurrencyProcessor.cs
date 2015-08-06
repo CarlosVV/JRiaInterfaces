@@ -1,4 +1,5 @@
-﻿using CES.CoreApi.Agent.Service.Business.Contract.Interfaces;
+﻿using System.Threading.Tasks;
+using CES.CoreApi.Agent.Service.Business.Contract.Interfaces;
 using CES.CoreApi.Agent.Service.Business.Contract.Models;
 using CES.CoreApi.Common.Enumerations;
 using CES.CoreApi.Common.Exceptions;
@@ -24,9 +25,9 @@ namespace CES.CoreApi.Agent.Service.Business.Logic.Processors
 
         #region MyRegion
 
-        public PayingAgentCurrencyModel GetAgentCurrent(int correspondentId, string symbol)
+        public async Task<PayingAgentCurrencyModel> GetAgentCurrent(int correspondentId, string symbol)
         {
-            return _repository.Get(correspondentId, symbol);
+            return await Task.Run(() => _repository.Get(correspondentId, symbol));
         } 
 
         #endregion

@@ -1,4 +1,5 @@
 ﻿using System.ServiceModel;
+using System.Threading.Tasks;
 using CES.CoreApi.Agent.Service.Business.Contract.Interfaces;
 using CES.CoreApi.Agent.Service.Business.Contract.Models;
 using CES.CoreApi.Agent.Service.Contract.Constants;
@@ -53,10 +54,10 @@ namespace CES.CoreApi.Agent.Service
 
         #region IAgentCurrencyService implementation
 
-        public GetAgentCurrencyResponse GetAgentCurrency(GetAgentCurrencyRequest request)
+        public async Task<GetAgentCurrencyResponse> GetAgentCurrency(GetAgentCurrencyRequest request)
         {
             _requestValidator.Validate(request);
-            var responseModel = _currencyProcessor.GetAgentCurrent(request.AgentId, request.Currency);
+            var responseModel = await _currencyProcessor.GetAgentCurrent(request.AgentId, request.Currency);
             return _mapper.ConvertToResponse<PayingAgentCurrencyModel, GetAgentCurrencyResponse>(responseModel);
         } 
 
@@ -64,15 +65,15 @@ namespace CES.CoreApi.Agent.Service
 
         #region IHealthMonitoringService implementation
 
-        public ClearCacheResponse ClearCache()
+        public async Task<ClearCacheResponse> ClearCache()
         {
-            var responseModel = _healthMonitoringProcessor.ClearCache();
+            var responseModel = await _healthMonitoringProcessor.ClearCache();
             return _mapper.ConvertToResponse<ClearCacheResponseModel, ClearCacheResponse>(responseModel);
         }
 
-        public PingResponse Ping()
+        public async Task<PingResponse> Ping()
         {
-            var responseModel = _healthMonitoringProcessor.Ping();
+            var responseModel = await _healthMonitoringProcessor.Ping();
             return _mapper.ConvertToResponse<PingResponseModel, PingResponse>(responseModel);
         }
 
@@ -80,11 +81,11 @@ namespace CES.CoreApi.Agent.Service
 
         #region IAgentUserService implementation
 
-        public ProcessSignatureResponse ProcessSignature(ProcessSignatureRequest request)
+        public async Task<ProcessSignatureResponse> ProcessSignature(ProcessSignatureRequest request)
         {
             _requestValidator.Validate(request);
             var requestModel = _mapper.ConvertTo<ProcessSignatureRequest, ProcessSignatureRequestModel>(request);
-            var responseModel = _agentUserProcessor.ProcessSignature(requestModel);
+            var responseModel = await _agentUserProcessor.ProcessSignature(requestModel);
             return _mapper.ConvertToResponse<ProcessSignatureResponseModel, ProcessSignatureResponse>(responseModel);
         } 
 

@@ -1,4 +1,5 @@
-﻿using CES.CoreApi.Agent.Service.Business.Contract.Interfaces;
+﻿using System.Threading.Tasks;
+using CES.CoreApi.Agent.Service.Business.Contract.Interfaces;
 using CES.CoreApi.Agent.Service.Business.Contract.Models;
 using CES.CoreApi.Common.Enumerations;
 using CES.CoreApi.Common.Exceptions;
@@ -24,11 +25,11 @@ namespace CES.CoreApi.Agent.Service.Business.Logic.Processors
 
         #region Public methods
 
-        public ProcessSignatureResponseModel ProcessSignature(ProcessSignatureRequestModel requestModel)
+        public async Task<ProcessSignatureResponseModel> ProcessSignature(ProcessSignatureRequestModel requestModel)
         {
             //do whatever needs to be done to save agent signature to database, use _agentUserRepository to access Image DB
 
-            return new ProcessSignatureResponseModel {IsCompleted = true};
+            return await Task.Run(() => new ProcessSignatureResponseModel {IsCompleted = true});
         } 
 
         #endregion
