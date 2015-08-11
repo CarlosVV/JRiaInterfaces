@@ -33,14 +33,23 @@
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Data" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Interfaces\IAgentCurrencyProcessor.cs" />
-    <Compile Include="Interfaces\IAgentCurrencyRepository.cs" />
+    <Compile Include="Enumerations\InformationGroup.cs" />
+    <Compile Include="Enumerations\PayingAgentStatus.cs" />
+    <Compile Include="Interfaces\IAgentProcessor.cs" />
     <Compile Include="Interfaces\IAgentUserProcessor.cs" />
     <Compile Include="Interfaces\IAgentUserRepository.cs" />
+    <Compile Include="Interfaces\ICurrencyMaterializer.cs" />
     <Compile Include="Interfaces\IHealthMonitoringProcessor.cs" />
+    <Compile Include="Interfaces\ILocationMaterializer.cs" />
+    <Compile Include="Interfaces\IPayingAgentLocationRepository.cs" />
+    <Compile Include="Interfaces\IPayingAgentRepository.cs" />
+    <Compile Include="Interfaces\IRepositoryFactory.cs" />
+    <Compile Include="Models\GetAgentResponseResponseModel.cs" />
     <Compile Include="Models\PayingAgentCurrencyModel.cs" />
+    <Compile Include="Models\PayingAgentModel.cs" />
     <Compile Include="Models\ProcessSignatureRequestModel.cs" />
     <Compile Include="Models\ProcessSignatureResponseModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -49,6 +58,10 @@
     <ProjectReference Include="..\..\Foundation\CES.CoreApi.Common\CES.CoreApi.Common.csproj">
       <Project>{070C7BB2-AF07-4A4C-A9CC-6BFB8CA416E6}</Project>
       <Name>CES.CoreApi.Common</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Shared\CES.CoreApi.Shared.Business.Contract\CES.CoreApi.Shared.Business.Contract.csproj">
+      <Project>{AE43A830-4DE7-4B13-A462-9C3F85FBE7D4}</Project>
+      <Name>CES.CoreApi.Shared.Business.Contract</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

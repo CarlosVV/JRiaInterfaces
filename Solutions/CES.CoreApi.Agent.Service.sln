@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 2013
-VisualStudioVersion = 12.0.31101.0
+# Visual Studio 14
+VisualStudioVersion = 14.0.23107.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CES.CoreApi.Agent.Service", "..\AgentService\CES.CoreApi.Agent.Service\CES.CoreApi.Agent.Service.csproj", "{BD1ADCD2-760D-4D38-B026-DEB76685B61D}"
 EndProject
@@ -36,6 +36,10 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CES.CoreApi.Agent.Service.UnitTests", "..\AgentService\CES.CoreApi.Agent.Service.UnitTests\CES.CoreApi.Agent.Service.UnitTests.csproj", "{1CE4F5CE-6E4B-4449-8D71-1534D244190D}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CES.CoreApi.Agent.Service.Business.Logic.UnitTests", "..\AgentService\CES.CoreApi.Agent.Service.Business.Logic.UnitTests\CES.CoreApi.Agent.Service.Business.Logic.UnitTests.csproj", "{8B54D253-C857-4EAC-A390-8B71BF850085}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Shared", "Shared", "{BFC2A120-C293-4518-99B3-F7690DB8D76F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CES.CoreApi.Shared.Business.Contract", "..\Shared\CES.CoreApi.Shared.Business.Contract\CES.CoreApi.Shared.Business.Contract.csproj", "{AE43A830-4DE7-4B13-A462-9C3F85FBE7D4}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -103,6 +107,10 @@ Global
 		{8B54D253-C857-4EAC-A390-8B71BF850085}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{8B54D253-C857-4EAC-A390-8B71BF850085}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{8B54D253-C857-4EAC-A390-8B71BF850085}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AE43A830-4DE7-4B13-A462-9C3F85FBE7D4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AE43A830-4DE7-4B13-A462-9C3F85FBE7D4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AE43A830-4DE7-4B13-A462-9C3F85FBE7D4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AE43A830-4DE7-4B13-A462-9C3F85FBE7D4}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -117,5 +125,6 @@ Global
 		{02BEAA68-76A1-4ED6-BF6C-7B6935165AD6} = {12A5FC42-897B-493D-BED8-0A89734DE1DB}
 		{1CE4F5CE-6E4B-4449-8D71-1534D244190D} = {BAE5DBC2-EE66-49F9-8F53-53418833270A}
 		{8B54D253-C857-4EAC-A390-8B71BF850085} = {BAE5DBC2-EE66-49F9-8F53-53418833270A}
+		{AE43A830-4DE7-4B13-A462-9C3F85FBE7D4} = {BFC2A120-C293-4518-99B3-F7690DB8D76F}
 	EndGlobalSection
 EndGlobal

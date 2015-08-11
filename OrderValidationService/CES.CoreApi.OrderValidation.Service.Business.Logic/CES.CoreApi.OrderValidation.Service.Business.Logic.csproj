@@ -44,7 +44,7 @@
   <ItemGroup>
     <Compile Include="Constants\CommonConstants.cs" />
     <Compile Include="Factories\ValidatorFactory.cs" />
-    <Compile Include="Processors\OrderValidateRequestProcessor.cs" />
+    <Compile Include="Processors\TransactionValidateRequestProcessor.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Validators\BaseAbstractValidator.cs" />
     <Compile Include="Validators\BeneficiaryValidator.cs" />

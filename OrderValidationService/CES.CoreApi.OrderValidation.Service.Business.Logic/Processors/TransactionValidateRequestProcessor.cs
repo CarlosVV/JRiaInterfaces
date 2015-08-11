@@ -10,14 +10,14 @@ using CES.CoreApi.OrderValidation.Service.Business.Logic.Validators;
 
 namespace CES.CoreApi.OrderValidation.Service.Business.Logic.Processors
 {
-    public class OrderValidateRequestProcessor : IOrderValidateRequestProcessor
+    public class TransactionValidateRequestProcessor : ITransactionValidateRequestProcessor
     {
         #region Core
 
         private readonly IServiceHelper _serviceHelper;
         private readonly IValidatorFactory _validatorFactory;
         
-        public OrderValidateRequestProcessor(IServiceHelper serviceHelper, IValidatorFactory validatorFactory)
+        public TransactionValidateRequestProcessor(IServiceHelper serviceHelper, IValidatorFactory validatorFactory)
         {
             if (serviceHelper == null)
                 throw new CoreApiException(TechnicalSubSystem.GeoLocationService,
@@ -29,12 +29,13 @@ namespace CES.CoreApi.OrderValidation.Service.Business.Logic.Processors
 
         #endregion
 
-        public async void ValidateOrder(int customerId)
+        public async Task Validate(TransactionValidateRequestModel validateRequest)
         {
-            var request = new CustomerGetRequest { CustomerId = customerId };
-            var customerTask =  await _serviceHelper.ExecuteAsync<ICustomerService, CustomerGetResponse>(p => p.Get(request));
+            //Get customer details
+            var request = new CustomerGetRequest { CustomerId = validateRequest.CustomerId };
+            var customer = await _serviceHelper.ExecuteAsync<ICustomerService, Task<CustomerGetResponse>>(p => p.Get(request));
 
-            var customer = customerTask;
+
 
 
             var paval = _validatorFactory.GetInstance<PayingAgentValidator>();

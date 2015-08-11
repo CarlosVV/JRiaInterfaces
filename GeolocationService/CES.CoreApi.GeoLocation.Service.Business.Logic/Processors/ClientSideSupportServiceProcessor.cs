@@ -42,7 +42,7 @@ namespace CES.CoreApi.GeoLocation.Service.Business.Logic.Processors
             var hostApplication = _hostApplicationProvider.GetApplication();
             var configKey = GetLicenseKeyConfigurationKey(providerType);
 
-            var foundKey = (from item in hostApplication.Configuration
+            var foundKey = (from item in hostApplication.Result.Configuration
                 where item.Name.Equals(configKey, StringComparison.OrdinalIgnoreCase)
                 select item.Value)
                 .FirstOrDefault();

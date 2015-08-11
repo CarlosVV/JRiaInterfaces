@@ -11,7 +11,10 @@ namespace CES.CoreApi.OrderValidation.Service.Contract.Models
         public OrderAmount Amount { get; set; }
 
         [DataMember(IsRequired = true)]
-        public int CorrespondentId { get; set; }
+        public int PayingAgentId { get; set; }
+
+        [DataMember(IsRequired = true)]
+        public int ReceivingAgentId { get; set; }
 
         [DataMember(IsRequired = true)]
         public int CustomerId { get; set; }

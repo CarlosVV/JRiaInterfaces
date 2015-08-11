@@ -1,8 +1,10 @@
 ﻿using System.ServiceModel;
+using System.Threading.Tasks;
 using CES.CoreApi.Common.Enumerations;
 using CES.CoreApi.Common.Exceptions;
 using CES.CoreApi.Foundation.Contract.Interfaces;
 using CES.CoreApi.OrderValidation.Service.Business.Contract.Interfaces;
+using CES.CoreApi.OrderValidation.Service.Business.Contract.Models;
 using CES.CoreApi.OrderValidation.Service.Contract.Interfaces;
 using CES.CoreApi.OrderValidation.Service.Contract.Models;
 using CES.CoreApi.OrderValidation.Service.Interfaces;
@@ -15,16 +17,16 @@ namespace CES.CoreApi.OrderValidation.Service
     {
         #region Core
 
-        private readonly IOrderValidateRequestProcessor _orderValidateRequestProcessor;
+        private readonly ITransactionValidateRequestProcessor _transactionValidateRequestProcessor;
         private readonly IMappingHelper _mapper;
         private readonly IRequestValidator _requestValidator;
 
-        public OrderValidationService(IOrderValidateRequestProcessor orderValidateRequestProcessor,
+        public OrderValidationService(ITransactionValidateRequestProcessor transactionValidateRequestProcessor,
             IMappingHelper mapper, IRequestValidator requestValidator)
         {
-            if (orderValidateRequestProcessor == null)
+            if (transactionValidateRequestProcessor == null)
                 throw new CoreApiException(TechnicalSubSystem.OrderValidationService,
-                    SubSystemError.GeneralRequiredParameterIsUndefined, "orderValidateRequestProcessor");
+                    SubSystemError.GeneralRequiredParameterIsUndefined, "transactionValidateRequestProcessor");
             if (mapper == null)
                 throw new CoreApiException(TechnicalSubSystem.OrderValidationService,
                     SubSystemError.GeneralRequiredParameterIsUndefined, "mapper");
@@ -32,7 +34,7 @@ namespace CES.CoreApi.OrderValidation.Service
                 throw new CoreApiException(TechnicalSubSystem.OrderValidationService,
                     SubSystemError.GeneralRequiredParameterIsUndefined, "requestValidator");
 
-            _orderValidateRequestProcessor = orderValidateRequestProcessor;
+            _transactionValidateRequestProcessor = transactionValidateRequestProcessor;
             _mapper = mapper;
             _requestValidator = requestValidator;
         }
@@ -41,11 +43,11 @@ namespace CES.CoreApi.OrderValidation.Service
 
         #region IOrderValidationService implementation
 
-        public OrderValidateResponse ValidateOrder(OrderValidateRequest request)
+        public async Task<OrderValidateResponse> ValidateOrder(OrderValidateRequest request)
         {
             _requestValidator.Validate(request);
-
-            _orderValidateRequestProcessor.ValidateOrder(request.CustomerId);
+            var requestModel = _mapper.ConvertTo<OrderValidateRequest, TransactionValidateRequestModel>(request);
+            await _transactionValidateRequestProcessor.Validate(requestModel);
 
             //var responseModel = _addressServiceRequestProcessor.ValidateAddress(
             //    request.FormattedAddress,

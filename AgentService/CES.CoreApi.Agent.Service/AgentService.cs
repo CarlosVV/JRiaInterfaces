@@ -1,8 +1,10 @@
 ﻿using System.ServiceModel;
 using System.Threading.Tasks;
+using CES.CoreApi.Agent.Service.Business.Contract.Enumerations;
 using CES.CoreApi.Agent.Service.Business.Contract.Interfaces;
 using CES.CoreApi.Agent.Service.Business.Contract.Models;
 using CES.CoreApi.Agent.Service.Contract.Constants;
+using CES.CoreApi.Agent.Service.Contract.Enumerations;
 using CES.CoreApi.Agent.Service.Contract.Interfaces;
 using CES.CoreApi.Agent.Service.Contract.Models;
 using CES.CoreApi.Agent.Service.Interfaces;
@@ -18,18 +20,19 @@ namespace CES.CoreApi.Agent.Service
     {
         #region Core
 
-        private readonly IAgentCurrencyProcessor _currencyProcessor;
+        private readonly IAgentProcessor _agentProcessor;
         private readonly IAgentUserProcessor _agentUserProcessor;
         private readonly IHealthMonitoringProcessor _healthMonitoringProcessor;
         private readonly IMappingHelper _mapper;
         private readonly IRequestValidator _requestValidator;
 
-        public AgentService(IAgentCurrencyProcessor currencyProcessor, IAgentUserProcessor agentUserProcessor, 
-            IHealthMonitoringProcessor healthMonitoringProcessor, IMappingHelper mapper, IRequestValidator requestValidator)
+        public AgentService(IAgentProcessor agentProcessor, IAgentUserProcessor agentUserProcessor, 
+            IHealthMonitoringProcessor healthMonitoringProcessor, IMappingHelper mapper, 
+            IRequestValidator requestValidator)
         {
-            if (currencyProcessor == null)
+            if (agentProcessor == null)
                 throw new CoreApiException(TechnicalSubSystem.AgentService,
-                    SubSystemError.GeneralRequiredParameterIsUndefined, "currencyProcessor");
+                    SubSystemError.GeneralRequiredParameterIsUndefined, "agentProcessor");
             if (agentUserProcessor == null)
                 throw new CoreApiException(TechnicalSubSystem.AgentService,
                     SubSystemError.GeneralRequiredParameterIsUndefined, "AgentUserProcessor");
@@ -43,7 +46,7 @@ namespace CES.CoreApi.Agent.Service
                 throw new CoreApiException(TechnicalSubSystem.AgentService,
                     SubSystemError.GeneralRequiredParameterIsUndefined, "requestValidator");
 
-            _currencyProcessor = currencyProcessor;
+            _agentProcessor = agentProcessor;
             _agentUserProcessor = agentUserProcessor;
             _healthMonitoringProcessor = healthMonitoringProcessor;
             _mapper = mapper;
@@ -57,7 +60,7 @@ namespace CES.CoreApi.Agent.Service
         public async Task<GetAgentCurrencyResponse> GetAgentCurrency(GetAgentCurrencyRequest request)
         {
             _requestValidator.Validate(request);
-            var responseModel = await _currencyProcessor.GetAgentCurrent(request.AgentId, request.Currency);
+            var responseModel = await _agentProcessor.GetAgentCurrency(request.AgentId, request.Currency);
             return _mapper.ConvertToResponse<PayingAgentCurrencyModel, GetAgentCurrencyResponse>(responseModel);
         } 
 
@@ -80,6 +83,17 @@ namespace CES.CoreApi.Agent.Service
         #endregion
 
         #region IAgentUserService implementation
+
+        public async Task<GetPayingAgentResponse> GetPayingAgent(GetPayingAgentRequest request)
+        {
+            _requestValidator.Validate(request);
+            var responseModel = await _agentProcessor.GetPayingAgent(
+                request.AgentId, 
+                request.LocationId,
+                request.CurrencySymbol,
+                _mapper.ConvertTo<AgentInformationGroup, InformationGroup>(request.DetalizationLevel));
+            return _mapper.ConvertToResponse<GetAgentResponseResponseModel, GetPayingAgentResponse>(responseModel);
+        }
 
         public async Task<ProcessSignatureResponse> ProcessSignature(ProcessSignatureRequest request)
         {

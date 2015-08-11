@@ -12,5 +12,7 @@ namespace CES.CoreApi.Shared.Business.Contract.Models
         public AgentLocationModel Location { get; set; }
         public string Number { get; set; }
         public bool IsRiaStore { get; set; }
+        public bool IsOnHold { get; set; }
+        public string OnHoldReason { get; set; }
     }
 }

@@ -1,4 +1,5 @@
 ﻿using System.Collections.ObjectModel;
+using System.Threading.Tasks;
 using CES.CoreApi.Common.Enumerations;
 using CES.CoreApi.Common.Interfaces;
 using CES.CoreApi.Common.Models;
@@ -9,7 +10,6 @@ using CES.CoreApi.GeoLocation.Service.Business.Logic.Constants;
 using CES.CoreApi.GeoLocation.Service.Business.Logic.Processors;
 using CES.CoreApi.GeoLocation.Service.UnitTestTools;
 using CES.CoreApi.Logging.Interfaces;
-using CES.CoreApi.Logging.Models;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
 
@@ -97,7 +97,8 @@ namespace CES.CoreApi.GeoLocation.Service.Business.Logic.UnitTest
         [TestMethod]
         public void GetProviderKey_Google_HappyPath()
         {
-            _hostApplicationProvider.Setup(p=>p.GetApplication()).Returns(_application.Object).Verifiable();
+            _hostApplicationProvider.Setup(p=>p.GetApplication()).ReturnsAsync(_application.Object).Verifiable();
+
             _application.SetupGet(p => p.Configuration).Returns(GetConfiguration()).Verifiable();
 
             var result = new ClientSideSupportServiceProcessor(_countryConfigurationProvider.Object, _hostApplicationProvider.Object, _logMonitorFactory.Object).GetProviderKey(
@@ -110,7 +111,9 @@ namespace CES.CoreApi.GeoLocation.Service.Business.Logic.UnitTest
         [TestMethod]
         public void GetProviderKey_Melissa_HappyPath()
         {
-            _hostApplicationProvider.Setup(p => p.GetApplication()).Returns(_application.Object).Verifiable();
+            _hostApplicationProvider.Setup(p => p.GetApplication()).ReturnsAsync(_application.Object).Verifiable();
+
+
             _application.SetupGet(p => p.Configuration).Returns(GetConfiguration()).Verifiable();
 
             var result = new ClientSideSupportServiceProcessor(_countryConfigurationProvider.Object, _hostApplicationProvider.Object, _logMonitorFactory.Object).GetProviderKey(
@@ -123,7 +126,7 @@ namespace CES.CoreApi.GeoLocation.Service.Business.Logic.UnitTest
         [TestMethod]
         public void GetProviderKey_Bing_HappyPath()
         {
-            _hostApplicationProvider.Setup(p => p.GetApplication()).Returns(_application.Object).Verifiable();
+            _hostApplicationProvider.Setup(p => p.GetApplication()).ReturnsAsync(_application.Object).Verifiable();
             _application.SetupGet(p => p.Configuration).Returns(GetConfiguration()).Verifiable();
 
             var result = new ClientSideSupportServiceProcessor(_countryConfigurationProvider.Object, _hostApplicationProvider.Object, _logMonitorFactory.Object).GetProviderKey(
@@ -136,7 +139,7 @@ namespace CES.CoreApi.GeoLocation.Service.Business.Logic.UnitTest
         [TestMethod]
         public void GetProviderKey_GoogleKeyNotFound_InValidResultReturned()
         {
-            _hostApplicationProvider.Setup(p => p.GetApplication()).Returns(_application.Object).Verifiable();
+            _hostApplicationProvider.Setup(p => p.GetApplication()).ReturnsAsync(_application.Object).Verifiable();
             _application.SetupGet(p => p.Configuration).Returns(GetConfiguration(false)).Verifiable();
 
             var result = new ClientSideSupportServiceProcessor(_countryConfigurationProvider.Object, _hostApplicationProvider.Object, _logMonitorFactory.Object).GetProviderKey(
@@ -149,8 +152,8 @@ namespace CES.CoreApi.GeoLocation.Service.Business.Logic.UnitTest
         [TestMethod]
         public void GetProviderKey_UnknownProvider_ExceptionRaised()
         {
-            _hostApplicationProvider.Setup(p => p.GetApplication()).Returns(_application.Object).Verifiable();
-            _application.SetupGet(p => p.Configuration).Returns(GetConfiguration(false)).Verifiable();
+            _hostApplicationProvider.Setup(p => p.GetApplication()).ReturnsAsync(_application.Object).Verifiable();
+            _application.Setup(p => p.Configuration).Returns(GetConfiguration(false)).Verifiable();
 
             ExceptionHelper.CheckException(
                 () => new ClientSideSupportServiceProcessor(_countryConfigurationProvider.Object, _hostApplicationProvider.Object, _logMonitorFactory.Object).GetProviderKey(DataProviderType.Undefined),

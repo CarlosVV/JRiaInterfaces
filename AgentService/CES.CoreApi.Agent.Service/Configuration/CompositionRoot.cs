@@ -3,6 +3,8 @@ using AutoMapper;
 using AutoMapper.Mappers;
 using CES.CoreApi.Agent.Service.Business.Contract.Interfaces;
 using CES.CoreApi.Agent.Service.Business.Logic.Processors;
+using CES.CoreApi.Agent.Service.Data.Factories;
+using CES.CoreApi.Agent.Service.Data.Materializers;
 using CES.CoreApi.Agent.Service.Data.Repositories;
 using CES.CoreApi.Agent.Service.Interfaces;
 using CES.CoreApi.Agent.Service.Utilities;
@@ -59,7 +61,7 @@ namespace CES.CoreApi.Agent.Service.Configuration
 
         private static void RegisterProcessors(Container container)
         {
-            container.RegisterSingle<IAgentCurrencyProcessor, AgentCurrencyProcessor>();
+            container.RegisterSingle<IAgentProcessor, AgentProcessor>();
             container.RegisterSingle<IAgentUserProcessor, AgentUserProcessor>();
             container.RegisterSingle<IHealthMonitoringProcessor, HealthMonitoringProcessor>();
         }
@@ -95,6 +97,7 @@ namespace CES.CoreApi.Agent.Service.Configuration
             container.Register<IConfiguration>(container.GetInstance<ConfigurationStore>);
             container.Register<AutoMapper.IConfigurationProvider>(container.GetInstance<ConfigurationStore>);
         }
+
         private static void RegisterLoggging(Container container)
         {
             //Register common classes
@@ -167,20 +170,31 @@ namespace CES.CoreApi.Agent.Service.Configuration
 
         private static void RegisterDataAccess(Container container)
         {
-            container.RegisterSingle<IAgentCurrencyRepository, AgentCurrencyRepository>();
+            container.RegisterSingle<IPayingAgentLocationRepository, PayingAgentLocationRepository>();
+            container.RegisterSingle<IPayingAgentRepository, PayingAgentRepository>();
             container.RegisterSingle<IAgentUserRepository, AgentUserRepository>();
             container.RegisterSingle<IDatabaseConfigurationProvider, DatabaseConfigurationProvider>();
             container.RegisterSingle<IDatabaseInstanceProvider, DatabaseInstanceProvider>();
             container.RegisterSingle<IDatabasePingProvider, DatabasePingProvider>();
+            container.RegisterSingle<ILocationMaterializer, LocationMaterializer>();
+            container.RegisterSingle<ICurrencyMaterializer, CurrencyMaterializer>();
+
+            container.RegisterSingle<IRepositoryFactory>(new RepositoryFactory
+            {
+                {"IPayingAgentLocationRepository", container.GetInstance<PayingAgentLocationRepository>},
+                {"IPayingAgentRepository", container.GetInstance<PayingAgentRepository>},
+                {"IAgentUserRepository", container.GetInstance<AgentUserRepository>},
+            });
         }
 
         private static void RegisterInterceptions(Container container)
         {
             container.InterceptWith<PerformanceInterceptor>(type => type == typeof(IApplicationRepository));
-            container.InterceptWith<PerformanceInterceptor>(type => type == typeof(IAgentCurrencyRepository));
+            container.InterceptWith<PerformanceInterceptor>(type => type == typeof(IPayingAgentRepository));
+            container.InterceptWith<PerformanceInterceptor>(type => type == typeof(IPayingAgentLocationRepository));
             container.InterceptWith<PerformanceInterceptor>(type => type == typeof(IAgentUserRepository));
             container.InterceptWith<PerformanceInterceptor>(type => type == typeof(IHealthMonitoringProcessor));
-            container.InterceptWith<PerformanceInterceptor>(type => type == typeof(IAgentCurrencyProcessor));
+            container.InterceptWith<PerformanceInterceptor>(type => type == typeof(IAgentProcessor));
             container.InterceptWith<PerformanceInterceptor>(type => type == typeof(IAgentUserProcessor));
         }
 

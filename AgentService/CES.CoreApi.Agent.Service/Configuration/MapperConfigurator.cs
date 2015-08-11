@@ -1,5 +1,7 @@
 ﻿using AutoMapper;
+using CES.CoreApi.Agent.Service.Business.Contract.Enumerations;
 using CES.CoreApi.Agent.Service.Business.Contract.Models;
+using CES.CoreApi.Agent.Service.Contract.Enumerations;
 using CES.CoreApi.Agent.Service.Contract.Models;
 using CES.CoreApi.Common.Models;
 using SimpleInjector;
@@ -20,7 +22,9 @@ namespace CES.CoreApi.Agent.Service.Configuration
             Mapper.CreateMap<DatabasePingModel, DatabasePingResponse>();
             Mapper.CreateMap<ProcessSignatureRequest, ProcessSignatureRequestModel>();
             Mapper.CreateMap<ProcessSignatureResponseModel, ProcessSignatureResponse>().ConstructUsingServiceLocator();
-          
+            Mapper.CreateMap<GetAgentResponseResponseModel, GetPayingAgentResponse>().ConstructUsingServiceLocator();
+            Mapper.CreateMap<AgentInformationGroup, InformationGroup>();
+
             Mapper.Configuration.ConstructServicesUsing(container.GetInstance);
         }
     }

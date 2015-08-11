@@ -68,7 +68,7 @@ namespace CES.CoreApi.OrderValidation.Service.Configuration
 
         private static void RegisterProcessors(Container container)
         {
-            container.RegisterSingle<IOrderValidateRequestProcessor, OrderValidateRequestProcessor>();
+            container.RegisterSingle<ITransactionValidateRequestProcessor, TransactionValidateRequestProcessor>();
         }
 
         private static void RegisterFoundation(Container container)
@@ -202,7 +202,7 @@ namespace CES.CoreApi.OrderValidation.Service.Configuration
             container.InterceptWith<PerformanceInterceptor>(type => type == typeof(IApplicationRepository));
             container.InterceptWith<PerformanceInterceptor>(type => type == typeof(IValidationReadOnlyRepository));
             container.InterceptWith<PerformanceInterceptor>(type => type == typeof(IValidationMainRepository));
-            container.InterceptWith<PerformanceInterceptor>(type => type == typeof(IOrderValidateRequestProcessor));
+            container.InterceptWith<PerformanceInterceptor>(type => type == typeof(ITransactionValidateRequestProcessor));
         }
 
         private static void RegisterResponses(Container container)

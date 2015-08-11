@@ -35,7 +35,7 @@
     <Reference Include="System.Core" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Processors\AgentCurrencyProcessor.cs" />
+    <Compile Include="Processors\AgentProcessor.cs" />
     <Compile Include="Processors\AgentUserProcessor.cs" />
     <Compile Include="Processors\HealthMonitoringProcessor.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

@@ -1,4 +1,5 @@
 ﻿using System.Threading.Tasks;
+using CES.CoreApi.Agent.Service.Business.Contract.Enumerations;
 using CES.CoreApi.Agent.Service.Business.Contract.Interfaces;
 using CES.CoreApi.Agent.Service.Business.Contract.Models;
 using CES.CoreApi.Common.Enumerations;
@@ -30,7 +31,7 @@ namespace CES.CoreApi.Agent.Service.Business.Logic.Processors
             //do whatever needs to be done to save agent signature to database, use _agentUserRepository to access Image DB
 
             return await Task.Run(() => new ProcessSignatureResponseModel {IsCompleted = true});
-        } 
+        }
 
         #endregion
     }

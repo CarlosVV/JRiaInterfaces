@@ -1,4 +1,5 @@
-﻿using CES.CoreApi.Agent.Service.Contract.Models;
+﻿using CES.CoreApi.Agent.Service.Contract.Enumerations;
+using CES.CoreApi.Agent.Service.Contract.Models;
 using CES.CoreApi.Agent.Service.Interfaces;
 using CES.CoreApi.Common.Constants;
 using CES.CoreApi.Common.Enumerations;
@@ -36,6 +37,22 @@ namespace CES.CoreApi.Agent.Service.Utilities
                 SubSystemError.GeneralRequiredParameterIsUndefined, "request.Signature", request.Signature);
             ContractValidation.Requires(request.Signature.Length > 0, TechnicalSubSystem.AgentService,
                 SubSystemError.GeneralInvalidParameterValue, "request.Signature", request.Signature);
+        }
+
+        public void Validate(GetPayingAgentRequest request)
+        {
+            ContractValidation.Requires(request != null, TechnicalSubSystem.AgentService,
+                 SubSystemError.GeneralRequiredParameterIsUndefined, "request");
+            ContractValidation.Requires(request.AgentId > 0, TechnicalSubSystem.AgentService,
+                SubSystemError.GeneralInvalidParameterValue, "request.AgentId", request.AgentId);
+            ContractValidation.Requires(request.DetalizationLevel != AgentInformationGroup.Undefined, TechnicalSubSystem.AgentService,
+                SubSystemError.GeneralInvalidParameterValue, "request.DetalizationLevel", request.DetalizationLevel);
+            ContractValidation.Requires((request.DetalizationLevel == AgentInformationGroup.Location ||
+                                        request.DetalizationLevel == AgentInformationGroup.LocationCurrency ||
+                                        request.DetalizationLevel == AgentInformationGroup.Medium ||
+                                        request.DetalizationLevel == AgentInformationGroup.Full) &&
+                                        request.LocationId > 0, TechnicalSubSystem.AgentService,
+                SubSystemError.GeneralInvalidParameterValue, "request.LocationId", request.LocationId);
         }
 
         // ReSharper restore PossibleNullReferenceException

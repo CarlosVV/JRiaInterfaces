@@ -6,5 +6,6 @@ namespace CES.CoreApi.Agent.Service.Interfaces
     {
         void Validate(GetAgentCurrencyRequest request);
         void Validate(ProcessSignatureRequest request);
+        void Validate(GetPayingAgentRequest request);
     }
 }

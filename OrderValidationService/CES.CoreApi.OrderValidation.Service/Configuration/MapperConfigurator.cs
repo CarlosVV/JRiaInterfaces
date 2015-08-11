@@ -1,4 +1,6 @@
 ﻿using AutoMapper;
+using CES.CoreApi.OrderValidation.Service.Business.Contract.Models;
+using CES.CoreApi.OrderValidation.Service.Contract.Models;
 using SimpleInjector;
 
 namespace CES.CoreApi.OrderValidation.Service.Configuration
@@ -7,7 +9,7 @@ namespace CES.CoreApi.OrderValidation.Service.Configuration
     {
         public static void Configure(Container container)
         {
-            //Mapper.CreateMap<AddressRequest, AddressModel>();
+            Mapper.CreateMap<OrderValidateRequest, TransactionValidateRequestModel>();
             //Mapper.CreateMap<AddressModel, AddressRequest>();
             //Mapper.CreateMap<AddressModel, ValidatedAddress>();
             //Mapper.CreateMap<AddressModel, AutocompleteAddress>();
