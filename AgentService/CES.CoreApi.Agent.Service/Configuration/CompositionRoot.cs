@@ -176,13 +176,16 @@ namespace CES.CoreApi.Agent.Service.Configuration
             container.RegisterSingle<IDatabaseConfigurationProvider, DatabaseConfigurationProvider>();
             container.RegisterSingle<IDatabaseInstanceProvider, DatabaseInstanceProvider>();
             container.RegisterSingle<IDatabasePingProvider, DatabasePingProvider>();
-            container.RegisterSingle<ILocationMaterializer, LocationMaterializer>();
-            container.RegisterSingle<ICurrencyMaterializer, CurrencyMaterializer>();
+            container.RegisterSingle<IPayingAgentLocationMaterializer, PayingAgentLocationMaterializer>();
+            container.RegisterSingle<IPayingAgentCurrencyMaterializer, PayingAgentCurrencyMaterializer>();
+            container.RegisterSingle<IPayingAgentMaterializer, PayingAgentMaterializer>();
+            container.RegisterSingle<IReceivingAgentMaterializer, ReceivingAgentMaterializer>();
 
             container.RegisterSingle<IRepositoryFactory>(new RepositoryFactory
             {
                 {"IPayingAgentLocationRepository", container.GetInstance<PayingAgentLocationRepository>},
                 {"IPayingAgentRepository", container.GetInstance<PayingAgentRepository>},
+                {"IReceivingAgentRepository", container.GetInstance<ReceivingAgentRepository>},
                 {"IAgentUserRepository", container.GetInstance<AgentUserRepository>},
             });
         }
@@ -192,6 +195,7 @@ namespace CES.CoreApi.Agent.Service.Configuration
             container.InterceptWith<PerformanceInterceptor>(type => type == typeof(IApplicationRepository));
             container.InterceptWith<PerformanceInterceptor>(type => type == typeof(IPayingAgentRepository));
             container.InterceptWith<PerformanceInterceptor>(type => type == typeof(IPayingAgentLocationRepository));
+            container.InterceptWith<PerformanceInterceptor>(type => type == typeof(IReceivingAgentRepository));
             container.InterceptWith<PerformanceInterceptor>(type => type == typeof(IAgentUserRepository));
             container.InterceptWith<PerformanceInterceptor>(type => type == typeof(IHealthMonitoringProcessor));
             container.InterceptWith<PerformanceInterceptor>(type => type == typeof(IAgentProcessor));

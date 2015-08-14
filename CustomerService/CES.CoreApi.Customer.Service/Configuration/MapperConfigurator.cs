@@ -4,6 +4,7 @@ using CES.CoreApi.Customer.Service.Business.Contract.Models;
 using CES.CoreApi.Customer.Service.Contract.Models;
 using CES.CoreApi.Shared.Business.Contract.Enumerations;
 using CES.CoreApi.Shared.Business.Contract.Models;
+using CES.CoreApi.Shared.Business.Contract.Models.Common;
 using SimpleInjector;
 
 namespace CES.CoreApi.Customer.Service.Configuration

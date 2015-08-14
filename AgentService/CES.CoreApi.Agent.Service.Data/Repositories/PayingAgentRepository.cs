@@ -1,8 +1,7 @@
 ﻿using System.Collections.ObjectModel;
 using System.Data.SqlClient;
-using CES.CoreApi.Agent.Service.Business.Contract.Enumerations;
+using System.Threading.Tasks;
 using CES.CoreApi.Agent.Service.Business.Contract.Interfaces;
-using CES.CoreApi.Agent.Service.Business.Contract.Models;
 using CES.CoreApi.Common.Enumerations;
 using CES.CoreApi.Common.Exceptions;
 using CES.CoreApi.Common.Interfaces;
@@ -11,6 +10,7 @@ using CES.CoreApi.Foundation.Data.Interfaces;
 using CES.CoreApi.Foundation.Data.Models;
 using CES.CoreApi.Foundation.Data.Utility;
 using CES.CoreApi.Logging.Interfaces;
+using CES.CoreApi.Shared.Business.Contract.Models.Agents;
 
 namespace CES.CoreApi.Agent.Service.Data.Repositories
 {
@@ -18,23 +18,28 @@ namespace CES.CoreApi.Agent.Service.Data.Repositories
     {
         #region Core
 
-        private readonly ICurrencyMaterializer _currencyMaterializer;
+        private readonly IPayingAgentMaterializer _payingAgentMaterializer;
+        private readonly IPayingAgentCurrencyMaterializer _payingAgentCurrencyMaterializer;
 
         public PayingAgentRepository(ICacheProvider cacheProvider, ILogMonitorFactory monitorFactory,
-            IIdentityManager identityManager, IDatabaseInstanceProvider instanceProvider, 
-            ICurrencyMaterializer currencyMaterializer)
+            IIdentityManager identityManager, IDatabaseInstanceProvider instanceProvider,
+            IPayingAgentMaterializer payingAgentMaterializer, IPayingAgentCurrencyMaterializer payingAgentCurrencyMaterializer)
             : base(cacheProvider, monitorFactory, identityManager, instanceProvider)
         {
-            if (currencyMaterializer == null)
+            if (payingAgentCurrencyMaterializer == null)
                 throw new CoreApiException(TechnicalSubSystem.AgentService,
-                   SubSystemError.GeneralRequiredParameterIsUndefined, "currencyMaterializer");
+                   SubSystemError.GeneralRequiredParameterIsUndefined, "PayingAgentCurrencyMaterializer");
+            if (payingAgentMaterializer == null)
+                throw new CoreApiException(TechnicalSubSystem.AgentService,
+                   SubSystemError.GeneralRequiredParameterIsUndefined, "PayingAgentMaterializer");
 
-            _currencyMaterializer = currencyMaterializer;
+            _payingAgentMaterializer = payingAgentMaterializer;
+            _payingAgentCurrencyMaterializer = payingAgentCurrencyMaterializer;
         }
 
         #endregion
 
-        public PayingAgentModel GetAgent(int agentId)
+        public async Task<PayingAgentModel> GetAgent(int agentId)
         {
             var request = new DatabaseRequest<PayingAgentModel>
             {
@@ -42,19 +47,12 @@ namespace CES.CoreApi.Agent.Service.Data.Repositories
                 IsCacheable = true,
                 DatabaseType = DatabaseType.ReadOnly,
                 Parameters = new Collection<SqlParameter>().Add("@fNameID", agentId),
-                Shaper = reader => new PayingAgentModel
-                {
-                    Id = agentId,
-                    IsOnHold = reader.ReadValue<bool>("fOnHold"),
-                    OnHoldReason = reader.ReadValue<string>("fOnHoldReason"),
-                    Status = reader.ReadValue<PayingAgentStatus>("fStatus"),
-                    IsBeneficiaryLastName2Required = reader.ReadValue<bool>("fReqBenLastName2")
-                }
+                Shaper = reader => _payingAgentMaterializer.Materialize(reader, agentId)
             };
-            return Get(request);
+            return await Task.Run(() => Get(request));
         }
 
-        public PayingAgentCurrencyModel GetAgentCurrency(int agentId, string currencySymbol)
+        public async Task<PayingAgentCurrencyModel> GetAgentCurrency(int agentId, string currencySymbol)
         {
             var request = new DatabaseRequest<PayingAgentCurrencyModel>
             {
@@ -64,10 +62,10 @@ namespace CES.CoreApi.Agent.Service.Data.Repositories
                 Parameters = new Collection<SqlParameter>()
                     .Add("@fNameID", agentId)
                     .Add("@fSymbol", currencySymbol),
-                Shaper = reader => _currencyMaterializer.Materialize(reader, agentId)
+                Shaper = reader => _payingAgentCurrencyMaterializer.Materialize(reader)
             };
 
-            return Get(request);
+            return await Task.Run(() => Get(request));
         }
     }
 }

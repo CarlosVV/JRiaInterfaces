@@ -5,12 +5,15 @@ using CES.CoreApi.Common.Models;
 namespace CES.CoreApi.Agent.Service.Contract.Models
 {
     [DataContract(Namespace = Namespaces.AgentServiceDataContractNamespace)]
-    public class GetAgentCurrencyRequest: BaseRequest
+    public class AgentCurrency: ExtensibleObject
     {
-        [DataMember(IsRequired = true)]
-        public int AgentId { get; set; }
-
-        [DataMember(IsRequired = true)]
+        [DataMember]
         public string Currency { get; set; }
+        [DataMember]
+        public decimal Minimum { get; set; }
+        [DataMember]
+        public decimal Maximum { get; set; }
+        [DataMember]
+        public decimal DailyMaximum { get; set; }
     }
 }

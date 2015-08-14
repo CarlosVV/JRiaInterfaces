@@ -109,6 +109,10 @@
       <Project>{02BEAA68-76A1-4ED6-BF6C-7B6935165AD6}</Project>
       <Name>CES.CoreApi.SimpleInjectorProxy</Name>
     </ProjectReference>
+    <ProjectReference Include="..\..\Shared\CES.CoreApi.Shared.Business.Contract\CES.CoreApi.Shared.Business.Contract.csproj">
+      <Project>{AE43A830-4DE7-4B13-A462-9C3F85FBE7D4}</Project>
+      <Name>CES.CoreApi.Shared.Business.Contract</Name>
+    </ProjectReference>
     <ProjectReference Include="..\CES.CoreApi.Agent.Service.Business.Contract\CES.CoreApi.Agent.Service.Business.Contract.csproj">
       <Project>{450171E3-C409-468B-B24E-F52E6C830577}</Project>
       <Name>CES.CoreApi.Agent.Service.Business.Contract</Name>

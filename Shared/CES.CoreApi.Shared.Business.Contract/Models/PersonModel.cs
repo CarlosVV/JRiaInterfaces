@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using CES.CoreApi.Shared.Business.Contract.Enumerations;
+using CES.CoreApi.Shared.Business.Contract.Models.Common;
 
 namespace CES.CoreApi.Shared.Business.Contract.Models
 {

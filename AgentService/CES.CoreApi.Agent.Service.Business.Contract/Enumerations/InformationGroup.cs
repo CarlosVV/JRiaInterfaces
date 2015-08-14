@@ -9,8 +9,9 @@ namespace CES.CoreApi.Agent.Service.Business.Contract.Enumerations
         Basic = 1,
         Location = 2,
         AgentCurrency = 4,
-        LocationCurrency = 8,
-        Full = Basic | Location | AgentCurrency | LocationCurrency,
-        Medium = Basic | Location
+        LocationWithCurrency = 8,
+        AllLocationsWithoutCurrency = 16,
+        Full = Basic | AgentCurrency | AllLocationsWithoutCurrency,
+        Medium = Basic | LocationWithCurrency
     }
 }

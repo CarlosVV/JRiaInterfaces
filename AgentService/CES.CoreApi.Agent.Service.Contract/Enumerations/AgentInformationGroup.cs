@@ -1,9 +1,11 @@
-﻿using System.Runtime.Serialization;
+﻿using System;
+using System.Runtime.Serialization;
 using CES.CoreApi.Agent.Service.Contract.Constants;
 
 namespace CES.CoreApi.Agent.Service.Contract.Enumerations
 {
     [DataContract(Namespace = Namespaces.AgentServiceDataContractNamespace)]
+    [Flags]
     public enum AgentInformationGroup
     {
         [EnumMember]
@@ -15,10 +17,12 @@ namespace CES.CoreApi.Agent.Service.Contract.Enumerations
         [EnumMember]
         AgentCurrency = 4,
         [EnumMember]
-        LocationCurrency = 8,
+        LocationWithCurrency = 8,
         [EnumMember]
-        Full = Basic | Location | AgentCurrency | LocationCurrency,
+        AllLocationsWithoutCurrency = 16,
         [EnumMember]
-        Medium = Basic | Location
+        Full = Basic | Location | AgentCurrency | AllLocationsWithoutCurrency,
+        [EnumMember]
+        Medium = Basic | LocationWithCurrency
     }
 }

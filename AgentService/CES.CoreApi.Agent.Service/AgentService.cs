@@ -12,11 +12,13 @@ using CES.CoreApi.Common.Enumerations;
 using CES.CoreApi.Common.Exceptions;
 using CES.CoreApi.Common.Models;
 using CES.CoreApi.Foundation.Contract.Interfaces;
+using CES.CoreApi.Shared.Business.Contract.Models;
+using CES.CoreApi.Shared.Business.Contract.Models.Agents;
 
 namespace CES.CoreApi.Agent.Service
 {
     [ServiceBehavior(Namespace = Namespaces.AgentServiceContractNamespace, InstanceContextMode = InstanceContextMode.PerCall)]
-    public class AgentService : IAgentCurrencyService, IAgentUserService, IHealthMonitoringService
+    public class AgentService : IAgentService, IAgentUserService, IHealthMonitoringService
     {
         #region Core
 
@@ -55,14 +57,31 @@ namespace CES.CoreApi.Agent.Service
 
         #endregion
 
-        #region IAgentCurrencyService implementation
+        #region IAgentService implementation
 
-        public async Task<GetAgentCurrencyResponse> GetAgentCurrency(GetAgentCurrencyRequest request)
+        public async Task<GetPayingAgentResponse> GetPayingAgent(GetPayingAgentRequest request)
         {
             _requestValidator.Validate(request);
-            var responseModel = await _agentProcessor.GetAgentCurrency(request.AgentId, request.Currency);
-            return _mapper.ConvertToResponse<PayingAgentCurrencyModel, GetAgentCurrencyResponse>(responseModel);
-        } 
+            var responseModel = await _agentProcessor.GetPayingAgent(
+                request.AgentId,
+                request.LocationId,
+                request.Currency,
+                _mapper.ConvertTo<AgentInformationGroup, InformationGroup>(request.DetalizationLevel));
+            var response = _mapper.ConvertToResponse<PayingAgentModel, GetPayingAgentResponse>(responseModel);
+            return response;
+        }
+
+        public async Task<GetReceivingAgentResponse> GetReceivingAgent(GetReceivingAgentRequest request)
+        {
+            _requestValidator.Validate(request);
+            //var responseModel = await _agentProcessor.GetReceivingAgent(
+            //    request.AgentId,
+            //    request.LocationId,
+            //    request.Currency,
+            //    _mapper.ConvertTo<AgentInformationGroup, InformationGroup>(request.DetalizationLevel));
+            //var response = _mapper.ConvertToResponse<ReceivingAgentModel, GetReceivingAgentResponse>(responseModel);
+            return null;
+        }
 
         #endregion
 
@@ -83,18 +102,7 @@ namespace CES.CoreApi.Agent.Service
         #endregion
 
         #region IAgentUserService implementation
-
-        public async Task<GetPayingAgentResponse> GetPayingAgent(GetPayingAgentRequest request)
-        {
-            _requestValidator.Validate(request);
-            var responseModel = await _agentProcessor.GetPayingAgent(
-                request.AgentId, 
-                request.LocationId,
-                request.CurrencySymbol,
-                _mapper.ConvertTo<AgentInformationGroup, InformationGroup>(request.DetalizationLevel));
-            return _mapper.ConvertToResponse<GetAgentResponseResponseModel, GetPayingAgentResponse>(responseModel);
-        }
-
+        
         public async Task<ProcessSignatureResponse> ProcessSignature(ProcessSignatureRequest request)
         {
             _requestValidator.Validate(request);

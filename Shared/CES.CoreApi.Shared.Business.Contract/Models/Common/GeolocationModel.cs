@@ -1,4 +1,4 @@
-﻿namespace CES.CoreApi.Shared.Business.Contract.Models
+﻿namespace CES.CoreApi.Shared.Business.Contract.Models.Common
 {
     public class GeolocationModel
     {

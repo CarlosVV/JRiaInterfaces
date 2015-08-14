@@ -11,18 +11,6 @@ namespace CES.CoreApi.Agent.Service.Utilities
     {
         // ReSharper disable PossibleNullReferenceException
 
-        public void Validate(GetAgentCurrencyRequest request)
-        {
-            ContractValidation.Requires(request != null, TechnicalSubSystem.AgentService,
-                SubSystemError.GeneralRequiredParameterIsUndefined, "request");
-            ContractValidation.Requires(request.AgentId > 0, TechnicalSubSystem.AgentService,
-                SubSystemError.GeneralInvalidParameterValue, "request.AgentId", request.AgentId);
-            ContractValidation.Requires(!string.IsNullOrEmpty(request.Currency), TechnicalSubSystem.AgentService,
-                SubSystemError.GeneralRequiredParameterIsUndefined, "request.Currency", request.Currency);
-            ContractValidation.Requires(request.Currency.Length == CommonConstants.StringLength.Currency, TechnicalSubSystem.AgentService,
-                SubSystemError.GeneralInvalidStringParameterLength, "request.Currency", CommonConstants.StringLength.Currency, request.Currency.Length);
-        }
-
         public void Validate(ProcessSignatureRequest request)
         {
             ContractValidation.Requires(request != null, TechnicalSubSystem.AgentService,
@@ -47,15 +35,38 @@ namespace CES.CoreApi.Agent.Service.Utilities
                 SubSystemError.GeneralInvalidParameterValue, "request.AgentId", request.AgentId);
             ContractValidation.Requires(request.DetalizationLevel != AgentInformationGroup.Undefined, TechnicalSubSystem.AgentService,
                 SubSystemError.GeneralInvalidParameterValue, "request.DetalizationLevel", request.DetalizationLevel);
-            ContractValidation.Requires((request.DetalizationLevel == AgentInformationGroup.Location ||
-                                        request.DetalizationLevel == AgentInformationGroup.LocationCurrency ||
-                                        request.DetalizationLevel == AgentInformationGroup.Medium ||
-                                        request.DetalizationLevel == AgentInformationGroup.Full) &&
-                                        request.LocationId > 0, TechnicalSubSystem.AgentService,
-                SubSystemError.GeneralInvalidParameterValue, "request.LocationId", request.LocationId);
+
+            ContractValidation.Requires(!IsLocationIdRequired(request.DetalizationLevel) || request.LocationId > 0,
+                TechnicalSubSystem.AgentService, SubSystemError.GeneralInvalidParameterValue, "request.LocationId",
+                request.LocationId);
+
+            var isCurrencyRequired = IsCurrencyRequired(request.DetalizationLevel);
+
+            ContractValidation.Requires(!isCurrencyRequired || !string.IsNullOrEmpty(request.Currency), 
+                TechnicalSubSystem.AgentService, SubSystemError.GeneralInvalidParameterValue, "request.Currency", request.Currency);
+
+            ContractValidation.Requires(!isCurrencyRequired || request.Currency.Length == CommonConstants.StringLength.Currency,
+                TechnicalSubSystem.AgentService, SubSystemError.GeneralInvalidStringParameterLength, "request.Currency",
+                CommonConstants.StringLength.Currency, request.Currency.Length);
+        }
+
+        public void Validate(GetReceivingAgentRequest request)
+        {
+            throw new System.NotImplementedException();
         }
 
         // ReSharper restore PossibleNullReferenceException
-      
+
+        private static bool IsLocationIdRequired(AgentInformationGroup detalizationLevel)
+        {
+            return (detalizationLevel & AgentInformationGroup.Location) == AgentInformationGroup.Location ||
+                   (detalizationLevel & AgentInformationGroup.LocationWithCurrency) == AgentInformationGroup.LocationWithCurrency;
+        }
+
+        private static bool IsCurrencyRequired(AgentInformationGroup detalizationLevel)
+        {
+            return (detalizationLevel & AgentInformationGroup.AgentCurrency) == AgentInformationGroup.AgentCurrency ||
+                   (detalizationLevel & AgentInformationGroup.LocationWithCurrency) == AgentInformationGroup.LocationWithCurrency;
+        }
     }
 }

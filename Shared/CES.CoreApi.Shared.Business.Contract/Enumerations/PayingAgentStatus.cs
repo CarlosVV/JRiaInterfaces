@@ -1,4 +1,4 @@
-﻿namespace CES.CoreApi.Agent.Service.Business.Contract.Enumerations
+﻿namespace CES.CoreApi.Shared.Business.Contract.Enumerations
 {
     public enum PayingAgentStatus
     {

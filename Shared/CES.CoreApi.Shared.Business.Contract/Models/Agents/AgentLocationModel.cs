@@ -1,4 +1,6 @@
-﻿namespace CES.CoreApi.Shared.Business.Contract.Models
+﻿using CES.CoreApi.Shared.Business.Contract.Models.Common;
+
+namespace CES.CoreApi.Shared.Business.Contract.Models.Agents
 {
     public class AgentLocationModel
     {

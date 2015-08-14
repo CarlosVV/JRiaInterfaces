@@ -302,7 +302,15 @@ namespace CES.CoreApi.Common.Enumerations
         [ErrorMessage("The paying agent location is disabled. PayingAgentID = '{0}'.")]
         OrderValidationPayingAgentLocationDisabled,
 
-        
+
+
+        #endregion
+
+        #region Agent service
+
+        [SubSystemErrorNumber("00600")]
+        [ErrorMessage("The agent location with LocationID = '{0}' is not found in location list. Paying AgentID = '{1}'.")]
+        AgentServiceLocationIsNotFound,
 
         #endregion
     }

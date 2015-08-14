@@ -15,7 +15,7 @@ namespace CES.CoreApi.Agent.Service.Contract.Models
         public int LocationId { get; set; }
 
         [DataMember(IsRequired = false)]
-        public string CurrencySymbol { get; set; }
+        public string Currency { get; set; }
 
         [DataMember(IsRequired = true)]
         public AgentInformationGroup DetalizationLevel { get; set; }

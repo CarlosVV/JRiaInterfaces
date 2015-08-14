@@ -39,17 +39,23 @@
   <ItemGroup>
     <Compile Include="Constants\Namespaces.cs" />
     <Compile Include="Enumerations\AgentInformationGroup.cs" />
-    <Compile Include="Interfaces\IAgentCurrencyService.cs" />
+    <Compile Include="Interfaces\IAgentService.cs" />
     <Compile Include="Interfaces\IAgentUserService.cs" />
     <Compile Include="Interfaces\IHealthMonitoringService.cs" />
+    <Compile Include="Models\Address.cs" />
+    <Compile Include="Models\AgentLocation.cs" />
     <Compile Include="Models\ClearCacheResponse.cs" />
+    <Compile Include="Models\Contact.cs" />
     <Compile Include="Models\DatabasePingResponse.cs" />
-    <Compile Include="Models\GetAgentCurrencyRequest.cs" />
-    <Compile Include="Models\GetAgentCurrencyResponse.cs" />
+    <Compile Include="Models\Geolocation.cs" />
     <Compile Include="Models\GetPayingAgentRequest.cs" />
     <Compile Include="Models\GetPayingAgentResponse.cs" />
+    <Compile Include="Models\GetReceivingAgentRequest.cs" />
+    <Compile Include="Models\GetReceivingAgentResponse.cs" />
+    <Compile Include="Models\PayingAgent.cs" />
+    <Compile Include="Models\Phone.cs" />
     <Compile Include="Models\PingResponse.cs" />
-    <Compile Include="Models\PayingAgentCurrency.cs" />
+    <Compile Include="Models\AgentCurrency.cs" />
     <Compile Include="Models\ProcessSignatureRequest.cs" />
     <Compile Include="Models\ProcessSignatureResponse.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

@@ -1,9 +1,7 @@
-﻿namespace CES.CoreApi.Agent.Service.Business.Contract.Models
+﻿namespace CES.CoreApi.Shared.Business.Contract.Models.Agents
 {
     public class PayingAgentCurrencyModel
     {
-        public int Id { get; set; }
-
         public string Currency { get; set; }
 
         public decimal Minimum { get; set; }

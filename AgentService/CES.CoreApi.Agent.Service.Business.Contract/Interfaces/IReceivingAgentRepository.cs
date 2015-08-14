@@ -4,9 +4,8 @@ using CES.CoreApi.Shared.Business.Contract.Models.Agents;
 
 namespace CES.CoreApi.Agent.Service.Business.Contract.Interfaces
 {
-    public interface IPayingAgentRepository
+    public interface IReceivingAgentRepository
     {
-        Task<PayingAgentModel> GetAgent(int agentId);
-        Task<PayingAgentCurrencyModel> GetAgentCurrency(int agentId, string currencySymbol);
+        Task<ReceivingAgentModel> GetAgent(int agentId);
     }
 }

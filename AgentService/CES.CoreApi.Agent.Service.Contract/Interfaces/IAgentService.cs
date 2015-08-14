@@ -7,10 +7,10 @@ using CES.CoreApi.Common.Models;
 namespace CES.CoreApi.Agent.Service.Contract.Interfaces
 {
     [ServiceContract(Namespace = Namespaces.AgentServiceContractNamespace)]
-    public interface IAgentCurrencyService
+    public interface IAgentService
     {
-        [OperationContract(Name = "GetAgentCurrency")]
+        [OperationContract(Name = "GetPayingAgent")]
         [FaultContract(typeof(CoreApiServiceFault), Action = Common.Constants.Namespaces.ServiceFaultContractAction)]
-        Task<GetAgentCurrencyResponse> GetAgentCurrency(GetAgentCurrencyRequest request);
+        Task<GetPayingAgentResponse> GetPayingAgent(GetPayingAgentRequest request);
     }
 }

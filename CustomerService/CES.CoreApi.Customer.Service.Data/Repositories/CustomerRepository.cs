@@ -14,6 +14,7 @@ using CES.CoreApi.Foundation.Data.Utility;
 using CES.CoreApi.Logging.Interfaces;
 using CES.CoreApi.Shared.Business.Contract.Enumerations;
 using CES.CoreApi.Shared.Business.Contract.Models;
+using CES.CoreApi.Shared.Business.Contract.Models.Common;
 
 namespace CES.CoreApi.Customer.Service.Data.Repositories
 {

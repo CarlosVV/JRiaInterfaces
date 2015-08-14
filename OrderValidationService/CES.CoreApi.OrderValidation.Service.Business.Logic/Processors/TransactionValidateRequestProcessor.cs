@@ -35,6 +35,7 @@ namespace CES.CoreApi.OrderValidation.Service.Business.Logic.Processors
             var request = new CustomerGetRequest { CustomerId = validateRequest.CustomerId };
             var customer = await _serviceHelper.ExecuteAsync<ICustomerService, Task<CustomerGetResponse>>(p => p.Get(request));
 
+            //Get paying agent details
 
 
 
