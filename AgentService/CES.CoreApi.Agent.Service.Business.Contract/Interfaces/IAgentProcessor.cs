@@ -7,6 +7,6 @@ namespace CES.CoreApi.Agent.Service.Business.Contract.Interfaces
 {
     public interface IAgentProcessor
     {
-        Task<PayingAgentModel> GetPayingAgent(int agentId, int locationId, string currencySymbol, InformationGroup detalizationLevel);
+        Task<PayingAgentModel> GetPayingAgent(int agentId, int locationId, string currencySymbol, PayingAgentDetalizationLevel detalizationLevel);
     }
 }

@@ -28,26 +28,26 @@ namespace CES.CoreApi.Agent.Service.Business.Logic.Processors
         #region MyRegion
 
 
-        public async Task<PayingAgentModel> GetPayingAgent(int agentId, int locationId, string currencySymbol, InformationGroup detalizationLevel)
+        public async Task<PayingAgentModel> GetPayingAgent(int agentId, int locationId, string currencySymbol, PayingAgentDetalizationLevel detalizationLevel)
         {
             //Get agent details
             var response = await GetRepository<IPayingAgentRepository>().GetAgent(agentId);
 
             //Get agent currency information
-            if ((detalizationLevel & InformationGroup.AgentCurrency) == InformationGroup.AgentCurrency)
+            if ((detalizationLevel & PayingAgentDetalizationLevel.AgentCurrency) == PayingAgentDetalizationLevel.AgentCurrency)
                 response.Currency = await GetRepository<IPayingAgentRepository>().GetAgentCurrency(agentId, currencySymbol);
 
             //Get agent location details
-            if ((detalizationLevel & InformationGroup.Location) != InformationGroup.Location &&
-                (detalizationLevel & InformationGroup.LocationWithCurrency) != InformationGroup.LocationWithCurrency &&
-                (detalizationLevel & InformationGroup.AllLocationsWithoutCurrency) != InformationGroup.AllLocationsWithoutCurrency)
+            if ((detalizationLevel & PayingAgentDetalizationLevel.Location) != PayingAgentDetalizationLevel.Location &&
+                (detalizationLevel & PayingAgentDetalizationLevel.LocationWithCurrency) != PayingAgentDetalizationLevel.LocationWithCurrency &&
+                (detalizationLevel & PayingAgentDetalizationLevel.AllLocationsWithoutCurrency) != PayingAgentDetalizationLevel.AllLocationsWithoutCurrency)
                 return response;
 
             //Get location(s)
-            response.Locations = await GetRepository<IPayingAgentLocationRepository>().GetLocations(agentId, locationId, detalizationLevel);
+            response.Locations = await GetRepository<IPayingAgentLocationRepository>().GetLocations(agentId, locationId, true);
 
             //Get location currency information only if location ID  > 0 - only for one location
-            if ((detalizationLevel & InformationGroup.LocationWithCurrency) != InformationGroup.LocationWithCurrency)
+            if ((detalizationLevel & PayingAgentDetalizationLevel.LocationWithCurrency) != PayingAgentDetalizationLevel.LocationWithCurrency)
                 return response;
 
             var location = response.Locations.FirstOrDefault(p => p.Id == locationId);

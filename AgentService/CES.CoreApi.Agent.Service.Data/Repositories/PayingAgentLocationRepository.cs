@@ -2,7 +2,6 @@
 using System.Collections.ObjectModel;
 using System.Data.SqlClient;
 using System.Threading.Tasks;
-using CES.CoreApi.Agent.Service.Business.Contract.Enumerations;
 using CES.CoreApi.Agent.Service.Business.Contract.Interfaces;
 using CES.CoreApi.Common.Enumerations;
 using CES.CoreApi.Common.Exceptions;
@@ -22,7 +21,6 @@ namespace CES.CoreApi.Agent.Service.Data.Repositories
 
         private readonly IPayingAgentLocationMaterializer _payingAgentLocationMaterializer;
         private readonly IPayingAgentCurrencyMaterializer _payingAgentCurrencyMaterializer;
-        private const string GetLocationsCacheKeySuffixTemplate = "Detalization_Level_{0}";
 
         public PayingAgentLocationRepository(ICacheProvider cacheProvider, ILogMonitorFactory monitorFactory,
             IIdentityManager identityManager, IDatabaseInstanceProvider instanceProvider, 
@@ -44,24 +42,19 @@ namespace CES.CoreApi.Agent.Service.Data.Repositories
         
         #region IPayingAgentLocationRepository implementation
 
-        public async Task<IEnumerable<PayingAgentLocationModel>> GetLocations(int agentId, int locationId, InformationGroup detalizationLevel)
+        public async Task<IEnumerable<PayingAgentLocationModel>> GetLocations(int agentId, int locationId, bool isReceivingAgent)
         {
-            var includeAllLocations = (detalizationLevel & InformationGroup.AllLocationsWithoutCurrency) == InformationGroup.AllLocationsWithoutCurrency;
-            
             var request = new DatabaseRequest<PayingAgentLocationModel>
             {
-                ProcedureName = includeAllLocations
-                    ? "ol_sp_lttblPayAgentsLocs_GetAllByAgent"
-                    : "ol_sp_lttblPayAgentsLocs_Get",
+                ProcedureName = "coreapi_sp_GetAgentAddress",
                 IsCacheable = true,
                 DatabaseType = DatabaseType.ReadOnly,
-                Parameters = new Collection<SqlParameter>().Add("@fNameIDAgent", agentId),
-                Shaper = reader => _payingAgentLocationMaterializer.Materialize(reader, locationId),
-                CacheKeySuffix = string.Format(GetLocationsCacheKeySuffixTemplate, detalizationLevel)
+                Parameters = new Collection<SqlParameter>()
+                    .Add("@AgentID", agentId)
+                    .Add("@LocationID", locationId)
+                    .Add("@IsReceivingAgent", isReceivingAgent ? 1 : 0),
+                Shaper = reader => _payingAgentLocationMaterializer.Materialize(reader, locationId)
             };
-
-            if (!includeAllLocations)
-                request.Parameters.Add("@fNameIDLoc", locationId);
 
             return await Task.Run(() => GetList(request));
         }

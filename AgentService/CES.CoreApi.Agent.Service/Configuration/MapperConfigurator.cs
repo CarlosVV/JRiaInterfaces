@@ -33,7 +33,7 @@ namespace CES.CoreApi.Agent.Service.Configuration
             Mapper.CreateMap<GeolocationModel, Geolocation>();
             Mapper.CreateMap<PayingAgentLocationModel, AgentLocation>();
 
-            Mapper.CreateMap<AgentInformationGroup, InformationGroup>();
+            Mapper.CreateMap<PayingAgentInformationGroup, PayingAgentDetalizationLevel>();
             Mapper.CreateMap<AddressValidationResult, string>()
                 .ConvertUsing(src => src.ToString());
             Mapper.CreateMap<PhoneType, string>()

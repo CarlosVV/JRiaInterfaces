@@ -18,6 +18,6 @@ namespace CES.CoreApi.Agent.Service.Contract.Models
         public string Currency { get; set; }
 
         [DataMember(IsRequired = true)]
-        public AgentInformationGroup DetalizationLevel { get; set; }
+        public PayingAgentInformationGroup DetalizationLevel { get; set; }
     }
 }

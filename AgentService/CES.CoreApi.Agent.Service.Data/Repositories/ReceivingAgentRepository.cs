@@ -10,7 +10,6 @@ using CES.CoreApi.Foundation.Data.Interfaces;
 using CES.CoreApi.Foundation.Data.Models;
 using CES.CoreApi.Foundation.Data.Utility;
 using CES.CoreApi.Logging.Interfaces;
-using CES.CoreApi.Shared.Business.Contract.Models;
 using CES.CoreApi.Shared.Business.Contract.Models.Agents;
 
 namespace CES.CoreApi.Agent.Service.Data.Repositories

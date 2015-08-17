@@ -38,7 +38,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Constants\Namespaces.cs" />
-    <Compile Include="Enumerations\AgentInformationGroup.cs" />
+    <Compile Include="Enumerations\PayingAgentInformationGroup.cs" />
+    <Compile Include="Enumerations\ReceivingAgentInformationGroup.cs" />
     <Compile Include="Interfaces\IAgentService.cs" />
     <Compile Include="Interfaces\IAgentUserService.cs" />
     <Compile Include="Interfaces\IHealthMonitoringService.cs" />

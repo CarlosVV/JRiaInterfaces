@@ -45,6 +45,7 @@
     <Compile Include="Repositories\PayingAgentLocationRepository.cs" />
     <Compile Include="Repositories\PayingAgentRepository.cs" />
     <Compile Include="Repositories\AgentUserRepository.cs" />
+    <Compile Include="Repositories\ReceivingAgentLocationRepository.cs" />
     <Compile Include="Repositories\ReceivingAgentRepository.cs" />
   </ItemGroup>
   <ItemGroup>

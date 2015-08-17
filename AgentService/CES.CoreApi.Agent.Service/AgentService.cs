@@ -12,7 +12,6 @@ using CES.CoreApi.Common.Enumerations;
 using CES.CoreApi.Common.Exceptions;
 using CES.CoreApi.Common.Models;
 using CES.CoreApi.Foundation.Contract.Interfaces;
-using CES.CoreApi.Shared.Business.Contract.Models;
 using CES.CoreApi.Shared.Business.Contract.Models.Agents;
 
 namespace CES.CoreApi.Agent.Service
@@ -66,19 +65,19 @@ namespace CES.CoreApi.Agent.Service
                 request.AgentId,
                 request.LocationId,
                 request.Currency,
-                _mapper.ConvertTo<AgentInformationGroup, InformationGroup>(request.DetalizationLevel));
+                _mapper.ConvertTo<PayingAgentInformationGroup, PayingAgentDetalizationLevel>(request.DetalizationLevel));
             var response = _mapper.ConvertToResponse<PayingAgentModel, GetPayingAgentResponse>(responseModel);
             return response;
         }
 
         public async Task<GetReceivingAgentResponse> GetReceivingAgent(GetReceivingAgentRequest request)
         {
-            _requestValidator.Validate(request);
+            //_requestValidator.Validate(request);
             //var responseModel = await _agentProcessor.GetReceivingAgent(
             //    request.AgentId,
             //    request.LocationId,
             //    request.Currency,
-            //    _mapper.ConvertTo<AgentInformationGroup, InformationGroup>(request.DetalizationLevel));
+            //    _mapper.ConvertTo<PayingAgentInformationGroup, PayingAgentDetalizationLevel>(request.DetalizationLevel));
             //var response = _mapper.ConvertToResponse<ReceivingAgentModel, GetReceivingAgentResponse>(responseModel);
             return null;
         }

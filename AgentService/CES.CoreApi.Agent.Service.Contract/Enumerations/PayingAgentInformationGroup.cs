@@ -6,7 +6,7 @@ namespace CES.CoreApi.Agent.Service.Contract.Enumerations
 {
     [DataContract(Namespace = Namespaces.AgentServiceDataContractNamespace)]
     [Flags]
-    public enum AgentInformationGroup
+    public enum PayingAgentInformationGroup
     {
         [EnumMember]
         Undefined = 0,

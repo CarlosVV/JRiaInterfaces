@@ -33,7 +33,7 @@ namespace CES.CoreApi.Agent.Service.Utilities
                  SubSystemError.GeneralRequiredParameterIsUndefined, "request");
             ContractValidation.Requires(request.AgentId > 0, TechnicalSubSystem.AgentService,
                 SubSystemError.GeneralInvalidParameterValue, "request.AgentId", request.AgentId);
-            ContractValidation.Requires(request.DetalizationLevel != AgentInformationGroup.Undefined, TechnicalSubSystem.AgentService,
+            ContractValidation.Requires(request.DetalizationLevel != PayingAgentInformationGroup.Undefined, TechnicalSubSystem.AgentService,
                 SubSystemError.GeneralInvalidParameterValue, "request.DetalizationLevel", request.DetalizationLevel);
 
             ContractValidation.Requires(!IsLocationIdRequired(request.DetalizationLevel) || request.LocationId > 0,
@@ -57,16 +57,16 @@ namespace CES.CoreApi.Agent.Service.Utilities
 
         // ReSharper restore PossibleNullReferenceException
 
-        private static bool IsLocationIdRequired(AgentInformationGroup detalizationLevel)
+        private static bool IsLocationIdRequired(PayingAgentInformationGroup detalizationLevel)
         {
-            return (detalizationLevel & AgentInformationGroup.Location) == AgentInformationGroup.Location ||
-                   (detalizationLevel & AgentInformationGroup.LocationWithCurrency) == AgentInformationGroup.LocationWithCurrency;
+            return (detalizationLevel & PayingAgentInformationGroup.Location) == PayingAgentInformationGroup.Location ||
+                   (detalizationLevel & PayingAgentInformationGroup.LocationWithCurrency) == PayingAgentInformationGroup.LocationWithCurrency;
         }
 
-        private static bool IsCurrencyRequired(AgentInformationGroup detalizationLevel)
+        private static bool IsCurrencyRequired(PayingAgentInformationGroup detalizationLevel)
         {
-            return (detalizationLevel & AgentInformationGroup.AgentCurrency) == AgentInformationGroup.AgentCurrency ||
-                   (detalizationLevel & AgentInformationGroup.LocationWithCurrency) == AgentInformationGroup.LocationWithCurrency;
+            return (detalizationLevel & PayingAgentInformationGroup.AgentCurrency) == PayingAgentInformationGroup.AgentCurrency ||
+                   (detalizationLevel & PayingAgentInformationGroup.LocationWithCurrency) == PayingAgentInformationGroup.LocationWithCurrency;
         }
     }
 }

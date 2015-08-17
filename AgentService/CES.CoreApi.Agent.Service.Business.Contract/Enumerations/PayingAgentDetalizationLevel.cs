@@ -3,7 +3,7 @@
 namespace CES.CoreApi.Agent.Service.Business.Contract.Enumerations
 {
     [Flags]
-    public enum InformationGroup
+    public enum PayingAgentDetalizationLevel
     {
         Undefined = 0,
         Basic = 1,
