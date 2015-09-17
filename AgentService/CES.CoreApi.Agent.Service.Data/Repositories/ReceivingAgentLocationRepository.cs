@@ -41,7 +41,7 @@ namespace CES.CoreApi.Agent.Service.Data.Repositories
         //    //    IsCacheable = true,
         //    //    DatabaseType = DatabaseType.ReadOnly,
         //    //    Parameters = new Collection<SqlParameter>().Add("@fNameIDAgent", agentId),
-        //    //    Shaper = reader => _payingAgentLocationMaterializer.Materialize(reader, locationId),
+        //    //    Shaper = reader => _agentLocationMaterializer.MaterializePayingAgentLocation(reader, locationId),
         //    //    CacheKeySuffix = string.Format(GetLocationsCacheKeySuffixTemplate, detalizationLevel)
         //    //};
 

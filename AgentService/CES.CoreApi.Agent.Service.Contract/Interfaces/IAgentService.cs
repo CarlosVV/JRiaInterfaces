@@ -12,5 +12,9 @@ namespace CES.CoreApi.Agent.Service.Contract.Interfaces
         [OperationContract(Name = "GetPayingAgent")]
         [FaultContract(typeof(CoreApiServiceFault), Action = Common.Constants.Namespaces.ServiceFaultContractAction)]
         Task<GetPayingAgentResponse> GetPayingAgent(GetPayingAgentRequest request);
+
+        [OperationContract(Name = "GetReceivingAgent")]
+        [FaultContract(typeof(CoreApiServiceFault), Action = Common.Constants.Namespaces.ServiceFaultContractAction)]
+        Task<GetReceivingAgentResponse> GetReceivingAgent(GetReceivingAgentRequest request);
     }
 }

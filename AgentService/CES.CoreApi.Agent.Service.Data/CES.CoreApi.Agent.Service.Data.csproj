@@ -39,10 +39,10 @@
     <Compile Include="Factories\RepositoryFactory.cs" />
     <Compile Include="Materializers\PayingAgentMaterializer.cs" />
     <Compile Include="Materializers\PayingAgentCurrencyMaterializer.cs" />
-    <Compile Include="Materializers\PayingAgentLocationMaterializer.cs" />
+    <Compile Include="Materializers\AgentLocationMaterializer.cs" />
     <Compile Include="Materializers\ReceivingAgentMaterializer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Repositories\PayingAgentLocationRepository.cs" />
+    <Compile Include="Repositories\AgentLocationRepository.cs" />
     <Compile Include="Repositories\PayingAgentRepository.cs" />
     <Compile Include="Repositories\AgentUserRepository.cs" />
     <Compile Include="Repositories\ReceivingAgentLocationRepository.cs" />

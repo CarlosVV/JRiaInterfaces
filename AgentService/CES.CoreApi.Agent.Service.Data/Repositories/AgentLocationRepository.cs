@@ -15,32 +15,32 @@ using CES.CoreApi.Shared.Business.Contract.Models.Agents;
 
 namespace CES.CoreApi.Agent.Service.Data.Repositories
 {
-    public class PayingAgentLocationRepository : BaseGenericRepository, IPayingAgentLocationRepository
+    public class AgentLocationRepository : BaseGenericRepository, IAgentLocationRepository
     {
         #region Core
 
-        private readonly IPayingAgentLocationMaterializer _payingAgentLocationMaterializer;
+        private readonly IAgentLocationMaterializer _agentLocationMaterializer;
         private readonly IPayingAgentCurrencyMaterializer _payingAgentCurrencyMaterializer;
 
-        public PayingAgentLocationRepository(ICacheProvider cacheProvider, ILogMonitorFactory monitorFactory,
+        public AgentLocationRepository(ICacheProvider cacheProvider, ILogMonitorFactory monitorFactory,
             IIdentityManager identityManager, IDatabaseInstanceProvider instanceProvider, 
-            IPayingAgentLocationMaterializer payingAgentLocationMaterializer, IPayingAgentCurrencyMaterializer payingAgentCurrencyMaterializer)
+            IAgentLocationMaterializer agentLocationMaterializer, IPayingAgentCurrencyMaterializer payingAgentCurrencyMaterializer)
             : base(cacheProvider, monitorFactory, identityManager, instanceProvider)
         {
-            if (payingAgentLocationMaterializer == null)
+            if (agentLocationMaterializer == null)
                 throw new CoreApiException(TechnicalSubSystem.AgentService,
-                   SubSystemError.GeneralRequiredParameterIsUndefined, "PayingAgentLocationMaterializer");
+                   SubSystemError.GeneralRequiredParameterIsUndefined, "agentLocationMaterializer");
             if (payingAgentCurrencyMaterializer == null)
                 throw new CoreApiException(TechnicalSubSystem.AgentService,
                    SubSystemError.GeneralRequiredParameterIsUndefined, "PayingAgentCurrencyMaterializer");
 
-            _payingAgentLocationMaterializer = payingAgentLocationMaterializer;
+            _agentLocationMaterializer = agentLocationMaterializer;
             _payingAgentCurrencyMaterializer = payingAgentCurrencyMaterializer;
         }
 
         #endregion
         
-        #region IPayingAgentLocationRepository implementation
+        #region IAgentLocationRepository implementation
 
         public async Task<IEnumerable<PayingAgentLocationModel>> GetLocations(int agentId, int locationId, bool isReceivingAgent)
         {
@@ -53,7 +53,7 @@ namespace CES.CoreApi.Agent.Service.Data.Repositories
                     .Add("@AgentID", agentId)
                     .Add("@LocationID", locationId)
                     .Add("@IsReceivingAgent", isReceivingAgent ? 1 : 0),
-                Shaper = reader => _payingAgentLocationMaterializer.Materialize(reader, locationId)
+                Shaper = reader => _agentLocationMaterializer.MaterializePayingAgentLocation(reader)
             };
 
             return await Task.Run(() => GetList(request));

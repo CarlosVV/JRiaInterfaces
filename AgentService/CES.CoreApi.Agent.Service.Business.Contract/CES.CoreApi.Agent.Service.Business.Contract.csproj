@@ -44,8 +44,8 @@
     <Compile Include="Interfaces\IAgentUserRepository.cs" />
     <Compile Include="Interfaces\IPayingAgentCurrencyMaterializer.cs" />
     <Compile Include="Interfaces\IHealthMonitoringProcessor.cs" />
-    <Compile Include="Interfaces\IPayingAgentLocationMaterializer.cs" />
-    <Compile Include="Interfaces\IPayingAgentLocationRepository.cs" />
+    <Compile Include="Interfaces\IAgentLocationMaterializer.cs" />
+    <Compile Include="Interfaces\IAgentLocationRepository.cs" />
     <Compile Include="Interfaces\IPayingAgentRepository.cs" />
     <Compile Include="Interfaces\IReceivingAgentMaterializer.cs" />
     <Compile Include="Interfaces\IReceivingAgentRepository.cs" />

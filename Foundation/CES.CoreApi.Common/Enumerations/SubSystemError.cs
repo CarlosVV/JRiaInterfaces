@@ -313,5 +313,13 @@ namespace CES.CoreApi.Common.Enumerations
         AgentServiceLocationIsNotFound,
 
         #endregion
+
+        #region Customer ID verification service
+
+        [SubSystemErrorNumber("00700")]
+        [ErrorMessage("The customer ID verification provider configuration is not found. Country = '{0}'.")]
+        CustomerIdVerificationProviderCountryConfigurationIsNotFound, 
+        
+        #endregion
     }
 }

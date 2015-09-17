@@ -66,20 +66,18 @@ namespace CES.CoreApi.Agent.Service
                 request.LocationId,
                 request.Currency,
                 _mapper.ConvertTo<PayingAgentInformationGroup, PayingAgentDetalizationLevel>(request.DetalizationLevel));
-            var response = _mapper.ConvertToResponse<PayingAgentModel, GetPayingAgentResponse>(responseModel);
-            return response;
+            return _mapper.ConvertToResponse<PayingAgentModel, GetPayingAgentResponse>(responseModel);
         }
 
         public async Task<GetReceivingAgentResponse> GetReceivingAgent(GetReceivingAgentRequest request)
         {
-            //_requestValidator.Validate(request);
-            //var responseModel = await _agentProcessor.GetReceivingAgent(
-            //    request.AgentId,
-            //    request.LocationId,
-            //    request.Currency,
-            //    _mapper.ConvertTo<PayingAgentInformationGroup, PayingAgentDetalizationLevel>(request.DetalizationLevel));
-            //var response = _mapper.ConvertToResponse<ReceivingAgentModel, GetReceivingAgentResponse>(responseModel);
-            return null;
+            _requestValidator.Validate(request);
+            var responseModel = await _agentProcessor.GetReceivingAgent(
+                request.AgentId,
+                request.LocationId,
+                _mapper.ConvertTo<ReceivingAgentInformationGroup, ReceivingAgentDetalizationLevel>(request.DetalizationLevel));
+            var response = _mapper.ConvertToResponse<ReceivingAgentModel, GetReceivingAgentResponse>(responseModel);
+            return response;
         }
 
         #endregion

@@ -208,7 +208,7 @@ namespace CES.CoreApi.Foundation.Security
             {
                 var exception = new CoreApiException(TechnicalSubSystem.Authentication,
                     SubSystemError.SecurityApplicationIsNotAssignedToServiceOperation,
-                    hostApplication.Id, operationName);
+                    clientApplicationId, operationName);
 
                 //Log security audit failure
                 _securityLogMonitor.LogFailure(auditParameters, exception.ClientMessage);
@@ -220,7 +220,7 @@ namespace CES.CoreApi.Foundation.Security
             {
                 var exception = new CoreApiException(TechnicalSubSystem.Authentication,
                     SubSystemError.SecurityApplicationAssignedToServiceOperationNotActive,
-                    hostApplication.Id, operationName);
+                    clientApplicationId, operationName);
 
                 //Log security audit failure
                 _securityLogMonitor.LogFailure(auditParameters, exception.ClientMessage);

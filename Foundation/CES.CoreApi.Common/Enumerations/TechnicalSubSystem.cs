@@ -18,5 +18,6 @@ namespace CES.CoreApi.Common.Enumerations
         [Description("LVRFS")] LimitVerificationService = 11,
         [Description("AGNTS")] AgentService = 12,
         [Description("ACNTS")] AccountingService = 13,
+        [Description("CVRFS")] CustomerVerificationService = 14,
     }
 }

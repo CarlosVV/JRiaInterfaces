@@ -52,7 +52,12 @@ namespace CES.CoreApi.Agent.Service.Utilities
 
         public void Validate(GetReceivingAgentRequest request)
         {
-            throw new System.NotImplementedException();
+            ContractValidation.Requires(request != null, TechnicalSubSystem.AgentService,
+                 SubSystemError.GeneralRequiredParameterIsUndefined, "request");
+            ContractValidation.Requires(request.AgentId > 0, TechnicalSubSystem.AgentService,
+                SubSystemError.GeneralInvalidParameterValue, "request.AgentId", request.AgentId);
+            ContractValidation.Requires(request.DetalizationLevel != ReceivingAgentInformationGroup.Undefined, TechnicalSubSystem.AgentService,
+                SubSystemError.GeneralInvalidParameterValue, "request.DetalizationLevel", request.DetalizationLevel);
         }
 
         // ReSharper restore PossibleNullReferenceException

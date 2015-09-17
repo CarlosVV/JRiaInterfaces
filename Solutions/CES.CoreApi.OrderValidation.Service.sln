@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 2013
-VisualStudioVersion = 12.0.31101.0
+# Visual Studio 14
+VisualStudioVersion = 14.0.23107.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CES.CoreApi.OrderValidation.Service", "..\OrderValidationService\CES.CoreApi.OrderValidation.Service\CES.CoreApi.OrderValidation.Service.csproj", "{3519B325-C3EF-4B94-B4AA-9BEBA31999E1}"
 EndProject
@@ -40,6 +40,8 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CES.CoreApi.ReferenceData.Service.Contract", "..\ReferenceDataService\CES.CoreApi.ReferenceData.Service.Contract\CES.CoreApi.ReferenceData.Service.Contract.csproj", "{B1BBA975-35BE-4725-8B66-BD282746A7BB}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CES.CoreApi.Settings.Service.Contract", "..\SettingsService\CES.CoreApi.Settings.Service.Contract\CES.CoreApi.Settings.Service.Contract.csproj", "{A6A0FF21-AE22-4099-8939-E588F3A7E2E1}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CES.CoreApi.GeoLocation.Service.Contract", "..\GeolocationService\CES.CoreApi.GeoLocation.Service.Contract\CES.CoreApi.GeoLocation.Service.Contract.csproj", "{E0888526-1DC6-4693-88A3-7347A99BC018}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -111,6 +113,10 @@ Global
 		{A6A0FF21-AE22-4099-8939-E588F3A7E2E1}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A6A0FF21-AE22-4099-8939-E588F3A7E2E1}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A6A0FF21-AE22-4099-8939-E588F3A7E2E1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E0888526-1DC6-4693-88A3-7347A99BC018}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E0888526-1DC6-4693-88A3-7347A99BC018}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E0888526-1DC6-4693-88A3-7347A99BC018}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E0888526-1DC6-4693-88A3-7347A99BC018}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -126,5 +132,6 @@ Global
 		{77345622-3D1C-4A0A-B13B-A0609101F479} = {5EEBD2D4-A78F-4756-AF0A-3A014EFB4EBB}
 		{B1BBA975-35BE-4725-8B66-BD282746A7BB} = {5EEBD2D4-A78F-4756-AF0A-3A014EFB4EBB}
 		{A6A0FF21-AE22-4099-8939-E588F3A7E2E1} = {5EEBD2D4-A78F-4756-AF0A-3A014EFB4EBB}
+		{E0888526-1DC6-4693-88A3-7347A99BC018} = {5EEBD2D4-A78F-4756-AF0A-3A014EFB4EBB}
 	EndGlobalSection
 EndGlobal

@@ -27,7 +27,8 @@ namespace CES.CoreApi.Common.Proxies
         {
             using (new OperationContextScope((IContextChannel)Channel))
             {
-                addCustomHeader?.Invoke();
+                if (addCustomHeader != null)
+                    addCustomHeader();
 
                 serviceMethod.Invoke(Channel);
             }
@@ -37,7 +38,8 @@ namespace CES.CoreApi.Common.Proxies
         {
             using (new OperationContextScope((IContextChannel) Channel))
             {
-                addCustomHeader?.Invoke();
+                if (addCustomHeader != null)
+                    addCustomHeader();
 
                 return serviceMethod.Invoke(Channel);
             }
@@ -49,7 +51,8 @@ namespace CES.CoreApi.Common.Proxies
             {
                 using (new OperationContextScope((IContextChannel) Channel))
                 {
-                    addCustomHeader?.Invoke();
+                    if (addCustomHeader != null)
+                        addCustomHeader();
 
                     return serviceMethod.Invoke(Channel);
                 }
@@ -84,7 +87,10 @@ namespace CES.CoreApi.Common.Proxies
 
         #region Private methods
 
-        private TContract Channel => _channel ?? (_channel = _channelFactory.CreateChannel());
+        private TContract Channel
+        {
+            get { return _channel ?? (_channel = _channelFactory.CreateChannel()); }
+        }
 
         #endregion
     }

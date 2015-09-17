@@ -18,7 +18,11 @@ namespace CES.CoreApi.Agent.Service.Configuration
             Mapper.CreateMap<PayingAgentModel, GetPayingAgentResponse>()
                .ForMember(p => p.PayingAgent, map => map.MapFrom(dto => Mapper.Map<PayingAgentModel, PayingAgent>(dto)))
                .ConstructUsingServiceLocator();
-            
+
+            Mapper.CreateMap<ReceivingAgentModel, GetReceivingAgentResponse>()
+               .ForMember(p => p.ReceivingAgent, map => map.MapFrom(dto => Mapper.Map<ReceivingAgentModel, ReceivingAgent>(dto)))
+               .ConstructUsingServiceLocator();
+
             Mapper.CreateMap<PayingAgentModel, PayingAgent>();
             Mapper.CreateMap<PayingAgentCurrencyModel, AgentCurrency>();
             Mapper.CreateMap<ClearCacheResponseModel, ClearCacheResponse>().ConstructUsingServiceLocator();
@@ -32,8 +36,12 @@ namespace CES.CoreApi.Agent.Service.Configuration
             Mapper.CreateMap<ContactModel, Contact>();
             Mapper.CreateMap<GeolocationModel, Geolocation>();
             Mapper.CreateMap<PayingAgentLocationModel, AgentLocation>();
+            Mapper.CreateMap<AgentLocationModel, PayingAgentLocationModel>();
+            //Mapper.CreateMap<ReceivingAgentModel, GetReceivingAgentResponse>();
+            Mapper.CreateMap<ReceivingAgentModel, ReceivingAgent>();
 
             Mapper.CreateMap<PayingAgentInformationGroup, PayingAgentDetalizationLevel>();
+            Mapper.CreateMap<ReceivingAgentInformationGroup, ReceivingAgentDetalizationLevel>();
             Mapper.CreateMap<AddressValidationResult, string>()
                 .ConvertUsing(src => src.ToString());
             Mapper.CreateMap<PhoneType, string>()

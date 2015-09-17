@@ -30,12 +30,14 @@ namespace CES.CoreApi.Agent.Service.Business.Logic.Processors
 
         public async Task<PayingAgentModel> GetPayingAgent(int agentId, int locationId, string currencySymbol, PayingAgentDetalizationLevel detalizationLevel)
         {
+            var agentRepository = _repositoryFactory.GetInstance<IPayingAgentRepository>();
+
             //Get agent details
-            var response = await GetRepository<IPayingAgentRepository>().GetAgent(agentId);
+            var response = await agentRepository.GetAgent(agentId);
 
             //Get agent currency information
             if ((detalizationLevel & PayingAgentDetalizationLevel.AgentCurrency) == PayingAgentDetalizationLevel.AgentCurrency)
-                response.Currency = await GetRepository<IPayingAgentRepository>().GetAgentCurrency(agentId, currencySymbol);
+                response.Currency = await agentRepository.GetAgentCurrency(agentId, currencySymbol);
 
             //Get agent location details
             if ((detalizationLevel & PayingAgentDetalizationLevel.Location) != PayingAgentDetalizationLevel.Location &&
@@ -43,8 +45,10 @@ namespace CES.CoreApi.Agent.Service.Business.Logic.Processors
                 (detalizationLevel & PayingAgentDetalizationLevel.AllLocationsWithoutCurrency) != PayingAgentDetalizationLevel.AllLocationsWithoutCurrency)
                 return response;
 
+            var locationRepository = _repositoryFactory.GetInstance<IAgentLocationRepository>();
+
             //Get location(s)
-            response.Locations = await GetRepository<IPayingAgentLocationRepository>().GetLocations(agentId, locationId, true);
+            response.Locations = await locationRepository.GetLocations(agentId, locationId, true);
 
             //Get location currency information only if location ID  > 0 - only for one location
             if ((detalizationLevel & PayingAgentDetalizationLevel.LocationWithCurrency) != PayingAgentDetalizationLevel.LocationWithCurrency)
@@ -55,16 +59,23 @@ namespace CES.CoreApi.Agent.Service.Business.Logic.Processors
                 throw new CoreApiException(TechnicalSubSystem.AgentService, SubSystemError.AgentServiceLocationIsNotFound, locationId, agentId);
 
             //Get currency details for particular location
-            location.Currency = await GetRepository<IPayingAgentLocationRepository>().GetLocationCurrency(locationId, currencySymbol);
+            location.Currency = await locationRepository.GetLocationCurrency(locationId, currencySymbol);
+
+            return response;
+        }
+
+
+        public async Task<ReceivingAgentModel> GetReceivingAgent(int agentId, int locationId, ReceivingAgentDetalizationLevel detalizationLevel)
+        {
+            var agentRepository = _repositoryFactory.GetInstance<IReceivingAgentRepository>();
+
+            //Get agent details
+            var response = await agentRepository.GetAgent(agentId);
 
             return response;
         }
 
         #endregion
 
-        private T GetRepository<T>() where T:  class
-        {
-            return _repositoryFactory.GetInstance<T>();
-        }
     }
 }

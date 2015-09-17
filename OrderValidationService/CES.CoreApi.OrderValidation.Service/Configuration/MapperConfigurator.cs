@@ -10,8 +10,8 @@ namespace CES.CoreApi.OrderValidation.Service.Configuration
         public static void Configure(Container container)
         {
             Mapper.CreateMap<OrderValidateRequest, TransactionValidateRequestModel>();
-            //Mapper.CreateMap<AddressModel, AddressRequest>();
-            //Mapper.CreateMap<AddressModel, ValidatedAddress>();
+            Mapper.CreateMap<OrderAmount, OrderAmountModel>();
+            Mapper.CreateMap<Beneficiary, BeneficiaryModel>();
             //Mapper.CreateMap<AddressModel, AutocompleteAddress>();
             //Mapper.CreateMap<AddressModel, GeocodeAddress>();
             //Mapper.CreateMap<AutocompleteSuggestionModel, AutocompleteSuggestion>();

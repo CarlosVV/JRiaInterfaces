@@ -4,6 +4,9 @@ using CES.CoreApi.Common.Exceptions;
 using CES.CoreApi.Customer.Service.Contract.Interfaces;
 using CES.CoreApi.Customer.Service.Contract.Models;
 using CES.CoreApi.Foundation.Contract.Interfaces;
+using CES.CoreApi.GeoLocation.Service.Contract.Enumerations;
+using CES.CoreApi.GeoLocation.Service.Contract.Interfaces;
+using CES.CoreApi.GeoLocation.Service.Contract.Models;
 using CES.CoreApi.OrderValidation.Service.Business.Contract.Interfaces;
 using CES.CoreApi.OrderValidation.Service.Business.Contract.Models;
 using CES.CoreApi.OrderValidation.Service.Business.Logic.Validators;
@@ -35,10 +38,32 @@ namespace CES.CoreApi.OrderValidation.Service.Business.Logic.Processors
             var request = new CustomerGetRequest { CustomerId = validateRequest.CustomerId };
             var customer = await _serviceHelper.ExecuteAsync<ICustomerService, Task<CustomerGetResponse>>(p => p.Get(request));
 
+            //Validate address
+            var validateAddressRequest = new ValidateAddressRequest
+            {
+                MinimumConfidence = Confidence.Medium,
+                Address = new AddressRequest
+                {
+                    Address1 = "1445 Brett Pl",
+                    AdministrativeArea = "CA",
+                    City = "Los Angeles",
+                    Country = "US"
+                }
+            };
+            var validateAddressResponse = _serviceHelper.Execute<IAddressService, ValidateAddressResponse>(p => p.ValidateAddress(validateAddressRequest));
+
+            //Autocomplete address
+            var autocompleteAddressRequest = new AutocompleteAddressRequest
+            {
+                Country = "US",
+                MinimumConfidence = Confidence.Medium,
+                MaxRecords = 15,
+                Address = "1445 brett"
+            };
+            var autocompleteAddressResponse = _serviceHelper.Execute<IAddressService, AutocompleteAddressResponse>(p => p.GetAutocompleteList(autocompleteAddressRequest));
+
+
             //Get paying agent details
-
-
-
             var paval = _validatorFactory.GetInstance<PayingAgentValidator>();
             
             var m1 = new PayingAgentValidationModel {PayingAgentId = 10};

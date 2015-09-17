@@ -59,6 +59,7 @@
     <Compile Include="Models\AgentCurrency.cs" />
     <Compile Include="Models\ProcessSignatureRequest.cs" />
     <Compile Include="Models\ProcessSignatureResponse.cs" />
+    <Compile Include="Models\ReceivingAgent.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

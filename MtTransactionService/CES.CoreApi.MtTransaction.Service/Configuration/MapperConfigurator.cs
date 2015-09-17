@@ -6,6 +6,8 @@ using CES.CoreApi.MtTransaction.Service.Contract.Enumerations;
 using CES.CoreApi.MtTransaction.Service.Contract.Models;
 using CES.CoreApi.Shared.Business.Contract.Enumerations;
 using CES.CoreApi.Shared.Business.Contract.Models;
+using CES.CoreApi.Shared.Business.Contract.Models.Agents;
+using CES.CoreApi.Shared.Business.Contract.Models.Common;
 using SimpleInjector;
 
 namespace CES.CoreApi.MtTransaction.Service.Configuration
