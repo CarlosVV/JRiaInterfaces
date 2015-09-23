@@ -5,6 +5,6 @@ namespace CES.CoreApi.GeoLocation.Service.Business.Contract.Interfaces
 {
     public interface IAddressAutocompleteDataProvider
     {
-        AutocompleteAddressResponseModel GetAddressHintList(string country, string administrativeArea, string address, int maxRecords, DataProviderType providerType, LevelOfConfidence confidence);
+        AutocompleteAddressResponseModel GetAddressHintList(AutocompleteAddressModel address, int maxRecords, DataProviderType providerType, LevelOfConfidence confidence);
     }
 }

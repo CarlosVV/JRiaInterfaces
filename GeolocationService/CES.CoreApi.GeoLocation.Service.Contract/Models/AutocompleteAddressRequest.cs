@@ -8,17 +8,12 @@ namespace CES.CoreApi.GeoLocation.Service.Contract.Models
     [DataContract(Namespace = Namespaces.GeolocationServiceDataContractNamespace)]
     public class AutocompleteAddressRequest : BaseRequest
     {
+        [DataMember(IsRequired = true)]
+        public AddressRequest Address { get; set; }
+
         [DataMember]
         public int MaxRecords { get; set; }
 
-        [DataMember(IsRequired = true)]
-        public string Country { get; set; }
-
-        [DataMember(IsRequired = true)]
-        public string Address { get; set; }
-
-        [DataMember]
-        public string AdministrativeArea { get; set; }
         /// <summary>
         /// Specifying the minimum confidence required for the result.
         /// </summary>

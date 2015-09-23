@@ -62,7 +62,7 @@ namespace CES.CoreApi.GeoLocation.Service.Business.Logic.Processors
             });
         }
 
-        public AutocompleteAddressResponseModel GetAutocompleteList(string country, string administrativeArea, string address, int maxRecords, LevelOfConfidence confidence)
+        public AutocompleteAddressResponseModel GetAutocompleteList(AutocompleteAddressModel address, int maxRecords, LevelOfConfidence confidence)
         {
             var defaultNumberOfHints = CountryConfigurationProvider.ConfigurationProvider.Read<int>(ConfigurationConstants.AddressAutompleteDefaultNumberOfHints);
             var maximumNumberOfHints = CountryConfigurationProvider.ConfigurationProvider.Read<int>(ConfigurationConstants.AddressAutompleteMaximumNumberOfHints);
@@ -70,7 +70,7 @@ namespace CES.CoreApi.GeoLocation.Service.Business.Logic.Processors
             if (maxRecords <= 0 || maxRecords > maximumNumberOfHints)
                 maxRecords = defaultNumberOfHints;
 
-            var providerConfiguration = GetProviderConfigurationByCountry(country, DataProviderServiceType.AddressAutoComplete).FirstOrDefault();
+            var providerConfiguration = GetProviderConfigurationByCountry(address.Country, DataProviderServiceType.AddressAutoComplete).FirstOrDefault();
 
             if (providerConfiguration == null)
                 throw new CoreApiException(TechnicalSubSystem.GeoLocationService,
@@ -78,8 +78,7 @@ namespace CES.CoreApi.GeoLocation.Service.Business.Logic.Processors
                     DataProviderServiceType.AddressAutoComplete);
 
             return _addressAutocompleteDataProvider
-                .GetAddressHintList(country, administrativeArea, address, maxRecords,
-                    providerConfiguration.DataProviderType, confidence);
+                .GetAddressHintList(address, maxRecords, providerConfiguration.DataProviderType, confidence);
         }
 
         #endregion 

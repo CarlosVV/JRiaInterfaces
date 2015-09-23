@@ -97,9 +97,7 @@ namespace CES.CoreApi.GeoLocation.Service
             _validator.Validate(request);
 
             var responseModel = _addressServiceRequestProcessor.GetAutocompleteList(
-                request.Country,
-                request.AdministrativeArea,
-                request.Address,
+                _mapper.ConvertTo<AddressRequest, AutocompleteAddressModel>(request.Address),
                 request.MaxRecords,
                 _mapper.ConvertTo<Confidence, LevelOfConfidence>(request.MinimumConfidence));
 

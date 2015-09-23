@@ -7,6 +7,6 @@ namespace CES.CoreApi.GeoLocation.Service.Business.Contract.Interfaces
     {
         ValidateAddressResponseModel ValidateAddress(AddressModel address, LevelOfConfidence confidence);
         ValidateAddressResponseModel ValidateAddress(string formattedAddress, string country, LevelOfConfidence confidence);
-        AutocompleteAddressResponseModel GetAutocompleteList(string country, string administrativeArea, string address, int maxRecords, LevelOfConfidence confidence);
+        AutocompleteAddressResponseModel GetAutocompleteList(AutocompleteAddressModel address, int maxRecords, LevelOfConfidence confidence);
     }
 }

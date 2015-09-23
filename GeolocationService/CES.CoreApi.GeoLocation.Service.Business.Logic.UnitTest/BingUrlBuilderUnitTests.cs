@@ -203,27 +203,27 @@ namespace CES.CoreApi.GeoLocation.Service.Business.Logic.UnitTest
             Assert.AreEqual(expected, result);
         }
 
-        [TestMethod]
-        public void BuildUrl_AddressAutocompleteUrl_ProperlyFormatted()
-        {
-            var builder = GetUrlBuilder();
+        //[TestMethod]
+        //public void BuildUrl_AddressAutocompleteUrl_ProperlyFormatted()
+        //{
+        //    var builder = GetUrlBuilder();
 
-            var query = string.Format(CultureInfo.InvariantCulture, "{0} {1} {2}", Address1, AdministrativeArea, ValidCountry);
-            query = HttpUtility.UrlPathEncode(query);
+        //    var query = string.Format(CultureInfo.InvariantCulture, "{0} {1} {2}", Address1, AdministrativeArea, ValidCountry);
+        //    query = HttpUtility.UrlPathEncode(query);
 
-            var expected = string.Format(
-                CultureInfo.InvariantCulture,
-                BingAddressAutocompleteUrlTemplate,
-                query,
-                MaxRecords,
-                BingLicenseKey);
+        //    var expected = string.Format(
+        //        CultureInfo.InvariantCulture,
+        //        BingAddressAutocompleteUrlTemplate,
+        //        query,
+        //        MaxRecords,
+        //        BingLicenseKey);
 
-            _addressQueryBuilder.Setup(p => p.Build(Address1, AdministrativeArea, ValidCountry)).Returns(query);
+        //    _addressQueryBuilder.Setup(p => p.Build(Address1, AdministrativeArea, ValidCountry)).Returns(query);
 
-            var result = builder.BuildUrl(Address1, AdministrativeArea, ValidCountry, MaxRecords);
+        //    var result = builder.BuildUrl(Address1, AdministrativeArea, ValidCountry, MaxRecords);
 
-            Assert.AreEqual(expected, result);
-        }
+        //    Assert.AreEqual(expected, result);
+        //}
 
         [TestMethod]
         public void BuildUrl_AddressGeocodeAndVerificationUrl_ProperlyFormatted()

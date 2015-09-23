@@ -15,12 +15,10 @@ namespace CES.CoreApi.GeoLocation.Service.Business.Contract.Interfaces
         /// <summary>
         /// Builds URL for address autocomplete
         /// </summary>
-        /// <param name="address">Address string</param>
-        /// <param name="administrativeArea">Administrative area</param>
-        /// <param name="country">Country code</param>
+        /// <param name="address">Address instance</param>
         /// <param name="maxRecords">Number of records to return</param>
         /// <returns></returns>
-        string BuildUrl(string address, string administrativeArea, string country, int maxRecords);
+        string BuildUrl(AutocompleteAddressModel address, int maxRecords);
 
         /// <summary>
         /// Builds URL for address geocoding and verification

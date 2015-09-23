@@ -43,13 +43,10 @@ namespace CES.CoreApi.GeoLocation.Service.Utilities
             ContractValidation.Requires(request != null, TechnicalSubSystem.GeoLocationService,
                 SubSystemError.GeneralRequiredParameterIsUndefined, "request");
 
-            ValidateCountry(request.Country);
-            
-            ContractValidation.Requires(!string.IsNullOrEmpty(request.Address), TechnicalSubSystem.GeoLocationService,
-                SubSystemError.GeneralRequiredParameterIsUndefined, "request.Address");
+            ValidateIncomingAddress(request.Address);
             ValidateRequestConfidence(request.MinimumConfidence);
         }
-
+        
         public void Validate(GeocodeAddressRequest request)
         {
             ContractValidation.Requires(request != null, TechnicalSubSystem.GeoLocationService,

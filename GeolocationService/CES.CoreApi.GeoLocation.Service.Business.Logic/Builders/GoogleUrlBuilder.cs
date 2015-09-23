@@ -92,14 +92,12 @@ namespace CES.CoreApi.GeoLocation.Service.Business.Logic.Builders
         /// <summary>
         /// Builds URL for address autocomplete
         /// </summary>
-        /// <param name="address">Address string</param>
-        /// <param name="administrativeArea">Administrative area</param>
-        /// <param name="country">Country code</param>
+        /// <param name="address">Address instance</param>
         /// <param name="maxRecords">Number of records to return</param>
         /// <returns></returns>
-        public string BuildUrl(string address, string administrativeArea, string country, int maxRecords)
+        public string BuildUrl(AutocompleteAddressModel address, int maxRecords)
         {
-            var query = _addressQueryBuilder.Build(address, administrativeArea, country);
+            var query = _addressQueryBuilder.Build(address.Address1, address.AdministrativeArea, address.Country);
 
             var url = string.Format(CultureInfo.InvariantCulture,
                 _addressAutocompleteUrlTemplate,

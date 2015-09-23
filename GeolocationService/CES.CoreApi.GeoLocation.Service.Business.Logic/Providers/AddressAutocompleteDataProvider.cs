@@ -34,19 +34,19 @@ namespace CES.CoreApi.GeoLocation.Service.Business.Logic.Providers
 
         #region Public methods
 
-        public AutocompleteAddressResponseModel GetAddressHintList(string country, string administrativeArea, string address, int maxRecords, 
+        public AutocompleteAddressResponseModel GetAddressHintList(AutocompleteAddressModel address, int maxRecords, 
             DataProviderType providerType, LevelOfConfidence confidence)
         {
             //Build data provider URL
             var urlBuilder = _urlBuilderFactory.GetInstance<IUrlBuilder>(providerType, FactoryEntity.UrlBuilder);
-            var url = urlBuilder.BuildUrl(address, administrativeArea, country, maxRecords);
+            var url = urlBuilder.BuildUrl(address, maxRecords);
 
             //Get raw response from data provider
             var rawResponse = _responseProvider.GetResponse(url, providerType);
 
             //Parse raw response
             var parser = _responseParserFactory.GetInstance<IResponseParser>(providerType);
-            var responseModel = parser.ParseAutocompleteAddressResponse(rawResponse, maxRecords, confidence, country);
+            var responseModel = parser.ParseAutocompleteAddressResponse(rawResponse, maxRecords, confidence, address.Country);
 
             return responseModel;
         }

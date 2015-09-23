@@ -119,24 +119,24 @@ namespace CES.CoreApi.GeoLocation.Service.Business.Logic.UnitTest
                SubSystemError.GeolocationReverseGeocodingIsNotSupported, DataProviderType.MelissaData);
         }
 
-        [TestMethod]
-        public void BuildUrl_AddressAutocompleteUrl_ProperlyFormatted()
-        {
-            var builder = GetUrlBuilder();
+        //[TestMethod]
+        //public void BuildUrl_AddressAutocompleteUrl_ProperlyFormatted()
+        //{
+        //    var builder = GetUrlBuilder();
 
-            var expected = string.Format(
-                CultureInfo.InvariantCulture,
-                MelissaDataAddressAutocompleteUrlTemplate,
-                MelissaDataLicenseKey,
-                HttpUtility.UrlEncode(Address1),
-                HttpUtility.UrlEncode(AdministrativeArea),
-                HttpUtility.UrlEncode(ValidCountry),
-                MaxRecords);
+        //    var expected = string.Format(
+        //        CultureInfo.InvariantCulture,
+        //        MelissaDataAddressAutocompleteUrlTemplate,
+        //        MelissaDataLicenseKey,
+        //        HttpUtility.UrlEncode(Address1),
+        //        HttpUtility.UrlEncode(AdministrativeArea),
+        //        HttpUtility.UrlEncode(ValidCountry),
+        //        MaxRecords);
 
-            var result = builder.BuildUrl(Address1, AdministrativeArea, ValidCountry, MaxRecords);
+        //    var result = builder.BuildUrl(Address1, AdministrativeArea, ValidCountry, MaxRecords);
 
-            Assert.AreEqual(expected, result);
-        }
+        //    Assert.AreEqual(expected, result);
+        //}
 
         [TestMethod]
         public void BuildUrl_AddressGeocodeAndVerificationUrl_ProperlyFormatted()

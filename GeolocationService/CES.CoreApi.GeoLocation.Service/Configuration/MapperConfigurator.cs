@@ -13,6 +13,7 @@ namespace CES.CoreApi.GeoLocation.Service.Configuration
         public static void Configure(Container container)
         {
             Mapper.CreateMap<AddressRequest, AddressModel>();
+            Mapper.CreateMap<AddressRequest, AutocompleteAddressModel>();
             Mapper.CreateMap<AddressModel, AddressRequest>();
             Mapper.CreateMap<AddressModel, ValidatedAddress>();
             Mapper.CreateMap<AddressModel, AutocompleteAddress>();
