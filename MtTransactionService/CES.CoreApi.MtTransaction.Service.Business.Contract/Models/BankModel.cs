@@ -1,4 +1,5 @@
 ﻿using CES.CoreApi.Shared.Business.Contract.Models;
+using CES.CoreApi.Shared.Business.Contract.Models.Common;
 
 namespace CES.CoreApi.MtTransaction.Service.Business.Contract.Models
 {

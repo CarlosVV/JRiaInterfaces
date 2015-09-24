@@ -55,37 +55,39 @@ namespace CES.CoreApi.GeoLocation.Service.Business.Logic.UnitTest
 
         #endregion
 
-        //[TestMethod]
-        //public void GetAddressHintList_HappyPath()
-        //{
-        //    _urlBuilderFactory.Setup(
-        //        p => p.GetInstance<IUrlBuilder>(It.IsAny<DataProviderType>(), It.IsAny<FactoryEntity>()))
-        //        .Returns(_urlBuilder.Object);
+        [TestMethod]
+        public void GetAddressHintList_HappyPath()
+        {
+            var model = new AutocompleteAddressModel();
 
-        //    _responseParserFactory.Setup(
-        //        p => p.GetInstance<IResponseParser>(It.IsAny<DataProviderType>()))
-        //        .Returns(_responseParser.Object);
+            _urlBuilderFactory.Setup(
+                p => p.GetInstance<IUrlBuilder>(It.IsAny<DataProviderType>(), It.IsAny<FactoryEntity>()))
+                .Returns(_urlBuilder.Object);
 
-        //    _urlBuilder.Setup(
-        //        p => p.BuildUrl(It.IsAny<string>(), It.IsAny<string>(), It.IsAny<string>(), It.IsAny<int>()))
-        //        .Returns(It.IsAny<string>())
-        //        .Verifiable();
+            _responseParserFactory.Setup(
+                p => p.GetInstance<IResponseParser>(It.IsAny<DataProviderType>()))
+                .Returns(_responseParser.Object);
 
-        //    _responseProvider.Setup(p => p.GetResponse(It.IsAny<string>(), It.IsAny<DataProviderType>()))
-        //        .Returns(It.IsAny<DataResponse>())
-        //        .Verifiable();
+            _urlBuilder.Setup(
+                p => p.BuildUrl(model, It.IsAny<int>()))
+                .Returns(It.IsAny<string>())
+                .Verifiable();
 
-        //    _responseParser.Setup(p => p.ParseAutocompleteAddressResponse(It.IsAny<DataResponse>(), It.IsAny<int>(), It.IsAny<LevelOfConfidence>(), It.IsAny<string>()))
-        //        .Returns(new AutocompleteAddressResponseModel())
-        //        .Verifiable();
-                
-        //    var result = new AddressAutocompleteDataProvider(_urlBuilderFactory.Object, _responseParserFactory.Object, _responseProvider.Object).GetAddressHintList(
-        //        It.IsAny<string>(), It.IsAny<string>(), It.IsAny<string>(), It.IsAny<int>(), It.IsAny<DataProviderType>(), It.IsAny<LevelOfConfidence>());
+            _responseProvider.Setup(p => p.GetResponse(It.IsAny<string>(), It.IsAny<DataProviderType>()))
+                .Returns(It.IsAny<DataResponse>())
+                .Verifiable();
 
-        //    _urlBuilder.Verify(p => p.BuildUrl(It.IsAny<string>(), It.IsAny<string>(), It.IsAny<string>(), It.IsAny<int>()), Times.Once);
-        //    _responseProvider.Verify(p => p.GetResponse(It.IsAny<string>(), It.IsAny<DataProviderType>()), Times.Once);
-        //    _responseParser.Verify(p => p.ParseAutocompleteAddressResponse(It.IsAny<DataResponse>(), It.IsAny<int>(), It.IsAny<LevelOfConfidence>(), It.IsAny<string>()), Times.Once);
-        //    Assert.IsNotNull(result);
-        //}
+            _responseParser.Setup(p => p.ParseAutocompleteAddressResponse(It.IsAny<DataResponse>(), It.IsAny<int>(), It.IsAny<LevelOfConfidence>(), It.IsAny<string>()))
+                .Returns(new AutocompleteAddressResponseModel())
+                .Verifiable();
+
+            var result = new AddressAutocompleteDataProvider(_urlBuilderFactory.Object, _responseParserFactory.Object, _responseProvider.Object).GetAddressHintList(
+                model, It.IsAny<int>(), It.IsAny<DataProviderType>(), It.IsAny<LevelOfConfidence>());
+
+            _urlBuilder.Verify(p => p.BuildUrl(model, It.IsAny<int>()), Times.Once);
+            _responseProvider.Verify(p => p.GetResponse(It.IsAny<string>(), It.IsAny<DataProviderType>()), Times.Once);
+            _responseParser.Verify(p => p.ParseAutocompleteAddressResponse(It.IsAny<DataResponse>(), It.IsAny<int>(), It.IsAny<LevelOfConfidence>(), It.IsAny<string>()), Times.Once);
+            Assert.IsNotNull(result);
+        }
     }
 }

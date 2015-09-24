@@ -55,10 +55,13 @@ namespace CES.CoreApi.OrderValidation.Service.Business.Logic.Processors
             //Autocomplete address
             var autocompleteAddressRequest = new AutocompleteAddressRequest
             {
-                Country = "US",
+                Address = new AddressRequest
+                {
+                    Address1 = "1445 brett",
+                    Country = "US",
+                },
                 MinimumConfidence = Confidence.Medium,
-                MaxRecords = 15,
-                Address = "1445 brett"
+                MaxRecords = 15
             };
             var autocompleteAddressResponse = _serviceHelper.Execute<IAddressService, AutocompleteAddressResponse>(p => p.GetAutocompleteList(autocompleteAddressRequest));
 

@@ -52,7 +52,7 @@ namespace CES.CoreApi.Accounting.Service.Business.Logic.Processors
         {
             var response = new HealthResponseModel();
 
-            response.Databases.Add(_transactionInformationRepository.Ping());
+            //response.Databases.Add(_transactionInformationRepository.Ping());
 
             return response;
         }

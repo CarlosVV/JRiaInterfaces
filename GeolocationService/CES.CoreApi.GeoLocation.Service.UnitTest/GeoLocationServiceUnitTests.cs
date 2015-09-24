@@ -154,27 +154,27 @@ namespace CES.CoreApi.GeoLocation.Service.UnitTest
             _mappingHelper.Verify(p => p.ConvertToResponse<ValidateAddressResponseModel, ValidateAddressResponse>(It.IsAny<ValidateAddressResponseModel>()), Times.Exactly(1));
         }
 
-        //[TestMethod]
-        //public void GetAutocompleteList_SuccessPath_AllDependenciesCalledNoExceptionRaised()
-        //{
-        //    var request = new AutocompleteAddressRequest();
+        [TestMethod]
+        public void GetAutocompleteList_SuccessPath_AllDependenciesCalledNoExceptionRaised()
+        {
+            var request = new AutocompleteAddressRequest();
 
-        //    _requestValidator.Setup(p => p.Validate(request)).Verifiable();
+            _requestValidator.Setup(p => p.Validate(request)).Verifiable();
 
-        //    _addressServiceRequestProcessor.Setup(p => p.GetAutocompleteList(It.IsAny<string>(), It.IsAny<string>(), It.IsAny<string>(), It.IsAny<int>(), It.IsAny<LevelOfConfidence>()))
-        //        .Returns(It.IsAny<AutocompleteAddressResponseModel>)
-        //        .Verifiable();
+            _addressServiceRequestProcessor.Setup(p => p.GetAutocompleteList(It.IsAny<AutocompleteAddressModel>(), It.IsAny<int>(), It.IsAny<LevelOfConfidence>()))
+                .Returns(It.IsAny<AutocompleteAddressResponseModel>)
+                .Verifiable();
 
-        //    _mappingHelper.Setup(p => p.ConvertToResponse<AutocompleteAddressResponseModel, AutocompleteAddressResponse>(It.IsAny<AutocompleteAddressResponseModel>()))
-        //        .Returns(It.IsAny<AutocompleteAddressResponse>())
-        //        .Verifiable();
+            _mappingHelper.Setup(p => p.ConvertToResponse<AutocompleteAddressResponseModel, AutocompleteAddressResponse>(It.IsAny<AutocompleteAddressResponseModel>()))
+                .Returns(It.IsAny<AutocompleteAddressResponse>())
+                .Verifiable();
 
-        //    _geoLocationService.GetAutocompleteList(request);
+            _geoLocationService.GetAutocompleteList(request);
 
-        //    _requestValidator.Verify(p => p.Validate(It.IsAny<AutocompleteAddressRequest>()), Times.Exactly(1));
-        //    _addressServiceRequestProcessor.Verify(p => p.GetAutocompleteList(It.IsAny<string>(), It.IsAny<string>(), It.IsAny<string>(), It.IsAny<int>(), It.IsAny<LevelOfConfidence>()), Times.Exactly(1));
-        //    _mappingHelper.Verify(p => p.ConvertToResponse<AutocompleteAddressResponseModel, AutocompleteAddressResponse>(It.IsAny<AutocompleteAddressResponseModel>()), Times.Exactly(1));
-        //}
+            _requestValidator.Verify(p => p.Validate(It.IsAny<AutocompleteAddressRequest>()), Times.Exactly(1));
+            _addressServiceRequestProcessor.Verify(p => p.GetAutocompleteList(It.IsAny<AutocompleteAddressModel>(), It.IsAny<int>(), It.IsAny<LevelOfConfidence>()), Times.Exactly(1));
+            _mappingHelper.Verify(p => p.ConvertToResponse<AutocompleteAddressResponseModel, AutocompleteAddressResponse>(It.IsAny<AutocompleteAddressResponseModel>()), Times.Exactly(1));
+        }
 
         [TestMethod]
         public void GeocodeAddress_SuccessPath_AllDependenciesCalledNoExceptionRaised()

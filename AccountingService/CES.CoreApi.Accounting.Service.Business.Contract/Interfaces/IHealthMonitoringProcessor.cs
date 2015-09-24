@@ -7,4 +7,8 @@ namespace CES.CoreApi.Accounting.Service.Business.Contract.Interfaces
         ClearCacheResponseModel ClearCache();
         HealthResponseModel Ping();
     }
+
+    public class HealthResponseModel
+    {
+    }
 }

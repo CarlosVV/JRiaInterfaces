@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using CES.CoreApi.GeoLocation.Service.Business.Contract.Enumerations;
-using CES.CoreApi.GeoLocation.Service.Business.Contract.Interfaces;
+﻿using CES.CoreApi.GeoLocation.Service.Business.Contract.Interfaces;
 using CES.CoreApi.GeoLocation.Service.Business.Logic.Factories;
 using CES.CoreApi.GeoLocation.Service.Business.Logic.Parsers;
 using Microsoft.VisualStudio.TestTools.UnitTesting;

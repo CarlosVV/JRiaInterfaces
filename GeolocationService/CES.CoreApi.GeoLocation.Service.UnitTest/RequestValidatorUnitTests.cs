@@ -208,20 +208,23 @@ namespace CES.CoreApi.GeoLocation.Service.UnitTest
 
         #region AutocompleteAddressRequest test methods
 
-        //[TestMethod]
-        //public void AutocompleteAddressRequest_Success_NoExceptionRaised()
-        //{
-        //    var request = new AutocompleteAddressRequest
-        //    {
-        //        Address = Address1,
-        //        Country = ValidCountry,
-        //        AdministrativeArea = AdministrativeArea,
-        //        MaxRecords = MaxRecords,
-        //        MinimumConfidence = Confidence.High
-        //    };
+        [TestMethod]
+        public void AutocompleteAddressRequest_Success_NoExceptionRaised()
+        {
+            var request = new AutocompleteAddressRequest
+            {
+                Address = new AddressRequest
+                {
+                    Address1 = Address1,
+                    Country = ValidCountry,
+                    AdministrativeArea = AdministrativeArea
+                },
+                MaxRecords = MaxRecords,
+                MinimumConfidence = Confidence.High
+            };
 
-        //    ExceptionHelper.CheckHappyPath(() => new RequestValidator().Validate(request));
-        //}
+            ExceptionHelper.CheckHappyPath(() => new RequestValidator().Validate(request));
+        }
 
         [TestMethod]
         public void AutocompleteAddressRequest_RequestIsNull_ExceptionRaised()
@@ -230,18 +233,21 @@ namespace CES.CoreApi.GeoLocation.Service.UnitTest
                 SubSystemError.GeneralRequiredParameterIsUndefined, "request");
         }
 
-        //[TestMethod]
-        //public void AutocompleteAddressRequest_AddressIsEmpty_ExceptionRaised()
-        //{
-        //    var request = new AutocompleteAddressRequest
-        //    {
-        //        Country = ValidCountry,
-        //        AdministrativeArea = AdministrativeArea,
-        //        MaxRecords = MaxRecords
-        //    };
-        //    ExceptionHelper.CheckException(() => new RequestValidator().Validate(request),
-        //        SubSystemError.GeneralRequiredParameterIsUndefined, "request.Address");
-        //}
+        [TestMethod]
+        public void AutocompleteAddressRequest_AddressIsEmpty_ExceptionRaised()
+        {
+            var request = new AutocompleteAddressRequest
+            {
+                Address = new AddressRequest
+                {
+                    Country = ValidCountry,
+                    AdministrativeArea = AdministrativeArea
+                },
+                MaxRecords = MaxRecords
+            };
+            ExceptionHelper.CheckException(() => new RequestValidator().Validate(request),
+                SubSystemError.GeneralRequiredParameterIsUndefined, "request.Address.Address1");
+        }
         
         #endregion
 

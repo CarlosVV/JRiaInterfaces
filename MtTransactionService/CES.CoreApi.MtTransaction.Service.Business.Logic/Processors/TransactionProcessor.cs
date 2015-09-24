@@ -31,7 +31,7 @@ namespace CES.CoreApi.MtTransaction.Service.Business.Logic.Processors
 
         public TransactionCreateModel CreateTransaction(int customerId)
         {
-            
+            return null;
         }
 
         #endregion

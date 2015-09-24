@@ -277,90 +277,120 @@ namespace CES.CoreApi.GeoLocation.Service.Business.Logic.UnitTest
 
         #region AutocompleteAddressResponseModel tests
 
-        //[TestMethod]
-        //public void GetAutocompleteList_HappyPath()
-        //{
-        //    var autocompleteResponseModel = GetAutocompleteAddressResponseModel();
-        //    var countryConfiguration = TestModelsProvider.GetUsCountryConfiguration();
+        [TestMethod]
+        public void GetAutocompleteList_HappyPath()
+        {
+            var model = new AutocompleteAddressModel()
+            {
+                Country = Country,
+                AdministrativeArea = AdministrativeArea,
+                Address1 = FormattedAddress
+            };
 
-        //    _configurationProvider.Setup(p => p.ConfigurationProvider.Read<int>(ConfigurationConstants.AddressAutompleteDefaultNumberOfHints)).Returns(15);
-        //    _configurationProvider.Setup(p => p.ConfigurationProvider.Read<int>(ConfigurationConstants.AddressAutompleteMaximumNumberOfHints)).Returns(20);
-        //    _configurationProvider.Setup(p => p.GetProviderConfigurationByCountry(Country)).Returns(countryConfiguration);
 
-        //    _addressAutocompleteDataProvider.Setup(p => p.GetAddressHintList(It.IsAny<string>(), It.IsAny<string>(), It.IsAny<string>(), It.IsAny<int>(),
-        //                It.IsAny<DataProviderType>(), It.IsAny<LevelOfConfidence>())).Returns(autocompleteResponseModel);
+            var autocompleteResponseModel = GetAutocompleteAddressResponseModel();
+            var countryConfiguration = TestModelsProvider.GetUsCountryConfiguration();
 
-        //    var result = new AddressServiceRequestProcessor(_configurationProvider.Object,
-        //        _addressVerificationDataProvider.Object, _addressAutocompleteDataProvider.Object).GetAutocompleteList(Country, AdministrativeArea, FormattedAddress, 10, LevelOfConfidence.High);
+            _configurationProvider.Setup(p => p.ConfigurationProvider.Read<int>(ConfigurationConstants.AddressAutompleteDefaultNumberOfHints)).Returns(15);
+            _configurationProvider.Setup(p => p.ConfigurationProvider.Read<int>(ConfigurationConstants.AddressAutompleteMaximumNumberOfHints)).Returns(20);
+            _configurationProvider.Setup(p => p.GetProviderConfigurationByCountry(Country)).Returns(countryConfiguration);
 
-        //    Assert.IsNotNull(result);
-        //    Assert.IsNotNull(result.Suggestions);
-        //    Assert.IsTrue(result.IsValid);
-        //    Assert.AreEqual(DataProviderType.Bing, result.DataProvider);
-        //}
+            _addressAutocompleteDataProvider.Setup(p => p.GetAddressHintList(It.IsAny<AutocompleteAddressModel>(), It.IsAny<int>(),
+                        It.IsAny<DataProviderType>(), It.IsAny<LevelOfConfidence>())).Returns(autocompleteResponseModel);
 
-        //[TestMethod]
-        //public void GetAutocompleteList_MaxRecordsIsZero_DefaultNumberUsed()
-        //{
-        //    var autocompleteResponseModel = GetAutocompleteAddressResponseModel();
-        //    var countryConfiguration = TestModelsProvider.GetUsCountryConfiguration();
+            var result = new AddressServiceRequestProcessor(_configurationProvider.Object,
+                _addressVerificationDataProvider.Object, _addressAutocompleteDataProvider.Object)
+                .GetAutocompleteList(model, 10, LevelOfConfidence.High);
 
-        //    _configurationProvider.Setup(p => p.ConfigurationProvider.Read<int>(ConfigurationConstants.AddressAutompleteDefaultNumberOfHints)).Returns(15);
-        //    _configurationProvider.Setup(p => p.ConfigurationProvider.Read<int>(ConfigurationConstants.AddressAutompleteMaximumNumberOfHints)).Returns(20);
-        //    _configurationProvider.Setup(p => p.GetProviderConfigurationByCountry(Country)).Returns(countryConfiguration);
+            Assert.IsNotNull(result);
+            Assert.IsNotNull(result.Suggestions);
+            Assert.IsTrue(result.IsValid);
+            Assert.AreEqual(DataProviderType.Bing, result.DataProvider);
+        }
 
-        //    _addressAutocompleteDataProvider.Setup(p => p.GetAddressHintList(It.IsAny<string>(), It.IsAny<string>(), It.IsAny<string>(), It.IsAny<int>(),
-        //                It.IsAny<DataProviderType>(), It.IsAny<LevelOfConfidence>())).Returns(autocompleteResponseModel);
+        [TestMethod]
+        public void GetAutocompleteList_MaxRecordsIsZero_DefaultNumberUsed()
+        {
+            var model = new AutocompleteAddressModel()
+            {
+                Country = Country,
+                AdministrativeArea = AdministrativeArea,
+                Address1 = FormattedAddress
+            };
 
-        //    var result = new AddressServiceRequestProcessor(_configurationProvider.Object,
-        //        _addressVerificationDataProvider.Object, _addressAutocompleteDataProvider.Object).GetAutocompleteList(Country, AdministrativeArea, FormattedAddress, 0, LevelOfConfidence.High);
+            var autocompleteResponseModel = GetAutocompleteAddressResponseModel();
+            var countryConfiguration = TestModelsProvider.GetUsCountryConfiguration();
 
-        //    Assert.IsNotNull(result);
-        //    Assert.IsNotNull(result.Suggestions);
-        //    Assert.IsTrue(result.IsValid);
-        //    Assert.AreEqual(DataProviderType.Bing, result.DataProvider);
-        //}
+            _configurationProvider.Setup(p => p.ConfigurationProvider.Read<int>(ConfigurationConstants.AddressAutompleteDefaultNumberOfHints)).Returns(15);
+            _configurationProvider.Setup(p => p.ConfigurationProvider.Read<int>(ConfigurationConstants.AddressAutompleteMaximumNumberOfHints)).Returns(20);
+            _configurationProvider.Setup(p => p.GetProviderConfigurationByCountry(Country)).Returns(countryConfiguration);
 
-        //[TestMethod]
-        //public void GetAutocompleteList_MaxRecordsModeThanUpperLimit_DefaultNumberUsed()
-        //{
-        //    var autocompleteResponseModel = GetAutocompleteAddressResponseModel();
-        //    var countryConfiguration = TestModelsProvider.GetUsCountryConfiguration();
+            _addressAutocompleteDataProvider.Setup(p => p.GetAddressHintList(It.IsAny<AutocompleteAddressModel>(), It.IsAny<int>(),
+                        It.IsAny<DataProviderType>(), It.IsAny<LevelOfConfidence>())).Returns(autocompleteResponseModel);
 
-        //    _configurationProvider.Setup(p => p.ConfigurationProvider.Read<int>(ConfigurationConstants.AddressAutompleteDefaultNumberOfHints)).Returns(15);
-        //    _configurationProvider.Setup(p => p.ConfigurationProvider.Read<int>(ConfigurationConstants.AddressAutompleteMaximumNumberOfHints)).Returns(20);
-        //    _configurationProvider.Setup(p => p.GetProviderConfigurationByCountry(Country)).Returns(countryConfiguration);
+            var result = new AddressServiceRequestProcessor(_configurationProvider.Object,
+                _addressVerificationDataProvider.Object, _addressAutocompleteDataProvider.Object).GetAutocompleteList(model, 0, LevelOfConfidence.High);
 
-        //    _addressAutocompleteDataProvider.Setup(p => p.GetAddressHintList(It.IsAny<string>(), It.IsAny<string>(), It.IsAny<string>(), It.IsAny<int>(),
-        //                It.IsAny<DataProviderType>(), It.IsAny<LevelOfConfidence>())).Returns(autocompleteResponseModel);
+            Assert.IsNotNull(result);
+            Assert.IsNotNull(result.Suggestions);
+            Assert.IsTrue(result.IsValid);
+            Assert.AreEqual(DataProviderType.Bing, result.DataProvider);
+        }
 
-        //    var result = new AddressServiceRequestProcessor(_configurationProvider.Object,
-        //        _addressVerificationDataProvider.Object, _addressAutocompleteDataProvider.Object).GetAutocompleteList(Country, AdministrativeArea, FormattedAddress, 100, LevelOfConfidence.High);
+        [TestMethod]
+        public void GetAutocompleteList_MaxRecordsModeThanUpperLimit_DefaultNumberUsed()
+        {
+            var model = new AutocompleteAddressModel()
+            {
+                Country = Country,
+                AdministrativeArea = AdministrativeArea,
+                Address1 = FormattedAddress
+            };
 
-        //    Assert.IsNotNull(result);
-        //    Assert.IsNotNull(result.Suggestions);
-        //    Assert.IsTrue(result.IsValid);
-        //    Assert.AreEqual(DataProviderType.Bing, result.DataProvider);
-        //}
+            var autocompleteResponseModel = GetAutocompleteAddressResponseModel();
+            var countryConfiguration = TestModelsProvider.GetUsCountryConfiguration();
 
-        //[TestMethod]
-        //public void GetAutocompleteList_NoProviderFound_ExceptionRaised()
-        //{
-        //    var autocompleteResponseModel = GetAutocompleteAddressResponseModel();
-        //    var countryConfiguration = TestModelsProvider.GetCountryConfigurationWithoutProviders();
+            _configurationProvider.Setup(p => p.ConfigurationProvider.Read<int>(ConfigurationConstants.AddressAutompleteDefaultNumberOfHints)).Returns(15);
+            _configurationProvider.Setup(p => p.ConfigurationProvider.Read<int>(ConfigurationConstants.AddressAutompleteMaximumNumberOfHints)).Returns(20);
+            _configurationProvider.Setup(p => p.GetProviderConfigurationByCountry(Country)).Returns(countryConfiguration);
 
-        //    _configurationProvider.Setup(p => p.ConfigurationProvider.Read<int>(ConfigurationConstants.AddressAutompleteDefaultNumberOfHints)).Returns(15);
-        //    _configurationProvider.Setup(p => p.ConfigurationProvider.Read<int>(ConfigurationConstants.AddressAutompleteMaximumNumberOfHints)).Returns(20);
-        //    _configurationProvider.Setup(p => p.GetProviderConfigurationByCountry(Country)).Returns(countryConfiguration);
+            _addressAutocompleteDataProvider.Setup(p => p.GetAddressHintList(It.IsAny<AutocompleteAddressModel>(), It.IsAny<int>(),
+                        It.IsAny<DataProviderType>(), It.IsAny<LevelOfConfidence>())).Returns(autocompleteResponseModel);
 
-        //    _addressAutocompleteDataProvider.Setup(p => p.GetAddressHintList(It.IsAny<string>(), It.IsAny<string>(), It.IsAny<string>(), It.IsAny<int>(),
-        //                It.IsAny<DataProviderType>(), It.IsAny<LevelOfConfidence>())).Returns(autocompleteResponseModel);
+            var result = new AddressServiceRequestProcessor(_configurationProvider.Object,
+                _addressVerificationDataProvider.Object, _addressAutocompleteDataProvider.Object).GetAutocompleteList(model, 100, LevelOfConfidence.High);
 
-        //    ExceptionHelper.CheckException(
-        //        () => new AddressServiceRequestProcessor(_configurationProvider.Object,
-        //        _addressVerificationDataProvider.Object, _addressAutocompleteDataProvider.Object).GetAutocompleteList(Country, AdministrativeArea, FormattedAddress, 10, LevelOfConfidence.High),
-        //        SubSystemError.GeolocationDataProviderNotFound, DataProviderServiceType.AddressAutoComplete);
-        //}
+            Assert.IsNotNull(result);
+            Assert.IsNotNull(result.Suggestions);
+            Assert.IsTrue(result.IsValid);
+            Assert.AreEqual(DataProviderType.Bing, result.DataProvider);
+        }
+
+        [TestMethod]
+        public void GetAutocompleteList_NoProviderFound_ExceptionRaised()
+        {
+            var model = new AutocompleteAddressModel()
+            {
+                Country = Country,
+                AdministrativeArea = AdministrativeArea,
+                Address1 = FormattedAddress
+            };
+
+            var autocompleteResponseModel = GetAutocompleteAddressResponseModel();
+            var countryConfiguration = TestModelsProvider.GetCountryConfigurationWithoutProviders();
+
+            _configurationProvider.Setup(p => p.ConfigurationProvider.Read<int>(ConfigurationConstants.AddressAutompleteDefaultNumberOfHints)).Returns(15);
+            _configurationProvider.Setup(p => p.ConfigurationProvider.Read<int>(ConfigurationConstants.AddressAutompleteMaximumNumberOfHints)).Returns(20);
+            _configurationProvider.Setup(p => p.GetProviderConfigurationByCountry(Country)).Returns(countryConfiguration);
+
+            _addressAutocompleteDataProvider.Setup(p => p.GetAddressHintList(It.IsAny<AutocompleteAddressModel>(), It.IsAny<int>(),
+                        It.IsAny<DataProviderType>(), It.IsAny<LevelOfConfidence>())).Returns(autocompleteResponseModel);
+
+            ExceptionHelper.CheckException(
+                () => new AddressServiceRequestProcessor(_configurationProvider.Object,
+                _addressVerificationDataProvider.Object, _addressAutocompleteDataProvider.Object).GetAutocompleteList(model, 10, LevelOfConfidence.High),
+                SubSystemError.GeolocationDataProviderNotFound, DataProviderServiceType.AddressAutoComplete);
+        }
 
         #endregion
 

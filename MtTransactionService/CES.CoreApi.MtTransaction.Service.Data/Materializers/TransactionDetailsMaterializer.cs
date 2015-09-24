@@ -9,6 +9,8 @@ using CES.CoreApi.MtTransaction.Service.Business.Contract.Interfaces;
 using CES.CoreApi.MtTransaction.Service.Business.Contract.Models;
 using CES.CoreApi.Shared.Business.Contract.Enumerations;
 using CES.CoreApi.Shared.Business.Contract.Models;
+using CES.CoreApi.Shared.Business.Contract.Models.Agents;
+using CES.CoreApi.Shared.Business.Contract.Models.Common;
 
 namespace CES.CoreApi.MtTransaction.Service.Data.Materializers
 {
@@ -91,10 +93,10 @@ namespace CES.CoreApi.MtTransaction.Service.Data.Materializers
                 DepartmentId = reader.ReadValue<int>("fDepartmentID"),
                 Name = reader.ReadValue<string>("RecAgent"),
                 Number = reader.ReadValue<string>("AgentNo"),
-                Location = new AgentLocationModel
-                {
-                    Id = reader.ReadValue<int>("fRecAgentLocID")
-                }
+                //Location = new AgentLocationModel
+                //{
+                //    Id = reader.ReadValue<int>("fRecAgentLocID")
+                //}
             };
         }
 
@@ -104,15 +106,15 @@ namespace CES.CoreApi.MtTransaction.Service.Data.Materializers
             {
                 Id = reader.ReadValue<int>("fPayAgentID"),
                 Name = reader.ReadValue<string>("PayingAgent"),
-                Location = new AgentLocationModel
-                {
-                    Id = reader.ReadValue<int>("fPayAgentLocID"),
-                    Name = reader.ReadValue<string>("AgentLocation"),
-                    Address = new AddressModel
-                    {
-                        Address1 = reader.ReadValue<string>("PayAgentLocAddress")
-                    }
-                }
+                //Location = new AgentLocationModel
+                //{
+                //    Id = reader.ReadValue<int>("fPayAgentLocID"),
+                //    Name = reader.ReadValue<string>("AgentLocation"),
+                //    Address = new AddressModel
+                //    {
+                //        Address1 = reader.ReadValue<string>("PayAgentLocAddress")
+                //    }
+                //}
             };
         }
 

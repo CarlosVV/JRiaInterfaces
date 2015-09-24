@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using CES.CoreApi.Accounting.Service.Business.Contract.Interfaces;
 using CES.CoreApi.Accounting.Service.Business.Contract.Models;
 using CES.CoreApi.Accounting.Service.Contract.Models;
 using CES.CoreApi.Common.Models;
@@ -19,7 +20,7 @@ namespace CES.CoreApi.Accounting.Service.Configuration
             Mapper.CreateMap<HealthResponseModel, HealthMonitoringResponse>().ConstructUsingServiceLocator();
             Mapper.CreateMap<GetTransactionSummaryRequest, GetTransactionSummaryRequestModel>();
           
-            Mapper.Configuration.ConstructServicesUsing(container.GetInstance);
+            //Mapper.Configuration.ConstructServicesUsing(container.GetInstance);
         }
     }
 }
