@@ -1,7 +1,9 @@
-﻿namespace CES.AddressVerification.Business.Contract.Interfaces
+﻿using System.Threading.Tasks;
+
+namespace CES.AddressVerification.Business.Contract.Interfaces
 {
     public interface IAddressProcessor
     {
-        void Start();
+        Task Start();
     }
 }

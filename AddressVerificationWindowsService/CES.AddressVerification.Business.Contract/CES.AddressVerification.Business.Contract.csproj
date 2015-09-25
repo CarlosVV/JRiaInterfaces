@@ -44,7 +44,14 @@
     <Compile Include="Interfaces\IAddressRepository.cs" />
     <Compile Include="Models\Address.cs" />
     <Compile Include="Interfaces\IAddressProcessor.cs" />
+    <Compile Include="Models\ValidationResult.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\GeolocationService\CES.CoreApi.GeoLocation.Service.Contract\CES.CoreApi.GeoLocation.Service.Contract.csproj">
+      <Project>{E0888526-1DC6-4693-88A3-7347A99BC018}</Project>
+      <Name>CES.CoreApi.GeoLocation.Service.Contract</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
