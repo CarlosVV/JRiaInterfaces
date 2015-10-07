@@ -1,0 +1,5 @@
+﻿<%@ ServiceHost 
+    Language="C#" 
+    Debug="true" 
+    Service="CES.CoreApi.Receipt.Service.ReceiptService" 
+    Factory="CES.CoreApi.Receipt.Service.Factory.ReceiptServiceHostFactory" %>
