@@ -16,9 +16,9 @@ namespace CES.CoreApi.Receipt.Service
 
         public ReceiptService(IRequestValidator validator, IReceiptProcessor processor, IMappingHelper mappingHelper)
         {
-            if (validator == null) throw new ArgumentNullException(nameof(validator));
-            if (processor == null) throw new ArgumentNullException(nameof(processor));
-            if (mappingHelper == null) throw new ArgumentNullException(nameof(mappingHelper));
+            if (validator == null) throw new ArgumentNullException("validator");
+            if (processor == null) throw new ArgumentNullException("processor");
+            if (mappingHelper == null) throw new ArgumentNullException("mappingHelper");
 
             _validator = validator;
             _processor = processor;
