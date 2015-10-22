@@ -1,6 +1,7 @@
 ﻿using System;
 using CES.CoreApi.Receipt.Service.Business.Contract.Interfaces;
 using CES.CoreApi.Receipt.Service.Business.Contract.Models;
+using System.Linq;
 
 namespace CES.CoreApi.Receipt.Service.Business.Logic.Processors
 {
@@ -8,7 +9,8 @@ namespace CES.CoreApi.Receipt.Service.Business.Logic.Processors
     {
         public ReceiptModel GenerateReceipt(int id)
         {
-            throw new NotImplementedException();
+            byte[] body = new byte[5] { 0x00, 0x00, 0x00, 0x00, 0x00 };
+            return new ReceiptModel { ReceiptName="Sender Receipts",ReceiptBody = body};
         }
     }
 }

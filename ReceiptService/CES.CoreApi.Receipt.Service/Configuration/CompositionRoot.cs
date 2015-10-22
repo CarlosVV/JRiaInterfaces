@@ -25,7 +25,8 @@ using CES.CoreApi.Logging.Monitors;
 using CES.CoreApi.Logging.Providers;
 using CES.CoreApi.Receipt.Service.Business.Contract.Interfaces;
 using CES.CoreApi.Receipt.Service.Business.Logic.Processors;
-using CES.CoreApi.Receipt.Service.Interfaces;
+using CES.CoreApi.Receipt.Service.Contract.Interfaces;
+using CES.CoreApi.Receipt.Service.Contract.Models;
 using CES.CoreApi.Receipt.Service.Utilites;
 using CES.CoreApi.SimpleInjectorProxy;
 using SimpleInjector;
@@ -135,6 +136,7 @@ namespace CES.CoreApi.Receipt.Service.Configuration
             //container.Register<ValidateAddressResponse, ValidateAddressResponse>();
             //container.Register<ClearCacheResponse, ClearCacheResponse>();
             //container.Register<AutocompleteAddressResponse, AutocompleteAddressResponse>();
+            container.Register<ReceiptResponse, ReceiptResponse>();
             //container.Register<PingResponse, PingResponse>();
             //container.Register<GetMapResponse, GetMapResponse>();
         }

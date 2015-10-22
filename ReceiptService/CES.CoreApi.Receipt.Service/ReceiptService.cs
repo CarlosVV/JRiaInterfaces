@@ -4,7 +4,7 @@ using CES.CoreApi.Receipt.Service.Business.Contract.Interfaces;
 using CES.CoreApi.Receipt.Service.Business.Contract.Models;
 using CES.CoreApi.Receipt.Service.Contract.Interfaces;
 using CES.CoreApi.Receipt.Service.Contract.Models;
-using CES.CoreApi.Receipt.Service.Interfaces;
+using CES.CoreApi.Receipt.Service.Contract.Interfaces;
 
 namespace CES.CoreApi.Receipt.Service
 {
@@ -32,6 +32,15 @@ namespace CES.CoreApi.Receipt.Service
             var responseModel = _processor.GenerateReceipt(request.Id);
 
             return _mappingHelper.ConvertToResponse<ReceiptModel, ReceiptResponse>(responseModel);
+
+            //_validator.Validate(request);
+
+            //var responseModel = _addressServiceRequestProcessor.GetAutocompleteList(
+            //    _mapper.ConvertTo<AddressRequest, AutocompleteAddressModel>(request.Address),
+            //    request.MaxRecords,
+            //    _mapper.ConvertTo<Confidence, LevelOfConfidence>(request.MinimumConfidence));
+
+            //return _mapper.ConvertToResponse<AutocompleteAddressResponseModel, AutocompleteAddressResponse>(responseModel);
         }
     }
 }

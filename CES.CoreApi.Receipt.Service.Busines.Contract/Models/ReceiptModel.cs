@@ -2,7 +2,7 @@
 {
     public class ReceiptModel
     {
-        public byte[] Body { get; set; }
-        public string Name { get; set; }
+        public byte[] ReceiptBody { get; set; }
+        public string ReceiptName { get; set; }
     }
 }

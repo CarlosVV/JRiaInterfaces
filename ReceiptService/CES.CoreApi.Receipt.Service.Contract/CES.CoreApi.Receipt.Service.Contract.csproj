@@ -44,6 +44,7 @@
   <ItemGroup>
     <Compile Include="Constants\Namespaces.cs" />
     <Compile Include="Interfaces\IReceiptService.cs" />
+    <Compile Include="Interfaces\IRequestValidator.cs" />
     <Compile Include="Models\ReceiptRequest.cs" />
     <Compile Include="Models\ReceiptResponse.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

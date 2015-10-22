@@ -1,6 +1,6 @@
 ﻿using CES.CoreApi.Receipt.Service.Contract.Models;
 
-namespace CES.CoreApi.Receipt.Service.Interfaces
+namespace CES.CoreApi.Receipt.Service.Contract.Interfaces
 {
     public interface IRequestValidator
     {

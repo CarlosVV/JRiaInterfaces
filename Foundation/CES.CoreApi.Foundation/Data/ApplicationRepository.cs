@@ -41,7 +41,7 @@ namespace CES.CoreApi.Foundation.Data
             var request = new DatabaseRequest<Application>
             {
                 ProcedureName = "coreapi_sp_GetApplicationByID",
-                IsCacheable = true,
+                IsCacheable = false,
                 DatabaseType = DatabaseType.Main,
                 Parameters = new Collection<SqlParameter>
                 {
