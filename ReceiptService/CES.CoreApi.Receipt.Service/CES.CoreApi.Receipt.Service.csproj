@@ -80,10 +80,6 @@
     <Compile Include="Utilites\RequestValidator.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\CES.CoreApi.Receipt.Service.Busines.Contract\CES.CoreApi.Receipt.Service.Business.Contract.csproj">
-      <Project>{C057A718-73D3-4E25-B31E-9F5557D6F566}</Project>
-      <Name>CES.CoreApi.Receipt.Service.Business.Contract</Name>
-    </ProjectReference>
     <ProjectReference Include="..\..\Foundation\CES.CoreApi.Caching\CES.CoreApi.Caching.csproj">
       <Project>{9FCF40A8-23F1-4272-9CAE-EFF674145F57}</Project>
       <Name>CES.CoreApi.Caching</Name>
@@ -111,6 +107,10 @@
     <ProjectReference Include="..\..\Foundation\CES.CoreApi.SimpleInjectorProxy\CES.CoreApi.SimpleInjectorProxy.csproj">
       <Project>{02BEAA68-76A1-4ED6-BF6C-7B6935165AD6}</Project>
       <Name>CES.CoreApi.SimpleInjectorProxy</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\CES.CoreApi.Receipt.Service.Busines.Contract\CES.CoreApi.Receipt.Service.Business.Contract.csproj">
+      <Project>{c057a718-73d3-4e25-b31e-9f5557d6f566}</Project>
+      <Name>CES.CoreApi.Receipt.Service.Business.Contract</Name>
     </ProjectReference>
     <ProjectReference Include="..\CES.CoreApi.Receipt.Service.Business.Logic\CES.CoreApi.Receipt.Service.Business.Logic.csproj">
       <Project>{7B29D356-E478-4D54-8F8D-2F3F9A0ED843}</Project>

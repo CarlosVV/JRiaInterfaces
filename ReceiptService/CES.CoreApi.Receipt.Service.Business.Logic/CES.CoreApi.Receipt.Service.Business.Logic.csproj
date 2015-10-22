@@ -44,8 +44,8 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\CES.CoreApi.Receipt.Service.Busines.Contract\CES.CoreApi.Receipt.Service.Business.Contract.csproj">
-      <Project>{C057A718-73D3-4E25-B31E-9F5557D6F566}</Project>
+    <ProjectReference Include="..\CES.CoreApi.Receipt.Service.Busines.Contract\CES.CoreApi.Receipt.Service.Business.Contract.csproj">
+      <Project>{c057a718-73d3-4e25-b31e-9f5557d6f566}</Project>
       <Name>CES.CoreApi.Receipt.Service.Business.Contract</Name>
     </ProjectReference>
   </ItemGroup>
