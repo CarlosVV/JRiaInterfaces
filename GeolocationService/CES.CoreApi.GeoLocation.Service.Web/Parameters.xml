@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8" ?>
+<?xml version="1.0" encoding="utf-8" ?>
 <parameters>
 
 	<parameter name="CompilationDebug" description="Compilation Debug" tags="" defaultvalue="false">
@@ -71,5 +71,10 @@
 		<parameterentry match="/configuration/log4net/appender[@name='PerformanceLogUdpAppender']/remoteAddress/@value" scope="\\web.config$" kind="XmlFile" />
 		<parameterentry match="/configuration/log4net/appender[@name='DatabasePerformanceLogUdpAppender']/remoteAddress/@value" scope="\\web.config$" kind="XmlFile" />
 	</parameter>
+
+	<parameter name="MainConnectionString" description="Main Database Connection String" tags=""defaultvalue="__MAINDBCONNECTIONSTRING__">
+		<parameterentry match="/configuration/dataAccessConfiguration/databaseServer[@name='Main']/@connectionString" scope="\\web.config$" kind="XmlFile" />
+	</parameter>
+
 
 </parameters>
