@@ -73,7 +73,7 @@
 	</parameter>
 
 	<parameter name="MainConnectionString" description="Main Database Connection String" tags="" defaultvalue="__MAINDBCONNECTIONSTRING__">
-		<parameterentry match="/configuration/dataAccessConfiguration/databaseServer[@name='Main']/@connectionString" scope="\\web.config$" kind="XmlFile" />
+		<parameterentry match="/configuration/dataAccessConfiguration/databaseServerGroups/databaseServerGroup[@name='Main']/databaseServer[@name='Main']/@connectionString" scope="\\web.config$" kind="XmlFile" />
 	</parameter>
 
 
