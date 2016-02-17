@@ -96,7 +96,6 @@
     <Compile Include="Models\CoreApiServiceFault.cs" />
     <Compile Include="Models\DatabasePingModel.cs" />
     <Compile Include="Models\ExtensibleObject.cs" />
-    <Compile Include="Models\FaultInfo.cs" />
     <Compile Include="Models\PingResponseModel.cs" />
     <Compile Include="Models\ServiceCallHeaderParameters.cs" />
     <Compile Include="Models\ServiceOperation.cs" />
