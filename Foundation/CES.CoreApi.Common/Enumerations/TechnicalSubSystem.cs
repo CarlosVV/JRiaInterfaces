@@ -19,5 +19,6 @@ namespace CES.CoreApi.Common.Enumerations
         [Description("AGNTS")] AgentService = 12,
         [Description("ACNTS")] AccountingService = 13,
         [Description("CVRFS")] CustomerVerificationService = 14,
+        [Description("CMPLS")] ComplianceService = 15,
     }
 }

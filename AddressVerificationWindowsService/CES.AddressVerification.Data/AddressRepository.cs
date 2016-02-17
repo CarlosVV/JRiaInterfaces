@@ -35,7 +35,7 @@ namespace CES.AddressVerification.Data
             return await Task.Run(() => GetList(request));
         }
 
-        public async Task UpdateAddressList()
+        public async Task<IEnumerable<Address>> UpdateAddressList()
         {
             var request = new DatabaseRequest<Address>
             {

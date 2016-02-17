@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Net;
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.ServiceModel;
@@ -65,6 +66,12 @@ namespace CES.CoreApi.Foundation.Service
             var faultException = BuildFaultException(error);
             var messageFault = faultException.CreateMessageFault();
             fault = Message.CreateMessage(version, messageFault, faultException.Action);
+            if (fault != null)
+            {
+                HttpResponseMessageProperty properties = new HttpResponseMessageProperty();
+                properties.StatusCode = HttpStatusCode.Conflict;
+                fault.Properties.Add(HttpResponseMessageProperty.Name, properties);
+            }
         }
 
         /// <summary>
@@ -74,6 +81,8 @@ namespace CES.CoreApi.Foundation.Service
         /// <returns></returns>
         public bool HandleError(Exception exception)
         {
+            _coreApiException = ConvertToCoreApiException(exception);
+
             // Publish exception
             _exceptionLogMonitor.Publish(_coreApiException);
 

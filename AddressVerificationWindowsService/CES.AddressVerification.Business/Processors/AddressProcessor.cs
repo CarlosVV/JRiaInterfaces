@@ -44,7 +44,7 @@ namespace CES.AddressVerification.Business.Processors
             var resultList = from address in recordList
                              select ProcessAddress(address);
             
-            var 
+             
         }
 
         private ValidationResult ProcessAddress(Address address)
@@ -79,7 +79,7 @@ namespace CES.AddressVerification.Business.Processors
 
         private DataTable ConvertValidationResult(IEnumerable<ValidationResult> validationResults)
         {
-            
+            throw new NotImplementedException();
         }
     }
 }

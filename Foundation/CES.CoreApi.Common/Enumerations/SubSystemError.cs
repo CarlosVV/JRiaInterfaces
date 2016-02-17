@@ -318,8 +318,18 @@ namespace CES.CoreApi.Common.Enumerations
 
         [SubSystemErrorNumber("00700")]
         [ErrorMessage("The customer ID verification provider configuration is not found. Country = '{0}'.")]
-        CustomerIdVerificationProviderCountryConfigurationIsNotFound, 
-        
+        CustomerIdVerificationProviderCountryConfigurationIsNotFound,
+
+        #endregion
+
+        #region Compliance service related errors
+
+        [SubSystemErrorNumber("08404")]
+        [ErrorMessage("Data provider for specified service was not found. Data Provider Service Type: '{0}'.")]
+        ComplianceDataProviderNotFound,
+
+
+
         #endregion
     }
 }
