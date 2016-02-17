@@ -36,8 +36,7 @@ namespace CES.CoreApi.Caching.Providers
             if (identityManager == null) throw new ArgumentNullException("identityManager");
 
             _monitorFactory = monitorFactory;
-            _identityManager = identityManager;
-       
+            _identityManager = identityManager;      
            
 
         }
