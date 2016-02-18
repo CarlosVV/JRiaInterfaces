@@ -54,7 +54,7 @@ namespace CES.CoreApi.Caching.Providers
 
         public void AddItem(string key, object value)
         {
-            AddItem(key, value, _config.CacheLifetime);
+            AddItem(key, value, _config.CacheLifetime.Value);
         }
 
         public void AddItem(string key, object value, TimeSpan timeout)
@@ -65,7 +65,7 @@ namespace CES.CoreApi.Caching.Providers
             try
             {
                 if (timeout == default(TimeSpan))
-                    timeout = _config.CacheLifetime;
+                    timeout = _config.CacheLifetime.Value;
 
                 var performanceMonitor = GetPerformanceMonitor(message);
                 _database.StringSet(key, JsonConvert.SerializeObject(value), timeout);
@@ -81,7 +81,7 @@ namespace CES.CoreApi.Caching.Providers
 
         public T GetItem<T>(string key, Func<T> getDataFunc)
         {
-            return GetItem(key, getDataFunc, _config.CacheLifetime);
+            return GetItem(key, getDataFunc, _config.CacheLifetime.Value);
         }
 
         public T GetItem<T>(string key, Func<T> getDataFunc, TimeSpan timeout, Func<T, bool> isCacheValid = null)
