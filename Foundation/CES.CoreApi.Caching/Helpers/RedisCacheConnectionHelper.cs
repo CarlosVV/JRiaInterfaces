@@ -36,16 +36,10 @@ namespace CES.CoreApi.Caching.Helpers
         private static  Lazy<ConnectionMultiplexer> lazyConnection = new Lazy<ConnectionMultiplexer>(() =>
         {
             var config = GetConfiguration();
+            var options = ConfigurationOptions.Parse(config.CacheConfigurationString.Value);
+            options.ClientName = config.CacheName.Value;      
 
-            var options = new ConfigurationOptions();
-            foreach (RedisHostElement host in config.Hosts)
-            {
-                options.EndPoints.Add(host.Server, host.Port);
-            }
-
-            options.ClientName = config.CacheName;
-           
-            return ConnectionMultiplexer.Connect(options);
+            return ConnectionMultiplexer.Connect(options); ;
         });
 
         private static  ConnectionMultiplexer Connection

@@ -54,7 +54,9 @@
     <Reference Include="System.Core" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Configuration\RedisGenericTimestampElement.cs" />
     <Compile Include="Configuration\RedisDataCacheClientSection.cs" />
+    <Compile Include="Configuration\RedisGenericStringElement.cs" />
     <Compile Include="Configuration\RedisHostElement.cs" />
     <Compile Include="Configuration\RedisHostElementCollection.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

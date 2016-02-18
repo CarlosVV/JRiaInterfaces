@@ -5,12 +5,12 @@ namespace CES.CoreApi.Caching.Configuration
 {
     public class RedisDataCacheClientSection : ConfigurationSection
     {
-        [ConfigurationProperty("cacheName", DefaultValue = "DefaultName", IsRequired = true)]
-        public string CacheName
+        [ConfigurationProperty("cacheName")]
+        public RedisGenericStringElement CacheName
         {
             get
             {
-                return this["cacheName"].ToString();
+                return (RedisGenericStringElement)this["cacheName"];
             }
             set
             {
@@ -19,16 +19,29 @@ namespace CES.CoreApi.Caching.Configuration
         }
 
         // Create a "cacheLifetime" attribute.
-        [ConfigurationProperty("cacheLifetime", DefaultValue = "0.00:10:00", IsRequired = false)]
-        public TimeSpan CacheLifetime
+        [ConfigurationProperty("cacheLifetime")]
+        public RedisGenericTimestampElement CacheLifetime
         {
             get
             {
-                return TimeSpan.Parse(this["cacheLifetime"].ToString());
+                return (RedisGenericTimestampElement)this["cacheLifetime"];
             }
             set
             {
                 this["cacheLifetime"] = value;
+            }
+        }
+
+        [ConfigurationProperty("cacheConfigurationString")]
+        public RedisGenericStringElement CacheConfigurationString
+        {
+            get
+            {
+                return (RedisGenericStringElement)this["cacheConfigurationString"];
+            }
+            set
+            {
+                this["cacheConfigurationString"] = value;
             }
         }
 
