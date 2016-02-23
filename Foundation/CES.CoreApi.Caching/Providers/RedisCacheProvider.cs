@@ -16,10 +16,8 @@ namespace CES.CoreApi.Caching.Providers
     public class RedisCacheProvider : ICacheProvider
     {
         #region Core
-
         private readonly ILogMonitorFactory _monitorFactory;
-        private readonly IIdentityManager _identityManager;
-        
+        private readonly IIdentityManager _identityManager;        
        
 
         private const string AddItemMessageTemplate = "{0}.{1}: key='{2}', timeout='{3}', value='{4}'";
