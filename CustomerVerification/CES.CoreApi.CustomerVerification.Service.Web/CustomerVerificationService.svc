@@ -1,5 +1,0 @@
-﻿<%@ ServiceHost 
-    Language="C#" 
-    Debug="true" 
-    Service="CES.CoreApi.CustomerVerification.Service.CustomerVerificationService" 
-    Factory="CES.CoreApi.CustomerVerification.Service.Factory.CustomerVerificationServiceHostFactory" %>
