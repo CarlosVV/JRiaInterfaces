@@ -56,10 +56,6 @@
       <Project>{76762A04-54F0-4147-BD2B-267372034706}</Project>
       <Name>CES.CoreApi.Logging</Name>
     </ProjectReference>
-    <ProjectReference Include="..\CES.CoreApi.Accounting.Service.Business.Contract\CES.CoreApi.Accounting.Service.Business.Contract.csproj">
-      <Project>{106809F4-DC36-4766-A685-037CE23897D5}</Project>
-      <Name>CES.CoreApi.Accounting.Service.Business.Contract</Name>
-    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
