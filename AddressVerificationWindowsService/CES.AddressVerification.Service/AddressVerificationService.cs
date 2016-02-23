@@ -8,7 +8,7 @@ namespace CES.AddressVerification.Service
     public partial class AddressVerificationService : ServiceBase
     {
         private readonly IAddressProcessor _addressProcessor;
-        private readonly Timer _processTimer;
+        private readonly Timer _processTimer; 
         private const int WatchTimeout = 10000;
 
         public AddressVerificationService(IAddressProcessor addressProcessor)
