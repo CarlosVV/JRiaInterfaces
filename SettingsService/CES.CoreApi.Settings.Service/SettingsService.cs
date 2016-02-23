@@ -10,7 +10,7 @@ using CES.CoreApi.Settings.Service.Contract.Constants;
 using CES.CoreApi.Settings.Service.Contract.Interfaces;
 using CES.CoreApi.Settings.Service.Contract.Models;
 using CES.CoreApi.Settings.Service.Interfaces;
-
+ 
 namespace CES.CoreApi.Settings.Service
 {
     [ServiceBehavior(Namespace = Namespaces.SettingsServiceContractNamespace, InstanceContextMode = InstanceContextMode.PerCall)]
