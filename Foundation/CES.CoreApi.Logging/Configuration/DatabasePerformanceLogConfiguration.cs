@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Configuration;
 using System.Globalization;
-using CES.CoreApi.Logging.Interfaces;
+using CES.CoreApi.Logging.Interfaces; 
 
 namespace CES.CoreApi.Logging.Configuration
 {
