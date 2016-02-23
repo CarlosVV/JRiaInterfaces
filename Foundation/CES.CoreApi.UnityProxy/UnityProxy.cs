@@ -16,7 +16,7 @@ namespace CES.CoreApi.UnityProxy
         /// <summary>
         /// Initializes UnityProxy instance
         /// </summary>
-        /// <param name="container">Unity IoC container </param>
+        /// <param name="container">Unity IoC container</param>
         public UnityProxy(IUnityContainer container)
         {
             if (container == null)
