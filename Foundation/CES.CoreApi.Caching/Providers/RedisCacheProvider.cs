@@ -1,8 +1,6 @@
 ﻿using System;
-using System.Configuration;
 using System.Globalization;
 using System.Reflection;
-using System.Threading.Tasks;
 using CES.CoreApi.Common.Interfaces;
 using CES.CoreApi.Logging.Interfaces;
 using Microsoft.ApplicationServer.Caching;
