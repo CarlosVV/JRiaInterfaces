@@ -25,7 +25,7 @@ namespace CES.CoreApi.Logging.Configuration
         }
 
         /// <summary>
-        /// Returns whether db performance log enabled
+        /// Returns whether db performance log enabled 
         /// </summary>
         [ConfigurationProperty(ConfigItemIsEnabled, DefaultValue = false, IsRequired = true)]
         public bool IsEnabled
