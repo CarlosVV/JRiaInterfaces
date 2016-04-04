@@ -40,6 +40,18 @@ namespace CES.CoreApi.GeoLocation.Service.UnitTest
                 _geocodeServiceRequestProcessor.Object, _mapServiceRequestProcessor.Object,
                 _healthMonitoringProcessor.Object, _clientSideSupportServiceProcessor.Object, 
                 _mappingHelper.Object, _requestValidator.Object);
+
+        var x =    _geoLocationService.GetAutocompleteList(new AutocompleteAddressRequest
+            {
+                Address = new AddressRequest()
+                {
+                    Address1 = "421 W Broadway",
+                    AdministrativeArea = "CA",
+                    Country = "US"
+                },
+                MaxRecords = 15,
+                MinimumConfidence = Contract.Enumerations.Confidence.Low
+            });
         }
 
         #region Constructor tests

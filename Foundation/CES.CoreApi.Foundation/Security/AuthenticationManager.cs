@@ -29,6 +29,7 @@ namespace CES.CoreApi.Foundation.Security
             _exceptionMonitor = exceptionMonitor;
         }
 
+
         #endregion
 
         #region Public Methods

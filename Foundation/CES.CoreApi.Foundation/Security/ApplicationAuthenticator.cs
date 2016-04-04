@@ -71,7 +71,8 @@ namespace CES.CoreApi.Foundation.Security
             return authPolicy;
         }
 
-        private static void SetApplicationPrincipal(Message message, IApplication clientApplication, ServiceCallHeaderParameters headerParameters)
+        private static void SetApplicationPrincipal(Message message, 
+			IApplication clientApplication, ServiceCallHeaderParameters headerParameters)
         {
             var identity = new ClientApplicationIdentity(clientApplication, headerParameters);
             IPrincipal applicationPrincipal = new ApplicationPrincipal(identity);

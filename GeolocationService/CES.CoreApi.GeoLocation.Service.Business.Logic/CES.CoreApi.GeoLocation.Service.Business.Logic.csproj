@@ -9,7 +9,7 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>CES.CoreApi.GeoLocation.Service.Business.Logic</RootNamespace>
     <AssemblyName>CES.CoreApi.GeoLocation.Service.Business.Logic</AssemblyName>
-    <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">..\..\</SolutionDir>
     <RestorePackages>true</RestorePackages>
@@ -102,10 +102,6 @@
     <ProjectReference Include="..\..\Foundation\CES.CoreApi.Foundation.Contract\CES.CoreApi.Foundation.Contract.csproj">
       <Project>{8DBCFE15-CA3B-4F7C-A7D6-D73F8F0B91AA}</Project>
       <Name>CES.CoreApi.Foundation.Contract</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\Foundation\CES.CoreApi.Foundation\CES.CoreApi.Foundation.csproj">
-      <Project>{E2B71A13-9683-4862-B2EB-31050190AFDC}</Project>
-      <Name>CES.CoreApi.Foundation</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\Foundation\CES.CoreApi.Logging\CES.CoreApi.Logging.csproj">
       <Project>{76762A04-54F0-4147-BD2B-267372034706}</Project>

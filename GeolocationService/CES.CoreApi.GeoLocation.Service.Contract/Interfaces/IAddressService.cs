@@ -1,6 +1,6 @@
 ﻿using System.ServiceModel;
-using CES.CoreApi.Common.Constants;
-using CES.CoreApi.Common.Models;
+//using CES.CoreApi.Common.Constants;
+//using CES.CoreApi.Common.Models;
 using CES.CoreApi.GeoLocation.Service.Contract.Models;
 
 namespace CES.CoreApi.GeoLocation.Service.Contract.Interfaces
@@ -15,7 +15,7 @@ namespace CES.CoreApi.GeoLocation.Service.Contract.Interfaces
         /// <param name="request"></param>
         /// <returns></returns>
         [OperationContract]
-        [FaultContract(typeof(CoreApiServiceFault), Action = Namespaces.ServiceFaultContractAction)]
+      //  [FaultContract(typeof(CoreApiServiceFault), Action = Namespaces.ServiceFaultContractAction)]
         ValidateAddressResponse ValidateAddress(ValidateAddressRequest request);
 
         /// <summary>
@@ -25,7 +25,7 @@ namespace CES.CoreApi.GeoLocation.Service.Contract.Interfaces
         /// <param name="request"></param>
         /// <returns></returns>
         [OperationContract(Name = "ValidateFormattedAddress")]
-        [FaultContract(typeof(CoreApiServiceFault), Action = Namespaces.ServiceFaultContractAction)]
+      //  [FaultContract(typeof(CoreApiServiceFault), Action = Namespaces.ServiceFaultContractAction)]
         ValidateAddressResponse ValidateAddress(ValidateFormattedAddressRequest request);
 
         /// <summary>
@@ -34,7 +34,7 @@ namespace CES.CoreApi.GeoLocation.Service.Contract.Interfaces
         /// <param name="request"></param>
         /// <returns>List of address hints</returns>
         [OperationContract]
-        [FaultContract(typeof(CoreApiServiceFault), Action = Namespaces.ServiceFaultContractAction)]
+      //  [FaultContract(typeof(CoreApiServiceFault), Action = Namespaces.ServiceFaultContractAction)]
         AutocompleteAddressResponse GetAutocompleteList(AutocompleteAddressRequest request);
     }
 }

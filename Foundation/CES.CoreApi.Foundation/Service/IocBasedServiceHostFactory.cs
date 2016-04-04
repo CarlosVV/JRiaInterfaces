@@ -8,7 +8,7 @@ using SimpleInjector.Integration.Wcf;
 
 namespace CES.CoreApi.Foundation.Service
 {
-    public abstract class IocBasedServiceHostFactory : SimpleInjectorServiceHostFactory
+    public abstract class IocBasedServiceHostFactory :SimpleInjectorServiceHostFactory
     {
         protected IocBasedServiceHostFactory(Container container)
         {

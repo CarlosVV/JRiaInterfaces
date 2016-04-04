@@ -2,20 +2,21 @@
 using System.Globalization;
 using System.Reflection;
 using CES.CoreApi.Common.Interfaces;
-using CES.CoreApi.Logging.Interfaces;
-using Microsoft.ApplicationServer.Caching;
+//using CES.CoreApi.Logging.Interfaces;
+//using Microsoft.ApplicationServer.Caching;
 using StackExchange.Redis;
 using CES.CoreApi.Caching.Configuration;
 using CES.CoreApi.Caching.Helpers;
 using Newtonsoft.Json;
+//using CES.CoreApi.Caching.Interfaces;
 
 namespace CES.CoreApi.Caching.Providers
 {
     public class RedisCacheProvider : ICacheProvider
     {
         #region Core
-        private readonly ILogMonitorFactory _monitorFactory;
-        private readonly IIdentityManager _identityManager;        
+       // private readonly ILogMonitorFactory _monitorFactory;
+      //  private readonly IIdentityManager _identityManager;        
        
 
         private const string AddItemMessageTemplate = "{0}.{1}: key='{2}', timeout='{3}', value='{4}'";
@@ -26,15 +27,15 @@ namespace CES.CoreApi.Caching.Providers
         private static  IDatabase  _database;
 
 
-        public RedisCacheProvider(ILogMonitorFactory monitorFactory, IIdentityManager identityManager)
-        {
-            if (monitorFactory == null) throw new ArgumentNullException("monitorFactory");
-            if (identityManager == null) throw new ArgumentNullException("identityManager");
+		public RedisCacheProvider()
+		{
+			//if (monitorFactory == null) throw new ArgumentNullException("monitorFactory");
+			//if (identityManager == null) throw new ArgumentNullException("identityManager");
 
-            _monitorFactory = monitorFactory;
-            _identityManager = identityManager;     
-           
-                    }
+			//_monitorFactory = monitorFactory;
+			//_identityManager = identityManager;
+
+		}
 
         static RedisCacheProvider()
         {
@@ -58,21 +59,21 @@ namespace CES.CoreApi.Caching.Providers
             var message = string.Format(CultureInfo.InvariantCulture, AddItemMessageTemplate,
                 GetType().Name, MethodBase.GetCurrentMethod().Name, key, timeout, value);
 
-            try
-            {
+            //try
+            //{
                 if (timeout == default(TimeSpan))
                     timeout = _config.CacheLifetime.Value;
 
-                var performanceMonitor = GetPerformanceMonitor(message);
+                //var performanceMonitor = GetPerformanceMonitor(message);
                 _database.StringSet(key, JsonConvert.SerializeObject(value), timeout);
                 
-                performanceMonitor.Stop();
-            }
-            catch (DataCacheException ex)
-            {
-                PublishException(ex, message);
-                throw;
-            }
+            //    performanceMonitor.Stop();
+            //}
+            //catch (DataCacheException ex)
+            //{
+            //    PublishException(ex, message);
+            //    throw;
+            //}
         }
 
         public T GetItem<T>(string key, Func<T> getDataFunc)
@@ -87,18 +88,18 @@ namespace CES.CoreApi.Caching.Providers
             var message = string.Format(CultureInfo.InvariantCulture, GetItemMessageTemplate,
                 GetType().Name, MethodBase.GetCurrentMethod().Name, key, timeout, getDataFunc);
 
-            try
-            {
-                var performanceMonitor = GetPerformanceMonitor(message);
+            //try
+            //{
+               // var performanceMonitor = GetPerformanceMonitor(message);
                 jsonResult = _database.StringGet(key);
              
-                performanceMonitor.Stop();
-            }
-            catch (DataCacheException ex)
-            {
-                PublishException(ex, message);
-                throw;
-            }
+               // performanceMonitor.Stop();
+           // }
+            //catch (DataCacheException ex)
+            //{
+            //    PublishException(ex, message);
+            //    throw;
+            //}
 
             if (jsonResult != null)
             {
@@ -124,37 +125,37 @@ namespace CES.CoreApi.Caching.Providers
             var message = string.Format(CultureInfo.InvariantCulture, RemoveItemMessageTemplate,
                 GetType().Name, MethodBase.GetCurrentMethod().Name, key);
 
-            try
-            {
-                var performanceMonitor = GetPerformanceMonitor(message);
+            //try
+           // {
+              //  var performanceMonitor = GetPerformanceMonitor(message);
 
                 _database.KeyDelete(key);
-                performanceMonitor.Stop();
-            }
-            catch (DataCacheException ex)
-            {
-                PublishException(ex, message);
-                throw;
-            }
+               // performanceMonitor.Stop();
+          //  }
+            //catch (DataCacheException ex)
+            //{
+            //  //  PublishException(ex, message);
+            //    throw;
+            //}
         }
 
         public void ClearCache()
         {
-            var message = string.Format(CultureInfo.InvariantCulture, ClearCacheMessageTemplate, GetType().Name, MethodBase.GetCurrentMethod().Name);
+          //  var message = string.Format(CultureInfo.InvariantCulture, ClearCacheMessageTemplate, GetType().Name, MethodBase.GetCurrentMethod().Name);
 
-            try
-            {
-                var performanceMonitor = GetPerformanceMonitor(message);
+            //try
+            //{
+               // var performanceMonitor = GetPerformanceMonitor(message);
               
                 RedisCacheConnectionHelper.ClearCache();
        
-                performanceMonitor.Stop();
-            }
-            catch (DataCacheException ex)
-            {
-                PublishException(ex, message);
-                throw;
-            }
+            //    performanceMonitor.Stop();
+            //}
+            //catch (DataCacheException ex)
+            //{
+            //   // PublishException(ex, message);
+            //    throw;
+            //}
 
         }
 
@@ -162,20 +163,20 @@ namespace CES.CoreApi.Caching.Providers
 
         #region private methods
 
-        private void PublishException(Exception ex, string message)
-        {
-            var exceptionMonitor = _monitorFactory.CreateNew<IExceptionLogMonitor>();
-            exceptionMonitor.DataContainer.ApplicationContext = _identityManager.GetClientApplicationIdentity();
-            exceptionMonitor.Publish(ex, message);
-        }
+        //private void PublishException(Exception ex, string message)
+        //{
+        //    var exceptionMonitor = _monitorFactory.CreateNew<IExceptionLogMonitor>();
+        //    exceptionMonitor.DataContainer.ApplicationContext = _identityManager.GetClientApplicationIdentity();
+        //    exceptionMonitor.Publish(ex, message);
+        //}
 
-        private IPerformanceLogMonitor GetPerformanceMonitor(string message)
-        {
-            var performanceMonitor = _monitorFactory.CreateNew<IPerformanceLogMonitor>();
-            performanceMonitor.DataContainer.ApplicationContext = _identityManager.GetClientApplicationIdentity();
-            performanceMonitor.Start(message);
-            return performanceMonitor;
-        }
+        //private IPerformanceLogMonitor GetPerformanceMonitor(string message)
+        //{
+        //    var performanceMonitor = _monitorFactory.CreateNew<IPerformanceLogMonitor>();
+        //    performanceMonitor.DataContainer.ApplicationContext = _identityManager.GetClientApplicationIdentity();
+        //    performanceMonitor.Start(message);
+        //    return performanceMonitor;
+        //}
 
         #endregion
     }

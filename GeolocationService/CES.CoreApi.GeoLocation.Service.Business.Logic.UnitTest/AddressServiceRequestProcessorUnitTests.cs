@@ -282,9 +282,9 @@ namespace CES.CoreApi.GeoLocation.Service.Business.Logic.UnitTest
         {
             var model = new AutocompleteAddressModel()
             {
-                Country = Country,
-                AdministrativeArea = AdministrativeArea,
-                Address1 = FormattedAddress
+                Country = "US",
+                AdministrativeArea = "CA",
+                Address1 = "421 W Broadway"
             };
 
 
@@ -300,7 +300,8 @@ namespace CES.CoreApi.GeoLocation.Service.Business.Logic.UnitTest
 
             var result = new AddressServiceRequestProcessor(_configurationProvider.Object,
                 _addressVerificationDataProvider.Object, _addressAutocompleteDataProvider.Object)
-                .GetAutocompleteList(model, 10, LevelOfConfidence.High);
+                .GetAutocompleteList(model, 10, LevelOfConfidence.Low
+                );
 
             Assert.IsNotNull(result);
             Assert.IsNotNull(result.Suggestions);
