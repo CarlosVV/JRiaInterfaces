@@ -1,14 +1,14 @@
 ﻿using System;
 using System.Globalization;
 using System.Reflection;
-using CES.CoreApi.Common.Interfaces;
+//using CES.CoreApi.Common.Interfaces;
 //using CES.CoreApi.Logging.Interfaces;
 //using Microsoft.ApplicationServer.Caching;
 using StackExchange.Redis;
 using CES.CoreApi.Caching.Configuration;
 using CES.CoreApi.Caching.Helpers;
 using Newtonsoft.Json;
-//using CES.CoreApi.Caching.Interfaces;
+using CES.CoreApi.Caching.Interfaces;
 
 namespace CES.CoreApi.Caching.Providers
 {
