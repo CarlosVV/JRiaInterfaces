@@ -11,7 +11,7 @@ using CES.CoreApi.Common.Interfaces;
 using CES.CoreApi.Foundation.Data.Interfaces;
 using CES.CoreApi.Foundation.Data.Models;
 using CES.CoreApi.Foundation.Data.Utility;
-using CES.CoreApi.Logging.Interfaces;
+//using CES.CoreApi.Logging.Interfaces;
 using Microsoft.Practices.EnterpriseLibrary.Common.Configuration;
 using Microsoft.Practices.EnterpriseLibrary.Data;
 
@@ -25,7 +25,7 @@ namespace CES.CoreApi.Foundation.Data.Base
         private static readonly int AppObjectId;
         private static readonly int UserNameId;
        // private readonly ICacheProvider _cacheProvider;
-        private readonly ILogMonitorFactory _monitorFactory;
+        //private readonly ILogMonitorFactory _monitorFactory;
         private readonly IIdentityManager _identityManager;
         private readonly IDatabaseInstanceProvider _instanceProvider;
 
@@ -39,16 +39,16 @@ namespace CES.CoreApi.Foundation.Data.Base
             UserNameId = int.Parse(ConfigurationManager.AppSettings["UserNameID"]);
         }
 
-        protected BaseGenericRepository(ILogMonitorFactory monitorFactory, IIdentityManager identityManager,
+        protected BaseGenericRepository(IIdentityManager identityManager,
             IDatabaseInstanceProvider instanceProvider)
         {
            // if (cacheProvider == null) throw new ArgumentNullException("cacheProvider");
-            if (monitorFactory == null) throw new ArgumentNullException("monitorFactory");
+           // if (monitorFactory == null) throw new ArgumentNullException("monitorFactory");
             if (identityManager == null) throw new ArgumentNullException("identityManager");
             if (instanceProvider == null) throw new ArgumentNullException("instanceProvider");
             
          //   _cacheProvider = cacheProvider;
-            _monitorFactory = monitorFactory;
+          //  _monitorFactory = monitorFactory;
             _identityManager = identityManager;
             _instanceProvider = instanceProvider;
         }
@@ -134,7 +134,7 @@ namespace CES.CoreApi.Foundation.Data.Base
         {
             var entitList = new Collection<TEntity>();
 
-            var performanceMonitor = GetPerformanceMonitor(commandContext.Command);
+           // var performanceMonitor = GetPerformanceMonitor(commandContext.Command);
 
             using (var reader = commandContext.Database.ExecuteReader(commandContext.Command))
             {
@@ -143,10 +143,10 @@ namespace CES.CoreApi.Foundation.Data.Base
                     var entity = shaper(reader);
                     entitList.Add(entity);
                 }
-                performanceMonitor.UpdateConnectionDetails(commandContext.Command);
+               // performanceMonitor.UpdateConnectionDetails(commandContext.Command);
             }
 
-            performanceMonitor.Stop();
+           // performanceMonitor.Stop();
 
             return entitList;
         }
@@ -163,7 +163,7 @@ namespace CES.CoreApi.Foundation.Data.Base
         {
             TEntity entity;
 
-            var performanceMonitor = GetPerformanceMonitor(commandContext.Command);
+           // var performanceMonitor = GetPerformanceMonitor(commandContext.Command);
 
             using (var reader = commandContext.Database.ExecuteReader(commandContext.Command))
             {
@@ -171,13 +171,13 @@ namespace CES.CoreApi.Foundation.Data.Base
                     ? shaper(reader) 
                     : default (TEntity);
 
-                performanceMonitor.UpdateConnectionDetails(commandContext.Command);
+                //performanceMonitor.UpdateConnectionDetails(commandContext.Command);
             }
 
             if (outputShaper != null)
                 outputShaper(commandContext.Command.Parameters, entity);
 
-            performanceMonitor.Stop();
+          //  performanceMonitor.Stop();
 
             return entity;
         }
@@ -188,11 +188,11 @@ namespace CES.CoreApi.Foundation.Data.Base
         /// <param name="commandContext">Database command context to execute</param>
         private void ExecuteNonQueryProcedure(CommandContext commandContext)
         {
-            var performanceMonitor = GetPerformanceMonitor(commandContext.Command);
+           // var performanceMonitor = GetPerformanceMonitor(commandContext.Command);
 
             commandContext.Database.ExecuteNonQuery(commandContext.Command);
 
-            performanceMonitor.Stop();
+          //  performanceMonitor.Stop();
         }
 
         /// <summary>
@@ -201,11 +201,11 @@ namespace CES.CoreApi.Foundation.Data.Base
         /// <param name="commandContext">Database command context to execute</param>
         private object ExecuteScalarProcedure(CommandContext commandContext)
         {
-            var performanceMonitor = GetPerformanceMonitor(commandContext.Command);
+            //var performanceMonitor = GetPerformanceMonitor(commandContext.Command);
 
             var result = commandContext.Database.ExecuteScalar(commandContext.Command);
 
-            performanceMonitor.Stop();
+           // performanceMonitor.Stop();
 
             return result;
         }
@@ -258,13 +258,13 @@ namespace CES.CoreApi.Foundation.Data.Base
                 throw new ApplicationException("databaseRequest.ProcedureName is empty.");
         }
         
-        private IDatabasePerformanceLogMonitor GetPerformanceMonitor(DbCommand command)
-        {
-            var performanceMonitor = _monitorFactory.CreateNew<IDatabasePerformanceLogMonitor>();
-            performanceMonitor.DataContainer.ApplicationContext = _identityManager.GetClientApplicationIdentity();
-            performanceMonitor.Start(command);
-            return performanceMonitor;
-        }
+        //private IDatabasePerformanceLogMonitor GetPerformanceMonitor(DbCommand command)
+        //{
+        //    var performanceMonitor = _monitorFactory.CreateNew<IDatabasePerformanceLogMonitor>();
+        //    performanceMonitor.DataContainer.ApplicationContext = _identityManager.GetClientApplicationIdentity();
+        //    performanceMonitor.Start(command);
+        //    return performanceMonitor;
+        //}
 
         #endregion
 
