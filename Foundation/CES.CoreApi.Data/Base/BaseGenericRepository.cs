@@ -24,7 +24,7 @@ namespace CES.CoreApi.Foundation.Data.Base
         private static readonly int ApplicationId;
         private static readonly int AppObjectId;
         private static readonly int UserNameId;
-        private readonly ICacheProvider _cacheProvider;
+       // private readonly ICacheProvider _cacheProvider;
         private readonly ILogMonitorFactory _monitorFactory;
         private readonly IIdentityManager _identityManager;
         private readonly IDatabaseInstanceProvider _instanceProvider;
@@ -39,15 +39,15 @@ namespace CES.CoreApi.Foundation.Data.Base
             UserNameId = int.Parse(ConfigurationManager.AppSettings["UserNameID"]);
         }
 
-        protected BaseGenericRepository(ICacheProvider cacheProvider, ILogMonitorFactory monitorFactory, IIdentityManager identityManager,
+        protected BaseGenericRepository(ILogMonitorFactory monitorFactory, IIdentityManager identityManager,
             IDatabaseInstanceProvider instanceProvider)
         {
-            if (cacheProvider == null) throw new ArgumentNullException("cacheProvider");
+           // if (cacheProvider == null) throw new ArgumentNullException("cacheProvider");
             if (monitorFactory == null) throw new ArgumentNullException("monitorFactory");
             if (identityManager == null) throw new ArgumentNullException("identityManager");
             if (instanceProvider == null) throw new ArgumentNullException("instanceProvider");
             
-            _cacheProvider = cacheProvider;
+         //   _cacheProvider = cacheProvider;
             _monitorFactory = monitorFactory;
             _identityManager = identityManager;
             _instanceProvider = instanceProvider;
@@ -63,11 +63,11 @@ namespace CES.CoreApi.Foundation.Data.Base
             
             var command = GetDbCommand(request);
 
-            if (!request.IsCacheable) 
+            //if (!request.IsCacheable) 
                 return ExecuteListReaderProcedure(command, request.Shaper);
 
-            var key = request.ToCacheKey();
-            return _cacheProvider.GetItem(key, () => ExecuteListReaderProcedure(command, request.Shaper), request.CacheDuration);
+            //var key = request.ToCacheKey();
+            //return _cacheProvider.GetItem(key, () => ExecuteListReaderProcedure(command, request.Shaper), request.CacheDuration);
         }
 
         protected int Add<TEntity>(DatabaseRequest<TEntity> request)
@@ -107,14 +107,14 @@ namespace CES.CoreApi.Foundation.Data.Base
 
             var command = GetDbCommand(request);
 
-            if (!request.IsCacheable) 
+           // if (!request.IsCacheable) 
                 return ExecuteReaderProcedure(command, request.Shaper, request.OutputShaper);
 
-            var key = request.ToCacheKey(request.CacheKeySuffix);
-            return _cacheProvider.GetItem(key,
-                () => ExecuteReaderProcedure(command, request.Shaper, request.OutputShaper),
-                request.CacheDuration,
-                request.CacheInvalidator);
+           // var key = request.ToCacheKey(request.CacheKeySuffix);
+            //return _cacheProvider.GetItem(key,
+            //    () => ExecuteReaderProcedure(command, request.Shaper, request.OutputShaper),
+            //    request.CacheDuration,
+            //    request.CacheInvalidator);
         }
 
         #endregion

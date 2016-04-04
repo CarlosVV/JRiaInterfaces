@@ -1,7 +1,7 @@
 ﻿using System.Configuration;
 using AutoMapper;
 using AutoMapper.Mappers;
-using CES.CoreApi.Caching.Providers;
+//using CES.CoreApi.Caching.Providers;
 using CES.CoreApi.Common.Interfaces;
 using CES.CoreApi.Common.Managers;
 using CES.CoreApi.Common.Providers;
@@ -35,6 +35,7 @@ using CES.CoreApi.Logging.Providers;
 using CES.CoreApi.SimpleInjectorProxy;
 using SimpleInjector;
 using IConfigurationProvider = CES.CoreApi.Foundation.Contract.Interfaces.IConfigurationProvider;
+using CES.CoreApi.Caching.Providers;
 
 namespace CES.CoreApi.GeoLocation.Service.Configuration
 {
@@ -70,7 +71,7 @@ namespace CES.CoreApi.GeoLocation.Service.Configuration
             container.RegisterSingle<IServiceCallHeaderParametersProvider, ServiceCallHeaderParametersProvider>();
             container.RegisterSingle<IAuthorizationManager, AuthorizationManager>();
             container.RegisterSingle<IAuthorizationAdministrator, AuthorizationAdministrator>();
-            container.RegisterSingle<Caching.Interfaces.ICacheProvider>(() => new RedisCacheProvider());
+			container.RegisterSingle<Caching.Interfaces.ICacheProvider>(() => new RedisCacheProvider());
             container.RegisterSingle<IHostApplicationProvider, HostApplicationProvider>();
             container.RegisterSingle<IClientSecurityContextProvider, ClientDetailsProvider>();
             container.RegisterSingle<IServiceExceptionHandler, ServiceExceptionHandler>();

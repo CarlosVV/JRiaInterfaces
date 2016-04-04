@@ -21,9 +21,9 @@ namespace CES.CoreApi.Foundation.Data
     {
         #region Core
 
-        public ApplicationRepository(ICacheProvider cacheProvider, ILogMonitorFactory logMonitorFactory, IIdentityManager identityManager, 
+        public ApplicationRepository(ILogMonitorFactory logMonitorFactory, IIdentityManager identityManager, 
             IDatabaseInstanceProvider instanceProvider)
-            : base(cacheProvider, logMonitorFactory, identityManager, instanceProvider)
+            : base( logMonitorFactory, identityManager, instanceProvider)
         {
         }
 

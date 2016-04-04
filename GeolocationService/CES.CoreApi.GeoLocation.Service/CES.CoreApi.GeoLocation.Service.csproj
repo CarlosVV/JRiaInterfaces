@@ -83,7 +83,7 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\Foundation\CES.CoreApi.Caching\CES.CoreApi.Caching.csproj">
-      <Project>{9FCF40A8-23F1-4272-9CAE-EFF674145F57}</Project>
+      <Project>{9fcf40a8-23f1-4272-9cae-eff674145f57}</Project>
       <Name>CES.CoreApi.Caching</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\Foundation\CES.CoreApi.Common\CES.CoreApi.Common.csproj">

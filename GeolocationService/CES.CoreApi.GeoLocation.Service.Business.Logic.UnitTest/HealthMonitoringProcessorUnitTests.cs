@@ -2,7 +2,7 @@
 using System.Collections.ObjectModel;
 using System.Linq;
 using CES.CoreApi.Common.Enumerations;
-using CES.CoreApi.Common.Interfaces;
+using CES.CoreApi.Caching.Interfaces;
 using CES.CoreApi.Common.Models;
 using CES.CoreApi.Foundation.Data.Interfaces;
 using CES.CoreApi.GeoLocation.Service.Business.Logic.Processors;
