@@ -1,8 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.Data;
-using System.Runtime.Serialization;
 using System.Threading;
 using CES.CoreApi.Common.Enumerations;
 using CES.CoreApi.Common.Interfaces;

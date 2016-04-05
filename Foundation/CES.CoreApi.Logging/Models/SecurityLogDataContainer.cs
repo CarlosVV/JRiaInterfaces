@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Runtime.Serialization;
 using CES.CoreApi.Common.Enumerations;
 using CES.CoreApi.Common.Interfaces;
 using CES.CoreApi.Logging.Interfaces;
@@ -39,7 +37,7 @@ namespace CES.CoreApi.Logging.Models
 
 		[JsonConverter(typeof(StringEnumConverter))]
 		public SecurityAuditResult AuditResult { get; set; }
-		[DataMember(Name = "timestamp")]
+
 		public DateTime AuditTime { get; private set; }
 
 		public string Details { get; set; }

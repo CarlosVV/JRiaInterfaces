@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
-using System.Runtime.Serialization;
 using CES.CoreApi.Common.Enumerations;
 using CES.CoreApi.Common.Interfaces;
 using CES.CoreApi.Logging.Interfaces;
@@ -82,11 +81,6 @@ namespace CES.CoreApi.Logging.Models
 				_requestMessage = value;
 			}
 		}
-
-		/// <summary>
-		/// Gets or sets log record creation time
-		/// </summary>
-		[DataMember(Name = "timestamp")]
 		public DateTime LogTime
 		{
 			get
@@ -94,21 +88,11 @@ namespace CES.CoreApi.Logging.Models
 				return _currentDateTimeProvider.GetCurrentUtc();
 			}
 		}
-
-		/// <summary>
-		/// Gets or sets request message length
-		/// </summary>
-
 		public long RequestMessageLength
 		{
 			get; private set;
 		}
 
-		/// <summary>
-		/// Gets or sets response message
-		/// </summary>
-
-		[DefaultValue("")]
 		public string ResponseMessage
 		{
 			get
@@ -128,24 +112,12 @@ namespace CES.CoreApi.Logging.Models
 			}
 		}
 
-		/// <summary>
-		/// Gets or sets response message length
-		/// </summary>
-
 		public long ResponseMessageLength
 		{
 			get; private set;
 		}
 
-		/// <summary>
-		/// Gets or sets binary response message length
-		/// </summary>
-
 		public long BinaryResponseMessageLength { get; set; }
-
-		/// <summary>
-		/// Gets or sets data provider type
-		/// </summary>
 
 		public string ProviderType { get; set; }
 
@@ -154,10 +126,6 @@ namespace CES.CoreApi.Logging.Models
 
 
 		public Guid MessageId { get; private set; }
-
-		/// <summary>
-		/// Gets or sets application context information
-		/// </summary>
 
 		public dynamic ApplicationContext
 		{

@@ -1,6 +1,4 @@
-﻿using System.Runtime.Serialization;
-
-namespace CES.CoreApi.Logging.Models
+﻿namespace CES.CoreApi.Logging.Models
 {
 	public class DatabaseConnection
 	{
