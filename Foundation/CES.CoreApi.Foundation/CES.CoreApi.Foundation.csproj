@@ -76,10 +76,6 @@
     <Compile Include="Providers\HostApplicationProvider.cs" />
     <Compile Include="Providers\ServiceCallHeaderParametersProvider.cs" />
     <Compile Include="Providers\ServiceConfigurationProvider.cs" />
-    <Compile Include="Security\ApplicationAuthenticator.cs" />
-    <Compile Include="Security\AuthenticationManager.cs" />
-    <Compile Include="Security\AuthorizationAdministrator.cs" />
-    <Compile Include="Security\AuthorizationManager.cs" />
     <Compile Include="Service\IocBasedInstanceProvider.cs" />
     <Compile Include="Service\IocBasedServiceHostFactory.cs" />
     <Compile Include="Service\IocBasedServiceHost.cs" />
@@ -113,6 +109,10 @@
     <ProjectReference Include="..\CES.CoreApi.Logging\CES.CoreApi.Logging.csproj">
       <Project>{76762A04-54F0-4147-BD2B-267372034706}</Project>
       <Name>CES.CoreApi.Logging</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\CES.CoreApi.Security\CES.CoreApi.Security.csproj">
+      <Project>{bab197c1-fc36-4070-b1fa-ffc0d6bd1d79}</Project>
+      <Name>CES.CoreApi.Security</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup />

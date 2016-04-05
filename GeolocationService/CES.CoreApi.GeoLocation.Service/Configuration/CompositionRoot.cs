@@ -11,7 +11,6 @@ using CES.CoreApi.Foundation.Data;
 using CES.CoreApi.Foundation.Data.Interfaces;
 using CES.CoreApi.Foundation.Data.Providers;
 using CES.CoreApi.Foundation.Providers;
-using CES.CoreApi.Foundation.Security;
 using CES.CoreApi.Foundation.Service;
 using CES.CoreApi.Foundation.Tools;
 using CES.CoreApi.GeoLocation.Service.Business.Contract.Interfaces;
@@ -35,7 +34,8 @@ using CES.CoreApi.SimpleInjectorProxy;
 using SimpleInjector;
 using IConfigurationProvider = CES.CoreApi.Foundation.Contract.Interfaces.IConfigurationProvider;
 using CES.CoreApi.Caching.Providers;
-using CES.CoreApi.Common.Models;
+using CES.CoreApi.Security.Interfaces;
+using CES.CoreApi.Security;
 
 namespace CES.CoreApi.GeoLocation.Service.Configuration
 {

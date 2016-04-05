@@ -5,10 +5,10 @@ using System.ServiceModel;
 using System.ServiceModel.Channels;
 using CES.CoreApi.Common.Enumerations;
 using CES.CoreApi.Common.Exceptions;
-using CES.CoreApi.Foundation.Contract.Interfaces;
 using CES.CoreApi.Logging.Interfaces;
+using CES.CoreApi.Security.Interfaces;
 
-namespace CES.CoreApi.Foundation.Security
+namespace CES.CoreApi.Security
 {
     public class AuthenticationManager : ServiceAuthenticationManager, IAuthenticationManager
     {

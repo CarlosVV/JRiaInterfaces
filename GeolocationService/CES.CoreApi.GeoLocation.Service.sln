@@ -56,6 +56,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "3_Business", "3_Business", 
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "2_Application", "2_Application", "{9FA49D56-EDFD-4E60-B71B-9CE0ABC2D813}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CES.CoreApi.Security", "..\Foundation\CES.CoreApi.Security\CES.CoreApi.Security.csproj", "{BAB197C1-FC36-4070-B1FA-FFC0D6BD1D79}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -134,6 +136,10 @@ Global
 		{E551BCC9-D0AA-45A6-BA1B-2D944BC9C0E6}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{E551BCC9-D0AA-45A6-BA1B-2D944BC9C0E6}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{E551BCC9-D0AA-45A6-BA1B-2D944BC9C0E6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BAB197C1-FC36-4070-B1FA-FFC0D6BD1D79}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BAB197C1-FC36-4070-B1FA-FFC0D6BD1D79}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BAB197C1-FC36-4070-B1FA-FFC0D6BD1D79}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BAB197C1-FC36-4070-B1FA-FFC0D6BD1D79}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -157,6 +163,7 @@ Global
 		{8F71176E-C3E6-4759-A354-5E7E3E4B0658} = {AD4EF941-E12E-4AB5-A0F9-4076107CA1DE}
 		{544EA150-4E44-42A5-A562-B0698C21DE77} = {AD4EF941-E12E-4AB5-A0F9-4076107CA1DE}
 		{E551BCC9-D0AA-45A6-BA1B-2D944BC9C0E6} = {AD4EF941-E12E-4AB5-A0F9-4076107CA1DE}
+		{BAB197C1-FC36-4070-B1FA-FFC0D6BD1D79} = {9B65F4D3-1728-4FF1-A2F2-DA4DF6270431}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		EnterpriseLibraryConfigurationToolBinariesPathV6 = packages\EnterpriseLibrary.Common.6.0.1304.0\lib\NET45;packages\EnterpriseLibrary.Data.6.0.1304.0\lib\NET45

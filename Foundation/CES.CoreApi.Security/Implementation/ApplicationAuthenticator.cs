@@ -10,9 +10,9 @@ using CES.CoreApi.Common.Interfaces;
 using CES.CoreApi.Common.Models;
 using CES.CoreApi.Foundation.Contract.Interfaces;
 using CES.CoreApi.Foundation.Contract.Models;
+using CES.CoreApi.Security.Interfaces;
 
-
-namespace CES.CoreApi.Foundation.Security
+namespace CES.CoreApi.Security
 {
     public class ApplicationAuthenticator : IApplicationAuthenticator
     {
