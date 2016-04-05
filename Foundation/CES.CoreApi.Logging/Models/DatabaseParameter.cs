@@ -5,21 +5,20 @@ using Newtonsoft.Json.Converters;
 
 namespace CES.CoreApi.Logging.Models
 {
-    [DataContract]
-    public class DatabaseParameter
-    {
-         [DataMember]
-        public string Name { get; set; }
+	public class DatabaseParameter
+	{
 
-         [DataMember]
-        public object Value { get; set; }
+		public string Name { get; set; }
 
-         [DataMember]
-         [JsonConverter(typeof(StringEnumConverter))]
-        public ParameterDirection Direction { get; set; }
 
-         [DataMember]
-         [JsonConverter(typeof(StringEnumConverter))]
-        public DbType DataType { get; set; }
-    }
+		public object Value { get; set; }
+
+
+		[JsonConverter(typeof(StringEnumConverter))]
+		public ParameterDirection Direction { get; set; }
+
+
+		[JsonConverter(typeof(StringEnumConverter))]
+		public DbType DataType { get; set; }
+	}
 }

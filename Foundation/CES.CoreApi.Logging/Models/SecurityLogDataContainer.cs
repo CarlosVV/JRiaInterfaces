@@ -9,69 +9,69 @@ using Newtonsoft.Json.Converters;
 
 namespace CES.CoreApi.Logging.Models
 {
-    [DataContract]
-    public class SecurityLogDataContainer : IDataContainer
-    {
-        #region Core
+	public class SecurityLogDataContainer : IDataContainer
+	{
+		#region Core
 
-        private readonly IJsonDataContainerFormatter _jsonDataContainerFormatter;
+		private readonly IJsonDataContainerFormatter _jsonDataContainerFormatter;
 
-        public SecurityLogDataContainer(IJsonDataContainerFormatter jsonDataContainerFormatter, ICurrentDateTimeProvider currentDateTimeProvider)
-        {
-            if (jsonDataContainerFormatter == null) throw new ArgumentNullException("jsonDataContainerFormatter");
-            if (currentDateTimeProvider == null) throw new ArgumentNullException("currentDateTimeProvider");
+		public SecurityLogDataContainer(IJsonDataContainerFormatter jsonDataContainerFormatter, ICurrentDateTimeProvider currentDateTimeProvider)
+		{
+			if (jsonDataContainerFormatter == null)
+				throw new ArgumentNullException("jsonDataContainerFormatter");
+			if (currentDateTimeProvider == null)
+				throw new ArgumentNullException("currentDateTimeProvider");
 
-            _jsonDataContainerFormatter = jsonDataContainerFormatter;
-            AuditTime = currentDateTimeProvider.GetCurrentUtc();
-            MessageId = Guid.NewGuid();
-        }
+			_jsonDataContainerFormatter = jsonDataContainerFormatter;
+			AuditTime = currentDateTimeProvider.GetCurrentUtc();
+			MessageId = Guid.NewGuid();
+		}
 
-        #endregion
+		#endregion
 
-        #region Public properties
+		#region Public properties
 
-        [DataMember]
-        public int ServiceApplicationId { get; set; }
-        [DataMember]
-        public int ClientApplicationId { get; set; }
-        [DataMember]
-        public string Operation { get; set; }
-        [DataMember]
-        [JsonConverter(typeof(StringEnumConverter))]
-        public SecurityAuditResult AuditResult { get; set; }
-        [DataMember(Name = "timestamp")]
-        public DateTime AuditTime { get; private set; }
-        [DataMember]
-        public string Details { get; set; }
-        [DataMember]
-        public Guid MessageId { get; private set; }
-        
-        [DataMember]
-        [JsonConverter(typeof(StringEnumConverter))]
-        public LogType LogType
-        {
-            get { return LogType.SecurityAudit; }
-        }
+		public int ServiceApplicationId { get; set; }
 
-        /// <summary>
-        /// Gets or sets application context information
-        /// </summary>
-        [DataMember]
-        public dynamic ApplicationContext
-        {
-            get;
-            set;
-        }
-        
-        #endregion
+		public int ClientApplicationId { get; set; }
 
-        #region Public methods
+		public string Operation { get; set; }
 
-        public override string ToString()
-        {
-            return _jsonDataContainerFormatter.Format(this);
-        }
+		[JsonConverter(typeof(StringEnumConverter))]
+		public SecurityAuditResult AuditResult { get; set; }
+		[DataMember(Name = "timestamp")]
+		public DateTime AuditTime { get; private set; }
 
-        #endregion
-    }
+		public string Details { get; set; }
+
+		public Guid MessageId { get; private set; }
+
+
+		[JsonConverter(typeof(StringEnumConverter))]
+		public LogType LogType
+		{
+			get { return LogType.SecurityAudit; }
+		}
+
+		/// <summary>
+		/// Gets or sets application context information
+		/// </summary>
+
+		public dynamic ApplicationContext
+		{
+			get;
+			set;
+		}
+
+		#endregion
+
+		#region Public methods
+
+		public override string ToString()
+		{
+			return _jsonDataContainerFormatter.Format(this);
+		}
+
+		#endregion
+	}
 }

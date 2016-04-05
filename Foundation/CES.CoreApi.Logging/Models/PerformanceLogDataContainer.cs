@@ -12,7 +12,6 @@ using Newtonsoft.Json.Converters;
 
 namespace CES.CoreApi.Logging.Models
 {
-    [DataContract]
     public class PerformanceLogDataContainer : IDataContainer
     {
         #region Core
@@ -36,7 +35,6 @@ namespace CES.CoreApi.Logging.Models
         /// <summary>
         /// Returns time when method was executed
         /// </summary>
-        [DataMember(Name = "timestamp")]
         public DateTime StartTime
         {
             get;
@@ -46,8 +44,6 @@ namespace CES.CoreApi.Logging.Models
         /// <summary>
         /// Returns elapsed time in milliseconds
         /// </summary>
-        [DataMember]
-        [DefaultValue(-1)]
         public long ElapsedMilliseconds
         {
             get; 
@@ -57,7 +53,6 @@ namespace CES.CoreApi.Logging.Models
         /// <summary>
         /// Gets or sets thred identifier
         /// </summary>
-        [DataMember]
         public int ThreadId
         {
             get;
@@ -67,7 +62,6 @@ namespace CES.CoreApi.Logging.Models
         /// <summary>
         /// Gets or sets executed method name
         /// </summary>
-        [DataMember]
         public string MethodName
         {
             get; 
@@ -77,7 +71,6 @@ namespace CES.CoreApi.Logging.Models
         /// <summary>
         /// Gets or sets generic argument list
         /// </summary>
-        [DataMember]
         public Type[] GenericArguments
         {
             get; 
@@ -87,7 +80,6 @@ namespace CES.CoreApi.Logging.Models
         /// <summary>
         /// Gets or sets list of method parameters
         /// </summary>
-        [DataMember]
         public IEnumerable Arguments
         {
             get; 
@@ -97,7 +89,6 @@ namespace CES.CoreApi.Logging.Models
         /// <summary>
         /// Gets or sets method return value
         /// </summary>
-        [DataMember]
         public object ReturnValue
         {
             get; 
@@ -107,7 +98,6 @@ namespace CES.CoreApi.Logging.Models
         /// <summary>
         /// Gets or sets application context information
         /// </summary>
-        [DataMember]
         public dynamic ApplicationContext
         {
             get;
@@ -130,7 +120,6 @@ namespace CES.CoreApi.Logging.Models
         /// <summary>
         /// Gets log type
         /// </summary>
-        [DataMember]
         [JsonConverter(typeof(StringEnumConverter))]
         public LogType LogType
         {

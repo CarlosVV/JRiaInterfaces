@@ -13,7 +13,7 @@ namespace CES.CoreApi.Logging.Formatters
         /// <returns></returns>
         public string Format(object value)
         {
-            return value == null ? string.Empty : value.ToString();
+            return value?.ToString() ?? string.Empty;
         }
 
         #endregion

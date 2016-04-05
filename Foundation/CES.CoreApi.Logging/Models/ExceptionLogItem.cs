@@ -3,41 +3,39 @@ using System.Runtime.Serialization;
 
 namespace CES.CoreApi.Logging.Models
 {
-    [DataContract]
-    public class ExceptionLogItem
-    {
-        #region Core 
-        
-        /// <summary>
-        /// Initializes ExceptionLogItem instance
-        /// </summary>
-        public ExceptionLogItem()
-        {
-            ChildItems = new Collection<ExceptionLogItem>();
-        }
+	public class ExceptionLogItem
+	{
+		#region Core 
 
-        #endregion
+		/// <summary>
+		/// Initializes ExceptionLogItem instance
+		/// </summary>
+		public ExceptionLogItem()
+		{
+			ChildItems = new Collection<ExceptionLogItem>();
+		}
 
-        #region Public properties
+		#endregion
 
-        /// <summary>
-        /// Gets item name
-        /// </summary>
-        [DataMember]
-        public string ItemName { get; set; }
+		#region Public properties
 
-        /// <summary>
-        /// Gets item value
-        /// </summary>
-        [DataMember]
-        public string ItemValue { get; set; }
+		/// <summary>
+		/// Gets item name
+		/// </summary>
+		public string ItemName { get; set; }
 
-        /// <summary>
-        /// Gets child item collection
-        /// </summary>
-        [DataMember]
-        public Collection<ExceptionLogItem> ChildItems { get; private set; }
+		/// <summary>
+		/// Gets item value
+		/// </summary>
 
-        #endregion //Public properties
-    }
+		public string ItemValue { get; set; }
+
+		/// <summary>
+		/// Gets child item collection
+		/// </summary>
+
+		public Collection<ExceptionLogItem> ChildItems { get; private set; }
+
+		#endregion //Public properties
+	}
 }
