@@ -18,10 +18,8 @@ namespace CES.CoreApi.Security
     {
         private readonly IApplicationRepository _repository;
         private readonly IServiceCallHeaderParametersProvider _parametersProvider;
-        private readonly IHostApplicationProvider _hostApplicationProvider;
-
-        public ApplicationAuthenticator(IApplicationRepository repository, IServiceCallHeaderParametersProvider parametersProvider,
-            IHostApplicationProvider hostApplicationProvider)
+        
+        public ApplicationAuthenticator(IApplicationRepository repository, IServiceCallHeaderParametersProvider parametersProvider, IHostApplicationProvider hostApplicationProvider)
         {
             if (repository == null)
                 throw new CoreApiException(TechnicalSubSystem.Authentication,
@@ -35,13 +33,9 @@ namespace CES.CoreApi.Security
 
             _repository = repository;
             _parametersProvider = parametersProvider;
-            _hostApplicationProvider = hostApplicationProvider;
         }
 
-        
-        public ReadOnlyCollection<IAuthorizationPolicy> Authenticate(
-            ReadOnlyCollection<IAuthorizationPolicy> authPolicy,
-            Uri listenUri, ref Message message)
+        public ReadOnlyCollection<IAuthorizationPolicy> Authenticate(ReadOnlyCollection<IAuthorizationPolicy> authPolicy, Uri listenUri, ref Message message)
         {
             var headerParameters = _parametersProvider.GetParameters();
             var clientApplication = ValidateClientApplication(headerParameters).Result;
@@ -50,8 +44,7 @@ namespace CES.CoreApi.Security
             return authPolicy;
         }
 
-        private static void SetApplicationPrincipal(Message message, 
-			IApplication clientApplication, ServiceCallHeaderParameters headerParameters)
+        private static void SetApplicationPrincipal(Message message, IApplication clientApplication, ServiceCallHeaderParameters headerParameters)
         {
             var identity = new ClientApplicationIdentity(clientApplication, headerParameters);
             IPrincipal applicationPrincipal = new ApplicationPrincipal(identity);

@@ -11,13 +11,13 @@ using CES.CoreApi.Security.Interfaces;
 
 namespace CES.CoreApi.Security
 {
-    public class AuthorizationAdministrator : IAuthorizationAdministrator
+    public class ApplicationAuthorization: IAuthorizationAdministrator
     {
         private readonly IServiceCallHeaderParametersProvider _parametersProvider;
         private readonly IHostApplicationProvider _hostApplicationProvider;
         private readonly IIdentityManager _identityManager;
 
-        public AuthorizationAdministrator(
+        public ApplicationAuthorization(
             IServiceCallHeaderParametersProvider parametersProvider, IHostApplicationProvider hostApplicationProvider, IIdentityManager identityManager)
         {            
             if (parametersProvider == null)

@@ -44,7 +44,7 @@
   <ItemGroup>
     <Compile Include="Implementation\ApplicationAuthenticator.cs" />
     <Compile Include="Implementation\AuthenticationManager.cs" />
-    <Compile Include="Implementation\AuthorizationAdministrator.cs" />
+    <Compile Include="Implementation\ApplicationAuthorization.cs" />
     <Compile Include="Implementation\AuthorizationManager.cs" />
     <Compile Include="Interfaces\IApplicationAuthenticator.cs" />
     <Compile Include="Interfaces\IAuthenticationManager.cs" />
