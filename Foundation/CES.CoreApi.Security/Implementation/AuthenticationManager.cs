@@ -5,57 +5,29 @@ using System.ServiceModel;
 using System.ServiceModel.Channels;
 using CES.CoreApi.Common.Enumerations;
 using CES.CoreApi.Common.Exceptions;
-using CES.CoreApi.Logging.Interfaces;
 using CES.CoreApi.Security.Interfaces;
 
 namespace CES.CoreApi.Security
 {
-    public class AuthenticationManager : ServiceAuthenticationManager, IAuthenticationManager
-    {
-        private readonly IApplicationAuthenticator _authenticator;
-        private readonly IExceptionLogMonitor _exceptionMonitor;
+	public class AuthenticationManager : ServiceAuthenticationManager, IAuthenticationManager
+	{
+		private readonly IApplicationAuthenticator _authenticator;
 
-        public AuthenticationManager(IApplicationAuthenticator authenticator, IExceptionLogMonitor exceptionMonitor)
-        {
-            if (authenticator == null)
-                throw new CoreApiException(TechnicalSubSystem.Authentication,
-                    SubSystemError.GeneralRequiredParameterIsUndefined, "authenticator");
-            if (exceptionMonitor == null)
-                throw new CoreApiException(TechnicalSubSystem.Authentication,
-                    SubSystemError.GeneralRequiredParameterIsUndefined, "exceptionMonitor");
-            _authenticator = authenticator;
-            _exceptionMonitor = exceptionMonitor;
-        }
-		
-        /// <summary>
-        /// Authenticates all incoming calls
-        /// </summary>
-        /// <param name="authPolicy"></param>
-        /// <param name="listenUri"></param>
-        /// <param name="message">Incoming message</param>
-        /// <returns></returns>
-        public override ReadOnlyCollection<IAuthorizationPolicy> Authenticate(
-            ReadOnlyCollection<IAuthorizationPolicy> authPolicy, Uri listenUri, ref Message message)
-        {
-            //Any exception happened in WCF authentication-authorization chain
-            //converted to "The caller was not authenticated by the service."
-            //So we are loosing details and need to catch exception here also
-            try
-            {
-                //If this is MEX contract call
-                if (OperationContext.Current.EndpointDispatcher.IsSystemEndpoint)
-                    return authPolicy;
+		public AuthenticationManager(IApplicationAuthenticator authenticator)
+		{
+			if (authenticator == null)
+				throw new CoreApiException(TechnicalSubSystem.Authentication,
+					SubSystemError.GeneralRequiredParameterIsUndefined, "authenticator");
 
-                //return OperationContext.Current.ServiceSecurityContext.IsAnonymous
-                //    ? _authenticator.Authenticate(authPolicy, listenUri, ref message)
-                //    : authPolicy;
-                return _authenticator.Authenticate(authPolicy, listenUri, ref message);
-            }
-            catch (Exception ex)
-            {
-                _exceptionMonitor.Publish(ex);
-                throw;
-            }
-        }
-    }
+			_authenticator = authenticator;
+		}
+
+		public override ReadOnlyCollection<IAuthorizationPolicy> Authenticate(ReadOnlyCollection<IAuthorizationPolicy> authPolicy, Uri listenUri, ref Message message)
+		{
+			if (OperationContext.Current.EndpointDispatcher.IsSystemEndpoint)
+				return authPolicy;
+
+			return _authenticator.Authenticate(authPolicy, listenUri, ref message);
+		}
+	}
 }

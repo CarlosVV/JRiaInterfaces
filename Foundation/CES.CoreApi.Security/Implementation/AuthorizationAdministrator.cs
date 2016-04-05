@@ -7,7 +7,6 @@ using CES.CoreApi.Common.Exceptions;
 using CES.CoreApi.Common.Interfaces;
 using CES.CoreApi.Common.Models;
 using CES.CoreApi.Foundation.Contract.Interfaces;
-using CES.CoreApi.Logging.Models;
 using CES.CoreApi.Security.Interfaces;
 
 namespace CES.CoreApi.Security
@@ -50,14 +49,7 @@ namespace CES.CoreApi.Security
 			
             var headerParameters = _parametersProvider.GetParameters();
 			var hostApplication = _hostApplicationProvider.GetApplication().Result;
-
-            var auditParameters = new SecurityAuditParameters
-            {
-                ClientApplicationId = clientApplicationId,
-                Operation = headerParameters.OperationName,
-                ServiceApplicationId = hostApplication.Id
-            };
-            
+			            
             ValidateClientApplicationAuthentication(clientApplicationPrincipal, clientApplicationId);
             ValidateHostApplication(hostApplication);
 			ValidateHostApplicationOperation(hostApplication, headerParameters.OperationName);
