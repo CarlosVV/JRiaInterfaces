@@ -1,13 +1,11 @@
 ﻿using System.Configuration;
 using AutoMapper;
 using AutoMapper.Mappers;
-//using CES.CoreApi.Caching.Providers;
 using CES.CoreApi.Common.Interfaces;
 using CES.CoreApi.Common.Managers;
 using CES.CoreApi.Common.Providers;
 using CES.CoreApi.Common.Proxies;
 using CES.CoreApi.Foundation.Contract.Interfaces;
-using CES.CoreApi.Foundation.Data;
 using CES.CoreApi.Foundation.Data.Interfaces;
 using CES.CoreApi.Foundation.Data.Providers;
 using CES.CoreApi.Foundation.Providers;
@@ -36,6 +34,7 @@ using IConfigurationProvider = CES.CoreApi.Foundation.Contract.Interfaces.IConfi
 using CES.CoreApi.Caching.Providers;
 using CES.CoreApi.Security.Interfaces;
 using CES.CoreApi.Security;
+using CES.CoreApi.Data.Repositories;
 
 namespace CES.CoreApi.GeoLocation.Service.Configuration
 {

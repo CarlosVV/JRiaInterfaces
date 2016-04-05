@@ -14,7 +14,7 @@ using CES.CoreApi.Foundation.Data.Interfaces;
 using CES.CoreApi.Foundation.Data.Models;
 using CES.CoreApi.Foundation.Data.Utility;
 
-namespace CES.CoreApi.Foundation.Data
+namespace CES.CoreApi.Data.Repositories
 {
 	public class ApplicationRepository : BaseGenericRepository, IApplicationRepository
 	{
