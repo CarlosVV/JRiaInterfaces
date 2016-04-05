@@ -7,46 +7,22 @@ using CES.CoreApi.Logging.Interfaces;
 
 namespace CES.CoreApi.Foundation.Security
 {
-    public class AuthorizationManager : ServiceAuthorizationManager, IAuthorizationManager 
-    {
-        #region Core
+	public class AuthorizationManager : ServiceAuthorizationManager, IAuthorizationManager
+	{
+		private readonly IAuthorizationAdministrator _authorizationAdministrator;
 
-        private readonly IAuthorizationAdministrator _authorizationAdministrator;
-        private readonly IExceptionLogMonitor _exceptionMonitor;
+		public AuthorizationManager(IAuthorizationAdministrator authorizationAdministrator)
+		{
+			if (authorizationAdministrator == null)
+				throw new CoreApiException(TechnicalSubSystem.Authorization,
+				   SubSystemError.GeneralRequiredParameterIsUndefined, "authorizationAdministrator");
 
-        public AuthorizationManager(IAuthorizationAdministrator authorizationAdministrator, IExceptionLogMonitor exceptionMonitor)
-        {
-            if (authorizationAdministrator == null)
-                throw new CoreApiException(TechnicalSubSystem.Authorization,
-                   SubSystemError.GeneralRequiredParameterIsUndefined, "authorizationAdministrator");
-            if (exceptionMonitor == null)
-                throw new CoreApiException(TechnicalSubSystem.Authorization,
-                  SubSystemError.GeneralRequiredParameterIsUndefined, "exceptionMonitor");
-            _authorizationAdministrator = authorizationAdministrator;
-            _exceptionMonitor = exceptionMonitor;
-        }
+			_authorizationAdministrator = authorizationAdministrator;
+		}
 
-        #endregion
-
-        #region Public methods
-
-        public override bool CheckAccess(OperationContext operationContext)
-        {
-            //Any exception happened in WCF authentication-authorization chain
-            //converted to "The caller was not authenticated by the service."
-            //So we are loosing details and need to catch exception here also
-            try
-            {
-                return operationContext.EndpointDispatcher.IsSystemEndpoint ||
-                   _authorizationAdministrator.ValidateAccess(operationContext);
-            }
-            catch (Exception ex)
-            {
-                _exceptionMonitor.Publish(ex);
-                throw;
-            }
-        }
-
-        #endregion
-    }
+		public override bool CheckAccess(OperationContext operationContext)
+		{
+			return operationContext.EndpointDispatcher.IsSystemEndpoint || _authorizationAdministrator.ValidateAccess(operationContext);
+		}
+	}
 }

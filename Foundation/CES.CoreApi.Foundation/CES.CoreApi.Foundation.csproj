@@ -89,7 +89,6 @@
     <Compile Include="Providers\RequestHeadersProvider.cs" />
     <Compile Include="Tools\ServiceHelper.cs" />
     <Compile Include="Validation\ContractValidation.cs" />
-    <Compile Include="Validation\ApplicationValidator.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />

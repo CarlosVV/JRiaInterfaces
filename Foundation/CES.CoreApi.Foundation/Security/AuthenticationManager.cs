@@ -12,8 +12,6 @@ namespace CES.CoreApi.Foundation.Security
 {
     public class AuthenticationManager : ServiceAuthenticationManager, IAuthenticationManager
     {
-        #region Core
-
         private readonly IApplicationAuthenticator _authenticator;
         private readonly IExceptionLogMonitor _exceptionMonitor;
 
@@ -28,12 +26,7 @@ namespace CES.CoreApi.Foundation.Security
             _authenticator = authenticator;
             _exceptionMonitor = exceptionMonitor;
         }
-
-
-        #endregion
-
-        #region Public Methods
-
+		
         /// <summary>
         /// Authenticates all incoming calls
         /// </summary>
@@ -64,7 +57,5 @@ namespace CES.CoreApi.Foundation.Security
                 throw;
             }
         }
-
-        #endregion
     }
 }

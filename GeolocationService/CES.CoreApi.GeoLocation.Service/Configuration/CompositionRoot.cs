@@ -14,7 +14,6 @@ using CES.CoreApi.Foundation.Providers;
 using CES.CoreApi.Foundation.Security;
 using CES.CoreApi.Foundation.Service;
 using CES.CoreApi.Foundation.Tools;
-using CES.CoreApi.Foundation.Validation;
 using CES.CoreApi.GeoLocation.Service.Business.Contract.Interfaces;
 using CES.CoreApi.GeoLocation.Service.Business.Logic.Builders;
 using CES.CoreApi.GeoLocation.Service.Business.Logic.Factories;
@@ -36,6 +35,7 @@ using CES.CoreApi.SimpleInjectorProxy;
 using SimpleInjector;
 using IConfigurationProvider = CES.CoreApi.Foundation.Contract.Interfaces.IConfigurationProvider;
 using CES.CoreApi.Caching.Providers;
+using CES.CoreApi.Common.Models;
 
 namespace CES.CoreApi.GeoLocation.Service.Configuration
 {
@@ -66,7 +66,7 @@ namespace CES.CoreApi.GeoLocation.Service.Configuration
             container.RegisterSingle<IAuthenticationManager, AuthenticationManager>();
             container.RegisterSingle<IApplicationAuthenticator, ApplicationAuthenticator>();
             container.RegisterSingle<IApplicationRepository, ApplicationRepository>(); 
-            container.RegisterSingle<IApplicationValidator, ApplicationValidator>();
+            
             container.RegisterSingle<IRequestHeadersProvider, RequestHeadersProvider>();
             container.RegisterSingle<IServiceCallHeaderParametersProvider, ServiceCallHeaderParametersProvider>();
             container.RegisterSingle<IAuthorizationManager, AuthorizationManager>();
@@ -91,7 +91,11 @@ namespace CES.CoreApi.GeoLocation.Service.Configuration
             container.InterceptWith<PerformanceInterceptor>(type => type == typeof(IMapServiceRequestProcessor));
             container.InterceptWith<PerformanceInterceptor>(type => type == typeof(IClientSideSupportServiceProcessor));
             container.InterceptWith<PerformanceInterceptor>(type => type == typeof(IApplicationRepository));
-        }
+
+			container.InterceptWith<SecurityLogMonitorInterceptor>(type => type == typeof(IAuthorizationAdministrator));
+			
+
+		}
 
         private static void RegisterAutomapper(Container container)
         {
@@ -110,8 +114,9 @@ namespace CES.CoreApi.GeoLocation.Service.Configuration
             // and both the interceptor are both singletons, the returned
             // (proxy) instance will be a singleton as well.
             container.RegisterSingle<PerformanceInterceptor>();
+			container.RegisterSingle<SecurityLogMonitorInterceptor>();
 
-            container.RegisterSingle<IRequestValidator, RequestValidator>();
+			container.RegisterSingle<IRequestValidator, RequestValidator>();
             container.RegisterSingle<IMappingHelper, MappingHelper>();
         }
 

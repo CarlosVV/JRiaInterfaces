@@ -42,37 +42,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Attributes\ConnectionNameAttribute.cs" />
-    <Compile Include="Attributes\ErrorMessageAttribute.cs" />
-    <Compile Include="Attributes\SubSystemErrorNumberAttribute.cs" />
-    <Compile Include="Attributes\SystemErrorNumberAttribute.cs" />
-    <Compile Include="Enumerations\SubSystemError.cs" />
-    <Compile Include="Interfaces\IApplication.cs" />
-    <Compile Include="Interfaces\IApplicationAuthenticator.cs" />
-    <Compile Include="Interfaces\IApplicationRepository.cs" />
-    <Compile Include="Interfaces\IApplicationValidator.cs" />
-    <Compile Include="Interfaces\IAuthenticationManager.cs" />
-    <Compile Include="Interfaces\IAuthorizationAdministrator.cs" />
-    <Compile Include="Interfaces\IAuthorizationManager.cs" />
-    <Compile Include="Interfaces\IHostApplicationProvider.cs" />
-    <Compile Include="Interfaces\IIdentityManager.cs" />
-    <Compile Include="Interfaces\IServiceCallHeaderParametersProvider.cs" />
-    <Compile Include="Models\Application.cs" />
-    <Compile Include="Models\ApplicationConfiguration.cs" />
-    <Compile Include="Models\ApplicationPrincipal.cs" />
-    <Compile Include="Models\ApplicationServiceOperation.cs" />
-    <Compile Include="Models\BehaviorConfiguration.cs" />
-    <Compile Include="Models\BindingConfiguration.cs" />
-    <Compile Include="Models\ClientApplicationIdentity.cs" />
-    <Compile Include="Models\ReaderQuotasConfiguration.cs" />
-    <Compile Include="Models\ReliableSessionConfiguration.cs" />
-    <Compile Include="Models\ServiceCallHeaderParameters.cs" />
-    <Compile Include="Models\ServiceOperation.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Security\ApplicationAuthenticator.cs" />
-    <Compile Include="Security\AuthenticationManager.cs" />
-    <Compile Include="Security\AuthorizationAdministrator.cs" />
-    <Compile Include="Security\AuthorizationManager.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\CES.CoreApi.Logging\CES.CoreApi.Logging.csproj">

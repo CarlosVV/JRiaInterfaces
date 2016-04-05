@@ -8,8 +8,6 @@ namespace CES.CoreApi.Logging.Monitors
 {
     public class SecurityLogMonitor: BaseLogMonitor, ISecurityLogMonitor
     {
-        #region Core
-
         public SecurityLogMonitor(SecurityLogDataContainer dataContainer, ILoggerProxy logProxy, ILogConfigurationProvider configuration) 
             : base(logProxy, configuration)
         {
@@ -17,18 +15,10 @@ namespace CES.CoreApi.Logging.Monitors
             DataContainer = dataContainer;
         }
 
-        #endregion
-
-        #region Properties
-
         /// <summary>
         /// Gets or sets data container instance
         /// </summary>
         public SecurityLogDataContainer DataContainer { get; private set; }
-        
-        #endregion //Properties
-
-        #region Public methods
 
         public void LogSuccess(SecurityAuditParameters parameters)
         {
@@ -54,7 +44,5 @@ namespace CES.CoreApi.Logging.Monitors
 
             Publish(DataContainer);
         }
-
-        #endregion
     }
 }
