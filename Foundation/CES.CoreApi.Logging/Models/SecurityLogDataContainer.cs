@@ -12,8 +12,6 @@ namespace CES.CoreApi.Logging.Models
     [DataContract]
     public class SecurityLogDataContainer : IDataContainer
     {
-        #region Core
-
         private readonly IJsonDataContainerFormatter _jsonDataContainerFormatter;
 
         public SecurityLogDataContainer(IJsonDataContainerFormatter jsonDataContainerFormatter, ICurrentDateTimeProvider currentDateTimeProvider)
@@ -25,11 +23,7 @@ namespace CES.CoreApi.Logging.Models
             AuditTime = currentDateTimeProvider.GetCurrentUtc();
             MessageId = Guid.NewGuid();
         }
-
-        #endregion
-
-        #region Public properties
-
+		
         [DataMember]
         public int ServiceApplicationId { get; set; }
         [DataMember]
@@ -62,16 +56,10 @@ namespace CES.CoreApi.Logging.Models
             get;
             set;
         }
-        
-        #endregion
-
-        #region Public methods
 
         public override string ToString()
         {
             return _jsonDataContainerFormatter.Format(this);
         }
-
-        #endregion
     }
 }
