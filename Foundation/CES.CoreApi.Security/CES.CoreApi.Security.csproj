@@ -44,11 +44,11 @@
   <ItemGroup>
     <Compile Include="Implementation\ApplicationAuthenticator.cs" />
     <Compile Include="Implementation\AuthenticationManager.cs" />
-    <Compile Include="Implementation\ApplicationAuthorization.cs" />
+    <Compile Include="Implementation\ApplicationAuthorizator.cs" />
     <Compile Include="Implementation\AuthorizationManager.cs" />
     <Compile Include="Interfaces\IApplicationAuthenticator.cs" />
     <Compile Include="Interfaces\IAuthenticationManager.cs" />
-    <Compile Include="Interfaces\IAuthorizationAdministrator.cs" />
+    <Compile Include="Interfaces\IApplicationAuthorizator.cs" />
     <Compile Include="Interfaces\IAuthorizationManager.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

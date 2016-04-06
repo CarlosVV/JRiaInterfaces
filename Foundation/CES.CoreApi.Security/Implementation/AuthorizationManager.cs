@@ -8,9 +8,9 @@ namespace CES.CoreApi.Security
 {
 	public class AuthorizationManager : ServiceAuthorizationManager, IAuthorizationManager
 	{
-		private readonly IAuthorizationAdministrator _authorizationAdministrator;
+		private readonly IApplicationAuthorizator _authorizationAdministrator;
 
-		public AuthorizationManager(IAuthorizationAdministrator authorizationAdministrator)
+		public AuthorizationManager(IApplicationAuthorizator authorizationAdministrator)
 		{
 			if (authorizationAdministrator == null)
 				throw new CoreApiException(TechnicalSubSystem.Authorization,

@@ -11,13 +11,13 @@ using CES.CoreApi.Security.Interfaces;
 
 namespace CES.CoreApi.Security
 {
-    public class ApplicationAuthorization: IAuthorizationAdministrator
+    public class ApplicationAuthorizator: IApplicationAuthorizator
     {
         private readonly IServiceCallHeaderParametersProvider _parametersProvider;
         private readonly IHostApplicationProvider _hostApplicationProvider;
         private readonly IIdentityManager _identityManager;
 
-        public ApplicationAuthorization(
+        public ApplicationAuthorizator(
             IServiceCallHeaderParametersProvider parametersProvider, IHostApplicationProvider hostApplicationProvider, IIdentityManager identityManager)
         {            
             if (parametersProvider == null)
@@ -43,16 +43,18 @@ namespace CES.CoreApi.Security
                 ? clientApplicationPrincipal.Identity as ClientApplicationIdentity
                 : null;
 
-            var clientApplicationId = clientApplicationIdentity != null
-                ? clientApplicationIdentity.ApplicationId
-                : -1;
-			
-            var headerParameters = _parametersProvider.GetParameters();
+			var clientApplicationId = clientApplicationIdentity != null
+				? clientApplicationIdentity.ApplicationId
+				: -1;
+
+			var headerParameters = _parametersProvider.GetParameters();
 			var hostApplication = _hostApplicationProvider.GetApplication().Result;
 			            
             ValidateClientApplicationAuthentication(clientApplicationPrincipal, clientApplicationId);
+
             ValidateHostApplication(hostApplication);
 			ValidateHostApplicationOperation(hostApplication, headerParameters.OperationName);
+
 			ValidateOperationAccess(hostApplication, headerParameters.OperationName, clientApplicationId);
 
             _identityManager.SetCurrentPrincipal(clientApplicationPrincipal);

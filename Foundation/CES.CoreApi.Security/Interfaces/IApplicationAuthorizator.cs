@@ -2,7 +2,7 @@
 
 namespace CES.CoreApi.Security.Interfaces
 {
-    public interface IAuthorizationAdministrator
+    public interface IApplicationAuthorizator
     {
         bool ValidateAccess(OperationContext operationContext);
     }
