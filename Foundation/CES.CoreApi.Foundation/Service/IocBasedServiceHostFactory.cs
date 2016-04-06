@@ -5,6 +5,7 @@ using CES.CoreApi.Foundation.Contract.Interfaces;
 using CES.CoreApi.Foundation.Providers;
 using SimpleInjector;
 using SimpleInjector.Integration.Wcf;
+using CES.CoreApi.Security.Interfaces;
 
 namespace CES.CoreApi.Foundation.Service
 {

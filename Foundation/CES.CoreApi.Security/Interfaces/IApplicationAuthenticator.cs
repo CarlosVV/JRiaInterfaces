@@ -5,7 +5,7 @@ using System.ServiceModel.Channels;
 
 namespace CES.CoreApi.Security.Interfaces
 {
-    public interface IAuthenticationManager
+    public interface IApplicationAuthenticator
     {
         ReadOnlyCollection<IAuthorizationPolicy> Authenticate(ReadOnlyCollection<IAuthorizationPolicy> authPolicy, Uri listenUri, ref Message message);
     }
