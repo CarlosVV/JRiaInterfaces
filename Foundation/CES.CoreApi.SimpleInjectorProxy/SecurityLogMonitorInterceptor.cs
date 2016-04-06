@@ -23,20 +23,7 @@ namespace CES.CoreApi.SimpleInjectorProxy
 
 		public void Intercept(IInvocation invocation)
 		{
-			var securityLogMonitor = _logMonitorFactory.CreateNew<ISecurityLogMonitor>();
-			securityLogMonitor.DataContainer.ApplicationContext = _identityManager.GetClientApplicationIdentity();
-			//securityLogMonitor.Start(invocation.Method);
-			SecurityAuditParameters a = new SecurityAuditParameters
-			{
-				ClientApplicationId = 111,
-				Operation = "test log",
-				ServiceApplicationId = 500
-			};
-
-			// Calls the decorated instance.
 			invocation.Proceed();
-			securityLogMonitor.LogSuccess(a);
-			
 		}
 	}
 }
