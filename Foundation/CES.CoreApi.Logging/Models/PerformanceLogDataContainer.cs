@@ -11,8 +11,6 @@ namespace CES.CoreApi.Logging.Models
 {
 	public class PerformanceLogDataContainer : IDataContainer
 	{
-		#region Core
-
 		private readonly IJsonDataContainerFormatter _formatter;
 
 		public PerformanceLogDataContainer(IJsonDataContainerFormatter formatter, ICurrentDateTimeProvider currentDateTimeProvider)
@@ -26,10 +24,6 @@ namespace CES.CoreApi.Logging.Models
 			StartTime = currentDateTimeProvider.GetCurrentUtc();
 			ThreadId = Thread.CurrentThread.ManagedThreadId;
 		}
-
-		#endregion
-
-		#region Public properties
 
 		public DateTime StartTime
 		{
@@ -79,21 +73,12 @@ namespace CES.CoreApi.Logging.Models
 			set;
 		}
 
-		#endregion //Public properties
-
-		#region Overriding
-
 		public override string ToString()
 		{
 			return _formatter.Format(this);
 		}
 
 		[JsonConverter(typeof(StringEnumConverter))]
-		public LogType LogType
-		{
-			get { return LogType.PerformanceLog; }
-		}
-
-		#endregion //Overriding
+		public LogType LogType => LogType.PerformanceLog;
 	}
 }

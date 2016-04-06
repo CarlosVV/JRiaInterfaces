@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.ObjectModel;
-using System.ComponentModel;
 using System.Linq;
 using System.Threading;
 using CES.CoreApi.Common.Enumerations;
@@ -14,8 +13,6 @@ namespace CES.CoreApi.Logging.Models
 {
 	public class ExceptionLogDataContainer : IDataContainer
 	{
-		#region Core
-
 		private readonly IJsonDataContainerFormatter _formatter;
 
 		/// <summary>
@@ -34,65 +31,21 @@ namespace CES.CoreApi.Logging.Models
 			ThreadId = Thread.CurrentThread.ManagedThreadId;
 		}
 
-		#endregion //Core
-
-		#region Public properties
-
-		/// <summary>
-		/// Gets or sets log record creation time
-		/// </summary>
+		[JsonProperty(PropertyName = "Timestamp")]
 		public DateTime Timestamp { get; private set; }
-
-		/// <summary>
-		/// Gets list of log item groups
-		/// </summary>
 
 		public Collection<ExceptionLogItemGroup> Items { get; private set; }
 
-		/// <summary>
-		/// Gets an exception instance
-		/// </summary>
-
 		public CoreApiException Exception { get; private set; }
-
-		/// <summary>
-		/// Gets or sets thred identifier
-		/// </summary>
 
 		public int ThreadId { get; private set; }
 
-		/// <summary>
-		/// Gets an exception message
-		/// </summary>
+		public string Message => Exception == null ? string.Empty : GetExceptionMessage();
 
-		[DefaultValue("")]
-		public string Message
-		{
-			get { return Exception == null ? string.Empty : GetExceptionMessage(); }
-		}
-
-
-		[DefaultValue("")]
 		public string CustomMessage { get; set; }
 
-		/// <summary>
-		/// Gets or sets application context information
-		/// </summary>
+		public dynamic ApplicationContext { get; set; }
 
-		public dynamic ApplicationContext
-		{
-			get;
-			set;
-		}
-
-		#endregion //Public properties
-
-		#region Public methods
-
-		/// <summary>
-		/// Gets existing item group or creates new one
-		/// </summary>
-		/// <param name="groupTitle">Group title</param>
 		public ExceptionLogItemGroup GetGroupByTitle(string groupTitle)
 		{
 			if (string.IsNullOrEmpty(groupTitle))
@@ -116,37 +69,14 @@ namespace CES.CoreApi.Logging.Models
 			Exception = coreApiException;
 		}
 
-		#endregion //Public methods
-
-		#region Overriding
-
-		/// <summary>
-		/// Returns string representation of the log entry
-		/// </summary>
-		/// <returns>String representation of the log entry</returns>
 		public override string ToString()
 		{
 			return _formatter.Format(this);
 		}
 
-		/// <summary>
-		/// Gets log type
-		/// </summary>
-
 		[JsonConverter(typeof(StringEnumConverter))]
-		public LogType LogType
-		{
-			get { return LogType.ExceptionLog; }
-		}
+		public LogType LogType => LogType.ExceptionLog;
 
-		#endregion //Overriding
-
-		#region Private methods
-
-		/// <summary>
-		/// Gets the most inner exception message
-		/// </summary>
-		/// <returns></returns>
 		private string GetExceptionMessage()
 		{
 			var message = Exception.Message;
@@ -160,7 +90,5 @@ namespace CES.CoreApi.Logging.Models
 
 			return message;
 		}
-
-		#endregion //Private methods
 	}
 }

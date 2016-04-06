@@ -9,7 +9,6 @@ namespace CES.CoreApi.Logging.Models
 {
 	public class SecurityLogDataContainer : IDataContainer
 	{
-		
 		private readonly IJsonDataContainerFormatter _jsonDataContainerFormatter;
 
 		public SecurityLogDataContainer(IJsonDataContainerFormatter jsonDataContainerFormatter, ICurrentDateTimeProvider currentDateTimeProvider)
@@ -23,7 +22,7 @@ namespace CES.CoreApi.Logging.Models
 			AuditTime = currentDateTimeProvider.GetCurrentUtc();
 			MessageId = Guid.NewGuid();
 		}
-		
+
 		public int ServiceApplicationId { get; set; }
 
 		public int ClientApplicationId { get; set; }
@@ -33,6 +32,7 @@ namespace CES.CoreApi.Logging.Models
 		[JsonConverter(typeof(StringEnumConverter))]
 		public SecurityAuditResult AuditResult { get; set; }
 
+		[JsonProperty(PropertyName = "Timestamp")]
 		public DateTime AuditTime { get; private set; }
 
 		public string Details { get; set; }
@@ -41,20 +41,9 @@ namespace CES.CoreApi.Logging.Models
 
 
 		[JsonConverter(typeof(StringEnumConverter))]
-		public LogType LogType
-		{
-			get { return LogType.SecurityAudit; }
-		}
+		public LogType LogType => LogType.SecurityAudit;
 
-		/// <summary>
-		/// Gets or sets application context information
-		/// </summary>
-
-		public dynamic ApplicationContext
-		{
-			get;
-			set;
-		}
+		public dynamic ApplicationContext { get; set; }
 
 		public override string ToString()
 		{
