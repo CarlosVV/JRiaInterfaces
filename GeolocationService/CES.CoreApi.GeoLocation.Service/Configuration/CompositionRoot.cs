@@ -91,7 +91,7 @@ namespace CES.CoreApi.GeoLocation.Service.Configuration
             container.InterceptWith<PerformanceInterceptor>(type => type == typeof(IClientSideSupportServiceProcessor));
             container.InterceptWith<PerformanceInterceptor>(type => type == typeof(IApplicationRepository));
 
-			container.InterceptWith<SecurityLogMonitorInterceptor>(type => type == typeof(IApplicationAuthorizator));
+			container.InterceptWith<SecurityLogMonitorInterceptor>(type => type == typeof(IHealthMonitoringProcessor));
 			
 
 		}
