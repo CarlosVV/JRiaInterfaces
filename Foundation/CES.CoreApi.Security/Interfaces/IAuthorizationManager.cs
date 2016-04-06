@@ -1,6 +1,6 @@
 ﻿using System.ServiceModel;
 
-namespace CES.CoreApi.Foundation.Security.Interfaces
+namespace CES.CoreApi.Security.Interfaces
 {
     public interface IAuthorizationManager
     {

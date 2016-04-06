@@ -44,11 +44,6 @@
     <Compile Include="Enumerations\ServiceConfigurationType.cs" />
     <Compile Include="Enumerations\ServiceSecurityMode.cs" />
     <Compile Include="Interfaces\IApplicationRepository.cs" />
-    <Compile Include="Interfaces\IApplicationAuthenticator.cs" />
-    <Compile Include="Interfaces\IApplicationValidator.cs" />
-    <Compile Include="Interfaces\IAuthenticationManager.cs" />
-    <Compile Include="Interfaces\IAuthorizationAdministrator.cs" />
-    <Compile Include="Interfaces\IAuthorizationManager.cs" />
     <Compile Include="Interfaces\IClientSecurityContextProvider.cs" />
     <Compile Include="Interfaces\IConfigurationProvider.cs" />
     <Compile Include="Interfaces\IHostApplicationProvider.cs" />
