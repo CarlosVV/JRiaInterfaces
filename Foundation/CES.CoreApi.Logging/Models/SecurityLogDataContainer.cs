@@ -22,7 +22,7 @@ namespace CES.CoreApi.Logging.Models
 			AuditTime = currentDateTimeProvider.GetCurrentUtc();
 			MessageId = Guid.NewGuid();
 		}
-
+		
 		public int ServiceApplicationId { get; set; }
 
 		public int ClientApplicationId { get; set; }
@@ -42,9 +42,7 @@ namespace CES.CoreApi.Logging.Models
 
 		[JsonConverter(typeof(StringEnumConverter))]
 		public LogType LogType => LogType.SecurityAudit;
-
 		public dynamic ApplicationContext { get; set; }
-
 		public override string ToString()
 		{
 			return _jsonDataContainerFormatter.Format(this);

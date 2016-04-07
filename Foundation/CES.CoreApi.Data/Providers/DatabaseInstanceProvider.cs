@@ -3,12 +3,15 @@ using System.Collections.Generic;
 using System.Data.Common;
 using System.Globalization;
 using System.Linq;
-using CES.CoreApi.Common.Attributes;
-using CES.CoreApi.Common.Enumerations;
-using CES.CoreApi.Common.Tools;
+//using CES.CoreApi.Common.Attributes;
+//using CES.CoreApi.Common.Enumerations;
+//using CES.CoreApi.Common.Tools;
 using CES.CoreApi.Foundation.Data.Interfaces;
 using CES.CoreApi.Foundation.Data.Models;
 using Microsoft.Practices.EnterpriseLibrary.Data;
+using CES.CoreApi.Data.Enumerations;
+using CES.CoreApi.Data.Attributes;
+using CES.CoreApi.Data.Tools;
 
 namespace CES.CoreApi.Foundation.Data.Providers
 {
