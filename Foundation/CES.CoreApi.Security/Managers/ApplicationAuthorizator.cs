@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Linq;
 using System.Security.Principal;
-using System.ServiceModel;
 using CES.CoreApi.Common.Enumerations;
 using CES.CoreApi.Common.Exceptions;
 using CES.CoreApi.Common.Interfaces;
@@ -35,32 +34,25 @@ namespace CES.CoreApi.Security
             _identityManager = identityManager;
         }
 		
-        public bool ValidateAccess(OperationContext operationContext)
+        public IPrincipal ValidateAccess(IPrincipal clientApplicationPrincipal)
         {
-            var clientApplicationPrincipal = operationContext.IncomingMessageProperties["Principal"] as IPrincipal;
-
-            var clientApplicationIdentity = clientApplicationPrincipal != null
-                ? clientApplicationPrincipal.Identity as ClientApplicationIdentity
-                : null;
-
-			var clientApplicationId = clientApplicationIdentity != null
-				? clientApplicationIdentity.ApplicationId
-				: -1;
-
-			var headerParameters = _parametersProvider.GetParameters();
-			var hostApplication = _hostApplicationProvider.GetApplication().Result;
-			            
+			var clientApplicationIdentity = clientApplicationPrincipal?.Identity as ClientApplicationIdentity;
+			var clientApplicationId = clientApplicationIdentity != null ? 
+											clientApplicationIdentity.ApplicationId : -1;
+            
             ValidateClientApplicationAuthentication(clientApplicationPrincipal, clientApplicationId);
 
-            ValidateHostApplication(hostApplication);
+			var hostApplication = _hostApplicationProvider.GetApplication().Result;
+			ValidateHostApplication(hostApplication);
+
+			var headerParameters = _parametersProvider.GetParameters();
 			ValidateHostApplicationOperation(hostApplication, headerParameters.OperationName);
 
 			ValidateOperationAccess(hostApplication, headerParameters.OperationName, clientApplicationId);
 
             _identityManager.SetCurrentPrincipal(clientApplicationPrincipal);
-            operationContext.ServiceSecurityContext.AuthorizationContext.Properties["Principal"] = _identityManager.GetCurrentPrincipal();
-			
-            return true;
+
+			return _identityManager.GetCurrentPrincipal();
         }
         
         private void ValidateClientApplicationAuthentication(IPrincipal clientApplicationPrincipal, int clientApplicationId)

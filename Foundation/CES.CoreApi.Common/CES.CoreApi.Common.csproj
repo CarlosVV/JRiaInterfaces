@@ -84,7 +84,6 @@
     <Compile Include="Interfaces\IIocContainer.cs" />
     <Compile Include="Interfaces\IIocContainerFactory.cs" />
     <Compile Include="Interfaces\ILoggerProxy.cs" />
-    <Compile Include="Managers\IdentityManager.cs" />
     <Compile Include="Models\Application.cs" />
     <Compile Include="Models\ApplicationConfiguration.cs" />
     <Compile Include="Models\ApplicationServiceOperation.cs" />

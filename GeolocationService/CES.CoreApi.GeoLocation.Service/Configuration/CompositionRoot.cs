@@ -2,7 +2,6 @@
 using AutoMapper;
 using AutoMapper.Mappers;
 using CES.CoreApi.Common.Interfaces;
-using CES.CoreApi.Common.Managers;
 using CES.CoreApi.Common.Providers;
 using CES.CoreApi.Common.Proxies;
 using CES.CoreApi.Foundation.Contract.Interfaces;

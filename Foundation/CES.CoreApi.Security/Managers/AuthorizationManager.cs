@@ -3,6 +3,7 @@ using System.ServiceModel;
 using CES.CoreApi.Common.Enumerations;
 using CES.CoreApi.Common.Exceptions;
 using CES.CoreApi.Security.Interfaces;
+using System.Security.Principal;
 
 namespace CES.CoreApi.Security
 {
@@ -21,7 +22,9 @@ namespace CES.CoreApi.Security
 
 		public override bool CheckAccess(OperationContext operationContext)
 		{
-			return operationContext.EndpointDispatcher.IsSystemEndpoint || _authorizationAdministrator.ValidateAccess(operationContext);
+			var principal = operationContext.IncomingMessageProperties["Principal"] as IPrincipal;
+			operationContext.ServiceSecurityContext.AuthorizationContext.Properties["Principal"] = _authorizationAdministrator.ValidateAccess(principal);
+			return operationContext.EndpointDispatcher.IsSystemEndpoint || operationContext.ServiceSecurityContext.AuthorizationContext.Properties["Principal"] != null;
 		}
 	}
 }

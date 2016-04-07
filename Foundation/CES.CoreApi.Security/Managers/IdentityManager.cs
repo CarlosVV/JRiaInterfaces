@@ -4,7 +4,7 @@ using System.Threading;
 using CES.CoreApi.Common.Interfaces;
 using CES.CoreApi.Common.Models;
 
-namespace CES.CoreApi.Common.Managers
+namespace CES.CoreApi.Security
 {
     public class IdentityManager : IIdentityManager
     {

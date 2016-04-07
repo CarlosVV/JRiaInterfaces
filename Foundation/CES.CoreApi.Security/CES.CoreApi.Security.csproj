@@ -42,10 +42,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Implementation\ApplicationAuthenticator.cs" />
-    <Compile Include="Implementation\AuthenticationManager.cs" />
-    <Compile Include="Implementation\ApplicationAuthorizator.cs" />
-    <Compile Include="Implementation\AuthorizationManager.cs" />
+    <Compile Include="Managers\ApplicationAuthenticator.cs" />
+    <Compile Include="Managers\AuthenticationManager.cs" />
+    <Compile Include="Managers\ApplicationAuthorizator.cs" />
+    <Compile Include="Managers\AuthorizationManager.cs" />
+    <Compile Include="Managers\IdentityManager.cs" />
     <Compile Include="Interfaces\IApplicationAuthenticator.cs" />
     <Compile Include="Interfaces\IAuthenticationManager.cs" />
     <Compile Include="Interfaces\IApplicationAuthorizator.cs" />

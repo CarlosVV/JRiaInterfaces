@@ -35,20 +35,13 @@ namespace CES.CoreApi.Security
             _parametersProvider = parametersProvider;
         }
 
-        public ReadOnlyCollection<IAuthorizationPolicy> Authenticate(ReadOnlyCollection<IAuthorizationPolicy> authPolicy, Uri listenUri, ref Message message)
+        public IPrincipal Authenticate()
         {
             var headerParameters = _parametersProvider.GetParameters();
             var clientApplication = ValidateClientApplication(headerParameters).Result;
-            SetApplicationPrincipal(message, clientApplication, headerParameters);
-            
-            return authPolicy;
-        }
 
-        private static void SetApplicationPrincipal(Message message, IApplication clientApplication, ServiceCallHeaderParameters headerParameters)
-        {
-            var identity = new ClientApplicationIdentity(clientApplication, headerParameters);
-            IPrincipal applicationPrincipal = new ApplicationPrincipal(identity);
-            message.Properties["Principal"] = applicationPrincipal;
+			var identity = new ClientApplicationIdentity(clientApplication, headerParameters);
+			return new ApplicationPrincipal(identity);
         }
 		
         private async Task<Application> ValidateClientApplication(ServiceCallHeaderParameters headerParameters)
