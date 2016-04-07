@@ -1,7 +1,8 @@
 ﻿using System;
 using System.Data;
 using System.Globalization;
-using CES.CoreApi.Common.Tools;
+//using CES.CoreApi.Common.Tools;
+using CES.CoreApi.Data.Tools;
 
 namespace CES.CoreApi.Foundation.Data.Utility
 {

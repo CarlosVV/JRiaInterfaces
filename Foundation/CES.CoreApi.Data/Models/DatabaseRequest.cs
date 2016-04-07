@@ -3,9 +3,10 @@ using System.Collections.Generic;
 using System.Data;
 using System.Data.Common;
 using System.Data.SqlClient;
-using CES.CoreApi.Common.Enumerations;
+//using CES.CoreApi.Common.Enumerations;
+using CES.CoreApi.Data.Enumerations;
 
-namespace CES.CoreApi.Foundation.Data.Models
+namespace CES.CoreApi.Data.Models
 {
     public class DatabaseRequest<TEntity>
     {

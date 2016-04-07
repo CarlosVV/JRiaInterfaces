@@ -6,14 +6,15 @@ using System.Configuration;
 using System.Data;
 using System.Data.Common;
 using System.Data.SqlClient;
-using CES.CoreApi.Common.Enumerations;
-using CES.CoreApi.Common.Interfaces;
+//using CES.CoreApi.Common.Enumerations;
+//using CES.CoreApi.Common.Interfaces;
 using CES.CoreApi.Foundation.Data.Interfaces;
-using CES.CoreApi.Foundation.Data.Models;
+using CES.CoreApi.Data.Models;
 //using CES.CoreApi.Foundation.Data.Utility; 
 //using CES.CoreApi.Logging.Interfaces;
 using Microsoft.Practices.EnterpriseLibrary.Common.Configuration;
 using Microsoft.Practices.EnterpriseLibrary.Data;
+using CES.CoreApi.Data.Enumerations;
 
 namespace CES.CoreApi.Foundation.Data.Base
 {
@@ -26,7 +27,7 @@ namespace CES.CoreApi.Foundation.Data.Base
         private static readonly int UserNameId;
        // private readonly ICacheProvider _cacheProvider;
         //private readonly ILogMonitorFactory _monitorFactory;
-        private readonly IIdentityManager _identityManager;
+       // private readonly IIdentityManager _identityManager;
         private readonly IDatabaseInstanceProvider _instanceProvider;
 
         static BaseGenericRepository()
@@ -39,17 +40,17 @@ namespace CES.CoreApi.Foundation.Data.Base
             UserNameId = int.Parse(ConfigurationManager.AppSettings["UserNameID"]);
         }
 
-        protected BaseGenericRepository(IIdentityManager identityManager,
+        protected BaseGenericRepository(
             IDatabaseInstanceProvider instanceProvider)
         {
            // if (cacheProvider == null) throw new ArgumentNullException("cacheProvider");
            // if (monitorFactory == null) throw new ArgumentNullException("monitorFactory");
-            if (identityManager == null) throw new ArgumentNullException("identityManager");
+           // if (identityManager == null) throw new ArgumentNullException("identityManager");
             if (instanceProvider == null) throw new ArgumentNullException("instanceProvider");
             
          //   _cacheProvider = cacheProvider;
           //  _monitorFactory = monitorFactory;
-            _identityManager = identityManager;
+           // _identityManager = identityManager;
             _instanceProvider = instanceProvider;
         }
 

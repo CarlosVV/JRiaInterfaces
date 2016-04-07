@@ -1,8 +1,9 @@
-﻿using System.Collections.Generic;
+﻿using CES.CoreApi.Data.Tools;
+using System.Collections.Generic;
 using System.Data;
 using System.Data.Common;
 using System.Data.SqlClient;
-using CES.CoreApi.Common.Tools;
+//using CES.CoreApi.Common.Tools;
 
 namespace CES.CoreApi.Foundation.Data.Utility
 {

@@ -1,4 +1,5 @@
-﻿using CES.CoreApi.Common.Enumerations;
+﻿//ing CES.CoreApi.Common.Enumerations;
+using CES.CoreApi.Data.Enumerations;
 using Microsoft.Practices.EnterpriseLibrary.Data;
 
 namespace CES.CoreApi.Foundation.Data.Interfaces
