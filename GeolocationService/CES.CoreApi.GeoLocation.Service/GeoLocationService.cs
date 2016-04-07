@@ -173,7 +173,7 @@ namespace CES.CoreApi.GeoLocation.Service
 
         public virtual PingResponse Ping()
         {
-            var responseModel = _healthMonitoringProcessor.Ping();
+            var responseModel = _healthMonitoringProcessor.Ping() as PingResponseModel;
             return _mapper.ConvertToResponse<PingResponseModel, PingResponse>(responseModel);
         }
 

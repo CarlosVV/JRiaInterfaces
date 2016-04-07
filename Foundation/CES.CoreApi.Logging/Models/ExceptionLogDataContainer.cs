@@ -1,9 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.ComponentModel;
 using System.Linq;
-using System.Runtime.Serialization;
 using System.Threading;
 using CES.CoreApi.Common.Enumerations;
 using CES.CoreApi.Common.Exceptions;
@@ -14,155 +11,84 @@ using Newtonsoft.Json.Converters;
 
 namespace CES.CoreApi.Logging.Models
 {
-    [DataContract]
-    public class ExceptionLogDataContainer : IDataContainer
-    {
-        #region Core
+	public class ExceptionLogDataContainer : IDataContainer
+	{
+		private readonly IJsonDataContainerFormatter _formatter;
 
-        private readonly IJsonDataContainerFormatter _formatter;
+		/// <summary>
+		/// Initializes ExceptionLogDataContainer instance
+		/// </summary>
+		public ExceptionLogDataContainer(IJsonDataContainerFormatter formatter, ICurrentDateTimeProvider currentDateTimeProvider)
+		{
+			if (formatter == null)
+				throw new ArgumentNullException("formatter");
+			if (currentDateTimeProvider == null)
+				throw new ArgumentNullException("currentDateTimeProvider");
 
-        /// <summary>
-        /// Initializes ExceptionLogDataContainer instance
-        /// </summary>
-        public ExceptionLogDataContainer(IJsonDataContainerFormatter formatter, ICurrentDateTimeProvider currentDateTimeProvider)
-        {
-            if (formatter == null) throw new ArgumentNullException("formatter");
-            if (currentDateTimeProvider == null) throw new ArgumentNullException("currentDateTimeProvider");
+			_formatter = formatter;
+			Items = new Collection<ExceptionLogItemGroup>();
+			Timestamp = currentDateTimeProvider.GetCurrentUtc();
+			ThreadId = Thread.CurrentThread.ManagedThreadId;
+		}
 
-            _formatter = formatter;
-            Items = new Collection<ExceptionLogItemGroup>();
-            Timestamp = currentDateTimeProvider.GetCurrentUtc();
-            ThreadId = Thread.CurrentThread.ManagedThreadId;
-        }
+		[JsonProperty(PropertyName = "Timestamp")]
+		public DateTime Timestamp { get; private set; }
 
-        #endregion //Core
+		public Collection<ExceptionLogItemGroup> Items { get; private set; }
 
-        #region Public properties
+		public CoreApiException Exception { get; private set; }
 
-        /// <summary>
-        /// Gets or sets log record creation time
-        /// </summary>
-        [DataMember(Name = "timestamp")]
-        public DateTime Timestamp { get; private set; }
+		public int ThreadId { get; private set; }
 
-        /// <summary>
-        /// Gets list of log item groups
-        /// </summary>
-        [DataMember]
-        public Collection<ExceptionLogItemGroup> Items { get; private set; }
+		public string Message => Exception == null ? string.Empty : GetExceptionMessage();
 
-        /// <summary>
-        /// Gets an exception instance
-        /// </summary>
-        [DataMember]
-        public CoreApiException Exception { get; private set; }
+		public string CustomMessage { get; set; }
 
-        /// <summary>
-        /// Gets or sets thred identifier
-        /// </summary>
-        [DataMember]
-        public int ThreadId { get; private set; }
+		public dynamic ApplicationContext { get; set; }
 
-        /// <summary>
-        /// Gets an exception message
-        /// </summary>
-        [DataMember]
-        [DefaultValue("")]
-        public string Message
-        {
-            get { return Exception == null ? string.Empty : GetExceptionMessage(); }
-        }
+		public ExceptionLogItemGroup GetGroupByTitle(string groupTitle)
+		{
+			if (string.IsNullOrEmpty(groupTitle))
+				throw new ArgumentNullException("groupTitle");
 
-        [DataMember]
-        [DefaultValue("")]
-        public string CustomMessage { get; set; }
+			var group = Items.FirstOrDefault(p => p.Title.Equals(groupTitle, StringComparison.OrdinalIgnoreCase));
+			if (group == null)
+			{
+				group = new ExceptionLogItemGroup { Title = groupTitle };
+				Items.Add(group);
+			}
+			return group;
+		}
 
-        /// <summary>
-        /// Gets or sets application context information
-        /// </summary>
-        [DataMember]
-        public dynamic ApplicationContext
-        {
-            get;
-            set;
-        }
+		public void SetException(Exception exception)
+		{
+			if (exception == null)
+				throw new ArgumentNullException("exception");
 
-        #endregion //Public properties
+			var coreApiException = exception as CoreApiException ?? new CoreApiException(exception);
+			Exception = coreApiException;
+		}
 
-        #region Public methods
-        
-        /// <summary>
-        /// Gets existing item group or creates new one
-        /// </summary>
-        /// <param name="groupTitle">Group title</param>
-        public ExceptionLogItemGroup GetGroupByTitle(string groupTitle)
-        {
-            if (string.IsNullOrEmpty(groupTitle))
-                throw new ArgumentNullException("groupTitle");
+		public override string ToString()
+		{
+			return _formatter.Format(this);
+		}
 
-            var group = Items.FirstOrDefault(p => p.Title.Equals(groupTitle, StringComparison.OrdinalIgnoreCase));
-            if (group == null)
-            {
-                group = new ExceptionLogItemGroup {Title = groupTitle};
-                Items.Add(group);
-            }
-            return group;
-        }
+		[JsonConverter(typeof(StringEnumConverter))]
+		public LogType LogType => LogType.ExceptionLog;
 
-        public void SetException(Exception exception)
-        {
-            if (exception == null) 
-                throw new ArgumentNullException("exception");
+		private string GetExceptionMessage()
+		{
+			var message = Exception.Message;
+			var innerException = Exception.InnerException;
 
-            var coreApiException = exception as CoreApiException ?? new CoreApiException(exception);
-            Exception = coreApiException;
-        }
+			while (innerException != null)
+			{
+				message = innerException.Message;
+				innerException = innerException.InnerException;
+			}
 
-        #endregion //Public methods
-
-        #region Overriding
-
-        /// <summary>
-        /// Returns string representation of the log entry
-        /// </summary>
-        /// <returns>String representation of the log entry</returns>
-        public override string ToString()
-        {
-            return _formatter.Format(this);
-        }
-
-        /// <summary>
-        /// Gets log type
-        /// </summary>
-        [DataMember]
-        [JsonConverter(typeof(StringEnumConverter))]
-        public LogType LogType
-        {
-            get { return LogType.ExceptionLog;}
-        }
-
-        #endregion //Overriding
-
-        #region Private methods
-        
-        /// <summary>
-        /// Gets the most inner exception message
-        /// </summary>
-        /// <returns></returns>
-        private string GetExceptionMessage()
-        {
-            var message = Exception.Message;
-            var innerException = Exception.InnerException;
-
-            while (innerException != null)
-            {
-                message = innerException.Message;
-                innerException = innerException.InnerException;
-            }
-
-            return message;
-        }
-
-        #endregion //Private methods
-    }
+			return message;
+		}
+	}
 }

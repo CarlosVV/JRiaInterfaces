@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using CES.CoreApi.Common.Models;
+using CES.CoreApi.Data.Models;
 using CES.CoreApi.GeoLocation.Service.Business.Contract.Enumerations;
 using CES.CoreApi.GeoLocation.Service.Business.Contract.Models;
 using CES.CoreApi.GeoLocation.Service.Contract.Enumerations;

@@ -1,7 +1,7 @@
 ﻿using System.Data.Common;
 using Microsoft.Practices.EnterpriseLibrary.Data;
 
-namespace CES.CoreApi.Foundation.Data.Models
+namespace CES.CoreApi.Data.Models
 {
     internal class CommandContext
     {

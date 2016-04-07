@@ -4,7 +4,7 @@ using System.Data;
 using System.Data.SqlClient;
 using System.Linq;
 using System.Threading.Tasks;
-using CES.CoreApi.Common.Enumerations;
+//using CES.CoreApi.Common.Enumerations;
 using CES.CoreApi.Common.Exceptions;
 using CES.CoreApi.Common.Interfaces;
 using CES.CoreApi.Common.Models;
@@ -13,13 +13,15 @@ using CES.CoreApi.Foundation.Data.Base;
 using CES.CoreApi.Foundation.Data.Interfaces;
 using CES.CoreApi.Foundation.Data.Models;
 using CES.CoreApi.Foundation.Data.Utility;
+using CES.CoreApi.Data.Models;
+using CES.CoreApi.Data.Enumerations;
 
 namespace CES.CoreApi.Data.Repositories
 {
 	public class ApplicationRepository : BaseGenericRepository, IApplicationRepository
 	{
 		public ApplicationRepository(IIdentityManager identityManager, IDatabaseInstanceProvider instanceProvider)
-			: base(identityManager, instanceProvider)
+			: base( instanceProvider)
 		{
 		}
 
@@ -55,7 +57,7 @@ namespace CES.CoreApi.Data.Repositories
 			var application = await GetApplication(applicationId);
 
 			if (application == null)
-				throw new CoreApiException(TechnicalSubSystem.CoreApiData, SubSystemError.ApplicationNotFoundInDatabase, applicationId);
+				throw new CoreApiException(Common.Enumerations.TechnicalSubSystem.CoreApiData, Common.Enumerations.SubSystemError.ApplicationNotFoundInDatabase, applicationId);
 
 			return application.Configuration;
 		}

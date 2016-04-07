@@ -16,36 +16,18 @@ namespace CES.CoreApi.Logging.Configuration
         /// </summary>
         [ConfigurationProperty(ConfigItemThreshold, DefaultValue = 500, IsRequired = true)]
         [IntegerValidator(MinValue = 0)]
-        public int Threshold
-        {
-            get
-            {
-                return Convert.ToInt32(this[ConfigItemThreshold], CultureInfo.InvariantCulture);
-            }
-        }
+        public int Threshold => Convert.ToInt32(this[ConfigItemThreshold], CultureInfo.InvariantCulture);
 
-        /// <summary>
+	    /// <summary>
         /// Returns whether db performance log enabled 
         /// </summary>
         [ConfigurationProperty(ConfigItemIsEnabled, DefaultValue = false, IsRequired = true)]
-        public bool IsEnabled
-        {
-            get
-            {
-                return Convert.ToBoolean(this[ConfigItemIsEnabled], CultureInfo.InvariantCulture);
-            }
-        }
+        public bool IsEnabled => Convert.ToBoolean(this[ConfigItemIsEnabled], CultureInfo.InvariantCulture);
 
-        /// <summary>
+	    /// <summary>
         /// Returns whether db performance log asynchronous
         /// </summary>
         [ConfigurationProperty(ConfigItemIsAsynchronous, DefaultValue = true, IsRequired = true)]
-        public bool IsAsynchronous
-        {
-            get
-            {
-                return Convert.ToBoolean(this[ConfigItemIsAsynchronous], CultureInfo.InvariantCulture);
-            }
-        }
+        public bool IsAsynchronous => Convert.ToBoolean(this[ConfigItemIsAsynchronous], CultureInfo.InvariantCulture);
     }
 }

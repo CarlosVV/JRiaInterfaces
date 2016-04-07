@@ -46,10 +46,20 @@
     <Reference Include="System.Core" />
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Data" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Xml.Linq" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Attributes\ConnectionNameAttribute.cs" />
+    <Compile Include="Attributes\ErrorMessageAttribute.cs" />
+    <Compile Include="Attributes\SubSystemErrorNumberAttribute.cs" />
+    <Compile Include="Attributes\SystemErrorNumberAttribute.cs" />
     <Compile Include="Base\BaseGenericRepository.cs" />
     <Compile Include="Configuration\DataAccessConfiguration.cs" />
+    <Compile Include="Constants\ServiceConfigurationItems.cs" />
+    <Compile Include="Enumerations\DatabaseType.cs" />
+    <Compile Include="Enumerations\ServiceConfigurationType.cs" />
+    <Compile Include="Enumerations\ServiceSecurityMode.cs" />
     <Compile Include="Providers\DatabaseConfigurationProvider.cs" />
     <Compile Include="Configuration\DatabaseServerGroups.cs" />
     <Compile Include="Configuration\DatabaseServer.cs" />
@@ -63,7 +73,11 @@
     <Compile Include="Interfaces\IDatabaseInstanceProvider.cs" />
     <Compile Include="Providers\DatabasePingProvider.cs" />
     <Compile Include="Interfaces\IDatabasePingProvider.cs" />
-    <Compile Include="Repositories\ApplicationRepository.cs" />
+    <Compile Include="Tools\EnumerableTools.cs" />
+    <Compile Include="Tools\EnumTools.cs" />
+    <Compile Include="Tools\StringTools.cs" />
+    <Compile Include="Tools\TypeTools.cs" />
+    <Compile Include="Tools\XmlTools.cs" />
     <Compile Include="Utility\DatabaseRequestExtensions.cs" />
     <Compile Include="Utility\DataReaderExtensions.cs" />
     <Compile Include="Utility\ParametersCollectionExtensions.cs" />
@@ -73,16 +87,6 @@
     <None Include="packages.config">
       <SubType>Designer</SubType>
     </None>
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\CES.CoreApi.Common\CES.CoreApi.Common.csproj">
-      <Project>{070c7bb2-af07-4a4c-a9cc-6bfb8ca416e6}</Project>
-      <Name>CES.CoreApi.Common</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\CES.CoreApi.Foundation.Contract\CES.CoreApi.Foundation.Contract.csproj">
-      <Project>{8dbcfe15-ca3b-4f7c-a7d6-d73f8f0b91aa}</Project>
-      <Name>CES.CoreApi.Foundation.Contract</Name>
-    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <WCFMetadata Include="Service References\" />
