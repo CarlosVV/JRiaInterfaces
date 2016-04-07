@@ -1,108 +1,108 @@
 ﻿using System;
 using CES.CoreApi.Logging.Interfaces;
+using static System.String;
 
 namespace CES.CoreApi.Logging.Formatters
 {
-    public class FileSizeFormatter : IFormatProvider, ICustomFormatter, IFileSizeFormatter
-    {
-        #region Core
+	public class FileSizeFormatter : IFormatProvider, ICustomFormatter, IFileSizeFormatter
+	{
+		#region Core
 
-        private const string FileSizeFormat = "fs";
-        private const Decimal OneKiloByte = 1024M;
-        private const Decimal OneMegaByte = OneKiloByte * 1024M;
-        private const Decimal OneGigaByte = OneMegaByte * 1024M;
+		private const string FileSizeFormat = "fs";
+		private const decimal OneKiloByte = 1024M;
+		private const decimal OneMegaByte = OneKiloByte * 1024M;
+		private const decimal OneGigaByte = OneMegaByte * 1024M;
 
-        #endregion
+		#endregion
 
-        #region Public methods
-        
-        /// <summary>
-        /// Returns an object that provides formatting services for the specified type.
-        /// </summary>
-        /// <param name="formatType"></param>
-        /// <returns></returns>
-        public object GetFormat(Type formatType)
-        {
-            return formatType == typeof (ICustomFormatter) ? this : null;
-        }
-        
-        /// <summary>
-        /// Formats file size
-        /// </summary>
-        /// <param name="fileSize">File size in bytes</param>
-        /// <returns></returns>
-        public string Format(long fileSize)
-        {
-            return string.Format(this, "{0:fs}", fileSize);
-        }
+		#region Public methods
 
-        /// <summary>
-        /// Converts the value of a specified object to an equivalent string representation using specified format and culture-specific formatting information.
-        /// </summary>
-        /// <param name="format"></param>
-        /// <param name="arg"></param>
-        /// <param name="formatProvider"></param>
-        /// <returns></returns>
-        public string Format(string format, object arg, IFormatProvider formatProvider)
-        {
-            if (format == null || !format.StartsWith(FileSizeFormat))
-            {
-                return DefaultFormat(format, arg, formatProvider);
-            }
+		/// <summary>
+		/// Returns an object that provides formatting services for the specified type.
+		/// </summary>
+		/// <param name="formatType"></param>
+		/// <returns></returns>
+		public object GetFormat(Type formatType)
+		{
+			return formatType == typeof(ICustomFormatter) ? this : null;
+		}
 
-            if (arg is string)
-            {
-                return DefaultFormat(format, arg, formatProvider);
-            }
+		/// <summary>
+		/// Formats file size
+		/// </summary>
+		/// <param name="fileSize">File size in bytes</param>
+		/// <returns></returns>
+		public string Format(long fileSize)
+		{
+			return string.Format(this, "{0:fs}", fileSize);
+		}
 
-            Decimal size;
-            try
-            {
-                size = Convert.ToDecimal(arg);
-            }
-            catch (InvalidCastException)
-            {
-                return DefaultFormat(format, arg, formatProvider);
-            }
+		/// <summary>
+		/// Converts the value of a specified object to an equivalent string representation using specified format and culture-specific formatting information.
+		/// </summary>
+		/// <param name="format"></param>
+		/// <param name="arg"></param>
+		/// <param name="formatProvider"></param>
+		/// <returns></returns>
+		public string Format(string format, object arg, IFormatProvider formatProvider)
+		{
+			if (format == null || !format.StartsWith(FileSizeFormat))
+			{
+				return DefaultFormat(format, arg, formatProvider);
+			}
 
-            string suffix;
-            if (size > OneGigaByte)
-            {
-                size /= OneGigaByte;
-                suffix = " GB";
-            }
-            else if (size > OneMegaByte)
-            {
-                size /= OneMegaByte;
-                suffix = " MB";
-            }
-            else if (size > OneKiloByte)
-            {
-                size /= OneKiloByte;
-                suffix = " kB";
-            }
-            else
-            {
-                suffix = " B";
-            }
+			if (arg is string)
+			{
+				return DefaultFormat(format, arg, formatProvider);
+			}
 
-            var precision = format.Substring(2);
-            if (String.IsNullOrEmpty(precision)) precision = "2";
-            return String.Format("{0:N" + precision + "}{1}", size, suffix);
-        }
+			decimal size;
+			try
+			{
+				size = Convert.ToDecimal(arg);
+			}
+			catch (InvalidCastException)
+			{
+				return DefaultFormat(format, arg, formatProvider);
+			}
 
-        #endregion
+			string suffix;
+			if (size > OneGigaByte)
+			{
+				size /= OneGigaByte;
+				suffix = " GB";
+			}
+			else if (size > OneMegaByte)
+			{
+				size /= OneMegaByte;
+				suffix = " MB";
+			}
+			else if (size > OneKiloByte)
+			{
+				size /= OneKiloByte;
+				suffix = " kB";
+			}
+			else
+			{
+				suffix = " B";
+			}
 
-        #region Private methods
+			var precision = format.Substring(2);
+			if (IsNullOrEmpty(precision))
+				precision = "2";
+			return string.Format("{0:N" + precision + "}{1}", size, suffix);
+		}
 
-        private static string DefaultFormat(string format, object arg, IFormatProvider formatProvider)
-        {
-            var formattableArg = arg as IFormattable;
-            return formattableArg != null
-                       ? formattableArg.ToString(format, formatProvider)
-                       : arg.ToString();
-        }
+		#endregion
 
-        #endregion
-    }
+		#region Private methods
+
+		private static string DefaultFormat(string format, object arg, IFormatProvider formatProvider)
+		{
+			var formattableArg = arg as IFormattable;
+			return formattableArg?.ToString(format, formatProvider) ?? arg.ToString();
+		}
+
+		#endregion
+	}
 }
