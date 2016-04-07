@@ -10,6 +10,7 @@ using CES.CoreApi.GeoLocation.Service.Contract.Models;
 using CES.CoreApi.GeoLocation.Service.UnitTestTools;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
+using CES.CoreApi.Data.Models;
 
 namespace CES.CoreApi.GeoLocation.Service.UnitTest
 {

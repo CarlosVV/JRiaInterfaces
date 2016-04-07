@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.ObjectModel;
 using System.Linq;
-using CES.CoreApi.Common.Enumerations;
+using CES.CoreApi.Data.Enumerations;
 using CES.CoreApi.Caching.Interfaces;
 using CES.CoreApi.Common.Models;
 using CES.CoreApi.Foundation.Data.Interfaces;
@@ -9,6 +9,7 @@ using CES.CoreApi.GeoLocation.Service.Business.Logic.Processors;
 using CES.CoreApi.GeoLocation.Service.UnitTestTools;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
+using CES.CoreApi.Data.Models;
 
 namespace CES.CoreApi.GeoLocation.Service.Business.Logic.UnitTest
 {
@@ -31,7 +32,7 @@ namespace CES.CoreApi.GeoLocation.Service.Business.Logic.UnitTest
         {
             ExceptionHelper.CheckException(
                 () => new HealthMonitoringProcessor(null, _databasePingProvider.Object),
-                 SubSystemError.GeneralRequiredParameterIsUndefined, "cacheProvider");
+				 Common.Enumerations.SubSystemError.GeneralRequiredParameterIsUndefined, "cacheProvider");
         }
 
         [TestMethod]
@@ -39,7 +40,7 @@ namespace CES.CoreApi.GeoLocation.Service.Business.Logic.UnitTest
         {
             ExceptionHelper.CheckException(
                 () => new HealthMonitoringProcessor(_cacheProvider.Object, null),
-                SubSystemError.GeneralRequiredParameterIsUndefined, "pingProvider");
+				Common.Enumerations.SubSystemError.GeneralRequiredParameterIsUndefined, "pingProvider");
         }
 
         [TestMethod]
@@ -91,11 +92,11 @@ namespace CES.CoreApi.GeoLocation.Service.Business.Logic.UnitTest
 
             var processor = new HealthMonitoringProcessor(_cacheProvider.Object, _databasePingProvider.Object);
             
-            var result = processor.Ping();
+            var result = processor.Ping() as PingResponseModel;
             _databasePingProvider.Verify(p => p.PingDatabases(), Times.Once);
             Assert.IsNotNull(result);
-            Assert.IsTrue(result.Databases.ToList()[0].IsOk);
-            Assert.AreEqual(DatabaseType.Main.ToString(), result.Databases.ToList()[0].Database);
+			Assert.IsTrue(result.Databases.ToList()[0].IsOk);
+			 Assert.AreEqual(DatabaseType.Main.ToString(), result.Databases.ToList()[0].Database);
         }
     }
 }

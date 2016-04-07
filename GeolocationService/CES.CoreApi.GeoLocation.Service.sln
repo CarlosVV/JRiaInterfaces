@@ -50,6 +50,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CES.CoreApi.GeoLocation.Api
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CES.CoreApi.GeoLocation.Api.Tests", "CES.CoreApi.GeoLocation.Api.Tests\CES.CoreApi.GeoLocation.Api.Tests.csproj", "{E551BCC9-D0AA-45A6-BA1B-2D944BC9C0E6}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CES.CoreApi.GeoLocation.Service.Web2", "CES.CoreApi.GeoLocation.Service.Web2\CES.CoreApi.GeoLocation.Service.Web2.csproj", "{B2ABB5DB-D6CE-4A92-8EEA-CE9163BD8413}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CES.CoreApi.GeoLocation.Facade", "CES.CoreApi.GeoLocation.Facade\CES.CoreApi.GeoLocation.Facade.csproj", "{36D833CF-7EC3-41C9-AFE4-5F3C25365835}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -128,6 +132,14 @@ Global
 		{E551BCC9-D0AA-45A6-BA1B-2D944BC9C0E6}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{E551BCC9-D0AA-45A6-BA1B-2D944BC9C0E6}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{E551BCC9-D0AA-45A6-BA1B-2D944BC9C0E6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B2ABB5DB-D6CE-4A92-8EEA-CE9163BD8413}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B2ABB5DB-D6CE-4A92-8EEA-CE9163BD8413}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B2ABB5DB-D6CE-4A92-8EEA-CE9163BD8413}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B2ABB5DB-D6CE-4A92-8EEA-CE9163BD8413}.Release|Any CPU.Build.0 = Release|Any CPU
+		{36D833CF-7EC3-41C9-AFE4-5F3C25365835}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{36D833CF-7EC3-41C9-AFE4-5F3C25365835}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{36D833CF-7EC3-41C9-AFE4-5F3C25365835}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{36D833CF-7EC3-41C9-AFE4-5F3C25365835}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

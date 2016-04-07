@@ -48,7 +48,7 @@ namespace CES.CoreApi.GeoLocation.Service.Business.Logic.Processors
             return response;
         }
 
-        public PingResponseModel Ping()
+        public object Ping()
         {
             return _pingProvider.PingDatabases();
         }
