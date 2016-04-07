@@ -1,20 +1,16 @@
 ﻿using System.Configuration;
 using AutoMapper;
 using AutoMapper.Mappers;
-//using CES.CoreApi.Caching.Providers;
 using CES.CoreApi.Common.Interfaces;
 using CES.CoreApi.Common.Managers;
 using CES.CoreApi.Common.Providers;
 using CES.CoreApi.Common.Proxies;
 using CES.CoreApi.Foundation.Contract.Interfaces;
-using CES.CoreApi.Foundation.Data;
 using CES.CoreApi.Foundation.Data.Interfaces;
 using CES.CoreApi.Foundation.Data.Providers;
 using CES.CoreApi.Foundation.Providers;
-using CES.CoreApi.Foundation.Security;
 using CES.CoreApi.Foundation.Service;
 using CES.CoreApi.Foundation.Tools;
-using CES.CoreApi.Foundation.Validation;
 using CES.CoreApi.GeoLocation.Service.Business.Contract.Interfaces;
 using CES.CoreApi.GeoLocation.Service.Business.Logic.Builders;
 using CES.CoreApi.GeoLocation.Service.Business.Logic.Factories;
@@ -36,6 +32,9 @@ using CES.CoreApi.SimpleInjectorProxy;
 using SimpleInjector;
 using IConfigurationProvider = CES.CoreApi.Foundation.Contract.Interfaces.IConfigurationProvider;
 using CES.CoreApi.Caching.Providers;
+using CES.CoreApi.Security.Interfaces;
+using CES.CoreApi.Security;
+using CES.CoreApi.Data.Repositories;
 
 namespace CES.CoreApi.GeoLocation.Service.Configuration
 {
@@ -66,11 +65,11 @@ namespace CES.CoreApi.GeoLocation.Service.Configuration
             container.RegisterSingle<IAuthenticationManager, AuthenticationManager>();
             container.RegisterSingle<IApplicationAuthenticator, ApplicationAuthenticator>();
             container.RegisterSingle<IApplicationRepository, ApplicationRepository>(); 
-            container.RegisterSingle<IApplicationValidator, ApplicationValidator>();
+            
             container.RegisterSingle<IRequestHeadersProvider, RequestHeadersProvider>();
             container.RegisterSingle<IServiceCallHeaderParametersProvider, ServiceCallHeaderParametersProvider>();
             container.RegisterSingle<IAuthorizationManager, AuthorizationManager>();
-            container.RegisterSingle<IAuthorizationAdministrator, AuthorizationAdministrator>();
+            container.RegisterSingle<IApplicationAuthorizator, ApplicationAuthorizator>();
 			container.RegisterSingle<Caching.Interfaces.ICacheProvider>(() => new RedisCacheProvider());
             container.RegisterSingle<IHostApplicationProvider, HostApplicationProvider>();
             container.RegisterSingle<IClientSecurityContextProvider, ClientDetailsProvider>();
@@ -91,7 +90,11 @@ namespace CES.CoreApi.GeoLocation.Service.Configuration
             container.InterceptWith<PerformanceInterceptor>(type => type == typeof(IMapServiceRequestProcessor));
             container.InterceptWith<PerformanceInterceptor>(type => type == typeof(IClientSideSupportServiceProcessor));
             container.InterceptWith<PerformanceInterceptor>(type => type == typeof(IApplicationRepository));
-        }
+
+			container.InterceptWith<SecurityLogMonitorInterceptor>(type => type == typeof(IApplicationAuthorizator));
+			
+
+		}
 
         private static void RegisterAutomapper(Container container)
         {
@@ -110,8 +113,9 @@ namespace CES.CoreApi.GeoLocation.Service.Configuration
             // and both the interceptor are both singletons, the returned
             // (proxy) instance will be a singleton as well.
             container.RegisterSingle<PerformanceInterceptor>();
+			container.RegisterSingle<SecurityLogMonitorInterceptor>();
 
-            container.RegisterSingle<IRequestValidator, RequestValidator>();
+			container.RegisterSingle<IRequestValidator, RequestValidator>();
             container.RegisterSingle<IMappingHelper, MappingHelper>();
         }
 

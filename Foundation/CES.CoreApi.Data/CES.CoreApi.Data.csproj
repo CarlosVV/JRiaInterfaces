@@ -78,6 +78,7 @@
     <Compile Include="Tools\StringTools.cs" />
     <Compile Include="Tools\TypeTools.cs" />
     <Compile Include="Tools\XmlTools.cs" />
+    <Compile Include="Repositories\ApplicationRepository.cs" />
     <Compile Include="Utility\DatabaseRequestExtensions.cs" />
     <Compile Include="Utility\DataReaderExtensions.cs" />
     <Compile Include="Utility\ParametersCollectionExtensions.cs" />

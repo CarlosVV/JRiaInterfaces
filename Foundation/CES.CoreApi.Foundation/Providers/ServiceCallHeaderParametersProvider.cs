@@ -5,7 +5,6 @@ using CES.CoreApi.Common.Models;
 using CES.CoreApi.Common.Tools;
 using CES.CoreApi.Foundation.Contract.Constants;
 using CES.CoreApi.Foundation.Contract.Interfaces;
-using CES.CoreApi.Foundation.Contract.Models;
 
 namespace CES.CoreApi.Foundation.Providers
 {

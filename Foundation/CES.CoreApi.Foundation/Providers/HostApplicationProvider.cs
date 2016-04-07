@@ -33,7 +33,7 @@ namespace CES.CoreApi.Foundation.Providers
         public async Task<IApplication> GetApplication()
         {
             //Get host application ID from config file and validate them
-            var applicationId = ConfigurationTools.ReadAppSettingsValue<int>(ServiceConfigurationItems.AppplicationId);
+            var applicationId = ConfigurationTools.ReadAppSettingsValue<int>(ServiceConfigurationItems.ApplicationId);
             if (applicationId == 0)
                 throw new CoreApiException(Organization.Ria, TechnicalSystem.CoreApi,
                     TechnicalSubSystem.Authentication, SubSystemError.ApplicationIdNotFoundInConfigFile);

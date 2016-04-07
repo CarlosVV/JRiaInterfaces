@@ -106,6 +106,10 @@
       <Project>{76762A04-54F0-4147-BD2B-267372034706}</Project>
       <Name>CES.CoreApi.Logging</Name>
     </ProjectReference>
+    <ProjectReference Include="..\..\Foundation\CES.CoreApi.Security\CES.CoreApi.Security.csproj">
+      <Project>{bab197c1-fc36-4070-b1fa-ffc0d6bd1d79}</Project>
+      <Name>CES.CoreApi.Security</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\Foundation\CES.CoreApi.SimpleInjectorProxy\CES.CoreApi.SimpleInjectorProxy.csproj">
       <Project>{02beaa68-76a1-4ed6-bf6c-7b6935165ad6}</Project>
       <Name>CES.CoreApi.SimpleInjectorProxy</Name>
