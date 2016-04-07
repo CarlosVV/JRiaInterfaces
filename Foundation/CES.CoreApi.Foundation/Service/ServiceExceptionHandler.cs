@@ -60,7 +60,14 @@ namespace CES.CoreApi.Foundation.Service
         /// <param name="fault">The System.ServiceModel.Channels.Message object that is returned to the client, or service, in the duplex case.</param>
         public void ProvideFault(Exception error, MessageVersion version, ref Message fault)
         {
-            _exceptionLogMonitor.AddServiceCallDetails(OperationContext.Current, () => _clientDetailsProvider.GetDetails(OperationContext.Current));
+            _exceptionLogMonitor.AddServiceCallDetails(OperationContext.Current, () =>
+				_clientDetailsProvider.GetDetails(OperationContext.Current));
+
+
+
+
+
+
             _exceptionLogMonitor.DataContainer.ApplicationContext = _identityManager.GetClientApplicationIdentity();
 
             var faultException = BuildFaultException(error);

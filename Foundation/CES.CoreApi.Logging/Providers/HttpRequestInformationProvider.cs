@@ -8,8 +8,7 @@ namespace CES.CoreApi.Logging.Providers
 {
     public class HttpRequestInformationProvider : IHttpRequestInformationProvider
     {
-        #region Core
-
+       
         internal const string ContentLength = "Content-Length";
         internal const string HttpRequest = "httpRequest";
         
@@ -26,16 +25,35 @@ namespace CES.CoreApi.Logging.Providers
             _fileSizeFormatter = fileSizeFormatter;
         }
 
-        #endregion //Core
+		public void AddDetails(ExceptionLogDataContainer exceptionLogDataContainer,
+		{
+			if (context == null)
+				return;
 
-        #region Public methods
+			if (!context.IncomingMessageProperties.Keys.Contains(HttpRequest))
+				return;
+			var item = context.IncomingMessageProperties[HttpRequest] as HttpRequestMessageProperty;
+			if (item == null)
+				return;
 
-        /// <summary>
-        /// Adds http request details to exception log data container
-        /// </summary>
-        /// <param name="exceptionLogDataContainer">Exception log data container</param>
-        /// <param name="context">Service operation context</param>
-        public void AddDetails(ExceptionLogDataContainer exceptionLogDataContainer, OperationContext context)
+			//Check if message exists - for RESTful calls we don't have message body
+			if (OperationContext.Current.RequestContext.RequestMessage.IsEmpty)
+				return;
+
+			var group = exceptionLogDataContainer.GetGroupByTitle("Incoming Message Details");
+			group.AddItem("Version", OperationContext.Current.IncomingMessageVersion.Envelope);
+			group.AddItem("Original Message", OperationContext.Current.RequestContext.RequestMessage);
+			group.AddItem("Method", item.Method);
+			group.AddItem("QueryString", item.QueryString);
+
+			for (var i = 0; i < item.Headers.Count; i++)
+			{
+				var itemName = item.Headers.GetKey(i);
+				group.AddItem(itemName, FormatItemValue(itemName, item.Headers.Get(i)));
+			}
+		}
+
+		public void AddDetails(ExceptionLogDataContainer exceptionLogDataContainer, OperationContext context)
         {
             if (context == null) return;
 
@@ -59,16 +77,7 @@ namespace CES.CoreApi.Logging.Providers
             }
         }
 
-        #endregion //Public methods
-
-        #region Private methods
-
-        /// <summary>
-        /// Formats item value
-        /// </summary>
-        /// <param name="itemName">Item name</param>
-        /// <param name="itemValueRaw">Item value unformatted</param>
-        /// <returns></returns>
+      
         private string FormatItemValue(string itemName, string itemValueRaw)
         {
             return itemName.Equals(ContentLength, StringComparison.OrdinalIgnoreCase)
@@ -76,11 +85,6 @@ namespace CES.CoreApi.Logging.Providers
                        : itemValueRaw;
         }
 
-        /// <summary>
-        /// Formats file size value
-        /// </summary>
-        /// <param name="itemValueRaw">File size value unformatted</param>
-        /// <returns></returns>
         private string FormatFileSize(string itemValueRaw)
         {
             long itemValue;
@@ -88,7 +92,5 @@ namespace CES.CoreApi.Logging.Providers
                        ? _fileSizeFormatter.Format(itemValue)
                        : itemValueRaw;
         }
-
-        #endregion //Private methods
     }
 }

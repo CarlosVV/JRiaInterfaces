@@ -14,5 +14,8 @@ namespace CES.CoreApi.Logging.Interfaces
         /// <param name="context"></param>
         /// <param name="getClientDetails"></param>
         void AddDetails(ExceptionLogDataContainer exceptionLogDataContainer, OperationContext context, Func<IDictionary<string, object>> getClientDetails);
-    }
+
+		void AddDetails(ExceptionLogDataContainer exceptionLogDataContainer, int port, string address, Func<IDictionary<string, object>> getClientDetails);
+
+	}
 }
