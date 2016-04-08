@@ -3,11 +3,10 @@ using System.Globalization;
 using System.Web;
 using CES.CoreApi.Common.Enumerations;
 using CES.CoreApi.Common.Exceptions;
-using CES.CoreApi.Foundation.Contract.Interfaces;
 using CES.CoreApi.GeoLocation.Service.Business.Contract.Enumerations;
 using CES.CoreApi.GeoLocation.Service.Business.Contract.Interfaces;
 using CES.CoreApi.GeoLocation.Service.Business.Contract.Models;
-using CES.CoreApi.GeoLocation.Service.Business.Logic.Constants;
+
 
 namespace CES.CoreApi.GeoLocation.Service.Business.Logic.Builders
 {
@@ -20,9 +19,9 @@ namespace CES.CoreApi.GeoLocation.Service.Business.Logic.Builders
         private readonly ICorrectImageSizeProvider _imageSizeProvider;   
 		private readonly  string key = Configuration.Provider.GeoLocationConfigurationSection.Instance.Bing.Key;
 
-        public BingUrlBuilder(IConfigurationProvider configurationProvider,IAddressQueryBuilder addressQueryBuilder,
+        public BingUrlBuilder(IAddressQueryBuilder addressQueryBuilder,
             IBingPushPinParameterProvider pushPinParameterProvider, ICorrectImageSizeProvider imageSizeProvider)
-            :base(configurationProvider)
+            :base()
         {
             if (addressQueryBuilder == null)
                 throw new CoreApiException(TechnicalSubSystem.GeoLocationService,

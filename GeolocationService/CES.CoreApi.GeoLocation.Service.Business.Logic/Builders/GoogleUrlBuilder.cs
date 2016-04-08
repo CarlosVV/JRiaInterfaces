@@ -4,12 +4,11 @@ using System.Web;
 using CES.CoreApi.Common.Enumerations;
 using CES.CoreApi.Common.Exceptions;
 using CES.CoreApi.Common.Tools;
-using CES.CoreApi.Foundation.Contract.Interfaces;
 using CES.CoreApi.GeoLocation.Service.Business.Contract.Attributes;
 using CES.CoreApi.GeoLocation.Service.Business.Contract.Enumerations;
 using CES.CoreApi.GeoLocation.Service.Business.Contract.Interfaces;
 using CES.CoreApi.GeoLocation.Service.Business.Contract.Models;
-using CES.CoreApi.GeoLocation.Service.Business.Logic.Constants;
+
 
 namespace CES.CoreApi.GeoLocation.Service.Business.Logic.Builders
 {
@@ -22,9 +21,9 @@ namespace CES.CoreApi.GeoLocation.Service.Business.Logic.Builders
         private readonly ICorrectImageSizeProvider _imageSizeProvider;      
         private const string KeyTemplate = "&key={0}";
 
-        public GoogleUrlBuilder(IConfigurationProvider configurationProvider, IAddressQueryBuilder addressQueryBuilder,
+        public GoogleUrlBuilder(IAddressQueryBuilder addressQueryBuilder,
             IGooglePushPinParameterProvider pushPinParameterProvider, ICorrectImageSizeProvider imageSizeProvider)
-            :base(configurationProvider)
+            :base()
         {
             if (addressQueryBuilder == null)
                 throw new CoreApiException(TechnicalSubSystem.GeoLocationService,

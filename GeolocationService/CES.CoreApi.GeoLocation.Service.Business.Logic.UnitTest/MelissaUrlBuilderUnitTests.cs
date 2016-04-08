@@ -49,7 +49,7 @@ namespace CES.CoreApi.GeoLocation.Service.Business.Logic.UnitTest
         [TestMethod]
         public void Constructor_ConfigurationProviderIsNull_ExceptionRaised()
         {
-            ExceptionHelper.CheckException(() => new MelissaUrlBuilder(null),
+            ExceptionHelper.CheckException(() => new MelissaUrlBuilder(),
                 SubSystemError.GeneralRequiredParameterIsUndefined, "configurationProvider");
         }
         
@@ -58,7 +58,7 @@ namespace CES.CoreApi.GeoLocation.Service.Business.Logic.UnitTest
         {
             _configurationProvider.Setup(p => p.Read<string>(MelissaDataLicenseKeyConfig)).Returns(string.Empty);
 
-            ExceptionHelper.CheckException(() => new MelissaUrlBuilder(_configurationProvider.Object),
+            ExceptionHelper.CheckException(() => new MelissaUrlBuilder(),
                 SubSystemError.GeolocationLicenseKeyNotFound, DataProviderType.MelissaData);
         }
 
@@ -70,7 +70,7 @@ namespace CES.CoreApi.GeoLocation.Service.Business.Logic.UnitTest
             _configurationProvider.Setup(p => p.Read<string>(MelissaDataAddressGeocodeAndVerificationUrlTemplateConfig)).Returns(MelissaDataAddressGeocodeAndVerificationUrlTemplate);
             _configurationProvider.Setup(p => p.Read<string>(MelissaDataLicenseKeyConfig)).Returns(MelissaDataLicenseKey);
 
-            ExceptionHelper.CheckException(() => new MelissaUrlBuilder(_configurationProvider.Object),
+            ExceptionHelper.CheckException(() => new MelissaUrlBuilder(),
                 SubSystemError.GeolocationUrlTemplateNotFound, DataProviderType.MelissaData, MelissaDataAddressAutocompleteUrlTemplateConfig);
         }
 
@@ -82,7 +82,7 @@ namespace CES.CoreApi.GeoLocation.Service.Business.Logic.UnitTest
             _configurationProvider.Setup(p => p.Read<string>(MelissaDataAddressGeocodeAndVerificationUrlTemplateConfig)).Returns(MelissaDataAddressGeocodeAndVerificationUrlTemplate);
             _configurationProvider.Setup(p => p.Read<string>(MelissaDataLicenseKeyConfig)).Returns(MelissaDataLicenseKey);
 
-            ExceptionHelper.CheckException(() => new MelissaUrlBuilder(_configurationProvider.Object),
+            ExceptionHelper.CheckException(() => new MelissaUrlBuilder(),
                 SubSystemError.GeolocationUrlTemplateNotFound, DataProviderType.MelissaData, MelissaDataFormattedAddressGeocodeAndVerificationUrlTemplateConfig);
         }
 
@@ -94,7 +94,7 @@ namespace CES.CoreApi.GeoLocation.Service.Business.Logic.UnitTest
             _configurationProvider.Setup(p => p.Read<string>(MelissaDataAddressGeocodeAndVerificationUrlTemplateConfig)).Returns(string.Empty);
             _configurationProvider.Setup(p => p.Read<string>(MelissaDataLicenseKeyConfig)).Returns(MelissaDataLicenseKey);
 
-            ExceptionHelper.CheckException(() => new MelissaUrlBuilder(_configurationProvider.Object),
+            ExceptionHelper.CheckException(() => new MelissaUrlBuilder(),
                SubSystemError.GeolocationUrlTemplateNotFound, DataProviderType.MelissaData, MelissaDataAddressGeocodeAndVerificationUrlTemplateConfig);
         }
 
@@ -106,7 +106,7 @@ namespace CES.CoreApi.GeoLocation.Service.Business.Logic.UnitTest
             _configurationProvider.Setup(p => p.Read<string>(MelissaDataAddressGeocodeAndVerificationUrlTemplateConfig)).Returns(MelissaDataAddressGeocodeAndVerificationUrlTemplate);
             _configurationProvider.Setup(p => p.Read<string>(MelissaDataLicenseKeyConfig)).Returns(MelissaDataLicenseKey);
 
-            ExceptionHelper.CheckHappyPath(() => new MelissaUrlBuilder(_configurationProvider.Object));
+            ExceptionHelper.CheckHappyPath(() => new MelissaUrlBuilder());
         }
 
         [TestMethod]
@@ -204,7 +204,7 @@ namespace CES.CoreApi.GeoLocation.Service.Business.Logic.UnitTest
                 .Returns(MelissaDataAddressGeocodeAndVerificationUrlTemplate);
             _configurationProvider.Setup(p => p.Read<string>(MelissaDataLicenseKeyConfig)).Returns(MelissaDataLicenseKey);
 
-            var builder = new MelissaUrlBuilder(_configurationProvider.Object);
+            var builder = new MelissaUrlBuilder();
             return builder;
         }
 

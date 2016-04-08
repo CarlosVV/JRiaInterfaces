@@ -7,7 +7,6 @@ using CES.CoreApi.Foundation.Contract.Interfaces;
 using CES.CoreApi.GeoLocation.Service.Business.Contract.Enumerations;
 using CES.CoreApi.GeoLocation.Service.Business.Contract.Interfaces;
 using CES.CoreApi.GeoLocation.Service.Business.Contract.Models;
-using CES.CoreApi.GeoLocation.Service.Business.Logic.Constants;
 
 namespace CES.CoreApi.GeoLocation.Service.Business.Logic.Builders
 {
@@ -16,10 +15,9 @@ namespace CES.CoreApi.GeoLocation.Service.Business.Logic.Builders
         #region Core
 		
 		private readonly string key = Configuration.Provider.GeoLocationConfigurationSection.Instance.MelissaData.Key;   
-        public MelissaUrlBuilder(IConfigurationProvider configurationProvider)
-         :base(configurationProvider)
-        {
-           
+        public MelissaUrlBuilder()
+			:base()
+        {           
         }
 
         #endregion
