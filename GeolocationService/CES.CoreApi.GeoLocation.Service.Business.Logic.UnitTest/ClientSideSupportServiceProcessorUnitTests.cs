@@ -164,7 +164,7 @@ namespace CES.CoreApi.GeoLocation.Service.Business.Logic.UnitTest
         {
             var config = new Collection<ApplicationConfiguration>
             {
-                new ApplicationConfiguration(ConfigurationConstants.BingLicenseKeyConfigurationName, BingKey),
+                new ApplicationConfiguration(ConfigurationConstants.BingLicenseKeyConfigurationName_, BingKey),
                 new ApplicationConfiguration(ConfigurationConstants.MelissaDataLicenseKeyConfigurationName, MelissaKey)
             };
 

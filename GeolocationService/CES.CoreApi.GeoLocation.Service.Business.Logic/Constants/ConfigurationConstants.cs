@@ -3,11 +3,11 @@
     public class ConfigurationConstants
     {
         public const string BingAddressAutocompleteUrlTemplate = "BingAddressAutocompleteUrlTemplate";
-        public const string BingLicenseKeyConfigurationName = "BingLicenseKey";
+        public const string BingLicenseKeyConfigurationName_ = "BingLicenseKey";
         public const string BingFormattedAddressGeocodeAndVerificationUrlTemplate = "BingFormattedAddressGeocodeAndVerificationUrlTemplate";
         public const string BingAddressGeocodeAndVerificationUrlTemplate = "BingAddressGeocodeAndVerificationUrlTemplate";
         public const string BingReverseGeocodePointUrlTemplate = "BingReverseGeocodePointUrlTemplate";
-        public const string BingMappingUrlTemplate = "BingMappingUrlTemplate";
+        public const string BingMappingUrlTemplate_ = "BingMappingUrlTemplate";
 
         public const string GoogleAddressAutocompleteUrlTemplate = "GoogleAddressAutocompleteUrlTemplate";
         public const string GoogleLicenseKeyConfigurationName = "GoogleLicenseKey";

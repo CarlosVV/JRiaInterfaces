@@ -107,6 +107,10 @@
       <Project>{76762A04-54F0-4147-BD2B-267372034706}</Project>
       <Name>CES.CoreApi.Logging</Name>
     </ProjectReference>
+    <ProjectReference Include="..\CES.CoreApi.Configuration\CES.CoreApi.Configuration.csproj">
+      <Project>{8d95c45a-c175-48fe-b307-00ee5780e36e}</Project>
+      <Name>CES.CoreApi.Configuration</Name>
+    </ProjectReference>
     <ProjectReference Include="..\CES.CoreApi.GeoLocation.Service.Business.Contract\CES.CoreApi.GeoLocation.Service.Business.Contract.csproj">
       <Project>{F1C8C7B5-94B0-4344-B4C1-220E1BB82976}</Project>
       <Name>CES.CoreApi.GeoLocation.Service.Business.Contract</Name>

@@ -76,7 +76,6 @@
     <Compile Include="Enumerations\TechnicalSystem.cs" />
     <Compile Include="Exceptions\CoreApiException.cs" />
     <Compile Include="Interfaces\IAutoMapperProxy.cs" />
-    <Compile Include="Interfaces\ICacheProvider.cs" />
     <Compile Include="Interfaces\ICurrentDateTimeProvider.cs" />
     <Compile Include="Interfaces\IDataContainer.cs" />
     <Compile Include="Interfaces\IHttpClientProxy.cs" />

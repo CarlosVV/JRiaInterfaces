@@ -75,7 +75,7 @@ namespace CES.CoreApi.GeoLocation.Service.Business.Logic.Processors
             switch (providerType)
             {
                 case DataProviderType.Bing:
-                    return ConfigurationConstants.BingLicenseKeyConfigurationName;
+                    return ConfigurationConstants.BingLicenseKeyConfigurationName_;
                 case DataProviderType.Google:
                     return ConfigurationConstants.GoogleLicenseKeyConfigurationName;
                 case DataProviderType.MelissaData:

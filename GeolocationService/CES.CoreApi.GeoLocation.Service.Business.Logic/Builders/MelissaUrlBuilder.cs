@@ -14,32 +14,12 @@ namespace CES.CoreApi.GeoLocation.Service.Business.Logic.Builders
     public class MelissaUrlBuilder : BaseUrlBuilder, IUrlBuilder
     {
         #region Core
-
-        private readonly string _addressAutocompleteUrlTemplate;
-        private readonly string _addressGeocodeAndVerificationUrlTemplate;
-        private readonly string _formattedAddressGeocodeAndVerificationUrlTemplate;
-            
+		
+		private readonly string key = Configuration.Provider.GeoLocationConfigurationSection.Instance.MelissaData.Key;   
         public MelissaUrlBuilder(IConfigurationProvider configurationProvider)
-            : base(configurationProvider, ConfigurationConstants.MelissaDataLicenseKeyConfigurationName, DataProviderType.MelissaData)
+         :base(configurationProvider)
         {
-            _addressAutocompleteUrlTemplate = configurationProvider.Read<string>(ConfigurationConstants.MelissaDataAddressAutocompleteUrlTemplate);
-            _addressGeocodeAndVerificationUrlTemplate = ConfigurationProvider.Read<string>(ConfigurationConstants.MelissaDataAddressGeocodeAndVerificationUrlTemplate);
-            _formattedAddressGeocodeAndVerificationUrlTemplate = ConfigurationProvider.Read<string>(ConfigurationConstants.MelissaDataFormattedAddressGeocodeAndVerificationUrlTemplate);
-            
-            if (string.IsNullOrEmpty(_addressAutocompleteUrlTemplate))
-                throw new CoreApiException(TechnicalSubSystem.GeoLocationService,
-                    SubSystemError.GeolocationUrlTemplateNotFound,
-                    DataProviderType.MelissaData, ConfigurationConstants.MelissaDataAddressAutocompleteUrlTemplate);
-
-            if (string.IsNullOrEmpty(_addressGeocodeAndVerificationUrlTemplate))
-                throw new CoreApiException(TechnicalSubSystem.GeoLocationService,
-                    SubSystemError.GeolocationUrlTemplateNotFound,
-                    DataProviderType.MelissaData, ConfigurationConstants.MelissaDataAddressGeocodeAndVerificationUrlTemplate);
-
-            if (string.IsNullOrEmpty(_formattedAddressGeocodeAndVerificationUrlTemplate))
-                throw new CoreApiException(TechnicalSubSystem.GeoLocationService,
-                    SubSystemError.GeolocationUrlTemplateNotFound,
-                    DataProviderType.MelissaData, ConfigurationConstants.MelissaDataFormattedAddressGeocodeAndVerificationUrlTemplate);
+           
         }
 
         #endregion
@@ -67,8 +47,9 @@ namespace CES.CoreApi.GeoLocation.Service.Business.Logic.Builders
         public string BuildUrl(AutocompleteAddressModel address, int maxRecords)
         {
             var url = string.Format(CultureInfo.InvariantCulture,
-                _addressAutocompleteUrlTemplate,
-                LicenseKey,
+				"{0}?id={1}&format=xml&address1={2}&administrativearea={3}&Country={4}&maxrecords={5}",
+				Configuration.Provider.GeoLocationConfigurationSection.Instance.MelissaData.AutoCompleteUrl,
+                key,
                 HttpUtility.UrlEncode(address.Address1),
                 HttpUtility.UrlEncode(address.AdministrativeArea),
                 HttpUtility.UrlEncode(address.Country),
@@ -84,8 +65,9 @@ namespace CES.CoreApi.GeoLocation.Service.Business.Logic.Builders
         public string BuildUrl(AddressModel address)
         {
             var url = string.Format(
-                _addressGeocodeAndVerificationUrlTemplate,
-                LicenseKey,
+				"{0}?format=xml&id={1}&a1={2}&a2={3}&loc={4}&admarea{5}&postal={6}&ctry={7}",
+				Configuration.Provider.GeoLocationConfigurationSection.Instance.MelissaData.Url,
+                key,
                 HttpUtility.UrlEncode(address.Address1),
                 HttpUtility.UrlEncode(address.Address2),
                 HttpUtility.UrlEncode(address.City),
@@ -105,8 +87,9 @@ namespace CES.CoreApi.GeoLocation.Service.Business.Logic.Builders
         public string BuildUrl(string address)
         {
             var url = string.Format(CultureInfo.InvariantCulture,
-               _formattedAddressGeocodeAndVerificationUrlTemplate,
-               LicenseKey,
+			   "{0}?format=xml&id={1}&a1={2}&maxrecords=1",
+			   Configuration.Provider.GeoLocationConfigurationSection.Instance.MelissaData.Url,
+               key,
                HttpUtility.UrlEncode(address));
             return url;
         }

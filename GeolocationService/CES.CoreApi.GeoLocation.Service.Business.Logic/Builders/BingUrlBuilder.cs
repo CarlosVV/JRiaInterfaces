@@ -17,16 +17,12 @@ namespace CES.CoreApi.GeoLocation.Service.Business.Logic.Builders
 
         private readonly IAddressQueryBuilder _addressQueryBuilder;
         private readonly IBingPushPinParameterProvider _pushPinParameterProvider;
-        private readonly ICorrectImageSizeProvider _imageSizeProvider;
-        private readonly string _addressAutocompleteUrlTemplate;
-        private readonly string _formattedAddressGeocodeAndVerificationUrlTemplate;
-        private readonly string _addressGeocodeAndVerificationUrlTemplate;
-        private readonly string _reverseGeocodePointUrlTemplate;
-        private readonly string _mappingUrlTemplate;
+        private readonly ICorrectImageSizeProvider _imageSizeProvider;   
+		private readonly  string key = Configuration.Provider.GeoLocationConfigurationSection.Instance.Bing.Key;
 
-        public BingUrlBuilder(IConfigurationProvider configurationProvider, IAddressQueryBuilder addressQueryBuilder,
+        public BingUrlBuilder(IConfigurationProvider configurationProvider,IAddressQueryBuilder addressQueryBuilder,
             IBingPushPinParameterProvider pushPinParameterProvider, ICorrectImageSizeProvider imageSizeProvider)
-            : base(configurationProvider, ConfigurationConstants.BingLicenseKeyConfigurationName, DataProviderType.Bing)
+            :base(configurationProvider)
         {
             if (addressQueryBuilder == null)
                 throw new CoreApiException(TechnicalSubSystem.GeoLocationService,
@@ -41,36 +37,7 @@ namespace CES.CoreApi.GeoLocation.Service.Business.Logic.Builders
             _addressQueryBuilder = addressQueryBuilder;
             _pushPinParameterProvider = pushPinParameterProvider;
             _imageSizeProvider = imageSizeProvider;
-            _addressAutocompleteUrlTemplate = configurationProvider.Read<string>(ConfigurationConstants.BingAddressAutocompleteUrlTemplate);
-            _addressGeocodeAndVerificationUrlTemplate = ConfigurationProvider.Read<string>(ConfigurationConstants.BingAddressGeocodeAndVerificationUrlTemplate);
-            _formattedAddressGeocodeAndVerificationUrlTemplate = ConfigurationProvider.Read<string>(ConfigurationConstants.BingFormattedAddressGeocodeAndVerificationUrlTemplate);
-            _reverseGeocodePointUrlTemplate = configurationProvider.Read<string>(ConfigurationConstants.BingReverseGeocodePointUrlTemplate);
-            _mappingUrlTemplate = configurationProvider.Read<string>(ConfigurationConstants.BingMappingUrlTemplate);
-
-            if (string.IsNullOrEmpty(_addressAutocompleteUrlTemplate))
-                throw new CoreApiException(TechnicalSubSystem.GeoLocationService,
-                    SubSystemError.GeolocationUrlTemplateNotFound,
-                    DataProviderType.Bing, ConfigurationConstants.BingAddressAutocompleteUrlTemplate);
-
-            if (string.IsNullOrEmpty(_formattedAddressGeocodeAndVerificationUrlTemplate))
-                throw new CoreApiException(TechnicalSubSystem.GeoLocationService,
-                    SubSystemError.GeolocationUrlTemplateNotFound,
-                    DataProviderType.Bing, ConfigurationConstants.BingFormattedAddressGeocodeAndVerificationUrlTemplate);
-
-            if (string.IsNullOrEmpty(_addressGeocodeAndVerificationUrlTemplate))
-                throw new CoreApiException(TechnicalSubSystem.GeoLocationService,
-                    SubSystemError.GeolocationUrlTemplateNotFound,
-                    DataProviderType.Bing, ConfigurationConstants.BingAddressGeocodeAndVerificationUrlTemplate);
-
-            if (string.IsNullOrEmpty(_reverseGeocodePointUrlTemplate))
-                throw new CoreApiException(TechnicalSubSystem.GeoLocationService,
-                    SubSystemError.GeolocationUrlTemplateNotFound,
-                    DataProviderType.Bing, ConfigurationConstants.BingReverseGeocodePointUrlTemplate);
-
-            if (string.IsNullOrEmpty(_mappingUrlTemplate))
-                throw new CoreApiException(TechnicalSubSystem.GeoLocationService,
-                    SubSystemError.GeolocationUrlTemplateNotFound,
-                    DataProviderType.Bing, ConfigurationConstants.BingMappingUrlTemplate);
+      
         }
 
         #endregion
@@ -83,10 +50,11 @@ namespace CES.CoreApi.GeoLocation.Service.Business.Logic.Builders
         public string BuildUrl(LocationModel location)
         {
             var url = string.Format(CultureInfo.InvariantCulture,
-                _reverseGeocodePointUrlTemplate,
+				"{0}/Locations/{1},{2}?o=xml&include=ciso2&userIp=127.0.0.1&maxResults=1&key={3}",
+				Configuration.Provider.GeoLocationConfigurationSection.Instance.Bing.Url,
                 location.Latitude,
                 location.Longitude,
-                LicenseKey);
+				key);
             return url;
         }
 
@@ -98,15 +66,18 @@ namespace CES.CoreApi.GeoLocation.Service.Business.Logic.Builders
         /// <returns></returns>
         public string BuildUrl(AutocompleteAddressModel address, int maxRecords)
         {
-            var url = string.Format(CultureInfo.InvariantCulture,
-                _addressAutocompleteUrlTemplate,
+		
+
+			var url = string.Format(CultureInfo.InvariantCulture,
+				"{0}/Locations?countryRegion={1}&adminDistrict={2}&locality={3}&postalCode={4}&addressLine={5}&o=xml&include=ciso2&userIp=127.0.0.1&maxResults={6}&key={7}",
+				Configuration.Provider.GeoLocationConfigurationSection.Instance.Bing.Url,
                 HttpUtility.UrlEncode(address.Country),
                 HttpUtility.UrlEncode(address.AdministrativeArea),
                 HttpUtility.UrlEncode(address.City),
                 HttpUtility.UrlEncode(address.PostalCode),
                 HttpUtility.UrlEncode(address.Address1),
                 maxRecords,
-                LicenseKey);
+				key);
             return url;
         }
 
@@ -116,15 +87,17 @@ namespace CES.CoreApi.GeoLocation.Service.Business.Logic.Builders
         /// <param name="address">Address instance to geocode or verify</param>
         /// <returns></returns>
         public string BuildUrl(AddressModel address)
-        {
-            var url = string.Format(CultureInfo.InvariantCulture,
-                _addressGeocodeAndVerificationUrlTemplate,
+		{ 
+			
+		var url = string.Format(CultureInfo.InvariantCulture,
+				"{0}/Locations?CountryRegion={1}&adminDistrict={2}&locality={3}&postalCode={4}&addressLine={5}&o=xml&include=ciso2&userIp=127.0.0.1&maxResults=1&key={6}",
+				Configuration.Provider.GeoLocationConfigurationSection.Instance.Bing.Url,
                 HttpUtility.UrlEncode(address.Country),
                 HttpUtility.UrlEncode(address.AdministrativeArea),
                 HttpUtility.UrlEncode(address.City),
                 HttpUtility.UrlEncode(address.PostalCode),
                 HttpUtility.UrlEncode(_addressQueryBuilder.Build(address.Address1, address.Address2)),
-                LicenseKey);
+				key);
             return url;
         }
 
@@ -135,10 +108,11 @@ namespace CES.CoreApi.GeoLocation.Service.Business.Logic.Builders
         /// <returns></returns>
         public string BuildUrl(string address)
         {
-            var url = string.Format(CultureInfo.InvariantCulture,
-               _formattedAddressGeocodeAndVerificationUrlTemplate,
+			var url = string.Format(CultureInfo.InvariantCulture,
+			   "{0}/Locations?q={1}&o=xml&include=ciso2&userIp=127.0.0.1&maxResults=1&key={2}",
+			   Configuration.Provider.GeoLocationConfigurationSection.Instance.Bing.Url,
                HttpUtility.UrlEncode(address),
-                LicenseKey);
+				key);
             return url;
         }
 
@@ -153,7 +127,8 @@ namespace CES.CoreApi.GeoLocation.Service.Business.Logic.Builders
         public string BuildUrl(LocationModel center, MapSizeModel size, MapOutputParametersModel outputParameters, ICollection<PushPinModel> pushPins)
         {
             var url = string.Format(CultureInfo.InvariantCulture,
-                _mappingUrlTemplate,
+				"/{0}/Imagery/Map/{1}/{2},{3}/{4}?mapSize={5},{6}&format={7}{8}&key={9}",
+				Configuration.Provider.GeoLocationConfigurationSection.Instance.Bing.Url,
                 outputParameters.MapStyle,
                 center.Latitude,
                 center.Longitude,
@@ -162,7 +137,7 @@ namespace CES.CoreApi.GeoLocation.Service.Business.Logic.Builders
                 _imageSizeProvider.GetCorrectImageSize(DataProviderType.Bing, ImageDimension.Height, size.Height),
                 outputParameters.ImageFormat,
                 _pushPinParameterProvider.GetPushPinParameter(pushPins),
-                LicenseKey);
+				key);
             return url;
         }
     }

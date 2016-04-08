@@ -13,22 +13,18 @@ using CES.CoreApi.GeoLocation.Service.Business.Logic.Constants;
 
 namespace CES.CoreApi.GeoLocation.Service.Business.Logic.Builders
 {
-    public class GoogleUrlBuilder : BaseUrlBuilder, IUrlBuilder
-    {
+    public class GoogleUrlBuilder  : BaseUrlBuilder, IUrlBuilder
+	{
         #region Core
 
         private readonly IAddressQueryBuilder _addressQueryBuilder;
         private readonly IGooglePushPinParameterProvider _pushPinParameterProvider;
-        private readonly ICorrectImageSizeProvider _imageSizeProvider;
-        private readonly string _addressAutocompleteUrlTemplate;
-        private readonly string _addressGeocodeAndVerificationUrlTemplate;
-        private readonly string _reverseGeocodePointUrlTemplate;
-        private readonly string _mappingUrlTemplate;
+        private readonly ICorrectImageSizeProvider _imageSizeProvider;      
         private const string KeyTemplate = "&key={0}";
 
         public GoogleUrlBuilder(IConfigurationProvider configurationProvider, IAddressQueryBuilder addressQueryBuilder,
             IGooglePushPinParameterProvider pushPinParameterProvider, ICorrectImageSizeProvider imageSizeProvider)
-            : base(configurationProvider, ConfigurationConstants.GoogleLicenseKeyConfigurationName, DataProviderType.Google)
+            :base(configurationProvider)
         {
             if (addressQueryBuilder == null)
                 throw new CoreApiException(TechnicalSubSystem.GeoLocationService,
@@ -43,31 +39,6 @@ namespace CES.CoreApi.GeoLocation.Service.Business.Logic.Builders
             _addressQueryBuilder = addressQueryBuilder;
             _pushPinParameterProvider = pushPinParameterProvider;
             _imageSizeProvider = imageSizeProvider;
-
-            _addressAutocompleteUrlTemplate = ConfigurationProvider.Read<string>(ConfigurationConstants.GoogleAddressAutocompleteUrlTemplate);
-            _addressGeocodeAndVerificationUrlTemplate = ConfigurationProvider.Read<string>(ConfigurationConstants.GoogleAddressGeocodeAndVerificationUrlTemplate);
-            _reverseGeocodePointUrlTemplate = ConfigurationProvider.Read<string>(ConfigurationConstants.GoogleReverseGeocodePointUrlTemplate);
-            _mappingUrlTemplate = configurationProvider.Read<string>(ConfigurationConstants.GoogleMappingUrlTemplate);
-            
-            if (string.IsNullOrEmpty(_addressAutocompleteUrlTemplate))
-                throw new CoreApiException(TechnicalSubSystem.GeoLocationService,
-                    SubSystemError.GeolocationUrlTemplateNotFound,
-                    DataProviderType.Google, ConfigurationConstants.GoogleAddressAutocompleteUrlTemplate);
-
-            if (string.IsNullOrEmpty(_addressGeocodeAndVerificationUrlTemplate))
-                throw new CoreApiException(TechnicalSubSystem.GeoLocationService,
-                    SubSystemError.GeolocationUrlTemplateNotFound,
-                    DataProviderType.Google, ConfigurationConstants.GoogleAddressGeocodeAndVerificationUrlTemplate);
-
-            if (string.IsNullOrEmpty(_reverseGeocodePointUrlTemplate))
-                throw new CoreApiException(TechnicalSubSystem.GeoLocationService,
-                    SubSystemError.GeolocationUrlTemplateNotFound,
-                    DataProviderType.Google, ConfigurationConstants.GoogleReverseGeocodePointUrlTemplate);
-
-            if (string.IsNullOrEmpty(_mappingUrlTemplate))
-                throw new CoreApiException(TechnicalSubSystem.GeoLocationService,
-                    SubSystemError.GeolocationUrlTemplateNotFound,
-                    DataProviderType.Google, ConfigurationConstants.GoogleMappingUrlTemplate);
         }
 
         #endregion
@@ -82,7 +53,8 @@ namespace CES.CoreApi.GeoLocation.Service.Business.Logic.Builders
         public string BuildUrl(LocationModel location)
         {
             var url = string.Format(CultureInfo.InvariantCulture,
-                _reverseGeocodePointUrlTemplate,
+				"{0}/geocode/xml?address={1}{2}",
+				Configuration.Provider.GeoLocationConfigurationSection.Instance.Google.Url,
                 location.Latitude,
                 location.Longitude,
                 GetLicenseKeyParameter());
@@ -100,7 +72,8 @@ namespace CES.CoreApi.GeoLocation.Service.Business.Logic.Builders
             var query = _addressQueryBuilder.Build(address.Address1, address.AdministrativeArea, address.Country);
 
             var url = string.Format(CultureInfo.InvariantCulture,
-                _addressAutocompleteUrlTemplate,
+				"{0}/geocode/xml?address={1}{2}",
+				Configuration.Provider.GeoLocationConfigurationSection.Instance.Google.Url,
                 query,
                 GetLicenseKeyParameter());
 
@@ -123,7 +96,8 @@ namespace CES.CoreApi.GeoLocation.Service.Business.Logic.Builders
                 address.Country);
 
             var url = string.Format(CultureInfo.InvariantCulture,
-                _addressGeocodeAndVerificationUrlTemplate,
+				"{0}/geocode/xml?address={1}{2}",
+				Configuration.Provider.GeoLocationConfigurationSection.Instance.Google.Url,
                 HttpUtility.UrlEncode(addressFormatted),
                 GetLicenseKeyParameter());
             return url;
@@ -137,7 +111,8 @@ namespace CES.CoreApi.GeoLocation.Service.Business.Logic.Builders
         public string BuildUrl(string address)
         {
             var url = string.Format(CultureInfo.InvariantCulture,
-                _addressGeocodeAndVerificationUrlTemplate,
+				"{0}/geocode/xml?address={1}{2}",
+				Configuration.Provider.GeoLocationConfigurationSection.Instance.Google.Url,
                 HttpUtility.UrlEncode(address),
                 GetLicenseKeyParameter());
             return url;
@@ -146,7 +121,8 @@ namespace CES.CoreApi.GeoLocation.Service.Business.Logic.Builders
         public string BuildUrl(LocationModel center, MapSizeModel size, MapOutputParametersModel outputParameters, ICollection<PushPinModel> pushPins)
         {
             var url = string.Format(CultureInfo.InvariantCulture,
-                _mappingUrlTemplate,
+				"{0}/staticmap?center={1},{2}&zoom={3}&size={4}x{5}&format={6}&maptype={7}{8}{9}",
+				Configuration.Provider.GeoLocationConfigurationSection.Instance.Google.Url,
                 center.Latitude,
                 center.Longitude,
                 outputParameters.ZoomLevel,
@@ -165,9 +141,10 @@ namespace CES.CoreApi.GeoLocation.Service.Business.Logic.Builders
 
         private string GetLicenseKeyParameter()
         {
-            return string.IsNullOrEmpty(LicenseKey)
+			var key = Configuration.Provider.GeoLocationConfigurationSection.Instance.Google.Key;
+            return string.IsNullOrEmpty(key)
                 ? string.Empty
-                : string.Format(CultureInfo.InvariantCulture, KeyTemplate, LicenseKey);
+                : string.Format(CultureInfo.InvariantCulture, KeyTemplate, key);
         }
 
         #endregion

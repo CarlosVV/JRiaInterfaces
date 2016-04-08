@@ -1,15 +1,15 @@
 ﻿using System.Configuration;
 
-namespace CES.CoreApi.Foundation.Configuration
+namespace CES.CoreApi.Configuration.Provider
 {
-	class ProviderConfigurationSection : ConfigurationSection
+	public class GeoLocationConfigurationSection : ConfigurationSection
 	{
-		private static ProviderConfigurationSection instance;
+		private static GeoLocationConfigurationSection instance;
 
 
-		public static ProviderConfigurationSection Instance => instance ??
-			(instance = ConfigurationManager.GetSection("providerConfigurationSection") 
-			as ProviderConfigurationSection);
+		public static GeoLocationConfigurationSection Instance => instance ??
+			(instance = ConfigurationManager.GetSection("geoLocationConfigurationSection") 
+			as GeoLocationConfigurationSection);
 
 		[ConfigurationProperty("Bing")]
 		public GeoLocationConfiguration Bing => (GeoLocationConfiguration)this["Bing"];
