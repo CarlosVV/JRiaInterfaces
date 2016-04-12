@@ -6,7 +6,7 @@ using CES.CoreApi.Foundation.Configuration;
 using CES.CoreApi.Foundation.Contract.Constants;
 using CES.CoreApi.Foundation.Contract.Interfaces;
 using Newtonsoft.Json;
-using ApplicationConfiguration = CES.CoreApi.Common.Models.ApplicationConfiguration;
+using ApplicationConfiguration = CES.CoreApi.Foundation.Contract.Models.ApplicationConfiguration;
 
 namespace CES.CoreApi.Foundation.Providers
 {

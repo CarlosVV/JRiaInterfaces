@@ -21,7 +21,7 @@ namespace CES.CoreApi.GeoLocation.Service.Business.Logic.Builders
 
         public BingUrlBuilder(IAddressQueryBuilder addressQueryBuilder,
             IBingPushPinParameterProvider pushPinParameterProvider, ICorrectImageSizeProvider imageSizeProvider)
-            :base()
+         
         {
             if (addressQueryBuilder == null)
                 throw new CoreApiException(TechnicalSubSystem.GeoLocationService,

@@ -23,7 +23,7 @@ namespace CES.CoreApi.GeoLocation.Service.Business.Logic.Builders
 
         public GoogleUrlBuilder(IAddressQueryBuilder addressQueryBuilder,
             IGooglePushPinParameterProvider pushPinParameterProvider, ICorrectImageSizeProvider imageSizeProvider)
-            :base()
+          
         {
             if (addressQueryBuilder == null)
                 throw new CoreApiException(TechnicalSubSystem.GeoLocationService,

@@ -1,12 +1,12 @@
 ﻿using System.Collections.Generic;
 using System.Security.Principal;
 using System.ServiceModel;
-using CES.CoreApi.Common.Models;
 using CES.CoreApi.Foundation.Contract.Interfaces;
+using CES.CoreApi.Foundation.Contract.Models;
 
 namespace CES.CoreApi.Foundation.Providers
 {
-    public class ClientDetailsProvider : IClientSecurityContextProvider
+	public class ClientDetailsProvider : IClientSecurityContextProvider
     {
         /// <summary>
         /// Provides client applicaiton details as a dictionary

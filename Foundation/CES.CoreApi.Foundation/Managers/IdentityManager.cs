@@ -2,7 +2,7 @@ using System;
 using System.Security.Principal;
 using System.Threading;
 using CES.CoreApi.Common.Interfaces;
-using CES.CoreApi.Common.Models;
+using CES.CoreApi.Foundation.Contract.Models;
 
 namespace CES.CoreApi.Common.Managers
 {

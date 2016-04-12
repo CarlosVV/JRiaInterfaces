@@ -100,7 +100,7 @@
       <Name>CES.CoreApi.Data</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\Foundation\CES.CoreApi.Foundation.Contract\CES.CoreApi.Foundation.Contract.csproj">
-      <Project>{8DBCFE15-CA3B-4F7C-A7D6-D73F8F0B91AA}</Project>
+      <Project>{8dbcfe15-ca3b-4f7c-a7d6-d73f8f0b91aa}</Project>
       <Name>CES.CoreApi.Foundation.Contract</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\Foundation\CES.CoreApi.Logging\CES.CoreApi.Logging.csproj">

@@ -5,13 +5,13 @@ using System.ServiceModel;
 using CES.CoreApi.Common.Enumerations;
 using CES.CoreApi.Common.Exceptions;
 using CES.CoreApi.Common.Interfaces;
-using CES.CoreApi.Common.Models;
 using CES.CoreApi.Foundation.Contract.Interfaces;
 using CES.CoreApi.Security.Interfaces;
+using CES.CoreApi.Foundation.Contract.Models;
 
 namespace CES.CoreApi.Security
 {
-    public class ApplicationAuthorizator: IApplicationAuthorizator
+	public class ApplicationAuthorizator: IApplicationAuthorizator
     {
         private readonly IServiceCallHeaderParametersProvider _parametersProvider;
         private readonly IHostApplicationProvider _hostApplicationProvider;

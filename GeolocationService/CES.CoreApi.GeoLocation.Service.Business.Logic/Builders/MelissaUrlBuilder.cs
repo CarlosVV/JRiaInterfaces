@@ -3,7 +3,6 @@ using System.Globalization;
 using System.Web;
 using CES.CoreApi.Common.Enumerations;
 using CES.CoreApi.Common.Exceptions;
-using CES.CoreApi.Foundation.Contract.Interfaces;
 using CES.CoreApi.GeoLocation.Service.Business.Contract.Enumerations;
 using CES.CoreApi.GeoLocation.Service.Business.Contract.Interfaces;
 using CES.CoreApi.GeoLocation.Service.Business.Contract.Models;
@@ -15,11 +14,7 @@ namespace CES.CoreApi.GeoLocation.Service.Business.Logic.Builders
         #region Core
 		
 		private readonly string key = Configuration.Provider.GeoLocationConfigurationSection.Instance.MelissaData.Key;   
-        public MelissaUrlBuilder()
-			:base()
-        {           
-        }
-
+      
         #endregion
 
         #region Public methods

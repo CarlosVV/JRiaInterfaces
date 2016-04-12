@@ -121,14 +121,18 @@ namespace CES.CoreApi.GeoLocation.Service.Configuration
 
         private static void RegisterFactories(Container container)
         {
-            container.RegisterSingle<IUrlBuilderFactory>(new UrlBuilderFactory
-            {
-                {"IBingUrlBuilder", container.GetInstance<BingUrlBuilder>},
-                {"IGoogleUrlBuilder", container.GetInstance<GoogleUrlBuilder>},
-                {"IMelissaDataUrlBuilder", container.GetInstance<MelissaUrlBuilder>}
-            });
+			container.RegisterSingle<IUrlBuilderFactory>(new UrlBuilderFactory
+			{
+				{"IBingUrlBuilder", container.GetInstance<BingUrlBuilder>},
+				{"IGoogleUrlBuilder", container.GetInstance<GoogleUrlBuilder>},
+				{"IMelissaDataUrlBuilder", container.GetInstance<MelissaUrlBuilder>}
+			});
 
-            container.RegisterSingle<IResponseParserFactory>(new ResponseParserFactory
+			//container.RegisterSingle<IUrlBuilder, BingUrlBuilder>();
+			//container.RegisterSingle<IUrlBuilder, GoogleUrlBuilder>();
+			//container.RegisterSingle<IUrlBuilder, MelissaUrlBuilder>();
+
+			container.RegisterSingle<IResponseParserFactory>(new ResponseParserFactory
             {
                 {"IBingResponseParser", container.GetInstance<BingResponseParser>},
                 {"IGoogleResponseParser", container.GetInstance<GoogleResponseParser>},

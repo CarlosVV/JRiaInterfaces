@@ -1,8 +1,9 @@
-﻿using System;
+﻿using CES.CoreApi.Foundation.Contract.Interfaces;
+using System;
 using System.Security.Principal;
-using CES.CoreApi.Common.Interfaces;
 
-namespace CES.CoreApi.Common.Models
+
+namespace CES.CoreApi.Foundation.Contract.Models
 {
     public class ClientApplicationIdentity : IIdentity
     {

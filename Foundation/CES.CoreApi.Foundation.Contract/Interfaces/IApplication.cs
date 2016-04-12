@@ -1,24 +1,24 @@
+using CES.CoreApi.Foundation.Contract.Models;
 using System.Collections.Generic;
-using System.Runtime.Serialization;
-using CES.CoreApi.Common.Models;
 
-namespace CES.CoreApi.Common.Interfaces
+
+namespace CES.CoreApi.Foundation.Contract.Interfaces
 {
     public interface IApplication
     {
-        [DataMember]
+        //[DataMember]
         int Id { get; }
 
-        [DataMember]
+       // [DataMember]
         string Name { get; }
 
-        [DataMember]
+       // [DataMember]
         bool IsActive { get; }
 
-        [DataMember]
+        //[DataMember]
         ICollection<ApplicationConfiguration> Configuration { get; }
 
-        [DataMember]
+       // [DataMember]
         ICollection<ServiceOperation> Operations { get; }
     }
 }
