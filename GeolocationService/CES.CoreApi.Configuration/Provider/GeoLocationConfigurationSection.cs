@@ -20,5 +20,12 @@ namespace CES.CoreApi.Configuration.Provider
 
 		[ConfigurationProperty("MelissaData")]
 		public GeoLocationConfiguration MelissaData => (GeoLocationConfiguration)this["MelissaData"];
+
+
+		[ConfigurationProperty("AutompleteMaximumNumberOfHints")]
+		public BasicConfiguration AutompleteMaximumNumberOfHints => (BasicConfiguration)this["AutompleteMaximumNumberOfHints"];
+
+		[ConfigurationProperty("AutompleteDefaultNumberOfHints")]
+		public BasicConfiguration AutompleteDefaultNumberOfHints => (BasicConfiguration)this["AutompleteDefaultNumberOfHints"];
 	}
 }

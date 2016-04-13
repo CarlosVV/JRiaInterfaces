@@ -291,8 +291,8 @@ namespace CES.CoreApi.GeoLocation.Service.Business.Logic.UnitTest
             var autocompleteResponseModel = GetAutocompleteAddressResponseModel();
             var countryConfiguration = TestModelsProvider.GetUsCountryConfiguration();
 
-            _configurationProvider.Setup(p => p.ConfigurationProvider.Read<int>(ConfigurationConstants.AddressAutompleteDefaultNumberOfHints)).Returns(15);
-            _configurationProvider.Setup(p => p.ConfigurationProvider.Read<int>(ConfigurationConstants.AddressAutompleteMaximumNumberOfHints)).Returns(20);
+           // _configurationProvider.Setup(Configuration.Provider.GeoLocationConfigurationSection.Instance.AutompleteDefaultNumberOfHints.Value).Returns(15);
+           // _configurationProvider.Setup(p => p.ConfigurationProvider.Read<int>(ConfigurationConstants.AddressAutompleteMaximumNumberOfHints)).Returns(20);
             _configurationProvider.Setup(p => p.GetProviderConfigurationByCountry(Country)).Returns(countryConfiguration);
 
             _addressAutocompleteDataProvider.Setup(p => p.GetAddressHintList(It.IsAny<AutocompleteAddressModel>(), It.IsAny<int>(),
@@ -322,8 +322,8 @@ namespace CES.CoreApi.GeoLocation.Service.Business.Logic.UnitTest
             var autocompleteResponseModel = GetAutocompleteAddressResponseModel();
             var countryConfiguration = TestModelsProvider.GetUsCountryConfiguration();
 
-            _configurationProvider.Setup(p => p.ConfigurationProvider.Read<int>(ConfigurationConstants.AddressAutompleteDefaultNumberOfHints)).Returns(15);
-            _configurationProvider.Setup(p => p.ConfigurationProvider.Read<int>(ConfigurationConstants.AddressAutompleteMaximumNumberOfHints)).Returns(20);
+          //  _configurationProvider.Setup(Configuration.Provider.GeoLocationConfigurationSection.Instance.AutompleteDefaultNumberOfHints.Value).Returns(15);
+            //_configurationProvider.Setup(p => p.ConfigurationProvider.Read<int>(ConfigurationConstants.AddressAutompleteMaximumNumberOfHints)).Returns(20);
             _configurationProvider.Setup(p => p.GetProviderConfigurationByCountry(Country)).Returns(countryConfiguration);
 
             _addressAutocompleteDataProvider.Setup(p => p.GetAddressHintList(It.IsAny<AutocompleteAddressModel>(), It.IsAny<int>(),
@@ -351,8 +351,8 @@ namespace CES.CoreApi.GeoLocation.Service.Business.Logic.UnitTest
             var autocompleteResponseModel = GetAutocompleteAddressResponseModel();
             var countryConfiguration = TestModelsProvider.GetUsCountryConfiguration();
 
-            _configurationProvider.Setup(p => p.ConfigurationProvider.Read<int>(ConfigurationConstants.AddressAutompleteDefaultNumberOfHints)).Returns(15);
-            _configurationProvider.Setup(p => p.ConfigurationProvider.Read<int>(ConfigurationConstants.AddressAutompleteMaximumNumberOfHints)).Returns(20);
+           // _configurationProvider.Setup(p => p.ConfigurationProvider.Read<int>(ConfigurationConstants.AddressAutompleteDefaultNumberOfHints)).Returns(15);
+           // _configurationProvider.Setup(p => p.ConfigurationProvider.Read<int>(ConfigurationConstants.AddressAutompleteMaximumNumberOfHints)).Returns(20);
             _configurationProvider.Setup(p => p.GetProviderConfigurationByCountry(Country)).Returns(countryConfiguration);
 
             _addressAutocompleteDataProvider.Setup(p => p.GetAddressHintList(It.IsAny<AutocompleteAddressModel>(), It.IsAny<int>(),
@@ -380,8 +380,8 @@ namespace CES.CoreApi.GeoLocation.Service.Business.Logic.UnitTest
             var autocompleteResponseModel = GetAutocompleteAddressResponseModel();
             var countryConfiguration = TestModelsProvider.GetCountryConfigurationWithoutProviders();
 
-            _configurationProvider.Setup(p => p.ConfigurationProvider.Read<int>(ConfigurationConstants.AddressAutompleteDefaultNumberOfHints)).Returns(15);
-            _configurationProvider.Setup(p => p.ConfigurationProvider.Read<int>(ConfigurationConstants.AddressAutompleteMaximumNumberOfHints)).Returns(20);
+         //   _configurationProvider.Setup(p => p.ConfigurationProvider.Read<int>(ConfigurationConstants.AddressAutompleteDefaultNumberOfHints)).Returns(15);
+          //  _configurationProvider.Setup(p => p.ConfigurationProvider.Read<int>(ConfigurationConstants.AddressAutompleteMaximumNumberOfHints)).Returns(20);
             _configurationProvider.Setup(p => p.GetProviderConfigurationByCountry(Country)).Returns(countryConfiguration);
 
             _addressAutocompleteDataProvider.Setup(p => p.GetAddressHintList(It.IsAny<AutocompleteAddressModel>(), It.IsAny<int>(),

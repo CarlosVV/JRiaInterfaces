@@ -20,6 +20,7 @@ namespace CES.CoreApi.Configuration.Provider
 		public string ReverseGeocodePointUrl => (string)this["reverseGeocodePointUrl"];
 
 
+		
 
 
 	}
