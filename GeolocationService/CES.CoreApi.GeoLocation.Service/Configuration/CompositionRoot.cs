@@ -87,12 +87,9 @@ namespace CES.CoreApi.GeoLocation.Service.Configuration
             container.InterceptWith<PerformanceInterceptor>(type => type == typeof(IHealthMonitoringProcessor));
             container.InterceptWith<PerformanceInterceptor>(type => type == typeof(IAddressServiceRequestProcessor));
             container.InterceptWith<PerformanceInterceptor>(type => type == typeof(IGeocodeServiceRequestProcessor));
-            container.InterceptWith<PerformanceInterceptor>(type => type == typeof(IMapServiceRequestProcessor));
-            container.InterceptWith<PerformanceInterceptor>(type => type == typeof(IClientSideSupportServiceProcessor));
+            container.InterceptWith<PerformanceInterceptor>(type => type == typeof(IMapServiceRequestProcessor));    
             container.InterceptWith<PerformanceInterceptor>(type => type == typeof(IApplicationRepository));
-
-			container.InterceptWith<SecurityLogMonitorInterceptor>(type => type == typeof(IHealthMonitoringProcessor));
-			
+			container.InterceptWith<SecurityLogMonitorInterceptor>(type => type == typeof(IHealthMonitoringProcessor));		
 
 		}
 
@@ -146,7 +143,7 @@ namespace CES.CoreApi.GeoLocation.Service.Configuration
             container.RegisterSingle<IAddressServiceRequestProcessor, AddressServiceRequestProcessor>();
             container.RegisterSingle<IGeocodeServiceRequestProcessor, GeocodeServiceRequestProcessor>();
             container.RegisterSingle<IMapServiceRequestProcessor, MapServiceRequestProcessor>();
-            container.RegisterSingle<IClientSideSupportServiceProcessor, ClientSideSupportServiceProcessor>();
+          
         }
 
         private static void RegisterUrlBuilders(Container container)

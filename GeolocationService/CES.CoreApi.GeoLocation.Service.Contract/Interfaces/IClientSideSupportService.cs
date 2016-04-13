@@ -22,8 +22,8 @@ namespace CES.CoreApi.GeoLocation.Service.Contract.Interfaces
         /// </summary>
         /// <param name="request"></param>
         /// <returns></returns>
-        [OperationContract]
-        [FaultContract(typeof(CoreApiServiceFault), Action = Namespaces.ServiceFaultContractAction)]
-        void LogEvent(LogEventRequest request);
+        //[OperationContract]
+        //[FaultContract(typeof(CoreApiServiceFault), Action = Namespaces.ServiceFaultContractAction)]
+        //void LogEvent(LogEventRequest request);
     }
 }

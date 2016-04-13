@@ -57,7 +57,6 @@
     <Compile Include="Interfaces\IAddressVerificationDataProvider.cs" />
     <Compile Include="Interfaces\IBingAddressParser.cs" />
     <Compile Include="Interfaces\IBingPushPinParameterProvider.cs" />
-    <Compile Include="Interfaces\IClientSideSupportServiceProcessor.cs" />
     <Compile Include="Interfaces\ICorrectImageSizeProvider.cs" />
     <Compile Include="Interfaces\ICountryConfigurationProvider.cs" />
     <Compile Include="Interfaces\IGeocodeAddressDataProvider.cs" />

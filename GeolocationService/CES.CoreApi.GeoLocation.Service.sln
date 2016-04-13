@@ -64,6 +64,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CES.CoreApi.Security", "..\
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CES.CoreApi.Configuration", "CES.CoreApi.Configuration\CES.CoreApi.Configuration.csproj", "{8D95C45A-C175-48FE-B307-00EE5780E36E}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CES.CoreApi.DataTests1", "CES.CoreApi.DataTests1\CES.CoreApi.DataTests1.csproj", "{E2EEC1D7-9CD3-44BB-848A-9B5FB4E6C382}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -158,6 +160,10 @@ Global
 		{8D95C45A-C175-48FE-B307-00EE5780E36E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{8D95C45A-C175-48FE-B307-00EE5780E36E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{8D95C45A-C175-48FE-B307-00EE5780E36E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E2EEC1D7-9CD3-44BB-848A-9B5FB4E6C382}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E2EEC1D7-9CD3-44BB-848A-9B5FB4E6C382}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E2EEC1D7-9CD3-44BB-848A-9B5FB4E6C382}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E2EEC1D7-9CD3-44BB-848A-9B5FB4E6C382}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
