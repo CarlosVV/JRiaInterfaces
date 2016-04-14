@@ -11,22 +11,13 @@ namespace CES.CoreApi.Logging.Configuration
 		private const string ConfigItemThreshold = "performanceLogThreshold";
 		private const string ConfigItemIsAsynchronous = "isPerformanceLogAsynchronous";
 
-		/// <summary>
-		/// Returns threshold in milliseconds, after which system logs call, 0 means log all calls
-		/// </summary>
 		[ConfigurationProperty(ConfigItemThreshold, DefaultValue = 1000, IsRequired = true)]
 		[IntegerValidator(MinValue = 0)]
 		public int Threshold => Convert.ToInt32(this[ConfigItemThreshold], CultureInfo.InvariantCulture);
 
-		/// <summary>
-		/// Returns whether performance log enabled
-		/// </summary>
 		[ConfigurationProperty(ConfigItemIsEnabled, DefaultValue = false, IsRequired = true)]
 		public bool IsEnabled => Convert.ToBoolean(this[ConfigItemIsEnabled], CultureInfo.InvariantCulture);
 
-		/// <summary>
-		/// Returns whether performance log asynchronous
-		/// </summary>
 		[ConfigurationProperty(ConfigItemIsAsynchronous, DefaultValue = true, IsRequired = true)]
 		public bool IsAsynchronous => Convert.ToBoolean(this[ConfigItemIsAsynchronous], CultureInfo.InvariantCulture);
 	}
