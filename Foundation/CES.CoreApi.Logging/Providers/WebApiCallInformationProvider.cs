@@ -52,7 +52,7 @@ namespace CES.CoreApi.Logging.Providers
             //group.AddItem("Host", context.Request.RequestUri.Host);
             //group.AddItem("Port", context.Request.RequestUri.Port);
             //group.AddItem("Method", context.Request.Method);
-            //group.AddItem("Version", context.Request.Version);
+            //group.AddItem("Envelope", context.Request.Envelope);
             //group.AddItem("Scheme", context.Request.RequestUri.Scheme);
             //group.AddItem("Query", context.Request.RequestUri.Query);
 

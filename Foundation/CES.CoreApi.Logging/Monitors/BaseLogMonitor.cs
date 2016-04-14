@@ -9,8 +9,6 @@ namespace CES.CoreApi.Logging.Monitors
 {
 	public abstract class BaseLogMonitor
 	{
-		#region Core
-
 		private readonly ILoggerProxy _logProxy;
 
 		protected BaseLogMonitor(ILoggerProxy logProxy, ILogConfigurationProvider configuration)
@@ -21,16 +19,8 @@ namespace CES.CoreApi.Logging.Monitors
 			Configuration = configuration;
 		}
 
-		#endregion
-
-		#region
-
 		protected ILogConfigurationProvider Configuration { get; }
 
-		/// <summary>
-		/// Logs entry data
-		/// </summary>
-		/// <param name="dataContainer">Logs entry data container</param>
 		protected void Publish(IDataContainer dataContainer)
 		{
 			if (!IsLogEnabled(dataContainer.LogType))
@@ -48,14 +38,6 @@ namespace CES.CoreApi.Logging.Monitors
 			}
 		}
 
-		#endregion
-
-		#region private methods
-
-		/// <summary>
-		/// Logs entry data
-		/// </summary>
-		/// <param name="dataContainer">Log entry data container</param>
 		private void PublishDataContainer(IDataContainer dataContainer)
 		{
 			if (Debugger.IsAttached || !IsLogAsynchronous(dataContainer.LogType))
@@ -64,10 +46,6 @@ namespace CES.CoreApi.Logging.Monitors
 				Task.Factory.StartNew(() => PublishLogEntry(dataContainer)); //Save log entry asynchronously
 		}
 
-		/// <summary>
-		/// Logs entry 
-		/// </summary>
-		/// <param name="dataContainer">Log entry data container</param>
 		private void PublishLogEntry(IDataContainer dataContainer)
 		{
 			switch (dataContainer.LogType)
@@ -138,7 +116,5 @@ namespace CES.CoreApi.Logging.Monitors
 			}
 			return false;
 		}
-
-		#endregion
 	}
 }

@@ -1,18 +1,11 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
-using System.ServiceModel;
 using CES.CoreApi.Logging.Models;
 
 namespace CES.CoreApi.Logging.Interfaces
 {
-    public interface IRemoteClientInformationProvider
-    {
-        /// <summary>
-        /// Adds remote client details to exception log data container
-        /// </summary>
-        /// <param name="exceptionLogDataContainer">Exception log data container</param>
-        /// <param name="context"></param>
-        /// <param name="getClientDetails"></param>
-        void AddDetails(ExceptionLogDataContainer exceptionLogDataContainer, OperationContext context, Func<IDictionary<string, object>> getClientDetails);
-    }
+	public interface IRemoteClientInformationProvider
+	{
+		void AddDetails(ExceptionLogDataContainer exceptionLogDataContainer, RemoteClientLogInfo remoteClientLogInfo, Func<IDictionary<string, object>> getClientDetails);
+	}
 }
