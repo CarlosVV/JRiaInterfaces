@@ -61,11 +61,9 @@ namespace CES.CoreApi.GeoLocation.Service.Configuration
         private static void RegisterFoundation(Container container)
         {
             var cacheName = ConfigurationManager.AppSettings["cacheName"];
-
             container.RegisterSingle<IAuthenticationManager, AuthenticationManager>();
             container.RegisterSingle<IApplicationAuthenticator, ApplicationAuthenticator>();
             container.RegisterSingle<IApplicationRepository, ApplicationRepository>(); 
-            
             container.RegisterSingle<IRequestHeadersProvider, RequestHeadersProvider>();
             container.RegisterSingle<IServiceCallHeaderParametersProvider, ServiceCallHeaderParametersProvider>();
             container.RegisterSingle<IAuthorizationManager, AuthorizationManager>();
@@ -77,7 +75,6 @@ namespace CES.CoreApi.GeoLocation.Service.Configuration
             container.RegisterSingle<IAutoMapperProxy, AutoMapperProxy>();
             container.RegisterSingle<IHttpClientProxy, HttpClientProxy>();
             container.RegisterSingle<IConfigurationProvider, ConfigurationProvider>();
-           // container.RegisterSingle<IServiceConfigurationProvider, ServiceConfigurationProvider>();
             container.RegisterSingle<IIdentityManager, IdentityManager>();
         }
 
@@ -111,7 +108,6 @@ namespace CES.CoreApi.GeoLocation.Service.Configuration
             // (proxy) instance will be a singleton as well.
             container.RegisterSingle<PerformanceInterceptor>();
 			container.RegisterSingle<SecurityLogMonitorInterceptor>();
-
 			container.RegisterSingle<IRequestValidator, RequestValidator>();
             container.RegisterSingle<IMappingHelper, MappingHelper>();
         }
@@ -124,10 +120,6 @@ namespace CES.CoreApi.GeoLocation.Service.Configuration
 				{"IGoogleUrlBuilder", container.GetInstance<GoogleUrlBuilder>},
 				{"IMelissaDataUrlBuilder", container.GetInstance<MelissaUrlBuilder>}
 			});
-
-			//container.RegisterSingle<IUrlBuilder, BingUrlBuilder>();
-			//container.RegisterSingle<IUrlBuilder, GoogleUrlBuilder>();
-			//container.RegisterSingle<IUrlBuilder, MelissaUrlBuilder>();
 
 			container.RegisterSingle<IResponseParserFactory>(new ResponseParserFactory
             {
@@ -212,6 +204,7 @@ namespace CES.CoreApi.GeoLocation.Service.Configuration
             container.Register<IRemoteClientInformationProvider, RemoteClientInformationProvider>();
             container.Register<IHttpRequestInformationProvider, HttpRequestInformationProvider>();
             container.Register<IServerInformationProvider, ServerInformationProvider>();
+
 
             //Performance log related
             container.Register<IPerformanceLogMonitor, PerformanceLogMonitor>();
