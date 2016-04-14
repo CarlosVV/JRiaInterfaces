@@ -7,6 +7,5 @@ namespace CES.CoreApi.Logging.Interfaces
 	public interface IRemoteClientInformationProvider
 	{
 		void AddDetails(ExceptionLogDataContainer exceptionLogDataContainer, RemoteClientLogInfo remoteClientLogInfo, Func<IDictionary<string, object>> getClientDetails);
-
 	}
 }

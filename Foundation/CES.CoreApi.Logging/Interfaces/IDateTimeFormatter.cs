@@ -2,11 +2,8 @@
 
 namespace CES.CoreApi.Logging.Interfaces
 {
-    public interface IDateTimeFormatter
-    {
-        /// <summary>
-        /// Returns execution start time formatted
-        /// </summary>
-        string Format(DateTime date);
-    }
+	public interface IDateTimeFormatter
+	{
+		string Format(DateTime date);
+	}
 }

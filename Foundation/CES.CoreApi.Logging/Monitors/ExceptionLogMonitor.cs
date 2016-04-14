@@ -25,13 +25,8 @@ namespace CES.CoreApi.Logging.Monitors
 
 		public void AddServiceCallDetails(RemoteClientLogInfo remoteClientLogInfo, RequestLogInfo requestLogInfo, ServerLogInfo serverLogInfo, Func<IDictionary<string, object>> getClientDetails)
 		{
-			//if (context == null)
-			//	return;
-
-			//Calling application should not fail if logging failed
 			try
 			{
-				//Collect web service call details
 				_serviceCallDetailsProvider.AddDetails(DataContainer, remoteClientLogInfo, requestLogInfo, serverLogInfo, getClientDetails);
 
 			}
@@ -44,7 +39,6 @@ namespace CES.CoreApi.Logging.Monitors
 
 		public void Publish(Exception exception, string customMessage = null)
 		{
-			//Calling application should not fail if logging failed
 			try
 			{
 				customMessage = string.IsNullOrEmpty(customMessage) ? string.Empty : customMessage;

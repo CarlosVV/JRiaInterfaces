@@ -3,23 +3,14 @@ using CES.CoreApi.Logging.Models;
 
 namespace CES.CoreApi.Logging.Interfaces
 {
-    public interface IDatabasePerformanceLogMonitor
-    {
-        /// <summary>
-        /// Gets or sets database performance log data container instance
-        /// </summary>
-        DatabasePerformanceLogDataContainer DataContainer { get; }
+	public interface IDatabasePerformanceLogMonitor
+	{
+		DatabasePerformanceLogDataContainer DataContainer { get; }
 
-        /// <summary>
-        /// Starts performance log monitoring
-        /// </summary>
-        void Start(DbCommand command);
+		void Start(DbCommand command);
 
-        /// <summary>
-        /// Stops performance log monitoring
-        /// </summary>
-        void Stop();
+		void Stop();
 
-        void UpdateConnectionDetails(DbCommand command);
-    }
+		void UpdateConnectionDetails(DbCommand command);
+	}
 }

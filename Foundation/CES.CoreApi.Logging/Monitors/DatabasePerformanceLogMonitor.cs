@@ -13,149 +13,117 @@ using CES.CoreApi.Logging.Models;
 
 namespace CES.CoreApi.Logging.Monitors
 {
-    public class DatabasePerformanceLogMonitor : BaseLogMonitor, IDatabasePerformanceLogMonitor
-    {
-        #region Core
+	public class DatabasePerformanceLogMonitor : BaseLogMonitor, IDatabasePerformanceLogMonitor
+	{
 
-        private readonly Stopwatch _timer;
+		private readonly Stopwatch _timer;
 
-        /// <summary>
-        /// Initializes DatabasePerformanceLogMonitor instance
-        /// </summary>
-        /// <param name="dataContainer">Trace log data container instance</param>
-        /// <param name="configuration">Performance log configuration </param>
-        /// <param name="logProxy"></param>
-        public DatabasePerformanceLogMonitor(DatabasePerformanceLogDataContainer dataContainer, ILogConfigurationProvider configuration, ILoggerProxy logProxy)
-            : base(logProxy, configuration)
-        {
-            if (dataContainer == null)
-                throw new ArgumentNullException("dataContainer");
+		public DatabasePerformanceLogMonitor(DatabasePerformanceLogDataContainer dataContainer, ILogConfigurationProvider configuration, ILoggerProxy logProxy)
+			: base(logProxy, configuration)
+		{
+			if (dataContainer == null)
+				throw new ArgumentNullException("dataContainer");
 
-            DataContainer = dataContainer;
+			DataContainer = dataContainer;
 
-            _timer = new Stopwatch();
-        }
+			_timer = new Stopwatch();
+		}
 
-        #endregion //Core
+		public DatabasePerformanceLogDataContainer DataContainer { get; private set; }
 
-        #region Properties
+		private bool ThresholdExceeded
+		{
+			get
+			{
+				return _timer.ElapsedMilliseconds >= Configuration.DatabasePerformanceLogConfiguration.Threshold;
+			}
+		}
 
-        /// <summary>
-        /// Gets or sets database performance log data container instance
-        /// </summary>
-        public DatabasePerformanceLogDataContainer DataContainer { get; private set; }
+		public void Start(DbCommand command)
+		{
+			if (!Configuration.PerformanceLogConfiguration.IsEnabled)
+				return;
+			if (command == null)
+				throw new ArgumentNullException("command");
+			if (_timer.IsRunning)
+				throw new ApplicationException("Database Performance Monitor is running. Call Stop method first.");
 
-        /// <summary>
-        /// Returns TRUE if timeout exceeded, otherwise returns FALSE
-        /// </summary>
-        private bool ThresholdExceeded
-        {
-            get
-            {
-                return _timer.ElapsedMilliseconds >= Configuration.DatabasePerformanceLogConfiguration.Threshold;
-            }
-        }
+			PopulateDataContainer(command);
 
-        #endregion //Properties
+			_timer.Start();
+		}
 
-        #region Public methods
+		public void UpdateConnectionDetails(DbCommand command)
+		{
+			if (!Configuration.PerformanceLogConfiguration.IsEnabled)
+				return;
+			if (command == null)
+				throw new ArgumentNullException("command");
+			if (!_timer.IsRunning)
+				throw new ApplicationException("Database Performance Monitor is not running. Start method should be called before Stop.");
 
-        /// <summary>
-        /// Starts performance log monitoring
-        /// </summary>
-        public void Start(DbCommand command)
-        {
-            if (!Configuration.PerformanceLogConfiguration.IsEnabled)
-                return;
-            if (command == null)
-                throw new ArgumentNullException("command");
-            if (_timer.IsRunning)
-                throw new ApplicationException("Database Performance Monitor is running. Call Stop method first.");
+			SetConnectionDetails(command);
+		}
 
-            PopulateDataContainer(command);
+		public void Stop()
+		{
+			if (!Configuration.PerformanceLogConfiguration.IsEnabled)
+				return;
 
-            _timer.Start();
-        }
+			if (!_timer.IsRunning)
+				throw new ApplicationException("Database Performance Monitor is not running. Start method should be called before Stop.");
 
-        public void UpdateConnectionDetails(DbCommand command)
-        {
-            if (!Configuration.PerformanceLogConfiguration.IsEnabled)
-                return;
-            if (command == null)
-                throw new ArgumentNullException("command");
-            if (!_timer.IsRunning)
-                throw new ApplicationException("Database Performance Monitor is not running. Start method should be called before Stop.");
-            
-            SetConnectionDetails(command);
-        }
+			_timer.Stop();
 
-        /// <summary>
-        /// Stops performance log monitoring
-        /// </summary>
-        public void Stop()
-        {
-            if (!Configuration.PerformanceLogConfiguration.IsEnabled)
-                return;
+			if (!ThresholdExceeded)
+				return;
 
-            if (!_timer.IsRunning)
-                throw new ApplicationException("Database Performance Monitor is not running. Start method should be called before Stop.");
+			DataContainer.ElapsedMilliseconds = _timer.ElapsedMilliseconds;
+			Publish(DataContainer);
+		}
 
-            _timer.Stop();
+		private void PopulateDataContainer(DbCommand command)
+		{
+			DataContainer.CommandText = command.CommandText;
+			DataContainer.CommandTimeout = command.CommandTimeout;
+			DataContainer.CommandType = command.CommandType;
+			DataContainer.Parameters = GetParametersCollection(command);
 
-            if (!ThresholdExceeded)
-                return;
+			SetConnectionDetails(command);
+		}
 
-            DataContainer.ElapsedMilliseconds = _timer.ElapsedMilliseconds;
-            Publish(DataContainer);
-        }
+		private void SetConnectionDetails(DbCommand command)
+		{
+			if (command.Connection == null)
+				return;
+			if (command.Connection.State != ConnectionState.Open)
+				return;
 
-        #endregion //Public methods
+			DataContainer.Connection = new DatabaseConnection
+			{
+				ConnectionString = command.Connection.ConnectionString.RemoveSecurityCredentials(),
+				ConnectionTimeout = command.Connection.ConnectionTimeout,
+				DatabaseName = command.Connection.Database,
+				ServerName = command.Connection.DataSource,
+				ServerVersion = command.Connection.ServerVersion
+			};
+		}
 
-        #region Private methods
-        
-        private void PopulateDataContainer(DbCommand command)
-        {
-            DataContainer.CommandText = command.CommandText;
-            DataContainer.CommandTimeout = command.CommandTimeout;
-            DataContainer.CommandType = command.CommandType;
-            DataContainer.Parameters = GetParametersCollection(command);
-
-            SetConnectionDetails(command);
-        }
-
-        private void SetConnectionDetails(DbCommand command)
-        {
-            if (command.Connection == null)
-                return;
-            if (command.Connection.State != ConnectionState.Open)
-                return;
-
-            DataContainer.Connection = new DatabaseConnection
-            {
-                ConnectionString = command.Connection.ConnectionString.RemoveSecurityCredentials(),
-                ConnectionTimeout = command.Connection.ConnectionTimeout,
-                DatabaseName = command.Connection.Database,
-                ServerName = command.Connection.DataSource,
-                ServerVersion = command.Connection.ServerVersion
-            };
-        }
-
-        private static IEnumerable<DatabaseParameter> GetParametersCollection(DbCommand command)
-        {
-            var parameters = new Collection<DatabaseParameter>();
-            foreach (var dbParameter in from SqlParameter parameter in command.Parameters select new DatabaseParameter
-            {
-                Name = parameter.ParameterName,
-                DataType = parameter.DbType,
-                Direction = parameter.Direction,
-                Value = parameter.Value
-            })
-            {
-                parameters.Add(dbParameter);
-            }
-            return parameters;
-        }
-
-        #endregion
-    }
+		private static IEnumerable<DatabaseParameter> GetParametersCollection(DbCommand command)
+		{
+			var parameters = new Collection<DatabaseParameter>();
+			foreach (var dbParameter in from SqlParameter parameter in command.Parameters
+										select new DatabaseParameter
+										{
+											Name = parameter.ParameterName,
+											DataType = parameter.DbType,
+											Direction = parameter.Direction,
+											Value = parameter.Value
+										})
+			{
+				parameters.Add(dbParameter);
+			}
+			return parameters;
+		}
+	}
 }

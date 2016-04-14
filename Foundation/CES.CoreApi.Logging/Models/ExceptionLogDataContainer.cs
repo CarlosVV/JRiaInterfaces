@@ -15,9 +15,6 @@ namespace CES.CoreApi.Logging.Models
 	{
 		private readonly IJsonDataContainerFormatter _formatter;
 
-		/// <summary>
-		/// Initializes ExceptionLogDataContainer instance
-		/// </summary>
 		public ExceptionLogDataContainer(IJsonDataContainerFormatter formatter, ICurrentDateTimeProvider currentDateTimeProvider)
 		{
 			if (formatter == null)

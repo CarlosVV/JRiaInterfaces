@@ -10,8 +10,7 @@ namespace CES.CoreApi.Logging.Formatters
 	{
 		public string Format(IDataContainer dataContainer)
 		{
-			if (dataContainer == null)
-				throw new ArgumentNullException("dataContainer");
+			if (dataContainer == null) throw new ArgumentNullException("dataContainer");
 
 			return JsonConvert.SerializeObject(dataContainer, Formatting.None,
 				new JsonSerializerSettings
