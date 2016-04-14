@@ -6,8 +6,6 @@ using System.ServiceModel.Channels;
 using System.Threading.Tasks;
 using CES.CoreApi.Common.Enumerations;
 using CES.CoreApi.Common.Exceptions;
-using CES.CoreApi.Common.Interfaces;
-using CES.CoreApi.Common.Models;
 using CES.CoreApi.Foundation.Contract.Interfaces;
 using CES.CoreApi.Foundation.Contract.Models;
 using CES.CoreApi.Security.Interfaces;
@@ -15,7 +13,7 @@ using CES.CoreApi.Security.Models;
 
 namespace CES.CoreApi.Security
 {
-    public class ApplicationAuthenticator : IApplicationAuthenticator
+	public class ApplicationAuthenticator : IApplicationAuthenticator
     {
         private readonly IApplicationRepository _repository;
         private readonly IServiceCallHeaderParametersProvider _parametersProvider;

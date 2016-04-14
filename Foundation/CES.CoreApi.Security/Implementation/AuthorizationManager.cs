@@ -1,5 +1,4 @@
-﻿using System;
-using System.ServiceModel;
+﻿using System.ServiceModel;
 using CES.CoreApi.Common.Enumerations;
 using CES.CoreApi.Common.Exceptions;
 using CES.CoreApi.Security.Interfaces;
