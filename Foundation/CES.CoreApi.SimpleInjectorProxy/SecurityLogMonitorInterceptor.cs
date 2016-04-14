@@ -4,6 +4,7 @@ using CES.CoreApi.Common.Interfaces;
 using CES.CoreApi.Logging.Interfaces;
 using CES.CoreApi.Logging.Models;
 using CES.CoreApi.Foundation.Contract.Interfaces;
+using CES.CoreApi.Security.Interfaces;
 
 namespace CES.CoreApi.SimpleInjectorProxy
 {

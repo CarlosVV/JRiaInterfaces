@@ -9,19 +9,19 @@ namespace CES.CoreApi.Foundation.Contract.Models
     {
         #region Core
 
-        public ClientApplicationIdentity(IApplication application, ServiceCallHeaderParameters headerParameters)
+        public ClientApplicationIdentity(IApplication application)
         {
             if (application == null) throw new ArgumentNullException("application");
-            if (headerParameters == null) throw new ArgumentNullException("headerParameters");
+            //if (headerParameters == null) throw new ArgumentNullException("headerParameters");
             
             ApplicationId = application.Id;
             Name = application.Name;
-            OperationName = headerParameters.OperationName;
-            Timestamp = headerParameters.Timestamp;
-            ApplicationSessionId = headerParameters.ApplicationSessionId;
-            ReferenceNumber = headerParameters.ReferenceNumber;
-            ReferenceNumberType = headerParameters.ReferenceNumberType;
-            CorrelationId = headerParameters.CorrelationId;
+            //OperationName = headerParameters.OperationName;
+            //Timestamp = headerParameters.Timestamp;
+            //ApplicationSessionId = headerParameters.ApplicationSessionId;
+            //ReferenceNumber = headerParameters.ReferenceNumber;
+            //ReferenceNumberType = headerParameters.ReferenceNumberType;
+            //CorrelationId = headerParameters.CorrelationId;
         }
 
         #endregion

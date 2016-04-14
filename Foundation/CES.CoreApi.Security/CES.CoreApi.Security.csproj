@@ -50,6 +50,8 @@
     <Compile Include="Interfaces\IAuthenticationManager.cs" />
     <Compile Include="Interfaces\IApplicationAuthorizator.cs" />
     <Compile Include="Interfaces\IAuthorizationManager.cs" />
+    <Compile Include="Interfaces\IServiceCallHeaderParametersProvider.cs" />
+    <Compile Include="Models\ServiceCallHeaderParameters.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

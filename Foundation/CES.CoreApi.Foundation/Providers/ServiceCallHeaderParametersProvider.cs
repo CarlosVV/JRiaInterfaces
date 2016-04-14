@@ -5,11 +5,12 @@ using System.ServiceModel;
 using CES.CoreApi.Common.Tools;
 using CES.CoreApi.Foundation.Contract.Constants;
 using CES.CoreApi.Foundation.Contract.Interfaces;
-using CES.CoreApi.Foundation.Contract.Models;
+using CES.CoreApi.Security.Interfaces;
+using CES.CoreApi.Security.Models;
 
 namespace CES.CoreApi.Foundation.Providers
 {
-    public class ServiceCallHeaderParametersProvider : IServiceCallHeaderParametersProvider
+	public class ServiceCallHeaderParametersProvider : IServiceCallHeaderParametersProvider
     {
         #region Core
 

@@ -11,6 +11,7 @@ using CES.CoreApi.Common.Models;
 using CES.CoreApi.Foundation.Contract.Interfaces;
 using CES.CoreApi.Foundation.Contract.Models;
 using CES.CoreApi.Security.Interfaces;
+using CES.CoreApi.Security.Models;
 
 namespace CES.CoreApi.Security
 {
@@ -46,7 +47,7 @@ namespace CES.CoreApi.Security
 
         private static void SetApplicationPrincipal(Message message, IApplication clientApplication, ServiceCallHeaderParameters headerParameters)
         {
-            var identity = new ClientApplicationIdentity(clientApplication, headerParameters);
+            var identity = new ClientApplicationIdentity(clientApplication);
             IPrincipal applicationPrincipal = new ApplicationPrincipal(identity);
             message.Properties["Principal"] = applicationPrincipal;
         }

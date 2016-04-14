@@ -1,7 +1,6 @@
-﻿
-using CES.CoreApi.Foundation.Contract.Models;
+﻿using CES.CoreApi.Security.Models;
 
-namespace CES.CoreApi.Foundation.Contract.Interfaces
+namespace CES.CoreApi.Security.Interfaces
 {
     public interface IServiceCallHeaderParametersProvider
     {
