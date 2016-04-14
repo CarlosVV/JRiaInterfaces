@@ -77,7 +77,7 @@ namespace CES.CoreApi.GeoLocation.Service.Configuration
             container.RegisterSingle<IAutoMapperProxy, AutoMapperProxy>();
             container.RegisterSingle<IHttpClientProxy, HttpClientProxy>();
             container.RegisterSingle<IConfigurationProvider, ConfigurationProvider>();
-            container.RegisterSingle<IServiceConfigurationProvider, ServiceConfigurationProvider>();
+           // container.RegisterSingle<IServiceConfigurationProvider, ServiceConfigurationProvider>();
             container.RegisterSingle<IIdentityManager, IdentityManager>();
         }
 
