@@ -9,7 +9,7 @@ using CES.CoreApi.Security.Interfaces;
 
 namespace CES.CoreApi.Foundation.Service
 {
-    public abstract class IocBasedServiceHostFactory :SimpleInjectorServiceHostFactory
+    public abstract class IocBasedServiceHostFactory: SimpleInjectorServiceHostFactory
     {
         protected IocBasedServiceHostFactory(Container container)
         {
@@ -28,8 +28,7 @@ namespace CES.CoreApi.Foundation.Service
 
             ApplyServiceBehaviors(host);
             ApplyContractBehaviors(host);
-
-            //Configure authentication and authorization
+			
             host.Authentication.ServiceAuthenticationManager = (ServiceAuthenticationManager)IocContainerProvider.Instance.GetInstance<IAuthenticationManager>();
             host.Authorization.ServiceAuthorizationManager = (ServiceAuthorizationManager)IocContainerProvider.Instance.GetInstance<IAuthorizationManager>();
             var serviceAuthorizationBehavior = host.Description.Behaviors.Find<ServiceAuthorizationBehavior>();

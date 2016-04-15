@@ -3,7 +3,7 @@ using CES.CoreApi.Foundation.Contract.Models;
 
 namespace CES.CoreApi.Foundation.Contract.Interfaces
 {
-    public interface IServiceCallHeaderParametersProvider
+    public interface IRequestHeaderParametersProvider
     {
         ServiceCallHeaderParameters GetParameters();
     }

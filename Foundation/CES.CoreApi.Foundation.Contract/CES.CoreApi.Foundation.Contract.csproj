@@ -48,8 +48,9 @@
     <Compile Include="Interfaces\IConfigurationProvider.cs" />
     <Compile Include="Interfaces\IHostApplicationProvider.cs" />
     <Compile Include="Interfaces\IMappingHelper.cs" />
+    <Compile Include="Interfaces\IRequestHeaderParametersProviderFactory.cs" />
     <Compile Include="Interfaces\IRequestHeadersProvider.cs" />
-    <Compile Include="Interfaces\IServiceCallHeaderParametersProvider.cs" />
+    <Compile Include="Interfaces\IRequestHeaderParametersProvider.cs" />
     <Compile Include="Interfaces\IServiceConfigurationProvider.cs" />
     <Compile Include="Interfaces\IServiceExceptionHandler.cs" />
     <Compile Include="Interfaces\IServiceHelper.cs" />

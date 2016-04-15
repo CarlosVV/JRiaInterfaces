@@ -31,6 +31,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
+    <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
     <Reference Include="System.IdentityModel" />
     <Reference Include="System.ServiceModel" />
@@ -42,6 +43,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Factory\RequestHeaderParametersProviderFactory.cs" />
+    <Compile Include="Interfaces\IWCFRequestHeaderParametersProvider.cs" />
     <Compile Include="Managers\ApplicationAuthenticator.cs" />
     <Compile Include="Managers\AuthenticationManager.cs" />
     <Compile Include="Managers\ApplicationAuthorizator.cs" />
@@ -52,11 +55,16 @@
     <Compile Include="Interfaces\IApplicationAuthorizator.cs" />
     <Compile Include="Interfaces\IAuthorizationManager.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Providers\BaseRequestHeaderParameters.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\CES.CoreApi.Common\CES.CoreApi.Common.csproj">
       <Project>{070c7bb2-af07-4a4c-a9cc-6bfb8ca416e6}</Project>
       <Name>CES.CoreApi.Common</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\CES.CoreApi.Data\CES.CoreApi.Data.csproj">
+      <Project>{1aa5ba90-02cc-4fd1-81f2-615c374c83a5}</Project>
+      <Name>CES.CoreApi.Data</Name>
     </ProjectReference>
     <ProjectReference Include="..\CES.CoreApi.Foundation.Contract\CES.CoreApi.Foundation.Contract.csproj">
       <Project>{8dbcfe15-ca3b-4f7c-a7d6-d73f8f0b91aa}</Project>

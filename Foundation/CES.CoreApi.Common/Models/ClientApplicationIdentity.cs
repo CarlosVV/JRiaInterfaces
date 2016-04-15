@@ -6,8 +6,6 @@ namespace CES.CoreApi.Common.Models
 {
     public class ClientApplicationIdentity : IIdentity
     {
-        #region Core
-
         public ClientApplicationIdentity(IApplication application, ServiceCallHeaderParameters headerParameters)
         {
             if (application == null) throw new ArgumentNullException("application");
@@ -22,11 +20,7 @@ namespace CES.CoreApi.Common.Models
             ReferenceNumberType = headerParameters.ReferenceNumberType;
             CorrelationId = headerParameters.CorrelationId;
         }
-
-        #endregion
-
-        #region Public properties
-
+		
         public int ApplicationId { get; private set; }
 
         public string Name { get; private set; }
@@ -46,7 +40,5 @@ namespace CES.CoreApi.Common.Models
         public string ReferenceNumberType { get; private set; }
 
         public string CorrelationId { get; private set; }
-
-        #endregion
     }
 }

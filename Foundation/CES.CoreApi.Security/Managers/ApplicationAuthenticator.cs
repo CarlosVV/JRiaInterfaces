@@ -1,38 +1,29 @@
-﻿using System;
-using System.Collections.ObjectModel;
-using System.IdentityModel.Policy;
-using System.Security.Principal;
-using System.ServiceModel.Channels;
+﻿using System.Security.Principal;
 using System.Threading.Tasks;
 using CES.CoreApi.Common.Enumerations;
 using CES.CoreApi.Common.Exceptions;
-using CES.CoreApi.Common.Interfaces;
 using CES.CoreApi.Common.Models;
 using CES.CoreApi.Foundation.Contract.Interfaces;
 using CES.CoreApi.Foundation.Contract.Models;
 using CES.CoreApi.Security.Interfaces;
+using System.Configuration;
 
 namespace CES.CoreApi.Security
 {
     public class ApplicationAuthenticator : IApplicationAuthenticator
     {
         private readonly IApplicationRepository _repository;
-        private readonly IServiceCallHeaderParametersProvider _parametersProvider;
+        private readonly IRequestHeaderParametersProvider _parametersProvider;
         
-        public ApplicationAuthenticator(IApplicationRepository repository, IServiceCallHeaderParametersProvider parametersProvider, IHostApplicationProvider hostApplicationProvider)
+        public ApplicationAuthenticator(IApplicationRepository repository, IRequestHeaderParametersProviderFactory requestHeaderParametersProviderFactory)
         {
             if (repository == null)
-                throw new CoreApiException(TechnicalSubSystem.Authentication,
-                    SubSystemError.GeneralRequiredParameterIsUndefined, "repository");
-            if (parametersProvider == null)
-                throw new CoreApiException(TechnicalSubSystem.Authentication,
-                    SubSystemError.GeneralRequiredParameterIsUndefined, "parametersProvider");
-            if (hostApplicationProvider == null)
-                throw new CoreApiException(TechnicalSubSystem.Authentication,
-                    SubSystemError.GeneralRequiredParameterIsUndefined, "hostApplicationProvider");
-
+				throw new CoreApiException(TechnicalSubSystem.Authentication, SubSystemError.GeneralRequiredParameterIsUndefined, "repository");
+            if (requestHeaderParametersProviderFactory == null)
+				throw new CoreApiException(TechnicalSubSystem.Authentication, SubSystemError.GeneralRequiredParameterIsUndefined, "requestHeaderParametersProviderFactory");
+            
             _repository = repository;
-            _parametersProvider = parametersProvider;
+            _parametersProvider = requestHeaderParametersProviderFactory.GetInstance<IRequestHeaderParametersProvider>(ConfigurationManager.AppSettings["HostServiceType"]);
         }
 
         public IPrincipal Authenticate()

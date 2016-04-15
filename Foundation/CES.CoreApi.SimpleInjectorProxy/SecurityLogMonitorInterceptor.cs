@@ -4,6 +4,7 @@ using CES.CoreApi.Common.Interfaces;
 using CES.CoreApi.Logging.Interfaces;
 using CES.CoreApi.Logging.Models;
 using CES.CoreApi.Foundation.Contract.Interfaces;
+using System.Configuration;
 
 namespace CES.CoreApi.SimpleInjectorProxy
 {
@@ -12,9 +13,8 @@ namespace CES.CoreApi.SimpleInjectorProxy
 		private readonly ILogMonitorFactory _logMonitorFactory;
 		private readonly IIdentityManager _identityManager;
 		private readonly IHostApplicationProvider _hostApplicationProvider;
-		private readonly IServiceCallHeaderParametersProvider _parametersProvider;
-
-		public SecurityLogMonitorInterceptor(ILogMonitorFactory logMonitorFactory, IIdentityManager identityManager, IHostApplicationProvider hostApplicationProvider, IServiceCallHeaderParametersProvider parametersProvider)
+		
+		public SecurityLogMonitorInterceptor(ILogMonitorFactory logMonitorFactory, IIdentityManager identityManager, IHostApplicationProvider hostApplicationProvider)
 		{
 			if (logMonitorFactory == null)
 				throw new ArgumentNullException("logMonitorFactory");
@@ -22,7 +22,6 @@ namespace CES.CoreApi.SimpleInjectorProxy
 			_logMonitorFactory = logMonitorFactory;
 			_identityManager = identityManager;
 			_hostApplicationProvider = hostApplicationProvider;
-			_parametersProvider = parametersProvider;
 		}
 
 		public void Intercept(IInvocation invocation)
@@ -35,7 +34,7 @@ namespace CES.CoreApi.SimpleInjectorProxy
 			var securityAuditParameters = new SecurityAuditParameters
 			{
 				ClientApplicationId = clientApplicationIdentity.ApplicationId,
-				Operation = _parametersProvider.GetParameters().OperationName,
+				Operation = clientApplicationIdentity.OperationName,
 				ServiceApplicationId = hostApplication.Id
 			};
 

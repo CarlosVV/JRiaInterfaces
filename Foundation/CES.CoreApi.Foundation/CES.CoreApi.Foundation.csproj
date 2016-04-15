@@ -70,6 +70,8 @@
     <Compile Include="Configuration\ConfigurationTools.cs" />
     <Compile Include="Configuration\GeoLocationConfiguration.cs" />
     <Compile Include="Configuration\ProviderConfigurationSection.cs" />
+    <Compile Include="Providers\WcfRequestHeaderParametersProvider.cs" />
+    <Compile Include="Providers\WebAPIRequestHeaderParametersProvider.cs" />
     <Compile Include="Repositories\ApplicationRepository.cs" />
     <Compile Include="Service\MessageInspector.cs" />
     <Compile Include="Tools\MappingHelper.cs" />
@@ -77,7 +79,6 @@
     <Compile Include="Providers\ClientDetailsProvider.cs" />
     <Compile Include="Providers\ConfigurationProvider.cs" />
     <Compile Include="Providers\HostApplicationProvider.cs" />
-    <Compile Include="Providers\ServiceCallHeaderParametersProvider.cs" />
     <Compile Include="Providers\ServiceConfigurationProvider.cs" />
     <Compile Include="Service\IocBasedInstanceProvider.cs" />
     <Compile Include="Service\IocBasedServiceHostFactory.cs" />
@@ -85,7 +86,7 @@
     <Compile Include="Providers\IocContainerProvider.cs" />
     <Compile Include="Service\ServiceEndpointBehavior.cs" />
     <Compile Include="Service\ServiceExceptionHandler.cs" />
-    <Compile Include="Providers\RequestHeadersProvider.cs" />
+    <Compile Include="Providers\WcfRequestHeadersProvider.cs" />
     <Compile Include="Tools\ServiceHelper.cs" />
     <Compile Include="Validation\ContractValidation.cs" />
   </ItemGroup>

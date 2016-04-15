@@ -1,5 +1,4 @@
-﻿using System;
-using System.ServiceModel;
+﻿using System.ServiceModel;
 using CES.CoreApi.Common.Enumerations;
 using CES.CoreApi.Common.Exceptions;
 using CES.CoreApi.Security.Interfaces;
@@ -14,17 +13,19 @@ namespace CES.CoreApi.Security
 		public AuthorizationManager(IApplicationAuthorizator authorizationAdministrator)
 		{
 			if (authorizationAdministrator == null)
-				throw new CoreApiException(TechnicalSubSystem.Authorization,
-				   SubSystemError.GeneralRequiredParameterIsUndefined, "authorizationAdministrator");
+				throw new CoreApiException(TechnicalSubSystem.Authorization, SubSystemError.GeneralRequiredParameterIsUndefined, "authorizationAdministrator");
 
 			_authorizationAdministrator = authorizationAdministrator;
 		}
 
 		public override bool CheckAccess(OperationContext operationContext)
 		{
+			if (operationContext.EndpointDispatcher.IsSystemEndpoint)
+				return operationContext.EndpointDispatcher.IsSystemEndpoint;
+
 			var principal = operationContext.IncomingMessageProperties["Principal"] as IPrincipal;
 			operationContext.ServiceSecurityContext.AuthorizationContext.Properties["Principal"] = _authorizationAdministrator.ValidateAccess(principal);
-			return operationContext.EndpointDispatcher.IsSystemEndpoint || operationContext.ServiceSecurityContext.AuthorizationContext.Properties["Principal"] != null;
+			return operationContext.ServiceSecurityContext.AuthorizationContext.Properties["Principal"] != null;
 		}
 	}
 }
