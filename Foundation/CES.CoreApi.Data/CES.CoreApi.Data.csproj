@@ -60,6 +60,7 @@
     <Compile Include="Enumerations\DatabaseType.cs" />
     <Compile Include="Enumerations\ServiceConfigurationType.cs" />
     <Compile Include="Enumerations\ServiceSecurityMode.cs" />
+    <Compile Include="Factory\CoreDatabaseFactory.cs" />
     <Compile Include="Providers\DatabaseConfigurationProvider.cs" />
     <Compile Include="Configuration\DatabaseServerGroups.cs" />
     <Compile Include="Configuration\DatabaseServer.cs" />

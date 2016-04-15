@@ -60,28 +60,6 @@
   <ItemGroup>
     <None Include="packages.config" />
   </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\..\Foundation\CES.CoreApi.Foundation.Contract\CES.CoreApi.Foundation.Contract.csproj">
-      <Project>{8dbcfe15-ca3b-4f7c-a7d6-d73f8f0b91aa}</Project>
-      <Name>CES.CoreApi.Foundation.Contract</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\Foundation\CES.CoreApi.Foundation\CES.CoreApi.Foundation.csproj">
-      <Project>{e2b71a13-9683-4862-b2eb-31050190afdc}</Project>
-      <Name>CES.CoreApi.Foundation</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\CES.CoreApi.GeoLocation.Service.Business.Contract\CES.CoreApi.GeoLocation.Service.Business.Contract.csproj">
-      <Project>{f1c8c7b5-94b0-4344-b4c1-220e1bb82976}</Project>
-      <Name>CES.CoreApi.GeoLocation.Service.Business.Contract</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\CES.CoreApi.GeoLocation.Service.Business.Logic\CES.CoreApi.GeoLocation.Service.Business.Logic.csproj">
-      <Project>{57496880-9c9b-448f-8c08-026214cf85eb}</Project>
-      <Name>CES.CoreApi.GeoLocation.Service.Business.Logic</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\CES.CoreApi.GeoLocation.Service.Contract\CES.CoreApi.GeoLocation.Service.Contract.csproj">
-      <Project>{e0888526-1dc6-4693-88a3-7347a99bc018}</Project>
-      <Name>CES.CoreApi.GeoLocation.Service.Contract</Name>
-    </ProjectReference>
-  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

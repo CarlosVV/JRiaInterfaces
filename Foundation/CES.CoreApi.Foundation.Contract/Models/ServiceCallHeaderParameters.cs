@@ -1,6 +1,6 @@
 using System;
 
-namespace CES.CoreApi.Common.Models
+namespace CES.CoreApi.Foundation.Models
 {
     public class ServiceCallHeaderParameters
     {

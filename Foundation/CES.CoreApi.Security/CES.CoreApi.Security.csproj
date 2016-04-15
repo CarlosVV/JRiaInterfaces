@@ -44,6 +44,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Factory\RequestHeaderParametersProviderFactory.cs" />
+    <Compile Include="Interfaces\IIdentityManager.cs" />
+    <Compile Include="Interfaces\IRequestHeaderParametersProvider.cs" />
     <Compile Include="Interfaces\IWCFRequestHeaderParametersProvider.cs" />
     <Compile Include="Managers\ApplicationAuthenticator.cs" />
     <Compile Include="Managers\AuthenticationManager.cs" />
@@ -54,6 +56,7 @@
     <Compile Include="Interfaces\IAuthenticationManager.cs" />
     <Compile Include="Interfaces\IApplicationAuthorizator.cs" />
     <Compile Include="Interfaces\IAuthorizationManager.cs" />
+    <Compile Include="Models\ClientApplicationIdentity.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Providers\BaseRequestHeaderParameters.cs" />
   </ItemGroup>

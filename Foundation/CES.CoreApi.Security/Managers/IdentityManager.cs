@@ -2,7 +2,9 @@ using System;
 using System.Security.Principal;
 using System.Threading;
 using CES.CoreApi.Common.Interfaces;
-using CES.CoreApi.Common.Models;
+using CES.CoreApi.Foundation.Contract.Models;
+using CES.CoreApi.Security.Interfaces;
+using CES.CoreApi.Security.Models;
 
 namespace CES.CoreApi.Security
 {

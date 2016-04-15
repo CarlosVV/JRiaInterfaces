@@ -66,7 +66,6 @@
       <Private>True</Private>
     </Reference>
     <Reference Include="System.Runtime.Serialization" />
-    <Reference Include="System.ServiceModel" />
     <Reference Include="System.Web" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="System.Data" />
@@ -91,6 +90,9 @@
     <Compile Include="Configuration\LogConfigurationProvider.cs" />
     <Compile Include="Interfaces\IPerformanceLogConfiguration.cs" />
     <Compile Include="Interfaces\ITraceLogDataContainer.cs" />
+    <Compile Include="Models\RemoteClientLogInfo.cs" />
+    <Compile Include="Models\RequestLogInfo.cs" />
+    <Compile Include="Models\ServerLogInfo.cs" />
     <Compile Include="Monitors\BaseLogMonitor.cs" />
     <Compile Include="Configuration\PerformanceLogConfiguration.cs" />
     <Compile Include="Models\DatabaseConnection.cs" />

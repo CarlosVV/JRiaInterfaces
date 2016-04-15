@@ -2,9 +2,9 @@
 using System.Globalization;
 using System.Runtime.Serialization;
 
-namespace CES.CoreApi.Common.Models
+namespace CES.CoreApi.Foundation.Contract.Models
 {
-    [DataContract]
+ 
     public class ApplicationServiceOperation
     {
         #region Core
@@ -21,10 +21,10 @@ namespace CES.CoreApi.Common.Models
 
         #region Public properties
 
-        [DataMember]
+    
         public int ApplicationId { get; set; }
 
-        [DataMember]
+      
         public bool IsActive { get; set; }
 
         #endregion

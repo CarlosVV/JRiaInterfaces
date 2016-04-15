@@ -1,9 +1,9 @@
 ﻿using System;
-using System.Runtime.Serialization;
 
-namespace CES.CoreApi.Common.Models
+
+namespace CES.CoreApi.Foundation.Contract.Models
 {
-    [DataContract]
+
     public class ApplicationConfiguration
     {
         public ApplicationConfiguration(string name, string value)
@@ -17,10 +17,10 @@ namespace CES.CoreApi.Common.Models
             Value = value;
         }
 
-        [DataMember]
+  
         public string Name { get; private set; }
 
-        [DataMember]
+     
         public string Value { get; private set; }
     }
 }

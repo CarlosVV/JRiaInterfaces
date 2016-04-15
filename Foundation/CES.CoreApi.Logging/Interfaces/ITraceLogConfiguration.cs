@@ -3,26 +3,14 @@ using CES.CoreApi.Logging.Configuration;
 
 namespace CES.CoreApi.Logging.Interfaces
 {
-    public interface ITraceLogConfiguration
-    {
-        /// <summary>
-        /// Returns whether Trace log enabled
-        /// </summary>
-        bool IsEnabled { get; }
+	public interface ITraceLogConfiguration
+	{
+		bool IsEnabled { get; }
 
-        /// <summary>
-        /// Returns whether Trace log asynchronous
-        /// </summary>
-        bool IsAsynchronous { get; }
+		bool IsAsynchronous { get; }
 
-        /// <summary>
-        /// Returns whether request logging enabled
-        /// </summary>
-        bool IsRequestLoggingEnabled { get; }
+		bool IsRequestLoggingEnabled { get; }
 
-        /// <summary>
-        /// Returns whether response logging enabled
-        /// </summary>
-        bool IsResponseLoggingEnabled { get; }
-    }
+		bool IsResponseLoggingEnabled { get; }
+	}
 }

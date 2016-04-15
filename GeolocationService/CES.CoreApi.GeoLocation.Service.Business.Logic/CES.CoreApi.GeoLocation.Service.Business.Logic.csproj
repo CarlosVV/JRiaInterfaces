@@ -66,7 +66,6 @@
     <Compile Include="Processors\AddressServiceRequestProcessor.cs" />
     <Compile Include="Parsers\BaseDataResponseParser.cs" />
     <Compile Include="Processors\BaseServiceRequestProcessor.cs" />
-    <Compile Include="Processors\ClientSideSupportServiceProcessor.cs" />
     <Compile Include="Processors\GeocodeServiceRequestProcessor.cs" />
     <Compile Include="Processors\HealthMonitoringProcessor.cs" />
     <Compile Include="Processors\MapServiceRequestProcessor.cs" />
@@ -101,12 +100,20 @@
       <Name>CES.CoreApi.Data</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\Foundation\CES.CoreApi.Foundation.Contract\CES.CoreApi.Foundation.Contract.csproj">
-      <Project>{8DBCFE15-CA3B-4F7C-A7D6-D73F8F0B91AA}</Project>
+      <Project>{8dbcfe15-ca3b-4f7c-a7d6-d73f8f0b91aa}</Project>
       <Name>CES.CoreApi.Foundation.Contract</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\Foundation\CES.CoreApi.Logging\CES.CoreApi.Logging.csproj">
       <Project>{76762A04-54F0-4147-BD2B-267372034706}</Project>
       <Name>CES.CoreApi.Logging</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Foundation\CES.CoreApi.Security\CES.CoreApi.Security.csproj">
+      <Project>{bab197c1-fc36-4070-b1fa-ffc0d6bd1d79}</Project>
+      <Name>CES.CoreApi.Security</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\CES.CoreApi.Configuration\CES.CoreApi.Configuration.csproj">
+      <Project>{8d95c45a-c175-48fe-b307-00ee5780e36e}</Project>
+      <Name>CES.CoreApi.Configuration</Name>
     </ProjectReference>
     <ProjectReference Include="..\CES.CoreApi.GeoLocation.Service.Business.Contract\CES.CoreApi.GeoLocation.Service.Business.Contract.csproj">
       <Project>{F1C8C7B5-94B0-4344-B4C1-220E1BB82976}</Project>

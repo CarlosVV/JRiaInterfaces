@@ -62,7 +62,7 @@ namespace CES.CoreApi.GeoLocation.Service.Business.Logic.UnitTest
         [TestMethod]
         public void Constructor_ConfigurationProviderIsNull_ExceptionRaised()
         {
-            ExceptionHelper.CheckException(() => new GoogleUrlBuilder(null, _addressQueryBuilder.Object, _pushPinParameterProvider.Object, _imageSizeProvider.Object),
+            ExceptionHelper.CheckException(() => new GoogleUrlBuilder( _addressQueryBuilder.Object, _pushPinParameterProvider.Object, _imageSizeProvider.Object),
                SubSystemError.GeneralRequiredParameterIsUndefined, "configurationProvider");
         }
 
@@ -71,7 +71,7 @@ namespace CES.CoreApi.GeoLocation.Service.Business.Logic.UnitTest
         {
             _configurationProvider.Setup(p => p.Read<string>(GoogleLicenseKeyConfig)).Returns(GoogleEmptyLicenseKey);
 
-            ExceptionHelper.CheckException(() => new GoogleUrlBuilder(_configurationProvider.Object, null, _pushPinParameterProvider.Object, _imageSizeProvider.Object),
+            ExceptionHelper.CheckException(() => new GoogleUrlBuilder( null, _pushPinParameterProvider.Object, _imageSizeProvider.Object),
                SubSystemError.GeneralRequiredParameterIsUndefined, "addressQueryBuilder");
         }
 
@@ -80,7 +80,7 @@ namespace CES.CoreApi.GeoLocation.Service.Business.Logic.UnitTest
         {
             _configurationProvider.Setup(p => p.Read<string>(GoogleLicenseKeyConfig)).Returns(GoogleEmptyLicenseKey);
 
-            ExceptionHelper.CheckException(() => new GoogleUrlBuilder(_configurationProvider.Object, _addressQueryBuilder.Object, null, _imageSizeProvider.Object),
+            ExceptionHelper.CheckException(() => new GoogleUrlBuilder( _addressQueryBuilder.Object, null, _imageSizeProvider.Object),
                 SubSystemError.GeneralRequiredParameterIsUndefined, "pushPinParameterProvider");
         }
 
@@ -89,7 +89,7 @@ namespace CES.CoreApi.GeoLocation.Service.Business.Logic.UnitTest
         {
             _configurationProvider.Setup(p => p.Read<string>(GoogleLicenseKeyConfig)).Returns(GoogleEmptyLicenseKey);
 
-            ExceptionHelper.CheckException(() => new GoogleUrlBuilder(_configurationProvider.Object, _addressQueryBuilder.Object, _pushPinParameterProvider.Object, null),
+            ExceptionHelper.CheckException(() => new GoogleUrlBuilder( _addressQueryBuilder.Object, _pushPinParameterProvider.Object, null),
                 SubSystemError.GeneralRequiredParameterIsUndefined, "imageSizeProvider");
         }
 
@@ -102,7 +102,7 @@ namespace CES.CoreApi.GeoLocation.Service.Business.Logic.UnitTest
             _configurationProvider.Setup(p => p.Read<string>(GoogleMappingUrlTemplateConfig)).Returns(GoogleMappingUrlTemplate);
             _configurationProvider.Setup(p => p.Read<string>(GoogleLicenseKeyConfig)).Returns(string.Empty);
 
-            ExceptionHelper.CheckHappyPath(() => new GoogleUrlBuilder(_configurationProvider.Object, _addressQueryBuilder.Object, _pushPinParameterProvider.Object, _imageSizeProvider.Object));
+            ExceptionHelper.CheckHappyPath(() => new GoogleUrlBuilder( _addressQueryBuilder.Object, _pushPinParameterProvider.Object, _imageSizeProvider.Object));
         }
 
         [TestMethod]
@@ -114,7 +114,7 @@ namespace CES.CoreApi.GeoLocation.Service.Business.Logic.UnitTest
             _configurationProvider.Setup(p => p.Read<string>(GoogleMappingUrlTemplateConfig)).Returns(GoogleMappingUrlTemplate);
             _configurationProvider.Setup(p => p.Read<string>(GoogleLicenseKeyConfig)).Returns(GoogleNonEmptyLicenseKey);
 
-            ExceptionHelper.CheckHappyPath(() => new GoogleUrlBuilder(_configurationProvider.Object, _addressQueryBuilder.Object, _pushPinParameterProvider.Object, _imageSizeProvider.Object));
+            ExceptionHelper.CheckHappyPath(() => new GoogleUrlBuilder( _addressQueryBuilder.Object, _pushPinParameterProvider.Object, _imageSizeProvider.Object));
         }
 
         [TestMethod]
@@ -126,7 +126,7 @@ namespace CES.CoreApi.GeoLocation.Service.Business.Logic.UnitTest
                 _configurationProvider.Setup(p => p.Read<string>(GoogleMappingUrlTemplateConfig)).Returns(GoogleMappingUrlTemplate);
                 _configurationProvider.Setup(p => p.Read<string>(GoogleLicenseKeyConfig)).Returns(GoogleEmptyLicenseKey);
 
-            ExceptionHelper.CheckException(() => new GoogleUrlBuilder(_configurationProvider.Object, _addressQueryBuilder.Object, _pushPinParameterProvider.Object, _imageSizeProvider.Object),
+            ExceptionHelper.CheckException(() => new GoogleUrlBuilder( _addressQueryBuilder.Object, _pushPinParameterProvider.Object, _imageSizeProvider.Object),
                 SubSystemError.GeolocationUrlTemplateNotFound, DataProviderType.Google, GoogleAddressAutocompleteUrlTemplateConfig);
         }
 
@@ -139,7 +139,7 @@ namespace CES.CoreApi.GeoLocation.Service.Business.Logic.UnitTest
             _configurationProvider.Setup(p => p.Read<string>(GoogleMappingUrlTemplateConfig)).Returns(GoogleMappingUrlTemplate);
             _configurationProvider.Setup(p => p.Read<string>(GoogleLicenseKeyConfig)).Returns(GoogleEmptyLicenseKey);
 
-            ExceptionHelper.CheckException(() => new GoogleUrlBuilder(_configurationProvider.Object, _addressQueryBuilder.Object, _pushPinParameterProvider.Object, _imageSizeProvider.Object),
+            ExceptionHelper.CheckException(() => new GoogleUrlBuilder( _addressQueryBuilder.Object, _pushPinParameterProvider.Object, _imageSizeProvider.Object),
                 SubSystemError.GeolocationUrlTemplateNotFound, DataProviderType.Google, GoogleAddressGeocodeAndVerificationUrlTemplateConfig);
         }
 
@@ -152,7 +152,7 @@ namespace CES.CoreApi.GeoLocation.Service.Business.Logic.UnitTest
             _configurationProvider.Setup(p => p.Read<string>(GoogleMappingUrlTemplateConfig)).Returns(GoogleMappingUrlTemplate);
             _configurationProvider.Setup(p => p.Read<string>(GoogleLicenseKeyConfig)).Returns(GoogleEmptyLicenseKey);
 
-            ExceptionHelper.CheckException(() => new GoogleUrlBuilder(_configurationProvider.Object, _addressQueryBuilder.Object, _pushPinParameterProvider.Object, _imageSizeProvider.Object),
+            ExceptionHelper.CheckException(() => new GoogleUrlBuilder( _addressQueryBuilder.Object, _pushPinParameterProvider.Object, _imageSizeProvider.Object),
                 SubSystemError.GeolocationUrlTemplateNotFound, DataProviderType.Google, GoogleReverseGeocodePointUrlTemplateConfig);
         }
 
@@ -165,7 +165,7 @@ namespace CES.CoreApi.GeoLocation.Service.Business.Logic.UnitTest
             _configurationProvider.Setup(p => p.Read<string>(GoogleMappingUrlTemplateConfig)).Returns(string.Empty);
             _configurationProvider.Setup(p => p.Read<string>(GoogleLicenseKeyConfig)).Returns(GoogleEmptyLicenseKey);
 
-            ExceptionHelper.CheckException(() => new GoogleUrlBuilder(_configurationProvider.Object, _addressQueryBuilder.Object, _pushPinParameterProvider.Object, _imageSizeProvider.Object),
+            ExceptionHelper.CheckException(() => new GoogleUrlBuilder( _addressQueryBuilder.Object, _pushPinParameterProvider.Object, _imageSizeProvider.Object),
                 SubSystemError.GeolocationUrlTemplateNotFound, DataProviderType.Google, GoogleMappingUrlTemplateConfig);
         }
 
@@ -178,7 +178,7 @@ namespace CES.CoreApi.GeoLocation.Service.Business.Logic.UnitTest
             _configurationProvider.Setup(p => p.Read<string>(GoogleMappingUrlTemplateConfig)).Returns(GoogleMappingUrlTemplate);
             _configurationProvider.Setup(p => p.Read<string>(GoogleLicenseKeyConfig)).Returns(GoogleEmptyLicenseKey);
 
-            ExceptionHelper.CheckHappyPath(() => new GoogleUrlBuilder(_configurationProvider.Object, _addressQueryBuilder.Object, _pushPinParameterProvider.Object, _imageSizeProvider.Object));
+            ExceptionHelper.CheckHappyPath(() => new GoogleUrlBuilder( _addressQueryBuilder.Object, _pushPinParameterProvider.Object, _imageSizeProvider.Object));
         }
 
         [TestMethod]
@@ -336,7 +336,7 @@ namespace CES.CoreApi.GeoLocation.Service.Business.Logic.UnitTest
             _configurationProvider.Setup(p => p.Read<string>(GoogleMappingUrlTemplateConfig)).Returns(GoogleMappingUrlTemplate);
             _configurationProvider.Setup(p => p.Read<string>(GoogleLicenseKeyConfig)).Returns(isKeyNull ? GoogleEmptyLicenseKey : GoogleNonEmptyLicenseKey);
 
-            var builder = new GoogleUrlBuilder(_configurationProvider.Object, _addressQueryBuilder.Object,
+            var builder = new GoogleUrlBuilder( _addressQueryBuilder.Object,
                 _pushPinParameterProvider.Object, _imageSizeProvider.Object);
             return builder;
         }

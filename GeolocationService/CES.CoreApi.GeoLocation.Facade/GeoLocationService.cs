@@ -14,59 +14,51 @@
 
 using System;
 using CES.CoreApi.GeoLocation.Facade.Configuration;
-using CES.CoreApi.GeoLocation.Service.Contract.Interfaces;
-using CES.CoreApi.GeoLocation.Service.Contract.Models;
-using CES.CoreApi.GeoLocation.Service.Business.Contract.Interfaces;
-using CES.CoreApi.Foundation.Contract.Interfaces;
-using CES.CoreApi.GeoLocation.Service.Business.Contract.Models;
-using CES.CoreApi.GeoLocation.Service.Contract.Enumerations;
-using CES.CoreApi.GeoLocation.Service.Business.Contract.Enumerations;
+
 
 namespace CES.CoreApi.GeoLocation.Facade
 {
    // [ServiceBehavior(Namespace = Namespaces.GeolocationServiceContractNamespace, InstanceContextMode = InstanceContextMode.PerCall)]
-    public class GeoLocationService : IAddressService//, IGeocodeService, IMapService, IHealthMonitoringService, IClientSideSupportService
+    public class GeoLocationService// : IAddressService//, IGeocodeService, IMapService, IHealthMonitoringService, IClientSideSupportService
 	{
 		#region Core
 		private readonly IUser user;
-		private readonly IAddressServiceRequestProcessor addressServiceRequestProcessor;
+		//private readonly IAddressServiceRequestProcessor addressServiceRequestProcessor;
 		//private readonly IGeocodeServiceRequestProcessor _geocodeServiceRequestProcessor;
 		//private readonly IMapServiceRequestProcessor _mapServiceRequestProcessor;
 		//private readonly IHealthMonitoringProcessor _healthMonitoringProcessor;
 		//private readonly IClientSideSupportServiceProcessor _clientSideSupportServiceProcessor;
-		private readonly IMappingHelper mapper;
+		//private readonly IMappingHelper mapper;
 		//private readonly IRequestValidator _validator;
 
-		public GeoLocationService(IUser user, IAddressServiceRequestProcessor addressServiceRequestProcessor,
-			IMappingHelper mapper
+		public GeoLocationService(IUser user
 			)
 		{
 			this.user = user;
-			this.addressServiceRequestProcessor = addressServiceRequestProcessor;
-			this.mapper = mapper;
+		
 
 		}
 
-		public AutocompleteAddressResponse GetAutocompleteList(AutocompleteAddressRequest request)
-		{
-			var responseModel = addressServiceRequestProcessor.GetAutocompleteList(
-				mapper.ConvertTo<AddressRequest, AutocompleteAddressModel>(request.Address),
-				request.MaxRecords,
-				mapper.ConvertTo<Confidence, LevelOfConfidence>(request.MinimumConfidence));
+		//public AutocompleteAddressResponse GetAutocompleteList(AutocompleteAddressRequest request)
+		//{
+		//	var responseModel = addressServiceRequestProcessor.GetAutocompleteList(
+		//		mapper.ConvertTo<AddressRequest, AutocompleteAddressModel>(request.Address),
+		//		request.MaxRecords,
+		//		mapper.ConvertTo<Confidence, LevelOfConfidence>(request.MinimumConfidence));
 
-			return mapper.ConvertToResponse<AutocompleteAddressResponseModel, AutocompleteAddressResponse>(responseModel);
-			throw new NotImplementedException();
-		}
+		//	return mapper.ConvertToResponse<AutocompleteAddressResponseModel, AutocompleteAddressResponse>(responseModel);
+		//	throw new NotImplementedException();
+		//}
 
-		public ValidateAddressResponse ValidateAddress(ValidateFormattedAddressRequest request)
-		{
-			throw new NotImplementedException();
-		}
+		//public ValidateAddressResponse ValidateAddress(ValidateFormattedAddressRequest request)
+		//{
+		//	throw new NotImplementedException();
+		//}
 
-		public ValidateAddressResponse ValidateAddress(ValidateAddressRequest request)
-		{
-			throw new NotImplementedException();
-		}
+		//public ValidateAddressResponse ValidateAddress(ValidateAddressRequest request)
+		//{
+		//	throw new NotImplementedException();
+		//}
 
 
 		//public GeoLocationService(IAddressServiceRequestProcessor addressServiceRequestProcessor,

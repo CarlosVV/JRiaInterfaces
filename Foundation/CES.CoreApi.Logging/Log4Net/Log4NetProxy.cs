@@ -16,12 +16,6 @@ namespace CES.CoreApi.Logging.Log4Net
 	{
 		private static readonly ILog Log;
 
-		#region Core
-
-		/// <summary>
-		/// Initializes Log4NetProxy instance
-		/// It declared as static to be able to use it effectively without IoC container also
-		/// </summary>
 		static Log4NetProxy()
 		{
 			XmlConfigurator.Configure();
@@ -35,50 +29,21 @@ namespace CES.CoreApi.Logging.Log4Net
 			IsNoticeEnabled = Log.Logger.IsEnabledFor(Level.Notice);
 		}
 
-		#endregion //Core
-
-		#region Implementation of ILoggerProxy
-
-		#region Parameter manipulation methods
-
-
-		/// <summary>
-		/// Sets parameter for logging
-		/// </summary>
-		/// <param name="parameterName">Parameter name</param>
-		/// <param name="parameterValue">Parameter value</param>
 		public void SetParameter(string parameterName, object parameterValue)
 		{
 			GlobalContext.Properties[parameterName] = parameterValue;
 		}
 
-		/// <summary>
-		/// Removes parameter for logging
-		/// </summary>
-		/// <param name="parameterName">Parameter name</param>
 		public void RemoveParameter(string parameterName)
 		{
 			GlobalContext.Properties.Remove(parameterName);
 		}
 
-		/// <summary>
-		/// Removes all logging parameters
-		/// </summary>
 		public void ClearParameters()
 		{
 			GlobalContext.Properties.Clear();
 		}
 
-		#endregion
-
-		#region Generic publish  method
-
-		/// <summary>
-		/// Publishes message according provided entry type
-		/// </summary>
-		/// <param name="entryType">Log entry type</param>
-		/// <param name="message">Log message</param>
-		/// <param name="exception">Exception instance - optional </param>
 		public void Publish(LogEntryType entryType, string message, Exception exception = null)
 		{
 			switch (entryType)
@@ -149,69 +114,32 @@ namespace CES.CoreApi.Logging.Log4Net
 			}
 		}
 
-		#endregion
-
-		#region Publish debug
-
-		/// <summary>
-		/// Publishes debug message
-		/// </summary>
-		/// <param name="message">Log message</param>
 		public void PublishDebug(string message)
 		{
 			Publish(LogEntryType.Debug, message);
 		}
 
-		/// <summary>
-		/// Formats message using Invariant culture and supplied parameters and publishes DEBUG message
-		/// </summary>
-		/// <param name="message">Log message</param>
-		/// <param name="parameters">Message parameters</param>
 		public void PublishDebug(string message, params object[] parameters)
 		{
 			var formattedMessage = string.Format(CultureInfo.InvariantCulture, message, parameters);
 			Publish(LogEntryType.Debug, formattedMessage);
 		}
 
-		#endregion
-
-		#region Publish warning
-
-		/// <summary>
-		/// Publishes warning message
-		/// </summary>
-		/// <param name="message">Log message</param>
 		public void PublishWarning(string message)
 		{
 			Publish(LogEntryType.Warning, message);
 		}
 
-		/// <summary>
-		/// Publishes warning message
-		/// </summary>
-		/// <param name="dataContainer">Data container instance</param>
 		public void PublishWarning(IDataContainer dataContainer)
 		{
 			Publish(LogEntryType.Warning, dataContainer.ToString());
 		}
 
-		#endregion
-
-		#region Publish information
-
-		/// <summary>
-		/// Publishes INFORMATION message
-		/// </summary>
-		/// <param name="message">Log message</param>
 		public void PublishInformation(string message)
 		{
 			Publish(LogEntryType.Information, message);
 		}
 
-		/// <summary>
-		/// Publishes INFORMATION message
-		/// </summary>
-		/// <param name="dataContainer">Data container instance</param>
 		public void PublishInformation(IDataContainer dataContainer)
 		{
 			if (dataContainer.LogType != LogType.TraceLog &&
@@ -221,34 +149,17 @@ namespace CES.CoreApi.Logging.Log4Net
 			Publish(LogEntryType.Information, dataContainer.ToString());
 		}
 
-		/// <summary>
-		/// Formats message using Current culture and supplied parameters and publishes INFORMATION message
-		/// </summary>
-		/// <param name="message">Log message</param>
-		/// <param name="parameters">Message parameters</param>
 		public void PublishInformation(string message, params object[] parameters)
 		{
 			var formattedMessage = string.Format(CultureInfo.InvariantCulture, message, parameters);
 			Publish(LogEntryType.Information, formattedMessage);
 		}
 
-		#endregion
-
-		#region Publish error
-
-		/// <summary>
-		/// Publishes ERROR message
-		/// </summary>
-		/// <param name="message">Log message</param>
 		public void PublishError(string message)
 		{
 			Publish(LogEntryType.Error, message);
 		}
 
-		/// <summary>
-		/// Publishes ERROR message
-		/// </summary>
-		/// <param name="dataContainer">Data container instance</param>
 		public void PublishError(IDataContainer dataContainer)
 		{
 			if (dataContainer.LogType != LogType.ExceptionLog)
@@ -256,21 +167,11 @@ namespace CES.CoreApi.Logging.Log4Net
 			Publish(LogEntryType.Error, dataContainer.ToString());
 		}
 
-		/// <summary>
-		/// Publishes ERROR message
-		/// </summary>
-		/// <param name="message">Log message</param>
-		/// <param name="exception">Exception instance</param>
 		public void PublishError(string message, Exception exception)
 		{
 			Publish(LogEntryType.Error, message, exception);
 		}
 
-		/// <summary>
-		/// Formats message using Current culture and supplied parameters and publishes ERROR message
-		/// </summary>
-		/// <param name="message">Log message</param>
-		/// <param name="parameters">Message parameters</param>
 		public void PublishError(string message, params object[] parameters)
 		{
 			if (!IsErrorEnabled)
@@ -279,67 +180,33 @@ namespace CES.CoreApi.Logging.Log4Net
 			Publish(LogEntryType.Error, formattedMessage);
 		}
 
-		#endregion
-
-		#region Publish fatal message
-
-		/// <summary>
-		/// Publishes fatal message
-		/// </summary>
-		/// <param name="message">Log message</param>
 		public void PublishFatal(string message)
 		{
 			Publish(LogEntryType.Fatal, message);
 		}
 
-		/// <summary>
-		/// Formats message using Current culture and supplied parameters and publishes FATAL message
-		/// </summary>
-		/// <param name="message">Log message</param>
-		/// <param name="parameters">Message parameters</param>
 		public void PublishFatal(string message, params object[] parameters)
 		{
 			var formattedMessage = string.Format(CultureInfo.InvariantCulture, message, parameters);
 			Publish(LogEntryType.Fatal, formattedMessage);
 		}
 
-		/// <summary>
-		/// Formats message using Current culture and supplied parameters and publishes FATAL message
-		/// </summary>
-		/// <param name="message">Log message</param>
-		/// <param name="exception">Exception instance</param>
 		public void PublishFatal(string message, Exception exception)
 		{
 			Publish(LogEntryType.Fatal, message, exception);
 		}
 
-		#endregion
-
-		#region Publish notice
-
-		/// <summary>
-		/// Publishes NOTICE message
-		/// </summary>
-		/// <param name="message">Log message</param>
 		public void PublishNotice(string message)
 		{
 			Publish(LogEntryType.Notice, message);
 		}
 
-		/// <summary>
-		/// Publish MOTICE message 
-		/// </summary>
-		/// <param name="dataContainer">Data container instance</param>
 		public void PublishNotice(IDataContainer dataContainer)
 		{
 			if (dataContainer.LogType != LogType.DbPerformanceLog)
 				return;
 			Publish(LogEntryType.Notice, dataContainer.ToString());
 		}
-
-		#endregion
-
-		#region Public properties
 
 		public static bool IsDebugEnabled
 		{
@@ -376,12 +243,6 @@ namespace CES.CoreApi.Logging.Log4Net
 			get;
 			private set;
 		}
-
-		#endregion
-
-		#endregion //Implementation of ILoggerProxy
-
-		#region Private methods
 
 		private void MakeSureAppenderEnabled(LogEntryType entryType)
 		{
@@ -436,10 +297,6 @@ namespace CES.CoreApi.Logging.Log4Net
 			}
 		}
 
-		#endregion
-
-		#region Private properties
-
 		private bool IsErrorAppenderEnabled { get; set; }
 		private bool IsFatalAppenderEnabled { get; set; }
 		private bool IsInformationAppenderEnabled { get; set; }
@@ -447,6 +304,5 @@ namespace CES.CoreApi.Logging.Log4Net
 		private bool IsDebugAppenderEnabled { get; set; }
 		private bool IsNoticeAppenderEnabled { get; set; }
 
-		#endregion
 	}
 }

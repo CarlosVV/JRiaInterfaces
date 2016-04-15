@@ -2,14 +2,11 @@
 
 namespace CES.CoreApi.Logging.Interfaces
 {
-    public interface ISecurityLogMonitor
-    {
-        /// <summary>
-        /// Gets or sets data container instance
-        /// </summary>
-        SecurityLogDataContainer DataContainer { get; }
+	public interface ISecurityLogMonitor
+	{
+		SecurityLogDataContainer DataContainer { get; }
 
-        void LogSuccess(SecurityAuditParameters parameters);
-        void LogFailure(SecurityAuditParameters parameters, string details);
-    }
+		void LogSuccess(SecurityAuditParameters parameters);
+		void LogFailure(SecurityAuditParameters parameters, string details);
+	}
 }

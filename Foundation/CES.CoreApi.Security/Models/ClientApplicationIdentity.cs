@@ -1,8 +1,10 @@
-﻿using System;
+﻿using CES.CoreApi.Foundation.Contract.Interfaces;
+using CES.CoreApi.Foundation.Models;
+using System;
 using System.Security.Principal;
-using CES.CoreApi.Common.Interfaces;
 
-namespace CES.CoreApi.Common.Models
+
+namespace CES.CoreApi.Security.Models
 {
     public class ClientApplicationIdentity : IIdentity
     {
@@ -20,7 +22,7 @@ namespace CES.CoreApi.Common.Models
             ReferenceNumberType = headerParameters.ReferenceNumberType;
             CorrelationId = headerParameters.CorrelationId;
         }
-		
+
         public int ApplicationId { get; private set; }
 
         public string Name { get; private set; }

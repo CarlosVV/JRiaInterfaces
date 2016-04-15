@@ -64,10 +64,11 @@ namespace CES.CoreApi.GeoLocation.Service.Business.Logic.Processors
 
         public AutocompleteAddressResponseModel GetAutocompleteList(AutocompleteAddressModel address, int maxRecords, LevelOfConfidence confidence)
         {
-            var defaultNumberOfHints = CountryConfigurationProvider.ConfigurationProvider.Read<int>(ConfigurationConstants.AddressAutompleteDefaultNumberOfHints);
-            var maximumNumberOfHints = CountryConfigurationProvider.ConfigurationProvider.Read<int>(ConfigurationConstants.AddressAutompleteMaximumNumberOfHints);
+            var defaultNumberOfHints = Configuration.Provider.GeoLocationConfigurationSection.Instance.AutompleteDefaultNumberOfHints.Value;
+			// var maximumNumberOfHints = CountryConfigurationProvider.ConfigurationProvider.Read<int>(ConfigurationConstants.AddressAutompleteMaximumNumberOfHints);
+			int maximumNumberOfHints = Configuration.Provider.GeoLocationConfigurationSection.Instance.AutompleteMaximumNumberOfHints.Value;
 
-            if (maxRecords <= 0 || maxRecords > maximumNumberOfHints)
+			if (maxRecords <= 0 || maxRecords > maximumNumberOfHints)
                 maxRecords = defaultNumberOfHints;
 
             var providerConfiguration = GetProviderConfigurationByCountry(address.Country, DataProviderServiceType.AddressAutoComplete).FirstOrDefault();

@@ -10,6 +10,8 @@ using System.ServiceModel.Channels;
 using System.Runtime.Serialization;
 using CES.CoreApi.Security;
 using System.ServiceModel.Web;
+using CES.CoreApi.Security.Interfaces;
+using CES.CoreApi.Foundation.Models;
 
 namespace CES.CoreApi.Foundation.Providers
 {

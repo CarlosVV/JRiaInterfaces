@@ -1,10 +1,9 @@
 ﻿using System;
 using Castle.DynamicProxy;
-using CES.CoreApi.Common.Interfaces;
+using CES.CoreApi.Security.Interfaces;
 using CES.CoreApi.Logging.Interfaces;
 using CES.CoreApi.Logging.Models;
 using CES.CoreApi.Foundation.Contract.Interfaces;
-using System.Configuration;
 
 namespace CES.CoreApi.SimpleInjectorProxy
 {
@@ -13,7 +12,7 @@ namespace CES.CoreApi.SimpleInjectorProxy
 		private readonly ILogMonitorFactory _logMonitorFactory;
 		private readonly IIdentityManager _identityManager;
 		private readonly IHostApplicationProvider _hostApplicationProvider;
-		
+
 		public SecurityLogMonitorInterceptor(ILogMonitorFactory logMonitorFactory, IIdentityManager identityManager, IHostApplicationProvider hostApplicationProvider)
 		{
 			if (logMonitorFactory == null)

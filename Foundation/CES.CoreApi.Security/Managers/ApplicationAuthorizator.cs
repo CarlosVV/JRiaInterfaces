@@ -4,10 +4,11 @@ using System.Security.Principal;
 using CES.CoreApi.Common.Enumerations;
 using CES.CoreApi.Common.Exceptions;
 using CES.CoreApi.Common.Interfaces;
-using CES.CoreApi.Common.Models;
 using CES.CoreApi.Foundation.Contract.Interfaces;
 using CES.CoreApi.Security.Interfaces;
 using System.Configuration;
+using CES.CoreApi.Foundation.Contract.Models;
+using CES.CoreApi.Security.Models;
 
 namespace CES.CoreApi.Security
 {
@@ -46,13 +47,13 @@ namespace CES.CoreApi.Security
 			ValidateOperationAccess(hostApplication, headerParameters.OperationName, clientApplicationId);
 
             _identityManager.SetCurrentPrincipal(clientApplicationPrincipal);
-
+			
 			return _identityManager.GetCurrentPrincipal();
         }
         
         private void ValidateClientApplicationAuthentication(IPrincipal clientApplicationPrincipal, int? clientApplicationId)
         {
-			if (clientApplicationPrincipal != null && clientApplicationPrincipal.Identity.IsAuthenticated)
+            if (clientApplicationPrincipal != null && clientApplicationPrincipal.Identity.IsAuthenticated)
                 return;
 
             throw new CoreApiException(TechnicalSubSystem.Authorization, SubSystemError.SecurityClientApplicationNotAuthenticated, clientApplicationId.Value);

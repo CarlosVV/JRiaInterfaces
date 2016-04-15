@@ -2,6 +2,7 @@
 using Castle.DynamicProxy;
 using CES.CoreApi.Common.Interfaces;
 using CES.CoreApi.Logging.Interfaces;
+using CES.CoreApi.Security.Interfaces;
 
 namespace CES.CoreApi.SimpleInjectorProxy
 {

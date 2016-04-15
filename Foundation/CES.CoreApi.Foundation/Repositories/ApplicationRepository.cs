@@ -15,12 +15,13 @@ using CES.CoreApi.Foundation.Data.Models;
 using CES.CoreApi.Foundation.Data.Utility;
 using CES.CoreApi.Data.Models;
 using CES.CoreApi.Data.Enumerations;
+using CES.CoreApi.Foundation.Contract.Models;
 
 namespace CES.CoreApi.Data.Repositories
 {
 	public class ApplicationRepository : BaseGenericRepository, IApplicationRepository
 	{
-		public ApplicationRepository(IIdentityManager identityManager, IDatabaseInstanceProvider instanceProvider)
+		public ApplicationRepository(IDatabaseInstanceProvider instanceProvider)
 			: base( instanceProvider)
 		{
 		}

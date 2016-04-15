@@ -7,6 +7,8 @@ using CES.CoreApi.Foundation.Contract.Interfaces;
 using CES.CoreApi.Foundation.Contract.Models;
 using CES.CoreApi.Security.Interfaces;
 using System.Configuration;
+using CES.CoreApi.Security.Models;
+using CES.CoreApi.Foundation.Models;
 
 namespace CES.CoreApi.Security
 {
@@ -21,7 +23,7 @@ namespace CES.CoreApi.Security
 				throw new CoreApiException(TechnicalSubSystem.Authentication, SubSystemError.GeneralRequiredParameterIsUndefined, "repository");
             if (requestHeaderParametersProviderFactory == null)
 				throw new CoreApiException(TechnicalSubSystem.Authentication, SubSystemError.GeneralRequiredParameterIsUndefined, "requestHeaderParametersProviderFactory");
-            
+
             _repository = repository;
             _parametersProvider = requestHeaderParametersProviderFactory.GetInstance<IRequestHeaderParametersProvider>(ConfigurationManager.AppSettings["HostServiceType"]);
         }

@@ -61,7 +61,7 @@ namespace CES.CoreApi.GeoLocation.Service.Business.Logic.UnitTest
         [TestMethod]
         public void Constructor_ConfigurationProviderIsNull_ExceptionRaised()
         {
-            ExceptionHelper.CheckException(() => new BingUrlBuilder(null, _addressQueryBuilder.Object, _pushPinParameterProvider.Object, _imageSizeProvider.Object),
+            ExceptionHelper.CheckException(() => new BingUrlBuilder(_addressQueryBuilder.Object, _pushPinParameterProvider.Object, _imageSizeProvider.Object),
                 SubSystemError.GeneralRequiredParameterIsUndefined, "configurationProvider");
         }
 
@@ -70,7 +70,7 @@ namespace CES.CoreApi.GeoLocation.Service.Business.Logic.UnitTest
         {
             _configurationProvider.Setup(p => p.Read<string>(BingLicenseKeyConfigurationName)).Returns(BingLicenseKey);
 
-            ExceptionHelper.CheckException(() => new BingUrlBuilder(_configurationProvider.Object, null, _pushPinParameterProvider.Object, _imageSizeProvider.Object),
+            ExceptionHelper.CheckException(() => new BingUrlBuilder(null, _pushPinParameterProvider.Object, _imageSizeProvider.Object),
                 SubSystemError.GeneralRequiredParameterIsUndefined, "addressQueryBuilder");
         }
 
@@ -79,7 +79,7 @@ namespace CES.CoreApi.GeoLocation.Service.Business.Logic.UnitTest
         {
             _configurationProvider.Setup(p => p.Read<string>(BingLicenseKeyConfigurationName)).Returns(BingLicenseKey);
 
-            ExceptionHelper.CheckException(() => new BingUrlBuilder(_configurationProvider.Object, _addressQueryBuilder.Object, null, _imageSizeProvider.Object),
+            ExceptionHelper.CheckException(() => new BingUrlBuilder( _addressQueryBuilder.Object, null, _imageSizeProvider.Object),
                 SubSystemError.GeneralRequiredParameterIsUndefined, "pushPinParameterProvider");
         }
 
@@ -88,7 +88,7 @@ namespace CES.CoreApi.GeoLocation.Service.Business.Logic.UnitTest
         {
             _configurationProvider.Setup(p => p.Read<string>(BingLicenseKeyConfigurationName)).Returns(BingLicenseKey);
 
-            ExceptionHelper.CheckException(() => new BingUrlBuilder(_configurationProvider.Object, _addressQueryBuilder.Object, _pushPinParameterProvider.Object, null),
+            ExceptionHelper.CheckException(() => new BingUrlBuilder( _addressQueryBuilder.Object, _pushPinParameterProvider.Object, null),
                 SubSystemError.GeneralRequiredParameterIsUndefined, "imageSizeProvider");
         }
 
@@ -97,7 +97,7 @@ namespace CES.CoreApi.GeoLocation.Service.Business.Logic.UnitTest
         {
             _configurationProvider.Setup(p => p.Read<string>(BingLicenseKeyConfigurationName)).Returns(string.Empty);
 
-            ExceptionHelper.CheckException(() => new BingUrlBuilder(_configurationProvider.Object, _addressQueryBuilder.Object, _pushPinParameterProvider.Object, _imageSizeProvider.Object),
+            ExceptionHelper.CheckException(() => new BingUrlBuilder( _addressQueryBuilder.Object, _pushPinParameterProvider.Object, _imageSizeProvider.Object),
                SubSystemError.GeolocationLicenseKeyNotFound, DataProviderType.Bing);
         }
 
@@ -111,7 +111,7 @@ namespace CES.CoreApi.GeoLocation.Service.Business.Logic.UnitTest
             _configurationProvider.Setup(p => p.Read<string>(BingMappingUrlTemplateConfig)).Returns(BingMappingUrlTemplate);
             _configurationProvider.Setup(p => p.Read<string>(BingLicenseKeyConfigurationName)).Returns(BingLicenseKey);
 
-            ExceptionHelper.CheckException(() => new BingUrlBuilder(_configurationProvider.Object, _addressQueryBuilder.Object, _pushPinParameterProvider.Object, _imageSizeProvider.Object),
+            ExceptionHelper.CheckException(() => new BingUrlBuilder( _addressQueryBuilder.Object, _pushPinParameterProvider.Object, _imageSizeProvider.Object),
                SubSystemError.GeolocationUrlTemplateNotFound, DataProviderType.Bing, BingAddressAutocompleteUrlTemplateConfig);
         }
 
@@ -125,7 +125,7 @@ namespace CES.CoreApi.GeoLocation.Service.Business.Logic.UnitTest
             _configurationProvider.Setup(p => p.Read<string>(BingMappingUrlTemplateConfig)).Returns(BingMappingUrlTemplate);
             _configurationProvider.Setup(p => p.Read<string>(BingLicenseKeyConfigurationName)).Returns(BingLicenseKey);
 
-            ExceptionHelper.CheckException(() => new BingUrlBuilder(_configurationProvider.Object, _addressQueryBuilder.Object, _pushPinParameterProvider.Object, _imageSizeProvider.Object),
+            ExceptionHelper.CheckException(() => new BingUrlBuilder( _addressQueryBuilder.Object, _pushPinParameterProvider.Object, _imageSizeProvider.Object),
               SubSystemError.GeolocationUrlTemplateNotFound, DataProviderType.Bing, BingFormattedAddressGeocodeAndVerificationUrlTemplateConfig);
         }
 
@@ -139,7 +139,7 @@ namespace CES.CoreApi.GeoLocation.Service.Business.Logic.UnitTest
             _configurationProvider.Setup(p => p.Read<string>(BingMappingUrlTemplateConfig)).Returns(BingMappingUrlTemplate);
             _configurationProvider.Setup(p => p.Read<string>(BingLicenseKeyConfigurationName)).Returns(BingLicenseKey);
 
-            ExceptionHelper.CheckException(() => new BingUrlBuilder(_configurationProvider.Object, _addressQueryBuilder.Object, _pushPinParameterProvider.Object, _imageSizeProvider.Object),
+            ExceptionHelper.CheckException(() => new BingUrlBuilder(_addressQueryBuilder.Object, _pushPinParameterProvider.Object, _imageSizeProvider.Object),
               SubSystemError.GeolocationUrlTemplateNotFound, DataProviderType.Bing, BingAddressGeocodeAndVerificationUrlTemplateConfig);
         }
 
@@ -153,7 +153,7 @@ namespace CES.CoreApi.GeoLocation.Service.Business.Logic.UnitTest
             _configurationProvider.Setup(p => p.Read<string>(BingMappingUrlTemplateConfig)).Returns(BingMappingUrlTemplate);
             _configurationProvider.Setup(p => p.Read<string>(BingLicenseKeyConfigurationName)).Returns(BingLicenseKey);
 
-            ExceptionHelper.CheckException(() => new BingUrlBuilder(_configurationProvider.Object, _addressQueryBuilder.Object, _pushPinParameterProvider.Object, _imageSizeProvider.Object),
+            ExceptionHelper.CheckException(() => new BingUrlBuilder( _addressQueryBuilder.Object, _pushPinParameterProvider.Object, _imageSizeProvider.Object),
               SubSystemError.GeolocationUrlTemplateNotFound, DataProviderType.Bing, BingReverseGeocodePointUrlTemplateConfig);
         }
 
@@ -167,7 +167,7 @@ namespace CES.CoreApi.GeoLocation.Service.Business.Logic.UnitTest
             _configurationProvider.Setup(p => p.Read<string>(BingMappingUrlTemplateConfig)).Returns(string.Empty);
             _configurationProvider.Setup(p => p.Read<string>(BingLicenseKeyConfigurationName)).Returns(BingLicenseKey);
 
-            ExceptionHelper.CheckException(() => new BingUrlBuilder(_configurationProvider.Object, _addressQueryBuilder.Object, _pushPinParameterProvider.Object, _imageSizeProvider.Object),
+            ExceptionHelper.CheckException(() => new BingUrlBuilder( _addressQueryBuilder.Object, _pushPinParameterProvider.Object, _imageSizeProvider.Object),
               SubSystemError.GeolocationUrlTemplateNotFound, DataProviderType.Bing, BingMappingUrlTemplateConfig);
         }
 
@@ -181,7 +181,7 @@ namespace CES.CoreApi.GeoLocation.Service.Business.Logic.UnitTest
             _configurationProvider.Setup(p => p.Read<string>(BingMappingUrlTemplateConfig)).Returns(BingMappingUrlTemplate);
             _configurationProvider.Setup(p => p.Read<string>(BingLicenseKeyConfigurationName)).Returns(BingLicenseKey);
 
-            ExceptionHelper.CheckHappyPath(() => new BingUrlBuilder(_configurationProvider.Object, _addressQueryBuilder.Object, _pushPinParameterProvider.Object, _imageSizeProvider.Object));
+            ExceptionHelper.CheckHappyPath(() => new BingUrlBuilder( _addressQueryBuilder.Object, _pushPinParameterProvider.Object, _imageSizeProvider.Object));
         }
 
         [TestMethod]
@@ -324,7 +324,7 @@ namespace CES.CoreApi.GeoLocation.Service.Business.Logic.UnitTest
             _configurationProvider.Setup(p => p.Read<string>(BingMappingUrlTemplateConfig)).Returns(BingMappingUrlTemplate);
             _configurationProvider.Setup(p => p.Read<string>(BingLicenseKeyConfigurationName)).Returns(BingLicenseKey);
 
-            var builder = new BingUrlBuilder(_configurationProvider.Object, _addressQueryBuilder.Object,
+            var builder = new BingUrlBuilder( _addressQueryBuilder.Object,
                 _pushPinParameterProvider.Object, _imageSizeProvider.Object);
             return builder;
         }

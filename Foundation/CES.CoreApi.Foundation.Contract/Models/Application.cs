@@ -1,11 +1,12 @@
-﻿using System;
+﻿using CES.CoreApi.Foundation.Contract.Interfaces;
+using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Globalization;
-using System.Runtime.Serialization;
-using CES.CoreApi.Common.Interfaces;
 
-namespace CES.CoreApi.Common.Models
+
+
+namespace CES.CoreApi.Foundation.Contract.Models
 {
 	public class Application : IApplication
 	{
