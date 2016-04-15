@@ -27,7 +27,9 @@ namespace CES.CoreApi.Security
 			if (OperationContext.Current.EndpointDispatcher.IsSystemEndpoint)
 				return authPolicy;
 
-			return _authenticator.Authenticate(authPolicy, listenUri, ref message);
+			message.Properties["Principal"] = _authenticator.Authenticate();
+
+			return authPolicy;
 		}
 	}
 }

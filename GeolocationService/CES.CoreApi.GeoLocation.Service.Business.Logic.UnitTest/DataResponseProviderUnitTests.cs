@@ -38,41 +38,27 @@ namespace CES.CoreApi.GeoLocation.Service.Business.Logic.UnitTest
         [TestMethod]
         public void Constructor_HttpClientProxyIsNull_ExceptionRaised()
         {
-            ExceptionHelper.CheckException(() => new DataResponseProvider(null, _logMonitorFactory.Object, _headerProvider.Object),
+            ExceptionHelper.CheckException(() => new DataResponseProvider(null),
                SubSystemError.GeneralRequiredParameterIsUndefined, "httpClientProxy");
         }
-
-        [TestMethod]
-        public void Constructor_LogMonitorFactoryIsNull_ExceptionRaised()
-        {
-            ExceptionHelper.CheckException(() => new DataResponseProvider(_httpClientProxy.Object, null, _headerProvider.Object),
-               SubSystemError.GeneralRequiredParameterIsUndefined, "logMonitorFactory");
-        }
-
-        [TestMethod]
-        public void Constructor_HeaderProviderIsNull_ExceptionRaised()
-        {
-            ExceptionHelper.CheckException(() => new DataResponseProvider(_httpClientProxy.Object, _logMonitorFactory.Object, null),
-               SubSystemError.GeneralRequiredParameterIsUndefined, "headerProvider");
-        }
-
+		
         [TestMethod]
         public void Constructor_HappyPath()
         {
-            ExceptionHelper.CheckHappyPath(() => new DataResponseProvider(_httpClientProxy.Object, _logMonitorFactory.Object, _headerProvider.Object));
+            ExceptionHelper.CheckHappyPath(() => new DataResponseProvider(_httpClientProxy.Object));
         }
 
         [TestMethod]
         public void GetResponse_UrlIsNullOrEmpty_ExceptionRaised()
         {
-            ExceptionHelper.CheckException(() => new DataResponseProvider(_httpClientProxy.Object, _logMonitorFactory.Object, _headerProvider.Object).GetResponse(string.Empty, It.IsAny<DataProviderType>()),
+            ExceptionHelper.CheckException(() => new DataResponseProvider(_httpClientProxy.Object).GetResponse(string.Empty, It.IsAny<DataProviderType>()),
               SubSystemError.GeneralRequiredParameterIsUndefined, "requestUrl");
         }
 
         [TestMethod]
         public void GetBinaryResponse_UrlIsNullOrEmpty_ExceptionRaised()
         {
-            ExceptionHelper.CheckException(() => new DataResponseProvider(_httpClientProxy.Object, _logMonitorFactory.Object, _headerProvider.Object).GetBinaryResponse(string.Empty, It.IsAny<DataProviderType>()),
+            ExceptionHelper.CheckException(() => new DataResponseProvider(_httpClientProxy.Object).GetBinaryResponse(string.Empty, It.IsAny<DataProviderType>()),
               SubSystemError.GeneralRequiredParameterIsUndefined, "requestUrl");
         }
 

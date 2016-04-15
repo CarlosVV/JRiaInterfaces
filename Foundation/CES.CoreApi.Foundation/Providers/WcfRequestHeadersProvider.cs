@@ -9,10 +9,8 @@ using CES.CoreApi.Foundation.Contract.Interfaces;
 
 namespace CES.CoreApi.Foundation.Providers
 {
-    public class RequestHeadersProvider : IRequestHeadersProvider
+    public class WcfRequestHeadersProvider : IRequestHeadersProvider
     {
-        #region Public methods
-        
         public Dictionary<string, object> GetHeaders(string bindingName)
         {
             var isRestCall = bindingName.IndexOf("WEBHTTPBINDING", StringComparison.OrdinalIgnoreCase) >= 0;
@@ -25,11 +23,7 @@ namespace CES.CoreApi.Foundation.Providers
         {
             return GetSoapHeaders();
         }
-
-        #endregion
-
-        #region Private methods
-
+		
         private static Dictionary<string, object> GetSoapHeaders()
         {
             return OperationContext.Current == null
@@ -84,7 +78,5 @@ namespace CES.CoreApi.Foundation.Providers
         {
             return GetHeader(name, OperationContext.Current.IncomingMessageHeaders, ns);
         }
-
-        #endregion
     }
 }

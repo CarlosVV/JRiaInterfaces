@@ -7,6 +7,7 @@ using CES.CoreApi.Foundation.Contract.Interfaces;
 using CES.CoreApi.GeoLocation.Service.Business.Contract.Configuration;
 using CES.CoreApi.GeoLocation.Service.Business.Contract.Interfaces;
 using CES.CoreApi.GeoLocation.Service.Business.Logic.Constants;
+using CES.CoreApi.Security.Interfaces;
 
 namespace CES.CoreApi.GeoLocation.Service.Business.Logic.Providers
 {

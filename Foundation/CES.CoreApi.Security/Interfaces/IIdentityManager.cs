@@ -1,8 +1,7 @@
 using System.Security.Principal;
+using CES.CoreApi.Security.Models;
 
-using CES.CoreApi.Foundation.Contract.Models;
-
-namespace CES.CoreApi.Common.Interfaces
+namespace CES.CoreApi.Security.Interfaces
 {
     public interface IIdentityManager
     {

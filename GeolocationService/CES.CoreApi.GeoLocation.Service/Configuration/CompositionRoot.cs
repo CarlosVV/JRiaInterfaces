@@ -2,7 +2,6 @@
 using AutoMapper;
 using AutoMapper.Mappers;
 using CES.CoreApi.Common.Interfaces;
-using CES.CoreApi.Common.Managers;
 using CES.CoreApi.Common.Providers;
 using CES.CoreApi.Common.Proxies;
 using CES.CoreApi.Foundation.Contract.Interfaces;
@@ -35,6 +34,7 @@ using CES.CoreApi.Caching.Providers;
 using CES.CoreApi.Security.Interfaces;
 using CES.CoreApi.Security;
 using CES.CoreApi.Data.Repositories;
+using CES.CoreApi.Security.Factories;
 
 namespace CES.CoreApi.GeoLocation.Service.Configuration
 {
@@ -51,6 +51,7 @@ namespace CES.CoreApi.GeoLocation.Service.Configuration
             RegisterResponses(container);
             RegisterOthers(container);
             RegisterLoggging(container);
+			RegisterSecurity(container);
             RegisterFactories(container);
             RegisterInterceptions(container);
             RegisterDataAccess(container);
@@ -64,8 +65,6 @@ namespace CES.CoreApi.GeoLocation.Service.Configuration
             container.RegisterSingle<IAuthenticationManager, AuthenticationManager>();
             container.RegisterSingle<IApplicationAuthenticator, ApplicationAuthenticator>();
             container.RegisterSingle<IApplicationRepository, ApplicationRepository>(); 
-            container.RegisterSingle<IRequestHeadersProvider, RequestHeadersProvider>();
-            container.RegisterSingle<IServiceCallHeaderParametersProvider, ServiceCallHeaderParametersProvider>();
             container.RegisterSingle<IAuthorizationManager, AuthorizationManager>();
             container.RegisterSingle<IApplicationAuthorizator, ApplicationAuthorizator>();
 			container.RegisterSingle<Caching.Interfaces.ICacheProvider>(() => new RedisCacheProvider());
@@ -84,10 +83,10 @@ namespace CES.CoreApi.GeoLocation.Service.Configuration
             container.InterceptWith<PerformanceInterceptor>(type => type == typeof(IHealthMonitoringProcessor));
             container.InterceptWith<PerformanceInterceptor>(type => type == typeof(IAddressServiceRequestProcessor));
             container.InterceptWith<PerformanceInterceptor>(type => type == typeof(IGeocodeServiceRequestProcessor));
-            container.InterceptWith<PerformanceInterceptor>(type => type == typeof(IMapServiceRequestProcessor));    
+            container.InterceptWith<PerformanceInterceptor>(type => type == typeof(IMapServiceRequestProcessor));
             container.InterceptWith<PerformanceInterceptor>(type => type == typeof(IApplicationRepository));
-			container.InterceptWith<SecurityLogMonitorInterceptor>(type => type == typeof(IHealthMonitoringProcessor));		
-
+			container.InterceptWith<SecurityLogMonitorInterceptor>(type => type == typeof(IHealthMonitoringProcessor));
+			
 		}
 
         private static void RegisterAutomapper(Container container)
@@ -114,14 +113,14 @@ namespace CES.CoreApi.GeoLocation.Service.Configuration
 
         private static void RegisterFactories(Container container)
         {
-			container.RegisterSingle<IUrlBuilderFactory>(new UrlBuilderFactory
-			{
-				{"IBingUrlBuilder", container.GetInstance<BingUrlBuilder>},
-				{"IGoogleUrlBuilder", container.GetInstance<GoogleUrlBuilder>},
-				{"IMelissaDataUrlBuilder", container.GetInstance<MelissaUrlBuilder>}
-			});
+            container.RegisterSingle<IUrlBuilderFactory>(new UrlBuilderFactory
+            {
+                {"IBingUrlBuilder", container.GetInstance<BingUrlBuilder>},
+                {"IGoogleUrlBuilder", container.GetInstance<GoogleUrlBuilder>},
+                {"IMelissaDataUrlBuilder", container.GetInstance<MelissaUrlBuilder>}
+            });
 
-			container.RegisterSingle<IResponseParserFactory>(new ResponseParserFactory
+            container.RegisterSingle<IResponseParserFactory>(new ResponseParserFactory
             {
                 {"IBingResponseParser", container.GetInstance<BingResponseParser>},
                 {"IGoogleResponseParser", container.GetInstance<GoogleResponseParser>},
@@ -149,9 +148,9 @@ namespace CES.CoreApi.GeoLocation.Service.Configuration
         private static void RegisterParsers(Container container)
         {
             container.RegisterAll<IResponseParser>(
-                typeof (BingResponseParser),
-                typeof (GoogleResponseParser),
-                typeof (MelissaResponseParser));
+				typeof(BingResponseParser),
+				typeof(GoogleResponseParser),
+				typeof(MelissaResponseParser));
 
             container.RegisterSingle<IBingAddressParser, BingAddressParser>();
             container.RegisterSingle<IMelissaAddressParser, MelissaAddressParser>();
@@ -240,6 +239,15 @@ namespace CES.CoreApi.GeoLocation.Service.Configuration
             //Security logging related
             container.Register<ISecurityLogMonitor, SecurityLogMonitor>();
         }
+
+		private static void RegisterSecurity(Container container)
+		{
+			container.RegisterSingle<IRequestHeaderParametersProviderFactory>(new RequestHeaderParametersProviderFactory
+			{
+				{"IWCFRequestHeaderParametersProvider", container.GetInstance<WcfRequestHeaderParametersProvider>},
+				{"IWebAPIRequestHeaderParametersProvider", container.GetInstance<WebAPIRequestHeaderParametersProvider>}
+			});
+		}
 
         private static void RegisterDataAccess(Container container)
         {

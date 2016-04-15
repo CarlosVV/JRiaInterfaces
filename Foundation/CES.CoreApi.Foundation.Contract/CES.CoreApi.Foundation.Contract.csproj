@@ -39,10 +39,6 @@
     <Reference Include="System.ServiceModel" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Attributes\ConnectionNameAttribute.cs" />
-    <Compile Include="Attributes\ErrorMessageAttribute.cs" />
-    <Compile Include="Attributes\SubSystemErrorNumberAttribute.cs" />
-    <Compile Include="Attributes\SystemErrorNumberAttribute.cs" />
     <Compile Include="Constants\CustomHeaderItems.cs" />
     <Compile Include="Constants\ServiceConfigurationItems.cs" />
     <Compile Include="Enumerations\ServiceConfigurationType.cs" />
@@ -52,8 +48,8 @@
     <Compile Include="Interfaces\IClientSecurityContextProvider.cs" />
     <Compile Include="Interfaces\IConfigurationProvider.cs" />
     <Compile Include="Interfaces\IHostApplicationProvider.cs" />
-    <Compile Include="Interfaces\IIdentityManager.cs" />
     <Compile Include="Interfaces\IMappingHelper.cs" />
+    <Compile Include="Interfaces\IRequestHeaderParametersProviderFactory.cs" />
     <Compile Include="Interfaces\IRequestHeadersProvider.cs" />
     <Compile Include="Interfaces\IServiceExceptionHandler.cs" />
     <Compile Include="Interfaces\IServiceHelper.cs" />
@@ -63,7 +59,6 @@
     <Compile Include="Models\ApplicationServiceOperation.cs" />
     <Compile Include="Models\BehaviorConfiguration.cs" />
     <Compile Include="Models\BindingConfiguration.cs" />
-    <Compile Include="Models\ClientApplicationIdentity.cs" />
     <Compile Include="Models\ServiceCallHeaderParameters.cs" />
     <Compile Include="Models\ServiceEndpointConfiguration.cs" />
     <Compile Include="Models\ReaderQuotasConfiguration.cs" />
@@ -73,6 +68,9 @@
     <Compile Include="Models\ServiceEndpoint.cs" />
     <Compile Include="Models\ServiceOperation.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Attributes\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="$(SolutionDir)\.nuget\NuGet.targets" Condition="Exists('$(SolutionDir)\.nuget\NuGet.targets')" />

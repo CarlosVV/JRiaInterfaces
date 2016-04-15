@@ -79,7 +79,6 @@
     <Compile Include="Interfaces\ICurrentDateTimeProvider.cs" />
     <Compile Include="Interfaces\IDataContainer.cs" />
     <Compile Include="Interfaces\IHttpClientProxy.cs" />
-    <Compile Include="Interfaces\IIdentityManager.cs" />
     <Compile Include="Interfaces\IIocContainer.cs" />
     <Compile Include="Interfaces\IIocContainerFactory.cs" />
     <Compile Include="Interfaces\ILoggerProxy.cs" />

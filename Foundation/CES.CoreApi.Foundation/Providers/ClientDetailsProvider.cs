@@ -3,6 +3,7 @@ using System.Security.Principal;
 using System.ServiceModel;
 using CES.CoreApi.Foundation.Contract.Interfaces;
 using CES.CoreApi.Foundation.Contract.Models;
+using CES.CoreApi.Security.Models;
 
 namespace CES.CoreApi.Foundation.Providers
 {
