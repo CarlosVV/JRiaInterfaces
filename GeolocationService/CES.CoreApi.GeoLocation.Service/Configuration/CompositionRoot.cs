@@ -59,18 +59,18 @@ namespace CES.CoreApi.GeoLocation.Service.Configuration
 
         private static void RegisterFoundation(Container container)
         {         
-            container.RegisterSingleton<IAuthenticationManager, AuthenticationManager>();
-            container.RegisterSingleton<IApplicationAuthenticator, ApplicationAuthenticator>();
-            container.RegisterSingleton<IApplicationRepository, ApplicationRepository>(); 
-            container.RegisterSingleton<IAuthorizationManager, AuthorizationManager>();
-            container.RegisterSingleton<IApplicationAuthorizator, ApplicationAuthorizator>();
-			container.RegisterSingleton<Caching.Interfaces.ICacheProvider>(() => new RedisCacheProvider());    
-            container.RegisterSingleton<IClientSecurityContextProvider, ClientDetailsProvider>();
-            container.RegisterSingleton<IServiceExceptionHandler, ServiceExceptionHandler>();
-            container.RegisterSingleton<IAutoMapperProxy, AutoMapperProxy>();
-            container.RegisterSingleton<IHttpClientProxy, HttpClientProxy>();
-            container.RegisterSingleton<IConfigurationProvider, ConfigurationProvider>();
-            container.RegisterSingleton<IIdentityManager, IdentityManager>();
+            container.Register<IAuthenticationManager, AuthenticationManager>();
+            container.Register<IApplicationAuthenticator, ApplicationAuthenticator>();
+            container.Register<IApplicationRepository, ApplicationRepository>(); 
+            container.Register<IAuthorizationManager, AuthorizationManager>();
+            container.Register<IApplicationAuthorizator, ApplicationAuthorizator>();
+			container.Register<Caching.Interfaces.ICacheProvider>(() => new RedisCacheProvider());    
+            container.Register<IClientSecurityContextProvider, ClientDetailsProvider>();
+            container.Register<IServiceExceptionHandler, ServiceExceptionHandler>();
+            container.Register<IAutoMapperProxy, AutoMapperProxy>();
+            container.Register<IHttpClientProxy, HttpClientProxy>();
+            container.Register<IConfigurationProvider, ConfigurationProvider>();
+            container.Register<IIdentityManager, IdentityManager>();
         }
 
         private static void RegisterInterceptions(Container container)
