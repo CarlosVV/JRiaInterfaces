@@ -54,27 +54,23 @@ namespace CES.CoreApi.GeoLocation.Service.Configuration
 			RegisterSecurity(container);
             RegisterFactories(container);
             RegisterInterceptions(container);
-            RegisterDataAccess(container);
-
             container.Verify();
         }
 
         private static void RegisterFoundation(Container container)
-        {
-            var cacheName = ConfigurationManager.AppSettings["cacheName"];
-            container.Register<IAuthenticationManager, AuthenticationManager>();
-            container.Register<IApplicationAuthenticator, ApplicationAuthenticator>();
-            container.Register<IApplicationRepository, ApplicationRepository>(); 
-            container.Register<IAuthorizationManager, AuthorizationManager>();
-            container.Register<IApplicationAuthorizator, ApplicationAuthorizator>();
-			container.Register<Caching.Interfaces.ICacheProvider>(() => new RedisCacheProvider());
-          //  container.RegisterSingle<IHostApplicationProvider, HostApplicationProvider>();
-            container.Register<IClientSecurityContextProvider, ClientDetailsProvider>();
-            container.Register<IServiceExceptionHandler, ServiceExceptionHandler>();
-            container.Register<IAutoMapperProxy, AutoMapperProxy>();
-            container.Register<IHttpClientProxy, HttpClientProxy>();
-            container.Register<IConfigurationProvider, ConfigurationProvider>();
-            container.Register<IIdentityManager, IdentityManager>();
+        {         
+            container.RegisterSingleton<IAuthenticationManager, AuthenticationManager>();
+            container.RegisterSingleton<IApplicationAuthenticator, ApplicationAuthenticator>();
+            container.RegisterSingleton<IApplicationRepository, ApplicationRepository>(); 
+            container.RegisterSingleton<IAuthorizationManager, AuthorizationManager>();
+            container.RegisterSingleton<IApplicationAuthorizator, ApplicationAuthorizator>();
+			container.RegisterSingleton<Caching.Interfaces.ICacheProvider>(() => new RedisCacheProvider());    
+            container.RegisterSingleton<IClientSecurityContextProvider, ClientDetailsProvider>();
+            container.RegisterSingleton<IServiceExceptionHandler, ServiceExceptionHandler>();
+            container.RegisterSingleton<IAutoMapperProxy, AutoMapperProxy>();
+            container.RegisterSingleton<IHttpClientProxy, HttpClientProxy>();
+            container.RegisterSingleton<IConfigurationProvider, ConfigurationProvider>();
+            container.RegisterSingleton<IIdentityManager, IdentityManager>();
         }
 
         private static void RegisterInterceptions(Container container)
@@ -244,15 +240,10 @@ namespace CES.CoreApi.GeoLocation.Service.Configuration
 		{
 			container.RegisterSingleton<IRequestHeaderParametersProviderFactory>(new RequestHeaderParametersProviderFactory
 			{
-				{"IWCFRequestHeaderParametersProvider", container.GetInstance<WcfRequestHeaderParametersProvider>}				
+				{"IWCFRequestHeaderParametersProvider", container.GetInstance<WcfRequestHeaderParametersProvider>},
+			    {"IWebAPIRequestHeaderParametersProvider", container.GetInstance<WebAPIRequestHeaderParametersProvider>}
 			});
 		}
 
-        private static void RegisterDataAccess(Container container)
-        {
-           // container.RegisterSingle<IDatabaseConfigurationProvider, DatabaseConfigurationProvider>();
-           // container.RegisterSingle<IDatabaseInstanceProvider, DatabaseInstanceProvider>();
-            container.Register<IDatabasePingProvider, DatabasePingProvider>();
-        }
     }
 }

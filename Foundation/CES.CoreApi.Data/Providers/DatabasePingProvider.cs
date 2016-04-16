@@ -23,12 +23,19 @@ namespace CES.CoreApi.Foundation.Data.Providers
                 //            select PingDatabase(name)
             };
         }
-        
-        #endregion
-        
-        #region Private methods
+		public static  object PingAllDatabases()
+		{
+			return new
+			{
+				//Databases = from name in _configurationProvider.GetDatabaseNameList()
+				//            select PingDatabase(name)
+			};
+		}
+		#endregion
 
-        private object  PingDatabase(string groupName)
+		#region Private methods
+
+		private   object  PingDatabase(string groupName)
         {
 			var pingResult = new  { Database = groupName, IsOk = true
 				};
