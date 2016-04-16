@@ -77,7 +77,6 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Providers\ClientDetailsProvider.cs" />
     <Compile Include="Providers\ConfigurationProvider.cs" />
-    <Compile Include="Providers\HostApplicationProvider.cs" />
     <Compile Include="Service\IocBasedInstanceProvider.cs" />
     <Compile Include="Service\IocBasedServiceHostFactory.cs" />
     <Compile Include="Service\IocBasedServiceHost.cs" />

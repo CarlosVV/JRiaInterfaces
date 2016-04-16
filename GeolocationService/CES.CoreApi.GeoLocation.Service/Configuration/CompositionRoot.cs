@@ -68,7 +68,7 @@ namespace CES.CoreApi.GeoLocation.Service.Configuration
             container.RegisterSingle<IAuthorizationManager, AuthorizationManager>();
             container.RegisterSingle<IApplicationAuthorizator, ApplicationAuthorizator>();
 			container.RegisterSingle<Caching.Interfaces.ICacheProvider>(() => new RedisCacheProvider());
-            container.RegisterSingle<IHostApplicationProvider, HostApplicationProvider>();
+          //  container.RegisterSingle<IHostApplicationProvider, HostApplicationProvider>();
             container.RegisterSingle<IClientSecurityContextProvider, ClientDetailsProvider>();
             container.RegisterSingle<IServiceExceptionHandler, ServiceExceptionHandler>();
             container.RegisterSingle<IAutoMapperProxy, AutoMapperProxy>();

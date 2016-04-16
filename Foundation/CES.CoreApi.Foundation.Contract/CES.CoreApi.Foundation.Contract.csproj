@@ -47,7 +47,6 @@
     <Compile Include="Interfaces\IApplicationRepository.cs" />
     <Compile Include="Interfaces\IClientSecurityContextProvider.cs" />
     <Compile Include="Interfaces\IConfigurationProvider.cs" />
-    <Compile Include="Interfaces\IHostApplicationProvider.cs" />
     <Compile Include="Interfaces\IMappingHelper.cs" />
     <Compile Include="Interfaces\IRequestHeaderParametersProviderFactory.cs" />
     <Compile Include="Interfaces\IRequestHeadersProvider.cs" />
