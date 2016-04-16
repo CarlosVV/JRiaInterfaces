@@ -15,6 +15,7 @@ using CES.CoreApi.Data.Models;
 using Microsoft.Practices.EnterpriseLibrary.Common.Configuration;
 using Microsoft.Practices.EnterpriseLibrary.Data;
 using CES.CoreApi.Data.Enumerations;
+using CES.CoreApi.Foundation.Data.Configuration;
 
 namespace CES.CoreApi.Foundation.Data.Base
 {
@@ -28,31 +29,30 @@ namespace CES.CoreApi.Foundation.Data.Base
        // private readonly ICacheProvider _cacheProvider;
         //private readonly ILogMonitorFactory _monitorFactory;
        // private readonly IIdentityManager _identityManager;
-        private readonly IDatabaseInstanceProvider _instanceProvider;
+       // private readonly IDatabaseInstanceProvider _instanceProvider;
 
         static BaseGenericRepository()
         {
-            var configSource = ConfigurationSourceFactory.Create();
-            DatabaseFactory.SetDatabaseProviderFactory(new DatabaseProviderFactory(configSource));
+            //var configSource = ConfigurationSourceFactory.Create();
+            //DatabaseFactory.SetDatabaseProviderFactory(new DatabaseProviderFactory(configSource));
 
             ApplicationId = int.Parse(ConfigurationManager.AppSettings["ApplicationID"]);
             AppObjectId = int.Parse(ConfigurationManager.AppSettings["AppObjectID"]);
             UserNameId = int.Parse(ConfigurationManager.AppSettings["UserNameID"]);
         }
 
-        protected BaseGenericRepository(
-            IDatabaseInstanceProvider instanceProvider)
-        {
-           // if (cacheProvider == null) throw new ArgumentNullException("cacheProvider");
-           // if (monitorFactory == null) throw new ArgumentNullException("monitorFactory");
-           // if (identityManager == null) throw new ArgumentNullException("identityManager");
-            if (instanceProvider == null) throw new ArgumentNullException("instanceProvider");
+        //protected BaseGenericRepository(            )
+        //{
+        //   // if (cacheProvider == null) throw new ArgumentNullException("cacheProvider");
+        //   // if (monitorFactory == null) throw new ArgumentNullException("monitorFactory");
+        //   // if (identityManager == null) throw new ArgumentNullException("identityManager");
+        //    if (instanceProvider == null) throw new ArgumentNullException("instanceProvider");
             
-         //   _cacheProvider = cacheProvider;
-          //  _monitorFactory = monitorFactory;
-           // _identityManager = identityManager;
-            _instanceProvider = instanceProvider;
-        }
+        // //   _cacheProvider = cacheProvider;
+        //  //  _monitorFactory = monitorFactory;
+        //   // _identityManager = identityManager;
+        //    _instanceProvider = instanceProvider;
+        //}
 
         #endregion
 
@@ -217,9 +217,12 @@ namespace CES.CoreApi.Foundation.Data.Base
 
         private CommandContext GetDbCommand<TEntity>(DatabaseRequest<TEntity> databaseRequest)
         {
-            var databaseCommand = new CommandContext
-            {
-                Database = _instanceProvider.GetDatabase(databaseRequest.DatabaseType, databaseRequest.DatabaseId)
+			
+			var databaseCommand = new CommandContext
+			{
+				Database = new GenericDatabase(GetDbString(databaseRequest.DatabaseType)
+				, DbProviderFactories.GetFactory("System.Data.SqlClient"))
+				
             };
 
             using (databaseCommand.Command = databaseCommand.Database.GetStoredProcCommand(databaseRequest.ProcedureName))
@@ -237,6 +240,21 @@ namespace CES.CoreApi.Foundation.Data.Base
             }
         }
 
+		private string GetDbString(DatabaseType type)
+		{
+			switch (type)
+			{			
+			
+				case DatabaseType.ReadOnly:
+					return DbConnectionString.Readonly;
+				case DatabaseType.FrontEnd:
+					return DbConnectionString.FrontEnd;
+				case DatabaseType.Image:
+					return DbConnectionString.Image;
+				default:
+					return DbConnectionString.Main;
+			}
+		}
         private static void AddConventionParameters<TEntity>(DatabaseRequest<TEntity> databaseRequest, DbCommand command)
         {
             if (!databaseRequest.IncludeConventionParameters) 

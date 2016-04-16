@@ -251,8 +251,8 @@ namespace CES.CoreApi.GeoLocation.Service.Configuration
 
         private static void RegisterDataAccess(Container container)
         {
-            container.RegisterSingle<IDatabaseConfigurationProvider, DatabaseConfigurationProvider>();
-            container.RegisterSingle<IDatabaseInstanceProvider, DatabaseInstanceProvider>();
+           // container.RegisterSingle<IDatabaseConfigurationProvider, DatabaseConfigurationProvider>();
+           // container.RegisterSingle<IDatabaseInstanceProvider, DatabaseInstanceProvider>();
             container.RegisterSingle<IDatabasePingProvider, DatabasePingProvider>();
         }
     }

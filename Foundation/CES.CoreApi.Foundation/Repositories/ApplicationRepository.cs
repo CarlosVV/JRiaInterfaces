@@ -21,10 +21,7 @@ namespace CES.CoreApi.Data.Repositories
 {
 	public class ApplicationRepository : BaseGenericRepository, IApplicationRepository
 	{
-		public ApplicationRepository(IDatabaseInstanceProvider instanceProvider)
-			: base( instanceProvider)
-		{
-		}
+		
 
 		/// <summary>
 		/// Gets application instance by ID

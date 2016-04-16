@@ -11,14 +11,24 @@ namespace CES.CoreApi.Foundation.Data.Factory
 	public class CoreDatabaseFactory
 	{
 
-		public static DbConnection Create(string connectionString, string provider = "System.Data.SqlClient")
+		public static DbConnection CreateDbConnection(string connectionString, string provider = "System.Data.SqlClient")
+		{
+		
+
+			var dbConnection =		   new GenericDatabase(connectionString,
+						   DbProviderFactories.GetFactory(provider));
+
+			return dbConnection.CreateConnection(); 
+		}
+
+		public static Database CreateDb(string connectionString, string provider = "System.Data.SqlClient")
 		{
 			//var df = DatabaseFactory.CreateDatabase();
 
-			var x =		   new GenericDatabase(connectionString,
+			var db = new GenericDatabase(connectionString,
 						   DbProviderFactories.GetFactory(provider));
 
-			return x.CreateConnection(); 
+			return db;
 		}
 	}
 }
