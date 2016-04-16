@@ -26,8 +26,8 @@ namespace CES.CoreApi.Foundation.Service
 
             host.Description.Behaviors.Add((IServiceBehavior) Container.GetInstance<IServiceExceptionHandler>());
 
-            ApplyServiceBehaviors(host);
-            ApplyContractBehaviors(host);
+            //ApplyServiceBehaviors(host);
+            //ApplyContractBehaviors(host);
 			
             host.Authentication.ServiceAuthenticationManager = (ServiceAuthenticationManager)IocContainerProvider.Instance.GetInstance<IAuthenticationManager>();
             host.Authorization.ServiceAuthorizationManager = (ServiceAuthorizationManager)IocContainerProvider.Instance.GetInstance<IAuthorizationManager>();

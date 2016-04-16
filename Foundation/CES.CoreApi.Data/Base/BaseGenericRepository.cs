@@ -6,20 +6,14 @@ using System.Configuration;
 using System.Data;
 using System.Data.Common;
 using System.Data.SqlClient;
-//using CES.CoreApi.Common.Enumerations;
-//using CES.CoreApi.Common.Interfaces;
-using CES.CoreApi.Foundation.Data.Interfaces;
 using CES.CoreApi.Data.Models;
-//using CES.CoreApi.Foundation.Data.Utility; 
-//using CES.CoreApi.Logging.Interfaces;
-using Microsoft.Practices.EnterpriseLibrary.Common.Configuration;
 using Microsoft.Practices.EnterpriseLibrary.Data;
 using CES.CoreApi.Data.Enumerations;
 using CES.CoreApi.Foundation.Data.Configuration;
 
 namespace CES.CoreApi.Foundation.Data.Base
 {
-    public abstract class BaseGenericRepository
+	public abstract class BaseGenericRepository
     {
         #region Core
 

@@ -1,10 +1,10 @@
-﻿using AutoMapper;
-using CES.CoreApi.Common.Models;
-using CES.CoreApi.Data.Models;
-using CES.CoreApi.GeoLocation.Service.Business.Contract.Enumerations;
-using CES.CoreApi.GeoLocation.Service.Business.Contract.Models;
-using CES.CoreApi.GeoLocation.Service.Contract.Enumerations;
-using CES.CoreApi.GeoLocation.Service.Contract.Models;
+﻿//using AutoMapper;
+//using CES.CoreApi.Common.Models;
+//using CES.CoreApi.Data.Models;
+//using CES.CoreApi.GeoLocation.Service.Business.Contract.Enumerations;
+//using CES.CoreApi.GeoLocation.Service.Business.Contract.Models;
+//using CES.CoreApi.GeoLocation.Service.Contract.Enumerations;
+//using CES.CoreApi.GeoLocation.Service.Contract.Models;
 using SimpleInjector;
 
 namespace CES.CoreApi.GeoLocation.Api
@@ -13,41 +13,41 @@ namespace CES.CoreApi.GeoLocation.Api
     {
 		public static void Configure(Container container)
 		{
-			var config = new MapperConfiguration(cfg =>
-			{
+			//var config = new MapperConfiguration(cfg =>
+			//{
 
 
 
-				cfg.CreateMap<AddressRequest, AddressModel>();
-				cfg.CreateMap<AddressRequest, AutocompleteAddressModel>();
-				cfg.CreateMap<AddressModel, AddressRequest>();
-				cfg.CreateMap<AddressModel, ValidatedAddress>();
-				cfg.CreateMap<AddressModel, AutocompleteAddress>();
-				cfg.CreateMap<AddressModel, GeocodeAddress>();
-				cfg.CreateMap<AutocompleteSuggestionModel, AutocompleteSuggestion>();
-				cfg.CreateMap<Location, LocationModel>();
-				cfg.CreateMap<MapSize, MapSizeModel>();
-				cfg.CreateMap<PushPin, PushPinModel>();
-				cfg.CreateMap<MapOutputParameters, MapOutputParametersModel>();
-				cfg.CreateMap<Confidence, LevelOfConfidence>();
-				cfg.CreateMap<LevelOfConfidence, Confidence>();
-				cfg.CreateMap<PinColor, Color>();
-				cfg.CreateMap<DataProviderType, DataProvider>();
-				cfg.CreateMap<LocationModel, Location>();
-				cfg.CreateMap<ValidateAddressResponseModel, ValidateAddressResponse>().ConstructUsingServiceLocator();
-				cfg.CreateMap<AutocompleteAddressResponseModel, AutocompleteAddressResponse>().ConstructUsingServiceLocator();
-				cfg.CreateMap<GeocodeAddressResponseModel, GeocodeAddressResponse>().ConstructUsingServiceLocator();
-				cfg.CreateMap<GeocodeAddressResponseModel, GeocodeAddressResponse>().ConstructUsingServiceLocator();
-				cfg.CreateMap<GetMapResponseModel, GetMapResponse>().ConstructUsingServiceLocator();
-				cfg.CreateMap<GetProviderKeyResponseModel, GetProviderKeyResponse>().ConstructUsingServiceLocator();
+			//	cfg.CreateMap<AddressRequest, AddressModel>();
+			//	cfg.CreateMap<AddressRequest, AutocompleteAddressModel>();
+			//	cfg.CreateMap<AddressModel, AddressRequest>();
+			//	cfg.CreateMap<AddressModel, ValidatedAddress>();
+			//	cfg.CreateMap<AddressModel, AutocompleteAddress>();
+			//	cfg.CreateMap<AddressModel, GeocodeAddress>();
+			//	cfg.CreateMap<AutocompleteSuggestionModel, AutocompleteSuggestion>();
+			//	cfg.CreateMap<Location, LocationModel>();
+			//	cfg.CreateMap<MapSize, MapSizeModel>();
+			//	cfg.CreateMap<PushPin, PushPinModel>();
+			//	cfg.CreateMap<MapOutputParameters, MapOutputParametersModel>();
+			//	cfg.CreateMap<Confidence, LevelOfConfidence>();
+			//	cfg.CreateMap<LevelOfConfidence, Confidence>();
+			//	cfg.CreateMap<PinColor, Color>();
+			//	cfg.CreateMap<DataProviderType, DataProvider>();
+			//	cfg.CreateMap<LocationModel, Location>();
+			//	cfg.CreateMap<ValidateAddressResponseModel, ValidateAddressResponse>().ConstructUsingServiceLocator();
+			//	cfg.CreateMap<AutocompleteAddressResponseModel, AutocompleteAddressResponse>().ConstructUsingServiceLocator();
+			//	cfg.CreateMap<GeocodeAddressResponseModel, GeocodeAddressResponse>().ConstructUsingServiceLocator();
+			//	cfg.CreateMap<GeocodeAddressResponseModel, GeocodeAddressResponse>().ConstructUsingServiceLocator();
+			//	cfg.CreateMap<GetMapResponseModel, GetMapResponse>().ConstructUsingServiceLocator();
+			//	cfg.CreateMap<GetProviderKeyResponseModel, GetProviderKeyResponse>().ConstructUsingServiceLocator();
 
-				cfg.CreateMap<PingResponseModel, PingResponse>().ConstructUsingServiceLocator();
-				cfg.CreateMap<ClearCacheResponseModel, ClearCacheResponse>().ConstructUsingServiceLocator();
-				cfg.CreateMap<DatabasePingModel, DatabasePingResponse>();
+			//	cfg.CreateMap<PingResponseModel, PingResponse>().ConstructUsingServiceLocator();
+			//	cfg.CreateMap<ClearCacheResponseModel, ClearCacheResponse>().ConstructUsingServiceLocator();
+			//	cfg.CreateMap<DatabasePingModel, DatabasePingResponse>();
 
 
-				cfg.ConstructServicesUsing(container.GetInstance);
-			});
+			//	cfg.ConstructServicesUsing(container.GetInstance);
+			//});
 			////Mapper.Configuration.ConstructServicesUsing(container.GetInstance);
 			//Mapper.CreateMap<AddressRequest, AddressModel>();
 			//Mapper.CreateMap<AddressRequest, AutocompleteAddressModel>();
