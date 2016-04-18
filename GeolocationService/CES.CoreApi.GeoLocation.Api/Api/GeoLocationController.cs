@@ -1,4 +1,5 @@
 ﻿using CES.CoreApi.GeoLocation.Api.Models;
+using CES.CoreApi.GeoLocation.Service.Contract.Models;
 using System.Web.Http;
 
 namespace CES.CoreApi.GeoLocation.Api.Api
@@ -12,13 +13,18 @@ namespace CES.CoreApi.GeoLocation.Api.Api
 			this.repository = repository;
 		}
 
-		[Route("Ping")]
 		[HttpGet]
 		public string Ping()
 		{
 			return "OK";
 		}
 
+		
+		[HttpPost]
+		public ValidateAddressResponse ValidateAddress(ValidateAddressRequest request)
+		{
+			return null;
+		}
 
 	}
 }

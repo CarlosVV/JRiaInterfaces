@@ -1,5 +1,6 @@
 ﻿using SimpleInjector;
 using SimpleInjector.Integration.WebApi;
+using System;
 using System.Web.Http;
 namespace CES.CoreApi.GeoLocation.Api
 {
@@ -33,6 +34,11 @@ namespace CES.CoreApi.GeoLocation.Api
 
 
 
+		}
+
+		protected void Application_Error(object sender, EventArgs e)
+		{
+			Exception exception = Server.GetLastError().GetBaseException();
 		}
 
 	}

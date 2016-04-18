@@ -12,6 +12,7 @@ using CES.CoreApi.Security;
 using System.ServiceModel.Web;
 using CES.CoreApi.Security.Interfaces;
 using CES.CoreApi.Foundation.Models;
+using CES.CoreApi.Security.Models;
 
 namespace CES.CoreApi.Foundation.Providers
 {

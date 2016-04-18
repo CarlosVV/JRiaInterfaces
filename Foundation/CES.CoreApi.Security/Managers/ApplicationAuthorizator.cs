@@ -1,14 +1,13 @@
-﻿using System;
+﻿using CES.CoreApi.Security.Interfaces;
+using System;
 using System.Linq;
 using System.Security.Principal;
+using CES.CoreApi.Foundation.Contract.Interfaces;
 using CES.CoreApi.Common.Enumerations;
 using CES.CoreApi.Common.Exceptions;
-using CES.CoreApi.Common.Interfaces;
-using CES.CoreApi.Foundation.Contract.Interfaces;
-using CES.CoreApi.Security.Interfaces;
-using System.Configuration;
-using CES.CoreApi.Foundation.Contract.Models;
 using CES.CoreApi.Security.Models;
+using CES.CoreApi.Foundation.Models;
+using CES.CoreApi.Security.Enums;
 
 namespace CES.CoreApi.Security
 {
@@ -28,23 +27,22 @@ namespace CES.CoreApi.Security
             if (identityManager == null)
                 throw new CoreApiException(TechnicalSubSystem.Authorization, SubSystemError.GeneralRequiredParameterIsUndefined, "identityManager");
 
-            _parametersProvider = requestHeaderParametersProviderFactory.GetInstance<IRequestHeaderParametersProvider>(ConfigurationManager.AppSettings["HostServiceType"]);
+            _parametersProvider = requestHeaderParametersProviderFactory.GetInstance<IRequestHeaderParametersProvider>(ServiceType.WebApi.ToString());
             _hostApplicationProvider = hostApplicationProvider;
             _identityManager = identityManager;
         }
 		
         public IPrincipal ValidateAccess(IPrincipal clientApplicationPrincipal)
         {
-			int? clientApplicationId = (clientApplicationPrincipal?.Identity as ClientApplicationIdentity)?.ApplicationId;
-			ValidateClientApplicationAuthentication(clientApplicationPrincipal, clientApplicationId);
+			var clientApplicationIdentity = clientApplicationPrincipal?.Identity as ClientApplicationIdentity;
+			ValidateClientApplicationAuthentication(clientApplicationPrincipal, clientApplicationIdentity?.ApplicationId);
 
 			var hostApplication = _hostApplicationProvider.GetApplication().Result;
 			ValidateHostApplication(hostApplication);
+			
+			ValidateHostApplicationOperation(hostApplication, clientApplicationIdentity?.OperationName);
 
-			var headerParameters = _parametersProvider.GetParameters();
-			ValidateHostApplicationOperation(hostApplication, headerParameters.OperationName);
-
-			ValidateOperationAccess(hostApplication, headerParameters.OperationName, clientApplicationId);
+			ValidateOperationAccess(hostApplication, clientApplicationIdentity?.OperationName, clientApplicationIdentity?.ApplicationId);
 
             _identityManager.SetCurrentPrincipal(clientApplicationPrincipal);
 			

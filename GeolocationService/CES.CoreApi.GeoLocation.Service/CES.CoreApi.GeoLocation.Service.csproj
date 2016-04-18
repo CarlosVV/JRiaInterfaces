@@ -51,19 +51,19 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\Castle.Core.3.3.3\lib\net45\Castle.Core.dll</HintPath>
     </Reference>
-    <Reference Include="SimpleInjector, Version=2.8.0.0, Culture=neutral, PublicKeyToken=984cb50dea722e99, processorArchitecture=MSIL">
-      <HintPath>..\packages\SimpleInjector.2.8.0\lib\net45\SimpleInjector.dll</HintPath>
+    <Reference Include="SimpleInjector, Version=3.1.3.0, Culture=neutral, PublicKeyToken=984cb50dea722e99, processorArchitecture=MSIL">
+      <HintPath>..\packages\SimpleInjector.3.1.3\lib\net45\SimpleInjector.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="SimpleInjector.Extensions.ExecutionContextScoping">
-      <HintPath>..\packages\SimpleInjector.Extensions.ExecutionContextScoping.2.8.0\lib\net45\SimpleInjector.Extensions.ExecutionContextScoping.dll</HintPath>
+    <Reference Include="SimpleInjector.Extensions.ExecutionContextScoping, Version=3.1.2.0, Culture=neutral, PublicKeyToken=984cb50dea722e99, processorArchitecture=MSIL">
+      <HintPath>..\packages\SimpleInjector.Extensions.ExecutionContextScoping.3.1.2\lib\net45\SimpleInjector.Extensions.ExecutionContextScoping.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="SimpleInjector.Extensions.LifetimeScoping">
       <HintPath>..\packages\SimpleInjector.Extensions.LifetimeScoping.2.8.0\lib\net40-client\SimpleInjector.Extensions.LifetimeScoping.dll</HintPath>
     </Reference>
-    <Reference Include="SimpleInjector.Integration.Wcf, Version=2.8.0.0, Culture=neutral, PublicKeyToken=984cb50dea722e99, processorArchitecture=MSIL">
-      <HintPath>..\packages\SimpleInjector.Integration.Wcf.2.8.0\lib\net40\SimpleInjector.Integration.Wcf.dll</HintPath>
+    <Reference Include="SimpleInjector.Integration.Wcf, Version=3.1.3.0, Culture=neutral, PublicKeyToken=984cb50dea722e99, processorArchitecture=MSIL">
+      <HintPath>..\packages\SimpleInjector.Integration.Wcf.3.1.3\lib\net40\SimpleInjector.Integration.Wcf.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="System" />
@@ -126,10 +126,16 @@
       <Project>{E0888526-1DC6-4693-88A3-7347A99BC018}</Project>
       <Name>CES.CoreApi.GeoLocation.Service.Contract</Name>
     </ProjectReference>
+    <ProjectReference Include="..\CES.CoreApi.Security.Wcf\CES.CoreApi.Security.Wcf.csproj">
+      <Project>{9a1ec39a-2eef-49f5-af9a-5cfd68ce413f}</Project>
+      <Name>CES.CoreApi.Security.Wcf</Name>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>
-    <None Include="app.config" />
+    <None Include="app.config">
+      <SubType>Designer</SubType>
+    </None>
     <None Include="packages.config">
       <SubType>Designer</SubType>
     </None>

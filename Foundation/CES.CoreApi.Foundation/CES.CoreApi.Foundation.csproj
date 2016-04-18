@@ -37,20 +37,20 @@
       <HintPath>..\packages\Newtonsoft.Json.6.0.8\lib\net45\Newtonsoft.Json.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="SimpleInjector, Version=2.8.0.0, Culture=neutral, PublicKeyToken=984cb50dea722e99, processorArchitecture=MSIL">
-      <HintPath>..\packages\SimpleInjector.2.8.0\lib\net45\SimpleInjector.dll</HintPath>
+    <Reference Include="SimpleInjector, Version=3.1.3.0, Culture=neutral, PublicKeyToken=984cb50dea722e99, processorArchitecture=MSIL">
+      <HintPath>..\..\GeolocationService\packages\SimpleInjector.3.1.3\lib\net45\SimpleInjector.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="SimpleInjector.Extensions.ExecutionContextScoping, Version=2.4.0.0, Culture=neutral, PublicKeyToken=984cb50dea722e99, processorArchitecture=MSIL">
-      <HintPath>..\packages\SimpleInjector.Extensions.ExecutionContextScoping.2.8.0\lib\net45\SimpleInjector.Extensions.ExecutionContextScoping.dll</HintPath>
+    <Reference Include="SimpleInjector.Extensions.ExecutionContextScoping, Version=3.1.2.0, Culture=neutral, PublicKeyToken=984cb50dea722e99, processorArchitecture=MSIL">
+      <HintPath>..\..\GeolocationService\packages\SimpleInjector.Extensions.ExecutionContextScoping.3.1.2\lib\net45\SimpleInjector.Extensions.ExecutionContextScoping.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="SimpleInjector.Extensions.LifetimeScoping, Version=2.8.0.0, Culture=neutral, PublicKeyToken=984cb50dea722e99, processorArchitecture=MSIL">
       <HintPath>..\packages\SimpleInjector.Extensions.LifetimeScoping.2.8.0\lib\net40-client\SimpleInjector.Extensions.LifetimeScoping.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="SimpleInjector.Integration.Wcf, Version=2.8.0.0, Culture=neutral, PublicKeyToken=984cb50dea722e99, processorArchitecture=MSIL">
-      <HintPath>..\packages\SimpleInjector.Integration.Wcf.2.8.0\lib\net40\SimpleInjector.Integration.Wcf.dll</HintPath>
+    <Reference Include="SimpleInjector.Integration.Wcf, Version=3.1.3.0, Culture=neutral, PublicKeyToken=984cb50dea722e99, processorArchitecture=MSIL">
+      <HintPath>..\..\GeolocationService\packages\SimpleInjector.Integration.Wcf.3.1.3\lib\net40\SimpleInjector.Integration.Wcf.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="System" />
@@ -70,7 +70,7 @@
     <Compile Include="Configuration\ApplicationConfiguration.cs" />
     <Compile Include="Configuration\ConfigurationTools.cs" />
     <Compile Include="Providers\WcfRequestHeaderParametersProvider.cs" />
-    <Compile Include="Providers\WebAPIRequestHeaderParametersProvider.cs" />
+    <Compile Include="Providers\WebApiRequestHeaderParametersProvider.cs" />
     <Compile Include="Repositories\ApplicationRepository.cs" />
     <Compile Include="Service\MessageInspector.cs" />
     <Compile Include="Tools\MappingHelper.cs" />
@@ -79,16 +79,16 @@
     <Compile Include="Providers\ConfigurationProvider.cs" />
     <Compile Include="Providers\HostApplicationProvider.cs" />
     <Compile Include="Service\IocBasedInstanceProvider.cs" />
-    <Compile Include="Service\IocBasedServiceHostFactory.cs" />
     <Compile Include="Service\IocBasedServiceHost.cs" />
     <Compile Include="Providers\IocContainerProvider.cs" />
     <Compile Include="Service\ServiceEndpointBehavior.cs" />
     <Compile Include="Service\ServiceExceptionHandler.cs" />
-    <Compile Include="Providers\WcfRequestHeadersProvider.cs" />
     <Compile Include="Validation\ContractValidation.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="app.config" />
+    <None Include="app.config">
+      <SubType>Designer</SubType>
+    </None>
     <None Include="CES.CoreApi.Foundation.nuspec" />
     <None Include="packages.config">
       <SubType>Designer</SubType>

@@ -3,6 +3,7 @@ using CES.CoreApi.Common.Exceptions;
 using CES.CoreApi.Foundation.Contract.Enumerations;
 using CES.CoreApi.Foundation.Contract.Interfaces;
 using CES.CoreApi.Security.Interfaces;
+using CES.CoreApi.Security.Models;
 using System;
 using System.Collections.Generic;
 using System.Globalization;
