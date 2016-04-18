@@ -15,6 +15,7 @@ using CES.CoreApi.Logging.Interfaces;
 using CES.CoreApi.Logging.Models;
 using ServiceEndpoint = System.ServiceModel.Description.ServiceEndpoint;
 using CES.CoreApi.Security.Interfaces;
+using CES.CoreApi.Foundation.Providers;
 
 namespace CES.CoreApi.Foundation.Service
 {
@@ -36,18 +37,17 @@ namespace CES.CoreApi.Foundation.Service
 		internal const string HttpRequest = "httpRequest";
 
 		public ServiceExceptionHandler(ILogMonitorFactory logMonitorFactory, 
-			IClientSecurityContextProvider clientDetailsProvider,
+			
 			IIdentityManager identityManager)
 		{
 			if (logMonitorFactory == null)
 				throw new ArgumentNullException("logMonitorFactory");
-			if (clientDetailsProvider == null)
-				throw new ArgumentNullException("clientDetailsProvider");
+		
 			if (identityManager == null)
 				throw new ArgumentNullException("identityManager");
 	
 
-			_clientDetailsProvider = clientDetailsProvider;
+			_clientDetailsProvider = new ClientDetailsProvider();
 			_identityManager = identityManager;
 
 			_exceptionLogMonitor = logMonitorFactory.CreateNew<IExceptionLogMonitor>();

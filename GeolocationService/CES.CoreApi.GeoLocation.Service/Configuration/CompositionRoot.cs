@@ -61,10 +61,10 @@ namespace CES.CoreApi.GeoLocation.Service.Configuration
             container.Register<IAuthorizationManager, AuthorizationManager>();
             container.Register<IApplicationAuthorizator, ApplicationAuthorizator>();
 			container.Register<Caching.Interfaces.ICacheProvider>(() => new RedisCacheProvider());    
-            container.Register<IClientSecurityContextProvider, ClientDetailsProvider>();
+           // container.Register<IClientSecurityContextProvider, ClientDetailsProvider>();
             container.Register<IServiceExceptionHandler, ServiceExceptionHandler>();
-            container.Register<IAutoMapperProxy, AutoMapperProxy>();
-            container.Register<IHttpClientProxy, HttpClientProxy>();
+          //  container.Register<IAutoMapperProxy, AutoMapperProxy>();
+          //container.Register<IHttpClientProxy, HttpClientProxy>();
             container.Register<IConfigurationProvider, ConfigurationProvider>();
             container.Register<IIdentityManager, IdentityManager>();
         }
@@ -181,7 +181,7 @@ namespace CES.CoreApi.GeoLocation.Service.Configuration
             container.Register<ILoggerProxy, Log4NetProxy>();
 
             //Registers common formatters
-            container.Register<IFileSizeFormatter, FileSizeFormatter>();
+			//container.Register<IFileSizeFormatter, FileSizeFormatter>();
             container.Register<IDateTimeFormatter, DateTimeFormatter>();
             container.Register<IFullMethodNameFormatter, FullMethodNameFormatter>();
             container.Register<IDefaultValueFormatter, DefaultValueFormatter>();

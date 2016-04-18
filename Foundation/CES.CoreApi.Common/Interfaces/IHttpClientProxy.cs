@@ -2,7 +2,7 @@
 
 namespace CES.CoreApi.Common.Interfaces
 {
-    public interface IHttpClientProxy
+    public interface IHttpClientProxy2
     {
         HttpClient GetHttpClient();
     }
