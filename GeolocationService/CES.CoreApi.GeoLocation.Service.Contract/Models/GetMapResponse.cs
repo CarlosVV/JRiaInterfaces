@@ -9,10 +9,7 @@ namespace CES.CoreApi.GeoLocation.Service.Contract.Models
     [DataContract(Namespace = Namespaces.GeolocationServiceDataContractNamespace)]
     public class GetMapResponse : BaseResponse
     {
-        public GetMapResponse(ICurrentDateTimeProvider currentDateTimeProvider) 
-            : base(currentDateTimeProvider)
-        {
-        }
+       
 
         [DataMember]
         public byte[]  MapData { get; set; }

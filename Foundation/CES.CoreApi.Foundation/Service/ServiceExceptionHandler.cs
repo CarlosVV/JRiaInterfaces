@@ -29,14 +29,15 @@ namespace CES.CoreApi.Foundation.Service
 		private readonly IExceptionLogMonitor _exceptionLogMonitor;
 		private readonly IClientSecurityContextProvider _clientDetailsProvider;
 		private readonly IIdentityManager _identityManager;
-		private readonly ICurrentDateTimeProvider _currentDateTimeProvider;
+
 		private CoreApiException _coreApiException;
 		private const string ErrorMessage = "Server error encountered. All details have been logged.";
 		private const string WcfSecurityErrorMessage = "The caller was not authenticated by the service.";
 		internal const string HttpRequest = "httpRequest";
 
-		public ServiceExceptionHandler(ILogMonitorFactory logMonitorFactory, IClientSecurityContextProvider clientDetailsProvider,
-			IIdentityManager identityManager, ICurrentDateTimeProvider currentDateTimeProvider)
+		public ServiceExceptionHandler(ILogMonitorFactory logMonitorFactory, 
+			IClientSecurityContextProvider clientDetailsProvider,
+			IIdentityManager identityManager)
 		{
 			if (logMonitorFactory == null)
 				throw new ArgumentNullException("logMonitorFactory");
@@ -44,12 +45,11 @@ namespace CES.CoreApi.Foundation.Service
 				throw new ArgumentNullException("clientDetailsProvider");
 			if (identityManager == null)
 				throw new ArgumentNullException("identityManager");
-			if (currentDateTimeProvider == null)
-				throw new ArgumentNullException("currentDateTimeProvider");
+	
 
 			_clientDetailsProvider = clientDetailsProvider;
 			_identityManager = identityManager;
-			_currentDateTimeProvider = currentDateTimeProvider;
+
 			_exceptionLogMonitor = logMonitorFactory.CreateNew<IExceptionLogMonitor>();
 		}
 		
@@ -167,7 +167,7 @@ namespace CES.CoreApi.Foundation.Service
 			{
 				ErrorCode = _coreApiException.ErrorCode,
 				ErrorMessage = _coreApiException.ClientMessage,
-				ErrorTime = _currentDateTimeProvider.GetCurrentUtc(),
+				ErrorTime = DateTime.UtcNow,
 				ErrorIdentifier = _coreApiException.ErrorId
 			};
 

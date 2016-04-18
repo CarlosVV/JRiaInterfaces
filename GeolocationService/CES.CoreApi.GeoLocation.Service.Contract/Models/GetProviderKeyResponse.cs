@@ -8,10 +8,7 @@ namespace CES.CoreApi.GeoLocation.Service.Contract.Models
     [DataContract(Namespace = Namespaces.GeolocationServiceDataContractNamespace)]
     public class GetProviderKeyResponse : BaseResponse
     {
-        public GetProviderKeyResponse(ICurrentDateTimeProvider currentDateTimeProvider)
-            : base(currentDateTimeProvider)
-        {
-        }
+       
 
         [DataMember]
         public string ProviderKey { get; set; }

@@ -15,16 +15,15 @@ namespace CES.CoreApi.Logging.Models
 	{
 		private readonly IJsonDataContainerFormatter _formatter;
 
-		public ExceptionLogDataContainer(IJsonDataContainerFormatter formatter, ICurrentDateTimeProvider currentDateTimeProvider)
+		public ExceptionLogDataContainer(IJsonDataContainerFormatter formatter)
 		{
 			if (formatter == null)
 				throw new ArgumentNullException("formatter");
-			if (currentDateTimeProvider == null)
-				throw new ArgumentNullException("currentDateTimeProvider");
+		
 
 			_formatter = formatter;
 			Items = new Collection<ExceptionLogItemGroup>();
-			Timestamp = currentDateTimeProvider.GetCurrentUtc();
+			Timestamp = DateTime.UtcNow;
 			ThreadId = Thread.CurrentThread.ManagedThreadId;
 		}
 

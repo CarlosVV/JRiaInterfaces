@@ -12,23 +12,22 @@ namespace CES.CoreApi.Logging.Models
 	{
 		private readonly IJsonDataContainerFormatter _jsonDataContainerFormatter;
 		private readonly ILogConfigurationProvider _configuration;
-		private readonly ICurrentDateTimeProvider _currentDateTimeProvider;
+
 		private string _requestMessage;
 		private string _responseMessage;
 
-		public TraceLogDataContainer(IJsonDataContainerFormatter jsonDataContainerFormatter, ILogConfigurationProvider configuration,
-			ICurrentDateTimeProvider currentDateTimeProvider)
+		public TraceLogDataContainer(IJsonDataContainerFormatter jsonDataContainerFormatter, ILogConfigurationProvider configuration
+			)
 		{
 			if (jsonDataContainerFormatter == null)
 				throw new ArgumentNullException("jsonDataContainerFormatter");
 			if (configuration == null)
 				throw new ArgumentNullException("configuration");
-			if (currentDateTimeProvider == null)
-				throw new ArgumentNullException("currentDateTimeProvider");
+		
 
 			_jsonDataContainerFormatter = jsonDataContainerFormatter;
 			_configuration = configuration;
-			_currentDateTimeProvider = currentDateTimeProvider;
+			
 			_requestMessage = string.Empty;
 			_responseMessage = string.Empty;
 			MessageId = Guid.NewGuid();
@@ -47,7 +46,7 @@ namespace CES.CoreApi.Logging.Models
 			}
 			set
 			{
-				RequestTime = _currentDateTimeProvider.GetCurrentUtc();
+				RequestTime = DateTime.UtcNow;
 				value = string.IsNullOrEmpty(value) ? string.Empty : value;
 				RequestMessageLength = value.Length;
 
@@ -57,7 +56,7 @@ namespace CES.CoreApi.Logging.Models
 				_requestMessage = value;
 			}
 		}
-		public DateTime LogTime => _currentDateTimeProvider.GetCurrentUtc();
+		public DateTime LogTime => DateTime.UtcNow;
 
 		public long RequestMessageLength
 		{
@@ -72,7 +71,7 @@ namespace CES.CoreApi.Logging.Models
 			}
 			set
 			{
-				ResponseTime = _currentDateTimeProvider.GetCurrentUtc();
+				ResponseTime = DateTime.UtcNow;
 				value = string.IsNullOrEmpty(value) ? string.Empty : value;
 				ResponseMessageLength = value.Length;
 

@@ -11,15 +11,14 @@ namespace CES.CoreApi.Logging.Models
 	{
 		private readonly IJsonDataContainerFormatter _jsonDataContainerFormatter;
 
-		public SecurityLogDataContainer(IJsonDataContainerFormatter jsonDataContainerFormatter, ICurrentDateTimeProvider currentDateTimeProvider)
+		public SecurityLogDataContainer(IJsonDataContainerFormatter jsonDataContainerFormatter)
 		{
 			if (jsonDataContainerFormatter == null)
 				throw new ArgumentNullException("jsonDataContainerFormatter");
-			if (currentDateTimeProvider == null)
-				throw new ArgumentNullException("currentDateTimeProvider");
+		
 
 			_jsonDataContainerFormatter = jsonDataContainerFormatter;
-			AuditTime = currentDateTimeProvider.GetCurrentUtc();
+			AuditTime = DateTime.UtcNow;
 			MessageId = Guid.NewGuid();
 		}
 		

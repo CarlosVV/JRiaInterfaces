@@ -9,10 +9,7 @@ namespace CES.CoreApi.GeoLocation.Service.Contract.Models
     [DataContract(Namespace = Namespaces.GeolocationServiceDataContractNamespace)]
     public class ValidateAddressResponse : BaseResponse
     {
-        public ValidateAddressResponse(ICurrentDateTimeProvider currentDateTimeProvider) 
-            : base(currentDateTimeProvider)
-        {
-        }
+        
 
         /// <summary>
         /// Address validation status.

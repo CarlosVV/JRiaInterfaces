@@ -1,12 +1,8 @@
-﻿using System.Configuration;
-using AutoMapper;
+﻿using AutoMapper;
 using AutoMapper.Mappers;
 using CES.CoreApi.Common.Interfaces;
-using CES.CoreApi.Common.Providers;
 using CES.CoreApi.Common.Proxies;
 using CES.CoreApi.Foundation.Contract.Interfaces;
-using CES.CoreApi.Foundation.Data.Interfaces;
-using CES.CoreApi.Foundation.Data.Providers;
 using CES.CoreApi.Foundation.Providers;
 using CES.CoreApi.Foundation.Service;
 using CES.CoreApi.Foundation.Tools;
@@ -38,7 +34,7 @@ using CES.CoreApi.Security.Factories;
 
 namespace CES.CoreApi.GeoLocation.Service.Configuration
 {
-    public class CompositionRoot
+	public class CompositionRoot
     {
         public static void RegisterDependencies(Container container)
         {
@@ -162,7 +158,7 @@ namespace CES.CoreApi.GeoLocation.Service.Configuration
             container.Register<IDataResponseProvider, DataResponseProvider>();
             container.Register<IMelissaLevelOfConfidenceProvider, MelissaLevelOfConfidenceProvider>();
             container.Register<IGoogleLevelOfConfidenceProvider, GoogleLevelOfConfidenceProvider>();
-            container.Register<ICurrentDateTimeProvider, CurrentDateTimeProvider>();
+         
             container.Register<IAddressAutocompleteDataProvider, AddressAutocompleteDataProvider>();
             container.Register<IGeocodeAddressDataProvider, GeocodeAddressDataProvider>();
             container.Register<IBingPushPinParameterProvider, BingPushPinParameterProvider>();

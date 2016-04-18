@@ -9,10 +9,7 @@ namespace CES.CoreApi.GeoLocation.Service.Contract.Models
     [DataContract(Namespace = Namespaces.GeolocationServiceDataContractNamespace)]
     public class GeocodeAddressResponse : BaseResponse
     {
-        public GeocodeAddressResponse(ICurrentDateTimeProvider currentDateTimeProvider) 
-            : base(currentDateTimeProvider)
-        {
-        }
+    
 
         [DataMember]
         public Location Location { get; set; }
