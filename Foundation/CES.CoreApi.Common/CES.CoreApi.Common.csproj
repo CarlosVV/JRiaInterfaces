@@ -33,10 +33,6 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="AutoMapper, Version=4.2.1.0, Culture=neutral, PublicKeyToken=be96cd2c38ef1005, processorArchitecture=MSIL">
-      <HintPath>..\..\GeolocationService\packages\AutoMapper.4.2.1\lib\net45\AutoMapper.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="Newtonsoft.Json, Version=6.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
@@ -72,7 +68,6 @@
     <Compile Include="Enumerations\TechnicalSubSystem.cs" />
     <Compile Include="Enumerations\TechnicalSystem.cs" />
     <Compile Include="Exceptions\CoreApiException.cs" />
-    <Compile Include="Interfaces\IAutoMapperProxy.cs" />
     <Compile Include="Interfaces\ICurrentDateTimeProvider.cs" />
     <Compile Include="Interfaces\IDataContainer.cs" />
     <Compile Include="Interfaces\IHttpClientProxy.cs" />
@@ -90,7 +85,6 @@
     <Compile Include="Providers\CurrentDateTimeProvider.cs" />
     <Compile Include="Exceptions\ExceptionHelper.cs" />
     <Compile Include="Interfaces\IExceptionHelper.cs" />
-    <Compile Include="Proxies\AutoMapperProxy.cs" />
     <Compile Include="Proxies\ServiceProxy.cs" />
     <Compile Include="Proxies\HttpClientProxy.cs" />
     <Compile Include="Tools\DictionaryTools.cs" />

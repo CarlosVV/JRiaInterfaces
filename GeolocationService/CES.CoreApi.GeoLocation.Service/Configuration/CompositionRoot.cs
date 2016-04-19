@@ -1,11 +1,8 @@
 ﻿using AutoMapper;
-using AutoMapper.Mappers;
 using CES.CoreApi.Common.Interfaces;
-using CES.CoreApi.Common.Proxies;
 using CES.CoreApi.Foundation.Contract.Interfaces;
 using CES.CoreApi.Foundation.Providers;
 using CES.CoreApi.Foundation.Service;
-using CES.CoreApi.Foundation.Tools;
 using CES.CoreApi.GeoLocation.Service.Business.Contract.Interfaces;
 using CES.CoreApi.GeoLocation.Service.Business.Logic.Builders;
 using CES.CoreApi.GeoLocation.Service.Business.Logic.Factories;
@@ -101,7 +98,7 @@ namespace CES.CoreApi.GeoLocation.Service.Configuration
             container.Register<PerformanceInterceptor>();
 			container.Register<SecurityLogMonitorInterceptor>();
 			container.Register<IRequestValidator, RequestValidator>();
-            container.Register<IMappingHelper, MappingHelper>();
+        
         }
 
         private static void RegisterFactories(Container container)
