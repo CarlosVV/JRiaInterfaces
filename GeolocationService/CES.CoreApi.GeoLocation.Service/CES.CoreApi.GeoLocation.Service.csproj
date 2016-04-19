@@ -123,6 +123,10 @@
       <Project>{9a1ec39a-2eef-49f5-af9a-5cfd68ce413f}</Project>
       <Name>CES.CoreApi.Security.Wcf</Name>
     </ProjectReference>
+    <ProjectReference Include="..\CES.CoreAPI.Security.WebApi\CES.CoreAPI.Security.WebApi.csproj">
+      <Project>{edf1e298-f3b9-4c97-ad36-2f3d260ae636}</Project>
+      <Name>CES.CoreAPI.Security.WebApi</Name>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>

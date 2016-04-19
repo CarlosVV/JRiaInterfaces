@@ -69,8 +69,6 @@
   <ItemGroup>
     <Compile Include="Configuration\ApplicationConfiguration.cs" />
     <Compile Include="Configuration\ConfigurationTools.cs" />
-    <Compile Include="Providers\WcfRequestHeaderParametersProvider.cs" />
-    <Compile Include="Providers\WebApiRequestHeaderParametersProvider.cs" />
     <Compile Include="Repositories\ApplicationRepository.cs" />
     <Compile Include="Service\MessageInspector.cs" />
     <Compile Include="Tools\MappingHelper.cs" />

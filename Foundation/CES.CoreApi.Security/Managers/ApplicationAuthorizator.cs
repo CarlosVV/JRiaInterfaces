@@ -8,25 +8,19 @@ using CES.CoreApi.Common.Exceptions;
 using CES.CoreApi.Security.Models;
 using CES.CoreApi.Foundation.Models;
 using CES.CoreApi.Security.Enums;
+using CES.CoreApi.Foundation.Contract.Constants;
 
 namespace CES.CoreApi.Security
 {
     public class ApplicationAuthorizator: IApplicationAuthorizator
     {
-        private readonly IRequestHeaderParametersProvider _parametersProvider;
-    
         private readonly IIdentityManager _identityManager;
-
-        public ApplicationAuthorizator(
-			IRequestHeaderParametersProviderFactory requestHeaderParametersProviderFactory, IIdentityManager identityManager)
+		
+		public ApplicationAuthorizator(IIdentityManager identityManager)
         {            
-            if (requestHeaderParametersProviderFactory == null)
-                throw new CoreApiException(TechnicalSubSystem.Authorization, SubSystemError.GeneralRequiredParameterIsUndefined, "requestHeaderParametersProviderFactory");
             if (identityManager == null)
                 throw new CoreApiException(TechnicalSubSystem.Authorization, SubSystemError.GeneralRequiredParameterIsUndefined, "identityManager");
-
-            //_parametersProvider = requestHeaderParametersProviderFactory.GetInstance<IRequestHeaderParametersProvider>(ConfigurationManager.AppSettings["HostServiceType"]);
-       
+			
             _identityManager = identityManager;
         }
 		
@@ -35,14 +29,19 @@ namespace CES.CoreApi.Security
 			var clientApplicationIdentity = clientApplicationPrincipal?.Identity as ClientApplicationIdentity;
 			ValidateClientApplicationAuthentication(clientApplicationPrincipal, clientApplicationIdentity?.ApplicationId);
 
-			//var hostApplication = _hostApplicationProvider.GetApplication().Result;
+			//var applicationId = ConfigurationTools.ReadAppSettingsValue<int>(ServiceConfigurationItems.ApplicationId);
+			//if (applicationId == 0)
+			//	throw new CoreApiException(Organization.Ria, TechnicalSystem.CoreApi,
+			//		TechnicalSubSystem.Authentication, SubSystemError.ApplicationIdNotFoundInConfigFile);
+			
+			//var hostApplication = _applicationRepository.GetApplication(applicationId);
 			//ValidateHostApplication(hostApplication);
 
 			//ValidateHostApplicationOperation(hostApplication, clientApplicationIdentity?.OperationName);
 
 			//ValidateOperationAccess(hostApplication, clientApplicationIdentity?.OperationName, clientApplicationIdentity?.ApplicationId);
 
-            _identityManager.SetCurrentPrincipal(clientApplicationPrincipal);
+			_identityManager.SetCurrentPrincipal(clientApplicationPrincipal);
 			
 			return _identityManager.GetCurrentPrincipal();
         }

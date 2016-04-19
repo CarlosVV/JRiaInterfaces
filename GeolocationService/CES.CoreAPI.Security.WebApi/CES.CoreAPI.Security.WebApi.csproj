@@ -54,6 +54,7 @@
   <ItemGroup>
     <Compile Include="AuthenticatorAttribute.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="WebApiRequestHeaderParametersProvider.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
