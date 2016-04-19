@@ -22,7 +22,6 @@ using AutoMapper;
 using AutoMapper.Mappers;
 using CES.CoreApi.GeoLocation.Service.Utilities;
 using CES.CoreApi.GeoLocation.Service.Business.Logic.Providers;
-using CES.CoreApi.Common.Providers;
 using CES.CoreApi.GeoLocation.Service.Contract.Models;
 using CES.CoreApi.Logging.Log4Net;
 using CES.CoreApi.Logging.Interfaces;
@@ -58,7 +57,6 @@ namespace CES.CoreApi.GeoLocation.Api
 			RegisterSecurity(container);
 			RegisterFactories(container);
 			RegisterInterceptions(container);
-			RegisterDataAccess(container);
 
 			container.Verify();
 		}
@@ -72,11 +70,9 @@ namespace CES.CoreApi.GeoLocation.Api
 			container.RegisterSingleton<IAuthorizationManager, AuthorizationManager>();
 			container.RegisterSingleton<IApplicationAuthorizator, ApplicationAuthorizator>();
 			container.RegisterSingleton<Caching.Interfaces.ICacheProvider>(() => new RedisCacheProvider());
-			container.RegisterSingleton<IHostApplicationProvider, HostApplicationProvider>();
 			container.RegisterSingleton<IClientSecurityContextProvider, ClientDetailsProvider>();
 			container.RegisterSingleton<IServiceExceptionHandler, ServiceExceptionHandler>();
 			container.RegisterSingleton<IAutoMapperProxy, AutoMapperProxy>();
-			container.RegisterSingleton<IHttpClientProxy, HttpClientProxy>();
 			container.RegisterSingleton<Foundation.Contract.Interfaces.IConfigurationProvider, ConfigurationProvider>();
 			container.RegisterSingleton<IIdentityManager, IdentityManager>();
 		}
@@ -171,7 +167,6 @@ namespace CES.CoreApi.GeoLocation.Api
 			container.RegisterSingleton<IDataResponseProvider, DataResponseProvider>();
 			container.RegisterSingleton<IMelissaLevelOfConfidenceProvider, MelissaLevelOfConfidenceProvider>();
 			container.RegisterSingleton<IGoogleLevelOfConfidenceProvider, GoogleLevelOfConfidenceProvider>();
-			container.RegisterSingleton<ICurrentDateTimeProvider, CurrentDateTimeProvider>();
 			container.RegisterSingleton<IAddressAutocompleteDataProvider, AddressAutocompleteDataProvider>();
 			container.RegisterSingleton<IGeocodeAddressDataProvider, GeocodeAddressDataProvider>();
 			container.RegisterSingleton<IBingPushPinParameterProvider, BingPushPinParameterProvider>();
@@ -254,13 +249,6 @@ namespace CES.CoreApi.GeoLocation.Api
 				{"IWcfRequestHeaderParametersProvider", container.GetInstance<WcfRequestHeaderParametersProvider>},
 				{"IWebApiRequestHeaderParametersProvider", container.GetInstance<WebApiRequestHeaderParametersProvider>}
 			});
-		}
-
-		private static void RegisterDataAccess(Container container)
-		{
-			container.RegisterSingleton<IDatabaseConfigurationProvider, DatabaseConfigurationProvider>();
-			container.RegisterSingleton<IDatabaseInstanceProvider, DatabaseInstanceProvider>();
-			container.RegisterSingleton<IDatabasePingProvider, DatabasePingProvider>();
 		}
 	}
 }

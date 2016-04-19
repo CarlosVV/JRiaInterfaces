@@ -5,6 +5,7 @@ using CES.CoreApi.Caching.Interfaces;
 using CES.CoreApi.Common.Models;
 using CES.CoreApi.Foundation.Data.Interfaces;
 using CES.CoreApi.GeoLocation.Service.Business.Contract.Interfaces;
+using CES.CoreApi.Foundation.Data.Providers;
 
 namespace CES.CoreApi.GeoLocation.Service.Business.Logic.Processors
 {
@@ -13,18 +14,17 @@ namespace CES.CoreApi.GeoLocation.Service.Business.Logic.Processors
         #region Core
 
         private readonly ICacheProvider _cacheProvider;
-        private readonly IDatabasePingProvider _pingProvider;
 
-        public HealthMonitoringProcessor(ICacheProvider cacheProvider, IDatabasePingProvider pingProvider)
+
+        public HealthMonitoringProcessor(ICacheProvider cacheProvider)
         {
             if (cacheProvider == null)
                 throw new CoreApiException(TechnicalSubSystem.GeoLocationService,
                   SubSystemError.GeneralRequiredParameterIsUndefined, "cacheProvider");
-            if (pingProvider == null)
-                throw new CoreApiException(TechnicalSubSystem.GeoLocationService,
-                  SubSystemError.GeneralRequiredParameterIsUndefined, "pingProvider");
+       
+            
             _cacheProvider = cacheProvider;
-            _pingProvider = pingProvider;
+          
         }
 
         #endregion
@@ -49,8 +49,9 @@ namespace CES.CoreApi.GeoLocation.Service.Business.Logic.Processors
         }
 
         public object Ping()
-        {
-            return _pingProvider.PingDatabases();
+        {		
+
+			return DatabasePingProvider.PingAllDatabases();
         }
 
         #endregion

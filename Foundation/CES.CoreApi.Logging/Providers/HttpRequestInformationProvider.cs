@@ -11,12 +11,12 @@ namespace CES.CoreApi.Logging.Providers
 
 		private readonly IFileSizeFormatter _fileSizeFormatter;
 
-		public HttpRequestInformationProvider(IFileSizeFormatter fileSizeFormatter)
+		public HttpRequestInformationProvider()
 		{
-			if (fileSizeFormatter == null)
-				throw new ArgumentNullException("fileSizeFormatter");
+			//if (fileSizeFormatter == null)
+			//	throw new ArgumentNullException("fileSizeFormatter");
 
-			_fileSizeFormatter = fileSizeFormatter;
+			_fileSizeFormatter = new Formatters.FileSizeFormatter();
 		}
 
 		public void AddDetails(ExceptionLogDataContainer exceptionLogDataContainer, RequestLogInfo requestLogInfo)

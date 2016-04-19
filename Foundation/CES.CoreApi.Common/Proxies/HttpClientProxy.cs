@@ -3,9 +3,9 @@ using CES.CoreApi.Common.Interfaces;
 
 namespace CES.CoreApi.Common.Proxies
 {
-    public class HttpClientProxy : IHttpClientProxy
+    public class HttpClientProxy//: IHttpClientProxy2
     {
-        public HttpClient GetHttpClient()
+        public  static HttpClient GetHttpClient()
         {
             return new HttpClient();
         }

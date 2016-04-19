@@ -10,11 +10,7 @@ namespace CES.CoreApi.GeoLocation.Service.Contract.Models
     [DataContract(Namespace = Namespaces.GeolocationServiceDataContractNamespace)]
     public class AutocompleteAddressResponse: BaseResponse
     {
-        public AutocompleteAddressResponse(ICurrentDateTimeProvider currentDateTimeProvider) 
-            : base(currentDateTimeProvider)
-        {
-        }
-
+       
         [DataMember(EmitDefaultValue = false)]
         public List<AutocompleteSuggestion> Suggestions { get; set; }
 

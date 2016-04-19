@@ -8,10 +8,7 @@ namespace CES.CoreApi.GeoLocation.Service.Contract.Models
     [DataContract(Namespace = Namespaces.GeolocationServiceDataContractNamespace)]
     public class ClearCacheResponse : BaseResponse
     {
-        public ClearCacheResponse(ICurrentDateTimeProvider currentDateTimeProvider) 
-            : base(currentDateTimeProvider)
-        {
-        }
+       
 
         [DataMember]
         public string Message { get; set; }

@@ -8,11 +8,10 @@ namespace CES.CoreApi.Common.Models
     [DataContract]
     public abstract class BaseResponse : ExtensibleObject
     {
-        protected BaseResponse(ICurrentDateTimeProvider currentDateTimeProvider)
-        {
-            ResponseTime = currentDateTimeProvider.GetCurrentUtc();
-        }
-
+		public BaseResponse()
+		{
+			ResponseTime = DateTime.UtcNow;
+		}
         /// <summary>
         /// Provides information about the success of the operation.
         /// </summary>

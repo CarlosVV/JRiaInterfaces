@@ -3,6 +3,7 @@ using CES.CoreApi.Common.Enumerations;
 using CES.CoreApi.Common.Interfaces;
 using CES.CoreApi.Common.Models;
 using CES.CoreApi.Foundation.Contract.Interfaces;
+using CES.CoreApi.Common.Proxies;
 
 namespace CES.CoreApi.Foundation.Tools
 {
@@ -12,10 +13,10 @@ namespace CES.CoreApi.Foundation.Tools
 
         private readonly IAutoMapperProxy _mapper;
 
-        public MappingHelper(IAutoMapperProxy mapper)
+        public MappingHelper()
         {
-            if (mapper == null) throw new ArgumentNullException("mapper");
-            _mapper = mapper;
+           // if (mapper == null) throw new ArgumentNullException("mapper");
+            _mapper = new AutoMapperProxy();
         }
 
         #endregion

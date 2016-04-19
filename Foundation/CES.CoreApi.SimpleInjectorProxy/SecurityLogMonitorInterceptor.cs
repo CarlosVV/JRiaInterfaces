@@ -11,16 +11,16 @@ namespace CES.CoreApi.SimpleInjectorProxy
 	{
 		private readonly ILogMonitorFactory _logMonitorFactory;
 		private readonly IIdentityManager _identityManager;
-		private readonly IHostApplicationProvider _hostApplicationProvider;
+	
 
-		public SecurityLogMonitorInterceptor(ILogMonitorFactory logMonitorFactory, IIdentityManager identityManager, IHostApplicationProvider hostApplicationProvider)
+		public SecurityLogMonitorInterceptor(ILogMonitorFactory logMonitorFactory, IIdentityManager identityManager)
 		{
 			if (logMonitorFactory == null)
 				throw new ArgumentNullException("logMonitorFactory");
 			if (identityManager == null) throw new ArgumentNullException("identityManager");
 			_logMonitorFactory = logMonitorFactory;
 			_identityManager = identityManager;
-			_hostApplicationProvider = hostApplicationProvider;
+			
 		}
 
 		public void Intercept(IInvocation invocation)
@@ -28,13 +28,13 @@ namespace CES.CoreApi.SimpleInjectorProxy
 			invocation.Proceed();
 			
 			var clientApplicationIdentity = _identityManager.GetClientApplicationIdentity();
-			var hostApplication = _hostApplicationProvider.GetApplication().Result;
+			
 			
 			var securityAuditParameters = new SecurityAuditParameters
 			{
 				ClientApplicationId = clientApplicationIdentity.ApplicationId,
 				Operation = clientApplicationIdentity.OperationName,
-				ServiceApplicationId = hostApplication.Id
+				ServiceApplicationId = 8000//TODO Get using simple app config  manager 
 			};
 
 			var securityLogMonitor = _logMonitorFactory.CreateNew<ISecurityLogMonitor>();

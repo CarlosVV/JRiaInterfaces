@@ -14,21 +14,19 @@ namespace CES.CoreApi.Security
     public class ApplicationAuthorizator: IApplicationAuthorizator
     {
         private readonly IRequestHeaderParametersProvider _parametersProvider;
-        private readonly IHostApplicationProvider _hostApplicationProvider;
+    
         private readonly IIdentityManager _identityManager;
 
         public ApplicationAuthorizator(
-			IRequestHeaderParametersProviderFactory requestHeaderParametersProviderFactory, IHostApplicationProvider hostApplicationProvider, IIdentityManager identityManager)
+			IRequestHeaderParametersProviderFactory requestHeaderParametersProviderFactory, IIdentityManager identityManager)
         {            
             if (requestHeaderParametersProviderFactory == null)
                 throw new CoreApiException(TechnicalSubSystem.Authorization, SubSystemError.GeneralRequiredParameterIsUndefined, "requestHeaderParametersProviderFactory");
-            if (hostApplicationProvider == null)
-                throw new CoreApiException(TechnicalSubSystem.Authorization, SubSystemError.GeneralRequiredParameterIsUndefined, "hostApplicationProvider");
             if (identityManager == null)
                 throw new CoreApiException(TechnicalSubSystem.Authorization, SubSystemError.GeneralRequiredParameterIsUndefined, "identityManager");
 
-            _parametersProvider = requestHeaderParametersProviderFactory.GetInstance<IRequestHeaderParametersProvider>(ServiceType.WebApi.ToString());
-            _hostApplicationProvider = hostApplicationProvider;
+            //_parametersProvider = requestHeaderParametersProviderFactory.GetInstance<IRequestHeaderParametersProvider>(ConfigurationManager.AppSettings["HostServiceType"]);
+       
             _identityManager = identityManager;
         }
 		
@@ -37,12 +35,12 @@ namespace CES.CoreApi.Security
 			var clientApplicationIdentity = clientApplicationPrincipal?.Identity as ClientApplicationIdentity;
 			ValidateClientApplicationAuthentication(clientApplicationPrincipal, clientApplicationIdentity?.ApplicationId);
 
-			var hostApplication = _hostApplicationProvider.GetApplication().Result;
-			ValidateHostApplication(hostApplication);
-			
-			ValidateHostApplicationOperation(hostApplication, clientApplicationIdentity?.OperationName);
+			//var hostApplication = _hostApplicationProvider.GetApplication().Result;
+			//ValidateHostApplication(hostApplication);
 
-			ValidateOperationAccess(hostApplication, clientApplicationIdentity?.OperationName, clientApplicationIdentity?.ApplicationId);
+			//ValidateHostApplicationOperation(hostApplication, clientApplicationIdentity?.OperationName);
+
+			//ValidateOperationAccess(hostApplication, clientApplicationIdentity?.OperationName, clientApplicationIdentity?.ApplicationId);
 
             _identityManager.SetCurrentPrincipal(clientApplicationPrincipal);
 			

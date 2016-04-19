@@ -101,7 +101,7 @@ namespace CES.CoreApi.Logging.Monitors
 
 			DataContainer.Connection = new DatabaseConnection
 			{
-				ConnectionString = command.Connection.ConnectionString.RemoveSecurityCredentials(),
+				ConnectionString = command.Connection.ConnectionString,
 				ConnectionTimeout = command.Connection.ConnectionTimeout,
 				DatabaseName = command.Connection.Database,
 				ServerName = command.Connection.DataSource,

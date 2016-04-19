@@ -13,15 +13,14 @@ namespace CES.CoreApi.Logging.Models
 	{
 		private readonly IJsonDataContainerFormatter _formatter;
 
-		public PerformanceLogDataContainer(IJsonDataContainerFormatter formatter, ICurrentDateTimeProvider currentDateTimeProvider)
+		public PerformanceLogDataContainer(IJsonDataContainerFormatter formatter)
 		{
 			if (formatter == null)
 				throw new ArgumentNullException("formatter");
-			if (currentDateTimeProvider == null)
-				throw new ArgumentNullException("currentDateTimeProvider");
+		
 
 			_formatter = formatter;
-			StartTime = currentDateTimeProvider.GetCurrentUtc();
+			StartTime = DateTime.UtcNow;
 			ThreadId = Thread.CurrentThread.ManagedThreadId;
 		}
 

@@ -1,6 +1,7 @@
 ﻿using CES.CoreApi.Common.Enumerations;
 using CES.CoreApi.Common.Exceptions;
 using CES.CoreApi.Common.Interfaces;
+using CES.CoreApi.Common.Proxies;
 using CES.CoreApi.Foundation.Contract.Interfaces;
 using CES.CoreApi.GeoLocation.Service.Business.Contract.Enumerations;
 using CES.CoreApi.GeoLocation.Service.Business.Contract.Interfaces;
@@ -11,15 +12,12 @@ namespace CES.CoreApi.GeoLocation.Service.Business.Logic.Providers
 {
     public class DataResponseProvider : IDataResponseProvider
     {
-        private readonly IHttpClientProxy _httpClientProxy;
+       // private readonly IHttpClientProxy2 _httpClientProxy;
 
-        public DataResponseProvider(IHttpClientProxy httpClientProxy)
-        {
-            if (httpClientProxy == null)
-                throw new CoreApiException(TechnicalSubSystem.GeoLocationService,
-                   SubSystemError.GeneralRequiredParameterIsUndefined, "httpClientProxy");
+        public DataResponseProvider()
+        {          
             
-            _httpClientProxy = httpClientProxy;
+       
         }
 
         public DataResponse GetResponse(string requestUrl, DataProviderType providerType)
@@ -27,7 +25,7 @@ namespace CES.CoreApi.GeoLocation.Service.Business.Logic.Providers
             if (string.IsNullOrEmpty(requestUrl))
                 throw new CoreApiException(TechnicalSubSystem.GeoLocationService, SubSystemError.GeneralRequiredParameterIsUndefined, "requestUrl");
 
-            using (var httpClient = _httpClientProxy.GetHttpClient())
+            using (var httpClient = HttpClientProxy.GetHttpClient())
             {
                 var responseMessage = httpClient.GetAsync(requestUrl).Result;
 
@@ -45,7 +43,7 @@ namespace CES.CoreApi.GeoLocation.Service.Business.Logic.Providers
             if (string.IsNullOrEmpty(requestUrl))
                 throw new CoreApiException(TechnicalSubSystem.GeoLocationService, SubSystemError.GeneralRequiredParameterIsUndefined, "requestUrl");
 			
-            using (var httpClient = _httpClientProxy.GetHttpClient())
+            using (var httpClient = HttpClientProxy.GetHttpClient())
             {
                 var responseMessage = httpClient.GetAsync(requestUrl).Result;
 

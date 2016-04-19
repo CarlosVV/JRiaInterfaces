@@ -27,26 +27,26 @@ namespace CES.CoreApi.GeoLocation.Service.Business.Logic.UnitTest
         }
         #region Constructor tests
 
-        [TestMethod]
-        public void Constructor_CacheProviderIsNull_ExceptionRaised()
-        {
-            ExceptionHelper.CheckException(
-                () => new HealthMonitoringProcessor(null, _databasePingProvider.Object),
-				 Common.Enumerations.SubSystemError.GeneralRequiredParameterIsUndefined, "cacheProvider");
-        }
+     //   [TestMethod]
+     //   public void Constructor_CacheProviderIsNull_ExceptionRaised()
+     //   {
+     //       ExceptionHelper.CheckException(
+     //           () => new HealthMonitoringProcessor(null, _databasePingProvider.Object),
+				 //Common.Enumerations.SubSystemError.GeneralRequiredParameterIsUndefined, "cacheProvider");
+     //   }
 
         [TestMethod]
         public void Constructor_DatabasePingProviderIsNull_ExceptionRaised()
         {
             ExceptionHelper.CheckException(
-                () => new HealthMonitoringProcessor(_cacheProvider.Object, null),
+                () => new HealthMonitoringProcessor(_cacheProvider.Object),
 				Common.Enumerations.SubSystemError.GeneralRequiredParameterIsUndefined, "pingProvider");
         }
 
         [TestMethod]
         public void Constructor_HappyPath()
         {
-            ExceptionHelper.CheckHappyPath(() => new HealthMonitoringProcessor(_cacheProvider.Object, _databasePingProvider.Object));
+            ExceptionHelper.CheckHappyPath(() => new HealthMonitoringProcessor(_cacheProvider.Object));
         }
 
         #endregion
@@ -56,7 +56,7 @@ namespace CES.CoreApi.GeoLocation.Service.Business.Logic.UnitTest
         {
             _cacheProvider.Setup(p => p.ClearCache()).Verifiable();
 
-            var result = new HealthMonitoringProcessor(_cacheProvider.Object, _databasePingProvider.Object).ClearCache();
+            var result = new HealthMonitoringProcessor(_cacheProvider.Object).ClearCache();
             
             _cacheProvider.Verify(p => p.ClearCache(), Times.Once);
             Assert.IsNotNull(result);
@@ -70,7 +70,7 @@ namespace CES.CoreApi.GeoLocation.Service.Business.Logic.UnitTest
             
             _cacheProvider.Setup(p => p.ClearCache()).Throws(new ApplicationException("Test Exception")).Verifiable();
 
-            var result = new HealthMonitoringProcessor(_cacheProvider.Object, _databasePingProvider.Object).ClearCache();
+            var result = new HealthMonitoringProcessor(_cacheProvider.Object).ClearCache();
 
             _cacheProvider.Verify(p => p.ClearCache(), Times.Once);
             Assert.IsNotNull(result);
@@ -90,7 +90,7 @@ namespace CES.CoreApi.GeoLocation.Service.Business.Logic.UnitTest
             };
             _databasePingProvider.Setup(p => p.PingDatabases()).Returns(pingModel).Verifiable();
 
-            var processor = new HealthMonitoringProcessor(_cacheProvider.Object, _databasePingProvider.Object);
+            var processor = new HealthMonitoringProcessor(_cacheProvider.Object);
             
             var result = processor.Ping() as PingResponseModel;
             _databasePingProvider.Verify(p => p.PingDatabases(), Times.Once);
