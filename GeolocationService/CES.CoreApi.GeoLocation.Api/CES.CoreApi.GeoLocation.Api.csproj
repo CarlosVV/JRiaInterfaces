@@ -115,7 +115,6 @@
     <Compile Include="MapperConfigurator.cs" />
     <Compile Include="Models\UserRepository.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="RequestValidator.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />

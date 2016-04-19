@@ -60,11 +60,8 @@ namespace CES.CoreApi.GeoLocation.Service.Configuration
             container.Register<IApplicationRepository, ApplicationRepository>(); 
             container.Register<IAuthorizationManager, AuthorizationManager>();
             container.Register<IApplicationAuthorizator, ApplicationAuthorizator>();
-			container.Register<Caching.Interfaces.ICacheProvider>(() => new RedisCacheProvider());    
-           // container.Register<IClientSecurityContextProvider, ClientDetailsProvider>();
-            container.Register<IServiceExceptionHandler, ServiceExceptionHandler>();
-          //  container.Register<IAutoMapperProxy, AutoMapperProxy>();
-          //container.Register<IHttpClientProxy, HttpClientProxy>();
+			container.Register<Caching.Interfaces.ICacheProvider>(() => new RedisCacheProvider());   
+            container.Register<IServiceExceptionHandler, ServiceExceptionHandler>();        
             container.Register<IConfigurationProvider, ConfigurationProvider>();
             container.Register<IIdentityManager, IdentityManager>();
         }
@@ -82,13 +79,17 @@ namespace CES.CoreApi.GeoLocation.Service.Configuration
 		}
 
         private static void RegisterAutomapper(Container container)
-        {
-            container.Register<ITypeMapFactory, TypeMapFactory>();
-            container.RegisterCollection<IObjectMapper>(MapperRegistry.Mappers);
-            container.Register<ConfigurationStore>();
-            container.Register<IConfiguration>(container.GetInstance<ConfigurationStore>);
-            container.Register<AutoMapper.IConfigurationProvider>(container.GetInstance<ConfigurationStore>);
-        }
+        {			
+
+			var config = new MapperConfiguration(cfg =>
+			{
+				cfg.AddProfile(new GeoLocationMapperProfile());
+				cfg.ConstructServicesUsing(type => container.GetInstance(type));
+			});
+			container.RegisterSingleton<MapperConfiguration>(config);
+			container.Register<IMapper>(() => config.CreateMapper(container.GetInstance));
+
+		}
         
         private static void RegisterOthers(Container container)
         {

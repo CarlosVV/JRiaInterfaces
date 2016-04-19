@@ -15,7 +15,7 @@ namespace CES.CoreApi.Common.Models
         /// <summary>
         /// Provides information about the success of the operation.
         /// </summary>
-        [DataMember(EmitDefaultValue = false, IsRequired = true)]
+        [DataMember(EmitDefaultValue = false)]
         public ResponseStatus StatusCode { get; set; }
 
         /// <summary>
