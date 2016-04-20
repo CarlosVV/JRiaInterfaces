@@ -1,4 +1,4 @@
-﻿namespace CES.CoreApi.Common.Enumerations
+﻿namespace CES.CoreApi.Logging.Enumerations
 {
     public enum LogEntryType
     {

@@ -1,9 +1,9 @@
-﻿using System;
-using CES.CoreApi.Common.Enumerations;
+﻿using CES.CoreApi.Logging.Enumerations;
+using System;
 
 namespace CES.CoreApi.Logging.Interfaces
 {
-    public interface ILoggerProxy
+	public interface ILoggerProxy
     {
         /// <summary>
         /// Sets parameter for logging

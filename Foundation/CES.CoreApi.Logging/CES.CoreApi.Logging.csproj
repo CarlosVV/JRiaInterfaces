@@ -66,7 +66,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Configuration\DatabasePerformanceLogConfiguration.cs" />
+    <Compile Include="Enumerations\LogEntryType.cs" />
     <Compile Include="Enumerations\LogType.cs" />
+    <Compile Include="Enumerations\SecurityAuditResult.cs" />
     <Compile Include="Interfaces\IDataContainer.cs" />
     <Compile Include="Interfaces\ILoggerProxy.cs" />
     <Compile Include="Interfaces\ILogMonitorFactory.cs" />
@@ -142,12 +144,6 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="readme.txt" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\CES.CoreApi.Common\CES.CoreApi.Common.csproj">
-      <Project>{070c7bb2-af07-4a4c-a9cc-6bfb8ca416e6}</Project>
-      <Name>CES.CoreApi.Common</Name>
-    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="$(SolutionDir)\.nuget\NuGet.targets" Condition="Exists('$(SolutionDir)\.nuget\NuGet.targets')" />

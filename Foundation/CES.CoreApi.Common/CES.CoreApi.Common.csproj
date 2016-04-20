@@ -59,17 +59,12 @@
     <Compile Include="Enumerations\InterceptionBehaviorType.cs" />
     <Compile Include="Enumerations\InterceptorType.cs" />
     <Compile Include="Enumerations\LifetimeManagerType.cs" />
-    <Compile Include="Enumerations\LogEntryType.cs" />
-    <Compile Include="Enumerations\LogType.cs" />
     <Compile Include="Enumerations\Organization.cs" />
     <Compile Include="Enumerations\ResponseStatus.cs" />
-    <Compile Include="Enumerations\SecurityAuditResult.cs" />
     <Compile Include="Enumerations\SubSystemError.cs" />
     <Compile Include="Enumerations\TechnicalSubSystem.cs" />
     <Compile Include="Enumerations\TechnicalSystem.cs" />
     <Compile Include="Exceptions\CoreApiException.cs" />
-    <Compile Include="Interfaces\ICurrentDateTimeProvider.cs" />
-    <Compile Include="Interfaces\IDataContainer.cs" />
     <Compile Include="Interfaces\IHttpClientProxy.cs" />
     <Compile Include="Interfaces\IIocContainer.cs" />
     <Compile Include="Interfaces\IIocContainerFactory.cs" />

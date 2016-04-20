@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using CES.CoreApi.Common.Interfaces;
 using CES.CoreApi.Logging.Interfaces;
 using CES.CoreApi.Logging.Models;
 
