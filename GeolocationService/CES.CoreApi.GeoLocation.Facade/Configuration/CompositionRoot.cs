@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using CES.CoreApi.Common.Interfaces;
 using CES.CoreApi.Foundation.Contract.Interfaces;
 using CES.CoreApi.Foundation.Providers;
 using CES.CoreApi.Foundation.Service;
@@ -19,7 +20,7 @@ using CES.CoreApi.Logging.Log4Net;
 using CES.CoreApi.Logging.Models;
 using CES.CoreApi.Logging.Monitors;
 using CES.CoreApi.Logging.Providers;
-using CES.CoreApi.SimpleInjectorProxy;
+
 using SimpleInjector;
 //using IConfigurationProvider = CES.CoreApi.Foundation.Contract.Interfaces.IConfigurationProvider;
 using CES.CoreApi.Caching.Providers;
@@ -27,8 +28,9 @@ using CES.CoreApi.Security.Interfaces;
 using CES.CoreApi.Security;
 using CES.CoreApi.Data.Repositories;
 using CES.CoreApi.Security.Factories;
+using CES.CoreApi.SimpleInjectorProxy;
 
-namespace CES.CoreApi.GeoLocation.Service.Configuration
+namespace CES.CoreApi.GeoLocation.Facade.Configuration
 {
 	public class CompositionRoot
     {
@@ -58,7 +60,7 @@ namespace CES.CoreApi.GeoLocation.Service.Configuration
             container.Register<IApplicationAuthorizator, ApplicationAuthorizator>();
 			container.Register<Caching.Interfaces.ICacheProvider>(() => new RedisCacheProvider());   
             container.Register<IServiceExceptionHandler, ServiceExceptionHandler>();        
-          //  container.Register<IConfigurationProvider, ConfigurationProvider>();
+            //container.Register<IConfigurationProvider, ConfigurationProvider>();
             container.Register<IIdentityManager, IdentityManager>();
         }
 
@@ -69,7 +71,7 @@ namespace CES.CoreApi.GeoLocation.Service.Configuration
             container.InterceptWith<PerformanceInterceptor>(type => type == typeof(IAddressServiceRequestProcessor));
             container.InterceptWith<PerformanceInterceptor>(type => type == typeof(IGeocodeServiceRequestProcessor));
             container.InterceptWith<PerformanceInterceptor>(type => type == typeof(IMapServiceRequestProcessor));
-           // container.InterceptWith<PerformanceInterceptor>(type => type == typeof(IApplicationRepository));
+            container.InterceptWith<PerformanceInterceptor>(type => type == typeof(IApplicationRepository));
 			container.InterceptWith<SecurityLogMonitorInterceptor>(type => type == typeof(IHealthMonitoringProcessor));
 			
 		}
