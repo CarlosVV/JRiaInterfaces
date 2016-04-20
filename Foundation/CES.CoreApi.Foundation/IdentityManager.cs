@@ -5,12 +5,13 @@ using CES.CoreApi.Common.Interfaces;
 using CES.CoreApi.Foundation.Contract.Models;
 using CES.CoreApi.Security.Interfaces;
 using CES.CoreApi.Security.Models;
+using CES.CoreApi.Foundation.Contract.Interfaces;
 
 namespace CES.CoreApi.Security
 {
     public class IdentityManager : IIdentityManager
     {
-        public ClientApplicationIdentity GetClientApplicationIdentity()
+        public IClientApplicationIdentity GetClientApplicationIdentity()
         {
             return Thread.CurrentPrincipal.Identity != null
                 ? Thread.CurrentPrincipal.Identity as ClientApplicationIdentity

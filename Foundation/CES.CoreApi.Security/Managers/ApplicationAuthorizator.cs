@@ -6,40 +6,45 @@ using CES.CoreApi.Foundation.Contract.Interfaces;
 using CES.CoreApi.Common.Enumerations;
 using CES.CoreApi.Common.Exceptions;
 using CES.CoreApi.Security.Models;
-using CES.CoreApi.Foundation.Models;
-using CES.CoreApi.Security.Enums;
 using CES.CoreApi.Foundation.Contract.Constants;
+using System.Configuration;
+using CES.CoreApi.Common.Tools;
+using CES.CoreApi.Foundation.Configuration;
 
 namespace CES.CoreApi.Security
 {
     public class ApplicationAuthorizator: IApplicationAuthorizator
     {
         private readonly IIdentityManager _identityManager;
-		
-		public ApplicationAuthorizator(IIdentityManager identityManager)
+		private readonly IApplicationRepository _applicationRepository;
+
+		public ApplicationAuthorizator(IIdentityManager identityManager, IApplicationRepository applicationRepository)
         {            
             if (identityManager == null)
                 throw new CoreApiException(TechnicalSubSystem.Authorization, SubSystemError.GeneralRequiredParameterIsUndefined, "identityManager");
-			
-            _identityManager = identityManager;
-        }
+
+			if (applicationRepository == null)
+				throw new CoreApiException(TechnicalSubSystem.Authorization, SubSystemError.GeneralRequiredParameterIsUndefined, "applicationRepository");
+
+			_identityManager = identityManager;
+			_applicationRepository = applicationRepository;
+		}
 		
         public IPrincipal ValidateAccess(IPrincipal clientApplicationPrincipal)
         {
 			var clientApplicationIdentity = clientApplicationPrincipal?.Identity as ClientApplicationIdentity;
 			ValidateClientApplicationAuthentication(clientApplicationPrincipal, clientApplicationIdentity?.ApplicationId);
 
-			//var applicationId = ConfigurationTools.ReadAppSettingsValue<int>(ServiceConfigurationItems.ApplicationId);
-			//if (applicationId == 0)
-			//	throw new CoreApiException(Organization.Ria, TechnicalSystem.CoreApi,
-			//		TechnicalSubSystem.Authentication, SubSystemError.ApplicationIdNotFoundInConfigFile);
-			
-			//var hostApplication = _applicationRepository.GetApplication(applicationId);
-			//ValidateHostApplication(hostApplication);
+			var applicationId = ConfigurationTools.ReadAppSettingsValue<int>(ServiceConfigurationItems.ApplicationId);
+			if (applicationId == 0)
+				throw new CoreApiException(Organization.Ria, TechnicalSystem.CoreApi, TechnicalSubSystem.Authentication, SubSystemError.ApplicationIdNotFoundInConfigFile);
 
-			//ValidateHostApplicationOperation(hostApplication, clientApplicationIdentity?.OperationName);
+			var hostApplication = _applicationRepository.GetApplication(applicationId).Result;
+			ValidateHostApplication(hostApplication);
 
-			//ValidateOperationAccess(hostApplication, clientApplicationIdentity?.OperationName, clientApplicationIdentity?.ApplicationId);
+			ValidateHostApplicationOperation(hostApplication, clientApplicationIdentity?.OperationName);
+
+			ValidateOperationAccess(hostApplication, clientApplicationIdentity?.OperationName, clientApplicationIdentity?.ApplicationId);
 
 			_identityManager.SetCurrentPrincipal(clientApplicationPrincipal);
 			
@@ -52,7 +57,6 @@ namespace CES.CoreApi.Security
                 return;
 
             throw new CoreApiException(TechnicalSubSystem.Authorization, SubSystemError.SecurityClientApplicationNotAuthenticated, clientApplicationId.Value);
-			
         }
 
         private void ValidateHostApplication(IApplication hostApplication)
@@ -90,5 +94,5 @@ namespace CES.CoreApi.Security
             if (!assignedApplication.IsActive)
                 throw new CoreApiException(TechnicalSubSystem.Authorization, SubSystemError.SecurityApplicationAssignedToServiceOperationNotActive, clientApplicationId, operationName);
         }
-    }
+	}
 }

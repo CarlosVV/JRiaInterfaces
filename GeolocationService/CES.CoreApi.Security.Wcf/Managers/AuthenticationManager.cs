@@ -35,7 +35,6 @@ namespace CES.CoreApi.Security.Wcf
 				return authPolicy;
 			
 			message.Properties["Principal"] = _authenticator.Authenticate(_parametersProvider.GetParameters());
-
 			return authPolicy;
 		}
 	}

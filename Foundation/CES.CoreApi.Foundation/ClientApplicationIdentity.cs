@@ -6,7 +6,7 @@ using System.Security.Principal;
 
 namespace CES.CoreApi.Security.Models
 {
-    public class ClientApplicationIdentity : IIdentity
+    public class ClientApplicationIdentity : IIdentity, IClientApplicationIdentity
     {
         public ClientApplicationIdentity(IApplication application, ServiceCallHeaderParameters headerParameters)
         {

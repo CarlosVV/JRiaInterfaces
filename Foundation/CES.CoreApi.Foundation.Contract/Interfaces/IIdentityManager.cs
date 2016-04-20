@@ -1,11 +1,11 @@
+using CES.CoreApi.Foundation.Contract.Interfaces;
 using System.Security.Principal;
-using CES.CoreApi.Security.Models;
 
 namespace CES.CoreApi.Security.Interfaces
 {
     public interface IIdentityManager
     {
-        ClientApplicationIdentity GetClientApplicationIdentity();
+        IClientApplicationIdentity GetClientApplicationIdentity();
         void SetCurrentPrincipal(IPrincipal principal);
         IPrincipal GetCurrentPrincipal();
     }
