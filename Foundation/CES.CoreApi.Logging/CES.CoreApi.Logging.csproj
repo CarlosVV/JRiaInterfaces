@@ -33,10 +33,6 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="AutoMapper, Version=4.2.1.0, Culture=neutral, PublicKeyToken=be96cd2c38ef1005, processorArchitecture=MSIL">
-      <HintPath>..\..\GeolocationService\packages\AutoMapper.4.2.1\lib\net45\AutoMapper.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
     <Reference Include="gelf4net, Version=1.2.11.8, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\Gelf4NetAppender.1.2.11.8\lib\net40\gelf4net.dll</HintPath>
       <Private>True</Private>
