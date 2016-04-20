@@ -1,9 +1,9 @@
 ﻿using System;
-using CES.CoreApi.Common.Enumerations;
-using CES.CoreApi.Common.Interfaces;
 using CES.CoreApi.Logging.Interfaces;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
+using CES.CoreApi.Common.Enumerations;
+using CES.CoreApi.Logging.Enumerations;
 
 namespace CES.CoreApi.Logging.Models
 {

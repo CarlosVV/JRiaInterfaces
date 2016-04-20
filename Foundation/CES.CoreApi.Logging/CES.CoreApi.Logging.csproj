@@ -66,6 +66,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Configuration\DatabasePerformanceLogConfiguration.cs" />
+    <Compile Include="Enumerations\LogType.cs" />
+    <Compile Include="Interfaces\IDataContainer.cs" />
+    <Compile Include="Interfaces\ILoggerProxy.cs" />
     <Compile Include="Interfaces\ILogMonitorFactory.cs" />
     <Compile Include="Factories\LogMonitorFactory.cs" />
     <Compile Include="Interfaces\ISqlQueryFormatter.cs" />

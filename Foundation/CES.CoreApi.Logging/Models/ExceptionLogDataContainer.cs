@@ -2,12 +2,11 @@
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Threading;
-using CES.CoreApi.Common.Enumerations;
-using CES.CoreApi.Common.Exceptions;
-using CES.CoreApi.Common.Interfaces;
 using CES.CoreApi.Logging.Interfaces;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
+using CES.CoreApi.Common.Exceptions;
+using CES.CoreApi.Logging.Enumerations;
 
 namespace CES.CoreApi.Logging.Models
 {
