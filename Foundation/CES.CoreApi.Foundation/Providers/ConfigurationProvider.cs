@@ -22,6 +22,22 @@ namespace CES.CoreApi.Foundation.Providers
             _configuration = applicationRepository.GetApplicationConfiguration(applicationId).Result;
         }
 
+		public static T GetAppConfig<T>(string configName)
+		{
+			//ConfigurationProvider.ReadFromJson<DataProviderServiceConfiguration>(ConfigurationConstants.DataProviderServiceConfiguration);
+			IApplicationRepository r = new CES.CoreApi.Foundation.Repositories.ApplicationRepository();
+			var applicationId = ConfigurationTools.ReadAppSettingsValue<int>(ServiceConfigurationItems.ApplicationId);
+			var a  = r.GetApplicationConfiguration(applicationId).Result;
+
+			foreach (var item in a)
+			{
+				if (string.IsNullOrEmpty(item.Name))
+					continue;
+				if(item.Name.Equals(configName))
+				 return 	JsonConvert.DeserializeObject<T>(item.Value);
+			}
+			return default(T);
+		}
         public T Read<T>(string name)
         {
             if (string.IsNullOrEmpty(name))

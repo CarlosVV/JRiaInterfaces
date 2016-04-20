@@ -9,9 +9,9 @@ using System.Data.SqlClient;
 using CES.CoreApi.Data.Models;
 using Microsoft.Practices.EnterpriseLibrary.Data;
 using CES.CoreApi.Data.Enumerations;
-using CES.CoreApi.Foundation.Data.Configuration;
+using CES.CoreApi.Data.Configuration;
 
-namespace CES.CoreApi.Foundation.Data.Base
+namespace CES.CoreApi.Data.Base
 {
 	public abstract class BaseGenericRepository
     {

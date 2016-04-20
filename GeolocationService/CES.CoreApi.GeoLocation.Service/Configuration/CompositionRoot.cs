@@ -25,8 +25,8 @@ using IConfigurationProvider = CES.CoreApi.Foundation.Contract.Interfaces.IConfi
 using CES.CoreApi.Caching.Providers;
 using CES.CoreApi.Security.Interfaces;
 using CES.CoreApi.Security;
-using CES.CoreApi.Data.Repositories;
 using CES.CoreApi.Security.Factories;
+using CES.CoreApi.Foundation.Repositories;
 
 namespace CES.CoreApi.GeoLocation.Service.Configuration
 {
@@ -58,8 +58,8 @@ namespace CES.CoreApi.GeoLocation.Service.Configuration
             container.Register<IApplicationAuthorizator, ApplicationAuthorizator>();
 			container.Register<Caching.Interfaces.ICacheProvider>(() => new RedisCacheProvider());   
             container.Register<IServiceExceptionHandler, ServiceExceptionHandler>();        
-			container.Register<IConfigurationProvider, ConfigurationProvider>();
-            container.Register<IIdentityManager, IdentityManager>();
+			//container.Register<IConfigurationProvider, ConfigurationProvider>();
+           container.Register<IIdentityManager, IdentityManager>();
         }
 
         private static void RegisterInterceptions(Container container)
@@ -150,7 +150,7 @@ namespace CES.CoreApi.GeoLocation.Service.Configuration
         private static void RegisterProviders(Container container)
         {
             container.Register<IAddressVerificationDataProvider, AddressVerificationDataProvider>();
-            container.Register<ICountryConfigurationProvider, CountryConfigurationProvider>();
+           // container.Register<ICountryConfigurationProvider, CountryConfigurationProvider>();
             container.Register<IMappingDataProvider, MappingDataProvider>();
             container.Register<IDataResponseProvider, DataResponseProvider>();
             container.Register<IMelissaLevelOfConfidenceProvider, MelissaLevelOfConfidenceProvider>();

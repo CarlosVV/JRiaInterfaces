@@ -1,5 +1,4 @@
 ﻿using AutoMapper;
-using CES.CoreApi.Common.Interfaces;
 using CES.CoreApi.Foundation.Contract.Interfaces;
 using CES.CoreApi.Foundation.Providers;
 using CES.CoreApi.Foundation.Service;
@@ -22,13 +21,13 @@ using CES.CoreApi.Logging.Monitors;
 using CES.CoreApi.Logging.Providers;
 
 using SimpleInjector;
-//using IConfigurationProvider = CES.CoreApi.Foundation.Contract.Interfaces.IConfigurationProvider;
+using IConfigurationProvider = CES.CoreApi.Foundation.Contract.Interfaces.IConfigurationProvider;
 using CES.CoreApi.Caching.Providers;
 using CES.CoreApi.Security.Interfaces;
 using CES.CoreApi.Security;
-using CES.CoreApi.Data.Repositories;
 using CES.CoreApi.Security.Factories;
 using CES.CoreApi.SimpleInjectorProxy;
+using CES.CoreApi.Foundation.Repositories;
 
 namespace CES.CoreApi.GeoLocation.Facade.Configuration
 {
@@ -60,7 +59,7 @@ namespace CES.CoreApi.GeoLocation.Facade.Configuration
             container.Register<IApplicationAuthorizator, ApplicationAuthorizator>();
 			container.Register<Caching.Interfaces.ICacheProvider>(() => new RedisCacheProvider());   
             container.Register<IServiceExceptionHandler, ServiceExceptionHandler>();        
-            //container.Register<IConfigurationProvider, ConfigurationProvider>();
+            container.Register<IConfigurationProvider, ConfigurationProvider>();
             container.Register<IIdentityManager, IdentityManager>();
         }
 
@@ -152,7 +151,7 @@ namespace CES.CoreApi.GeoLocation.Facade.Configuration
         private static void RegisterProviders(Container container)
         {
             container.Register<IAddressVerificationDataProvider, AddressVerificationDataProvider>();
-            container.Register<ICountryConfigurationProvider, CountryConfigurationProvider>();
+            //container.Register<ICountryConfigurationProvider, CountryConfigurationProvider>();
             container.Register<IMappingDataProvider, MappingDataProvider>();
             container.Register<IDataResponseProvider, DataResponseProvider>();
             container.Register<IMelissaLevelOfConfidenceProvider, MelissaLevelOfConfidenceProvider>();

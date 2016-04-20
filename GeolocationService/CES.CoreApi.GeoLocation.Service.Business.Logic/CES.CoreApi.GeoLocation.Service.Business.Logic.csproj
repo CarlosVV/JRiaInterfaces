@@ -103,6 +103,10 @@
       <Project>{8dbcfe15-ca3b-4f7c-a7d6-d73f8f0b91aa}</Project>
       <Name>CES.CoreApi.Foundation.Contract</Name>
     </ProjectReference>
+    <ProjectReference Include="..\..\Foundation\CES.CoreApi.Foundation\CES.CoreApi.Foundation.csproj">
+      <Project>{e2b71a13-9683-4862-b2eb-31050190afdc}</Project>
+      <Name>CES.CoreApi.Foundation</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\Foundation\CES.CoreApi.Logging\CES.CoreApi.Logging.csproj">
       <Project>{76762A04-54F0-4147-BD2B-267372034706}</Project>
       <Name>CES.CoreApi.Logging</Name>

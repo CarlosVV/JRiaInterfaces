@@ -17,9 +17,9 @@ namespace CES.CoreApi.GeoLocation.Service.Business.Logic.Processors
         private readonly IAddressVerificationDataProvider _addressVerificationDataProvider;
         private readonly IAddressAutocompleteDataProvider _addressAutocompleteDataProvider;
 
-        public AddressServiceRequestProcessor(ICountryConfigurationProvider configurationProvider,
+        public AddressServiceRequestProcessor(
             IAddressVerificationDataProvider addressVerificationDataProvider, IAddressAutocompleteDataProvider addressAutocompleteDataProvider)
-            : base(configurationProvider)
+            
         {
             if (addressVerificationDataProvider == null)
                 throw new CoreApiException(TechnicalSubSystem.GeoLocationService,
@@ -88,7 +88,10 @@ namespace CES.CoreApi.GeoLocation.Service.Business.Logic.Processors
 
         private ValidateAddressResponseModel VerifyAddress(string country, Func<DataProviderConfiguration, ValidateAddressResponseModel> verifyByProvider)
         {
-            var numberOfProviders = CountryConfigurationProvider.ConfigurationProvider.Read<int>(ConfigurationConstants.NumberOfProvidersToProcessResult);
+			var numberOfProviders = Configuration.Provider.GeoLocationConfigurationSection.Instance.NumberOfProvidersToProcessResult.Value;
+
+
+				//CountryConfigurationProvider.ConfigurationProvider.Read<int>(ConfigurationConstants.NumberOfProvidersToProcessResult);
             var providers = GetProviderConfigurationByCountry(country, DataProviderServiceType.AddressVerification, numberOfProviders).ToList();
 
             if (!providers.Any())

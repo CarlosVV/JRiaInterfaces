@@ -6,18 +6,14 @@ using System.Linq;
 using System.Threading.Tasks;
 //using CES.CoreApi.Common.Enumerations;
 using CES.CoreApi.Common.Exceptions;
-using CES.CoreApi.Common.Interfaces;
-using CES.CoreApi.Common.Models;
 using CES.CoreApi.Foundation.Contract.Interfaces;
-using CES.CoreApi.Foundation.Data.Base;
-using CES.CoreApi.Foundation.Data.Interfaces;
-using CES.CoreApi.Foundation.Data.Models;
+using CES.CoreApi.Data.Base;
 using CES.CoreApi.Foundation.Data.Utility;
 using CES.CoreApi.Data.Models;
 using CES.CoreApi.Data.Enumerations;
 using CES.CoreApi.Foundation.Contract.Models;
 
-namespace CES.CoreApi.Data.Repositories
+namespace CES.CoreApi.Foundation.Repositories
 {
 	public class ApplicationRepository : BaseGenericRepository, IApplicationRepository
 	{

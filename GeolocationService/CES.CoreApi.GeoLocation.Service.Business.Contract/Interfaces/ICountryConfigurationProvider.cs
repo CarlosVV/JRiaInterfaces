@@ -10,6 +10,6 @@ namespace CES.CoreApi.GeoLocation.Service.Business.Contract.Interfaces
         /// <summary>
         /// Global application configuration provider instance
         /// </summary>
-        IConfigurationProvider ConfigurationProvider { get; }
+      //  IConfigurationProvider ConfigurationProvider { get; }
     }
 }
