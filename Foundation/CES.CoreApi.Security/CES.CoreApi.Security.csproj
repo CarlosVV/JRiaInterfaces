@@ -47,14 +47,11 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Enums\ServiceType.cs" />
-    <Compile Include="Factory\RequestHeaderParametersProviderFactory.cs" />
-    <Compile Include="Interfaces\IRequestHeaderParametersProvider.cs" />
     <Compile Include="Managers\ApplicationAuthenticator.cs" />
     <Compile Include="Managers\ApplicationAuthorizator.cs" />
     <Compile Include="Interfaces\IApplicationAuthenticator.cs" />
     <Compile Include="Interfaces\IApplicationAuthorizator.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Models\BaseRequestHeaderParameters.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\CES.CoreApi.Common\CES.CoreApi.Common.csproj">
@@ -73,6 +70,7 @@
   <ItemGroup>
     <None Include="packages.config" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

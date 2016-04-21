@@ -1,4 +1,6 @@
-﻿using SimpleInjector;
+﻿using CES.CoreApi.Security.Interfaces;
+using CES.CoreApi.Security.Managers.WebAPI;
+using SimpleInjector;
 using SimpleInjector.Integration.WebApi;
 using System;
 using System.Web.Http;
@@ -13,7 +15,7 @@ namespace CES.CoreApi.GeoLocation.Api
 
 			//var container = new Container();
 			//container.Options.DefaultScopedLifestyle = new WebApiRequestLifestyle();
-
+			
 			GlobalConfiguration.Configure(WebApiConfig.Register);
 			var container = new Container();
 
@@ -24,7 +26,8 @@ namespace CES.CoreApi.GeoLocation.Api
 			CompositionRoot.RegisterDependencies(container);
 			MapperConfigurator.Configure(container);
 			// Register your types, for instance using the scoped lifestyle:
-			
+
+			GlobalConfiguration.Configuration.Filters.Add(new ApplicationAuthenticator(container.GetInstance<IApplicationAuthenticator>(), container.GetInstance<IWebApiRequestHeaderParametersProvider>()));
 
 			//container.Verify();
 

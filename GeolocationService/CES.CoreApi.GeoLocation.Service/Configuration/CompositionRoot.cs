@@ -30,7 +30,6 @@ using CES.CoreApi.Caching.Providers;
 using CES.CoreApi.Security.Interfaces;
 using CES.CoreApi.Security;
 using CES.CoreApi.Data.Repositories;
-using CES.CoreApi.Security.Factories;
 using CES.CoreApi.Security.Wcf.Interfaces;
 using CES.CoreApi.Security.Wcf;
 
@@ -49,8 +48,8 @@ namespace CES.CoreApi.GeoLocation.Service.Configuration
             RegisterResponses(container);
             RegisterOthers(container);
             RegisterLoggging(container);
+			RegisterFactories(container);
 			RegisterSecurity(container);
-            RegisterFactories(container);
             RegisterInterceptions(container);
             container.Verify();
         }
@@ -236,12 +235,8 @@ namespace CES.CoreApi.GeoLocation.Service.Configuration
 
 		private static void RegisterSecurity(Container container)
 		{
-			container.RegisterSingleton<IRequestHeaderParametersProviderFactory>(new RequestHeaderParametersProviderFactory
-			{
-				{"IWcfRequestHeaderParametersProvider", container.GetInstance<WcfRequestHeaderParametersProvider>},
-				{"IWebApiRequestHeaderParametersProvider", container.GetInstance<WebApiRequestHeaderParametersProvider>}
-			});
+			container.Register<IWcfRequestHeaderParametersProvider, WcfRequestHeaderParametersProvider>();
+			container.Register<IWebApiRequestHeaderParametersProvider, WebApiRequestHeaderParametersProvider>();
 		}
-
     }
 }

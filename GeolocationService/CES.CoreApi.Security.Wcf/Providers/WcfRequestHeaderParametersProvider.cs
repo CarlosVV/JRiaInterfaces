@@ -16,7 +16,7 @@ using CES.CoreApi.Security.Models;
 
 namespace CES.CoreApi.Foundation.Providers
 {
-    public class WcfRequestHeaderParametersProvider : BaseRequestHeaderParameters, IRequestHeaderParametersProvider
+    public class WcfRequestHeaderParametersProvider : IWcfRequestHeaderParametersProvider
 	{
 		public ServiceCallHeaderParameters GetParameters()
 		{

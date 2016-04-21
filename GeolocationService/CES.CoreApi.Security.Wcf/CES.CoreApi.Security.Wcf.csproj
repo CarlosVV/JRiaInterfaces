@@ -62,13 +62,13 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Interfaces\IWcfRequestHeaderParametersProvider.cs" />
     <Compile Include="IocBasedServiceHostFactory.cs" />
     <Compile Include="Managers\AuthenticationManager.cs" />
     <Compile Include="Managers\AuthorizationManager.cs" />
     <Compile Include="Interfaces\IAuthenticationManager.cs" />
     <Compile Include="Interfaces\IAuthorizationManager.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Providers\WcfRequestHeadersProvider.cs" />
     <Compile Include="Providers\WcfRequestHeaderParametersProvider.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -95,7 +95,6 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />
-    <None Include="packages.config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

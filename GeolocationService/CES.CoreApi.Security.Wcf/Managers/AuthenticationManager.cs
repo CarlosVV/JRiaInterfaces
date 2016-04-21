@@ -15,18 +15,18 @@ namespace CES.CoreApi.Security.Wcf
 	public class AuthenticationManager : ServiceAuthenticationManager, IAuthenticationManager
 	{
 		private readonly IApplicationAuthenticator _authenticator;
-		private readonly IRequestHeaderParametersProvider _parametersProvider;
+		private readonly IWcfRequestHeaderParametersProvider _parametersProvider;
 
-		public AuthenticationManager(IApplicationAuthenticator authenticator, IRequestHeaderParametersProviderFactory requestHeaderParametersProviderFactory)
+		public AuthenticationManager(IApplicationAuthenticator authenticator, IWcfRequestHeaderParametersProvider parametersProvider)
 		{
 			if (authenticator == null)
 				throw new CoreApiException(TechnicalSubSystem.Authentication, SubSystemError.GeneralRequiredParameterIsUndefined, "authenticator");
 
-			if (requestHeaderParametersProviderFactory == null)
+			if (parametersProvider == null)
 				throw new CoreApiException(TechnicalSubSystem.Authentication, SubSystemError.GeneralRequiredParameterIsUndefined, "requestHeaderParametersProviderFactory");
 
 			_authenticator = authenticator;
-			_parametersProvider = requestHeaderParametersProviderFactory.GetInstance<IRequestHeaderParametersProvider>(ServiceType.Wcf.ToString());
+			_parametersProvider = parametersProvider;
 		}
 
 		public override ReadOnlyCollection<IAuthorizationPolicy> Authenticate(ReadOnlyCollection<IAuthorizationPolicy> authPolicy, Uri listenUri, ref Message message)
