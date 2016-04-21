@@ -16,48 +16,36 @@ namespace CES.CoreApi.GeoLocation.Api.Api
     {
 		
 		private readonly IUserRepository repository;
-		private readonly IAddressServiceRequestProcessor _addressServiceRequestProcessor;
-		private readonly IGeocodeServiceRequestProcessor _geocodeServiceRequestProcessor;
-		private readonly IMapServiceRequestProcessor _mapServiceRequestProcessor;
-		private readonly IHealthMonitoringProcessor _healthMonitoringProcessor;
-
-		private readonly IMapper _mapper;
-		private readonly IRequestValidator _validator;
-		public GeoLocationController(IUserRepository repository, IMapper mapper)
+		private readonly IAddressServiceRequestProcessor addressServiceRequestProcessor;
+		private readonly IMapper mapper;
+		//private readonly IRequestValidator _validator;
+		public GeoLocationController(IUserRepository repository, IMapper mapper, IAddressServiceRequestProcessor addressServiceRequestProcessor)
 		{
 			this.repository = repository;
-			_mapper = mapper;
+			this.mapper = mapper;
+			this.addressServiceRequestProcessor = addressServiceRequestProcessor;
 		}
-		//public GeoLocationController(IAddressServiceRequestProcessor addressServiceRequestProcessor,
-
-
-		// IMapper mapper)
-		//{
-
-
-		//	_addressServiceRequestProcessor = addressServiceRequestProcessor;
-
-
-		//	_mapper = mapper;
-		//	//_validator = validator;
-		//}
+		
 		[Route("Ping")]
 		[HttpGet]
 		public string Ping()
 		{
-			return "OK";
+			return "OK with 2";
 		}
+		[HttpPost]
 		[Route("Autocomplete")]
 		public  AutocompleteAddressResponse GetAutocompleteList(AutocompleteAddressRequest request)
 		{
-			_validator.Validate(request);
+			//_validator.Validate(request);
 
-			var responseModel = _addressServiceRequestProcessor.GetAutocompleteList(
-				_mapper.Map<AddressRequest, AutocompleteAddressModel>(request.Address),
+			var responseModel = addressServiceRequestProcessor.GetAutocompleteList(
+				mapper.Map<AddressRequest, AutocompleteAddressModel>(request.Address),
 				request.MaxRecords,
-				_mapper.Map<Confidence, LevelOfConfidence>(request.MinimumConfidence));
+				mapper.Map<Confidence, LevelOfConfidence>(request.MinimumConfidence));
 
-			return _mapper.Map<AutocompleteAddressResponseModel, AutocompleteAddressResponse>(responseModel);
+			var x = mapper.Map<AutocompleteAddressResponseModel, AutocompleteAddressResponse>(responseModel);
+
+			return x;
 		}
 	}
 }

@@ -5,7 +5,7 @@ using CES.CoreApi.Common.Interfaces;
 
 namespace CES.CoreApi.Common.Models
 {
-    [DataContract]
+   [DataContract]
     public abstract class BaseResponse : ExtensibleObject
     {
 		public BaseResponse()

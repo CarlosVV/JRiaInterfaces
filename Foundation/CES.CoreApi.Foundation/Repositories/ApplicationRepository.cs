@@ -40,8 +40,24 @@ namespace CES.CoreApi.Foundation.Repositories
 
 			return await Task.Run(() => Get(request));
 		}
-
+		public Application GetApplicationInfo(int applicationId)
+		{
+			var request = new DatabaseRequest<Application>
+			{
+				ProcedureName = "coreapi_sp_GetApplicationByID",
+				IsCacheable = false,
+				DatabaseType = DatabaseType.Main,
+				Parameters = new Collection<SqlParameter>
+				{
+					new SqlParameter("@applicationID", applicationId)
+				},
+				Shaper = reader => GetApplication(reader, applicationId)
+			};
+			var app = Get(request);
+			return app;
+		}
 		/// <summary>
+		/// 
 		/// Gets application configuration items collection
 		/// </summary>
 		/// <param name="applicationId">Application identifier</param>
@@ -55,7 +71,15 @@ namespace CES.CoreApi.Foundation.Repositories
 
 			return application.Configuration;
 		}
+		public ICollection<ApplicationConfiguration> GetApplicationConfigurationInfo(int applicationId)
+		{
+			var application =  GetApplicationInfo(applicationId);
 
+			if (application == null)
+				throw new CoreApiException(Common.Enumerations.TechnicalSubSystem.CoreApiData, Common.Enumerations.SubSystemError.ApplicationNotFoundInDatabase, applicationId);
+
+			return application.Configuration;
+		}
 		private static Application GetApplication(IDataReader reader, int applicationId)
 		{
 			var application = InitializeApplication(reader, applicationId);

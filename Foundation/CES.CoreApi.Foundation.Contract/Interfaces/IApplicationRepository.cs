@@ -14,5 +14,7 @@ namespace CES.CoreApi.Foundation.Contract.Interfaces
         /// <param name="applicationId">Application identifier</param>
         /// <returns></returns>
         Task<ICollection<ApplicationConfiguration>> GetApplicationConfiguration(int applicationId);
-    }
+
+		ICollection<ApplicationConfiguration> GetApplicationConfigurationInfo(int applicationId);
+	}
 }
