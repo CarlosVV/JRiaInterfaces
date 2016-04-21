@@ -20,14 +20,9 @@ namespace CES.CoreApi.GeoLocation.Api.Api
 			this.addressServiceRequestProcessor = addressServiceRequestProcessor;
 		}
 		
-		[Route("Ping")]
-		[HttpGet]
-		public string Ping()
-		{
-			return "OK";
-		}
+		
 		[HttpPost]
-		[Route("AutoCompleteList")]
+		[Route("address/autoComplete")]
 		public  AutocompleteAddressResponse GetAutoCompleteList(AutocompleteAddressRequest request)
 		{
 			//_validator.Validate(request);
@@ -37,9 +32,32 @@ namespace CES.CoreApi.GeoLocation.Api.Api
 				request.MaxRecords,
 				mapper.Map<Confidence, LevelOfConfidence>(request.MinimumConfidence));
 
-			var x = mapper.Map<AutocompleteAddressResponseModel, AutocompleteAddressResponse>(responseModel);
+			return mapper.Map<AutocompleteAddressResponseModel, AutocompleteAddressResponse>(responseModel);
+						
+		}
+		[HttpPost]
+		[Route("address/validate")]
+		public virtual ValidateAddressResponse ValidateAddress(ValidateAddressRequest request)
+		{
+			//_validator.Validate(request);
 
-			return x;
+			var responseModel = addressServiceRequestProcessor.ValidateAddress(
+			mapper.Map<AddressRequest, AddressModel>(request.Address),
+			mapper.Map<Confidence, LevelOfConfidence>(request.MinimumConfidence));
+
+			return mapper.Map<ValidateAddressResponseModel, ValidateAddressResponse>(responseModel);
+		}
+		[Route("address/formatted/validate")]
+		public virtual ValidateAddressResponse ValidateAddress(ValidateFormattedAddressRequest request)
+		{
+			//validator.Validate(request);
+
+			var responseModel = addressServiceRequestProcessor.ValidateAddress(
+				request.FormattedAddress,
+				request.Country,
+				mapper.Map<Confidence, LevelOfConfidence>(request.MinimumConfidence));
+
+			return mapper.Map<ValidateAddressResponseModel, ValidateAddressResponse>(responseModel);
 		}
 	}
 }

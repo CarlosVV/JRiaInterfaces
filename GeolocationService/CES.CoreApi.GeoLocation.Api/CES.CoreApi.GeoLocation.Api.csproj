@@ -108,6 +108,8 @@
   <ItemGroup>
     <Compile Include="Api\AutoCompleteController.cs" />
     <Compile Include="Api\GeoCodeAddressController.cs" />
+    <Compile Include="Api\MapController.cs" />
+    <Compile Include="Api\PingController.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
