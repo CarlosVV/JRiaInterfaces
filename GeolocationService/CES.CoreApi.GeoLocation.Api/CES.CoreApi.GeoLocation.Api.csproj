@@ -106,13 +106,11 @@
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Api\GeoLocationController.cs" />
+    <Compile Include="Api\AutoCompleteController.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
-    <Compile Include="CompositionRoot.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Models\UserRepository.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -178,6 +176,9 @@
       <Project>{e0888526-1dc6-4693-88a3-7347a99bc018}</Project>
       <Name>CES.CoreApi.GeoLocation.Service.Contract</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Models\" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

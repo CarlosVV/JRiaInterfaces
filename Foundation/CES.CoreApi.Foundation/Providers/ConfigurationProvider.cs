@@ -1,18 +1,14 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using CES.CoreApi.Common.Tools;
-using CES.CoreApi.Foundation.Configuration;
+﻿using CES.CoreApi.Foundation.Configuration;
 using CES.CoreApi.Foundation.Contract.Constants;
 using CES.CoreApi.Foundation.Contract.Interfaces;
 using Newtonsoft.Json;
-using ApplicationConfiguration = CES.CoreApi.Foundation.Contract.Models.ApplicationConfiguration;
+
 
 namespace CES.CoreApi.Foundation.Providers
 {
-    public class ConfigurationProvider : IConfigurationProvider
+	public class ConfigurationProvider : IConfigurationProvider
     {
-		private readonly ICollection<ApplicationConfiguration> _configuration;
+		//private readonly ICollection<ApplicationConfiguration> _configuration;
 
 		//public ConfigurationProvider(IApplicationRepository applicationRepository)
 		//{
@@ -40,12 +36,13 @@ namespace CES.CoreApi.Foundation.Providers
 		}
 		public T Read<T>(string name)
 		{
-			if (string.IsNullOrEmpty(name))
-				return default(T);
+			//if (string.IsNullOrEmpty(name))
+			//	return default(T);
 
-			var item = _configuration.FirstOrDefault(p => p.Name.Equals(name, StringComparison.OrdinalIgnoreCase));
+			//var item = _configuration.FirstOrDefault(p => p.Name.Equals(name, StringComparison.OrdinalIgnoreCase));
 
-			return item == null ? default(T) : item.Value.ConvertValue<T>();
+			//return item == null ? default(T) : item.Value.ConvertValue<T>();
+			return default(T);
 		}
 
 		public T ReadFromJson<T>(string name)
