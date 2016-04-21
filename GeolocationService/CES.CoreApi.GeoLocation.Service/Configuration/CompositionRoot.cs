@@ -21,7 +21,7 @@ using CES.CoreApi.Logging.Monitors;
 using CES.CoreApi.Logging.Providers;
 using CES.CoreApi.SimpleInjectorProxy;
 using SimpleInjector;
-using IConfigurationProvider = CES.CoreApi.Foundation.Contract.Interfaces.IConfigurationProvider;
+//using IConfigurationProvider = CES.CoreApi.Foundation.Contract.Interfaces.IConfigurationProvider;
 using CES.CoreApi.Caching.Providers;
 using CES.CoreApi.Security.Interfaces;
 using CES.CoreApi.Security;

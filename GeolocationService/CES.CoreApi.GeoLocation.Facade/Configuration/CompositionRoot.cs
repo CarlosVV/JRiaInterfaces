@@ -21,7 +21,7 @@ using CES.CoreApi.Logging.Monitors;
 using CES.CoreApi.Logging.Providers;
 
 using SimpleInjector;
-using IConfigurationProvider = CES.CoreApi.Foundation.Contract.Interfaces.IConfigurationProvider;
+//using IConfigurationProvider = CES.CoreApi.Foundation.Contract.Interfaces.IConfigurationProvider;
 using CES.CoreApi.Caching.Providers;
 using CES.CoreApi.Security.Interfaces;
 using CES.CoreApi.Security;
@@ -59,7 +59,7 @@ namespace CES.CoreApi.GeoLocation.Facade.Configuration
             container.Register<IApplicationAuthorizator, ApplicationAuthorizator>();
 			container.Register<Caching.Interfaces.ICacheProvider>(() => new RedisCacheProvider());   
             container.Register<IServiceExceptionHandler, ServiceExceptionHandler>();        
-            container.Register<IConfigurationProvider, ConfigurationProvider>();
+           // container.Register<IConfigurationProvider, ConfigurationProvider>();
             container.Register<IIdentityManager, IdentityManager>();
         }
 
@@ -70,7 +70,7 @@ namespace CES.CoreApi.GeoLocation.Facade.Configuration
             container.InterceptWith<PerformanceInterceptor>(type => type == typeof(IAddressServiceRequestProcessor));
             container.InterceptWith<PerformanceInterceptor>(type => type == typeof(IGeocodeServiceRequestProcessor));
             container.InterceptWith<PerformanceInterceptor>(type => type == typeof(IMapServiceRequestProcessor));
-            container.InterceptWith<PerformanceInterceptor>(type => type == typeof(IApplicationRepository));
+           // container.InterceptWith<PerformanceInterceptor>(type => type == typeof(IApplicationRepository));
 			container.InterceptWith<SecurityLogMonitorInterceptor>(type => type == typeof(IHealthMonitoringProcessor));
 			
 		}
