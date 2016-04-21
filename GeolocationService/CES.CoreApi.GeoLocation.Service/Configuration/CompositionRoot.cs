@@ -1,7 +1,6 @@
 ﻿using AutoMapper;
 using AutoMapper.Mappers;
 using CES.CoreApi.Common.Interfaces;
-using CES.CoreApi.Common.Proxies;
 using CES.CoreApi.Foundation.Contract.Interfaces;
 using CES.CoreApi.Foundation.Providers;
 using CES.CoreApi.Foundation.Service;
@@ -31,7 +30,10 @@ using CES.CoreApi.Security.Interfaces;
 using CES.CoreApi.Security;
 using CES.CoreApi.Data.Repositories;
 using CES.CoreApi.Security.Wcf.Interfaces;
-using CES.CoreApi.Security.Wcf;
+using CES.CoreApi.Security.Wcf.Managers;
+using CES.CoreApi.Security.Wcf.Services;
+using CES.CoreApi.Security.Managers;
+using CES.CoreApi.Security.Providers;
 
 namespace CES.CoreApi.GeoLocation.Service.Configuration
 {
@@ -62,10 +64,7 @@ namespace CES.CoreApi.GeoLocation.Service.Configuration
             container.Register<IAuthorizationManager, AuthorizationManager>();
             container.Register<IApplicationAuthorizator, ApplicationAuthorizator>();
 			container.Register<Caching.Interfaces.ICacheProvider>(() => new RedisCacheProvider());    
-           // container.Register<IClientSecurityContextProvider, ClientDetailsProvider>();
             container.Register<IServiceExceptionHandler, ServiceExceptionHandler>();
-          //  container.Register<IAutoMapperProxy, AutoMapperProxy>();
-          //container.Register<IHttpClientProxy, HttpClientProxy>();
             container.Register<IConfigurationProvider, ConfigurationProvider>();
             container.Register<IIdentityManager, IdentityManager>();
         }
@@ -235,8 +234,8 @@ namespace CES.CoreApi.GeoLocation.Service.Configuration
 
 		private static void RegisterSecurity(Container container)
 		{
-			container.Register<IWcfRequestHeaderParametersProvider, WcfRequestHeaderParametersProvider>();
-			container.Register<IWebApiRequestHeaderParametersProvider, WebApiRequestHeaderParametersProvider>();
+			container.Register<IWcfRequestHeaderParametersService, WcfRequestHeaderParametersService>();
+			container.Register<IWebApiRequestHeaderParametersService, WebApiRequestHeaderParametersService>();
 		}
     }
 }

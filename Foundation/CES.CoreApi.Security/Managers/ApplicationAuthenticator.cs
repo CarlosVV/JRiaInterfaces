@@ -8,7 +8,7 @@ using CES.CoreApi.Security.Models;
 using System.Security.Principal;
 using System.Threading.Tasks;
 
-namespace CES.CoreApi.Security
+namespace CES.CoreApi.Security.Managers
 {
     public class ApplicationAuthenticator : IApplicationAuthenticator
     {

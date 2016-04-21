@@ -7,11 +7,9 @@ using CES.CoreApi.Common.Enumerations;
 using CES.CoreApi.Common.Exceptions;
 using CES.CoreApi.Security.Models;
 using CES.CoreApi.Foundation.Contract.Constants;
-using System.Configuration;
-using CES.CoreApi.Common.Tools;
 using CES.CoreApi.Foundation.Configuration;
 
-namespace CES.CoreApi.Security
+namespace CES.CoreApi.Security.Managers
 {
     public class ApplicationAuthorizator: IApplicationAuthorizator
     {

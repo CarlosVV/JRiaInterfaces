@@ -1,8 +1,7 @@
 ﻿using System;
 using Castle.DynamicProxy;
-using CES.CoreApi.Common.Interfaces;
 using CES.CoreApi.Logging.Interfaces;
-using CES.CoreApi.Security.Interfaces;
+using CES.CoreApi.Foundation.Contract.Interfaces;
 
 namespace CES.CoreApi.SimpleInjectorProxy
 {
@@ -25,8 +24,7 @@ namespace CES.CoreApi.SimpleInjectorProxy
             var performanceMonitor = _logMonitorFactory.CreateNew<IPerformanceLogMonitor>();
             performanceMonitor.DataContainer.ApplicationContext = _identityManager.GetClientApplicationIdentity();
             performanceMonitor.Start(invocation.Method);
-
-            // Calls the decorated instance.
+            
             invocation.Proceed();
 
             performanceMonitor.DataContainer.Arguments = invocation.Arguments;

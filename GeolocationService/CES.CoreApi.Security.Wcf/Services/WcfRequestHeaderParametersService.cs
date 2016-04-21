@@ -1,22 +1,18 @@
 ﻿using System;
 using System.Linq;
 using System.ServiceModel;
-using CES.CoreApi.Common.Models;
 using CES.CoreApi.Common.Tools;
 using CES.CoreApi.Foundation.Contract.Constants;
-using CES.CoreApi.Foundation.Contract.Interfaces;
 using System.Collections.Generic;
 using System.ServiceModel.Channels;
 using System.Runtime.Serialization;
-using CES.CoreApi.Security;
 using System.ServiceModel.Web;
-using CES.CoreApi.Security.Interfaces;
 using CES.CoreApi.Foundation.Models;
-using CES.CoreApi.Security.Models;
+using CES.CoreApi.Security.Wcf.Interfaces;
 
-namespace CES.CoreApi.Foundation.Providers
+namespace CES.CoreApi.Security.Wcf.Services
 {
-    public class WcfRequestHeaderParametersProvider : IWcfRequestHeaderParametersProvider
+    public class WcfRequestHeaderParametersService : IWcfRequestHeaderParametersService
 	{
 		public ServiceCallHeaderParameters GetParameters()
 		{

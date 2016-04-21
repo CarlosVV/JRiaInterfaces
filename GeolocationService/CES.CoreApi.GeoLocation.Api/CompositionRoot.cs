@@ -35,6 +35,10 @@ using CES.CoreApi.Foundation.Data.Providers;
 using CES.CoreApi.Foundation.Data.Interfaces;
 using CES.CoreApi.Security.Wcf.Interfaces;
 using CES.CoreApi.Security.Wcf;
+using CES.CoreApi.Security.Wcf.Managers;
+using CES.CoreApi.Security.Managers;
+using CES.CoreApi.Security.Wcf.Services;
+using CES.CoreApi.Security.Providers;
 
 namespace CES.CoreApi.GeoLocation.Api
 {
@@ -243,8 +247,8 @@ namespace CES.CoreApi.GeoLocation.Api
 
 		private static void RegisterSecurity(Container container)
 		{
-			container.Register<IWcfRequestHeaderParametersProvider, WcfRequestHeaderParametersProvider>();
-			container.Register<IWebApiRequestHeaderParametersProvider, WebApiRequestHeaderParametersProvider>();
+			container.Register<IWcfRequestHeaderParametersService, WcfRequestHeaderParametersService>();
+			container.Register<IWebApiRequestHeaderParametersService, WebApiRequestHeaderParametersService>();
 		}
 	}
 }

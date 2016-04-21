@@ -1,16 +1,14 @@
 ﻿using System;
-using CES.CoreApi.Security;
 using CES.CoreApi.Foundation.Models;
 using CES.CoreApi.Security.Interfaces;
-using System.Net.Http;
 using System.Web;
 using System.Collections.Generic;
 using CES.CoreApi.Common.Tools;
 using CES.CoreApi.Foundation.Contract.Constants;
 
-namespace CES.CoreApi.Foundation.Providers
+namespace CES.CoreApi.Security.Providers
 {
-    public class WebApiRequestHeaderParametersProvider: IWebApiRequestHeaderParametersProvider
+    public class WebApiRequestHeaderParametersService: IWebApiRequestHeaderParametersService
 	{
         public ServiceCallHeaderParameters GetParameters(string operationName)
 		{

@@ -5,7 +5,7 @@ using CES.CoreApi.Security.Interfaces;
 using System.Security.Principal;
 using CES.CoreApi.Security.Wcf.Interfaces;
 
-namespace CES.CoreApi.Security.Wcf
+namespace CES.CoreApi.Security.Wcf.Managers
 {
 	public class AuthorizationManager : ServiceAuthorizationManager, IAuthorizationManager
 	{

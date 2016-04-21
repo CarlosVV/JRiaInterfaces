@@ -4,14 +4,9 @@ using System.Data;
 using System.Data.SqlClient;
 using System.Linq;
 using System.Threading.Tasks;
-//using CES.CoreApi.Common.Enumerations;
 using CES.CoreApi.Common.Exceptions;
-using CES.CoreApi.Common.Interfaces;
-using CES.CoreApi.Common.Models;
 using CES.CoreApi.Foundation.Contract.Interfaces;
 using CES.CoreApi.Foundation.Data.Base;
-using CES.CoreApi.Foundation.Data.Interfaces;
-using CES.CoreApi.Foundation.Data.Models;
 using CES.CoreApi.Foundation.Data.Utility;
 using CES.CoreApi.Data.Models;
 using CES.CoreApi.Data.Enumerations;
@@ -21,13 +16,6 @@ namespace CES.CoreApi.Data.Repositories
 {
 	public class ApplicationRepository : BaseGenericRepository, IApplicationRepository
 	{
-		
-
-		/// <summary>
-		/// Gets application instance by ID
-		/// </summary>
-		/// <param name="applicationId">Application ID</param>
-		/// <returns></returns>
 		public async Task<Application> GetApplication(int applicationId)
 		{
 			var request = new DatabaseRequest<Application>
@@ -45,11 +33,6 @@ namespace CES.CoreApi.Data.Repositories
 			return await Task.Run(() => Get(request));
 		}
 
-		/// <summary>
-		/// Gets application configuration items collection
-		/// </summary>
-		/// <param name="applicationId">Application identifier</param>
-		/// <returns></returns>
 		public async Task<ICollection<ApplicationConfiguration>> GetApplicationConfiguration(int applicationId)
 		{
 			var application = await GetApplication(applicationId);

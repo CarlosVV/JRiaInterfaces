@@ -57,10 +57,10 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="AuthenticatorAttribute.cs" />
-    <Compile Include="Interfaces\IWebApiRequestHeaderParametersProvider.cs" />
+    <Compile Include="Filters\AuthenticatorAttribute.cs" />
+    <Compile Include="Interfaces\IWebApiRequestHeaderParametersService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="WebApiRequestHeaderParametersProvider.cs" />
+    <Compile Include="Services\WebApiRequestHeaderParametersService.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />

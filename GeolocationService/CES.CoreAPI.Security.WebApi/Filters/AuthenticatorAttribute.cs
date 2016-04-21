@@ -1,24 +1,21 @@
 ﻿using CES.CoreApi.Common.Enumerations;
 using CES.CoreApi.Common.Exceptions;
-using CES.CoreApi.Foundation.Contract.Interfaces;
-using CES.CoreApi.Foundation.Providers;
-using CES.CoreApi.Security.Enums;
 using CES.CoreApi.Security.Interfaces;
 using System;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Web.Http.Filters;
 
-namespace CES.CoreApi.Security.Managers.WebAPI
+namespace CES.CoreApi.Security.WebAPI.Filters
 {
 	public class ApplicationAuthenticator: IAuthenticationFilter
 	{
 		private readonly IApplicationAuthenticator _authenticator;
-		private readonly IWebApiRequestHeaderParametersProvider _parametersProvider;
+		private readonly IWebApiRequestHeaderParametersService _parametersProvider;
 
 		public bool AllowMultiple { get; set; }
 		
-		public ApplicationAuthenticator(IApplicationAuthenticator authenticator, IWebApiRequestHeaderParametersProvider parametersProvider)
+		public ApplicationAuthenticator(IApplicationAuthenticator authenticator, IWebApiRequestHeaderParametersService parametersProvider)
 		{
 			if (authenticator == null)
 				throw new CoreApiException(TechnicalSubSystem.Authentication, SubSystemError.GeneralRequiredParameterIsUndefined, "authenticator");

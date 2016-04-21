@@ -14,7 +14,6 @@ using CES.CoreApi.Foundation.Contract.Interfaces;
 using CES.CoreApi.Logging.Interfaces;
 using CES.CoreApi.Logging.Models;
 using ServiceEndpoint = System.ServiceModel.Description.ServiceEndpoint;
-using CES.CoreApi.Security.Interfaces;
 using CES.CoreApi.Foundation.Providers;
 
 namespace CES.CoreApi.Foundation.Service

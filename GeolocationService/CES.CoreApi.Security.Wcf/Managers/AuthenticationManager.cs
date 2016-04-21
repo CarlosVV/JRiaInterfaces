@@ -1,7 +1,5 @@
 ﻿using CES.CoreApi.Common.Enumerations;
 using CES.CoreApi.Common.Exceptions;
-using CES.CoreApi.Foundation.Contract.Interfaces;
-using CES.CoreApi.Security.Enums;
 using CES.CoreApi.Security.Interfaces;
 using CES.CoreApi.Security.Wcf.Interfaces;
 using System;
@@ -10,14 +8,14 @@ using System.IdentityModel.Policy;
 using System.ServiceModel;
 using System.ServiceModel.Channels;
 
-namespace CES.CoreApi.Security.Wcf
+namespace CES.CoreApi.Security.Wcf.Managers
 {
 	public class AuthenticationManager : ServiceAuthenticationManager, IAuthenticationManager
 	{
 		private readonly IApplicationAuthenticator _authenticator;
-		private readonly IWcfRequestHeaderParametersProvider _parametersProvider;
+		private readonly IWcfRequestHeaderParametersService _parametersProvider;
 
-		public AuthenticationManager(IApplicationAuthenticator authenticator, IWcfRequestHeaderParametersProvider parametersProvider)
+		public AuthenticationManager(IApplicationAuthenticator authenticator, IWcfRequestHeaderParametersService parametersProvider)
 		{
 			if (authenticator == null)
 				throw new CoreApiException(TechnicalSubSystem.Authentication, SubSystemError.GeneralRequiredParameterIsUndefined, "authenticator");
