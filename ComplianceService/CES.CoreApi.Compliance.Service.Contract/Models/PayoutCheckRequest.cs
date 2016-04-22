@@ -1,10 +1,10 @@
 ﻿using System.Runtime.Serialization;
-using CES.CoreApi.Common.Models;
 using CES.CoreApi.Compliance.Service.Contract.Constants;
+using CES.CoreApi.Common.Models;
 
 namespace CES.CoreApi.Compliance.Service.Contract.Models
 {
-    [DataContract(Namespace = Namespaces.ComplianceServiceDataContractNamespace)]
+	[DataContract(Namespace = Namespaces.ComplianceServiceDataContractNamespace)]
     public class CheckPayoutRequest : BaseRequest
     {
     }

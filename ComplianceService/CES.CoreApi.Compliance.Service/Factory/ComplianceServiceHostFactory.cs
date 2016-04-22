@@ -10,7 +10,7 @@ namespace CES.CoreApi.Compliance.Service.Factory
             : base(new Container())
         {
             CompositionRoot.RegisterDependencies(Container);
-            MapperConfigurator.Configure(Container);
+          
         }
     }
 }
