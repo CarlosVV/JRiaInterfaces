@@ -131,7 +131,6 @@
     <Compile Include="Providers\RemoteClientInformationProvider.cs" />
     <Compile Include="Providers\ServerInformationProvider.cs" />
     <Compile Include="Providers\ServiceCallInformationProvider.cs" />
-    <Compile Include="Utilities\WebApiGlobalExceptionLogger.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />
