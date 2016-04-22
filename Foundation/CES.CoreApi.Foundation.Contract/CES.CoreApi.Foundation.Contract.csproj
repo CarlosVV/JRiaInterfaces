@@ -55,6 +55,7 @@
     <Compile Include="Models\ApplicationConfiguration.cs" />
     <Compile Include="Models\ApplicationPrincipal.cs" />
     <Compile Include="Models\ApplicationServiceOperation.cs" />
+    <Compile Include="Models\AuditLog.cs" />
     <Compile Include="Models\BehaviorConfiguration.cs" />
     <Compile Include="Models\BindingConfiguration.cs" />
     <Compile Include="Models\ServiceCallHeaderParameters.cs" />
