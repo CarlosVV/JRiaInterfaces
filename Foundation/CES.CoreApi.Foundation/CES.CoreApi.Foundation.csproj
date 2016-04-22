@@ -69,9 +69,11 @@
   <ItemGroup>
     <Compile Include="Configuration\ApplicationConfiguration.cs" />
     <Compile Include="Configuration\ConfigurationTools.cs" />
+    <Compile Include="Providers\JsonProvider.cs" />
     <Compile Include="Providers\WcfRequestHeaderParametersProvider.cs" />
     <Compile Include="Providers\WebAPIRequestHeaderParametersProvider.cs" />
     <Compile Include="Repositories\ApplicationRepository.cs" />
+    <Compile Include="Repositories\AuditRepository.cs" />
     <Compile Include="Service\MessageInspector.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Providers\ClientDetailsProvider.cs" />

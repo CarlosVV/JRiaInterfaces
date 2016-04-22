@@ -19,7 +19,6 @@ namespace CES.CoreApi.GeoLocation.Api
 			container.RegisterWebApiControllers(GlobalConfiguration.Configuration);			
 			Facade.Configuration.CompositionRoot.RegisterDependencies(container);
 
-			//container.Verify();
 			GlobalConfiguration.Configuration.DependencyResolver =
 				new SimpleInjectorWebApiDependencyResolver(container);
 

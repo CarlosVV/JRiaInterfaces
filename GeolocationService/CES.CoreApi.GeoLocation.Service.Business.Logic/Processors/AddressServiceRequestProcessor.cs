@@ -7,6 +7,8 @@ using CES.CoreApi.GeoLocation.Service.Business.Contract.Enumerations;
 using CES.CoreApi.GeoLocation.Service.Business.Contract.Interfaces;
 using CES.CoreApi.GeoLocation.Service.Business.Contract.Models;
 using CES.CoreApi.GeoLocation.Service.Business.Logic.Constants;
+using CES.CoreApi.Foundation.Repositories;
+using CES.CoreApi.Foundation.Providers;
 
 namespace CES.CoreApi.GeoLocation.Service.Business.Logic.Processors
 {
@@ -72,15 +74,47 @@ namespace CES.CoreApi.GeoLocation.Service.Business.Logic.Processors
                 maxRecords = defaultNumberOfHints;
 
             var providerConfiguration = GetProviderConfigurationByCountry(address.Country, DataProviderServiceType.AddressAutoComplete).FirstOrDefault();
+			var id = Guid.NewGuid();
+			AuditRepository.SetAudit(new Foundation.Contract.Models.AuditLog
+			{
+				AppId = 8000,
+				AppInstanceId = 1,
+				AppName = "GeoLocation",
+				Context = string.Format("{0},{1}" ,address.Address1, address.Country),
+				DumpType = 1,
+				JsonContent = JsonProvider.ConvertToJson(address),
+				Queue = 1,
+				ServiceId = 1,
+				SoapContent = "",
+				TransactionId = 1,
+				Id = id
+			});
 
-            if (providerConfiguration == null)
+			if (providerConfiguration == null)
                 throw new CoreApiException(TechnicalSubSystem.GeoLocationService,
                     SubSystemError.GeolocationDataProviderNotFound,
                     DataProviderServiceType.AddressAutoComplete);
 
-            return _addressAutocompleteDataProvider
+            var r = _addressAutocompleteDataProvider
                 .GetAddressHintList(address, maxRecords, providerConfiguration.DataProviderType, confidence);
-        }
+
+
+			AuditRepository.SetAudit(new Foundation.Contract.Models.AuditLog
+			{
+				AppId = 8000,
+				AppInstanceId = 1,
+				AppName = "GeoLocation",
+				Context = "Api Response",
+				DumpType = 2,
+				JsonContent = JsonProvider.ConvertToJson(r),
+				Queue = 1,
+				ServiceId = 1,
+				SoapContent = "",
+				TransactionId = 1,
+				Id = id
+			});
+			return r;
+		}
 
         #endregion 
 
