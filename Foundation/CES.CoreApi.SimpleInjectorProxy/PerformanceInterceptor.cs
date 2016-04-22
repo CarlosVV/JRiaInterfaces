@@ -6,32 +6,33 @@ using CES.CoreApi.Security.Interfaces;
 
 namespace CES.CoreApi.SimpleInjectorProxy
 {
-    public class PerformanceInterceptor : IInterceptor
-    {
-        private readonly ILogMonitorFactory _logMonitorFactory;
-        private readonly IIdentityManager _identityManager;
+	public class PerformanceInterceptor : IInterceptor
+	{
+		private readonly IPerformanceLogMonitor _performanceLogMonitor;
+		private readonly IIdentityManager _identityManager;
 
-        public PerformanceInterceptor(ILogMonitorFactory logMonitorFactory, IIdentityManager identityManager)
-        {
-            if (logMonitorFactory == null)
-                throw new ArgumentNullException("logMonitorFactory");
-            if (identityManager == null) throw new ArgumentNullException("identityManager");
-            _logMonitorFactory = logMonitorFactory;
-            _identityManager = identityManager;
-        }
+		public PerformanceInterceptor(IPerformanceLogMonitor performanceLogMonitor, IIdentityManager identityManager)
+		{
+			if (performanceLogMonitor == null)
+				throw new ArgumentNullException("performanceLogMonitor");
+			if (identityManager == null)
+				throw new ArgumentNullException("identityManager");
 
-        public void Intercept(IInvocation invocation)
-        {
-            var performanceMonitor = _logMonitorFactory.CreateNew<IPerformanceLogMonitor>();
-            performanceMonitor.DataContainer.ApplicationContext = _identityManager.GetClientApplicationIdentity();
-            performanceMonitor.Start(invocation.Method);
+			_performanceLogMonitor = performanceLogMonitor;
+			_identityManager = identityManager;
+		}
 
-            // Calls the decorated instance.
-            invocation.Proceed();
+		public void Intercept(IInvocation invocation)
+		{
+			_performanceLogMonitor.DataContainer.ApplicationContext = _identityManager.GetClientApplicationIdentity();
+			_performanceLogMonitor.Start(invocation.Method);
 
-            performanceMonitor.DataContainer.Arguments = invocation.Arguments;
-            performanceMonitor.DataContainer.ReturnValue = invocation.ReturnValue;
-            performanceMonitor.Stop();
-        }
-    }
+			// Calls the decorated instance.
+			invocation.Proceed();
+
+			_performanceLogMonitor.DataContainer.Arguments = invocation.Arguments;
+			_performanceLogMonitor.DataContainer.ReturnValue = invocation.ReturnValue;
+			_performanceLogMonitor.Stop();
+		}
+	}
 }

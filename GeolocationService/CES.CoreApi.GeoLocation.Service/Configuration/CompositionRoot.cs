@@ -212,18 +212,18 @@ namespace CES.CoreApi.GeoLocation.Service.Configuration
 				typeof(ExceptionLogDataContainer),
 				typeof(SecurityLogDataContainer)});
 
+			//TODO BI: the factory is not needed as we can specifiy what we need in all the cases
+			//container.RegisterSingleton<ILogMonitorFactory>(new LogMonitorFactory
+			//{
+			//    {"IDatabasePerformanceLogMonitor", container.GetInstance<DatabasePerformanceLogMonitor>},
+			//    {"ITraceLogMonitor", container.GetInstance<TraceLogMonitor>},
+			//    {"IPerformanceLogMonitor", container.GetInstance<PerformanceLogMonitor>},
+			//    {"IExceptionLogMonitor", container.GetInstance<ExceptionLogMonitor>},
+			//    {"ISecurityLogMonitor", container.GetInstance<SecurityLogMonitor>}
+			//});
 
-            container.RegisterSingleton<ILogMonitorFactory>(new LogMonitorFactory
-            {
-                {"IDatabasePerformanceLogMonitor", container.GetInstance<DatabasePerformanceLogMonitor>},
-                {"ITraceLogMonitor", container.GetInstance<TraceLogMonitor>},
-                {"IPerformanceLogMonitor", container.GetInstance<PerformanceLogMonitor>},
-                {"IExceptionLogMonitor", container.GetInstance<ExceptionLogMonitor>},
-                {"ISecurityLogMonitor", container.GetInstance<SecurityLogMonitor>}
-            });
-
-            //Configuration related
-            container.Register<ILogConfigurationProvider, LogConfigurationProvider>();
+			//Configuration related
+			container.Register<ILogConfigurationProvider, LogConfigurationProvider>();
 
             //Security logging related
             container.Register<ISecurityLogMonitor, SecurityLogMonitor>();
