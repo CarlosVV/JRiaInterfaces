@@ -18,7 +18,7 @@ namespace CES.CoreApi.Configuration.Web
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             BundleConfig.RegisterBundles(BundleTable.Bundles);
-            MapperConfig.Configure();
+           // MapperConfig.Configure();
         }
 
         protected void Application_Error(object sender, EventArgs e)
