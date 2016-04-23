@@ -8,10 +8,10 @@ namespace CES.CoreApi.Configuration.Web
     {
         public static void Configure()
         {
-            Mapper.CreateMap<SettingModel, Setting>();
-            Mapper.CreateMap<Setting, SettingModel>();
-            Mapper.CreateMap<ServiceModel, Service>();
-            Mapper.CreateMap<Service, ServiceModel>();
+            //Mapper.CreateMap<SettingModel, Setting>();
+            //Mapper.CreateMap<Setting, SettingModel>();
+            //Mapper.CreateMap<ServiceModel, Service>();
+            //Mapper.CreateMap<Service, ServiceModel>();
         }
     }
 }

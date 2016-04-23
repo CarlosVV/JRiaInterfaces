@@ -1,36 +1,33 @@
 ﻿using System;
 using System.Collections.Generic;
-using CES.CoreApi.Common.Interfaces;
-using CES.CoreApi.Configuration.Model.DomainEntities;
 using CES.CoreApi.Configuration.Model.Interfaces;
 using CES.CoreApi.Configuration.Model.Models;
 
 namespace CES.CoreApi.Configuration.Business.Services
 {
-    public class SettingManager : ISettingManager
+	public class SettingManager : ISettingManager
     {
-        private readonly ISettingsRepository _repository;
-        private readonly IAutoMapperProxy _mapper;
+       // private readonly ISettingsRepository _repository;
+        //private readonly IAutoMapperProxy _mapper;
 
-        public SettingManager(ISettingsRepository repository, IAutoMapperProxy mapper)
+        public SettingManager(ISettingsRepository repository)
         {
-            if (repository == null) throw new ArgumentNullException("repository");
-            if (mapper == null) throw new ArgumentNullException("mapper");
-            _repository = repository;
-            _mapper = mapper;
+            //if (repository == null) throw new ArgumentNullException("repository");
+          
         }
 
         public IEnumerable<SettingModel> GetList(int serviceId)
         {
-            var settings = _repository.GetList(serviceId);
-            var settingModelList = _mapper.Map<IEnumerable<Setting>, IEnumerable<SettingModel>>(settings);
-            return settingModelList;
+			return null;
+            //var settings = _repository.GetList(serviceId);
+            //var settingModelList = _mapper.Map<IEnumerable<Setting>, IEnumerable<SettingModel>>(settings);
+            //return settingModelList;
         }
 
         public void Update(SettingModel settingModel)
         {
-            var setting = _mapper.Map<SettingModel, Setting>(settingModel);
-            _repository.Update(setting);
+            //var setting = _mapper.Map<SettingModel, Setting>(settingModel);
+            //_repository.Update(setting);
         }
     }
 }

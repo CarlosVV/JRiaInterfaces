@@ -12,7 +12,7 @@ namespace CES.CoreApi.Configuration.Web
     {
         protected void Application_Start()
         {
-            CompositionRoot.RegisterDependencies();
+           // CompositionRoot.RegisterDependencies();
             AreaRegistration.RegisterAllAreas();
             GlobalConfiguration.Configure(WebApiConfig.Register);
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);

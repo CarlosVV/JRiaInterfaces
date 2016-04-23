@@ -9,7 +9,7 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>CES.CoreApi.Configuration.Data</RootNamespace>
     <AssemblyName>CES.CoreApi.Configuration.Data</AssemblyName>
-    <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <TargetFrameworkProfile />
   </PropertyGroup>
@@ -41,16 +41,16 @@
     <Compile Include="SettingsRepository.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\Foundation\CES.CoreApi.Common\CES.CoreApi.Common.csproj">
-      <Project>{070c7bb2-af07-4a4c-a9cc-6bfb8ca416e6}</Project>
-      <Name>CES.CoreApi.Common</Name>
+    <ProjectReference Include="..\..\Foundation\CES.CoreApi.Caching\CES.CoreApi.Caching.csproj">
+      <Project>{9fcf40a8-23f1-4272-9cae-eff674145f57}</Project>
+      <Name>CES.CoreApi.Caching</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\Foundation\CES.CoreApi.Data\CES.CoreApi.Data.csproj">
       <Project>{1aa5ba90-02cc-4fd1-81f2-615c374c83a5}</Project>
       <Name>CES.CoreApi.Data</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\Foundation\CES.CoreApi.Logging\CES.CoreApi.Logging.csproj">
-      <Project>{76762A04-54F0-4147-BD2B-267372034706}</Project>
+      <Project>{76762a04-54f0-4147-bd2b-267372034706}</Project>
       <Name>CES.CoreApi.Logging</Name>
     </ProjectReference>
     <ProjectReference Include="..\CES.CoreApi.Configuration.Contract\CES.CoreApi.Configuration.Contract.csproj">
