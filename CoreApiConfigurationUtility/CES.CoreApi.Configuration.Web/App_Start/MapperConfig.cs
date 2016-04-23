@@ -4,14 +4,14 @@ using CES.CoreApi.Configuration.Model.Models;
 
 namespace CES.CoreApi.Configuration.Web
 {
-    public class MapperConfig
+    public class MapperConfig :Profile
     {
-        public static void Configure()
+        protected override  void Configure()
         {
-            //Mapper.CreateMap<SettingModel, Setting>();
-            //Mapper.CreateMap<Setting, SettingModel>();
-            //Mapper.CreateMap<ServiceModel, Service>();
-            //Mapper.CreateMap<Service, ServiceModel>();
-        }
+			CreateMap<SettingModel, Setting>();
+			CreateMap<Setting, SettingModel>();
+			CreateMap<ServiceModel, Service>();
+			CreateMap<Service, ServiceModel>();
+		}
     }
 }
