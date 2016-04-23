@@ -123,6 +123,16 @@
             <exception cref="T:System.ArgumentNullException">Thrown when <paramref name="container"/> is a null
             reference or <paramref name="serviceType"/> is a null reference.</exception>
         </member>
+        <member name="M:SimpleInjector.Integration.Wcf.SimpleInjectorServiceHost.#ctor(SimpleInjector.Container,System.Object,System.Uri[])">
+            <summary>
+            Initializes a new instance of the <see cref="T:SimpleInjector.Integration.Wcf.SimpleInjectorServiceHost"/> class.
+            </summary>
+            <param name="container">The container.</param>
+            <param name="singletonInstance">The instance of the hosted service.</param>
+            <param name="baseAddresses">The base addresses.</param>
+            <exception cref="T:System.ArgumentNullException">Thrown when <paramref name="container"/> is a null
+            reference or <paramref name="singletonInstance"/> is a null reference.</exception>
+        </member>
         <member name="M:SimpleInjector.Integration.Wcf.SimpleInjectorServiceHost.GetImplementedContracts">
             <summary>Gets the contracts implemented by the service hosted.</summary>
             <returns>The collection of <see cref="T:System.ServiceModel.Description.ContractDescription"/>s.</returns>
