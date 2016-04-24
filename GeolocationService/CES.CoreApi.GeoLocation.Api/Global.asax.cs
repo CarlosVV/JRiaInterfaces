@@ -1,5 +1,7 @@
 ﻿using CES.CoreApi.Security.Interfaces;
+using CES.CoreApi.Security.Managers;
 using CES.CoreApi.Security.WebAPI.Filters;
+using CES.CoreAPI.Security.WebApi.Filters;
 using SimpleInjector;
 using SimpleInjector.Integration.WebApi;
 using System;
@@ -18,7 +20,8 @@ namespace CES.CoreApi.GeoLocation.Api
 			container.RegisterWebApiControllers(GlobalConfiguration.Configuration);
 			CompositionRoot.RegisterDependencies(container);
 			MapperConfigurator.Configure(container);
-			GlobalConfiguration.Configuration.Filters.Add(new ApplicationAuthenticator(container.GetInstance<IApplicationAuthenticator>(), container.GetInstance<IWebApiRequestHeaderParametersService>()));
+			GlobalConfiguration.Configuration.Filters.Add(new AuthenticationManager(container.GetInstance<IApplicationAuthenticator>(), container.GetInstance<IWebApiRequestHeaderParametersService>()));
+			GlobalConfiguration.Configuration.Filters.Add(new AuthorizationManager(container.GetInstance<IApplicationAuthorizator>()));
 			GlobalConfiguration.Configuration.DependencyResolver = new SimpleInjectorWebApiDependencyResolver(container);
 		}
 

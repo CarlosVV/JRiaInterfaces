@@ -39,6 +39,7 @@ using CES.CoreApi.Security.Wcf.Managers;
 using CES.CoreApi.Security.Managers;
 using CES.CoreApi.Security.Wcf.Services;
 using CES.CoreApi.Security.Providers;
+using System.Web.Http.Filters;
 
 namespace CES.CoreApi.GeoLocation.Api
 {

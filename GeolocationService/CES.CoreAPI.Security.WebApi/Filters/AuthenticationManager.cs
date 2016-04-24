@@ -2,20 +2,23 @@
 using CES.CoreApi.Common.Exceptions;
 using CES.CoreApi.Security.Interfaces;
 using System;
+using System.Net;
 using System.Threading;
 using System.Threading.Tasks;
+using System.Web;
+using System.Web.Http;
 using System.Web.Http.Filters;
 
 namespace CES.CoreApi.Security.WebAPI.Filters
 {
-	public class ApplicationAuthenticator: IAuthenticationFilter
+	public class AuthenticationManager : IAuthenticationFilter
 	{
 		private readonly IApplicationAuthenticator _authenticator;
 		private readonly IWebApiRequestHeaderParametersService _parametersProvider;
 
 		public bool AllowMultiple { get; set; }
-		
-		public ApplicationAuthenticator(IApplicationAuthenticator authenticator, IWebApiRequestHeaderParametersService parametersProvider)
+
+		public AuthenticationManager(IApplicationAuthenticator authenticator, IWebApiRequestHeaderParametersService parametersProvider)
 		{
 			if (authenticator == null)
 				throw new CoreApiException(TechnicalSubSystem.Authentication, SubSystemError.GeneralRequiredParameterIsUndefined, "authenticator");
@@ -27,16 +30,16 @@ namespace CES.CoreApi.Security.WebAPI.Filters
 			_parametersProvider = parametersProvider;
 		}
 
-		
+
 		public async Task AuthenticateAsync(HttpAuthenticationContext context, CancellationToken cancellationToken)
 		{
-			var authorization = context.Request.Headers.Authorization;
-			context.Principal = _authenticator.Authenticate(_parametersProvider.GetParameters(context.ActionContext.ActionDescriptor.ActionName));
+			context.Principal = _authenticator.Authenticate(
+										_parametersProvider.GetParameters(context.ActionContext.ActionDescriptor.ActionName));
 		}
 
 		public Task ChallengeAsync(HttpAuthenticationChallengeContext context, CancellationToken cancellationToken)
 		{
-			throw new NotImplementedException();
+			return Task.CompletedTask;
 		}
 	}
 }
