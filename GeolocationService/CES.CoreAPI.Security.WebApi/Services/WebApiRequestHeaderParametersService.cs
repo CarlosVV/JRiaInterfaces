@@ -1,10 +1,10 @@
 ﻿using System;
 using CES.CoreApi.Foundation.Models;
-using CES.CoreApi.Security.Interfaces;
 using System.Web;
 using System.Collections.Generic;
 using CES.CoreApi.Common.Tools;
 using CES.CoreApi.Foundation.Contract.Constants;
+using CES.CoreApi.Security.WebApi.Interfaces;
 
 namespace CES.CoreApi.Security.Providers
 {

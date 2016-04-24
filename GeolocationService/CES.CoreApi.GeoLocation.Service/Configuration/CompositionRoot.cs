@@ -34,6 +34,7 @@ using CES.CoreApi.Security.Wcf.Managers;
 using CES.CoreApi.Security.Wcf.Services;
 using CES.CoreApi.Security.Managers;
 using CES.CoreApi.Security.Providers;
+using CES.CoreApi.Security.WebApi.Interfaces;
 
 namespace CES.CoreApi.GeoLocation.Service.Configuration
 {

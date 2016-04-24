@@ -1,5 +1,5 @@
 ﻿using CES.CoreApi.Security.Interfaces;
-using CES.CoreApi.Security.Managers;
+using CES.CoreApi.Security.WebApi.Interfaces;
 using CES.CoreApi.Security.WebAPI.Filters;
 using CES.CoreAPI.Security.WebApi.Filters;
 using SimpleInjector;

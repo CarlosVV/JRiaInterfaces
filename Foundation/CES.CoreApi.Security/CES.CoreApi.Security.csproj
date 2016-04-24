@@ -46,7 +46,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Enums\ServiceType.cs" />
     <Compile Include="Managers\ApplicationAuthenticator.cs" />
     <Compile Include="Managers\ApplicationAuthorizator.cs" />
     <Compile Include="Interfaces\IApplicationAuthenticator.cs" />

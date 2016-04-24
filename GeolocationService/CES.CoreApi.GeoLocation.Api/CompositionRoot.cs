@@ -31,15 +31,12 @@ using CES.CoreApi.Logging.Monitors;
 using CES.CoreApi.Logging.Formatters;
 using CES.CoreApi.Logging.Factories;
 using CES.CoreApi.Logging.Configuration;
-using CES.CoreApi.Foundation.Data.Providers;
-using CES.CoreApi.Foundation.Data.Interfaces;
 using CES.CoreApi.Security.Wcf.Interfaces;
-using CES.CoreApi.Security.Wcf;
 using CES.CoreApi.Security.Wcf.Managers;
 using CES.CoreApi.Security.Managers;
 using CES.CoreApi.Security.Wcf.Services;
 using CES.CoreApi.Security.Providers;
-using System.Web.Http.Filters;
+using CES.CoreApi.Security.WebApi.Interfaces;
 
 namespace CES.CoreApi.GeoLocation.Api
 {

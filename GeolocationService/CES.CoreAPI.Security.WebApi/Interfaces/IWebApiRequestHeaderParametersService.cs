@@ -1,7 +1,6 @@
-﻿
-using CES.CoreApi.Foundation.Models;
+﻿using CES.CoreApi.Foundation.Models;
 
-namespace CES.CoreApi.Security.Interfaces
+namespace CES.CoreApi.Security.WebApi.Interfaces
 {
     public interface IWebApiRequestHeaderParametersService
     {

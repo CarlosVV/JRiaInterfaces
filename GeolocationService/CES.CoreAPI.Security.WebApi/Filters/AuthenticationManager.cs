@@ -1,12 +1,9 @@
 ﻿using CES.CoreApi.Common.Enumerations;
 using CES.CoreApi.Common.Exceptions;
 using CES.CoreApi.Security.Interfaces;
-using System;
-using System.Net;
+using CES.CoreApi.Security.WebApi.Interfaces;
 using System.Threading;
 using System.Threading.Tasks;
-using System.Web;
-using System.Web.Http;
 using System.Web.Http.Filters;
 
 namespace CES.CoreApi.Security.WebAPI.Filters
