@@ -122,7 +122,9 @@
       <DependentUpon>Web.config</DependentUpon>
     </None>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="Models\" />
+  </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\Foundation\CES.CoreApi.Caching\CES.CoreApi.Caching.csproj">
       <Project>{9fcf40a8-23f1-4272-9cae-eff674145f57}</Project>
@@ -176,11 +178,11 @@
       <Project>{95de1da5-4826-4fae-be0e-7a4c6ac69c53}</Project>
       <Name>CES.CoreApi.GeoLocation.Service</Name>
     </ProjectReference>
-    <ProjectReference Include="..\CES.CoreApi.Security.Wcf\CES.CoreApi.Security.Wcf.csproj">
+    <ProjectReference Include="..\..\Foundation\CES.CoreApi.Security.Wcf\CES.CoreApi.Security.Wcf.csproj">
       <Project>{9a1ec39a-2eef-49f5-af9a-5cfd68ce413f}</Project>
       <Name>CES.CoreApi.Security.Wcf</Name>
     </ProjectReference>
-    <ProjectReference Include="..\CES.CoreAPI.Security.WebApi\CES.CoreAPI.Security.WebApi.csproj">
+    <ProjectReference Include="..\..\Foundation\CES.CoreAPI.Security.WebApi\CES.CoreAPI.Security.WebApi.csproj">
       <Project>{edf1e298-f3b9-4c97-ad36-2f3d260ae636}</Project>
       <Name>CES.CoreAPI.Security.WebApi</Name>
     </ProjectReference>
@@ -223,9 +225,7 @@
       <Name>CES.CoreApi.GeoLocation.Service.Contract</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Models\" />
-  </ItemGroup>
+  <ItemGroup />
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>

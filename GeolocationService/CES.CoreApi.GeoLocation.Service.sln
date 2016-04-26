@@ -64,9 +64,9 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CES.CoreApi.Configuration",
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CES.CoreApi.DataTests", "CES.CoreApi.DataTests\CES.CoreApi.DataTests.csproj", "{B663AA83-314B-438E-A130-C316CF03744F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CES.CoreApi.Security.Wcf", "CES.CoreApi.Security.Wcf\CES.CoreApi.Security.Wcf.csproj", "{9A1EC39A-2EEF-49F5-AF9A-5CFD68CE413F}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CES.CoreApi.Security.Wcf", "..\Foundation\CES.CoreApi.Security.Wcf\CES.CoreApi.Security.Wcf.csproj", "{9A1EC39A-2EEF-49F5-AF9A-5CFD68CE413F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CES.CoreAPI.Security.WebApi", "CES.CoreAPI.Security.WebApi\CES.CoreAPI.Security.WebApi.csproj", "{EDF1E298-F3B9-4C97-AD36-2F3D260AE636}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CES.CoreAPI.Security.WebApi", "..\Foundation\CES.CoreAPI.Security.WebApi\CES.CoreAPI.Security.WebApi.csproj", "{EDF1E298-F3B9-4C97-AD36-2F3D260AE636}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
