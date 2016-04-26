@@ -8,16 +8,16 @@ namespace CES.CoreApi.Logging.WebApi
 {
 	public class WebApiGlobalExceptionLogger : IExceptionLogger
 	{
-		private readonly ILogMonitorFactory _logMonitorFactory;
+		private readonly IExceptionLogMonitor _exceptionLogMonitor;
 		private readonly IWebApiCallInformationProvider _webApiCallInformationProvider;
 
-		public WebApiGlobalExceptionLogger(ILogMonitorFactory logMonitorFactory, IWebApiCallInformationProvider webApiCallInformationProvider)
+		public WebApiGlobalExceptionLogger(IExceptionLogMonitor exceptionLogMonitor, IWebApiCallInformationProvider webApiCallInformationProvider)
 		{
-			if (logMonitorFactory == null)
+			if (exceptionLogMonitor == null)
 				throw new ArgumentNullException("logMonitorFactory");
 			if (webApiCallInformationProvider == null)
 				throw new ArgumentNullException("webApiCallInformationProvider");
-			_logMonitorFactory = logMonitorFactory;
+			_exceptionLogMonitor = exceptionLogMonitor;
 			_webApiCallInformationProvider = webApiCallInformationProvider;
 		}
 
@@ -37,11 +37,9 @@ namespace CES.CoreApi.Logging.WebApi
 
 		private void LogCore(ExceptionLoggerContext context)
 		{
-			var exceptionMonitor = _logMonitorFactory.CreateNew<IExceptionLogMonitor>();
+			_webApiCallInformationProvider.AddDetails(_exceptionLogMonitor.DataContainer, context);
 
-			_webApiCallInformationProvider.AddDetails(exceptionMonitor.DataContainer, context);
-
-			exceptionMonitor.Publish(context.Exception);
+			_exceptionLogMonitor.Publish(context.Exception);
 		}
 
 		private static bool ShouldLog(ExceptionLoggerContext context)
