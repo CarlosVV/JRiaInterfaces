@@ -1,10 +1,8 @@
 ﻿using System;
 using System.Diagnostics;
 using System.Threading.Tasks;
-using CES.CoreApi.Common.Enumerations;
-using CES.CoreApi.Common.Interfaces;
 using CES.CoreApi.Logging.Interfaces;
-
+using CES.CoreApi.Logging.Enumerations;
 namespace CES.CoreApi.Logging.Monitors
 {
 	public abstract class BaseLogMonitor

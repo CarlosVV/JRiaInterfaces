@@ -6,21 +6,15 @@ using MoreLinq;
 using CES.CoreApi.GeoLocation.Service.Business.Contract.Configuration;
 using CES.CoreApi.GeoLocation.Service.Business.Contract.Enumerations;
 using CES.CoreApi.GeoLocation.Service.Business.Contract.Interfaces;
+using CES.CoreApi.GeoLocation.Service.Business.Logic.Providers;
 
 namespace CES.CoreApi.GeoLocation.Service.Business.Logic.Processors
 {
     public abstract class BaseServiceRequestProcessor
     {
-        protected BaseServiceRequestProcessor(ICountryConfigurationProvider configurationProvider)
-        {
-            if (configurationProvider == null)
-                throw new CoreApiException(TechnicalSubSystem.GeoLocationService,
-                    SubSystemError.GeneralRequiredParameterIsUndefined, "configurationProvider");
+       
 
-            CountryConfigurationProvider = configurationProvider;
-        }
-
-        protected ICountryConfigurationProvider CountryConfigurationProvider { get; private set; }
+       // protected ICountryConfigurationProvider CountryConfigurationProvider { get; private set; }
 
         /// <summary>
         /// Gets providers by country and service type ordered by priority

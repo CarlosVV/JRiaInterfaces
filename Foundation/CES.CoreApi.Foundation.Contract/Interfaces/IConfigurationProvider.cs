@@ -2,7 +2,7 @@
 {
     public interface IConfigurationProvider
     {
-        T Read<T>(string name);
-        T ReadFromJson<T>(string name);
-    }
+		//T Read<T>(string name);
+		//T ReadFromJson<T>(string name);
+	}
 }

@@ -33,14 +33,7 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="AutoMapper, Version=3.3.1.0, Culture=neutral, PublicKeyToken=be96cd2c38ef1005, processorArchitecture=MSIL">
-      <HintPath>..\packages\AutoMapper.3.3.1\lib\net40\AutoMapper.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="AutoMapper.Net4, Version=3.3.1.0, Culture=neutral, PublicKeyToken=be96cd2c38ef1005, processorArchitecture=MSIL">
-      <HintPath>..\packages\AutoMapper.3.3.1\lib\net40\AutoMapper.Net4.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
+    <Reference Include="Microsoft.CSharp" />
     <Reference Include="Newtonsoft.Json, Version=6.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\packages\Newtonsoft.Json.6.0.8\lib\net45\Newtonsoft.Json.dll</HintPath>
@@ -66,18 +59,12 @@
     <Compile Include="Enumerations\InterceptionBehaviorType.cs" />
     <Compile Include="Enumerations\InterceptorType.cs" />
     <Compile Include="Enumerations\LifetimeManagerType.cs" />
-    <Compile Include="Enumerations\LogEntryType.cs" />
-    <Compile Include="Enumerations\LogType.cs" />
     <Compile Include="Enumerations\Organization.cs" />
     <Compile Include="Enumerations\ResponseStatus.cs" />
-    <Compile Include="Enumerations\SecurityAuditResult.cs" />
     <Compile Include="Enumerations\SubSystemError.cs" />
     <Compile Include="Enumerations\TechnicalSubSystem.cs" />
     <Compile Include="Enumerations\TechnicalSystem.cs" />
     <Compile Include="Exceptions\CoreApiException.cs" />
-    <Compile Include="Interfaces\IAutoMapperProxy.cs" />
-    <Compile Include="Interfaces\ICurrentDateTimeProvider.cs" />
-    <Compile Include="Interfaces\IDataContainer.cs" />
     <Compile Include="Interfaces\IHttpClientProxy.cs" />
     <Compile Include="Interfaces\IIocContainer.cs" />
     <Compile Include="Interfaces\IIocContainerFactory.cs" />
@@ -93,7 +80,6 @@
     <Compile Include="Providers\CurrentDateTimeProvider.cs" />
     <Compile Include="Exceptions\ExceptionHelper.cs" />
     <Compile Include="Interfaces\IExceptionHelper.cs" />
-    <Compile Include="Proxies\AutoMapperProxy.cs" />
     <Compile Include="Proxies\ServiceProxy.cs" />
     <Compile Include="Proxies\HttpClientProxy.cs" />
     <Compile Include="Tools\DictionaryTools.cs" />

@@ -16,9 +16,9 @@ namespace CES.CoreApi.GeoLocation.Service.Business.Logic.Processors
 
         private readonly IGeocodeAddressDataProvider _geocodeAddressDataProvider;
 
-        public GeocodeServiceRequestProcessor(ICountryConfigurationProvider configurationProvider,
+        public GeocodeServiceRequestProcessor(
             IGeocodeAddressDataProvider geocodeAddressDataProvider)
-            : base(configurationProvider)
+           
         {
             if (geocodeAddressDataProvider == null)
                 throw new CoreApiException(TechnicalSubSystem.GeoLocationService,
@@ -58,8 +58,8 @@ namespace CES.CoreApi.GeoLocation.Service.Business.Logic.Processors
 
         private GeocodeAddressResponseModel Process(string country, Func<DataProviderConfiguration, GeocodeAddressResponseModel> geocodeByProvider)
         {
-            var numberOfProviders = CountryConfigurationProvider.ConfigurationProvider.Read<int>(ConfigurationConstants.NumberOfProvidersToProcessResult);
-            var providers = GetProviderConfigurationByCountry(country, DataProviderServiceType.Geocoding, numberOfProviders).ToList();
+            var numberOfProviders = Configuration.Provider.GeoLocationConfigurationSection.Instance.NumberOfProvidersToProcessResult.Value;
+			var providers = GetProviderConfigurationByCountry(country, DataProviderServiceType.Geocoding, numberOfProviders).ToList();
 
             if (!providers.Any())
                 throw new CoreApiException(TechnicalSubSystem.GeoLocationService,

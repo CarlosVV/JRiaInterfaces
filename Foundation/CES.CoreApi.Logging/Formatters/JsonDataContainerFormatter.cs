@@ -1,7 +1,5 @@
 ﻿using System;
-using CES.CoreApi.Common.Interfaces;
 using CES.CoreApi.Logging.Interfaces;
-using CES.CoreApi.Logging.Utilities;
 using Newtonsoft.Json;
 
 namespace CES.CoreApi.Logging.Formatters

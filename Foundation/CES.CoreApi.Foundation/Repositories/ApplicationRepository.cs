@@ -6,13 +6,13 @@ using System.Linq;
 using System.Threading.Tasks;
 using CES.CoreApi.Common.Exceptions;
 using CES.CoreApi.Foundation.Contract.Interfaces;
-using CES.CoreApi.Foundation.Data.Base;
+using CES.CoreApi.Data.Base;
 using CES.CoreApi.Foundation.Data.Utility;
 using CES.CoreApi.Data.Models;
 using CES.CoreApi.Data.Enumerations;
 using CES.CoreApi.Foundation.Contract.Models;
 
-namespace CES.CoreApi.Data.Repositories
+namespace CES.CoreApi.Foundation.Repositories
 {
 	public class ApplicationRepository : BaseGenericRepository, IApplicationRepository
 	{
@@ -32,7 +32,28 @@ namespace CES.CoreApi.Data.Repositories
 
 			return await Task.Run(() => Get(request));
 		}
-
+		public Application GetApplicationInfo(int applicationId)
+		{
+			var request = new DatabaseRequest<Application>
+			{
+				ProcedureName = "coreapi_sp_GetApplicationByID",
+				IsCacheable = false,
+				DatabaseType = DatabaseType.Main,
+				Parameters = new Collection<SqlParameter>
+				{
+					new SqlParameter("@applicationID", applicationId)
+				},
+				Shaper = reader => GetApplication(reader, applicationId)
+			};
+			var app = Get(request);
+			return app;
+		}
+		/// <summary>
+		/// 
+		/// Gets application configuration items collection
+		/// </summary>
+		/// <param name="applicationId">Application identifier</param>
+		/// <returns></returns>
 		public async Task<ICollection<ApplicationConfiguration>> GetApplicationConfiguration(int applicationId)
 		{
 			var application = await GetApplication(applicationId);
@@ -42,7 +63,15 @@ namespace CES.CoreApi.Data.Repositories
 
 			return application.Configuration;
 		}
+		public ICollection<ApplicationConfiguration> GetApplicationConfigurationInfo(int applicationId)
+		{
+			var application =  GetApplicationInfo(applicationId);
 
+			if (application == null)
+				throw new CoreApiException(Common.Enumerations.TechnicalSubSystem.CoreApiData, Common.Enumerations.SubSystemError.ApplicationNotFoundInDatabase, applicationId);
+
+			return application.Configuration;
+		}
 		private static Application GetApplication(IDataReader reader, int applicationId)
 		{
 			var application = InitializeApplication(reader, applicationId);

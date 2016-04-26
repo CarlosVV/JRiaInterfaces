@@ -10,7 +10,7 @@ namespace CES.CoreApi.GeoLocation.Service.Factory
             : base(new Container())
         {
             CompositionRoot.RegisterDependencies(Container);
-            MapperConfigurator.Configure(Container);
+			//MapperConfiguratorX.Configure(Container);
         }
     }
 }

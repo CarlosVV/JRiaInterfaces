@@ -27,5 +27,10 @@ namespace CES.CoreApi.Configuration.Provider
 
 		[ConfigurationProperty("AutompleteDefaultNumberOfHints")]
 		public BasicConfiguration AutompleteDefaultNumberOfHints => (BasicConfiguration)this["AutompleteDefaultNumberOfHints"];
+
+		[ConfigurationProperty("NumberOfProvidersToProcessResult")]
+		public BasicConfiguration NumberOfProvidersToProcessResult => (BasicConfiguration)this["NumberOfProvidersToProcessResult"];
+
+
 	}
 }

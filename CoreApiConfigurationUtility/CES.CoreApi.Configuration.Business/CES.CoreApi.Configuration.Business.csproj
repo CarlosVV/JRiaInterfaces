@@ -9,7 +9,7 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>CES.CoreApi.Configuration.Business</RootNamespace>
     <AssemblyName>CES.CoreApi.Configuration.Business</AssemblyName>
-    <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <TargetFrameworkProfile />
   </PropertyGroup>
@@ -40,12 +40,8 @@
     <Compile Include="Services\SettingManager.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\Foundation\CES.CoreApi.Common\CES.CoreApi.Common.csproj">
-      <Project>{070c7bb2-af07-4a4c-a9cc-6bfb8ca416e6}</Project>
-      <Name>CES.CoreApi.Common</Name>
-    </ProjectReference>
     <ProjectReference Include="..\CES.CoreApi.Configuration.Contract\CES.CoreApi.Configuration.Contract.csproj">
-      <Project>{C54DF6BF-40BF-4201-B945-C4CD0ED7A4DB}</Project>
+      <Project>{c54df6bf-40bf-4201-b945-c4cd0ed7a4db}</Project>
       <Name>CES.CoreApi.Configuration.Contract</Name>
     </ProjectReference>
   </ItemGroup>

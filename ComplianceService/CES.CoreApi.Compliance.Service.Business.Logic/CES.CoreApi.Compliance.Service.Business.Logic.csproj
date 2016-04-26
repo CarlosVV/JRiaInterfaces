@@ -9,7 +9,7 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>CES.CoreApi.Compliance.Service.Business.Logic</RootNamespace>
     <AssemblyName>CES.CoreApi.Compliance.Service.Business.Logic</AssemblyName>
-    <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <TargetFrameworkProfile />
   </PropertyGroup>
@@ -55,29 +55,9 @@
     <Compile Include="Provider\RiaCheckPayoutServiceProvider.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\Foundation\CES.CoreApi.Caching\CES.CoreApi.Caching.csproj">
-      <Project>{9fcf40a8-23f1-4272-9cae-eff674145f57}</Project>
-      <Name>CES.CoreApi.Caching</Name>
-    </ProjectReference>
     <ProjectReference Include="..\..\Foundation\CES.CoreApi.Common\CES.CoreApi.Common.csproj">
       <Project>{070c7bb2-af07-4a4c-a9cc-6bfb8ca416e6}</Project>
       <Name>CES.CoreApi.Common</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\Foundation\CES.CoreApi.Data\CES.CoreApi.Data.csproj">
-      <Project>{1aa5ba90-02cc-4fd1-81f2-615c374c83a5}</Project>
-      <Name>CES.CoreApi.Data</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\Foundation\CES.CoreApi.Foundation.Contract\CES.CoreApi.Foundation.Contract.csproj">
-      <Project>{8dbcfe15-ca3b-4f7c-a7d6-d73f8f0b91aa}</Project>
-      <Name>CES.CoreApi.Foundation.Contract</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\Foundation\CES.CoreApi.Foundation\CES.CoreApi.Foundation.csproj">
-      <Project>{e2b71a13-9683-4862-b2eb-31050190afdc}</Project>
-      <Name>CES.CoreApi.Foundation</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\Foundation\CES.CoreApi.Logging\CES.CoreApi.Logging.csproj">
-      <Project>{76762a04-54f0-4147-bd2b-267372034706}</Project>
-      <Name>CES.CoreApi.Logging</Name>
     </ProjectReference>
     <ProjectReference Include="..\CES.CoreApi.Compliance.Service.Busines.Contract\CES.CoreApi.Compliance.Service.Business.Contract.csproj">
       <Project>{c057a718-73d3-4e25-b31e-9f5557d6f566}</Project>

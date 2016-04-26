@@ -1,10 +1,8 @@
 using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Runtime.Serialization;
-using CES.CoreApi.Common.Enumerations;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
+using CES.CoreApi.Logging.Enumerations;
 
 namespace CES.CoreApi.Logging.Interfaces
 {

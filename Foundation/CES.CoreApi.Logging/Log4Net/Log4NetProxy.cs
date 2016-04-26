@@ -2,13 +2,12 @@
 using System.Globalization;
 using System.Linq;
 using System.Reflection;
-using CES.CoreApi.Common.Enumerations;
-using CES.CoreApi.Common.Interfaces;
-using CES.CoreApi.Logging.Interfaces;
 using log4net;
 using log4net.Appender;
 using log4net.Config;
 using log4net.Core;
+using CES.CoreApi.Logging.Interfaces;
+using CES.CoreApi.Logging.Enumerations;
 
 namespace CES.CoreApi.Logging.Log4Net
 {

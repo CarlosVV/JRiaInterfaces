@@ -8,7 +8,7 @@ using CES.CoreApi.Compliance.Service.Contract.Models;
 using CES.CoreApi.Compliance.Service.Contract.Constants;
 using CES.CoreApi.Common.Exceptions;
 using CES.CoreApi.Common.Enumerations;
-
+using AutoMapper;
 namespace CES.CoreApi.Compliance.Service
 {
     [ServiceBehavior(Namespace = Namespaces.ComplianceServiceContractNamespace, InstanceContextMode = InstanceContextMode.PerCall)]
@@ -17,17 +17,14 @@ namespace CES.CoreApi.Compliance.Service
         #region Core
         private readonly IRequestValidator _validator;
         private readonly ICheckPayoutRequestProcessor _checkingServiceRequestProcessor;
-        private readonly IMappingHelper _mapper;
+        private readonly  IMapper  _mapper;
 
-        public ComplianceService(IRequestValidator validator, ICheckPayoutRequestProcessor checkingServiceRequestProcessor, IMappingHelper mapper)
+        public ComplianceService(IRequestValidator validator, ICheckPayoutRequestProcessor checkingServiceRequestProcessor
+			, IMapper  mapper)
         {
             if (validator == null) throw new ArgumentNullException("validator");
             if (checkingServiceRequestProcessor == null) throw new ArgumentNullException("_checkingServiceRequestProcessor");
-            if (mapper == null) throw new ArgumentNullException("mapper");
-
-            if (mapper == null)
-                throw new CoreApiException(TechnicalSubSystem.ComplianceService,
-                    SubSystemError.GeneralRequiredParameterIsUndefined, "mapper");
+            
             if (validator == null)
                 throw new CoreApiException(TechnicalSubSystem.ComplianceService,
                     SubSystemError.GeneralRequiredParameterIsUndefined, "validator");
@@ -49,10 +46,10 @@ namespace CES.CoreApi.Compliance.Service
         {
             _validator.Validate(request);
 
-            var requestModel = _mapper.ConvertTo<CheckPayoutRequest, CheckPayoutRequestModel>(request);
+            var requestModel = _mapper.Map<CheckPayoutRequest, CheckPayoutRequestModel>(request);
             var responseModel = _checkingServiceRequestProcessor.CheckPayout(requestModel);
 
-            return _mapper.ConvertToResponse<CheckPayoutResponseModel, CheckPayoutResponse>(responseModel);
+            return _mapper.Map<CheckPayoutResponseModel, CheckPayoutResponse>(responseModel);
 
             //_validator.Validate(request);
 

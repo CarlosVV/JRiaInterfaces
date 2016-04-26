@@ -4,7 +4,6 @@ using CES.CoreApi.Common.Interfaces;
 using CES.CoreApi.Foundation.Contract.Interfaces;
 using CES.CoreApi.Foundation.Providers;
 using CES.CoreApi.Foundation.Service;
-using CES.CoreApi.Foundation.Tools;
 using CES.CoreApi.GeoLocation.Service.Business.Contract.Interfaces;
 using CES.CoreApi.GeoLocation.Service.Business.Logic.Builders;
 using CES.CoreApi.GeoLocation.Service.Business.Logic.Factories;
@@ -24,21 +23,20 @@ using CES.CoreApi.Logging.Monitors;
 using CES.CoreApi.Logging.Providers;
 using CES.CoreApi.SimpleInjectorProxy;
 using SimpleInjector;
-using IConfigurationProvider = CES.CoreApi.Foundation.Contract.Interfaces.IConfigurationProvider;
 using CES.CoreApi.Caching.Providers;
 using CES.CoreApi.Security.Interfaces;
 using CES.CoreApi.Security;
-using CES.CoreApi.Data.Repositories;
 using CES.CoreApi.Security.Wcf.Interfaces;
 using CES.CoreApi.Security.Wcf.Managers;
 using CES.CoreApi.Security.Wcf.Services;
 using CES.CoreApi.Security.Managers;
 using CES.CoreApi.Security.Providers;
 using CES.CoreApi.Security.WebApi.Interfaces;
+using CES.CoreApi.Foundation.Repositories;
 
 namespace CES.CoreApi.GeoLocation.Service.Configuration
 {
-    public class CompositionRoot
+	public class CompositionRoot
     {
         public static void RegisterDependencies(Container container)
         {
@@ -51,14 +49,14 @@ namespace CES.CoreApi.GeoLocation.Service.Configuration
             RegisterResponses(container);
             RegisterOthers(container);
             RegisterLoggging(container);
-			RegisterFactories(container);
+            RegisterFactories(container);
 			RegisterSecurity(container);
             RegisterInterceptions(container);
             container.Verify();
         }
 
         private static void RegisterFoundation(Container container)
-        {
+        {         
             container.Register<IAuthenticationManager, AuthenticationManager>();
             container.Register<IApplicationAuthenticator, ApplicationAuthenticator>();
             container.Register<IApplicationRepository, ApplicationRepository>(); 
@@ -66,7 +64,7 @@ namespace CES.CoreApi.GeoLocation.Service.Configuration
             container.Register<IApplicationAuthorizator, ApplicationAuthorizator>();
 			container.Register<Caching.Interfaces.ICacheProvider>(() => new RedisCacheProvider());    
             container.Register<IServiceExceptionHandler, ServiceExceptionHandler>();
-            container.Register<IConfigurationProvider, ConfigurationProvider>();
+			//container.Register<IConfigurationProvider, ConfigurationProvider>();
             container.Register<IIdentityManager, IdentityManager>();
         }
 
@@ -77,18 +75,22 @@ namespace CES.CoreApi.GeoLocation.Service.Configuration
             container.InterceptWith<PerformanceInterceptor>(type => type == typeof(IAddressServiceRequestProcessor));
             container.InterceptWith<PerformanceInterceptor>(type => type == typeof(IGeocodeServiceRequestProcessor));
             container.InterceptWith<PerformanceInterceptor>(type => type == typeof(IMapServiceRequestProcessor));
-            container.InterceptWith<PerformanceInterceptor>(type => type == typeof(IApplicationRepository));
+           // container.InterceptWith<PerformanceInterceptor>(type => type == typeof(IApplicationRepository));
 			container.InterceptWith<SecurityLogMonitorInterceptor>(type => type == typeof(IHealthMonitoringProcessor));
 			
 		}
 
         private static void RegisterAutomapper(Container container)
         {
-            container.Register<ITypeMapFactory, TypeMapFactory>();
-            container.RegisterCollection<IObjectMapper>(MapperRegistry.Mappers);
-            container.Register<ConfigurationStore>();
-            container.Register<IConfiguration>(container.GetInstance<ConfigurationStore>);
-            container.Register<AutoMapper.IConfigurationProvider>(container.GetInstance<ConfigurationStore>);
+
+			var config = new MapperConfiguration(cfg =>
+			{
+				cfg.AddProfile(new GeoLocationMapperProfile());
+				cfg.ConstructServicesUsing(type => container.GetInstance(type));
+			});
+			container.RegisterSingleton(config);
+			container.Register(() => config.CreateMapper(container.GetInstance));
+
         }
         
         private static void RegisterOthers(Container container)
@@ -101,7 +103,7 @@ namespace CES.CoreApi.GeoLocation.Service.Configuration
             container.Register<PerformanceInterceptor>();
 			container.Register<SecurityLogMonitorInterceptor>();
 			container.Register<IRequestValidator, RequestValidator>();
-            container.Register<IMappingHelper, MappingHelper>();
+        
         }
 
         private static void RegisterFactories(Container container)
@@ -134,7 +136,7 @@ namespace CES.CoreApi.GeoLocation.Service.Configuration
         {
             container.RegisterCollection<IUrlBuilder>(new[] {
 				typeof(BingUrlBuilder),
-                typeof(GoogleUrlBuilder),
+				typeof(GoogleUrlBuilder),
 				typeof(MelissaUrlBuilder)});
         }
 
@@ -154,7 +156,7 @@ namespace CES.CoreApi.GeoLocation.Service.Configuration
         private static void RegisterProviders(Container container)
         {
             container.Register<IAddressVerificationDataProvider, AddressVerificationDataProvider>();
-            container.Register<ICountryConfigurationProvider, CountryConfigurationProvider>();
+           // container.Register<ICountryConfigurationProvider, CountryConfigurationProvider>();
             container.Register<IMappingDataProvider, MappingDataProvider>();
             container.Register<IDataResponseProvider, DataResponseProvider>();
             container.Register<IMelissaLevelOfConfidenceProvider, MelissaLevelOfConfidenceProvider>();
@@ -208,12 +210,12 @@ namespace CES.CoreApi.GeoLocation.Service.Configuration
             container.Register<IDatabasePerformanceLogMonitor, DatabasePerformanceLogMonitor>();
             container.Register<ISqlQueryFormatter, SqlQueryFormatter>();
 
-            //Register data containers
+			//Register data containers
 			container.RegisterCollection<IDataContainer>(new[] {
 				typeof(DatabasePerformanceLogDataContainer),
-                typeof(PerformanceLogDataContainer),
-                typeof(TraceLogDataContainer),
-                typeof(ExceptionLogDataContainer),
+				typeof(PerformanceLogDataContainer),
+				typeof(TraceLogDataContainer),
+				typeof(ExceptionLogDataContainer),
 				typeof(SecurityLogDataContainer)});
 
 

@@ -1,12 +1,11 @@
 ﻿using System;
-using CES.CoreApi.Common.Enumerations;
-using CES.CoreApi.Common.Interfaces;
 using CES.CoreApi.Logging.Interfaces;
 using CES.CoreApi.Logging.Models;
+using CES.CoreApi.Logging.Enumerations;
 
 namespace CES.CoreApi.Logging.Monitors
 {
-    public class SecurityLogMonitor: BaseLogMonitor, ISecurityLogMonitor
+	public class SecurityLogMonitor: BaseLogMonitor, ISecurityLogMonitor
     {
         public SecurityLogMonitor(SecurityLogDataContainer dataContainer, ILoggerProxy logProxy, ILogConfigurationProvider configuration) 
             : base(logProxy, configuration)

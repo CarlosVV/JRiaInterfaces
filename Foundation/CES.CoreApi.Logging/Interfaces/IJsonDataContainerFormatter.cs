@@ -1,6 +1,4 @@
-﻿using CES.CoreApi.Common.Interfaces;
-
-namespace CES.CoreApi.Logging.Interfaces
+﻿namespace CES.CoreApi.Logging.Interfaces
 {
 	public interface IJsonDataContainerFormatter
 	{

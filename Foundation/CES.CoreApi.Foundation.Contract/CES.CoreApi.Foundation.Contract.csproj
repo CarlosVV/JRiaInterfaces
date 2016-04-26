@@ -49,13 +49,13 @@
     <Compile Include="Interfaces\IApplicationRepository.cs" />
     <Compile Include="Interfaces\IClientSecurityContextProvider.cs" />
     <Compile Include="Interfaces\IConfigurationProvider.cs" />
-    <Compile Include="Interfaces\IMappingHelper.cs" />
     <Compile Include="Interfaces\IServiceExceptionHandler.cs" />
     <Compile Include="Interfaces\IServiceHelper.cs" />
     <Compile Include="Models\Application.cs" />
     <Compile Include="Models\ApplicationConfiguration.cs" />
     <Compile Include="Models\ApplicationPrincipal.cs" />
     <Compile Include="Models\ApplicationServiceOperation.cs" />
+    <Compile Include="Models\AuditLog.cs" />
     <Compile Include="Models\BehaviorConfiguration.cs" />
     <Compile Include="Models\BindingConfiguration.cs" />
     <Compile Include="Models\ServiceCallHeaderParameters.cs" />

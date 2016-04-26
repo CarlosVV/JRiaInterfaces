@@ -2,12 +2,10 @@
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Threading;
-using CES.CoreApi.Common.Enumerations;
-using CES.CoreApi.Common.Exceptions;
-using CES.CoreApi.Common.Interfaces;
 using CES.CoreApi.Logging.Interfaces;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
+using CES.CoreApi.Logging.Enumerations;
 
 namespace CES.CoreApi.Logging.Models
 {
@@ -32,7 +30,7 @@ namespace CES.CoreApi.Logging.Models
 
 		public Collection<ExceptionLogItemGroup> Items { get; private set; }
 
-		public CoreApiException Exception { get; private set; }
+		public Exception Exception { get; private set; }
 
 		public int ThreadId { get; private set; }
 
@@ -58,11 +56,11 @@ namespace CES.CoreApi.Logging.Models
 
 		public void SetException(Exception exception)
 		{
-			if (exception == null)
-				throw new ArgumentNullException("exception");
+			//if (exception == null)
+			//	throw new ArgumentNullException("exception");
 
-			var coreApiException = exception as CoreApiException ?? new CoreApiException(exception);
-			Exception = coreApiException;
+			//var coreApiException = exception as CoreApiException ?? new CoreApiException(exception);
+			Exception = exception;
 		}
 
 		public override string ToString()

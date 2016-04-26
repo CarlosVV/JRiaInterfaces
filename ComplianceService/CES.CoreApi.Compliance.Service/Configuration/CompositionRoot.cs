@@ -1,28 +1,5 @@
-﻿using System.Configuration;
-using AutoMapper;
-using AutoMapper.Mappers;
-using CES.CoreApi.Caching.Providers;
-using CES.CoreApi.Common.Interfaces;
-using CES.CoreApi.Common.Managers;
-using CES.CoreApi.Common.Providers;
-using CES.CoreApi.Common.Proxies;
-using CES.CoreApi.Foundation.Contract.Interfaces;
-using CES.CoreApi.Foundation.Data;
-using CES.CoreApi.Foundation.Data.Interfaces;
-using CES.CoreApi.Foundation.Data.Providers;
-using CES.CoreApi.Foundation.Providers;
-using CES.CoreApi.Foundation.Security;
+﻿using CES.CoreApi.Foundation.Contract.Interfaces;
 using CES.CoreApi.Foundation.Service;
-using CES.CoreApi.Foundation.Tools;
-using CES.CoreApi.Foundation.Validation;
-using CES.CoreApi.Logging.Configuration;
-using CES.CoreApi.Logging.Factories;
-using CES.CoreApi.Logging.Formatters;
-using CES.CoreApi.Logging.Interfaces;
-using CES.CoreApi.Logging.Log4Net;
-using CES.CoreApi.Logging.Models;
-using CES.CoreApi.Logging.Monitors;
-using CES.CoreApi.Logging.Providers;
 using CES.CoreApi.Compliance.Service.Business.Contract.Interfaces;
 using CES.CoreApi.Compliance.Service.Business.Logic.Processors;
 using CES.CoreApi.Compliance.Service.Business.Logic.Provider;
@@ -32,10 +9,23 @@ using CES.CoreApi.Compliance.Service.Contract.Models;
 using CES.CoreApi.Compliance.Service.Utilites;
 using CES.CoreApi.SimpleInjectorProxy;
 using SimpleInjector;
+using CES.CoreApi.Security.Interfaces;
+using CES.CoreApi.Security;
+using CES.CoreApi.Foundation.Repositories;
+using CES.CoreApi.Caching.Providers;
+using CES.CoreApi.Logging.Interfaces;
+using CES.CoreApi.Logging.Log4Net;
+using CES.CoreApi.Logging.Models;
+using CES.CoreApi.Logging.Formatters;
+using CES.CoreApi.Logging.Monitors;
+using CES.CoreApi.Logging.Providers;
+using CES.CoreApi.Logging.Factories;
+using CES.CoreApi.Logging.Configuration;
+using AutoMapper;
 
 namespace CES.CoreApi.Compliance.Service.Configuration
 {
-    class CompositionRoot
+	class CompositionRoot
     {
         public static void RegisterDependencies(Container container)
         {
@@ -47,33 +37,24 @@ namespace CES.CoreApi.Compliance.Service.Configuration
             RegisterOthers(container);
             RegisterLoggging(container);
             RegisterInterceptions(container);
-            RegisterDataAccess(container);
+         
 
             container.Verify();
         }
 
         private static void RegisterFoundation(Container container)
         {
-            var cacheName = ConfigurationManager.AppSettings["cacheName"];
 
-            container.RegisterSingle<IAuthenticationManager, AuthenticationManager>();
-            container.RegisterSingle<IApplicationAuthenticator, ApplicationAuthenticator>();
-            container.RegisterSingle<IApplicationRepository, ApplicationRepository>();
-            container.RegisterSingle<IApplicationValidator, ApplicationValidator>();
-            container.RegisterSingle<IRequestHeadersProvider, RequestHeadersProvider>();
-            container.RegisterSingle<IServiceCallHeaderParametersProvider, ServiceCallHeaderParametersProvider>();
-            container.RegisterSingle<IAuthorizationManager, AuthorizationManager>();
-            container.RegisterSingle<IAuthorizationAdministrator, AuthorizationAdministrator>();
-            container.RegisterSingle<ICacheProvider>(() => new AppFabricCacheProvider(container.GetInstance<ILogMonitorFactory>(), container.GetInstance<IIdentityManager>(), cacheName));
-            container.RegisterSingle<IHostApplicationProvider, HostApplicationProvider>();
-            container.RegisterSingle<IClientSecurityContextProvider, ClientDetailsProvider>();
-            container.RegisterSingle<IServiceExceptionHandler, ServiceExceptionHandler>();
-            container.RegisterSingle<IAutoMapperProxy, AutoMapperProxy>();
-            container.RegisterSingle<IHttpClientProxy, HttpClientProxy>();
-            container.RegisterSingle<Foundation.Contract.Interfaces.IConfigurationProvider, ConfigurationProvider>();
-            container.RegisterSingle<IServiceConfigurationProvider, ServiceConfigurationProvider>();
-            container.RegisterSingle<IIdentityManager, IdentityManager>();
-        }
+			container.Register<IAuthenticationManager, AuthenticationManager>();
+			container.Register<IApplicationAuthenticator, ApplicationAuthenticator>();
+			container.Register<IApplicationRepository, ApplicationRepository>();
+			container.Register<IAuthorizationManager, AuthorizationManager>();
+			container.Register<IApplicationAuthorizator, ApplicationAuthorizator>();
+			container.Register<Caching.Interfaces.ICacheProvider>(() => new RedisCacheProvider());
+			container.Register<IServiceExceptionHandler, ServiceExceptionHandler>();
+			//container.Register<IConfigurationProvider, ConfigurationProvider>();
+			container.Register<IIdentityManager, IdentityManager>();
+		}
 
         private static void RegisterInterceptions(Container container)
         {
@@ -88,12 +69,16 @@ namespace CES.CoreApi.Compliance.Service.Configuration
 
         private static void RegisterAutomapper(Container container)
         {
-            container.Register<ITypeMapFactory, TypeMapFactory>();
-            container.RegisterAll<IObjectMapper>(MapperRegistry.Mappers);
-            container.RegisterSingle<ConfigurationStore>();
-            container.Register<IConfiguration>(container.GetInstance<ConfigurationStore>);
-            container.Register<AutoMapper.IConfigurationProvider>(container.GetInstance<ConfigurationStore>);
-        }
+			
+			var config = new MapperConfiguration(cfg =>
+			{
+				cfg.AddProfile(new MapperConfiguratorProfile());
+				cfg.ConstructServicesUsing(type => container.GetInstance(type));
+			});
+			container.RegisterSingleton(config);
+			container.Register(() => config.CreateMapper(container.GetInstance));
+
+		}
 
         private static void RegisterOthers(Container container)
         {
@@ -102,44 +87,30 @@ namespace CES.CoreApi.Compliance.Service.Configuration
             // from being created and each call. When the intercepted service
             // and both the interceptor are both singletons, the returned
             // (proxy) instance will be a singleton as well.
-            container.RegisterSingle<PerformanceInterceptor>();
+            //container.RegisterSingle<PerformanceInterceptor>();
 
-            container.RegisterSingle<IRequestValidator, RequestValidator>();
-            container.RegisterSingle<IMappingHelper, MappingHelper>();
+            container.Register<IRequestValidator, RequestValidator>();
+           
         }
         
         private static void RegisterProcessors(Container container)
         {
-            container.RegisterSingle<ICheckPayoutRequestProcessor, CheckPayoutRequestProcessor>();
-            //container.RegisterSingle<IAddressServiceRequestProcessor, AddressServiceRequestProcessor>();
-            //container.RegisterSingle<IGeocodeServiceRequestProcessor, GeocodeServiceRequestProcessor>();
-            //container.RegisterSingle<IMapServiceRequestProcessor, MapServiceRequestProcessor>();
-            //container.RegisterSingle<IClientSideSupportServiceProcessor, ClientSideSupportServiceProcessor>();
+            container.Register<ICheckPayoutRequestProcessor, CheckPayoutRequestProcessor>();
+           
         }
         
         private static void RegisterProviders(Container container)
         {
-            //container.RegisterSingle<IAddressVerificationDataProvider, AddressVerificationDataProvider>();
-            //container.RegisterSingle<ICountryConfigurationProvider, CountryConfigurationProvider>();
-            //container.RegisterSingle<IMappingDataProvider, MappingDataProvider>();
-            //container.RegisterSingle<IDataResponseProvider, DataResponseProvider>();
-            //container.RegisterSingle<IMelissaLevelOfConfidenceProvider, MelissaLevelOfConfidenceProvider>();
-            //container.RegisterSingle<IGoogleLevelOfConfidenceProvider, GoogleLevelOfConfidenceProvider>();
-            container.RegisterSingle<ICurrentDateTimeProvider, CurrentDateTimeProvider>();
-            //container.RegisterSingle<IAddressAutocompleteDataProvider, AddressAutocompleteDataProvider>();
-            //container.RegisterSingle<IGeocodeAddressDataProvider, GeocodeAddressDataProvider>();
-            //container.RegisterSingle<IBingPushPinParameterProvider, BingPushPinParameterProvider>();
-            //container.RegisterSingle<IGooglePushPinParameterProvider, GooglePushPinParameterProvider>();
-            //container.RegisterSingle<ICorrectImageSizeProvider, CorrectImageSizeProvider>();
+          
 
-            container.RegisterAll<ICheckPayoutServiceProvider>(
-               typeof(RiaCheckPayoutServiceProvider),
-               typeof(RiaCheckPayoutServiceProvider));
+            container.RegisterCollection<ICheckPayoutServiceProvider>(new[] {
+			   typeof(RiaCheckPayoutServiceProvider),
+			   typeof(RiaCheckPayoutServiceProvider)});
         }
 
         private static void RegisterFactories(Container container)
         {
-            container.RegisterSingle<ICheckPayoutProviderFactory>(new CheckPayoutProviderFactory
+            container.RegisterSingleton<ICheckPayoutProviderFactory>(new CheckPayoutProviderFactory
             {
                 {"IRiaCheckPayoutProvider",container.GetInstance<RiaCheckPayoutServiceProvider>},
                 {"INiceCheckPayoutProvider", container.GetInstance<NiceCheckPayoutServiceProvider>}
@@ -159,14 +130,14 @@ namespace CES.CoreApi.Compliance.Service.Configuration
         private static void RegisterLoggging(Container container)
         {
             //Register common classes
-            container.RegisterSingle<ILoggerProxy, Log4NetProxy>();
+            container.Register<ILoggerProxy, Log4NetProxy>();
 
             //Registers common formatters
-            container.RegisterSingle<IFileSizeFormatter, FileSizeFormatter>();
-            container.RegisterSingle<IDateTimeFormatter, DateTimeFormatter>();
-            container.RegisterSingle<IFullMethodNameFormatter, FullMethodNameFormatter>();
-            container.RegisterSingle<IDefaultValueFormatter, DefaultValueFormatter>();
-            container.RegisterSingle<IJsonDataContainerFormatter, JsonDataContainerFormatter>();
+            container.Register<IFileSizeFormatter, FileSizeFormatter>();
+            container.Register<IDateTimeFormatter, DateTimeFormatter>();
+            container.Register<IFullMethodNameFormatter, FullMethodNameFormatter>();
+            container.Register<IDefaultValueFormatter, DefaultValueFormatter>();
+            container.Register<IJsonDataContainerFormatter, JsonDataContainerFormatter>();
 
             //Exception log related
             container.Register<IExceptionLogMonitor, ExceptionLogMonitor>();
@@ -185,18 +156,18 @@ namespace CES.CoreApi.Compliance.Service.Configuration
 
             //Database performance log related
             container.Register<IDatabasePerformanceLogMonitor, DatabasePerformanceLogMonitor>();
-            container.RegisterSingle<ISqlQueryFormatter, SqlQueryFormatter>();
+            container.Register<ISqlQueryFormatter, SqlQueryFormatter>();
 
             //Register data containers
-            container.RegisterAll<IDataContainer>(
-                typeof(DatabasePerformanceLogDataContainer),
-                typeof(PerformanceLogDataContainer),
-                typeof(TraceLogDataContainer),
-                typeof(ExceptionLogDataContainer),
-                typeof(SecurityLogDataContainer));
+            container.RegisterCollection<IDataContainer>( new []{
+				typeof(DatabasePerformanceLogDataContainer),
+				typeof(PerformanceLogDataContainer),
+				typeof(TraceLogDataContainer),
+				typeof(ExceptionLogDataContainer),
+				typeof(SecurityLogDataContainer) });
 
 
-            container.RegisterSingle<ILogMonitorFactory>(new LogMonitorFactory
+            container.RegisterSingleton<ILogMonitorFactory>(new LogMonitorFactory
             {
                 {"IDatabasePerformanceLogMonitor", container.GetInstance<DatabasePerformanceLogMonitor>},
                 {"ITraceLogMonitor", container.GetInstance<TraceLogMonitor>},
@@ -206,17 +177,12 @@ namespace CES.CoreApi.Compliance.Service.Configuration
             });
 
             //Configuration related
-            container.RegisterSingle<ILogConfigurationProvider, LogConfigurationProvider>();
+            container.Register<ILogConfigurationProvider, LogConfigurationProvider>();
 
             //Security logging related
             container.Register<ISecurityLogMonitor, SecurityLogMonitor>();
         }
 
-        private static void RegisterDataAccess(Container container)
-        {
-            container.RegisterSingle<IDatabaseConfigurationProvider, DatabaseConfigurationProvider>();
-            container.RegisterSingle<IDatabaseInstanceProvider, DatabaseInstanceProvider>();
-            container.RegisterSingle<IDatabasePingProvider, DatabasePingProvider>();
-        }
+        
     }
 }

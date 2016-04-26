@@ -6,8 +6,6 @@ using System.Data.Common;
 using System.Data.SqlClient;
 using System.Diagnostics;
 using System.Linq;
-using CES.CoreApi.Common.Interfaces;
-using CES.CoreApi.Common.Tools;
 using CES.CoreApi.Logging.Interfaces;
 using CES.CoreApi.Logging.Models;
 

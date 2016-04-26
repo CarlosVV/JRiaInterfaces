@@ -3,7 +3,6 @@ using System.ServiceModel;
 using CES.CoreApi.Common.Enumerations;
 using CES.CoreApi.Common.Exceptions;
 using CES.CoreApi.Common.Models;
-using CES.CoreApi.Foundation.Contract.Interfaces;
 using CES.CoreApi.GeoLocation.Service.Business.Contract.Enumerations;
 using CES.CoreApi.GeoLocation.Service.Business.Contract.Interfaces;
 using CES.CoreApi.GeoLocation.Service.Business.Contract.Models;
@@ -11,10 +10,11 @@ using CES.CoreApi.GeoLocation.Service.Contract.Constants;
 using CES.CoreApi.GeoLocation.Service.Contract.Enumerations;
 using CES.CoreApi.GeoLocation.Service.Contract.Interfaces;
 using CES.CoreApi.GeoLocation.Service.Contract.Models;
+using AutoMapper;
 
 namespace CES.CoreApi.GeoLocation.Service
 {
-    [ServiceBehavior(Namespace = Namespaces.GeolocationServiceContractNamespace, InstanceContextMode = InstanceContextMode.PerCall)]
+	[ServiceBehavior(Namespace = Namespaces.GeolocationServiceContractNamespace, InstanceContextMode = InstanceContextMode.PerCall)]
     public class GeoLocationService : IAddressService, IGeocodeService, IMapService, IHealthMonitoringService
     {
         #region Core
@@ -24,15 +24,15 @@ namespace CES.CoreApi.GeoLocation.Service
         private readonly IMapServiceRequestProcessor _mapServiceRequestProcessor;
         private readonly IHealthMonitoringProcessor _healthMonitoringProcessor;
   
-        private readonly IMappingHelper _mapper;
+        private readonly IMapper _mapper;
         private readonly IRequestValidator _validator;
 
         public GeoLocationService(IAddressServiceRequestProcessor addressServiceRequestProcessor,
             IGeocodeServiceRequestProcessor geocodeServiceRequestProcessor,
             IMapServiceRequestProcessor mapServiceRequestProcessor,
             IHealthMonitoringProcessor healthMonitoringProcessor,
-         
-            IMappingHelper mapper, IRequestValidator validator)
+
+			IMapper mapper, IRequestValidator validator)
         {
             if (addressServiceRequestProcessor == null)
                 throw new CoreApiException(TechnicalSubSystem.GeoLocationService,
@@ -72,10 +72,10 @@ namespace CES.CoreApi.GeoLocation.Service
             _validator.Validate(request);
 
             var responseModel = _addressServiceRequestProcessor.ValidateAddress(
-                _mapper.ConvertTo<AddressRequest, AddressModel>(request.Address),
-                _mapper.ConvertTo<Confidence, LevelOfConfidence>(request.MinimumConfidence));
+                _mapper.Map<AddressRequest, AddressModel>(request.Address),
+                _mapper.Map<Confidence, LevelOfConfidence>(request.MinimumConfidence));
 
-            return _mapper.ConvertToResponse<ValidateAddressResponseModel, ValidateAddressResponse>(responseModel);
+            return _mapper.Map<ValidateAddressResponseModel, ValidateAddressResponse>(responseModel);
         }
 
         public virtual ValidateAddressResponse ValidateAddress(ValidateFormattedAddressRequest request)
@@ -85,9 +85,9 @@ namespace CES.CoreApi.GeoLocation.Service
             var responseModel = _addressServiceRequestProcessor.ValidateAddress(
                 request.FormattedAddress,
                 request.Country,
-                _mapper.ConvertTo<Confidence, LevelOfConfidence>(request.MinimumConfidence));
+                _mapper.Map<Confidence, LevelOfConfidence>(request.MinimumConfidence));
 
-            return _mapper.ConvertToResponse<ValidateAddressResponseModel, ValidateAddressResponse>(responseModel);
+            return _mapper.Map<ValidateAddressResponseModel, ValidateAddressResponse>(responseModel);
         }
 
         public virtual AutocompleteAddressResponse GetAutocompleteList(AutocompleteAddressRequest request)
@@ -95,11 +95,11 @@ namespace CES.CoreApi.GeoLocation.Service
             _validator.Validate(request);
 
             var responseModel = _addressServiceRequestProcessor.GetAutocompleteList(
-                _mapper.ConvertTo<AddressRequest, AutocompleteAddressModel>(request.Address),
+                _mapper.Map<AddressRequest, AutocompleteAddressModel>(request.Address),
                 request.MaxRecords,
-                _mapper.ConvertTo<Confidence, LevelOfConfidence>(request.MinimumConfidence));
+                _mapper.Map<Confidence, LevelOfConfidence>(request.MinimumConfidence));
 
-            return _mapper.ConvertToResponse<AutocompleteAddressResponseModel, AutocompleteAddressResponse>(responseModel);
+            return _mapper.Map<AutocompleteAddressResponseModel, AutocompleteAddressResponse>(responseModel);
         }
 
         #endregion
@@ -111,10 +111,10 @@ namespace CES.CoreApi.GeoLocation.Service
             _validator.Validate(request);
 
             var responseModel = _geocodeServiceRequestProcessor.GeocodeAddress(
-                _mapper.ConvertTo<AddressRequest, AddressModel>(request.Address),
-                _mapper.ConvertTo<Confidence, LevelOfConfidence>(request.MinimumConfidence));
+                _mapper.Map<AddressRequest, AddressModel>(request.Address),
+                _mapper.Map<Confidence, LevelOfConfidence>(request.MinimumConfidence));
 
-            return _mapper.ConvertToResponse<GeocodeAddressResponseModel, GeocodeAddressResponse>(responseModel);
+            return _mapper.Map<GeocodeAddressResponseModel, GeocodeAddressResponse>(responseModel);
         }
 
         public virtual GeocodeAddressResponse GeocodeAddress(GeocodeFormattedAddressRequest request)
@@ -124,9 +124,9 @@ namespace CES.CoreApi.GeoLocation.Service
             var responseModel = _geocodeServiceRequestProcessor.GeocodeAddress(
                 request.FormattedAddress,
                 request.Country,
-                _mapper.ConvertTo<Confidence, LevelOfConfidence>(request.MinimumConfidence));
+                _mapper.Map<Confidence, LevelOfConfidence>(request.MinimumConfidence));
 
-            return _mapper.ConvertToResponse<GeocodeAddressResponseModel, GeocodeAddressResponse>(responseModel);
+            return _mapper.Map<GeocodeAddressResponseModel, GeocodeAddressResponse>(responseModel);
         }
 
         public virtual GeocodeAddressResponse ReverseGeocodePoint(ReverseGeocodePointRequest request)
@@ -134,11 +134,11 @@ namespace CES.CoreApi.GeoLocation.Service
             _validator.Validate(request);
 
             var responseModel = _geocodeServiceRequestProcessor.ReverseGeocodePoint(
-                _mapper.ConvertTo<Location, LocationModel>(request.Location),
+                _mapper.Map<Location, LocationModel>(request.Location),
                 request.Country,
-                _mapper.ConvertTo<Confidence, LevelOfConfidence>(request.MinimumConfidence));
+                _mapper.Map<Confidence, LevelOfConfidence>(request.MinimumConfidence));
 
-            return _mapper.ConvertToResponse<GeocodeAddressResponseModel, GeocodeAddressResponse>(responseModel);
+            return _mapper.Map<GeocodeAddressResponseModel, GeocodeAddressResponse>(responseModel);
         }
 
         #endregion
@@ -151,12 +151,12 @@ namespace CES.CoreApi.GeoLocation.Service
 
             var responseModel = _mapServiceRequestProcessor.GetMap(
                 request.Country,
-                _mapper.ConvertTo<Location, LocationModel>(request.Center),
-                _mapper.ConvertTo<MapSize, MapSizeModel>(request.MapSize),
-                _mapper.ConvertTo<MapOutputParameters, MapOutputParametersModel>(request.MapOutputParameters),
-                _mapper.ConvertTo<ICollection<PushPin>, ICollection<PushPinModel>>(request.PushPins));
+                _mapper.Map<Location, LocationModel>(request.Center),
+                _mapper.Map<MapSize, MapSizeModel>(request.MapSize),
+                _mapper.Map<MapOutputParameters, MapOutputParametersModel>(request.MapOutputParameters),
+                _mapper.Map<ICollection<PushPin>, ICollection<PushPinModel>>(request.PushPins));
 
-            return _mapper.ConvertToResponse<GetMapResponseModel, GetMapResponse>(responseModel);
+            return _mapper.Map<GetMapResponseModel, GetMapResponse>(responseModel);
         }
 
         #endregion
@@ -166,13 +166,13 @@ namespace CES.CoreApi.GeoLocation.Service
         public virtual ClearCacheResponse ClearCache()
         {
             var responseModel = _healthMonitoringProcessor.ClearCache();
-            return _mapper.ConvertToResponse<ClearCacheResponseModel, ClearCacheResponse>(responseModel);
+            return _mapper.Map<ClearCacheResponseModel, ClearCacheResponse>(responseModel);
         }
 
         public virtual PingResponse Ping()
         {
             var responseModel = _healthMonitoringProcessor.Ping() as PingResponseModel;
-            return _mapper.ConvertToResponse<PingResponseModel, PingResponse>(responseModel);
+            return _mapper.Map<PingResponseModel, PingResponse>(responseModel);
         }
 
         #endregion

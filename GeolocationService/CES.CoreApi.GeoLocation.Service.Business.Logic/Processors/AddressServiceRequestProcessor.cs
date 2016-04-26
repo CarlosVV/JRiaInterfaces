@@ -6,7 +6,8 @@ using CES.CoreApi.GeoLocation.Service.Business.Contract.Configuration;
 using CES.CoreApi.GeoLocation.Service.Business.Contract.Enumerations;
 using CES.CoreApi.GeoLocation.Service.Business.Contract.Interfaces;
 using CES.CoreApi.GeoLocation.Service.Business.Contract.Models;
-using CES.CoreApi.GeoLocation.Service.Business.Logic.Constants;
+using CES.CoreApi.Foundation.Repositories;
+using Newtonsoft.Json;
 
 namespace CES.CoreApi.GeoLocation.Service.Business.Logic.Processors
 {
@@ -17,9 +18,9 @@ namespace CES.CoreApi.GeoLocation.Service.Business.Logic.Processors
         private readonly IAddressVerificationDataProvider _addressVerificationDataProvider;
         private readonly IAddressAutocompleteDataProvider _addressAutocompleteDataProvider;
 
-        public AddressServiceRequestProcessor(ICountryConfigurationProvider configurationProvider,
+        public AddressServiceRequestProcessor(
             IAddressVerificationDataProvider addressVerificationDataProvider, IAddressAutocompleteDataProvider addressAutocompleteDataProvider)
-            : base(configurationProvider)
+            
         {
             if (addressVerificationDataProvider == null)
                 throw new CoreApiException(TechnicalSubSystem.GeoLocationService,
@@ -72,15 +73,47 @@ namespace CES.CoreApi.GeoLocation.Service.Business.Logic.Processors
                 maxRecords = defaultNumberOfHints;
 
             var providerConfiguration = GetProviderConfigurationByCountry(address.Country, DataProviderServiceType.AddressAutoComplete).FirstOrDefault();
+			var id = Guid.NewGuid();
+			AuditRepository.SetAudit(new Foundation.Contract.Models.AuditLog
+			{
+				AppId = 8000,
+				AppInstanceId = 1,
+				AppName = "GeoLocation",
+				Context = string.Format("{0},{1}" ,address.Address1, address.Country),
+				DumpType = 1,
+				JsonContent = JsonConvert.SerializeObject(address),
+				Queue = 1,
+				ServiceId = 1,
+				SoapContent = "",
+				TransactionId = 1,
+				Id = id
+			});
 
-            if (providerConfiguration == null)
+			if (providerConfiguration == null)
                 throw new CoreApiException(TechnicalSubSystem.GeoLocationService,
                     SubSystemError.GeolocationDataProviderNotFound,
                     DataProviderServiceType.AddressAutoComplete);
 
-            return _addressAutocompleteDataProvider
+            var r = _addressAutocompleteDataProvider
                 .GetAddressHintList(address, maxRecords, providerConfiguration.DataProviderType, confidence);
-        }
+
+
+			AuditRepository.SetAudit(new Foundation.Contract.Models.AuditLog
+			{
+				AppId = 8000,
+				AppInstanceId = 1,
+				AppName = "GeoLocation",
+				Context = "Api Response",
+				DumpType = 2,
+				JsonContent = JsonConvert.SerializeObject(r),
+				Queue = 1,
+				ServiceId = 1,
+				SoapContent = "",
+				TransactionId = 1,
+				Id = id
+			});
+			return r;
+		}
 
         #endregion 
 
@@ -88,7 +121,10 @@ namespace CES.CoreApi.GeoLocation.Service.Business.Logic.Processors
 
         private ValidateAddressResponseModel VerifyAddress(string country, Func<DataProviderConfiguration, ValidateAddressResponseModel> verifyByProvider)
         {
-            var numberOfProviders = CountryConfigurationProvider.ConfigurationProvider.Read<int>(ConfigurationConstants.NumberOfProvidersToProcessResult);
+			var numberOfProviders = Configuration.Provider.GeoLocationConfigurationSection.Instance.NumberOfProvidersToProcessResult.Value;
+
+
+				//CountryConfigurationProvider.ConfigurationProvider.Read<int>(ConfigurationConstants.NumberOfProvidersToProcessResult);
             var providers = GetProviderConfigurationByCountry(country, DataProviderServiceType.AddressVerification, numberOfProviders).ToList();
 
             if (!providers.Any())

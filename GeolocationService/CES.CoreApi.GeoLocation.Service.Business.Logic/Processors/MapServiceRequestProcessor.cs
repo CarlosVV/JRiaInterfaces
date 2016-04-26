@@ -14,8 +14,8 @@ namespace CES.CoreApi.GeoLocation.Service.Business.Logic.Processors
 
         private readonly IMappingDataProvider _mappingDataProvider;
 
-        public MapServiceRequestProcessor(ICountryConfigurationProvider configurationProvider, IMappingDataProvider mappingDataProvider) 
-            : base(configurationProvider)
+        public MapServiceRequestProcessor(IMappingDataProvider mappingDataProvider) 
+            
         {
             if (mappingDataProvider == null)
                 throw new CoreApiException(TechnicalSubSystem.GeoLocationService,

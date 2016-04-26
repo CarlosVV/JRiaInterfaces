@@ -1,12 +1,12 @@
 ﻿using System;
 using System.Runtime.Serialization;
 using CES.CoreApi.Common.Enumerations;
-using CES.CoreApi.Common.Interfaces;
+
 
 namespace CES.CoreApi.Common.Models
 {
-    [DataContract]
-    public abstract class BaseResponse : ExtensibleObject
+   [DataContract]
+    public abstract class BaseResponse 
     {
 		public BaseResponse()
 		{
@@ -15,7 +15,7 @@ namespace CES.CoreApi.Common.Models
         /// <summary>
         /// Provides information about the success of the operation.
         /// </summary>
-        [DataMember(EmitDefaultValue = false, IsRequired = true)]
+        [DataMember(EmitDefaultValue = false)]
         public ResponseStatus StatusCode { get; set; }
 
         /// <summary>
@@ -32,5 +32,7 @@ namespace CES.CoreApi.Common.Models
         /// </summary>
         [DataMember]
         public DateTime ResponseTime { get; private set; }
-    }
+		[DataMember]
+		public string Message  { get; set; }
+	}
 }
