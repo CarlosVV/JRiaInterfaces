@@ -1,11 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Configuration;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Configuration;
 
-namespace CES.CoreApi.Foundation.Data.Configuration
+namespace CES.CoreApi.Data.Configuration
 {
 	public class DbConnectionString
 	{
