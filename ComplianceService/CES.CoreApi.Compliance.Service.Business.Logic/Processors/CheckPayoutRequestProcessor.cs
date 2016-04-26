@@ -39,7 +39,7 @@ namespace CES.CoreApi.Compliance.Service.Business.Logic.Processors
 
         public CheckPayoutResponseModel CheckPayout(CheckPayoutRequestModel request)
         {
-            var settingDefaultCheckPayoutProvider = CountryConfigurationProvider.ConfigurationProvider.Read<string>(ConfigurationConstants.CheckPayoutProvider);
+            //var settingDefaultCheckPayoutProvider = CountryConfigurationProvider.ConfigurationProvider.Read<string>(ConfigurationConstants.CheckPayoutProvider);
             var providerConfiguration = GetProviderConfigurationByCountry(request.Country, DataProviderServiceType.CheckPayout).FirstOrDefault();
 
             if (providerConfiguration == null)

@@ -25,14 +25,18 @@ namespace CES.CoreApi.GeoLocation.Api.Api
 		[Route("address/autoComplete")]
 		public  AutocompleteAddressResponse GetAutoCompleteList(AutocompleteAddressRequest request)
 		{
-			//_validator.Validate(request);
+			var result =Facade.Utilities.RequestValidator.Validate(request);
+			if (result != null)
+				return result;
 
 			var responseModel = addressServiceRequestProcessor.GetAutocompleteList(
 				mapper.Map<AddressRequest, AutocompleteAddressModel>(request.Address),
 				request.MaxRecords,
 				mapper.Map<Confidence, LevelOfConfidence>(request.MinimumConfidence));
 
-			return mapper.Map<AutocompleteAddressResponseModel, AutocompleteAddressResponse>(responseModel);
+			result = mapper.Map<AutocompleteAddressResponseModel, AutocompleteAddressResponse>(responseModel);
+
+			return result;
 						
 		}
 		[HttpPost]

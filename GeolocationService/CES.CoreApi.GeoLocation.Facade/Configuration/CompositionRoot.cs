@@ -8,9 +8,6 @@ using CES.CoreApi.GeoLocation.Service.Business.Logic.Factories;
 using CES.CoreApi.GeoLocation.Service.Business.Logic.Parsers;
 using CES.CoreApi.GeoLocation.Service.Business.Logic.Processors;
 using CES.CoreApi.GeoLocation.Service.Business.Logic.Providers;
-using CES.CoreApi.GeoLocation.Service.Contract.Interfaces;
-using CES.CoreApi.GeoLocation.Service.Contract.Models;
-using CES.CoreApi.GeoLocation.Service.Utilities;
 using CES.CoreApi.Logging.Configuration;
 using CES.CoreApi.Logging.Factories;
 using CES.CoreApi.Logging.Formatters;
@@ -19,9 +16,7 @@ using CES.CoreApi.Logging.Log4Net;
 using CES.CoreApi.Logging.Models;
 using CES.CoreApi.Logging.Monitors;
 using CES.CoreApi.Logging.Providers;
-
 using SimpleInjector;
-//using IConfigurationProvider = CES.CoreApi.Foundation.Contract.Interfaces.IConfigurationProvider;
 using CES.CoreApi.Caching.Providers;
 using CES.CoreApi.Security.Interfaces;
 using CES.CoreApi.Security;
@@ -41,8 +36,6 @@ namespace CES.CoreApi.GeoLocation.Facade.Configuration
 			RegisterUrlBuilders(container);
 			RegisterParsers(container);
 			RegisterProviders(container);
-			RegisterResponses(container);
-			RegisterOthers(container);
 			RegisterLoggging(container);
 			RegisterSecurity(container);
 			RegisterFactories(container);
@@ -59,7 +52,6 @@ namespace CES.CoreApi.GeoLocation.Facade.Configuration
 			container.Register<IApplicationAuthorizator, ApplicationAuthorizator>();
 			container.Register<Caching.Interfaces.ICacheProvider>(() => new RedisCacheProvider());
 			container.Register<IServiceExceptionHandler, ServiceExceptionHandler>();
-			// container.Register<IConfigurationProvider, ConfigurationProvider>();
 			container.Register<IIdentityManager, IdentityManager>();
 		}
 
@@ -70,7 +62,6 @@ namespace CES.CoreApi.GeoLocation.Facade.Configuration
 			container.InterceptWith<PerformanceInterceptor>(type => type == typeof(IAddressServiceRequestProcessor));
 			container.InterceptWith<PerformanceInterceptor>(type => type == typeof(IGeocodeServiceRequestProcessor));
 			container.InterceptWith<PerformanceInterceptor>(type => type == typeof(IMapServiceRequestProcessor));
-			// container.InterceptWith<PerformanceInterceptor>(type => type == typeof(IApplicationRepository));
 			container.InterceptWith<SecurityLogMonitorInterceptor>(type => type == typeof(IHealthMonitoringProcessor));
 
 		}
@@ -88,18 +79,7 @@ namespace CES.CoreApi.GeoLocation.Facade.Configuration
 
 		}
 
-		private static void RegisterOthers(Container container)
-		{
-			// When the interceptor (and its dependencies) are thread-safe,
-			// it can be registered as singleton to prevent a new instance
-			// from being created and each call. When the intercepted service
-			// and both the interceptor are both singletons, the returned
-			// (proxy) instance will be a singleton as well.
-			container.Register<PerformanceInterceptor>();
-			container.Register<SecurityLogMonitorInterceptor>();
-			container.Register<IRequestValidator, RequestValidator>();
 
-		}
 
 		private static void RegisterFactories(Container container)
 		{
@@ -151,7 +131,6 @@ namespace CES.CoreApi.GeoLocation.Facade.Configuration
 		private static void RegisterProviders(Container container)
 		{
 			container.Register<IAddressVerificationDataProvider, AddressVerificationDataProvider>();
-			//container.Register<ICountryConfigurationProvider, CountryConfigurationProvider>();
 			container.Register<IMappingDataProvider, MappingDataProvider>();
 			container.Register<IDataResponseProvider, DataResponseProvider>();
 			container.Register<IMelissaLevelOfConfidenceProvider, MelissaLevelOfConfidenceProvider>();
@@ -164,14 +143,7 @@ namespace CES.CoreApi.GeoLocation.Facade.Configuration
 			container.Register<ICorrectImageSizeProvider, CorrectImageSizeProvider>();
 		}
 
-		private static void RegisterResponses(Container container)
-		{
-			container.Register<ValidateAddressResponse, ValidateAddressResponse>();
-			container.Register<ClearCacheResponse, ClearCacheResponse>();
-			container.Register<AutocompleteAddressResponse, AutocompleteAddressResponse>();
-			container.Register<PingResponse, PingResponse>();
-			container.Register<GetMapResponse, GetMapResponse>();
-		}
+        
 
 		private static void RegisterLoggging(Container container)
 		{
@@ -179,7 +151,6 @@ namespace CES.CoreApi.GeoLocation.Facade.Configuration
 			container.Register<ILoggerProxy, Log4NetProxy>();
 
 			//Registers common formatters
-			//container.Register<IFileSizeFormatter, FileSizeFormatter>();
 			container.Register<IDateTimeFormatter, DateTimeFormatter>();
 			container.Register<IFullMethodNameFormatter, FullMethodNameFormatter>();
 			container.Register<IDefaultValueFormatter, DefaultValueFormatter>();
@@ -187,8 +158,6 @@ namespace CES.CoreApi.GeoLocation.Facade.Configuration
 
 			//Exception log related
 			container.Register<IExceptionLogMonitor, ExceptionLogMonitor>();
-			container.Register<ExceptionLogItemGroup>();
-			container.Register<ExceptionLogItem>();
 			container.Register<IServiceCallInformationProvider, ServiceCallInformationProvider>();
 			container.Register<IRemoteClientInformationProvider, RemoteClientInformationProvider>();
 			container.Register<IHttpRequestInformationProvider, HttpRequestInformationProvider>();

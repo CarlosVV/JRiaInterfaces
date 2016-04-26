@@ -12,13 +12,13 @@ namespace CES.CoreApi.Configuration.Web
     {
         protected void Application_Start()
         {
-            CompositionRoot.RegisterDependencies();
+           // CompositionRoot.RegisterDependencies();
             AreaRegistration.RegisterAllAreas();
             GlobalConfiguration.Configure(WebApiConfig.Register);
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             BundleConfig.RegisterBundles(BundleTable.Bundles);
-            MapperConfig.Configure();
+           // MapperConfig.Configure();
         }
 
         protected void Application_Error(object sender, EventArgs e)
