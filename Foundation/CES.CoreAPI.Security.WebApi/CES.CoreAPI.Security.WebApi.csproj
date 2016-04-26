@@ -86,7 +86,7 @@
       <Project>{8dbcfe15-ca3b-4f7c-a7d6-d73f8f0b91aa}</Project>
       <Name>CES.CoreApi.Foundation.Contract</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\Foundation\CES.CoreApi.Security\CES.CoreApi.Security.csproj">
+    <ProjectReference Include="..\CES.CoreApi.Security\CES.CoreApi.Security.csproj">
       <Project>{bab197c1-fc36-4070-b1fa-ffc0d6bd1d79}</Project>
       <Name>CES.CoreApi.Security</Name>
     </ProjectReference>
