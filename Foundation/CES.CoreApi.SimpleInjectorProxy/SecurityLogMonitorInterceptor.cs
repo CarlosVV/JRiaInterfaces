@@ -9,16 +9,16 @@ namespace CES.CoreApi.SimpleInjectorProxy
 {
 	public class SecurityLogMonitorInterceptor : IInterceptor
 	{
-		private readonly ILogMonitorFactory _logMonitorFactory;
+		private readonly ISecurityLogMonitor _securityLogMonitor;
 		private readonly IIdentityManager _identityManager;
 	
 
-		public SecurityLogMonitorInterceptor(ILogMonitorFactory logMonitorFactory, IIdentityManager identityManager)
+		public SecurityLogMonitorInterceptor(ISecurityLogMonitor securityLogMonitor, IIdentityManager identityManager)
 		{
-			if (logMonitorFactory == null)
-				throw new ArgumentNullException("logMonitorFactory");
+			if (securityLogMonitor == null)
+				throw new ArgumentNullException("securityLogMonitor");
 			if (identityManager == null) throw new ArgumentNullException("identityManager");
-			_logMonitorFactory = logMonitorFactory;
+			_securityLogMonitor = securityLogMonitor;
 			_identityManager = identityManager;
 			
 		}
@@ -29,7 +29,6 @@ namespace CES.CoreApi.SimpleInjectorProxy
 			
 			var clientApplicationIdentity = _identityManager.GetClientApplicationIdentity();
 			
-			
 			var securityAuditParameters = new SecurityAuditParameters
 			{
 				ClientApplicationId = clientApplicationIdentity.ApplicationId,
@@ -37,9 +36,8 @@ namespace CES.CoreApi.SimpleInjectorProxy
 				ServiceApplicationId = 8000//TODO Get using simple app config  manager 
 			};
 
-			var securityLogMonitor = _logMonitorFactory.CreateNew<ISecurityLogMonitor>();
-			securityLogMonitor.DataContainer.ApplicationContext = clientApplicationIdentity;
-			securityLogMonitor.LogSuccess(securityAuditParameters);
+			_securityLogMonitor.DataContainer.ApplicationContext = clientApplicationIdentity;
+			_securityLogMonitor.LogSuccess(securityAuditParameters);
 		}
 	}
 }
