@@ -25,6 +25,9 @@ namespace CES.CoreApi.Security.Managers
 
         public IPrincipal Authenticate(ServiceCallHeaderParameters serviceCallHeaderParameters)
         {
+			if (serviceCallHeaderParameters == null)
+				throw new CoreApiException(TechnicalSubSystem.Authentication, SubSystemError.GeneralRequiredParameterIsUndefined, "serviceCallHeaderParameters");
+
             var clientApplication = ValidateClientApplication(serviceCallHeaderParameters).Result;
 
 			var identity = new ClientApplicationIdentity(clientApplication, serviceCallHeaderParameters);
@@ -42,7 +45,5 @@ namespace CES.CoreApi.Security.Managers
 
             return application;
         }
-		
-      
     }
 }
