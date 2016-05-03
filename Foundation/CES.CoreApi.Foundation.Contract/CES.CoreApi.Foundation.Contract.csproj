@@ -44,7 +44,7 @@
     <Compile Include="Enumerations\ServiceConfigurationType.cs" />
     <Compile Include="Enumerations\ServiceSecurityMode.cs" />
     <Compile Include="Interfaces\IClientApplicationIdentity.cs" />
-    <Compile Include="Interfaces\IIdentityManager.cs" />
+    <Compile Include="Interfaces\IIdentityProvider.cs" />
     <Compile Include="Interfaces\IApplication.cs" />
     <Compile Include="Interfaces\IApplicationRepository.cs" />
     <Compile Include="Interfaces\IClientSecurityContextProvider.cs" />

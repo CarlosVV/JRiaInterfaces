@@ -1,10 +1,9 @@
 ﻿using CES.CoreApi.Foundation.Contract.Interfaces;
-using CES.CoreApi.Foundation.Models;
 using System;
 using System.Security.Principal;
 
 
-namespace CES.CoreApi.Security.Models
+namespace CES.CoreApi.Foundation.Models
 {
     public class ClientApplicationIdentity : IIdentity, IClientApplicationIdentity
     {

@@ -3,7 +3,7 @@ using System.Security.Principal;
 
 namespace CES.CoreApi.Foundation.Contract.Interfaces
 {
-    public interface IIdentityManager
+    public interface IIdentityProvider
     {
         IClientApplicationIdentity GetClientApplicationIdentity();
         void SetCurrentPrincipal(IPrincipal principal);

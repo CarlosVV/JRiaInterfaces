@@ -4,7 +4,6 @@ using CES.CoreApi.Foundation.Contract.Interfaces;
 using CES.CoreApi.Foundation.Contract.Models;
 using CES.CoreApi.Foundation.Models;
 using CES.CoreApi.Security.Interfaces;
-using CES.CoreApi.Security.Models;
 using System.Security.Principal;
 using System.Threading.Tasks;
 

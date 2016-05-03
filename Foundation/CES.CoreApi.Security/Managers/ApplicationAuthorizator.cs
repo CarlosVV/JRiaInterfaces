@@ -5,26 +5,26 @@ using System.Security.Principal;
 using CES.CoreApi.Foundation.Contract.Interfaces;
 using CES.CoreApi.Common.Enumerations;
 using CES.CoreApi.Common.Exceptions;
-using CES.CoreApi.Security.Models;
 using CES.CoreApi.Foundation.Contract.Constants;
 using CES.CoreApi.Foundation.Configuration;
+using CES.CoreApi.Foundation.Models;
 
 namespace CES.CoreApi.Security.Managers
 {
     public class ApplicationAuthorizator: IApplicationAuthorizator
     {
-        private readonly IIdentityManager _identityManager;
+        private readonly IIdentityProvider _identityProvider;
 		private readonly IApplicationRepository _applicationRepository;
 
-		public ApplicationAuthorizator(IIdentityManager identityManager, IApplicationRepository applicationRepository)
+		public ApplicationAuthorizator(IIdentityProvider identityProvider, IApplicationRepository applicationRepository)
         {            
-            if (identityManager == null)
+            if (identityProvider == null)
                 throw new CoreApiException(TechnicalSubSystem.Authorization, SubSystemError.GeneralRequiredParameterIsUndefined, "identityManager");
 
 			if (applicationRepository == null)
 				throw new CoreApiException(TechnicalSubSystem.Authorization, SubSystemError.GeneralRequiredParameterIsUndefined, "applicationRepository");
 
-			_identityManager = identityManager;
+			_identityProvider = identityProvider;
 			_applicationRepository = applicationRepository;
 		}
 		
@@ -44,9 +44,9 @@ namespace CES.CoreApi.Security.Managers
 
 			ValidateOperationAccess(hostApplication, clientApplicationIdentity?.OperationName, clientApplicationIdentity?.ApplicationId);
 
-			_identityManager.SetCurrentPrincipal(clientApplicationPrincipal);
+			_identityProvider.SetCurrentPrincipal(clientApplicationPrincipal);
 			
-			return _identityManager.GetCurrentPrincipal();
+			return _identityProvider.GetCurrentPrincipal();
         }
         
         private void ValidateClientApplicationAuthentication(IPrincipal clientApplicationPrincipal, int? clientApplicationId)

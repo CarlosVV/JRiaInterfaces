@@ -1,12 +1,13 @@
 using System;
 using System.Security.Principal;
 using System.Threading;
-using CES.CoreApi.Security.Models;
 using CES.CoreApi.Foundation.Contract.Interfaces;
+using CES.CoreApi.Foundation.Models;
 
-namespace CES.CoreApi.Security
+namespace CES.CoreApi.Foundation.Providers
+
 {
-    public class IdentityManager : IIdentityManager
+    public class IdentityProvider : IIdentityProvider
     {
         public IClientApplicationIdentity GetClientApplicationIdentity()
         {

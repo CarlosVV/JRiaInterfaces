@@ -8,22 +8,22 @@ namespace CES.CoreApi.SimpleInjectorProxy
     public class PerformanceInterceptor : IInterceptor
     {
 		private readonly IPerformanceLogMonitor _performanceLogMonitor;
-        private readonly IIdentityManager _identityManager;
+        private readonly IIdentityProvider _identityProvider;
 
-		public PerformanceInterceptor(IPerformanceLogMonitor performanceLogMonitor, IIdentityManager identityManager)
+		public PerformanceInterceptor(IPerformanceLogMonitor performanceLogMonitor, IIdentityProvider identityProvider)
         {
 			if (performanceLogMonitor == null)
 				throw new ArgumentNullException("performanceLogMonitor");
-			if (identityManager == null)
+			if (identityProvider == null)
 				throw new ArgumentNullException("identityManager");
 
 			_performanceLogMonitor = performanceLogMonitor;
-            _identityManager = identityManager;
+            _identityProvider = identityProvider;
         }
 
         public void Intercept(IInvocation invocation)
         {
-			_performanceLogMonitor.DataContainer.ApplicationContext = _identityManager.GetClientApplicationIdentity();
+			_performanceLogMonitor.DataContainer.ApplicationContext = _identityProvider.GetClientApplicationIdentity();
 			_performanceLogMonitor.Start(invocation.Method);
 
             invocation.Proceed();
