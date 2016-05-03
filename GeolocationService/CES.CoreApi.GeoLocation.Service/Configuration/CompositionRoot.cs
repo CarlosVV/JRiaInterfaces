@@ -62,10 +62,10 @@ namespace CES.CoreApi.GeoLocation.Service.Configuration
             container.Register<IApplicationRepository, ApplicationRepository>(); 
             container.Register<IAuthorizationManager, AuthorizationManager>();
             container.Register<IApplicationAuthorizator, ApplicationAuthorizator>();
-			container.Register<Caching.Interfaces.ICacheProvider>(() => new RedisCacheProvider());    
-            container.Register<IServiceExceptionHandler, ServiceExceptionHandler>();
+			container.Register<Caching.Interfaces.ICacheProvider>(() => new RedisCacheProvider());   
+            container.Register<IServiceExceptionHandler, ServiceExceptionHandler>();        
 			//container.Register<IConfigurationProvider, ConfigurationProvider>();
-            container.Register<IIdentityManager, IdentityManager>();
+           container.Register<IIdentityManager, IdentityManager>();
         }
 
         private static void RegisterInterceptions(Container container)
@@ -81,7 +81,7 @@ namespace CES.CoreApi.GeoLocation.Service.Configuration
 		}
 
         private static void RegisterAutomapper(Container container)
-        {
+        {			
 
 			var config = new MapperConfiguration(cfg =>
 			{
@@ -91,7 +91,7 @@ namespace CES.CoreApi.GeoLocation.Service.Configuration
 			container.RegisterSingleton(config);
 			container.Register(() => config.CreateMapper(container.GetInstance));
 
-        }
+		}
         
         private static void RegisterOthers(Container container)
         {
@@ -217,16 +217,6 @@ namespace CES.CoreApi.GeoLocation.Service.Configuration
 				typeof(TraceLogDataContainer),
 				typeof(ExceptionLogDataContainer),
 				typeof(SecurityLogDataContainer)});
-
-
-            container.RegisterSingleton<ILogMonitorFactory>(new LogMonitorFactory
-            {
-                {"IDatabasePerformanceLogMonitor", container.GetInstance<DatabasePerformanceLogMonitor>},
-                {"ITraceLogMonitor", container.GetInstance<TraceLogMonitor>},
-                {"IPerformanceLogMonitor", container.GetInstance<PerformanceLogMonitor>},
-                {"IExceptionLogMonitor", container.GetInstance<ExceptionLogMonitor>},
-                {"ISecurityLogMonitor", container.GetInstance<SecurityLogMonitor>}
-            });
 
             //Configuration related
             container.Register<ILogConfigurationProvider, LogConfigurationProvider>();

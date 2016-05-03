@@ -35,21 +35,20 @@ namespace CES.CoreApi.Foundation.Service
 		private const string WcfSecurityErrorMessage = "The caller was not authenticated by the service.";
 		internal const string HttpRequest = "httpRequest";
 
-		public ServiceExceptionHandler(ILogMonitorFactory logMonitorFactory, 
+		public ServiceExceptionHandler(IExceptionLogMonitor exceptionLogMonitor, 
 			
 			IIdentityManager identityManager)
 		{
-			if (logMonitorFactory == null)
+			if (exceptionLogMonitor == null)
 				throw new ArgumentNullException("logMonitorFactory");
-		
+
 			if (identityManager == null)
 				throw new ArgumentNullException("identityManager");
-	
 
 			_clientDetailsProvider = new ClientDetailsProvider();
 			_identityManager = identityManager;
 
-			_exceptionLogMonitor = logMonitorFactory.CreateNew<IExceptionLogMonitor>();
+			_exceptionLogMonitor = exceptionLogMonitor;
 		}
 		
 		public void ProvideFault(Exception error, MessageVersion version, ref Message fault)
