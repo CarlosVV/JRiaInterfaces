@@ -57,7 +57,7 @@ namespace CES.CoreApi.GeoLocation.Facade.Configuration
             container.Register<IApplicationAuthorizator, ApplicationAuthorizator>();
 			container.Register<Caching.Interfaces.ICacheProvider>(() => new RedisCacheProvider());   
             container.Register<IServiceExceptionHandler, ServiceExceptionHandler>();       
-            container.Register<IIdentityManager, IdentityManager>();
+            container.Register<IIdentityProvider, IdentityProvider>();
         }
 
         private static void RegisterInterceptions(Container container)
