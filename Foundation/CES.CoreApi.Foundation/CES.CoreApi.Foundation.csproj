@@ -67,11 +67,10 @@
     <Reference Include="System.Xml.Linq" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Models\ClientApplicationIdentity.cs" />
     <Compile Include="Configuration\ApplicationConfiguration.cs" />
     <Compile Include="Configuration\ConfigurationTools.cs" />
-    <Compile Include="Providers\JsonProvider.cs" />
-    <Compile Include="Providers\WcfRequestHeaderParametersProvider.cs" />
-    <Compile Include="Providers\WebAPIRequestHeaderParametersProvider.cs" />
+    <Compile Include="Providers\IdentityProvider.cs" />
     <Compile Include="Repositories\ApplicationRepository.cs" />
     <Compile Include="Repositories\AuditRepository.cs" />
     <Compile Include="Service\MessageInspector.cs" />
@@ -79,16 +78,16 @@
     <Compile Include="Providers\ClientDetailsProvider.cs" />
     <Compile Include="Providers\ConfigurationProvider.cs" />
     <Compile Include="Service\IocBasedInstanceProvider.cs" />
-    <Compile Include="Service\IocBasedServiceHostFactory.cs" />
     <Compile Include="Service\IocBasedServiceHost.cs" />
     <Compile Include="Providers\IocContainerProvider.cs" />
     <Compile Include="Service\ServiceEndpointBehavior.cs" />
     <Compile Include="Service\ServiceExceptionHandler.cs" />
-    <Compile Include="Providers\WcfRequestHeadersProvider.cs" />
     <Compile Include="Validation\ContractValidation.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="app.config" />
+    <None Include="app.config">
+      <SubType>Designer</SubType>
+    </None>
     <None Include="CES.CoreApi.Foundation.nuspec" />
     <None Include="packages.config">
       <SubType>Designer</SubType>
@@ -110,10 +109,6 @@
     <ProjectReference Include="..\CES.CoreApi.Logging\CES.CoreApi.Logging.csproj">
       <Project>{76762A04-54F0-4147-BD2B-267372034706}</Project>
       <Name>CES.CoreApi.Logging</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\CES.CoreApi.Security\CES.CoreApi.Security.csproj">
-      <Project>{bab197c1-fc36-4070-b1fa-ffc0d6bd1d79}</Project>
-      <Name>CES.CoreApi.Security</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

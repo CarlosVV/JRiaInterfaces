@@ -1,33 +1,34 @@
-﻿using SimpleInjector;
+﻿using CES.CoreApi.GeoLocation.Facade.Configuration;
+using CES.CoreApi.Security.Interfaces;
+using CES.CoreApi.Security.WebApi.Interfaces;
+using CES.CoreApi.Security.WebAPI.Filters;
+using CES.CoreAPI.Security.WebApi.Filters;
+using SimpleInjector;
 using SimpleInjector.Integration.WebApi;
 using System;
 using System.Web.Http;
+
 namespace CES.CoreApi.GeoLocation.Api
 {
 
 
 	public class WebApiApplication : System.Web.HttpApplication
-	{
-		protected void Application_Start()
-		{
-
-			var container = new Container();
+    {
+        protected void Application_Start()
+        {
 			GlobalConfiguration.Configure(WebApiConfig.Register);
+			var container = new Container();
 			container.Options.DefaultScopedLifestyle = new WebApiRequestLifestyle();
-			//container.Register<IUserRepository, UserRepository>(Lifestyle.Scoped);
-			// This is an extension method from the integration package.
-			container.RegisterWebApiControllers(GlobalConfiguration.Configuration);			
-			Facade.Configuration.CompositionRoot.RegisterDependencies(container);
-
-			GlobalConfiguration.Configuration.DependencyResolver =
-				new SimpleInjectorWebApiDependencyResolver(container);
-
-
+			container.RegisterWebApiControllers(GlobalConfiguration.Configuration);
+			CompositionRoot.RegisterDependencies(container);
+			GlobalConfiguration.Configuration.Filters.Add(new AuthenticationManager(container.GetInstance<IApplicationAuthenticator>(), container.GetInstance<IWebApiRequestHeaderParametersService>()));
+			GlobalConfiguration.Configuration.Filters.Add(new AuthorizationManager(container.GetInstance<IApplicationAuthorizator>()));
+			GlobalConfiguration.Configuration.DependencyResolver = new SimpleInjectorWebApiDependencyResolver(container);
 		}
+
 		protected void Application_Error(object sender, EventArgs e)
 		{
 			Exception exception = Server.GetLastError().GetBaseException();
 		}
-
 	}
 }

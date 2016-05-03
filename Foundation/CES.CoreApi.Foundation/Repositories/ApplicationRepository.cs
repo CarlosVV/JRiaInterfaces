@@ -4,7 +4,6 @@ using System.Data;
 using System.Data.SqlClient;
 using System.Linq;
 using System.Threading.Tasks;
-//using CES.CoreApi.Common.Enumerations;
 using CES.CoreApi.Common.Exceptions;
 using CES.CoreApi.Foundation.Contract.Interfaces;
 using CES.CoreApi.Data.Base;
@@ -17,13 +16,6 @@ namespace CES.CoreApi.Foundation.Repositories
 {
 	public class ApplicationRepository : BaseGenericRepository, IApplicationRepository
 	{
-		
-
-		/// <summary>
-		/// Gets application instance by ID
-		/// </summary>
-		/// <param name="applicationId">Application ID</param>
-		/// <returns></returns>
 		public async Task<Application> GetApplication(int applicationId)
 		{
 			var request = new DatabaseRequest<Application>

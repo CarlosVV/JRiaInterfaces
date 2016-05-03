@@ -5,11 +5,14 @@ using Newtonsoft.Json;
 
 namespace CES.CoreApi.Common.Exceptions
 {
-    [Serializable]
-    [JsonObject(MemberSerialization.OptOut)]
+    //[Serializable]
+    //[JsonObject(MemberSerialization.OptOut)]
     public class CoreApiException: Exception
     {
         private static readonly ExceptionHelper Helper = new ExceptionHelper();
+		public CoreApiException()
+		{
+		}
 
         public CoreApiException(TechnicalSubSystem subSystem, SubSystemError subSystemError, Exception ex, params object[] parameters)
             : this(Organization.Ria, TechnicalSystem.CoreApi, subSystem, subSystemError, parameters)

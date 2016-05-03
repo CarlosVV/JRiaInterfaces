@@ -6,9 +6,8 @@ using CES.CoreApi.GeoLocation.Service.Business.Contract.Configuration;
 using CES.CoreApi.GeoLocation.Service.Business.Contract.Enumerations;
 using CES.CoreApi.GeoLocation.Service.Business.Contract.Interfaces;
 using CES.CoreApi.GeoLocation.Service.Business.Contract.Models;
-using CES.CoreApi.GeoLocation.Service.Business.Logic.Constants;
 using CES.CoreApi.Foundation.Repositories;
-using CES.CoreApi.Foundation.Providers;
+using Newtonsoft.Json;
 
 namespace CES.CoreApi.GeoLocation.Service.Business.Logic.Processors
 {
@@ -82,7 +81,7 @@ namespace CES.CoreApi.GeoLocation.Service.Business.Logic.Processors
 				AppName = "GeoLocation",
 				Context = string.Format("{0},{1}" ,address.Address1, address.Country),
 				DumpType = 1,
-				JsonContent = JsonProvider.ConvertToJson(address),
+				JsonContent = JsonConvert.SerializeObject(address),
 				Queue = 1,
 				ServiceId = 1,
 				SoapContent = "",
@@ -106,7 +105,7 @@ namespace CES.CoreApi.GeoLocation.Service.Business.Logic.Processors
 				AppName = "GeoLocation",
 				Context = "Api Response",
 				DumpType = 2,
-				JsonContent = JsonProvider.ConvertToJson(r),
+				JsonContent = JsonConvert.SerializeObject(r),
 				Queue = 1,
 				ServiceId = 1,
 				SoapContent = "",

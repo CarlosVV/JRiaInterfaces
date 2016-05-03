@@ -14,7 +14,6 @@ using CES.CoreApi.Foundation.Contract.Interfaces;
 using CES.CoreApi.Logging.Interfaces;
 using CES.CoreApi.Logging.Models;
 using ServiceEndpoint = System.ServiceModel.Description.ServiceEndpoint;
-using CES.CoreApi.Security.Interfaces;
 using CES.CoreApi.Foundation.Providers;
 
 namespace CES.CoreApi.Foundation.Service
@@ -29,25 +28,23 @@ namespace CES.CoreApi.Foundation.Service
 		
 		private readonly IExceptionLogMonitor _exceptionLogMonitor;
 		private readonly IClientSecurityContextProvider _clientDetailsProvider;
-		private readonly IIdentityManager _identityManager;
+		private readonly IIdentityProvider _identityProvider;
 
 		private CoreApiException _coreApiException;
 		private const string ErrorMessage = "Server error encountered. All details have been logged.";
 		private const string WcfSecurityErrorMessage = "The caller was not authenticated by the service.";
 		internal const string HttpRequest = "httpRequest";
 
-		public ServiceExceptionHandler(IExceptionLogMonitor exceptionLogMonitor, 
-			
-			IIdentityManager identityManager)
+		public ServiceExceptionHandler(IExceptionLogMonitor exceptionLogMonitor, IIdentityProvider identityProvider)
 		{
 			if (exceptionLogMonitor == null)
 				throw new ArgumentNullException("logMonitorFactory");
 
-			if (identityManager == null)
+			if (identityProvider == null)
 				throw new ArgumentNullException("identityManager");
 
 			_clientDetailsProvider = new ClientDetailsProvider();
-			_identityManager = identityManager;
+			_identityProvider = identityProvider;
 
 			_exceptionLogMonitor = exceptionLogMonitor;
 		}
@@ -107,7 +104,7 @@ namespace CES.CoreApi.Foundation.Service
 			_exceptionLogMonitor.AddServiceCallDetails(remoteClientLogInfo,requestLogInfo,serverLogInfo, () =>
 				_clientDetailsProvider.GetDetails(OperationContext.Current));
 			
-			_exceptionLogMonitor.DataContainer.ApplicationContext = _identityManager.GetClientApplicationIdentity();
+			_exceptionLogMonitor.DataContainer.ApplicationContext = _identityProvider.GetClientApplicationIdentity();
 
 			var faultException = BuildFaultException(error);
 			var messageFault = faultException.CreateMessageFault();

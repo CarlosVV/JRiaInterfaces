@@ -1,52 +1,52 @@
-﻿using System;
+﻿using CES.CoreApi.Security.Interfaces;
+using System;
 using System.Linq;
 using System.Security.Principal;
+using CES.CoreApi.Foundation.Contract.Interfaces;
 using CES.CoreApi.Common.Enumerations;
 using CES.CoreApi.Common.Exceptions;
-using CES.CoreApi.Common.Interfaces;
-using CES.CoreApi.Foundation.Contract.Interfaces;
-using CES.CoreApi.Security.Interfaces;
-using System.Configuration;
-using CES.CoreApi.Foundation.Contract.Models;
-using CES.CoreApi.Security.Models;
+using CES.CoreApi.Foundation.Contract.Constants;
+using CES.CoreApi.Foundation.Configuration;
+using CES.CoreApi.Foundation.Models;
 
-namespace CES.CoreApi.Security
+namespace CES.CoreApi.Security.Managers
 {
     public class ApplicationAuthorizator: IApplicationAuthorizator
     {
-        private readonly IRequestHeaderParametersProvider _parametersProvider;
-    
-        private readonly IIdentityManager _identityManager;
+        private readonly IIdentityProvider _identityProvider;
+		private readonly IApplicationRepository _applicationRepository;
 
-        public ApplicationAuthorizator(
-			IRequestHeaderParametersProviderFactory requestHeaderParametersProviderFactory, IIdentityManager identityManager)
+		public ApplicationAuthorizator(IIdentityProvider identityProvider, IApplicationRepository applicationRepository)
         {            
-            if (requestHeaderParametersProviderFactory == null)
-                throw new CoreApiException(TechnicalSubSystem.Authorization, SubSystemError.GeneralRequiredParameterIsUndefined, "requestHeaderParametersProviderFactory");
-            if (identityManager == null)
+            if (identityProvider == null)
                 throw new CoreApiException(TechnicalSubSystem.Authorization, SubSystemError.GeneralRequiredParameterIsUndefined, "identityManager");
 
-            _parametersProvider = requestHeaderParametersProviderFactory.GetInstance<IRequestHeaderParametersProvider>(ConfigurationManager.AppSettings["HostServiceType"]);
-       
-            _identityManager = identityManager;
-        }
+			if (applicationRepository == null)
+				throw new CoreApiException(TechnicalSubSystem.Authorization, SubSystemError.GeneralRequiredParameterIsUndefined, "applicationRepository");
+
+			_identityProvider = identityProvider;
+			_applicationRepository = applicationRepository;
+		}
 		
         public IPrincipal ValidateAccess(IPrincipal clientApplicationPrincipal)
         {
-			int? clientApplicationId = (clientApplicationPrincipal?.Identity as ClientApplicationIdentity)?.ApplicationId;
-			ValidateClientApplicationAuthentication(clientApplicationPrincipal, clientApplicationId);
+			var clientApplicationIdentity = clientApplicationPrincipal?.Identity as ClientApplicationIdentity;
+			ValidateClientApplicationAuthentication(clientApplicationPrincipal, clientApplicationIdentity?.ApplicationId);
 
-			//var hostApplication = _hostApplicationProvider.GetApplication().Result;
-			//ValidateHostApplication(hostApplication);
+			var applicationId = ConfigurationTools.ReadAppSettingsValue<int>(ServiceConfigurationItems.ApplicationId);
+			if (applicationId == 0)
+				throw new CoreApiException(Organization.Ria, TechnicalSystem.CoreApi, TechnicalSubSystem.Authentication, SubSystemError.ApplicationIdNotFoundInConfigFile);
 
-			//var headerParameters = _parametersProvider.GetParameters();
-			//ValidateHostApplicationOperation(hostApplication, headerParameters.OperationName);
+			var hostApplication = _applicationRepository.GetApplication(applicationId).Result;
+			ValidateHostApplication(hostApplication);
 
-			//ValidateOperationAccess(hostApplication, headerParameters.OperationName, clientApplicationId);
+			ValidateHostApplicationOperation(hostApplication, clientApplicationIdentity?.OperationName);
 
-            _identityManager.SetCurrentPrincipal(clientApplicationPrincipal);
+			ValidateOperationAccess(hostApplication, clientApplicationIdentity?.OperationName, clientApplicationIdentity?.ApplicationId);
+
+			_identityProvider.SetCurrentPrincipal(clientApplicationPrincipal);
 			
-			return _identityManager.GetCurrentPrincipal();
+			return _identityProvider.GetCurrentPrincipal();
         }
         
         private void ValidateClientApplicationAuthentication(IPrincipal clientApplicationPrincipal, int? clientApplicationId)
@@ -55,7 +55,6 @@ namespace CES.CoreApi.Security
                 return;
 
             throw new CoreApiException(TechnicalSubSystem.Authorization, SubSystemError.SecurityClientApplicationNotAuthenticated, clientApplicationId.Value);
-			
         }
 
         private void ValidateHostApplication(IApplication hostApplication)
@@ -93,5 +92,5 @@ namespace CES.CoreApi.Security
             if (!assignedApplication.IsActive)
                 throw new CoreApiException(TechnicalSubSystem.Authorization, SubSystemError.SecurityApplicationAssignedToServiceOperationNotActive, clientApplicationId, operationName);
         }
-    }
+	}
 }

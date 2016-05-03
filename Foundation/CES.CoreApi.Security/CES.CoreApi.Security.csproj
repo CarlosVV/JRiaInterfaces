@@ -30,11 +30,14 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Newtonsoft.Json, Version=6.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\..\GeolocationService\packages\Newtonsoft.Json.6.0.4\lib\net45\Newtonsoft.Json.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
     <Reference Include="System.IdentityModel" />
-    <Reference Include="System.ServiceModel" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -43,22 +46,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Factory\RequestHeaderParametersProviderFactory.cs" />
-    <Compile Include="Interfaces\IIdentityManager.cs" />
-    <Compile Include="Interfaces\IRequestHeaderParametersProvider.cs" />
-    <Compile Include="Interfaces\IWCFRequestHeaderParametersProvider.cs" />
     <Compile Include="Managers\ApplicationAuthenticator.cs" />
-    <Compile Include="Managers\AuthenticationManager.cs" />
     <Compile Include="Managers\ApplicationAuthorizator.cs" />
-    <Compile Include="Managers\AuthorizationManager.cs" />
-    <Compile Include="Managers\IdentityManager.cs" />
     <Compile Include="Interfaces\IApplicationAuthenticator.cs" />
-    <Compile Include="Interfaces\IAuthenticationManager.cs" />
     <Compile Include="Interfaces\IApplicationAuthorizator.cs" />
-    <Compile Include="Interfaces\IAuthorizationManager.cs" />
-    <Compile Include="Models\ClientApplicationIdentity.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Providers\BaseRequestHeaderParameters.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\CES.CoreApi.Common\CES.CoreApi.Common.csproj">
@@ -69,7 +61,15 @@
       <Project>{8dbcfe15-ca3b-4f7c-a7d6-d73f8f0b91aa}</Project>
       <Name>CES.CoreApi.Foundation.Contract</Name>
     </ProjectReference>
+    <ProjectReference Include="..\CES.CoreApi.Foundation\CES.CoreApi.Foundation.csproj">
+      <Project>{e2b71a13-9683-4862-b2eb-31050190afdc}</Project>
+      <Name>CES.CoreApi.Foundation</Name>
+    </ProjectReference>
   </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

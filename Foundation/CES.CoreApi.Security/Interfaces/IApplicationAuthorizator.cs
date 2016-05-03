@@ -1,5 +1,4 @@
 ﻿using System.Security.Principal;
-using System.ServiceModel;
 
 namespace CES.CoreApi.Security.Interfaces
 {

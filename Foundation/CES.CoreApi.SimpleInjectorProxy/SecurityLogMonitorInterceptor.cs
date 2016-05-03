@@ -10,16 +10,16 @@ namespace CES.CoreApi.SimpleInjectorProxy
 	public class SecurityLogMonitorInterceptor : IInterceptor
 	{
 		private readonly ISecurityLogMonitor _securityLogMonitor;
-		private readonly IIdentityManager _identityManager;
+		private readonly IIdentityProvider _identityProvider;
 	
 
-		public SecurityLogMonitorInterceptor(ISecurityLogMonitor securityLogMonitor, IIdentityManager identityManager)
+		public SecurityLogMonitorInterceptor(ISecurityLogMonitor securityLogMonitor, IIdentityProvider identityManager)
 		{
 			if (securityLogMonitor == null)
 				throw new ArgumentNullException("securityLogMonitor");
 			if (identityManager == null) throw new ArgumentNullException("identityManager");
 			_securityLogMonitor = securityLogMonitor;
-			_identityManager = identityManager;
+			_identityProvider = identityManager;
 			
 		}
 
@@ -27,7 +27,7 @@ namespace CES.CoreApi.SimpleInjectorProxy
 		{
 			invocation.Proceed();
 			
-			var clientApplicationIdentity = _identityManager.GetClientApplicationIdentity();
+			var clientApplicationIdentity = _identityProvider.GetClientApplicationIdentity();
 			
 			var securityAuditParameters = new SecurityAuditParameters
 			{

@@ -16,7 +16,7 @@ namespace CES.CoreApi.GeoLocation.Service.Business.Logic.UnitTest
     public class DataResponseProviderUnitTests
     {
        // private Mock<IHttpClientProxy> _httpClientProxy;
-        private Mock<IRequestHeadersProvider> _headerProvider;
+        //private Mock<IRequestHeadersProvider> _headerProvider;
         private Mock<HttpClient> _httpClient;
         private Mock<HttpResponseMessage> _httpResponseMessage;
         private Mock<ILogMonitorFactory> _logMonitorFactory;
@@ -32,7 +32,7 @@ namespace CES.CoreApi.GeoLocation.Service.Business.Logic.UnitTest
             _httpResponseMessage = new Mock<HttpResponseMessage>();
             _logMonitorFactory = new Mock<ILogMonitorFactory>();
             _getAsyncResult = new Mock<Task<HttpResponseMessage>>();
-            _headerProvider = new Mock<IRequestHeadersProvider>();
+            //_headerProvider = new Mock<IRequestHeadersProvider>();
         }
 
         [TestMethod]

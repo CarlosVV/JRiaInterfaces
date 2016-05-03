@@ -30,6 +30,12 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CES.CoreApi.Security", "CES
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CES.CoreApi.Logging.WebApi", "CES.CoreApi.Logging.WebApi\CES.CoreApi.Logging.WebApi.csproj", "{BF4DB095-5FA9-4982-8699-955CEE425690}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CES.CoreApi.Security.Wcf", "CES.CoreApi.Security.Wcf\CES.CoreApi.Security.Wcf.csproj", "{9A1EC39A-2EEF-49F5-AF9A-5CFD68CE413F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CES.CoreAPI.Security.WebApi", "CES.CoreAPI.Security.WebApi\CES.CoreAPI.Security.WebApi.csproj", "{EDF1E298-F3B9-4C97-AD36-2F3D260AE636}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CES.CoreApi.Security.Test", "CES.CoreApi.Security.Test\CES.CoreApi.Security.Test.csproj", "{039CB1D4-3058-4ABA-8838-430771B1DD7C}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -72,6 +78,18 @@ Global
 		{BAB197C1-FC36-4070-B1FA-FFC0D6BD1D79}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{BAB197C1-FC36-4070-B1FA-FFC0D6BD1D79}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{BAB197C1-FC36-4070-B1FA-FFC0D6BD1D79}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9A1EC39A-2EEF-49F5-AF9A-5CFD68CE413F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9A1EC39A-2EEF-49F5-AF9A-5CFD68CE413F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9A1EC39A-2EEF-49F5-AF9A-5CFD68CE413F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9A1EC39A-2EEF-49F5-AF9A-5CFD68CE413F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EDF1E298-F3B9-4C97-AD36-2F3D260AE636}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EDF1E298-F3B9-4C97-AD36-2F3D260AE636}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EDF1E298-F3B9-4C97-AD36-2F3D260AE636}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EDF1E298-F3B9-4C97-AD36-2F3D260AE636}.Release|Any CPU.Build.0 = Release|Any CPU
+		{039CB1D4-3058-4ABA-8838-430771B1DD7C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{039CB1D4-3058-4ABA-8838-430771B1DD7C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{039CB1D4-3058-4ABA-8838-430771B1DD7C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{039CB1D4-3058-4ABA-8838-430771B1DD7C}.Release|Any CPU.Build.0 = Release|Any CPU
 		{BF4DB095-5FA9-4982-8699-955CEE425690}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{BF4DB095-5FA9-4982-8699-955CEE425690}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{BF4DB095-5FA9-4982-8699-955CEE425690}.Release|Any CPU.ActiveCfg = Release|Any CPU

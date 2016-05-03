@@ -5,7 +5,7 @@ using SimpleInjector;
 
 namespace CES.CoreApi.Foundation.Providers
 {
-    internal class IocContainerProvider
+    public class IocContainerProvider
     {
         private static Container _instance;
         public void Initialize(Container container)
