@@ -8,7 +8,6 @@ using System.Web.Http;
 
 namespace CES.CoreApi.GeoLocation.Api.Api
 {
-	[RoutePrefix("geolocation")]
 	public class GeoCodeAddressController : ApiController
     {
 		private readonly IMapper mapper;

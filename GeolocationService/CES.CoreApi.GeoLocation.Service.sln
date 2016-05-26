@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 14
-VisualStudioVersion = 14.0.25123.0
+VisualStudioVersion = 14.0.24720.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CES.CoreApi.GeoLocation.Service", "CES.CoreApi.GeoLocation.Service\CES.CoreApi.GeoLocation.Service.csproj", "{95DE1DA5-4826-4FAE-BE0E-7A4C6AC69C53}"
 EndProject
@@ -48,6 +48,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CES.CoreApi.GeoLocation.Api
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CES.CoreApi.GeoLocation.Api.Tests", "CES.CoreApi.GeoLocation.Api.Tests\CES.CoreApi.GeoLocation.Api.Tests.csproj", "{E551BCC9-D0AA-45A6-BA1B-2D944BC9C0E6}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CES.CoreApi.GeoLocation.Service.Web2", "CES.CoreApi.GeoLocation.Service.Web2\CES.CoreApi.GeoLocation.Service.Web2.csproj", "{B2ABB5DB-D6CE-4A92-8EEA-CE9163BD8413}"
+EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CES.CoreApi.GeoLocation.Facade", "CES.CoreApi.GeoLocation.Facade\CES.CoreApi.GeoLocation.Facade.csproj", "{36D833CF-7EC3-41C9-AFE4-5F3C25365835}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "1_DistributedServices", "1_DistributedServices", "{AD4EF941-E12E-4AB5-A0F9-4076107CA1DE}"
@@ -65,8 +67,6 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CES.CoreApi.Security.Wcf", "..\Foundation\CES.CoreApi.Security.Wcf\CES.CoreApi.Security.Wcf.csproj", "{9A1EC39A-2EEF-49F5-AF9A-5CFD68CE413F}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CES.CoreAPI.Security.WebApi", "..\Foundation\CES.CoreAPI.Security.WebApi\CES.CoreAPI.Security.WebApi.csproj", "{EDF1E298-F3B9-4C97-AD36-2F3D260AE636}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CES.CoreApi.UnityProxy", "..\Foundation\CES.CoreApi.UnityProxy\CES.CoreApi.UnityProxy.csproj", "{BEFA4246-E001-4C23-9818-D0302A0D1926}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -142,6 +142,10 @@ Global
 		{E551BCC9-D0AA-45A6-BA1B-2D944BC9C0E6}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{E551BCC9-D0AA-45A6-BA1B-2D944BC9C0E6}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{E551BCC9-D0AA-45A6-BA1B-2D944BC9C0E6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B2ABB5DB-D6CE-4A92-8EEA-CE9163BD8413}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B2ABB5DB-D6CE-4A92-8EEA-CE9163BD8413}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B2ABB5DB-D6CE-4A92-8EEA-CE9163BD8413}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B2ABB5DB-D6CE-4A92-8EEA-CE9163BD8413}.Release|Any CPU.Build.0 = Release|Any CPU
 		{36D833CF-7EC3-41C9-AFE4-5F3C25365835}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{36D833CF-7EC3-41C9-AFE4-5F3C25365835}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{36D833CF-7EC3-41C9-AFE4-5F3C25365835}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -166,10 +170,6 @@ Global
 		{EDF1E298-F3B9-4C97-AD36-2F3D260AE636}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{EDF1E298-F3B9-4C97-AD36-2F3D260AE636}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{EDF1E298-F3B9-4C97-AD36-2F3D260AE636}.Release|Any CPU.Build.0 = Release|Any CPU
-		{BEFA4246-E001-4C23-9818-D0302A0D1926}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{BEFA4246-E001-4C23-9818-D0302A0D1926}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{BEFA4246-E001-4C23-9818-D0302A0D1926}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{BEFA4246-E001-4C23-9818-D0302A0D1926}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -192,13 +192,13 @@ Global
 		{8F71176E-C3E6-4759-A354-5E7E3E4B0658} = {AD4EF941-E12E-4AB5-A0F9-4076107CA1DE}
 		{544EA150-4E44-42A5-A562-B0698C21DE77} = {AD4EF941-E12E-4AB5-A0F9-4076107CA1DE}
 		{E551BCC9-D0AA-45A6-BA1B-2D944BC9C0E6} = {88A7196A-847A-4876-975E-F5EE494AAC9A}
+		{B2ABB5DB-D6CE-4A92-8EEA-CE9163BD8413} = {AD4EF941-E12E-4AB5-A0F9-4076107CA1DE}
 		{36D833CF-7EC3-41C9-AFE4-5F3C25365835} = {9FA49D56-EDFD-4E60-B71B-9CE0ABC2D813}
 		{BAB197C1-FC36-4070-B1FA-FFC0D6BD1D79} = {9B65F4D3-1728-4FF1-A2F2-DA4DF6270431}
 		{8D95C45A-C175-48FE-B307-00EE5780E36E} = {9B65F4D3-1728-4FF1-A2F2-DA4DF6270431}
 		{B663AA83-314B-438E-A130-C316CF03744F} = {88A7196A-847A-4876-975E-F5EE494AAC9A}
 		{9A1EC39A-2EEF-49F5-AF9A-5CFD68CE413F} = {9B65F4D3-1728-4FF1-A2F2-DA4DF6270431}
 		{EDF1E298-F3B9-4C97-AD36-2F3D260AE636} = {9B65F4D3-1728-4FF1-A2F2-DA4DF6270431}
-		{BEFA4246-E001-4C23-9818-D0302A0D1926} = {9B65F4D3-1728-4FF1-A2F2-DA4DF6270431}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		EnterpriseLibraryConfigurationToolBinariesPathV6 = packages\EnterpriseLibrary.Common.6.0.1304.0\lib\NET45;packages\EnterpriseLibrary.Data.6.0.1304.0\lib\NET45
