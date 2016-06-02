@@ -30,9 +30,9 @@ using CES.CoreApi.Security.Wcf.Interfaces;
 using CES.CoreApi.Security.Wcf.Managers;
 using CES.CoreApi.Security.Wcf.Services;
 using CES.CoreApi.Security.Managers;
-using CES.CoreApi.Security.Providers;
-using CES.CoreApi.Security.WebApi.Interfaces;
-using CES.CoreApi.Foundation.Repositories;
+//using CES.CoreApi.Security.Providers;
+//using CES.CoreApi.Security.WebApi.Interfaces;
+//using CES.CoreApi.Foundation.Repositories;
 
 namespace CES.CoreApi.GeoLocation.Service.Configuration
 {
@@ -59,7 +59,7 @@ namespace CES.CoreApi.GeoLocation.Service.Configuration
         {         
             container.Register<IAuthenticationManager, AuthenticationManager>();
             container.Register<IApplicationAuthenticator, ApplicationAuthenticator>();
-            container.Register<IApplicationRepository, ApplicationRepository>(); 
+            container.Register<IApplicationRepository, Foundation.Repositories.ApplicationRepository>(); 
             container.Register<IAuthorizationManager, AuthorizationManager>();
             container.Register<IApplicationAuthorizator, ApplicationAuthorizator>();
 			container.Register<Caching.Interfaces.ICacheProvider>(() => new RedisCacheProvider());   
@@ -195,9 +195,9 @@ namespace CES.CoreApi.GeoLocation.Service.Configuration
             container.Register<ExceptionLogItemGroup>();
             container.Register<ExceptionLogItem>();
             container.Register<IServiceCallInformationProvider, ServiceCallInformationProvider>();
-            container.Register<IRemoteClientInformationProvider, RemoteClientInformationProvider>();
-            container.Register<IHttpRequestInformationProvider, HttpRequestInformationProvider>();
-            container.Register<IServerInformationProvider, ServerInformationProvider>();
+            //container.Register<IRemoteClientInformationProvider, RemoteClientInformationProvider>();
+            //container.Register<IHttpRequestInformationProvider, HttpRequestInformationProvider>();
+            //container.Register<IServerInformationProvider, ServerInformationProvider>();
 
 
             //Performance log related
@@ -228,7 +228,7 @@ namespace CES.CoreApi.GeoLocation.Service.Configuration
 		private static void RegisterSecurity(Container container)
 		{
 			container.Register<IWcfRequestHeaderParametersService, WcfRequestHeaderParametersService>();
-			container.Register<IWebApiRequestHeaderParametersService, WebApiRequestHeaderParametersService>();
+			//container.Register<IWebApiRequestHeaderParametersService, WebApiRequestHeaderParametersService>();
 		}
     }
 }

@@ -5,10 +5,11 @@ using Newtonsoft.Json;
 
 namespace CES.CoreApi.Common.Exceptions
 {
-    //[Serializable]
-    //[JsonObject(MemberSerialization.OptOut)]
-    public class CoreApiException: Exception
-    {
+	
+	//[Serializable]
+	//[JsonObject(MemberSerialization.OptOut)]
+	public class CoreApiException:  Exception
+	{
         private static readonly ExceptionHelper Helper = new ExceptionHelper();
 		public CoreApiException()
 		{

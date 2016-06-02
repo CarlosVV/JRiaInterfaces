@@ -1,6 +1,6 @@
 ﻿using System;
-using Castle.DynamicProxy;
-using CES.CoreApi.Security.Interfaces;
+//using Castle.DynamicProxy;
+//using CES.CoreApi.Security.Interfaces;
 using CES.CoreApi.Logging.Interfaces;
 using CES.CoreApi.Logging.Models;
 using CES.CoreApi.Foundation.Contract.Interfaces;
@@ -11,7 +11,7 @@ namespace CES.CoreApi.SimpleInjectorProxy
 	{
 		private readonly ISecurityLogMonitor _securityLogMonitor;
 		private readonly IIdentityProvider _identityProvider;
-	
+
 
 		public SecurityLogMonitorInterceptor(ISecurityLogMonitor securityLogMonitor, IIdentityProvider identityManager)
 		{
@@ -20,15 +20,15 @@ namespace CES.CoreApi.SimpleInjectorProxy
 			if (identityManager == null) throw new ArgumentNullException("identityManager");
 			_securityLogMonitor = securityLogMonitor;
 			_identityProvider = identityManager;
-			
+
 		}
 
 		public void Intercept(IInvocation invocation)
 		{
 			invocation.Proceed();
-			
+
 			var clientApplicationIdentity = _identityProvider.GetClientApplicationIdentity();
-			
+
 			var securityAuditParameters = new SecurityAuditParameters
 			{
 				ClientApplicationId = clientApplicationIdentity.ApplicationId,

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using CES.CoreApi.Logging.Interfaces;
 using CES.CoreApi.Logging.Models;
+using CES.CoreApi.Logging.Providers;
 
 namespace CES.CoreApi.Logging.Monitors
 {
@@ -9,14 +10,15 @@ namespace CES.CoreApi.Logging.Monitors
 	{
 		private readonly IServiceCallInformationProvider _serviceCallDetailsProvider;
 
-		public ExceptionLogMonitor(ExceptionLogDataContainer dataContainer, IServiceCallInformationProvider serviceCallDetailsProvider,
+		public ExceptionLogMonitor(ExceptionLogDataContainer dataContainer,
+		
 			ILoggerProxy logProxy, ILogConfigurationProvider configuration)
 			: base(logProxy, configuration)
 		{
 			if (dataContainer == null) throw new ArgumentNullException("dataContainer");
-			if (serviceCallDetailsProvider == null) throw new ArgumentNullException("serviceCallDetailsProvider");
+			//if (serviceCallDetailsProvider == null) throw new ArgumentNullException("serviceCallDetailsProvider");
 
-			_serviceCallDetailsProvider = serviceCallDetailsProvider;
+			_serviceCallDetailsProvider = new ServiceCallInformationProvider();
 			DataContainer = dataContainer;
 		}
 

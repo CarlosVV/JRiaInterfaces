@@ -30,7 +30,8 @@ namespace CES.CoreApi.Security.WebAPI.Filters
 
 		public async Task AuthenticateAsync(HttpAuthenticationContext context, CancellationToken cancellationToken)
 		{
-			context.Principal = _authenticator.Authenticate(
+			
+			context.Principal =  await _authenticator.AuthenticateAsync(
 										_parametersProvider.GetParameters(context.ActionContext.ActionDescriptor.ActionName));
 		}
 

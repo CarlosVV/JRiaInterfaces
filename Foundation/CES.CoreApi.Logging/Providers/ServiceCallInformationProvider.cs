@@ -17,16 +17,16 @@ namespace CES.CoreApi.Logging.Providers
 		/// <param name="remoteClientInformationProvider">Remote Client Details Provider instance</param>
 		/// <param name="httpRequestInformationProvider">Htpp Request Details Provider instance</param>
 		/// <param name="serverInformationProvider">Server details information provider instance </param>
-		public ServiceCallInformationProvider(IRemoteClientInformationProvider remoteClientInformationProvider,
-			IHttpRequestInformationProvider httpRequestInformationProvider, IServerInformationProvider serverInformationProvider)
+		public ServiceCallInformationProvider(
+			 )
 		{
-			if (remoteClientInformationProvider == null) throw new ArgumentNullException("remoteClientInformationProvider");
-			if (httpRequestInformationProvider == null) throw new ArgumentNullException("httpRequestInformationProvider");
-			if (serverInformationProvider == null) throw new ArgumentNullException("serverInformationProvider");
+			//if (remoteClientInformationProvider == null) throw new ArgumentNullException("remoteClientInformationProvider");
+			//if (httpRequestInformationProvider == null) throw new ArgumentNullException("httpRequestInformationProvider");
+			//if (serverInformationProvider == null) throw new ArgumentNullException("serverInformationProvider");
 
-			_remoteClientInformationProvider = remoteClientInformationProvider;
-			_httpRequestInformationProvider = httpRequestInformationProvider;
-			_serverInformationProvider = serverInformationProvider;
+			_remoteClientInformationProvider = new RemoteClientInformationProvider();
+			_httpRequestInformationProvider = new HttpRequestInformationProvider();
+			_serverInformationProvider = new ServerInformationProvider();
 		}
 
 		public void AddDetails(ExceptionLogDataContainer exceptionLogDataContainer

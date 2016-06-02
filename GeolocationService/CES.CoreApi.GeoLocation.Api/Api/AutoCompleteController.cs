@@ -23,8 +23,18 @@ namespace CES.CoreApi.GeoLocation.Api.Api
 		
 		[HttpPost]
 		[Route("address/autoComplete")]
-		public  AutocompleteAddressResponse GetAutoCompleteList(AutocompleteAddressRequest request)
+		public   AutocompleteAddressResponse GetAutoCompleteList(AutocompleteAddressRequest request)
 		{
+			//try
+			//{
+			//	int x = System.Convert.ToInt32("asdas");
+			//}
+			//catch (System.Exception e)
+			//{
+
+			//	throw e;
+			//}
+		
 			var result =Facade.Utilities.RequestValidator.Validate(request);
 			if (result != null)
 				return result;

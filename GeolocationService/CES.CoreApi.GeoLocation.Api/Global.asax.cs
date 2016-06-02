@@ -6,7 +6,10 @@ using CES.CoreAPI.Security.WebApi.Filters;
 using SimpleInjector;
 using SimpleInjector.Integration.WebApi;
 using System;
+using System.Net.Http;
+using System.Text;
 using System.Web.Http;
+using System.Web.Http.ExceptionHandling;
 
 namespace CES.CoreApi.GeoLocation.Api
 {
@@ -16,19 +19,19 @@ namespace CES.CoreApi.GeoLocation.Api
     {
         protected void Application_Start()
         {
+			
 			GlobalConfiguration.Configure(WebApiConfig.Register);
 			var container = new Container();
 			container.Options.DefaultScopedLifestyle = new WebApiRequestLifestyle();
 			container.RegisterWebApiControllers(GlobalConfiguration.Configuration);
+			GlobalConfiguration.Configuration.DependencyResolver = new SimpleInjectorWebApiDependencyResolver(container);
+
 			CompositionRoot.RegisterDependencies(container);
 			GlobalConfiguration.Configuration.Filters.Add(new AuthenticationManager(container.GetInstance<IApplicationAuthenticator>(), container.GetInstance<IWebApiRequestHeaderParametersService>()));
 			GlobalConfiguration.Configuration.Filters.Add(new AuthorizationManager(container.GetInstance<IApplicationAuthorizator>()));
-			GlobalConfiguration.Configuration.DependencyResolver = new SimpleInjectorWebApiDependencyResolver(container);
+			GlobalConfiguration.Configuration.Services.Add(typeof(IExceptionLogger), new CES.CoreApi.Logging.Monitors.WebApiExceptionLogger());
+			
 		}
 
-		protected void Application_Error(object sender, EventArgs e)
-		{
-			Exception exception = Server.GetLastError().GetBaseException();
-		}
 	}
 }
