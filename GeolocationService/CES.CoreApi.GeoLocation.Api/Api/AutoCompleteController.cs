@@ -4,10 +4,12 @@ using CES.CoreApi.GeoLocation.Service.Business.Contract.Interfaces;
 using CES.CoreApi.GeoLocation.Service.Business.Contract.Models;
 using CES.CoreApi.GeoLocation.Service.Contract.Enumerations;
 using CES.CoreApi.GeoLocation.Service.Contract.Models;
+using CES.CoreApi.Logging.Attributes;
 using System.Web.Http;
 
 namespace CES.CoreApi.GeoLocation.Api.Api
 {
+	[FaultExceptionFilter]
 	[RoutePrefix("geolocation")]
 	public class AutoCompleteController : ApiController
     {	
