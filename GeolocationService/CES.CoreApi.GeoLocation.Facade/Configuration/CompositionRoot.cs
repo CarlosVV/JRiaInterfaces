@@ -69,7 +69,7 @@ namespace CES.CoreApi.GeoLocation.Facade.Configuration
             container.InterceptWith<PerformanceInterceptor>(type => type == typeof(IGeocodeServiceRequestProcessor));
             container.InterceptWith<PerformanceInterceptor>(type => type == typeof(IMapServiceRequestProcessor));     
 			container.InterceptWith<SecurityLogMonitorInterceptor>(type => type == typeof(IHealthMonitoringProcessor));
-			container.InterceptWith<MonitoringInterceptor>(type => type == typeof(ICoreApiException));
+			
 		}
 
 
