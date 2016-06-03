@@ -37,11 +37,17 @@ namespace CES.CoreApi.GeoLocation.Facade.Utilities
         {
 			
 			if (request == null)
-				return  new AutocompleteAddressResponse { Message = "Request is required" };
-			if (string.IsNullOrEmpty(request.Address.Country))
+				return  new AutocompleteAddressResponse { Message = "Request object can't be null. eg. {Address :{Address1:'421 W Broadway',Address2:'',AdministrativeArea:'CA',City:'Long Beach',Country:'CA'	},MaxRecords:5}" };
+			if (request.Address == null)
+				return new AutocompleteAddressResponse { Message = "Address object  can't be null. eg. {Address :{Address1:'421 W Broadway',Address2:'',AdministrativeArea:'CA',City:'Long Beach',Country:'CA'	},MaxRecords:5}}" };
+
+			if (string.IsNullOrWhiteSpace(request.Address.Country))
 				return new AutocompleteAddressResponse { Message = " Address.Country is required" };
 			if (string.IsNullOrEmpty(request.Address.Address1))
 				return new AutocompleteAddressResponse { Message = " Address.Address1 is required" };
+
+			if (request.Address.Country.Length !=2)
+				return new AutocompleteAddressResponse { Message = " Address.Country must be 2 code, eg. US, CA" };
 
 			//ValidateIncomingAddress(request.Address);
 			//ValidateRequestConfidence(request.MinimumConfidence);

@@ -20,11 +20,16 @@ namespace CES.CoreApi.Logging.Monitors
 				message.Append(request.Method);
 			if (request.RequestUri != null)
 				message.Append(" ").Append(request.RequestUri);
-			if (request.Properties != null)
+			if (request.Headers != null)
 			{
-				foreach (var item in request.Properties)
+				foreach (var item in request.Headers)
 				{
-					message.Append(" ").Append(string.Format("{0}:{1}", item.Key, item.Value));
+
+					message.AppendLine(" ").Append(item.Key).Append(":");
+					foreach (var str in item.Value)
+					{
+						message.Append(str).Append(" ");
+					}
 				}
 			}
 			
