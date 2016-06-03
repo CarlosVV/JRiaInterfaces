@@ -32,6 +32,8 @@ namespace CES.CoreApi.Security.Managers
 
 		private async Task<Application> ValidateClientApplicationAsync(ServiceCallHeaderParameters headerParameters)
 		{
+			if (headerParameters.ApplicationId < 1)
+				throw new Exception("Application id is required ");
 			ApplicationRepository applicationRepository = new ApplicationRepository();
 			var application = await applicationRepository.GetApplication(headerParameters.ApplicationId);
 			if (application == null)
@@ -57,6 +59,8 @@ namespace CES.CoreApi.Security.Managers
         private Application ValidateClientApplication(ServiceCallHeaderParameters headerParameters)
         {
 			//ApplicationRepository applicationRepository = new ApplicationRepository();
+			if(headerParameters.ApplicationId <1)
+				throw new Exception("Application id is required ");
 			var application = ApplicationRepository.GetApplicationById(headerParameters.ApplicationId);
 			if (application == null)
                 throw new Exception("TechnicalSubSystem.CoreApiData, SubSystemError.ApplicationNotFoundInDatabase, headerParameters.ApplicationId");

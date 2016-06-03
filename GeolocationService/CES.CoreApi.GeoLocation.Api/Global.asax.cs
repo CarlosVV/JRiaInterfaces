@@ -6,9 +6,6 @@ using CES.CoreApi.Security.WebAPI.Filters;
 using CES.CoreAPI.Security.WebApi.Filters;
 using SimpleInjector;
 using SimpleInjector.Integration.WebApi;
-using System;
-using System.Net.Http;
-using System.Text;
 using System.Web.Http;
 using System.Web.Http.ExceptionHandling;
 

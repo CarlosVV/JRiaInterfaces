@@ -19,10 +19,11 @@ namespace CES.CoreApi.Logging.Attributes
 			//{
 				//context.Response = new HttpResponseMessage(HttpStatusCode.NotImplemented);
 				//context.Exception = new Exception(context.Exception.StackTrace);
-				throw new HttpResponseException(new HttpResponseMessage(HttpStatusCode.InternalServerError)
+				throw new HttpResponseException(new HttpResponseMessage(HttpStatusCode.OK)
 				{
 					Content = new StringContent(context.Exception.Message),
-					ReasonPhrase = "Exception"
+					ReasonPhrase = "Exception",
+					
 				});
 			//}
 		}

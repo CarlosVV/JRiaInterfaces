@@ -8,7 +8,7 @@ using CES.CoreApi.Security.WebApi.Interfaces;
 
 namespace CES.CoreApi.Security.Providers
 {
-    public class WebApiRequestHeaderParametersService: IWebApiRequestHeaderParametersService
+	public class WebApiRequestHeaderParametersService: IWebApiRequestHeaderParametersService
 	{
         public ServiceCallHeaderParameters GetParameters(string operationName)
 		{
@@ -37,7 +37,7 @@ namespace CES.CoreApi.Security.Providers
 				var values = HttpContext.Current.Request.Headers.GetValues(key)[0];
 				headers.Add(key, values);
 			}
-
+			
 			return headers;
 		}
 	}

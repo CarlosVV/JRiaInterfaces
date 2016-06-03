@@ -11,6 +11,7 @@ namespace CES.CoreApi.GeoLocation.Api.Api
 {
 	[FaultExceptionFilter]
 	[RoutePrefix("geolocation")]
+
 	public class AutoCompleteController : ApiController
     {	
 		
@@ -26,19 +27,13 @@ namespace CES.CoreApi.GeoLocation.Api.Api
 		
 		[HttpPost]
 		[Route("address/autoComplete")]
+		[Route("v2/address/autoComplete")]
+		[Route("v2.0/address/autoComplete")]
+		[Route("2/address/autoComplete")]
 		public   AutocompleteAddressResponse GetAutoCompleteList(AutocompleteAddressRequest request)
-		{
-			//try
-			//{
-			//	int x = System.Convert.ToInt32("asdas");
-			//}
-			//catch (System.Exception e)
-			//{
-
-			//	throw e;
-			//}
+		{		
 		
-			var result =Facade.Utilities.RequestValidator.Validate(request);
+			var result =Facade.Utilities.RequestValidator.ValidateVersion2(request);
 			if (result != null)
 				return result;
 
@@ -48,9 +43,32 @@ namespace CES.CoreApi.GeoLocation.Api.Api
 				mapper.Map<Confidence, LevelOfConfidence>(request.MinimumConfidence));
 
 			result = mapper.Map<AutocompleteAddressResponseModel, AutocompleteAddressResponse>(responseModel);
-
+			result.Version = "v2.0";
 			return result;
 						
+		}
+
+		[HttpPost]
+		
+		[Route("v1/address/autoComplete")]
+		[Route("v1.0/address/autoComplete")]
+		[Route("1/address/autoComplete")]
+		public AutocompleteAddressResponse GetAutoCompleteListV1(AutocompleteAddressRequest request)
+		{
+
+			var result = Facade.Utilities.RequestValidator.Validate(request);
+			if (result != null)
+				return result;
+
+			var responseModel = addressServiceRequestProcessor.GetAutocompleteList(
+				mapper.Map<AddressRequest, AutocompleteAddressModel>(request.Address),
+				request.MaxRecords,
+				mapper.Map<Confidence, LevelOfConfidence>(request.MinimumConfidence));
+
+			result = mapper.Map<AutocompleteAddressResponseModel, AutocompleteAddressResponse>(responseModel);
+			result.Version = "v1.0";
+			return result;
+
 		}
 		[HttpPost]
 		[Route("address/validate")]
