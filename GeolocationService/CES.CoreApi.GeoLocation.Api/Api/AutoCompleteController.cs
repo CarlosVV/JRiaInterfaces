@@ -11,13 +11,11 @@ namespace CES.CoreApi.GeoLocation.Api.Api
 {
 	[FaultExceptionFilter]
 	[RoutePrefix("geolocation")]
-
 	public class AutoCompleteController : ApiController
     {	
 		
 		private readonly IAddressServiceRequestProcessor addressServiceRequestProcessor;
-		private readonly IMapper mapper;
-		//private readonly IRequestValidator _validator;
+		private readonly IMapper mapper;		
 		public AutoCompleteController(IMapper mapper, IAddressServiceRequestProcessor addressServiceRequestProcessor)
 		{		
 			this.mapper = mapper;
@@ -48,8 +46,7 @@ namespace CES.CoreApi.GeoLocation.Api.Api
 						
 		}
 
-		[HttpPost]
-		
+		[HttpPost]		
 		[Route("v1/address/autoComplete")]
 		[Route("v1.0/address/autoComplete")]
 		[Route("1/address/autoComplete")]

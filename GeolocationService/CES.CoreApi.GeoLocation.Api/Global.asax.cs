@@ -29,7 +29,7 @@ namespace CES.CoreApi.GeoLocation.Api
 			GlobalConfiguration.Configuration.Filters.Add(new FaultExceptionFilterAttribute());
 			GlobalConfiguration.Configuration.Filters.Add(new AuthenticationManager(container.GetInstance<IApplicationAuthenticator>(), container.GetInstance<IWebApiRequestHeaderParametersService>()));
 			GlobalConfiguration.Configuration.Filters.Add(new AuthorizationManager(container.GetInstance<IApplicationAuthorizator>()));
-			GlobalConfiguration.Configuration.Services.Add(typeof(IExceptionLogger), new CES.CoreApi.Logging.Monitors.WebApiExceptionLogger());
+			GlobalConfiguration.Configuration.Services.Add(typeof(IExceptionLogger), new Logging.Monitors.WebApiExceptionLogger());
 			
 		}
 
