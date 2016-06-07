@@ -1,6 +1,6 @@
 ﻿using System.ServiceModel;
-using CES.CoreApi.Common.Enumerations;
-using CES.CoreApi.Common.Exceptions;
+//using CES.CoreApi.Common.Enumerations;
+//using CES.CoreApi.Common.Exceptions;
 using CES.CoreApi.Security.Interfaces;
 using System.Security.Principal;
 using CES.CoreApi.Security.Wcf.Interfaces;
@@ -14,7 +14,7 @@ namespace CES.CoreApi.Security.Wcf.Managers
 		public AuthorizationManager(IApplicationAuthorizator authorizationAdministrator)
 		{
 			if (authorizationAdministrator == null)
-				throw new CoreApiException(TechnicalSubSystem.Authorization, SubSystemError.GeneralRequiredParameterIsUndefined, "authorizationAdministrator");
+				throw new System.Exception("TechnicalSubSystem.Authorization, SubSystemError.GeneralRequiredParameterIsUndefined, \"authorizationAdministrator\"");
 
 			_authorizationAdministrator = authorizationAdministrator;
 		}

@@ -1,5 +1,6 @@
 ﻿
-using CES.CoreApi.Foundation.Models;
+
+using CES.CoreApi.Security.Models;
 
 namespace CES.CoreApi.Security.Wcf.Interfaces
 {

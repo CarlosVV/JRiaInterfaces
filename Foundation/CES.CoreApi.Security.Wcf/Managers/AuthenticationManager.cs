@@ -1,5 +1,4 @@
-﻿using CES.CoreApi.Common.Enumerations;
-using CES.CoreApi.Common.Exceptions;
+﻿
 using CES.CoreApi.Security.Interfaces;
 using CES.CoreApi.Security.Wcf.Interfaces;
 using System;
@@ -18,10 +17,10 @@ namespace CES.CoreApi.Security.Wcf.Managers
 		public AuthenticationManager(IApplicationAuthenticator authenticator, IWcfRequestHeaderParametersService parametersProvider)
 		{
 			if (authenticator == null)
-				throw new CoreApiException(TechnicalSubSystem.Authentication, SubSystemError.GeneralRequiredParameterIsUndefined, "authenticator");
+				throw new Exception ("TechnicalSubSystem.Authentication, SubSystemError.GeneralRequiredParameterIsUndefined, \"authenticator\"");
 
 			if (parametersProvider == null)
-				throw new CoreApiException(TechnicalSubSystem.Authentication, SubSystemError.GeneralRequiredParameterIsUndefined, "requestHeaderParametersProviderFactory");
+				throw new Exception("TechnicalSubSystem.Authentication, SubSystemError.GeneralRequiredParameterIsUndefined, \"requestHeaderParametersProviderFactory\"");
 
 			_authenticator = authenticator;
 			_parametersProvider = parametersProvider;

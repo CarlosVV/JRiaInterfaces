@@ -1,7 +1,8 @@
-﻿using CES.CoreApi.Common.Enumerations;
-using CES.CoreApi.Common.Exceptions;
+﻿//using CES.CoreApi.Common.Enumerations;
+//using CES.CoreApi.Common.Exceptions;
 using CES.CoreApi.Security.Interfaces;
 using CES.CoreApi.Security.WebApi.Interfaces;
+using System;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Web.Http.Filters;
@@ -18,10 +19,10 @@ namespace CES.CoreApi.Security.WebAPI.Filters
 		public AuthenticationManager(IApplicationAuthenticator authenticator, IWebApiRequestHeaderParametersService parametersProvider)
 		{
 			if (authenticator == null)
-				throw new CoreApiException(TechnicalSubSystem.Authentication, SubSystemError.GeneralRequiredParameterIsUndefined, "authenticator");
+				throw new Exception("TechnicalSubSystem.Authentication, SubSystemError.GeneralRequiredParameterIsUndefined, \"authenticator\"");
 
 			if (parametersProvider == null)
-				throw new CoreApiException(TechnicalSubSystem.Authentication, SubSystemError.GeneralRequiredParameterIsUndefined, "requestHeaderParametersProviderFactory");
+				throw new Exception("TechnicalSubSystem.Authentication, SubSystemError.GeneralRequiredParameterIsUndefined, \"requestHeaderParametersProviderFactory\"");
 
 			_authenticator = authenticator;
 			_parametersProvider = parametersProvider;

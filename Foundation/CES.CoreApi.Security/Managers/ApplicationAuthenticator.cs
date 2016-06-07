@@ -1,6 +1,7 @@
-﻿using CES.CoreApi.Foundation.Contract.Models;
-using CES.CoreApi.Foundation.Models;
+﻿//using CES.CoreApi.Foundation.Contract.Models;
+//using CES.CoreApi.Foundation.Models;
 using CES.CoreApi.Security.Interfaces;
+using CES.CoreApi.Security.Models;
 using System;
 using System.Security.Principal;
 using System.Threading.Tasks;
@@ -9,16 +10,7 @@ namespace CES.CoreApi.Security.Managers
 {
 	public class ApplicationAuthenticator : IApplicationAuthenticator
     {
-		// private readonly IApplicationRepository _repository;
-
-
-		//    public ApplicationAuthenticator(IApplicationRepository repository)
-		//    {
-		//        if (repository == null)
-		//throw new CoreApiException(TechnicalSubSystem.Authentication, SubSystemError.GeneralRequiredParameterIsUndefined, "repository");
-
-		//        _repository = repository;
-		//    }
+		
 		public async Task<IPrincipal> AuthenticateAsync(ServiceCallHeaderParameters serviceCallHeaderParameters)
 		{
 			if (serviceCallHeaderParameters == null)

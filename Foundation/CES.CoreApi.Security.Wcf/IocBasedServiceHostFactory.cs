@@ -1,15 +1,39 @@
 ﻿using System;
 using System.ServiceModel;
 using System.ServiceModel.Description;
-using CES.CoreApi.Foundation.Contract.Interfaces;
+//using CES.CoreApi.Foundation.Contract.Interfaces;
 using SimpleInjector;
 using SimpleInjector.Integration.Wcf;
-using CES.CoreApi.Foundation.Providers;
-using CES.CoreApi.Security.Wcf.Interfaces;
+//using CES.CoreApi.Foundation.Providers;
+//using CES.CoreApi.Security.Wcf.Interfaces;
 
 namespace CES.CoreApi.Foundation.Service
 {
-    public abstract class IocBasedServiceHostFactory: SimpleInjectorServiceHostFactory
+	public class IocContainerProvider
+	{
+		private static Container _instance;
+		public void Initialize(Container container)
+		{
+			if (container == null)
+				throw new ArgumentNullException("container");
+			Instance = container;
+		}
+
+		public static Container Instance
+		{
+			get
+			{
+				if (_instance == null)
+					throw new Exception(
+						"Organization.Ria						TechnicalSystem.CoreApi						TechnicalSubSystem.CoreApi						SubSystemError.ServiceIntializationIoCContainerIsNotInitialized");
+
+				return _instance;
+			}
+			private set { _instance = value; }
+		}
+
+	}
+	public abstract class IocBasedServiceHostFactory: SimpleInjectorServiceHostFactory
     {
         protected IocBasedServiceHostFactory(Container container)
         {
@@ -20,22 +44,23 @@ namespace CES.CoreApi.Foundation.Service
             Container = IocContainerProvider.Instance;
         }
 
-        protected override ServiceHost CreateServiceHost(Type serviceType, Uri[] baseAddresses)
-        {
-            var host = new IocBasedServiceHost(Container, serviceType, baseAddresses);
+        //protected override ServiceHost CreateServiceHost(Type serviceType, Uri[] baseAddresses)
+        //{
+        //    //var host = new IocBasedServiceHost(Container, serviceType, baseAddresses);
 
-            host.Description.Behaviors.Add((IServiceBehavior) Container.GetInstance<IServiceExceptionHandler>());
+        //    //host.Description.Behaviors.Add((IServiceBehavior) Container.GetInstance<IServiceExceptionHandler>());
 
-            //ApplyServiceBehaviors(host);
-            //ApplyContractBehaviors(host);
+        //    ////ApplyServiceBehaviors(host);
+        //    ////ApplyContractBehaviors(host);
 			
-            host.Authentication.ServiceAuthenticationManager = (ServiceAuthenticationManager)IocContainerProvider.Instance.GetInstance<IAuthenticationManager>();
-            host.Authorization.ServiceAuthorizationManager = (ServiceAuthorizationManager)IocContainerProvider.Instance.GetInstance<IAuthorizationManager>();
-            var serviceAuthorizationBehavior = host.Description.Behaviors.Find<ServiceAuthorizationBehavior>();
-            serviceAuthorizationBehavior.PrincipalPermissionMode = PrincipalPermissionMode.Custom;
+        //    //host.Authentication.ServiceAuthenticationManager = (ServiceAuthenticationManager)IocContainerProvider.Instance.GetInstance<IAuthenticationManager>();
+        //    //host.Authorization.ServiceAuthorizationManager = (ServiceAuthorizationManager)IocContainerProvider.Instance.GetInstance<IAuthorizationManager>();
+        //    //var serviceAuthorizationBehavior = host.Description.Behaviors.Find<ServiceAuthorizationBehavior>();
+        //    //serviceAuthorizationBehavior.PrincipalPermissionMode = PrincipalPermissionMode.Custom;
 
-            return host;
-        }
+        //    //return host;
+
+        //}
 
         private static void ApplyServiceBehaviors(ServiceHostBase host)
         {

@@ -1,14 +1,17 @@
 ﻿using System;
 using System.Linq;
 using System.ServiceModel;
-using CES.CoreApi.Common.Tools;
-using CES.CoreApi.Foundation.Contract.Constants;
+//using CES.CoreApi.Common.Tools;
+//using CES.CoreApi.Foundation.Contract.Constants;
 using System.Collections.Generic;
 using System.ServiceModel.Channels;
 using System.Runtime.Serialization;
 using System.ServiceModel.Web;
-using CES.CoreApi.Foundation.Models;
+//using CES.CoreApi.Foundation.Models;
 using CES.CoreApi.Security.Wcf.Interfaces;
+using CES.CoreApi.Security.Tools;
+using CES.CoreApi.Security.Models;
+using CES.CoreApi.Security.Constants;
 
 namespace CES.CoreApi.Security.Wcf.Services
 {

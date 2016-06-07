@@ -1,9 +1,9 @@
 ﻿using AutoMapper;
 using AutoMapper.Mappers;
 using CES.CoreApi.Common.Interfaces;
-using CES.CoreApi.Foundation.Contract.Interfaces;
-using CES.CoreApi.Foundation.Providers;
-using CES.CoreApi.Foundation.Service;
+//using CES.CoreApi.Foundation.Contract.Interfaces;
+//using CES.CoreApi.Foundation.Providers;
+//using CES.CoreApi.Foundation.Service;
 using CES.CoreApi.GeoLocation.Service.Business.Contract.Interfaces;
 using CES.CoreApi.GeoLocation.Service.Business.Logic.Builders;
 using CES.CoreApi.GeoLocation.Service.Business.Logic.Factories;
@@ -30,6 +30,9 @@ using CES.CoreApi.Security.Wcf.Interfaces;
 using CES.CoreApi.Security.Wcf.Managers;
 using CES.CoreApi.Security.Wcf.Services;
 using CES.CoreApi.Security.Managers;
+using CES.CoreApi.Security.Providers;
+//using CES.CoreApi.Foundation.Service;
+//using CES.CoreApi.Foundation.Providers;
 //using CES.CoreApi.Security.Providers;
 //using CES.CoreApi.Security.WebApi.Interfaces;
 //using CES.CoreApi.Foundation.Repositories;
@@ -59,11 +62,11 @@ namespace CES.CoreApi.GeoLocation.Service.Configuration
         {         
             container.Register<IAuthenticationManager, AuthenticationManager>();
             container.Register<IApplicationAuthenticator, ApplicationAuthenticator>();
-            container.Register<IApplicationRepository, Foundation.Repositories.ApplicationRepository>(); 
+            container.Register<Foundation.Contract.Interfaces.IApplicationRepository, Foundation.Repositories.ApplicationRepository>(); 
             container.Register<IAuthorizationManager, AuthorizationManager>();
             container.Register<IApplicationAuthorizator, ApplicationAuthorizator>();
 			container.Register<Caching.Interfaces.ICacheProvider>(() => new RedisCacheProvider());   
-            container.Register<IServiceExceptionHandler, ServiceExceptionHandler>();        
+            container.Register<Foundation.Contract.Interfaces.IServiceExceptionHandler, Foundation.Service.ServiceExceptionHandler>();        
 			//container.Register<IConfigurationProvider, ConfigurationProvider>();
            container.Register<IIdentityProvider, IdentityProvider>();
         }

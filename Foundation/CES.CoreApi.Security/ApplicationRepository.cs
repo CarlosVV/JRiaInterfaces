@@ -8,8 +8,9 @@ using CES.CoreApi.Data.Base;
 using CES.CoreApi.Foundation.Data.Utility;
 using CES.CoreApi.Data.Models;
 using CES.CoreApi.Data.Enumerations;
-using CES.CoreApi.Foundation.Contract.Models;
+//using CES.CoreApi.Foundation.Contract.Models;
 using System;
+using CES.CoreApi.Security.Models;
 
 namespace CES.CoreApi.Security
 {

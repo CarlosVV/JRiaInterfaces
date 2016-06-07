@@ -2,10 +2,12 @@
 using System;
 using System.Linq;
 using System.Security.Principal;
-using CES.CoreApi.Foundation.Contract.Interfaces;
-using CES.CoreApi.Foundation.Contract.Constants;
-using CES.CoreApi.Foundation.Configuration;
-using CES.CoreApi.Foundation.Models;
+//using CES.CoreApi.Foundation.Contract.Interfaces;
+//using CES.CoreApi.Foundation.Contract.Constants;
+//using CES.CoreApi.Foundation.Configuration;
+//using CES.CoreApi.Foundation.Models;
+using CES.CoreApi.Security.Tools;
+using CES.CoreApi.Security.Models;
 
 namespace CES.CoreApi.Security.Managers
 {
@@ -31,7 +33,7 @@ namespace CES.CoreApi.Security.Managers
 			var clientApplicationIdentity = clientApplicationPrincipal?.Identity as ClientApplicationIdentity;
 			ValidateClientApplicationAuthentication(clientApplicationPrincipal, clientApplicationIdentity?.ApplicationId);
 
-			var applicationId = ConfigurationTools.ReadAppSettingsValue<int>(ServiceConfigurationItems.ApplicationId);
+			var applicationId = ConfigurationTools.ReadAppSettingsValueAsInt("ApplicationId");
 			if (applicationId == 0)
 				throw new Exception("Organization.Ria, TechnicalSystem.CoreApi, TechnicalSubSystem.Authentication, SubSystemError.ApplicationIdNotFoundInConfigFile");
 			//ApplicationRepository repo = new ApplicationRepository();

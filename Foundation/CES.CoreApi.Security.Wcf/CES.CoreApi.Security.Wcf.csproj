@@ -68,18 +68,6 @@
     <Compile Include="Services\WcfRequestHeaderParametersService.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\Foundation\CES.CoreApi.Common\CES.CoreApi.Common.csproj">
-      <Project>{070c7bb2-af07-4a4c-a9cc-6bfb8ca416e6}</Project>
-      <Name>CES.CoreApi.Common</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\Foundation\CES.CoreApi.Foundation.Contract\CES.CoreApi.Foundation.Contract.csproj">
-      <Project>{8dbcfe15-ca3b-4f7c-a7d6-d73f8f0b91aa}</Project>
-      <Name>CES.CoreApi.Foundation.Contract</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\Foundation\CES.CoreApi.Foundation\CES.CoreApi.Foundation.csproj">
-      <Project>{e2b71a13-9683-4862-b2eb-31050190afdc}</Project>
-      <Name>CES.CoreApi.Foundation</Name>
-    </ProjectReference>
     <ProjectReference Include="..\..\Foundation\CES.CoreApi.SimpleInjectorProxy\CES.CoreApi.SimpleInjectorProxy.csproj">
       <Project>{02beaa68-76a1-4ed6-bf6c-7b6935165ad6}</Project>
       <Name>CES.CoreApi.SimpleInjectorProxy</Name>
