@@ -4,13 +4,13 @@ using SimpleInjector;
 
 namespace CES.CoreApi.GeoLocation.Service.Factory
 {
-    public sealed class GeolocationServiceHostFactory : IocBasedServiceHostFactory
+    public sealed class GeolocationServiceHostFactory 
     {
-        public GeolocationServiceHostFactory()
-            : base(new Container())
-        {
-            CompositionRoot.RegisterDependencies(Container);
-			//MapperConfiguratorX.Configure(Container);
-        }
+   //     public GeolocationServiceHostFactory()
+   //         : base(new Container())
+   //     {
+   //         CompositionRoot.RegisterDependencies(Container);
+			////MapperConfiguratorX.Configure(Container);
+   //     }
     }
 }
