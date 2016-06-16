@@ -6,6 +6,7 @@ namespace CES.CoreApi.GeoLocation.Api.Api
 	public class PingController : ApiController
     {
 		[HttpGet]
+		[Route("Ping")]
 		public string Ping()
 		{
 			return "OK";
