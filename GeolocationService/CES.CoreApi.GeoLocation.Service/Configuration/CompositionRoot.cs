@@ -59,26 +59,38 @@ namespace CES.CoreApi.GeoLocation.Service.Configuration
         }
 
         private static void RegisterFoundation(Container container)
-        {         
-            container.Register<IAuthenticationManager, AuthenticationManager>();
+		{
+		
+			container.Register<IAuthenticationManager, AuthenticationManager>();
             container.Register<IApplicationAuthenticator, ApplicationAuthenticator>();
-            container.Register<Foundation.Contract.Interfaces.IApplicationRepository, Foundation.Repositories.ApplicationRepository>(); 
-            container.Register<IAuthorizationManager, AuthorizationManager>();
-            container.Register<IApplicationAuthorizator, ApplicationAuthorizator>();
+            container.Register<Foundation.Contract.Interfaces.IApplicationRepository, Foundation.Repositories.ApplicationRepository>();
+			container.Register<IAuthorizationManager, AuthorizationManager>();
+			container.Register<IApplicationAuthorizator, ApplicationAuthorizator>();
+			container.Register<CES.CoreApi.Security.Interfaces.IIdentityProvider, CES.CoreApi.Security.Providers.IdentityProvider>();
+
+			container.Register<Foundation.Contract.Interfaces.IIdentityProvider, CES.CoreApi.Foundation.Providers.IdentityProvider>();
 			container.Register<Caching.Interfaces.ICacheProvider>(() => new RedisCacheProvider());   
             container.Register<Foundation.Contract.Interfaces.IServiceExceptionHandler, Foundation.Service.ServiceExceptionHandler>();        
 			//container.Register<IConfigurationProvider, ConfigurationProvider>();
-           container.Register<IIdentityProvider, IdentityProvider>();
+          
         }
+		private static void RegisterFoundation2(Container container)
+		{
+			container.Register<IApplicationAuthenticator, ApplicationAuthenticator>();
+			container.Register<IApplicationAuthorizator, ApplicationAuthorizator>();
+			container.Register<Caching.Interfaces.ICacheProvider>(() => new RedisCacheProvider());
+			//  container.Register<Foundation.Contract.Interfaces.IServiceExceptionHandler, Foundation.Service.ServiceExceptionHandler>();       
+			container.Register<IIdentityProvider, IdentityProvider>();
+		}
 
-        private static void RegisterInterceptions(Container container)
+		private static void RegisterInterceptions(Container container)
         {
             container.InterceptWith<PerformanceInterceptor>(type => type == typeof(IDataResponseProvider));
             container.InterceptWith<PerformanceInterceptor>(type => type == typeof(IHealthMonitoringProcessor));
             container.InterceptWith<PerformanceInterceptor>(type => type == typeof(IAddressServiceRequestProcessor));
             container.InterceptWith<PerformanceInterceptor>(type => type == typeof(IGeocodeServiceRequestProcessor));
             container.InterceptWith<PerformanceInterceptor>(type => type == typeof(IMapServiceRequestProcessor));
-           // container.InterceptWith<PerformanceInterceptor>(type => type == typeof(IApplicationRepository));
+           //container.InterceptWith<PerformanceInterceptor>(type => type == typeof(IApplicationRepository));
 			container.InterceptWith<SecurityLogMonitorInterceptor>(type => type == typeof(IHealthMonitoringProcessor));
 			
 		}

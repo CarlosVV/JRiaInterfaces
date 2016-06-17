@@ -7,7 +7,7 @@ using System.Configuration;
 
 namespace CES.CoreApi.Security
 {
-	public class ApplicationRepository 
+	public class ApplicationSecurityRepository
 	{
 		public async Task<Application> GetApplication(int applicationId)
 		{

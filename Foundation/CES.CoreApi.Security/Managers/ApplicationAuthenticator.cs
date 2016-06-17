@@ -26,7 +26,7 @@ namespace CES.CoreApi.Security.Managers
 		{
 			if (headerParameters.ApplicationId < 1)
 				throw new Exception("Application id is required ");
-			ApplicationRepository applicationRepository = new ApplicationRepository();
+			ApplicationSecurityRepository applicationRepository = new ApplicationSecurityRepository();
 			var application = await applicationRepository.GetApplication(headerParameters.ApplicationId);
 			if (application == null)
 				throw new Exception("TechnicalSubSystem.CoreApiData, SubSystemError.ApplicationNotFoundInDatabase, headerParameters.ApplicationId");
@@ -53,7 +53,7 @@ namespace CES.CoreApi.Security.Managers
 			//ApplicationRepository applicationRepository = new ApplicationRepository();
 			if(headerParameters.ApplicationId <1)
 				throw new Exception("Application id is required ");
-			var application = ApplicationRepository.GetApplicationById(headerParameters.ApplicationId);
+			var application = ApplicationSecurityRepository.GetApplicationById(headerParameters.ApplicationId);
 			if (application == null)
                 throw new Exception("TechnicalSubSystem.CoreApiData, SubSystemError.ApplicationNotFoundInDatabase, headerParameters.ApplicationId");
 
