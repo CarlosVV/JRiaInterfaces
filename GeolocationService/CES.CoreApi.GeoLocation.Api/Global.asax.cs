@@ -1,4 +1,4 @@
-﻿using CES.CoreApi.GeoLocation.Facade.Configuration;
+﻿using CES.CoreApi.GeoLocation.Api.Configuration;
 using CES.CoreApi.Logging.Attributes;
 using CES.CoreApi.Security.Interfaces;
 using CES.CoreApi.Security.WebApi.Interfaces;
@@ -11,13 +11,10 @@ using System.Web.Http.ExceptionHandling;
 
 namespace CES.CoreApi.GeoLocation.Api
 {
-
-
 	public class WebApiApplication : System.Web.HttpApplication
     {
 		
-        protected void Application_Start()
-        {
+        protected void Application_Start()        {
 			
 			GlobalConfiguration.Configure(WebApiConfig.Register);
 			var container = new Container();
@@ -32,6 +29,5 @@ namespace CES.CoreApi.GeoLocation.Api
 			GlobalConfiguration.Configuration.Services.Add(typeof(IExceptionLogger), new Logging.Monitors.WebApiExceptionLogger());
 			
 		}
-
 	}
 }

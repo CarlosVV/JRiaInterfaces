@@ -5,7 +5,7 @@ using CES.CoreApi.GeoLocation.Service.Contract.Enumerations;
 using CES.CoreApi.GeoLocation.Service.Contract.Models;
 
 
-namespace CES.CoreApi.GeoLocation.Facade.Configuration
+namespace CES.CoreApi.GeoLocation.Api.Configuration
 {
 	public class GeoLocationMapperProfile : Profile
 	{

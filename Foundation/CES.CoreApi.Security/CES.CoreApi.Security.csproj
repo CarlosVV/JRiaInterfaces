@@ -69,12 +69,6 @@
     <Compile Include="Tools\TypeTools.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\CES.CoreApi.Data\CES.CoreApi.Data.csproj">
-      <Project>{1aa5ba90-02cc-4fd1-81f2-615c374c83a5}</Project>
-      <Name>CES.CoreApi.Data</Name>
-    </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup />

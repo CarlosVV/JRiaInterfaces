@@ -31,7 +31,7 @@ namespace CES.CoreApi.GeoLocation.Api.Api
 		public   AutocompleteAddressResponse GetAutoCompleteList(AutocompleteAddressRequest request)
 		{		
 		
-			var result =Facade.Utilities.RequestValidator.ValidateVersion2(request);
+			var result =Utilities.RequestValidator.ValidateVersion2(request);
 			if (result != null)
 				return result;
 
@@ -53,7 +53,7 @@ namespace CES.CoreApi.GeoLocation.Api.Api
 		public AutocompleteAddressResponse GetAutoCompleteListV1(AutocompleteAddressRequest request)
 		{
 
-			var result = Facade.Utilities.RequestValidator.Validate(request);
+			var result = Utilities.RequestValidator.Validate(request);
 			if (result != null)
 				return result;
 
