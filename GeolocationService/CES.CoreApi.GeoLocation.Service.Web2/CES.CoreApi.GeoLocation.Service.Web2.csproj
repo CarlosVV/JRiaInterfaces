@@ -116,12 +116,6 @@
       <DependentUpon>Web.config</DependentUpon>
     </None>
   </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\CES.CoreApi.GeoLocation.Facade\CES.CoreApi.GeoLocation.Facade.csproj">
-      <Project>{36d833cf-7ec3-41c9-afe4-5f3c25365835}</Project>
-      <Name>CES.CoreApi.GeoLocation.Facade</Name>
-    </ProjectReference>
-  </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
