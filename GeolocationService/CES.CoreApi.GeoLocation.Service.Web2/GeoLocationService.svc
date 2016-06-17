@@ -1,7 +1,0 @@
-﻿<%@ ServiceHost 
-    Language="C#" 
-    Debug="true" 
-    Service="CES.CoreApi.GeoLocation.Facade.GeoLocationService" 
-		CodeBehind="CES.CoreApi.GeoLocation.Facade.GeoLocationService.cs"
-    Factory="CES.CoreApi.GeoLocation.Facade.Factory.GeolocationServiceHostFactory"
-     %>
