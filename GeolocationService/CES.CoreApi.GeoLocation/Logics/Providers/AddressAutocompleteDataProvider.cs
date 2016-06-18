@@ -4,7 +4,6 @@ using CES.CoreApi.GeoLocation.Enumerations;
 using CES.CoreApi.GeoLocation.Models;
 using CES.CoreApi.GeoLocation.Service.Business.Contract.Interfaces;
 
-
 namespace CES.CoreApi.GeoLocation.Service.Business.Logic.Providers
 {
     public class AddressAutocompleteDataProvider : IAddressAutocompleteDataProvider
