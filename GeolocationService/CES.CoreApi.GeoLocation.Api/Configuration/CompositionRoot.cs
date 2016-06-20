@@ -2,7 +2,7 @@
 //using CES.CoreApi.Foundation.Contract.Interfaces;
 ////using CES.CoreApi.Foundation.Providers;
 //using CES.CoreApi.Foundation.Service;
-using CES.CoreApi.GeoLocation.Service.Business.Contract.Interfaces;
+//using CES.CoreApi.GeoLocation.Service.Business.Contract.Interfaces;
 using CES.CoreApi.GeoLocation.Service.Business.Logic.Builders;
 using CES.CoreApi.GeoLocation.Service.Business.Logic.Factories;
 using CES.CoreApi.GeoLocation.Service.Business.Logic.Parsers;
@@ -22,6 +22,7 @@ using CES.CoreApi.SimpleInjectorProxy;
 using CES.CoreApi.Security.Managers;
 using CES.CoreApi.Security.Providers;
 using CES.CoreApi.Security.WebApi.Interfaces;
+using CES.CoreApi.GeoLocation.Service.Business.Contract.Interfaces;
 
 namespace CES.CoreApi.GeoLocation.Api.Configuration
 {
@@ -93,7 +94,7 @@ namespace CES.CoreApi.GeoLocation.Api.Configuration
 
         private static void RegisterProcessors(Container container)
         {
-            container.Register<IHealthMonitoringProcessor, HealthMonitoringProcessor>();
+          //  container.Register<IHealthMonitoringProcessor, HealthMonitoringProcessor>();
             container.Register<IAddressServiceRequestProcessor, AddressServiceRequestProcessor>();
             container.Register<IGeocodeServiceRequestProcessor, GeocodeServiceRequestProcessor>();
             container.Register<IMapServiceRequestProcessor, MapServiceRequestProcessor>();

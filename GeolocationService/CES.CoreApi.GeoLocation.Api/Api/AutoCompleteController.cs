@@ -1,7 +1,7 @@
 ﻿using AutoMapper;
-using CES.CoreApi.GeoLocation.Service.Business.Contract.Enumerations;
+using CES.CoreApi.GeoLocation.Enumerations;
+using CES.CoreApi.GeoLocation.Models;
 using CES.CoreApi.GeoLocation.Service.Business.Contract.Interfaces;
-using CES.CoreApi.GeoLocation.Service.Business.Contract.Models;
 using CES.CoreApi.GeoLocation.Service.Contract.Enumerations;
 using CES.CoreApi.GeoLocation.Service.Contract.Models;
 using CES.CoreApi.Logging.Attributes;
@@ -46,27 +46,7 @@ namespace CES.CoreApi.GeoLocation.Api.Api
 						
 		}
 
-		[HttpPost]		
-		[Route("v1/address/autoComplete")]
-		[Route("v1.0/address/autoComplete")]
-		[Route("1/address/autoComplete")]
-		public AutocompleteAddressResponse GetAutoCompleteListV1(AutocompleteAddressRequest request)
-		{
-
-			var result = Utilities.RequestValidator.Validate(request);
-			if (result != null)
-				return result;
-
-			var responseModel = addressServiceRequestProcessor.GetAutocompleteList(
-				mapper.Map<AddressRequest, AutocompleteAddressModel>(request.Address),
-				request.MaxRecords,
-				mapper.Map<Confidence, LevelOfConfidence>(request.MinimumConfidence));
-
-			result = mapper.Map<AutocompleteAddressResponseModel, AutocompleteAddressResponse>(responseModel);
-			result.Version = "v1.0";
-			return result;
-
-		}
+		
 		[HttpPost]
 		[Route("address/validate")]
 		public virtual ValidateAddressResponse ValidateAddress(ValidateAddressRequest request)

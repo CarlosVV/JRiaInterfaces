@@ -1,6 +1,6 @@
 ﻿using AutoMapper;
+using CES.CoreApi.GeoLocation.Models;
 using CES.CoreApi.GeoLocation.Service.Business.Contract.Interfaces;
-using CES.CoreApi.GeoLocation.Service.Business.Contract.Models;
 using CES.CoreApi.GeoLocation.Service.Contract.Models;
 using System.Collections.Generic;
 using System.Web.Http;

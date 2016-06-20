@@ -70,9 +70,10 @@ namespace CES.CoreApi.GeoLocation.Service.Business.Logic.Builders
         {
             var query = _addressQueryBuilder.Build(address.Address1, address.AdministrativeArea, address.Country);
 
-            var url = string.Format(CultureInfo.InvariantCulture,
-				"{0}/geocode/xml?address={1}{2}",
+			var url = string.Format(CultureInfo.InvariantCulture,
+				"{0}/geocode/xml?key={1}&address={2}{3}",
 				GeoLocationConfigurationSection.Instance.Google.Url,
+				GeoLocationConfigurationSection.Instance.Google.Key,
                 query,
                 GetLicenseKeyParameter());
 
