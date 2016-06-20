@@ -11,7 +11,14 @@ namespace CES.CoreApi.GeoLocation.Models
         /// Specify data provider used to get autocomplete list
         /// </summary>
         public DataProviderType DataProvider { get; set; }
+		public string Provider
+		{
+			get
+			{
+				return DataProvider.ToString();
+			}
+		}
 
-        public bool IsValid { get; set; }
+		public bool IsValid { get; set; }
     }
 }

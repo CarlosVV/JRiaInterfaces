@@ -9,7 +9,7 @@ namespace CES.CoreApi.GeoLocation.Api.Api
 		[Route("Ping")]
 		public string Ping()
 		{
-			return "OK";
+			return "OK" + CES.CoreApi.Configuration.Provider.GeoLocationConfigurationSection.Instance.Google.Key;;
 		}
 	}
 }

@@ -22,5 +22,13 @@ namespace CES.CoreApi.GeoLocation.Service.Contract.Models
 		public string Version { get; set; }
 		[DataMember]
         public bool IsValid { get; set; }
-    }
+		[DataMember]
+		public string Provider
+		{
+			get
+			{
+				return DataProvider.ToString();
+			}
+		}
+	}
 }
