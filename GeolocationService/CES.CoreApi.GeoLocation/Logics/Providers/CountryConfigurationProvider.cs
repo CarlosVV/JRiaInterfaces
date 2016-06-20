@@ -4,42 +4,49 @@ using CES.CoreApi.Common.Enumerations;
 using CES.CoreApi.Common.Exceptions;
 using CES.CoreApi.GeoLocation.Service.Business.Logic.Constants;
 using CES.CoreApi.GeoLocation.Configuration;
+using CES.CoreApi.Security.Providers;
 
 namespace CES.CoreApi.GeoLocation.Service.Business.Logic.Providers
 {
     public class CountryConfigurationProvider 
     {
-     //   private readonly IIdentityManager _identityManager;
+		//   private readonly IIdentityManager _identityManager;
 
-        #region Core
+		//private readonly IdentityProvider identityProvider;
+		#region Core
 
-       // private readonly DataProviderServiceConfiguration _configurationProvider;
-        private const string DefaultCountry = "default";
+		// private readonly DataProviderServiceConfiguration _configurationProvider;
+		private const string DefaultCountry = "default";
 
-        //public CountryConfigurationProvider( IIdentityManager identityManager)
-        //{
-            
-        //    if (identityManager == null)
-        //        throw new CoreApiException(TechnicalSubSystem.GeoLocationService,
-        //           SubSystemError.GeneralRequiredParameterIsUndefined, "identityManager");
-			
-		  
-        //    _identityManager = identityManager;
-        //   // _configurationProvider =  ConfigurationProvider.ReadFromJson<DataProviderServiceConfiguration>(ConfigurationConstants.DataProviderServiceConfiguration);
-        //}
+		//public CountryConfigurationProvider(IdentityProvider identityProvider)
+		//{
+		//	this.identityProvider = identityProvider;
+		//}
+		//public CountryConfigurationProvider(IIdentityManager identityManager)
+		//{
 
-        #endregion
+		//	if (identityManager == null)
+		//		throw new CoreApiException(TechnicalSubSystem.GeoLocationService,
+		//		   SubSystemError.GeneralRequiredParameterIsUndefined, "identityManager");
 
-        #region Public methods
 
-        public static CountryConfiguration GetProviderConfigurationByCountry(string countryCode)
+		//	_identityManager = identityManager;
+		//	// _configurationProvider =  ConfigurationProvider.ReadFromJson<DataProviderServiceConfiguration>(ConfigurationConstants.DataProviderServiceConfiguration);
+		//}
+
+		#endregion
+
+		#region Public methods
+
+		public static CountryConfiguration GetProviderConfigurationByCountry(string countryCode)
         {
-			//var clientApplicationIdentity = _identityManager.GetClientApplicationIdentity();
+			var id = new IdentityProvider();
+			var clientApplicationIdentity = id.GetClientApplicationIdentity();
 
 			//if (clientApplicationIdentity == null)
 			//    throw new CoreApiException(TechnicalSubSystem.Authorization, SubSystemError.SecurityClientApplicationNotAuthenticated, -1);
 
-			var applicationId = 11;// clientApplicationIdentity.ApplicationId;
+			var applicationId = clientApplicationIdentity.ApplicationId;
 
             var countryConfiguration = GetCountryConfiguration(countryCode, applicationId) ??
                                        GetCountryConfiguration(DefaultCountry, applicationId);
