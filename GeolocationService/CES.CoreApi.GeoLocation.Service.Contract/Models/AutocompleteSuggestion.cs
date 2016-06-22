@@ -13,5 +13,12 @@ namespace CES.CoreApi.GeoLocation.Service.Contract.Models
         public Location Location { get; set; }
         [DataMember]
         public Confidence Confidence { get; set; }
-    }
+		[DataMember]
+		public string ConfidenceText {
+			get
+			{
+				return Confidence.ToString();
+			}
+		}
+	}
 }

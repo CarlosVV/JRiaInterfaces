@@ -60,32 +60,31 @@ namespace CES.CoreApi.GeoLocation.Service.Business.Logic.Builders
             return url;
         }
 
-        /// <summary>
-        /// Builds URL for address autocomplete
-        /// </summary>
-        /// <param name="address">Address instance</param>
-        /// <param name="maxRecords">Number of records to return</param>
-        /// <returns></returns>
-        public string BuildUrl(AutocompleteAddressModel address, int maxRecords)
-        {
-            var query = _addressQueryBuilder.Build(address.Address1, address.AdministrativeArea, address.Country);
+		/// <summary>
+		/// Builds URL for address autocomplete
+		/// </summary>
+		/// <param name="address">Address instance</param>
+		/// <param name="maxRecords">Number of records to return</param>
+		/// <returns></returns>
+		public string BuildUrl(AutocompleteAddressModel address, int maxRecords)
+		{
+			var query = _addressQueryBuilder.Build(address.Address1, address.AdministrativeArea, address.Country);
 
 			var url = string.Format(CultureInfo.InvariantCulture,
-				"{0}/geocode/xml?key={1}&address={2}{3}",
+				"{0}/geocode/xml?address={1}{2}",
 				GeoLocationConfigurationSection.Instance.Google.Url,
-				GeoLocationConfigurationSection.Instance.Google.Key,
-                query,
-                GetLicenseKeyParameter());
+				query,
+				GetLicenseKeyParameter());
 
-            return url;
-        }
+			return url;
+		}
 
-        /// <summary>
-        /// Builds URL for address geocoding and verification
-        /// </summary>
-        /// <param name="address">Address instance to geocode or verify</param>
-        /// <returns></returns>
-        public string BuildUrl(AddressModel address)
+		/// <summary>
+		/// Builds URL for address geocoding and verification
+		/// </summary>
+		/// <param name="address">Address instance to geocode or verify</param>
+		/// <returns></returns>
+		public string BuildUrl(AddressModel address)
         {
             var addressFormatted = string.Join(",",
                 address.Address1,
@@ -94,8 +93,8 @@ namespace CES.CoreApi.GeoLocation.Service.Business.Logic.Builders
                 address.AdministrativeArea,
                 address.PostalCode,
                 address.Country);
-
-            var url = string.Format(CultureInfo.InvariantCulture,
+		
+			var url = string.Format(CultureInfo.InvariantCulture,
 				"{0}/geocode/xml?address={1}{2}",
 				GeoLocationConfigurationSection.Instance.Google.Url,
                 HttpUtility.UrlEncode(addressFormatted),
