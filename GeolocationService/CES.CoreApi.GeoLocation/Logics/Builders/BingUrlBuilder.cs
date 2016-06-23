@@ -126,7 +126,7 @@ namespace CES.CoreApi.GeoLocation.Service.Business.Logic.Builders
         public string BuildUrl(LocationModel center, MapSizeModel size, MapOutputParametersModel outputParameters, ICollection<PushPinModel> pushPins)
         {
             var url = string.Format(CultureInfo.InvariantCulture,
-				"/{0}/Imagery/Map/{1}/{2},{3}/{4}?mapSize={5},{6}&format={7}{8}&key={9}",
+				"{0}/Imagery/Map/{1}/{2},{3}/{4}?mapSize={5},{6}&format={7}{8}&key={9}",
 				GeoLocationConfigurationSection.Instance.Bing.Url,
                 outputParameters.MapStyle,
                 center.Latitude,
