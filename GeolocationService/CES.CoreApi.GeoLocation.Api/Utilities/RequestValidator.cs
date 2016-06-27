@@ -17,13 +17,24 @@ namespace CES.CoreApi.GeoLocation.Api.Utilities
 
 		//#region Public methods
 
-		//public void Validate(ValidateAddressRequest request)
-		//{
-		//    ContractValidation.Requires(request != null, TechnicalSubSystem.GeoLocationService,
-		//        SubSystemError.GeneralRequiredParameterIsUndefined, "request");
-		//    ValidateIncomingAddress(request.Address);
-		//    ValidateRequestConfidence(request.MinimumConfidence);
-		//}
+		public static ValidateAddressResponse Validate(ValidateAddressRequest request)
+		{			
+
+			if (request == null || request.Address == null)
+				return new ValidateAddressResponse { Message = "Address object  can't be null. eg. {Address :{Address1:'421 W Broadway',Address2:'',AdministrativeArea:'CA',City:'Long Beach',Country:'CA'	}}" };
+			
+			if (string.IsNullOrWhiteSpace(request.Address.Country))
+				return new ValidateAddressResponse { Message = " Address.Country is required" };
+			if (string.IsNullOrEmpty(request.Address.Address1))
+				return new ValidateAddressResponse { Message = " Address.Address1 is required" };
+
+			if (request.Address.Country.Length != 2)
+				return new ValidateAddressResponse { Message = " Address.Country must be 2 code, eg. US, CA" };
+			return null;
+		}
+
+
+
 
 		//public void Validate(ValidateFormattedAddressRequest request)
 		//{
@@ -40,8 +51,8 @@ namespace CES.CoreApi.GeoLocation.Api.Utilities
 				return new AutocompleteAddressResponse { Message = "Request object can't be null. eg. {Address :{Address1:'421 W Broadway',Address2:'',AdministrativeArea:'CA',City:'Long Beach',Country:'CA'	},MaxRecords:5}" };
 			if (request.Address == null)
 				return new AutocompleteAddressResponse { Message = "Address object  can't be null. eg. {Address :{Address1:'421 W Broadway',Address2:'',AdministrativeArea:'CA',City:'Long Beach',Country:'CA'	},MaxRecords:5}}" };
-			if (string.IsNullOrWhiteSpace(request.Address.City))
-				return new AutocompleteAddressResponse { Message = " Address.City is required" };
+			//if (string.IsNullOrWhiteSpace(request.Address.City))
+			//	return new AutocompleteAddressResponse { Message = " Address.City is required" };
 			if (string.IsNullOrWhiteSpace(request.Address.Country))
 				return new AutocompleteAddressResponse { Message = " Address.Country is required" };
 			if (string.IsNullOrEmpty(request.Address.Address1))
@@ -55,27 +66,7 @@ namespace CES.CoreApi.GeoLocation.Api.Utilities
 
 			return null;
 		}
-		public static AutocompleteAddressResponse ValidateVersion2(AutocompleteAddressRequest request)
-		{
-
-			if (request == null)
-				return new AutocompleteAddressResponse { Message = "Request object can't be null. eg. {Address :{Address1:'421 W Broadway',Address2:'',AdministrativeArea:'CA',City:'Long Beach',Country:'CA'	},MaxRecords:5}" };
-			if (request.Address == null)
-				return new AutocompleteAddressResponse { Message = "Address object  can't be null. eg. {Address :{Address1:'421 W Broadway',Address2:'',AdministrativeArea:'CA',City:'Long Beach',Country:'CA'	},MaxRecords:5}}" };
-
-			if (string.IsNullOrWhiteSpace(request.Address.Country))
-				return new AutocompleteAddressResponse { Message = " Address.Country is required" };
-			if (string.IsNullOrEmpty(request.Address.Address1))
-				return new AutocompleteAddressResponse { Message = " Address.Address1 is required" };
-
-			if (request.Address.Country.Length != 2)
-				return new AutocompleteAddressResponse { Message = " Address.Country must be 2 code, eg. US, CA" };
-
-			//ValidateIncomingAddress(request.Address);
-			//ValidateRequestConfidence(request.MinimumConfidence);
-
-			return null;
-		}
+	
 
 		//public void Validate(GeocodeAddressRequest request)
 		//{

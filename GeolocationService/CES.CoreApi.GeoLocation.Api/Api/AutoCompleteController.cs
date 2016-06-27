@@ -25,13 +25,13 @@ namespace CES.CoreApi.GeoLocation.Api.Api
 		
 		[HttpPost]
 		[Route("address/autoComplete")]
-		[Route("v2/address/autoComplete")]
-		[Route("v2.0/address/autoComplete")]
-		[Route("2/address/autoComplete")]
-		public   AutocompleteAddressResponse GetAutoCompleteList(AutocompleteAddressRequest request)
+		[Route("v1/address/autoComplete")]
+		[Route("v1.0/address/autoComplete")]
+		[Route("1/address/autoComplete")]
+		public AutocompleteAddressResponse GetAutoCompleteList(AutocompleteAddressRequest request)
 		{		
 		
-			var result =Utilities.RequestValidator.ValidateVersion2(request);
+			var result =Utilities.RequestValidator.Validate(request);
 			if (result != null)
 				return result;
 
@@ -41,7 +41,7 @@ namespace CES.CoreApi.GeoLocation.Api.Api
 				mapper.Map<Confidence, LevelOfConfidence>(request.MinimumConfidence));
 
 			result = mapper.Map<AutocompleteAddressResponseModel, AutocompleteAddressResponse>(responseModel);
-			result.Version = "v2.0";
+		
 			return result;
 						
 		}
@@ -51,7 +51,9 @@ namespace CES.CoreApi.GeoLocation.Api.Api
 		[Route("address/validate")]
 		public virtual ValidateAddressResponse ValidateAddress(ValidateAddressRequest request)
 		{
-			//_validator.Validate(request);
+			var result = Utilities.RequestValidator.Validate(request);
+			if (result != null)
+				return result;
 
 			var responseModel = addressServiceRequestProcessor.ValidateAddress(
 			mapper.Map<AddressRequest, AddressModel>(request.Address),

@@ -34,5 +34,7 @@ namespace CES.CoreApi.Common.Models
         public DateTime ResponseTime { get; private set; }
 		[DataMember]
 		public string Message  { get; set; }
+
+
 	}
 }

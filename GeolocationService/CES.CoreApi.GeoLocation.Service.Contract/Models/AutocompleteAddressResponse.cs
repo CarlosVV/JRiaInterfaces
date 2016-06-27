@@ -15,20 +15,20 @@ namespace CES.CoreApi.GeoLocation.Service.Contract.Models
 
         /// <summary>
         /// Specify data provider used to get address hint list
-        /// </summary>
-        [DataMember]
-        public DataProvider DataProvider { get; set; }
-		[DataMember]
-		public string Version { get; set; }
+        /// </summary>     
+	
 		[DataMember]
         public bool IsValid { get; set; }
+
 		[DataMember]
-		public string Provider
-		{
-			get
-			{
-				return DataProvider.ToString();
-			}
-		}
+		public DataProvider DataProvider { get; set; }
+		//[DataMember]
+		//public string Provider
+		//{
+		//	get
+		//	{
+		//		return DataProvider.ToString();
+		//	}
+		//}
 	}
 }

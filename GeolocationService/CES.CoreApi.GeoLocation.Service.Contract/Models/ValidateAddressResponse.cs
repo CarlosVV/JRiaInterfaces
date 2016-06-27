@@ -37,10 +37,16 @@ namespace CES.CoreApi.GeoLocation.Service.Contract.Models
         [DataMember]
         public Confidence Confidence { get; set; }
 
-        /// <summary>
-        /// Specify data provider used to verify address
-        /// </summary>
-        [DataMember]
+		//[DataMember]
+		//public string ConfidenceText { get { return Confidence.ToString(); } }
+
+		/// <summary>
+		/// Specify data provider used to verify address
+		/// </summary>
+		[DataMember]
         public DataProvider DataProvider { get; set; }
-    }
+
+		//[DataMember]
+		//public string DataProviderText { get { return DataProvider.ToString(); } }
+	}
 }
