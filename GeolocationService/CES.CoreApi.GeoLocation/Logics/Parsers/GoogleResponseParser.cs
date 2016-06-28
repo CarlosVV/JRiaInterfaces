@@ -49,7 +49,7 @@ namespace CES.CoreApi.GeoLocation.Service.Business.Logic.Parsers
             var rootElement = GetResponseDocument(dataResponse);
             
             return rootElement == null 
-                ? GetInvalidAddressAutocompleteResponse()
+                ? GetInvalidAddressAutocompleteResponse("")
                 : GetAddressAutocompleteResponse(rootElement, maxRecords, confidence);
         }
 
@@ -64,7 +64,7 @@ namespace CES.CoreApi.GeoLocation.Service.Business.Logic.Parsers
             var rootElement = GetResponseDocument(dataResponse);
 
             return rootElement == null
-                ? GetInvalidAddressVerificationResponse()
+                ? GetInvalidAddressVerificationResponse("")
                 : GetAddressVerificationResponse(rootElement, acceptableConfidence);
         }
 

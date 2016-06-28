@@ -27,16 +27,18 @@ namespace CES.CoreApi.GeoLocation.Service.Business.Logic.Parsers
         
         protected DataProviderType ProviderType { get; private set; }
 
-        protected AutocompleteAddressResponseModel GetInvalidAddressAutocompleteResponse()
+        protected AutocompleteAddressResponseModel GetInvalidAddressAutocompleteResponse(string message ="")
         {
-            return new AutocompleteAddressResponseModel
-            {
-                DataProvider = ProviderType,
-                IsValid = false
+			return new AutocompleteAddressResponseModel
+			{
+				DataProvider = ProviderType,
+				IsValid = false,
+				Message = message
+		
             };
         }
 
-        protected AutocompleteAddressResponseModel GetValidAddressAutocompleteResponse()
+        protected AutocompleteAddressResponseModel GetValidAddressAutocompleteResponse(string message="")
         {
             return new AutocompleteAddressResponseModel
             {
@@ -49,7 +51,7 @@ namespace CES.CoreApi.GeoLocation.Service.Business.Logic.Parsers
         /// Gets failed response
         /// </summary>
         /// <returns></returns>
-        protected ValidateAddressResponseModel GetInvalidAddressVerificationResponse()
+        protected ValidateAddressResponseModel GetInvalidAddressVerificationResponse(string message="")
         {
             return new ValidateAddressResponseModel
             {

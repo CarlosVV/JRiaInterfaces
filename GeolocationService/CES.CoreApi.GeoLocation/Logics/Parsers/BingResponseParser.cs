@@ -43,10 +43,12 @@ namespace CES.CoreApi.GeoLocation.Service.Business.Logic.Parsers
         public AutocompleteAddressResponseModel ParseAutocompleteAddressResponse(DataResponse dataResponse, int maxRecords, LevelOfConfidence confidence, string country = null)
         {
             var resourceSets = GetResourceSets(dataResponse);
+			if (resourceSets.IsFailed)
+				return GetInvalidAddressAutocompleteResponse(resourceSets.Message);
 
-            return resourceSets == null
-                ? GetInvalidAddressAutocompleteResponse()
-                : GetAddressAutocompleteResponse(resourceSets, confidence);
+			return resourceSets == null
+                ? GetInvalidAddressAutocompleteResponse("")
+                : GetAddressAutocompleteResponse(resourceSets.Result, confidence);
         }
 
         /// <summary>
@@ -60,8 +62,8 @@ namespace CES.CoreApi.GeoLocation.Service.Business.Logic.Parsers
             var resourceSets = GetResourceSets(dataResponse);
 
             return resourceSets == null
-                ? GetInvalidAddressVerificationResponse()
-                : GetAddressVerificationResponse(resourceSets, acceptableConfidence);
+                ? GetInvalidAddressVerificationResponse(resourceSets.Message)
+                : GetAddressVerificationResponse(resourceSets.Result, acceptableConfidence);
         }
 
         /// <summary>
@@ -76,7 +78,7 @@ namespace CES.CoreApi.GeoLocation.Service.Business.Logic.Parsers
 
             return resourceSets == null
                 ? GetInvalidGeocodeAddressResponse()
-                : GetGeocodeAddressResponse(resourceSets, acceptableConfidence);
+                : GetGeocodeAddressResponse(resourceSets.Result, acceptableConfidence);
         }
 
         /// <summary>
@@ -91,26 +93,39 @@ namespace CES.CoreApi.GeoLocation.Service.Business.Logic.Parsers
                 : GetValidMapResponse(dataResponse.BinaryResponse);
         }
 
-        #endregion
+		#endregion
 
-        #region Private methods
+		#region Private methods
 
-        /// <summary>
-        /// Gets ResourceSets element from response XML
-        /// </summary>
-        /// <param name="dataResponse">Service data response</param>
-        /// <returns></returns>
-        private XElement GetResourceSets(DataResponse dataResponse)
-        {
-            if (dataResponse == null || !dataResponse.IsSuccessStatusCode)
-                return null;
+		/// <summary>
+		/// Gets ResourceSets element from response XML
+		/// </summary>
+		/// <param name="dataResponse">Service data response</param>
+		/// <returns></returns>
+		private XElementResult GetResourceSets(DataResponse dataResponse)
+		{
+			XElementResult result = new XElementResult();
 
-            var responseDocument = XDocument.Parse(dataResponse.RawResponse);
+			if (dataResponse == null)
+				return null;
+			if (!dataResponse.IsSuccessStatusCode)
+			{
+				var errorDoc = XDocument.Parse(dataResponse.RawResponse);
+				if (errorDoc.Root != null)
+				{
+					result.Message = errorDoc.Root.Element(_responseNamespace + "ErrorDetails").Value;
+					result.IsFailed = true;
+				}
+			}
+			var responseDocument = XDocument.Parse(dataResponse.RawResponse);
 
-            return responseDocument.Root != null
-                ? responseDocument.Root.Element(_responseNamespace + BingConstants.ResourceSets)
-                : null;
-        }
+			if (responseDocument.Root != null)
+			{
+				result.Result = responseDocument.Root.Element(_responseNamespace + BingConstants.ResourceSets);
+
+			}
+			return result;
+		}
 
         /// <summary>
         /// Gets address autcomplete response model
@@ -136,10 +151,10 @@ namespace CES.CoreApi.GeoLocation.Service.Business.Logic.Parsers
 
             //No hints returned
             if (!addressHints.Any())
-                return GetInvalidAddressAutocompleteResponse();
+                return GetInvalidAddressAutocompleteResponse("");
 
             //Populate valid response model
-            var responseModel = GetValidAddressAutocompleteResponse();
+            var responseModel = GetValidAddressAutocompleteResponse("");
             responseModel.Suggestions = (from hint in addressHints
                 select new AutocompleteSuggestionModel
                 {

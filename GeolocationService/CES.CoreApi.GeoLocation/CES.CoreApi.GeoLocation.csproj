@@ -138,6 +138,7 @@
     <Compile Include="Models\MapSizeModel.cs" />
     <Compile Include="Models\PushPinModel.cs" />
     <Compile Include="Models\ValidateAddressResponseModel.cs" />
+    <Compile Include="Models\XElementResult.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

@@ -18,7 +18,7 @@ namespace CES.CoreApi.GeoLocation.Models
 				return DataProvider.ToString();
 			}
 		}
-
+		public string Message { get; set; }
 		public bool IsValid { get; set; }
     }
 }
