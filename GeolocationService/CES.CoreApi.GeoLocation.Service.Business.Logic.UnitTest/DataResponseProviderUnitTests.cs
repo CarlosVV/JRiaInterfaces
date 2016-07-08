@@ -35,12 +35,12 @@ namespace CES.CoreApi.GeoLocation.Service.Business.Logic.UnitTest
             //_headerProvider = new Mock<IRequestHeadersProvider>();
         }
 
-        [TestMethod]
-        public void Constructor_HttpClientProxyIsNull_ExceptionRaised()
-        {
-            ExceptionHelper.CheckException(() => new DataResponseProvider(),
-               SubSystemError.GeneralRequiredParameterIsUndefined, "httpClientProxy");
-        }
+        //[TestMethod]
+        //public void Constructor_HttpClientProxyIsNull_ExceptionRaised()
+        //{
+        //    ExceptionHelper.CheckException(() => new DataResponseProvider(),
+        //       SubSystemError.GeneralRequiredParameterIsUndefined, "httpClientProxy");
+        //}
 		
         [TestMethod]
         public void Constructor_HappyPath()

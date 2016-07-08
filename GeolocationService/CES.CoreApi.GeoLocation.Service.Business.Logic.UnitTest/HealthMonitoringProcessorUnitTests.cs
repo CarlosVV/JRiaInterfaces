@@ -35,13 +35,13 @@ namespace CES.CoreApi.GeoLocation.Service.Business.Logic.UnitTest
 				 //Common.Enumerations.SubSystemError.GeneralRequiredParameterIsUndefined, "cacheProvider");
      //   }
 
-        [TestMethod]
-        public void Constructor_DatabasePingProviderIsNull_ExceptionRaised()
-        {
-            ExceptionHelper.CheckException(
-                () => new HealthMonitoringProcessor(_cacheProvider.Object),
-				Common.Enumerations.SubSystemError.GeneralRequiredParameterIsUndefined, "pingProvider");
-        }
+    //    [TestMethod]
+    //    public void Constructor_DatabasePingProviderIsNull_ExceptionRaised()
+    //    {
+    //        ExceptionHelper.CheckException(
+    //            () => new HealthMonitoringProcessor(_cacheProvider.Object),
+				//Common.Enumerations.SubSystemError.GeneralRequiredParameterIsUndefined, "pingProvider");
+    //    }
 
         [TestMethod]
         public void Constructor_HappyPath()
@@ -78,25 +78,25 @@ namespace CES.CoreApi.GeoLocation.Service.Business.Logic.UnitTest
             Assert.IsFalse(result.IsOk);
         }
 
-        [TestMethod]
-        public void Ping_HappyPath()
-        {
-            var pingModel = new PingResponseModel
-            {
-                Databases = new Collection<DatabasePingModel>
-                {
-                    new DatabasePingModel {Database = DatabaseType.Main.ToString(), IsOk = true}
-                }
-            };
-            _databasePingProvider.Setup(p => p.PingDatabases()).Returns(pingModel).Verifiable();
+   //     [TestMethod]
+   //     public void Ping_HappyPath()
+   //     {
+   //         var pingModel = new PingResponseModel
+   //         {
+   //             Databases = new Collection<DatabasePingModel>
+   //             {
+   //                 new DatabasePingModel {Database = DatabaseType.Main.ToString(), IsOk = true}
+   //             }
+   //         };
+   //         _databasePingProvider.Setup(p => p.PingDatabases()).Returns(pingModel).Verifiable();
 
-            var processor = new HealthMonitoringProcessor(_cacheProvider.Object);
+   //         var processor = new HealthMonitoringProcessor(_cacheProvider.Object);
             
-            var result = processor.Ping() as PingResponseModel;
-            _databasePingProvider.Verify(p => p.PingDatabases(), Times.Once);
-            Assert.IsNotNull(result);
-			Assert.IsTrue(result.Databases.ToList()[0].IsOk);
-			 Assert.AreEqual(DatabaseType.Main.ToString(), result.Databases.ToList()[0].Database);
-        }
+   //         var result = processor.Ping() as PingResponseModel;
+   //         _databasePingProvider.Verify(p => p.PingDatabases(), Times.Once);
+   //         Assert.IsNotNull(result);
+			//Assert.IsTrue(result.Databases.ToList()[0].IsOk);
+			// Assert.AreEqual(DatabaseType.Main.ToString(), result.Databases.ToList()[0].Database);
+   //     }
     }
 }
