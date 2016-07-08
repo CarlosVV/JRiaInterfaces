@@ -22,13 +22,13 @@ namespace CES.CoreApi.GeoLocation.Service.Contract.Models
 
 		[DataMember]
 		public DataProvider DataProvider { get; set; }
-		//[DataMember]
-		//public string Provider
-		//{
-		//	get
-		//	{
-		//		return DataProvider.ToString();
-		//	}
-		//}
+		[DataMember]
+		public string Provider
+		{
+			get
+			{
+				return DataProvider.ToString();
+			}
+		}
 	}
 }

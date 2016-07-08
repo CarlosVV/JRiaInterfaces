@@ -26,27 +26,14 @@ namespace CES.CoreApi.Data.Base
        // private readonly IDatabaseInstanceProvider _instanceProvider;
 
         static BaseGenericRepository()
-        {
-            //var configSource = ConfigurationSourceFactory.Create();
-            //DatabaseFactory.SetDatabaseProviderFactory(new DatabaseProviderFactory(configSource));
+        {          
 
             ApplicationId = int.Parse(ConfigurationManager.AppSettings["ApplicationID"]);
             AppObjectId = int.Parse(ConfigurationManager.AppSettings["AppObjectID"]);
             UserNameId = int.Parse(ConfigurationManager.AppSettings["UserNameID"]);
-        }
+		}
 
-        //protected BaseGenericRepository(            )
-        //{
-        //   // if (cacheProvider == null) throw new ArgumentNullException("cacheProvider");
-        //   // if (monitorFactory == null) throw new ArgumentNullException("monitorFactory");
-        //   // if (identityManager == null) throw new ArgumentNullException("identityManager");
-        //    if (instanceProvider == null) throw new ArgumentNullException("instanceProvider");
-            
-        // //   _cacheProvider = cacheProvider;
-        //  //  _monitorFactory = monitorFactory;
-        //   // _identityManager = identityManager;
-        //    _instanceProvider = instanceProvider;
-        //}
+        
 
         #endregion
 

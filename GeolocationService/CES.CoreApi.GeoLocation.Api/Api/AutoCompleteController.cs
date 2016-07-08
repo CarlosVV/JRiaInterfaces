@@ -22,7 +22,7 @@ namespace CES.CoreApi.GeoLocation.Api.Api
 			this.addressServiceRequestProcessor = addressServiceRequestProcessor;
 		}
 		
-		
+		[HttpGet]
 		[HttpPost]
 		[Route("address/autoComplete")]
 		[Route("v1/address/autoComplete")]
