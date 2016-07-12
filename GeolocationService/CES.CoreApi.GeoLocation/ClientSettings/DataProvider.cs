@@ -1,9 +1,7 @@
-﻿
-using CES.CoreApi.GeoLocation.Enumerations;
-
-namespace CES.CoreApi.GeoLocation.Configuration
+﻿using CES.CoreApi.GeoLocation.Enumerations;
+namespace CES.CoreApi.GeoLocation.ClientSettings
 {
-    public class DataProviderConfiguration
+	public class DataProvider
     {
         public DataProviderServiceType DataProviderServiceType { get; set; }
         public DataProviderType DataProviderType { get; set; }

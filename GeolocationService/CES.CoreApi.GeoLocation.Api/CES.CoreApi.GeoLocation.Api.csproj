@@ -163,10 +163,6 @@
       <Project>{edf1e298-f3b9-4c97-ad36-2f3d260ae636}</Project>
       <Name>CES.CoreAPI.Security.WebApi</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\Foundation\CES.CoreApi.SimpleInjectorProxy\CES.CoreApi.SimpleInjectorProxy.csproj">
-      <Project>{02beaa68-76a1-4ed6-bf6c-7b6935165ad6}</Project>
-      <Name>CES.CoreApi.SimpleInjectorProxy</Name>
-    </ProjectReference>
     <ProjectReference Include="..\CES.CoreApi.GeoLocation\CES.CoreApi.GeoLocation.csproj">
       <Project>{08b9ed41-e60a-41f2-9988-f84c72e4af96}</Project>
       <Name>CES.CoreApi.GeoLocation</Name>

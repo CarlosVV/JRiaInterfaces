@@ -6,6 +6,7 @@ using CES.CoreApi.GeoLocation.Models;
 using CES.CoreApi.GeoLocation.Enumerations;
 using CES.CoreApi.GeoLocation.Configuration;
 using CES.CoreApi.Configuration.Provider;
+using CES.CoreApi.GeoLocation.ClientSettings;
 
 namespace CES.CoreApi.GeoLocation.Service.Business.Logic.Processors
 {
@@ -55,7 +56,7 @@ namespace CES.CoreApi.GeoLocation.Service.Business.Logic.Processors
 
         #region Private methods
 
-        private GeocodeAddressResponseModel Process(string country, Func<DataProviderConfiguration, GeocodeAddressResponseModel> geocodeByProvider)
+        private GeocodeAddressResponseModel Process(string country, Func<DataProvider, GeocodeAddressResponseModel> geocodeByProvider)
         {
             var numberOfProviders = GeoLocationConfigurationSection.Instance.NumberOfProvidersToProcessResult.Value;
 			var providers = GetProviderConfigurationByCountry(country, DataProviderServiceType.Geocoding, numberOfProviders).ToList();

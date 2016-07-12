@@ -52,13 +52,12 @@
   <ItemGroup>
     <Compile Include="Attributes\GoogleImageFormatAttribute.cs" />
     <Compile Include="Attributes\GoogleMapTypeAttribute.cs" />
-    <Compile Include="Configuration\ApplicationCountryConfiguration.cs" />
     <Compile Include="Configuration\BasicConfiguration.cs" />
-    <Compile Include="Configuration\ClientAppSetting.cs" />
-    <Compile Include="Configuration\DataProviderConfiguration.cs" />
+    <Compile Include="ClientSettings\ClientAppSetting.cs" />
+    <Compile Include="ClientSettings\DataProvider.cs" />
     <Compile Include="Configuration\GeoLocationConfiguration.cs" />
     <Compile Include="Configuration\GeoLocationConfigurationSection.cs" />
-    <Compile Include="Configuration\Settings.cs" />
+    <Compile Include="Configuration\AppSettings.cs" />
     <Compile Include="Enumerations\Color.cs" />
     <Compile Include="Enumerations\DataProviderServiceType.cs" />
     <Compile Include="Enumerations\DataProviderType.cs" />
@@ -67,7 +66,7 @@
     <Compile Include="Enumerations\ImageFormat.cs" />
     <Compile Include="Enumerations\LevelOfConfidence.cs" />
     <Compile Include="Enumerations\MapStyle.cs" />
-    <Compile Include="EnumTools.cs" />
+    <Compile Include="Tools\EnumTools.cs" />
     <Compile Include="Interfaces\IAddressAutocompleteDataProvider.cs" />
     <Compile Include="Interfaces\IAddressQueryBuilder.cs" />
     <Compile Include="Interfaces\IAddressServiceRequestProcessor.cs" />
@@ -75,14 +74,12 @@
     <Compile Include="Interfaces\IBingAddressParser.cs" />
     <Compile Include="Interfaces\IBingPushPinParameterProvider.cs" />
     <Compile Include="Interfaces\ICorrectImageSizeProvider.cs" />
-    <Compile Include="Interfaces\ICountryConfigurationProvider.cs" />
     <Compile Include="Interfaces\IDataResponseProvider.cs" />
     <Compile Include="Interfaces\IGeocodeAddressDataProvider.cs" />
     <Compile Include="Interfaces\IGeocodeServiceRequestProcessor.cs" />
     <Compile Include="Interfaces\IGoogleAddressParser.cs" />
     <Compile Include="Interfaces\IGoogleLevelOfConfidenceProvider.cs" />
     <Compile Include="Interfaces\IGooglePushPinParameterProvider.cs" />
-    <Compile Include="Interfaces\IHealthMonitoringProcessor.cs" />
     <Compile Include="Interfaces\IMappingDataProvider.cs" />
     <Compile Include="Interfaces\IMapServiceRequestProcessor.cs" />
     <Compile Include="Interfaces\IMelissaAddressParser.cs" />
@@ -142,9 +139,9 @@
     <Compile Include="Models\ValidateAddressResponseModel.cs" />
     <Compile Include="Models\XElementResult.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Repositories\ServiceProviderRepository.cs" />
-    <Compile Include="TypeTools.cs" />
-    <Compile Include="XmlTools.cs" />
+    <Compile Include="Repositories\ClientSettingRepository.cs" />
+    <Compile Include="Tools\TypeTools.cs" />
+    <Compile Include="Tools\XmlTools.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\Foundation\CES.CoreApi.Security\CES.CoreApi.Security.csproj">
@@ -153,7 +150,6 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <None Include="app.config" />
     <None Include="packages.config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

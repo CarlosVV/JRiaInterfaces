@@ -10,6 +10,7 @@ using MoreLinq;
 using CES.CoreApi.GeoLocation.Configuration;
 using CES.CoreApi.GeoLocation.Enumerations;
 using CES.CoreApi.GeoLocation.Service.Business.Logic.Providers;
+using CES.CoreApi.GeoLocation.ClientSettings;
 
 namespace CES.CoreApi.GeoLocation.Service.Business.Logic.Processors
 {
@@ -26,7 +27,7 @@ namespace CES.CoreApi.GeoLocation.Service.Business.Logic.Processors
         /// <param name="serviceType"></param>
         /// <param name="numberOfProviders">Number of data provider configurations to return. Default is 1.</param>
         /// <returns></returns>
-        protected IEnumerable<DataProviderConfiguration> GetProviderConfigurationByCountry(string country, DataProviderServiceType serviceType, int numberOfProviders = 1)
+        protected IEnumerable<DataProvider> GetProviderConfigurationByCountry(string country, DataProviderServiceType serviceType, int numberOfProviders = 1)
         {
             var addressVerificationProviders = CountryConfiguration(country).DataProviders
                 .Where(p => p.DataProviderServiceType == serviceType)

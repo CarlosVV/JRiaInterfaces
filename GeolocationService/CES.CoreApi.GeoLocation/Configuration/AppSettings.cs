@@ -4,7 +4,7 @@ using System.Configuration;
 
 namespace CES.CoreApi.GeoLocation.Configuration
 {
-	public class Settings
+	public class AppSettings
 	{
 		public static int ApplicationId
 		{

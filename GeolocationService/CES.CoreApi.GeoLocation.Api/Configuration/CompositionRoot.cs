@@ -47,12 +47,10 @@ namespace CES.CoreApi.GeoLocation.Api.Configuration
 
         private static void RegisterInterceptions(Container container)
         {
-            container.InterceptWith<PerformanceInterceptor>(type => type == typeof(IDataResponseProvider));
-            container.InterceptWith<PerformanceInterceptor>(type => type == typeof(IHealthMonitoringProcessor));
+            container.InterceptWith<PerformanceInterceptor>(type => type == typeof(IDataResponseProvider));      
             container.InterceptWith<PerformanceInterceptor>(type => type == typeof(IAddressServiceRequestProcessor));
             container.InterceptWith<PerformanceInterceptor>(type => type == typeof(IGeocodeServiceRequestProcessor));
-            container.InterceptWith<PerformanceInterceptor>(type => type == typeof(IMapServiceRequestProcessor));     
-			container.InterceptWith<SecurityLogMonitorInterceptor>(type => type == typeof(IHealthMonitoringProcessor));
+            container.InterceptWith<PerformanceInterceptor>(type => type == typeof(IMapServiceRequestProcessor));    
 			
 		}
 

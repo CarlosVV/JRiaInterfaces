@@ -7,6 +7,7 @@ using CES.CoreApi.GeoLocation.Models;
 using CES.CoreApi.GeoLocation.Enumerations;
 using CES.CoreApi.Configuration.Provider;
 using CES.CoreApi.GeoLocation.Configuration;
+using CES.CoreApi.GeoLocation.ClientSettings;
 
 namespace CES.CoreApi.GeoLocation.Service.Business.Logic.Processors
 {
@@ -117,7 +118,7 @@ namespace CES.CoreApi.GeoLocation.Service.Business.Logic.Processors
 
         #region Private methods
 
-        private ValidateAddressResponseModel VerifyAddress(string country, Func<DataProviderConfiguration, ValidateAddressResponseModel> verifyByProvider)
+        private ValidateAddressResponseModel VerifyAddress(string country, Func<DataProvider, ValidateAddressResponseModel> verifyByProvider)
         {
 			var numberOfProviders = GeoLocationConfigurationSection.Instance.NumberOfProvidersToProcessResult.Value;
 

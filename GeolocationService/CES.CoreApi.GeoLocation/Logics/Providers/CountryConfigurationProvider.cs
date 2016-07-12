@@ -1,27 +1,24 @@
 ﻿using System;
-using System.Linq;
-//using CES.CoreApi.Common.Enumerations;
-//using CES.CoreApi.Common.Exceptions;
-using CES.CoreApi.GeoLocation.Service.Business.Logic.Constants;
 using CES.CoreApi.GeoLocation.Configuration;
 using CES.CoreApi.Security.Providers;
 using CES.CoreApi.GeoLocation.Repositories;
 using Newtonsoft.Json;
 using System.Collections.Generic;
+using CES.CoreApi.GeoLocation.ClientSettings;
 
 namespace CES.CoreApi.GeoLocation.Service.Business.Logic.Providers
 {
     public class CountryConfigurationProvider 
     {
 
-		private readonly ServiceProviderRepository repo;
+		private readonly ClientSettingRepository repository;
 		private static readonly Lazy<CountryConfigurationProvider> instance = new Lazy<CountryConfigurationProvider>(
-			() => new CountryConfigurationProvider(new ServiceProviderRepository()));
+			() => new CountryConfigurationProvider(new ClientSettingRepository()));
 
 
-		private CountryConfigurationProvider(ServiceProviderRepository repo)
+		private CountryConfigurationProvider(ClientSettingRepository repository)
 		{
-			this.repo = repo;
+			this.repository = repository;
 		}
 		#region Core
 		// private readonly DataProviderServiceConfiguration _configurationProvider;
@@ -48,10 +45,7 @@ namespace CES.CoreApi.GeoLocation.Service.Business.Logic.Providers
             return countryConfiguration;
         }
 
-        /// <summary>
-        /// Global application configuration provider instance
-        /// </summary>
-       // public IConfigurationProvider ConfigurationProvider { get; private set; }
+
 
         #endregion
 
@@ -59,20 +53,15 @@ namespace CES.CoreApi.GeoLocation.Service.Business.Logic.Providers
 
         private  static ClientAppSetting GetCountryConfiguration(string countryCode, int applicationId)
         {
-
-			var serviceData = instance.Value.repo.GetServiceProvider(Settings.ApplicationId);
+			var serviceData = instance.Value.repository.GetClientSetting(AppSettings.ApplicationId);
 			var clientSettings = JsonConvert.DeserializeObject<List<ClientAppSetting>>(serviceData);
-
 			foreach (var item in clientSettings)
 			{
 				if (applicationId == item.ApplicationId)
 					return item;
-			}
-			
+			}			
 			return null;
-        }
-
-	
+        }	
 
 		#endregion
 	}

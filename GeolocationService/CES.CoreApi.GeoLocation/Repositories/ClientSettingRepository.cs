@@ -1,23 +1,20 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Configuration;
 using System.Data;
 using System.Data.SqlClient;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace CES.CoreApi.GeoLocation.Repositories
 {
-	public class ServiceProviderRepository
+	public class ClientSettingRepository
 	{
 
-		public async Task<string> GetServiceProviderAsync(int applicationId)
+		public async Task<string> GetGetClientSettingAsync(int applicationId)
 		{
-				return await Task.Run(() => GetServiceProvider(applicationId));
+				return await Task.Run(() => GetClientSetting(applicationId));
 		}
 		
-		public  string GetServiceProvider(int applicationId)
+		public  string GetClientSetting(int applicationId)
 		{
 			
 			var connectionString = ConfigurationManager.ConnectionStrings["Main"].ConnectionString;
