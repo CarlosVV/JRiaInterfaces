@@ -45,6 +45,18 @@
       <HintPath>..\packages\AutoMapper.4.2.1\lib\net45\AutoMapper.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="CES.Logging, Version=1.0.0.27, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\CES.Logging.1.0.0.27\lib\net45\CES.Logging.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Gelf4Net, Version=2.0.3.14, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Gelf4Net.2.0.3.14\lib\net40\Gelf4Net.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="log4net, Version=1.2.15.0, Culture=neutral, PublicKeyToken=669e0ddf0bb1aa2a, processorArchitecture=MSIL">
+      <HintPath>..\packages\log4net.2.0.5\lib\net45-full\log4net.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="Newtonsoft.Json, Version=9.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <HintPath>..\packages\Newtonsoft.Json.9.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
@@ -105,11 +117,13 @@
     <Compile Include="Api\MapController.cs" />
     <Compile Include="Api\PingController.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
+    <Compile Include="Attributes\CoreApiExceptionFilterAttribute.cs" />
     <Compile Include="Configuration\CompositionRoot.cs" />
     <Compile Include="Configuration\GeoLocationMapperProfile.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Logger\WebApiExceptionLogger.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Utilities\RequestValidator.cs" />
     <Compile Include="ViewModels\AddressRequest.cs" />
@@ -155,10 +169,6 @@
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>
-    <ProjectReference Include="..\..\Foundation\CES.CoreApi.Logging\CES.CoreApi.Logging.csproj">
-      <Project>{76762a04-54f0-4147-bd2b-267372034706}</Project>
-      <Name>CES.CoreApi.Logging</Name>
-    </ProjectReference>
     <ProjectReference Include="..\..\Foundation\CES.CoreAPI.Security.WebApi\CES.CoreAPI.Security.WebApi.csproj">
       <Project>{edf1e298-f3b9-4c97-ad36-2f3d260ae636}</Project>
       <Name>CES.CoreAPI.Security.WebApi</Name>
@@ -169,17 +179,9 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\Foundation\CES.CoreApi.Logging\CES.CoreApi.Logging.csproj">
-      <Project>{76762a04-54f0-4147-bd2b-267372034706}</Project>
-      <Name>CES.CoreApi.Logging</Name>
-    </ProjectReference>
     <ProjectReference Include="..\..\Foundation\CES.CoreApi.Security\CES.CoreApi.Security.csproj">
       <Project>{bab197c1-fc36-4070-b1fa-ffc0d6bd1d79}</Project>
       <Name>CES.CoreApi.Security</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\Foundation\CES.CoreApi.SimpleInjectorProxy\CES.CoreApi.SimpleInjectorProxy.csproj">
-      <Project>{02beaa68-76a1-4ed6-bf6c-7b6935165ad6}</Project>
-      <Name>CES.CoreApi.SimpleInjectorProxy</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup />

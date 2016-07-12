@@ -1,5 +1,6 @@
-﻿using CES.CoreApi.GeoLocation.Api.Configuration;
-using CES.CoreApi.Logging.Attributes;
+﻿using CES.CoreApi.GeoLocation.Api.Attributes;
+using CES.CoreApi.GeoLocation.Api.Configuration;
+using CES.CoreApi.GeoLocation.Api.Logger;
 using CES.CoreApi.Security.Interfaces;
 using CES.CoreApi.Security.WebApi.Interfaces;
 using CES.CoreApi.Security.WebAPI.Filters;
@@ -23,10 +24,10 @@ namespace CES.CoreApi.GeoLocation.Api
 			GlobalConfiguration.Configuration.DependencyResolver = new SimpleInjectorWebApiDependencyResolver(container);
 
 			CompositionRoot.RegisterDependencies(container);
-			GlobalConfiguration.Configuration.Filters.Add(new FaultExceptionFilterAttribute());
+			GlobalConfiguration.Configuration.Filters.Add(new CoreApiExceptionFilterAttribute());
 			GlobalConfiguration.Configuration.Filters.Add(new AuthenticationManager(container.GetInstance<IApplicationAuthenticator>(), container.GetInstance<IWebApiRequestHeaderParametersService>()));
 			GlobalConfiguration.Configuration.Filters.Add(new AuthorizationManager(container.GetInstance<IApplicationAuthorizator>()));
-			GlobalConfiguration.Configuration.Services.Add(typeof(IExceptionLogger), new Logging.Monitors.WebApiExceptionLogger());
+			GlobalConfiguration.Configuration.Services.Add(typeof(IExceptionLogger), new WebApiExceptionLogger());
 			
 		}
 	}

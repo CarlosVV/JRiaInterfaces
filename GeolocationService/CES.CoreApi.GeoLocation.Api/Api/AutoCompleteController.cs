@@ -1,15 +1,16 @@
 ﻿using AutoMapper;
+using CES.CoreApi.GeoLocation.Api.Attributes;
 using CES.CoreApi.GeoLocation.Enumerations;
 using CES.CoreApi.GeoLocation.Models;
 using CES.CoreApi.GeoLocation.Service.Business.Contract.Interfaces;
 using CES.CoreApi.GeoLocation.Service.Contract.Enumerations;
 using CES.CoreApi.GeoLocation.Service.Contract.Models;
-using CES.CoreApi.Logging.Attributes;
+
 using System.Web.Http;
 
 namespace CES.CoreApi.GeoLocation.Api.Api
-{
-	[FaultExceptionFilter]
+{  
+	[CoreApiExceptionFilter]
 	[RoutePrefix("geolocation")]
 	public class AutoCompleteController : ApiController
     {	
