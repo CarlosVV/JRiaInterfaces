@@ -1,5 +1,4 @@
-﻿using CES.CoreApi.Common.Enumerations;
-using CES.CoreApi.Common.Exceptions;
+﻿
 using CES.CoreApi.GeoLocation.Enumerations;
 using CES.CoreApi.GeoLocation.Models;
 using CES.CoreApi.GeoLocation.Service.Business.Contract.Interfaces;
@@ -16,15 +15,15 @@ namespace CES.CoreApi.GeoLocation.Service.Business.Logic.Providers
 
         public AddressAutocompleteDataProvider(IUrlBuilderFactory urlBuilderFactory, IResponseParserFactory responseParserFactory,  IDataResponseProvider responseProvider)
         {
-            if (urlBuilderFactory == null)
-                throw new CoreApiException(TechnicalSubSystem.GeoLocationService,
-                   SubSystemError.GeneralRequiredParameterIsUndefined, "urlBuilderFactory");
-            if (responseProvider == null)
-                throw new CoreApiException(TechnicalSubSystem.GeoLocationService,
-                  SubSystemError.GeneralRequiredParameterIsUndefined, "responseProvider");
-            if (responseParserFactory == null)
-                throw new CoreApiException(TechnicalSubSystem.GeoLocationService,
-                  SubSystemError.GeneralRequiredParameterIsUndefined, "responseParserFactory");
+            //if (urlBuilderFactory == null)
+            //    throw new CoreApiException(TechnicalSubSystem.GeoLocationService,
+            //       SubSystemError.GeneralRequiredParameterIsUndefined, "urlBuilderFactory");
+            //if (responseProvider == null)
+            //    throw new CoreApiException(TechnicalSubSystem.GeoLocationService,
+            //      SubSystemError.GeneralRequiredParameterIsUndefined, "responseProvider");
+            //if (responseParserFactory == null)
+            //    throw new CoreApiException(TechnicalSubSystem.GeoLocationService,
+            //      SubSystemError.GeneralRequiredParameterIsUndefined, "responseParserFactory");
             _urlBuilderFactory = urlBuilderFactory;
             _responseParserFactory = responseParserFactory;
             _responseProvider = responseProvider;

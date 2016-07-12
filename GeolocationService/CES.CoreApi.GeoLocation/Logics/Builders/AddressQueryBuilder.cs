@@ -1,7 +1,5 @@
 ﻿using System.Globalization;
 using System.Web;
-using CES.CoreApi.Common.Enumerations;
-using CES.CoreApi.Common.Exceptions;
 using CES.CoreApi.GeoLocation.Service.Business.Contract.Interfaces;
 
 namespace CES.CoreApi.GeoLocation.Service.Business.Logic.Builders
@@ -20,14 +18,12 @@ namespace CES.CoreApi.GeoLocation.Service.Business.Logic.Builders
 
         public string Build(string address, string administrativeArea, string country)
         {
-            if (string.IsNullOrEmpty(address))
-                throw new CoreApiException(TechnicalSubSystem.GeoLocationService,
-                    SubSystemError.GeneralRequiredParameterIsUndefined, "address");
+			if (string.IsNullOrEmpty(address))
+				throw new System.Exception("address is required");
             if (string.IsNullOrEmpty(country))
-                throw new CoreApiException(TechnicalSubSystem.GeoLocationService,
-                    SubSystemError.GeneralRequiredParameterIsUndefined, "country");
-            
-            var query = string.IsNullOrEmpty(administrativeArea)
+				throw new System.Exception("country is required");
+
+			var query = string.IsNullOrEmpty(administrativeArea)
                 ? string.Format(CultureInfo.InvariantCulture, QueryWithoutAdministrativeAreaTemplate, address, country)
                 : string.Format(CultureInfo.InvariantCulture, QueryWithAdministrativeAreaTemplate, address, administrativeArea, country);
 
@@ -37,10 +33,9 @@ namespace CES.CoreApi.GeoLocation.Service.Business.Logic.Builders
         public string Build(string address1, string address2)
         {
             if (string.IsNullOrEmpty(address1))
-                throw new CoreApiException(TechnicalSubSystem.GeoLocationService,
-                    SubSystemError.GeneralRequiredParameterIsUndefined, "address1");
+				throw new System.Exception("address1 is required");
 
-            var query = string.IsNullOrEmpty(address2)
+			var query = string.IsNullOrEmpty(address2)
                 ? address1
                 : string.Format(CultureInfo.InvariantCulture, CompositeAddressTemplate, address1, address2);
 

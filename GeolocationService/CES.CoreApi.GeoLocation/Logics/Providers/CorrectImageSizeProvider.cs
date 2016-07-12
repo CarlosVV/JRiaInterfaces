@@ -1,7 +1,7 @@
-﻿using CES.CoreApi.Common.Enumerations;
-using CES.CoreApi.Common.Exceptions;
+﻿
 using CES.CoreApi.GeoLocation.Enumerations;
 using CES.CoreApi.GeoLocation.Service.Business.Contract.Interfaces;
+using System;
 
 namespace CES.CoreApi.GeoLocation.Service.Business.Logic.Providers
 {
@@ -40,9 +40,7 @@ namespace CES.CoreApi.GeoLocation.Service.Business.Logic.Providers
                     return GetCorrectGoogleSize(dimension, requestValue);
 
                 default:
-                    throw new CoreApiException(TechnicalSubSystem.GeoLocationService,
-                        SubSystemError.GeolocationMappingIsNotSupported,
-                        providerType);
+                    throw new Exception("Invalid provider");
             }
         }
 

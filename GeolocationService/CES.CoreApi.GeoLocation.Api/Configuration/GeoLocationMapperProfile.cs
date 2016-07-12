@@ -32,7 +32,6 @@ namespace CES.CoreApi.GeoLocation.Api.Configuration
 			CreateMap<GeocodeAddressResponseModel, GeocodeAddressResponse>().ConstructUsingServiceLocator();
 			CreateMap<GeocodeAddressResponseModel, GeocodeAddressResponse>().ConstructUsingServiceLocator();
 			CreateMap<GetMapResponseModel, GetMapResponse>().ConstructUsingServiceLocator();
-			CreateMap<GetProviderKeyResponseModel, GetProviderKeyResponse>().ConstructUsingServiceLocator();
 		}
 	}
 

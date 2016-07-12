@@ -1,13 +1,10 @@
 ﻿using System.Collections.Generic;
 using System.Globalization;
 using System.Web;
-using CES.CoreApi.Common.Enumerations;
-using CES.CoreApi.Common.Exceptions;
-using CES.CoreApi.GeoLocation.Enumerations;
 using CES.CoreApi.GeoLocation.Service.Business.Contract.Interfaces;
 using CES.CoreApi.GeoLocation.Models;
-using CES.CoreApi.GeoLocation.Configuration;
 using CES.CoreApi.Configuration.Provider;
+using System;
 
 namespace CES.CoreApi.GeoLocation.Service.Business.Logic.Builders
 {
@@ -21,17 +18,18 @@ namespace CES.CoreApi.GeoLocation.Service.Business.Logic.Builders
 
         #region Public methods
 
-        /// <summary>
-        /// Builds URL for reverse geocoding - provides address by point
-        /// </summary>
-        /// <param name="location">Geographic point to reverse geocode</param>
-        /// <returns></returns>
-        public string BuildUrl(LocationModel location)
-        {
-            throw new CoreApiException(TechnicalSubSystem.GeoLocationService,
-               SubSystemError.GeolocationReverseGeocodingIsNotSupported,
-               DataProviderType.MelissaData);
-        }
+   //     /// <summary>
+   //     /// Builds URL for reverse geocoding - provides address by point
+   //     /// </summary>
+   //     /// <param name="location">Geographic point to reverse geocode</param>
+   //     /// <returns></returns>
+   //     public string BuildUrl(LocationModel location)
+   //     {
+   //         //throw new CoreApiException(TechnicalSubSystem.GeoLocationService,
+   //         //   SubSystemError.GeolocationReverseGeocodingIsNotSupported,
+   //         //   DataProviderType.MelissaData);
+			//throw new U
+   //     }
 
         /// <summary>
         /// Builds URL for address autocomplete
@@ -89,21 +87,31 @@ namespace CES.CoreApi.GeoLocation.Service.Business.Logic.Builders
             return url;
         }
 
-        /// <summary>
-        /// Builds URL for getting map
-        /// </summary>
-        /// <param name="center">Map center point</param>
-        /// <param name="size">Map size</param>
-        /// <param name="outputParameters">Parameters defining how to display map</param>
-        /// <param name="pushPins">Collection of pins to display on map</param>
-        /// <returns></returns>
-        public string BuildUrl(LocationModel center, MapSizeModel size, MapOutputParametersModel outputParameters, ICollection<PushPinModel> pushPins)
-        {
-            throw new CoreApiException(TechnicalSubSystem.GeoLocationService,
-               SubSystemError.GeolocationMappingIsNotSupported,
-               DataProviderType.MelissaData);
-        }
+		public string BuildUrl(LocationModel location)
+		{
+			throw new NotImplementedException();
+		}
 
-        #endregion
-    }
+		public string BuildUrl(LocationModel center, MapSizeModel size, MapOutputParametersModel outputParameters, ICollection<PushPinModel> pushPins)
+		{
+			throw new NotImplementedException();
+		}
+
+		/// <summary>
+		/// Builds URL for getting map
+		/// </summary>
+		/// <param name="center">Map center point</param>
+		/// <param name="size">Map size</param>
+		/// <param name="outputParameters">Parameters defining how to display map</param>
+		/// <param name="pushPins">Collection of pins to display on map</param>
+		/// <returns></returns>
+		//public string BuildUrl(LocationModel center, MapSizeModel size, MapOutputParametersModel outputParameters, ICollection<PushPinModel> pushPins)
+		//{
+		//    throw new CoreApiException(TechnicalSubSystem.GeoLocationService,
+		//       SubSystemError.GeolocationMappingIsNotSupported,
+		//       DataProviderType.MelissaData);
+		//}
+
+		#endregion
+	}
 }

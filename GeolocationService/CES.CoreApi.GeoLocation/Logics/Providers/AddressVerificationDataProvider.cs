@@ -1,5 +1,5 @@
-﻿using CES.CoreApi.Common.Enumerations;
-using CES.CoreApi.Common.Exceptions;
+﻿//using CES.CoreApi.Common.Enumerations;
+//using CES.CoreApi.Common.Exceptions;
 using CES.CoreApi.GeoLocation.Enumerations;
 using CES.CoreApi.GeoLocation.Models;
 using CES.CoreApi.GeoLocation.Service.Business.Contract.Interfaces;
@@ -17,15 +17,15 @@ namespace CES.CoreApi.GeoLocation.Service.Business.Logic.Providers
 
         public AddressVerificationDataProvider(IDataResponseProvider responseProvider, IUrlBuilderFactory urlBuilderFactory, IResponseParserFactory responseParserFactory)
         {
-            if (responseProvider == null)
-                throw new CoreApiException(TechnicalSubSystem.GeoLocationService,
-                   SubSystemError.GeneralRequiredParameterIsUndefined, "responseProvider");
-            if (urlBuilderFactory == null)
-                throw new CoreApiException(TechnicalSubSystem.GeoLocationService,
-                    SubSystemError.GeneralRequiredParameterIsUndefined, "urlBuilderFactory");
-            if (responseParserFactory == null)
-                throw new CoreApiException(TechnicalSubSystem.GeoLocationService,
-                    SubSystemError.GeneralRequiredParameterIsUndefined, "responseParserFactory");
+            //if (responseProvider == null)
+            //    throw new CoreApiException(TechnicalSubSystem.GeoLocationService,
+            //       SubSystemError.GeneralRequiredParameterIsUndefined, "responseProvider");
+            //if (urlBuilderFactory == null)
+            //    throw new CoreApiException(TechnicalSubSystem.GeoLocationService,
+            //        SubSystemError.GeneralRequiredParameterIsUndefined, "urlBuilderFactory");
+            //if (responseParserFactory == null)
+            //    throw new CoreApiException(TechnicalSubSystem.GeoLocationService,
+            //        SubSystemError.GeneralRequiredParameterIsUndefined, "responseParserFactory");
             _responseProvider = responseProvider;
             _urlBuilderFactory = urlBuilderFactory;
             _responseParserFactory = responseParserFactory;

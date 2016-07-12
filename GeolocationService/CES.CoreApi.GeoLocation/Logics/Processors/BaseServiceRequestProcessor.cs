@@ -37,7 +37,7 @@ namespace CES.CoreApi.GeoLocation.Service.Business.Logic.Processors
             return addressVerificationProviders;
         }
 
-        protected CountryConfiguration CountryConfiguration(string country)
+        protected ClientAppSetting CountryConfiguration(string country)
         {
             return CountryConfigurationProvider.GetProviderConfigurationByCountry(country);
         }

@@ -1,10 +1,10 @@
-﻿using CES.CoreApi.Common.Enumerations;
-using CES.CoreApi.Common.Exceptions;
-using CES.CoreApi.Common.Proxies;
+﻿//using CES.CoreApi.Common.Enumerations;
+//using CES.CoreApi.Common.Exceptions;
+
 using CES.CoreApi.GeoLocation.Enumerations;
 using CES.CoreApi.GeoLocation.Models;
 using CES.CoreApi.GeoLocation.Service.Business.Contract.Interfaces;
-
+using System.Net.Http;
 namespace CES.CoreApi.GeoLocation.Service.Business.Logic.Providers
 {
     public class DataResponseProvider : IDataResponseProvider
@@ -19,10 +19,10 @@ namespace CES.CoreApi.GeoLocation.Service.Business.Logic.Providers
 
         public DataResponse GetResponse(string requestUrl, DataProviderType providerType)
         {
-            if (string.IsNullOrEmpty(requestUrl))
-                throw new CoreApiException(TechnicalSubSystem.GeoLocationService, SubSystemError.GeneralRequiredParameterIsUndefined, "requestUrl");
+            //if (string.IsNullOrEmpty(requestUrl))
+            //    throw new CoreApiException(TechnicalSubSystem.GeoLocationService, SubSystemError.GeneralRequiredParameterIsUndefined, "requestUrl");
 
-            using (var httpClient = HttpClientProxy.GetHttpClient())
+            using (var httpClient = new HttpClient())
             {
                 var responseMessage = httpClient.GetAsync(requestUrl).Result;
 
@@ -37,10 +37,10 @@ namespace CES.CoreApi.GeoLocation.Service.Business.Logic.Providers
 
         public BinaryDataResponse GetBinaryResponse(string requestUrl, DataProviderType providerType)
         {
-            if (string.IsNullOrEmpty(requestUrl))
-                throw new CoreApiException(TechnicalSubSystem.GeoLocationService, SubSystemError.GeneralRequiredParameterIsUndefined, "requestUrl");
+            //if (string.IsNullOrEmpty(requestUrl))
+            //    throw new CoreApiException(TechnicalSubSystem.GeoLocationService, SubSystemError.GeneralRequiredParameterIsUndefined, "requestUrl");
 			
-            using (var httpClient = HttpClientProxy.GetHttpClient())
+            using (var httpClient = new HttpClient())
             {
                 var responseMessage = httpClient.GetAsync(requestUrl).Result;
 

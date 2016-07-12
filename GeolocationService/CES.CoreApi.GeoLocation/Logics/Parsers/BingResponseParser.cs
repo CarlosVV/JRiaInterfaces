@@ -1,8 +1,6 @@
 ﻿using System;
 using System.Linq;
 using System.Xml.Linq;
-using CES.CoreApi.Common.Enumerations;
-using CES.CoreApi.Common.Exceptions;
 using CES.CoreApi.Common.Tools;
 using CES.CoreApi.GeoLocation.Service.Business.Contract.Interfaces;
 using CES.CoreApi.GeoLocation.Service.Business.Logic.Constants;
@@ -22,8 +20,7 @@ namespace CES.CoreApi.GeoLocation.Service.Business.Logic.Parsers
             : base(DataProviderType.Bing)
         {
             if (addressParser == null)
-                throw new CoreApiException(TechnicalSubSystem.GeoLocationService,
-                   SubSystemError.GeneralRequiredParameterIsUndefined, "addressParser");
+                throw new Exception("IBingAddressParser is null");
             _addressParser = addressParser;
             _responseNamespace = "http://schemas.microsoft.com/search/local/ws/rest/v1";
         }
@@ -219,9 +216,9 @@ namespace CES.CoreApi.GeoLocation.Service.Business.Logic.Parsers
         private LocationModel GetLocation(XContainer locationRecord)
         {
             var pointElement = locationRecord.Element(_responseNamespace + BingConstants.Point);
-            if (pointElement == null)
-                throw new CoreApiException(TechnicalSubSystem.GeoLocationService,
-                   SubSystemError.GeolocationLocationIsNotFoundInResponse, DataProviderType.Bing);
+            //if (pointElement == null)
+            //    throw new CoreApiException(TechnicalSubSystem.GeoLocationService,
+            //       SubSystemError.GeolocationLocationIsNotFoundInResponse, DataProviderType.Bing);
 
             return new LocationModel
             {

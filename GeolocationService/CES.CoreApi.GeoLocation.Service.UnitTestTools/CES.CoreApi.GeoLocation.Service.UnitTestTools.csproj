@@ -66,10 +66,6 @@
       <Project>{F1C8C7B5-94B0-4344-B4C1-220E1BB82976}</Project>
       <Name>CES.CoreApi.GeoLocation.Service.Business.Contract</Name>
     </ProjectReference>
-    <ProjectReference Include="..\CES.CoreApi.GeoLocation.Service.Contract\CES.CoreApi.GeoLocation.Service.Contract.csproj">
-      <Project>{E0888526-1DC6-4693-88A3-7347A99BC018}</Project>
-      <Name>CES.CoreApi.GeoLocation.Service.Contract</Name>
-    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />

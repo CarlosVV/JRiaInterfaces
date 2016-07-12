@@ -1,9 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Globalization;
-using CES.CoreApi.Common.Enumerations;
-using CES.CoreApi.Common.Exceptions;
-using CES.CoreApi.GeoLocation.Service.Business.Contract.Enumerations;
 using CES.CoreApi.GeoLocation.Service.Business.Contract.Interfaces;
 using CES.CoreApi.GeoLocation.Service.Business.Logic.Parsers;
 using CES.CoreApi.GeoLocation.Enumerations;
@@ -33,9 +30,7 @@ namespace CES.CoreApi.GeoLocation.Service.Business.Logic.Factories
         private static string GetRegistrationName(DataProviderType providerType)
         {
             if (providerType == DataProviderType.Undefined)
-                throw new CoreApiException(TechnicalSubSystem.GeoLocationService,
-                    SubSystemError.GeneralInvalidParameterValue,
-                    "providerType", providerType);
+                throw new Exception("Invalid provider");
 
             return string.Format(
                 CultureInfo.InvariantCulture,

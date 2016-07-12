@@ -1,7 +1,5 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
-using CES.CoreApi.Common.Enumerations;
-using CES.CoreApi.Common.Exceptions;
 using CES.CoreApi.GeoLocation.Service.Business.Contract.Enumerations;
 using CES.CoreApi.GeoLocation.Service.Business.Contract.Interfaces;
 using CES.CoreApi.GeoLocation.Models;
@@ -18,9 +16,9 @@ namespace CES.CoreApi.GeoLocation.Service.Business.Logic.Processors
         public MapServiceRequestProcessor(IMappingDataProvider mappingDataProvider) 
             
         {
-            if (mappingDataProvider == null)
-                throw new CoreApiException(TechnicalSubSystem.GeoLocationService,
-                   SubSystemError.GeneralRequiredParameterIsUndefined, "mappingDataProvider");
+            //if (mappingDataProvider == null)
+            //    throw new CoreApiException(TechnicalSubSystem.GeoLocationService,
+            //       SubSystemError.GeneralRequiredParameterIsUndefined, "mappingDataProvider");
             _mappingDataProvider = mappingDataProvider;
         }
 
@@ -32,10 +30,10 @@ namespace CES.CoreApi.GeoLocation.Service.Business.Logic.Processors
         {
             var providerConfiguration = GetProviderConfigurationByCountry(country, DataProviderServiceType.Mapping).FirstOrDefault();
 
-            if (providerConfiguration == null)
-                throw new CoreApiException(TechnicalSubSystem.GeoLocationService,
-                    SubSystemError.GeolocationDataProviderNotFound,
-                    DataProviderServiceType.Mapping);
+            //if (providerConfiguration == null)
+            //    throw new CoreApiException(TechnicalSubSystem.GeoLocationService,
+            //        SubSystemError.GeolocationDataProviderNotFound,
+            //        DataProviderServiceType.Mapping);
 
             //Set default image format if it is not defined
             if (outputParameters.ImageFormat == ImageFormat.Undefined)

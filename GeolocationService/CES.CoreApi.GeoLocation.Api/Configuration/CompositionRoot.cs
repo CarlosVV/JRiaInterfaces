@@ -1,8 +1,4 @@
 ﻿using AutoMapper;
-//using CES.CoreApi.Foundation.Contract.Interfaces;
-////using CES.CoreApi.Foundation.Providers;
-//using CES.CoreApi.Foundation.Service;
-//using CES.CoreApi.GeoLocation.Service.Business.Contract.Interfaces;
 using CES.CoreApi.GeoLocation.Service.Business.Logic.Builders;
 using CES.CoreApi.GeoLocation.Service.Business.Logic.Factories;
 using CES.CoreApi.GeoLocation.Service.Business.Logic.Parsers;
@@ -16,7 +12,6 @@ using CES.CoreApi.Logging.Models;
 using CES.CoreApi.Logging.Monitors;
 using CES.CoreApi.Logging.Providers;
 using SimpleInjector;
-using CES.CoreApi.Caching.Providers;
 using CES.CoreApi.Security.Interfaces;
 using CES.CoreApi.SimpleInjectorProxy;
 using CES.CoreApi.Security.Managers;
@@ -47,8 +42,6 @@ namespace CES.CoreApi.GeoLocation.Api.Configuration
         {         
             container.Register<IApplicationAuthenticator, ApplicationAuthenticator>();             
             container.Register<IApplicationAuthorizator, ApplicationAuthorizator>();
-			container.Register<Caching.Interfaces.ICacheProvider>(() => new RedisCacheProvider());   
-          //  container.Register<Foundation.Contract.Interfaces.IServiceExceptionHandler, Foundation.Service.ServiceExceptionHandler>();       
             container.Register<IIdentityProvider, IdentityProvider>();
         }
 

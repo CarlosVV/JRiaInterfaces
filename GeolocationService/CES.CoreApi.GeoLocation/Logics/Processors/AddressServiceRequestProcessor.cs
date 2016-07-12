@@ -1,10 +1,8 @@
 ﻿using System;
 using System.Linq;
-using CES.CoreApi.Common.Enumerations;
-using CES.CoreApi.Common.Exceptions;
 using CES.CoreApi.GeoLocation.Service.Business.Contract.Interfaces;
-using CES.CoreApi.Foundation.Repositories;
-using Newtonsoft.Json;
+
+
 using CES.CoreApi.GeoLocation.Models;
 using CES.CoreApi.GeoLocation.Enumerations;
 using CES.CoreApi.Configuration.Provider;
@@ -23,12 +21,12 @@ namespace CES.CoreApi.GeoLocation.Service.Business.Logic.Processors
             IAddressVerificationDataProvider addressVerificationDataProvider, IAddressAutocompleteDataProvider addressAutocompleteDataProvider)
             
         {
-            if (addressVerificationDataProvider == null)
-                throw new CoreApiException(TechnicalSubSystem.GeoLocationService,
-                   SubSystemError.GeneralRequiredParameterIsUndefined, "addressVerificationDataProvider");
-            if (addressAutocompleteDataProvider == null)
-                throw new CoreApiException(TechnicalSubSystem.GeoLocationService,
-                   SubSystemError.GeneralRequiredParameterIsUndefined, "addressAutocompleteDataProvider");
+            //if (addressVerificationDataProvider == null)
+            //    throw new CoreApiException(TechnicalSubSystem.GeoLocationService,
+            //       SubSystemError.GeneralRequiredParameterIsUndefined, "addressVerificationDataProvider");
+            //if (addressAutocompleteDataProvider == null)
+            //    throw new CoreApiException(TechnicalSubSystem.GeoLocationService,
+            //       SubSystemError.GeneralRequiredParameterIsUndefined, "addressAutocompleteDataProvider");
 
             _addressVerificationDataProvider = addressVerificationDataProvider;
             _addressAutocompleteDataProvider = addressAutocompleteDataProvider;
@@ -128,9 +126,7 @@ namespace CES.CoreApi.GeoLocation.Service.Business.Logic.Processors
             var providers = GetProviderConfigurationByCountry(country, DataProviderServiceType.AddressVerification, numberOfProviders).ToList();
 
             if (!providers.Any())
-                throw new CoreApiException(TechnicalSubSystem.GeoLocationService,
-                    SubSystemError.GeolocationDataProviderNotFound,
-                    DataProviderServiceType.AddressVerification);
+                throw new Exception("application is not setup or not authorized");
 
             ValidateAddressResponseModel responseModel = null;
 

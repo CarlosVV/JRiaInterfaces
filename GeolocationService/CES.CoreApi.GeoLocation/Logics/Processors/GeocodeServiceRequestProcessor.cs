@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Linq;
-using CES.CoreApi.Common.Enumerations;
-using CES.CoreApi.Common.Exceptions;
+
 using CES.CoreApi.GeoLocation.Service.Business.Contract.Interfaces;
 using CES.CoreApi.GeoLocation.Models;
 using CES.CoreApi.GeoLocation.Enumerations;
@@ -20,9 +19,9 @@ namespace CES.CoreApi.GeoLocation.Service.Business.Logic.Processors
             IGeocodeAddressDataProvider geocodeAddressDataProvider)
            
         {
-            if (geocodeAddressDataProvider == null)
-                throw new CoreApiException(TechnicalSubSystem.GeoLocationService,
-                   SubSystemError.GeneralRequiredParameterIsUndefined, "geocodeAddressDataProvider");
+            //if (geocodeAddressDataProvider == null)
+            //    throw new CoreApiException(TechnicalSubSystem.GeoLocationService,
+            //       SubSystemError.GeneralRequiredParameterIsUndefined, "geocodeAddressDataProvider");
 
             _geocodeAddressDataProvider = geocodeAddressDataProvider;
         }
@@ -61,11 +60,14 @@ namespace CES.CoreApi.GeoLocation.Service.Business.Logic.Processors
             var numberOfProviders = GeoLocationConfigurationSection.Instance.NumberOfProvidersToProcessResult.Value;
 			var providers = GetProviderConfigurationByCountry(country, DataProviderServiceType.Geocoding, numberOfProviders).ToList();
 
-            if (!providers.Any())
-                throw new CoreApiException(TechnicalSubSystem.GeoLocationService,
-                    SubSystemError.GeolocationDataProviderNotFound, DataProviderServiceType.Geocoding);
+			//if (!providers.Any())
+			//    throw new CoreApiException(TechnicalSubSystem.GeoLocationService,
+			//        SubSystemError.GeolocationDataProviderNotFound, DataProviderServiceType.Geocoding);
 
-            GeocodeAddressResponseModel responseModel = null;
+			if (!providers.Any())
+				throw new Exception("Invalid app configaration or app is not authorized");
+
+			GeocodeAddressResponseModel responseModel = null;
 
             foreach (var providerConfiguration in providers)
             {

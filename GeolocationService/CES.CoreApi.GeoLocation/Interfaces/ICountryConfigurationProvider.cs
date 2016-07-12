@@ -5,7 +5,7 @@ namespace CES.CoreApi.GeoLocation.Service.Business.Contract.Interfaces
 {
 	public interface ICountryConfigurationProvider
     {
-        CountryConfiguration GetProviderConfigurationByCountry(string countryCode);
+        //CountryConfiguration GetProviderConfigurationByCountry(string countryCode);
 
         /// <summary>
         /// Global application configuration provider instance

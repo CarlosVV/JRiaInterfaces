@@ -1,8 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Globalization;
 using System.Web;
-using CES.CoreApi.Common.Enumerations;
-using CES.CoreApi.Common.Exceptions;
 using CES.CoreApi.Common.Tools;
 using CES.CoreApi.GeoLocation.Service.Business.Contract.Interfaces;
 using CES.CoreApi.GeoLocation.Models;
@@ -26,16 +24,13 @@ namespace CES.CoreApi.GeoLocation.Service.Business.Logic.Builders
           
         {
             if (addressQueryBuilder == null)
-                throw new CoreApiException(TechnicalSubSystem.GeoLocationService,
-                  SubSystemError.GeneralRequiredParameterIsUndefined, "addressQueryBuilder");
+				throw new System.Exception("IAddressQueryBuilder is null");
             if (pushPinParameterProvider == null)
-                throw new CoreApiException(TechnicalSubSystem.GeoLocationService,
-                  SubSystemError.GeneralRequiredParameterIsUndefined, "pushPinParameterProvider");
-            if (imageSizeProvider == null)
-                throw new CoreApiException(TechnicalSubSystem.GeoLocationService,
-                  SubSystemError.GeneralRequiredParameterIsUndefined, "imageSizeProvider");
+				throw new System.Exception("IGooglePushPinParameterProvider is null");
+			if (imageSizeProvider == null)
+				throw new System.Exception("ICorrectImageSizeProvider is null");
 
-            _addressQueryBuilder = addressQueryBuilder;
+			_addressQueryBuilder = addressQueryBuilder;
             _pushPinParameterProvider = pushPinParameterProvider;
             _imageSizeProvider = imageSizeProvider;
         }

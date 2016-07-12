@@ -2,9 +2,11 @@
 
 namespace CES.CoreApi.GeoLocation.Configuration
 {
-    public class ApplicationCountryConfiguration
-    {
-        public List<CountryConfiguration> CountryConfigurations { get; set; }
-        public int ApplicationId { get; set; }
+    public class ClientSettings
+	{
+        public ClientAppSetting ClientAppSetting { get; set; }
+      
     }
+
+	
 }

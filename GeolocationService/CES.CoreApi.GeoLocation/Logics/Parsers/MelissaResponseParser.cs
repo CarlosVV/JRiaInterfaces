@@ -2,8 +2,8 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Xml.Linq;
-using CES.CoreApi.Common.Enumerations;
-using CES.CoreApi.Common.Exceptions;
+//using CES.CoreApi.Common.Enumerations;
+//using CES.CoreApi.Common.Exceptions;
 using CES.CoreApi.Common.Tools;
 using CES.CoreApi.GeoLocation.Service.Business.Contract.Interfaces;
 using CES.CoreApi.GeoLocation.Service.Business.Logic.Constants;
@@ -24,12 +24,12 @@ namespace CES.CoreApi.GeoLocation.Service.Business.Logic.Parsers
             IMelissaLevelOfConfidenceProvider levelOfConfidenceProvider)
             : base(DataProviderType.MelissaData)
         {
-            if (addressParser == null)
-                throw new CoreApiException(TechnicalSubSystem.GeoLocationService,
-                   SubSystemError.GeneralRequiredParameterIsUndefined, "addressParser");
-            if (levelOfConfidenceProvider == null)
-                throw new CoreApiException(TechnicalSubSystem.GeoLocationService,
-                   SubSystemError.GeneralRequiredParameterIsUndefined, "levelOfConfidenceProvider");
+            //if (addressParser == null)
+            //    throw new CoreApiException(TechnicalSubSystem.GeoLocationService,
+            //       SubSystemError.GeneralRequiredParameterIsUndefined, "addressParser");
+            //if (levelOfConfidenceProvider == null)
+            //    throw new CoreApiException(TechnicalSubSystem.GeoLocationService,
+            //       SubSystemError.GeneralRequiredParameterIsUndefined, "levelOfConfidenceProvider");
 
             _addressParser = addressParser;
             _levelOfConfidenceProvider = levelOfConfidenceProvider;
@@ -87,12 +87,7 @@ namespace CES.CoreApi.GeoLocation.Service.Business.Logic.Parsers
                 : GetGeocodeAddressResponse(rootElement, acceptableConfidence);
         }
 
-        public GetMapResponseModel ParseMapResponse(BinaryDataResponse dataResponse)
-        {
-            throw new CoreApiException(TechnicalSubSystem.GeoLocationService,
-                SubSystemError.GeolocationMappingIsNotSupported,
-                DataProviderType.MelissaData);
-        }
+    
 
         #endregion
 
@@ -232,6 +227,11 @@ namespace CES.CoreApi.GeoLocation.Service.Business.Logic.Parsers
             return responseModel;
         }
 
-        #endregion
-    }
+		public GetMapResponseModel ParseMapResponse(BinaryDataResponse dataResponse)
+		{
+			throw new NotImplementedException();
+		}
+
+		#endregion
+	}
 }
