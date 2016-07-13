@@ -2,10 +2,10 @@
 using System.Collections.Generic;
 using System.Linq;
 using CES.CoreApi.Common.Tools;
-using CES.CoreApi.GeoLocation.Service.Business.Contract.Interfaces;
+using CES.CoreApi.GeoLocation.Interfaces;
 using CES.CoreApi.GeoLocation.Enumerations;
 
-namespace CES.CoreApi.GeoLocation.Service.Business.Logic.Providers
+namespace CES.CoreApi.GeoLocation.Logic.Providers
 {
     public class MelissaLevelOfConfidenceProvider : IMelissaLevelOfConfidenceProvider
     {

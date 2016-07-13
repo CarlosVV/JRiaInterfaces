@@ -1,8 +1,8 @@
 ﻿using AutoMapper;
 using CES.CoreApi.GeoLocation.Enumerations;
 using CES.CoreApi.GeoLocation.Models;
-using CES.CoreApi.GeoLocation.Service.Contract.Enumerations;
-using CES.CoreApi.GeoLocation.Service.Contract.Models;
+using CES.CoreApi.GeoLocation.Api.ViewModels;
+using CES.CoreApi.GeoLocation.Api.ViewModels;
 
 
 namespace CES.CoreApi.GeoLocation.Api.Configuration

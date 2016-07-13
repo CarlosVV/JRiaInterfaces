@@ -1,8 +1,8 @@
 ﻿using System.Globalization;
 using System.Web;
-using CES.CoreApi.GeoLocation.Service.Business.Contract.Interfaces;
+using CES.CoreApi.GeoLocation.Interfaces;
 
-namespace CES.CoreApi.GeoLocation.Service.Business.Logic.Builders
+namespace CES.CoreApi.GeoLocation.Logic.Builders
 {
     public class AddressQueryBuilder : IAddressQueryBuilder
     {

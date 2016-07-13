@@ -1,10 +1,10 @@
 ﻿using System.Runtime.Serialization;
-using CES.CoreApi.GeoLocation.Service.Contract.Enumerations;
-using Namespaces = CES.CoreApi.GeoLocation.Service.Contract.Constants.Namespaces;
+using CES.CoreApi.GeoLocation.Api.ViewModels;
 
-namespace CES.CoreApi.GeoLocation.Service.Contract.Models
+
+namespace CES.CoreApi.GeoLocation.Api.ViewModels
 {
-    [DataContract(Namespace = Namespaces.GeolocationServiceDataContractNamespace, Name = "Suggestion")]
+    [DataContract(Name = "Suggestion")]
     public class AutocompleteSuggestion 
     {
         [DataMember(EmitDefaultValue = false)]
@@ -13,12 +13,13 @@ namespace CES.CoreApi.GeoLocation.Service.Contract.Models
         public Location Location { get; set; }
         [DataMember]
         public Confidence Confidence { get; set; }
-		//[DataMember]
-		//public string ConfidenceText {
-		//	get
-		//	{
-		//		return Confidence.ToString();
-		//	}
-		//}
+		[DataMember]
+		public string ConfidenceText
+		{
+			get
+			{
+				return Confidence.ToString();
+			}
+		}
 	}
 }

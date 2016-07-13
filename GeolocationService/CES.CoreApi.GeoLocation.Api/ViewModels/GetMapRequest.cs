@@ -1,11 +1,11 @@
 ﻿using System.Collections.ObjectModel;
 using System.Runtime.Serialization;
 using CES.CoreApi.Common.Models;
-using Namespaces = CES.CoreApi.GeoLocation.Service.Contract.Constants.Namespaces;
 
-namespace CES.CoreApi.GeoLocation.Service.Contract.Models
+
+namespace CES.CoreApi.GeoLocation.Api.ViewModels
 {
-    [DataContract(Namespace = Namespaces.GeolocationServiceDataContractNamespace)]
+    [DataContract]
     public class GetMapRequest : BaseRequest
     {
         [DataMember(IsRequired = true)]

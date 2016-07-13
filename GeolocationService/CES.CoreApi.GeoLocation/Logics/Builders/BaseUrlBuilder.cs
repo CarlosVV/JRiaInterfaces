@@ -1,5 +1,5 @@
 ﻿
-namespace CES.CoreApi.GeoLocation.Service.Business.Logic.Builders
+namespace CES.CoreApi.GeoLocation.Logic.Builders
 {
     public abstract class BaseUrlBuilder 
     {

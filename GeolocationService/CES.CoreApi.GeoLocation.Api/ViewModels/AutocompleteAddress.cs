@@ -3,7 +3,7 @@ using System.Runtime.Serialization;
 using CES.CoreApi.Common.Models;
 
 
-namespace CES.CoreApi.GeoLocation.Service.Contract.Models
+namespace CES.CoreApi.GeoLocation.Api.ViewModels
 {
     [DataContract]
     public class AutocompleteAddress 

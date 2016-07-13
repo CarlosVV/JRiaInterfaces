@@ -1,14 +1,12 @@
 ﻿using System;
 using System.Linq;
-
-using CES.CoreApi.GeoLocation.Service.Business.Contract.Interfaces;
+using CES.CoreApi.GeoLocation.Interfaces;
 using CES.CoreApi.GeoLocation.Models;
 using CES.CoreApi.GeoLocation.Enumerations;
 using CES.CoreApi.GeoLocation.Configuration;
-using CES.CoreApi.Configuration.Provider;
 using CES.CoreApi.GeoLocation.ClientSettings;
 
-namespace CES.CoreApi.GeoLocation.Service.Business.Logic.Processors
+namespace CES.CoreApi.GeoLocation.Logic.Processors
 {
     public class GeocodeServiceRequestProcessor : BaseServiceRequestProcessor, IGeocodeServiceRequestProcessor
     {
@@ -20,10 +18,7 @@ namespace CES.CoreApi.GeoLocation.Service.Business.Logic.Processors
             IGeocodeAddressDataProvider geocodeAddressDataProvider)
            
         {
-            //if (geocodeAddressDataProvider == null)
-            //    throw new CoreApiException(TechnicalSubSystem.GeoLocationService,
-            //       SubSystemError.GeneralRequiredParameterIsUndefined, "geocodeAddressDataProvider");
-
+         
             _geocodeAddressDataProvider = geocodeAddressDataProvider;
         }
 

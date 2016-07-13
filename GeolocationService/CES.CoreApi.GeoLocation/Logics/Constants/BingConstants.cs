@@ -1,6 +1,6 @@
-﻿namespace CES.CoreApi.GeoLocation.Service.Business.Logic.Constants
+﻿namespace CES.CoreApi.GeoLocation.Logic.Constants
 {
-    public class BingConstants
+    internal class BingConstants
     {
         public const string ResourceSets = "ResourceSets";
         public const string ResourceSet = "ResourceSet";

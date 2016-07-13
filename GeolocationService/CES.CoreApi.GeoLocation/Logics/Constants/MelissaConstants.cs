@@ -1,6 +1,6 @@
-﻿namespace CES.CoreApi.GeoLocation.Service.Business.Logic.Constants
+﻿namespace CES.CoreApi.GeoLocation.Logic.Constants
 {
-    public class MelissaConstants
+	internal class MelissaConstants
     {
         public const string ResultCode = "ResultCode";
         public const string ErrorString = "ErrorString";

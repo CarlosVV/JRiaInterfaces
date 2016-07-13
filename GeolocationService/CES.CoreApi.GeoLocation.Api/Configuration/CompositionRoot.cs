@@ -1,22 +1,15 @@
 ﻿using AutoMapper;
-using CES.CoreApi.GeoLocation.Service.Business.Logic.Builders;
-using CES.CoreApi.GeoLocation.Service.Business.Logic.Factories;
-using CES.CoreApi.GeoLocation.Service.Business.Logic.Parsers;
-using CES.CoreApi.GeoLocation.Service.Business.Logic.Processors;
-using CES.CoreApi.GeoLocation.Service.Business.Logic.Providers;
-//using CES.CoreApi.Logging.Configuration;
-//using CES.CoreApi.Logging.Formatters;
-//using CES.CoreApi.Logging.Interfaces;
-//using CES.CoreApi.Logging.Log4Net;
-//using CES.CoreApi.Logging.Models;
-//using CES.CoreApi.Logging.Monitors;
-//using CES.CoreApi.Logging.Providers;
+using CES.CoreApi.GeoLocation.Logic.Builders;
+using CES.CoreApi.GeoLocation.Logic.Factories;
+using CES.CoreApi.GeoLocation.Logic.Parsers;
+using CES.CoreApi.GeoLocation.Logic.Processors;
+using CES.CoreApi.GeoLocation.Logic.Providers;
 using SimpleInjector;
 using CES.CoreApi.Security.Interfaces;
 using CES.CoreApi.Security.Managers;
 using CES.CoreApi.Security.Providers;
 using CES.CoreApi.Security.WebApi.Interfaces;
-using CES.CoreApi.GeoLocation.Service.Business.Contract.Interfaces;
+using CES.CoreApi.GeoLocation.Interfaces;
 
 namespace CES.CoreApi.GeoLocation.Api.Configuration
 {
@@ -29,10 +22,8 @@ namespace CES.CoreApi.GeoLocation.Api.Configuration
             RegisterProcessors(container);
             RegisterUrlBuilders(container);
             RegisterParsers(container);
-            RegisterProviders(container);       
-            //RegisterLoggging(container);
-            RegisterFactories(container);
-           // RegisterInterceptions(container);
+            RegisterProviders(container);     
+            RegisterFactories(container); 
 			RegisterSecurity(container);
             container.Verify();
         }
@@ -43,15 +34,7 @@ namespace CES.CoreApi.GeoLocation.Api.Configuration
             container.Register<IApplicationAuthorizator, ApplicationAuthorizator>();
             container.Register<IIdentityProvider, IdentityProvider>();
         }
-
-  //      private static void RegisterInterceptions(Container container)
-  //      {
-  //          container.InterceptWith<PerformanceInterceptor>(type => type == typeof(IDataResponseProvider));      
-  //          container.InterceptWith<PerformanceInterceptor>(type => type == typeof(IAddressServiceRequestProcessor));
-  //          container.InterceptWith<PerformanceInterceptor>(type => type == typeof(IGeocodeServiceRequestProcessor));
-  //          container.InterceptWith<PerformanceInterceptor>(type => type == typeof(IMapServiceRequestProcessor));    
-			
-		//}
+		
 
 		private static void RegisterAutomapper(Container container)
 		{
@@ -83,8 +66,7 @@ namespace CES.CoreApi.GeoLocation.Api.Configuration
         }
 
         private static void RegisterProcessors(Container container)
-        {
-          //  container.Register<IHealthMonitoringProcessor, HealthMonitoringProcessor>();
+        {     
             container.Register<IAddressServiceRequestProcessor, AddressServiceRequestProcessor>();
             container.Register<IGeocodeServiceRequestProcessor, GeocodeServiceRequestProcessor>();
             container.Register<IMapServiceRequestProcessor, MapServiceRequestProcessor>();
@@ -125,44 +107,7 @@ namespace CES.CoreApi.GeoLocation.Api.Configuration
             container.Register<ICorrectImageSizeProvider, CorrectImageSizeProvider>();
         }       
 
-   //     private static void RegisterLoggging(Container container)
-   //     {
-   //         //Register common classes
-   //         container.Register<ILoggerProxy, Log4NetProxy>();
 
-   //         //Registers common formatters			
-   //         container.Register<IDateTimeFormatter, DateTimeFormatter>();
-   //         container.Register<IFullMethodNameFormatter, FullMethodNameFormatter>();
-   //         container.Register<IDefaultValueFormatter, DefaultValueFormatter>();
-   //         container.Register<IJsonDataContainerFormatter, JsonDataContainerFormatter>();
-
-   //         //Exception log related    
-			//container.Register<IExceptionLogMonitor, ExceptionLogMonitor>();
-			//container.Register<IServiceCallInformationProvider, ServiceCallInformationProvider>();
-        
-   //         //Performance log related
-   //         container.Register<IPerformanceLogMonitor, PerformanceLogMonitor>();
-
-   //         //Trace log related
-   //         container.Register<ITraceLogMonitor, TraceLogMonitor>();
-
-   //         //Database performance log related
-   //         container.Register<IDatabasePerformanceLogMonitor, DatabasePerformanceLogMonitor>();
-   //         container.Register<ISqlQueryFormatter, SqlQueryFormatter>();
-
-			////Register data containers
-			//container.RegisterCollection<IDataContainer>(new[] {
-			//	typeof(DatabasePerformanceLogDataContainer),
-			//	typeof(PerformanceLogDataContainer),
-			//	typeof(TraceLogDataContainer),
-			//	typeof(ExceptionLogDataContainer),
-			//	typeof(SecurityLogDataContainer)});
-
-   //         //Configuration related
-   //         container.Register<ILogConfigurationProvider, LogConfigurationProvider>();
-   //         //Security logging related
-   //         container.Register<ISecurityLogMonitor, SecurityLogMonitor>();
-   //     }
 		private static void RegisterSecurity(Container container)
 		{
 			container.Register<IWebApiRequestHeaderParametersService, WebApiRequestHeaderParametersService>();

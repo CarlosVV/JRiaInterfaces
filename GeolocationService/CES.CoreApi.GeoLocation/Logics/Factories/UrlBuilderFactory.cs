@@ -2,11 +2,11 @@
 using System.Collections.Generic;
 using System.Globalization;
 
-using CES.CoreApi.GeoLocation.Service.Business.Contract.Interfaces;
-using CES.CoreApi.GeoLocation.Service.Business.Logic.Builders;
+using CES.CoreApi.GeoLocation.Interfaces;
+using CES.CoreApi.GeoLocation.Logic.Builders;
 using CES.CoreApi.GeoLocation.Enumerations;
 
-namespace CES.CoreApi.GeoLocation.Service.Business.Logic.Factories
+namespace CES.CoreApi.GeoLocation.Logic.Factories
 {
     public class UrlBuilderFactory : Dictionary<string, Func<BaseUrlBuilder>>, IUrlBuilderFactory
     {

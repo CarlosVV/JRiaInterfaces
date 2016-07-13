@@ -1,6 +1,6 @@
 ﻿using System.Web.Http;
 
-namespace CES.CoreApi.GeoLocation.Api.Api
+namespace CES.CoreApi.GeoLocation.Api
 {
 	[RoutePrefix("geolocation")]
 	public class PingController : ApiController
@@ -9,7 +9,7 @@ namespace CES.CoreApi.GeoLocation.Api.Api
 		[Route("Ping")]
 		public string Ping()
 		{
-			return "OK 2" + CES.CoreApi.Configuration.Provider.GeoLocationConfigurationSection.Instance.Google.Key;;
+			return "OK";
 		}
 	}
 }

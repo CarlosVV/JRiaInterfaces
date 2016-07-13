@@ -1,6 +1,6 @@
 ﻿using System.Configuration;
 
-namespace CES.CoreApi.Configuration.Provider
+namespace CES.CoreApi.GeoLocation.Configuration
 {
 	public class BasicConfiguration : ConfigurationElement
 	{

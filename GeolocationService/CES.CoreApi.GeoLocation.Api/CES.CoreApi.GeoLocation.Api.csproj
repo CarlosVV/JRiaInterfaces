@@ -147,7 +147,6 @@
     <Compile Include="ViewModels\MapDisplayStyle.cs" />
     <Compile Include="ViewModels\MapOutputParameters.cs" />
     <Compile Include="ViewModels\MapSize.cs" />
-    <Compile Include="ViewModels\Namespaces.cs" />
     <Compile Include="ViewModels\PinColor.cs" />
     <Compile Include="ViewModels\PushPin.cs" />
     <Compile Include="ViewModels\ReverseGeocodePointRequest.cs" />

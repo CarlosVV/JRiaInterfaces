@@ -1,6 +1,6 @@
 ﻿using System.Runtime.Serialization;
 
-namespace CES.CoreApi.GeoLocation.Service.Contract.Enumerations
+namespace CES.CoreApi.GeoLocation.Api.ViewModels
 {
     [DataContract]
     public enum MapDisplayStyle

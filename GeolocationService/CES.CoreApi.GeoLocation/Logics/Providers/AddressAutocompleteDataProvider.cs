@@ -1,9 +1,9 @@
 ﻿
 using CES.CoreApi.GeoLocation.Enumerations;
 using CES.CoreApi.GeoLocation.Models;
-using CES.CoreApi.GeoLocation.Service.Business.Contract.Interfaces;
+using CES.CoreApi.GeoLocation.Interfaces;
 
-namespace CES.CoreApi.GeoLocation.Service.Business.Logic.Providers
+namespace CES.CoreApi.GeoLocation.Logic.Providers
 {
     public class AddressAutocompleteDataProvider : IAddressAutocompleteDataProvider
     {
@@ -14,16 +14,7 @@ namespace CES.CoreApi.GeoLocation.Service.Business.Logic.Providers
         private readonly IDataResponseProvider _responseProvider;
 
         public AddressAutocompleteDataProvider(IUrlBuilderFactory urlBuilderFactory, IResponseParserFactory responseParserFactory,  IDataResponseProvider responseProvider)
-        {
-            //if (urlBuilderFactory == null)
-            //    throw new CoreApiException(TechnicalSubSystem.GeoLocationService,
-            //       SubSystemError.GeneralRequiredParameterIsUndefined, "urlBuilderFactory");
-            //if (responseProvider == null)
-            //    throw new CoreApiException(TechnicalSubSystem.GeoLocationService,
-            //      SubSystemError.GeneralRequiredParameterIsUndefined, "responseProvider");
-            //if (responseParserFactory == null)
-            //    throw new CoreApiException(TechnicalSubSystem.GeoLocationService,
-            //      SubSystemError.GeneralRequiredParameterIsUndefined, "responseParserFactory");
+        {          
             _urlBuilderFactory = urlBuilderFactory;
             _responseParserFactory = responseParserFactory;
             _responseProvider = responseProvider;

@@ -1,12 +1,12 @@
 ﻿using System.Collections.Generic;
 using System.Globalization;
 using System.Web;
-using CES.CoreApi.GeoLocation.Service.Business.Contract.Interfaces;
+using CES.CoreApi.GeoLocation.Interfaces;
 using CES.CoreApi.GeoLocation.Models;
-using CES.CoreApi.Configuration.Provider;
 using CES.CoreApi.GeoLocation.Enumerations;
+using CES.CoreApi.GeoLocation.Configuration;
 
-namespace CES.CoreApi.GeoLocation.Service.Business.Logic.Builders
+namespace CES.CoreApi.GeoLocation.Logic.Builders
 {
     public class BingUrlBuilder: BaseUrlBuilder, IUrlBuilder
     {

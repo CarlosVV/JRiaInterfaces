@@ -94,7 +94,6 @@
     <Compile Include="Logics\Builders\GoogleUrlBuilder.cs" />
     <Compile Include="Logics\Builders\MelissaUrlBuilder.cs" />
     <Compile Include="Logics\Constants\BingConstants.cs" />
-    <Compile Include="Logics\Constants\ConfigurationConstants.cs" />
     <Compile Include="Logics\Constants\GoogleConstants.cs" />
     <Compile Include="Logics\Constants\MelissaConstants.cs" />
     <Compile Include="Logics\Factories\ResponseParserFactory.cs" />
@@ -109,7 +108,6 @@
     <Compile Include="Logics\Processors\AddressServiceRequestProcessor.cs" />
     <Compile Include="Logics\Processors\BaseServiceRequestProcessor.cs" />
     <Compile Include="Logics\Processors\GeocodeServiceRequestProcessor.cs" />
-    <Compile Include="Logics\Processors\HealthMonitoringProcessor.cs" />
     <Compile Include="Logics\Processors\MapServiceRequestProcessor.cs" />
     <Compile Include="Logics\Providers\AddressAutocompleteDataProvider.cs" />
     <Compile Include="Logics\Providers\AddressVerificationDataProvider.cs" />

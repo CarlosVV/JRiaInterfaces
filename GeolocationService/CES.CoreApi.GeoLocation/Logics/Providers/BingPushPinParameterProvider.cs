@@ -1,10 +1,10 @@
 ﻿using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
-using CES.CoreApi.GeoLocation.Service.Business.Contract.Interfaces;
+using CES.CoreApi.GeoLocation.Interfaces;
 using CES.CoreApi.GeoLocation.Models;
 
-namespace CES.CoreApi.GeoLocation.Service.Business.Logic.Providers
+namespace CES.CoreApi.GeoLocation.Logic.Providers
 {
     public class BingPushPinParameterProvider : IBingPushPinParameterProvider
     {

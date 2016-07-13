@@ -3,16 +3,16 @@ using System.Linq;
 //using CES.CoreApi.Common.Enumerations;
 //using CES.CoreApi.Common.Exceptions;
 using MoreLinq;
-//using CES.CoreApi.GeoLocation.Service.Business.Contract.Configuration;
-//using CES.CoreApi.GeoLocation.Service.Business.Contract.Enumerations;
-//using CES.CoreApi.GeoLocation.Service.Business.Contract.Interfaces;
-//using CES.CoreApi.GeoLocation.Service.Business.Logic.Providers;
+//using CES.CoreApi.GeoLocation.Contract.Configuration;
+//using CES.CoreApi.GeoLocation.Contract.Enumerations;
+//using CES.CoreApi.GeoLocation.Interfaces;
+//using CES.CoreApi.GeoLocation.Logic.Providers;
 using CES.CoreApi.GeoLocation.Configuration;
 using CES.CoreApi.GeoLocation.Enumerations;
-using CES.CoreApi.GeoLocation.Service.Business.Logic.Providers;
+using CES.CoreApi.GeoLocation.Logic.Providers;
 using CES.CoreApi.GeoLocation.ClientSettings;
 
-namespace CES.CoreApi.GeoLocation.Service.Business.Logic.Processors
+namespace CES.CoreApi.GeoLocation.Logic.Processors
 {
     public abstract class BaseServiceRequestProcessor
     {

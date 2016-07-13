@@ -1,11 +1,11 @@
 ﻿using AutoMapper;
 using CES.CoreApi.GeoLocation.Models;
-using CES.CoreApi.GeoLocation.Service.Business.Contract.Interfaces;
-using CES.CoreApi.GeoLocation.Service.Contract.Models;
+using CES.CoreApi.GeoLocation.Interfaces;
+using CES.CoreApi.GeoLocation.Api.ViewModels;
 using System.Collections.Generic;
 using System.Web.Http;
 
-namespace CES.CoreApi.GeoLocation.Api.Api
+namespace CES.CoreApi.GeoLocation.Api
 {
 	[RoutePrefix("geolocation")]
 	public class MapController : ApiController

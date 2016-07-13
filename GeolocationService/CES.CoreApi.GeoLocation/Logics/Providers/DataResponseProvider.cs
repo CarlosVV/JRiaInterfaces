@@ -3,9 +3,9 @@
 
 using CES.CoreApi.GeoLocation.Enumerations;
 using CES.CoreApi.GeoLocation.Models;
-using CES.CoreApi.GeoLocation.Service.Business.Contract.Interfaces;
+using CES.CoreApi.GeoLocation.Interfaces;
 using System.Net.Http;
-namespace CES.CoreApi.GeoLocation.Service.Business.Logic.Providers
+namespace CES.CoreApi.GeoLocation.Logic.Providers
 {
     public class DataResponseProvider : IDataResponseProvider
     {

@@ -1,4 +1,5 @@
-﻿using CES.CoreApi.GeoLocation.Service.Business.Contract.Enumerations;
+﻿using CES.CoreApi.GeoLocation.Enumerations;
+
 
 namespace CES.CoreApi.GeoLocation.Models
 {

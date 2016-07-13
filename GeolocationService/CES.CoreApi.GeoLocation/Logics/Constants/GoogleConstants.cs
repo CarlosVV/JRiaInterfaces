@@ -1,6 +1,6 @@
-﻿namespace CES.CoreApi.GeoLocation.Service.Business.Logic.Constants
+﻿namespace CES.CoreApi.GeoLocation.Logic.Constants
 {
-    public class GoogleConstants
+	internal class GoogleConstants
     {
         public const string StreetNumber = "street_number";
         public const string Street = "route";

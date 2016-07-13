@@ -4,7 +4,7 @@ using CES.CoreApi.Common.Tools;
 using CES.CoreApi.GeoLocation.Enumerations;
 using CES.CoreApi.GeoLocation.Models;
 
-namespace CES.CoreApi.GeoLocation.Service.Business.Logic.Parsers
+namespace CES.CoreApi.GeoLocation.Logic.Parsers
 {
     public abstract class BaseDataResponseParser
     {

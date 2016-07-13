@@ -1,11 +1,9 @@
 ﻿using System.Collections.Generic;
-//using CES.CoreApi.Common.Enumerations;
-//using CES.CoreApi.Common.Exceptions;
-using CES.CoreApi.GeoLocation.Service.Business.Contract.Interfaces;
+using CES.CoreApi.GeoLocation.Interfaces;
 using CES.CoreApi.GeoLocation.Models;
 using CES.CoreApi.GeoLocation.Enumerations;
 
-namespace CES.CoreApi.GeoLocation.Service.Business.Logic.Providers
+namespace CES.CoreApi.GeoLocation.Logic.Providers
 {
     public class MappingDataProvider : IMappingDataProvider
     {
@@ -17,15 +15,7 @@ namespace CES.CoreApi.GeoLocation.Service.Business.Logic.Providers
 
         public MappingDataProvider(IUrlBuilderFactory urlBuilderFactory, IDataResponseProvider responseProvider, IResponseParserFactory responseParserFactory)
         {
-            //if (urlBuilderFactory == null)
-            //    throw new CoreApiException(TechnicalSubSystem.GeoLocationService,
-            //       SubSystemError.GeneralRequiredParameterIsUndefined, "urlBuilderFactory");
-            //if (responseProvider == null)
-            //    throw new CoreApiException(TechnicalSubSystem.GeoLocationService,
-            //        SubSystemError.GeneralRequiredParameterIsUndefined, "responseProvider");
-            //if (responseParserFactory == null)
-            //    throw new CoreApiException(TechnicalSubSystem.GeoLocationService,
-            //        SubSystemError.GeneralRequiredParameterIsUndefined, "responseParserFactory");
+         
             _urlBuilderFactory = urlBuilderFactory;
             _responseProvider = responseProvider;
             _responseParserFactory = responseParserFactory;

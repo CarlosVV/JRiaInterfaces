@@ -2,13 +2,13 @@
 using CES.CoreApi.GeoLocation.Api.Attributes;
 using CES.CoreApi.GeoLocation.Enumerations;
 using CES.CoreApi.GeoLocation.Models;
-using CES.CoreApi.GeoLocation.Service.Business.Contract.Interfaces;
-using CES.CoreApi.GeoLocation.Service.Contract.Enumerations;
-using CES.CoreApi.GeoLocation.Service.Contract.Models;
+using CES.CoreApi.GeoLocation.Interfaces;
+using CES.CoreApi.GeoLocation.Api.ViewModels;
+
 
 using System.Web.Http;
 
-namespace CES.CoreApi.GeoLocation.Api.Api
+namespace CES.CoreApi.GeoLocation.Api
 {  
 	[CoreApiExceptionFilter]
 	[RoutePrefix("geolocation")]

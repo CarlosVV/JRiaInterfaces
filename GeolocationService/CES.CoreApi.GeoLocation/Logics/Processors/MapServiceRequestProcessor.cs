@@ -1,11 +1,10 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
-using CES.CoreApi.GeoLocation.Service.Business.Contract.Enumerations;
-using CES.CoreApi.GeoLocation.Service.Business.Contract.Interfaces;
+using CES.CoreApi.GeoLocation.Interfaces;
 using CES.CoreApi.GeoLocation.Models;
 using CES.CoreApi.GeoLocation.Enumerations;
 
-namespace CES.CoreApi.GeoLocation.Service.Business.Logic.Processors
+namespace CES.CoreApi.GeoLocation.Logic.Processors
 {
     public class MapServiceRequestProcessor : BaseServiceRequestProcessor, IMapServiceRequestProcessor
     {
@@ -13,12 +12,8 @@ namespace CES.CoreApi.GeoLocation.Service.Business.Logic.Processors
 
         private readonly IMappingDataProvider _mappingDataProvider;
 
-        public MapServiceRequestProcessor(IMappingDataProvider mappingDataProvider) 
-            
-        {
-            //if (mappingDataProvider == null)
-            //    throw new CoreApiException(TechnicalSubSystem.GeoLocationService,
-            //       SubSystemError.GeneralRequiredParameterIsUndefined, "mappingDataProvider");
+        public MapServiceRequestProcessor(IMappingDataProvider mappingDataProvider)             
+        {          
             _mappingDataProvider = mappingDataProvider;
         }
 

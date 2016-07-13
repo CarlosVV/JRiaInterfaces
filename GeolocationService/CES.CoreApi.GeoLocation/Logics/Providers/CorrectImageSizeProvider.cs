@@ -1,9 +1,9 @@
 ﻿
 using CES.CoreApi.GeoLocation.Enumerations;
-using CES.CoreApi.GeoLocation.Service.Business.Contract.Interfaces;
+using CES.CoreApi.GeoLocation.Interfaces;
 using System;
 
-namespace CES.CoreApi.GeoLocation.Service.Business.Logic.Providers
+namespace CES.CoreApi.GeoLocation.Logic.Providers
 {
     public class CorrectImageSizeProvider : ICorrectImageSizeProvider
     {

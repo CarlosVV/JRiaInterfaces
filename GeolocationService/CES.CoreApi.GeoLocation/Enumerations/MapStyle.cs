@@ -1,6 +1,6 @@
 ﻿using CES.CoreApi.GeoLocation.Attributes;
 
-namespace CES.CoreApi.GeoLocation.Service.Business.Contract.Enumerations
+namespace CES.CoreApi.GeoLocation.Enumerations
 {
     public enum MapStyle
     {

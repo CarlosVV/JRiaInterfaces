@@ -1,11 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Globalization;
-using CES.CoreApi.GeoLocation.Service.Business.Contract.Interfaces;
-using CES.CoreApi.GeoLocation.Service.Business.Logic.Parsers;
+using CES.CoreApi.GeoLocation.Interfaces;
+using CES.CoreApi.GeoLocation.Logic.Parsers;
 using CES.CoreApi.GeoLocation.Enumerations;
 
-namespace CES.CoreApi.GeoLocation.Service.Business.Logic.Factories
+namespace CES.CoreApi.GeoLocation.Logic.Factories
 {
     public class ResponseParserFactory: Dictionary<string, Func<BaseDataResponseParser>>, IResponseParserFactory
     {

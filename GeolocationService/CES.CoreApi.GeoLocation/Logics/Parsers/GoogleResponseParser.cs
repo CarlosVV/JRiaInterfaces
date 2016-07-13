@@ -4,12 +4,12 @@ using System.Xml.Linq;
 //using CES.CoreApi.Common.Enumerations;
 //using CES.CoreApi.Common.Exceptions;
 using CES.CoreApi.Common.Tools;
-using CES.CoreApi.GeoLocation.Service.Business.Contract.Interfaces;
-using CES.CoreApi.GeoLocation.Service.Business.Logic.Constants;
+using CES.CoreApi.GeoLocation.Interfaces;
+using CES.CoreApi.GeoLocation.Logic.Constants;
 using CES.CoreApi.GeoLocation.Enumerations;
 using CES.CoreApi.GeoLocation.Models;
 
-namespace CES.CoreApi.GeoLocation.Service.Business.Logic.Parsers
+namespace CES.CoreApi.GeoLocation.Logic.Parsers
 {
     public class GoogleResponseParser: BaseDataResponseParser, IResponseParser
     {

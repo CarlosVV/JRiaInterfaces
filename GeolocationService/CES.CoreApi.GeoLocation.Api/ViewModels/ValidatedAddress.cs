@@ -1,10 +1,10 @@
 ﻿using System.Runtime.Serialization;
 
-using Namespaces = CES.CoreApi.GeoLocation.Service.Contract.Constants.Namespaces;
 
-namespace CES.CoreApi.GeoLocation.Service.Contract.Models
+
+namespace CES.CoreApi.GeoLocation.Api.ViewModels
 {
-    [DataContract(Namespace = Namespaces.GeolocationServiceDataContractNamespace, Name = "Address")]
+    [DataContract(Name = "Address")]
     public class ValidatedAddress 
     {
         [DataMember(EmitDefaultValue = false)]

@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using CES.CoreApi.GeoLocation.Models;
 
-namespace CES.CoreApi.GeoLocation.Service.Business.Contract.Interfaces
+namespace CES.CoreApi.GeoLocation.Interfaces
 {
     public interface IUrlBuilder
     {

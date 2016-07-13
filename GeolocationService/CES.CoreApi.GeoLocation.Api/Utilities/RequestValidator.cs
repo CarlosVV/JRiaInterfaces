@@ -1,4 +1,4 @@
-﻿using CES.CoreApi.GeoLocation.Service.Contract.Models;
+﻿using CES.CoreApi.GeoLocation.Api.ViewModels;
 
 namespace CES.CoreApi.GeoLocation.Api.Utilities
 {

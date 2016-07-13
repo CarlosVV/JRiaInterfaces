@@ -1,8 +1,8 @@
 ﻿using CES.CoreApi.Common.Models;
-using CES.CoreApi.GeoLocation.Service.Contract.Enumerations;
+using CES.CoreApi.GeoLocation.Api.ViewModels;
 
 
-namespace CES.CoreApi.GeoLocation.Service.Contract.Models
+namespace CES.CoreApi.GeoLocation.Api.ViewModels
 {
  
     public class GeocodeAddressRequest : BaseRequest
