@@ -1,10 +1,12 @@
 ﻿using System;
 using CES.CoreApi.GeoLocation.Configuration;
-using CES.CoreApi.Security.Providers;
 using CES.CoreApi.GeoLocation.Repositories;
 using Newtonsoft.Json;
 using System.Collections.Generic;
 using CES.CoreApi.GeoLocation.ClientSettings;
+using System.Security.Principal;
+using System.Threading;
+using System.Reflection;
 
 namespace CES.CoreApi.GeoLocation.Logic.Providers
 {
@@ -28,22 +30,27 @@ namespace CES.CoreApi.GeoLocation.Logic.Providers
 		#region Public methods
 
 		public static ClientAppSetting GetProviderConfigurationByCountry(string countryCode)
-        {
-			var id = new IdentityProvider();
-			var clientApplicationIdentity = id.GetClientApplicationIdentity();
-
+		{
 		
-			var applicationId = clientApplicationIdentity.ApplicationId;
+			IIdentity identity = Thread.CurrentPrincipal.Identity;
+			int appId = 0;
 
-            var countryConfiguration = GetCountryConfiguration(countryCode, applicationId) ??
-                                       GetCountryConfiguration(DefaultCountry, applicationId);
+			Type type = identity.GetType();
+			var prop = type.GetProperty("ApplicationId",
+										 BindingFlags.Public
+										 | BindingFlags.Instance
+										 | BindingFlags.IgnoreCase);
 
-            //if (countryConfiguration == null)
-            //    throw new CoreApiException(TechnicalSubSystem.GeoLocationService,
-            //        SubSystemError.GeolocationContryConfigurationIsNotFound, applicationId, countryCode);
+			if (prop != null)
+				appId = (int)prop.GetValue(identity, null);
+			
+			var setting = GetCountryConfiguration(countryCode, appId);
+			if (setting != null)
+				return setting;
 
-            return countryConfiguration;
-        }
+			return GetCountryConfiguration(DefaultCountry, appId);
+		
+		}
 
 
 

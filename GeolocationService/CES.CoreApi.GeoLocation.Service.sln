@@ -3,24 +3,11 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 14
 VisualStudioVersion = 14.0.25420.1
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "4_Crosscutting", "4_Crosscutting", "{9B65F4D3-1728-4FF1-A2F2-DA4DF6270431}"
-EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{290DB366-45DE-4AFE-94E3-C5EFF237B529}"
-	ProjectSection(SolutionItems) = preProject
-		.nuget\NuGet.Config = .nuget\NuGet.Config
-		.nuget\NuGet.exe = .nuget\NuGet.exe
-		.nuget\NuGet.targets = .nuget\NuGet.targets
-	EndProjectSection
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CES.CoreApi.GeoLocation.Api", "CES.CoreApi.GeoLocation.Api\CES.CoreApi.GeoLocation.Api.csproj", "{544EA150-4E44-42A5-A562-B0698C21DE77}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "1_Api", "1_Api", "{AD4EF941-E12E-4AB5-A0F9-4076107CA1DE}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "2_BusinessCore", "2_BusinessCore", "{3F8CDCBF-3A47-4A47-A622-A5AAC46EAABC}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CES.CoreApi.Security", "..\Foundation\CES.CoreApi.Security\CES.CoreApi.Security.csproj", "{BAB197C1-FC36-4070-B1FA-FFC0D6BD1D79}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CES.CoreAPI.Security.WebApi", "..\Foundation\CES.CoreAPI.Security.WebApi\CES.CoreAPI.Security.WebApi.csproj", "{EDF1E298-F3B9-4C97-AD36-2F3D260AE636}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CES.CoreApi.GeoLocation", "CES.CoreApi.GeoLocation\CES.CoreApi.GeoLocation.csproj", "{08B9ED41-E60A-41F2-9988-F84C72E4AF96}"
 EndProject
@@ -34,14 +21,6 @@ Global
 		{544EA150-4E44-42A5-A562-B0698C21DE77}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{544EA150-4E44-42A5-A562-B0698C21DE77}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{544EA150-4E44-42A5-A562-B0698C21DE77}.Release|Any CPU.Build.0 = Release|Any CPU
-		{BAB197C1-FC36-4070-B1FA-FFC0D6BD1D79}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{BAB197C1-FC36-4070-B1FA-FFC0D6BD1D79}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{BAB197C1-FC36-4070-B1FA-FFC0D6BD1D79}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{BAB197C1-FC36-4070-B1FA-FFC0D6BD1D79}.Release|Any CPU.Build.0 = Release|Any CPU
-		{EDF1E298-F3B9-4C97-AD36-2F3D260AE636}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{EDF1E298-F3B9-4C97-AD36-2F3D260AE636}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{EDF1E298-F3B9-4C97-AD36-2F3D260AE636}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{EDF1E298-F3B9-4C97-AD36-2F3D260AE636}.Release|Any CPU.Build.0 = Release|Any CPU
 		{08B9ED41-E60A-41F2-9988-F84C72E4AF96}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{08B9ED41-E60A-41F2-9988-F84C72E4AF96}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{08B9ED41-E60A-41F2-9988-F84C72E4AF96}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -52,8 +31,6 @@ Global
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{544EA150-4E44-42A5-A562-B0698C21DE77} = {AD4EF941-E12E-4AB5-A0F9-4076107CA1DE}
-		{BAB197C1-FC36-4070-B1FA-FFC0D6BD1D79} = {9B65F4D3-1728-4FF1-A2F2-DA4DF6270431}
-		{EDF1E298-F3B9-4C97-AD36-2F3D260AE636} = {9B65F4D3-1728-4FF1-A2F2-DA4DF6270431}
 		{08B9ED41-E60A-41F2-9988-F84C72E4AF96} = {3F8CDCBF-3A47-4A47-A622-A5AAC46EAABC}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution

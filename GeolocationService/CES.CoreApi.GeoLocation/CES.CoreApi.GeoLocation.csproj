@@ -142,12 +142,6 @@
     <Compile Include="Tools\XmlTools.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\Foundation\CES.CoreApi.Security\CES.CoreApi.Security.csproj">
-      <Project>{bab197c1-fc36-4070-b1fa-ffc0d6bd1d79}</Project>
-      <Name>CES.CoreApi.Security</Name>
-    </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
     <None Include="packages.config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

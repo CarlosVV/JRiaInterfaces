@@ -49,6 +49,10 @@
       <HintPath>..\packages\CES.Logging.1.0.0.27\lib\net45\CES.Logging.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="CES.Security.CoreApi, Version=1.0.0.8, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\CES.Security.CoreApi.1.0.0.8\lib\net461\CES.Security.CoreApi.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="Gelf4Net, Version=2.0.3.14, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\Gelf4Net.2.0.3.14\lib\net40\Gelf4Net.dll</HintPath>
       <Private>True</Private>
@@ -59,7 +63,7 @@
     </Reference>
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="Newtonsoft.Json, Version=9.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
-      <HintPath>..\packages\Newtonsoft.Json.9.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
+      <HintPath>..\packages\CES.Security.CoreApi.1.0.0.8\lib\net461\Newtonsoft.Json.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="SimpleInjector, Version=3.1.3.0, Culture=neutral, PublicKeyToken=984cb50dea722e99, processorArchitecture=MSIL">
@@ -75,6 +79,10 @@
       <Private>True</Private>
     </Reference>
     <Reference Include="System.Net.Http" />
+    <Reference Include="System.Net.Http.Formatting, Version=5.2.3.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\CES.Security.CoreApi.1.0.0.8\lib\net461\System.Net.Http.Formatting.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.ServiceModel" />
     <Reference Include="System.Web.DynamicData" />
@@ -86,6 +94,10 @@
     <Reference Include="System.Core" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="System.Web.Extensions" />
+    <Reference Include="System.Web.Http, Version=5.2.3.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\CES.Security.CoreApi.1.0.0.8\lib\net461\System.Web.Http.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Drawing" />
     <Reference Include="System.Web" />
@@ -95,12 +107,6 @@
     <Reference Include="System.EnterpriseServices" />
   </ItemGroup>
   <ItemGroup>
-    <Reference Include="System.Net.Http.Formatting">
-      <HintPath>..\packages\Microsoft.AspNet.WebApi.Client.5.2.3\lib\net45\System.Net.Http.Formatting.dll</HintPath>
-    </Reference>
-    <Reference Include="System.Web.Http">
-      <HintPath>..\packages\Microsoft.AspNet.WebApi.Core.5.2.3\lib\net45\System.Web.Http.dll</HintPath>
-    </Reference>
     <Reference Include="System.Web.Http.WebHost">
       <HintPath>..\packages\Microsoft.AspNet.WebApi.WebHost.5.2.3\lib\net45\System.Web.Http.WebHost.dll</HintPath>
     </Reference>
@@ -168,19 +174,9 @@
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>
-    <ProjectReference Include="..\..\Foundation\CES.CoreAPI.Security.WebApi\CES.CoreAPI.Security.WebApi.csproj">
-      <Project>{edf1e298-f3b9-4c97-ad36-2f3d260ae636}</Project>
-      <Name>CES.CoreAPI.Security.WebApi</Name>
-    </ProjectReference>
     <ProjectReference Include="..\CES.CoreApi.GeoLocation\CES.CoreApi.GeoLocation.csproj">
       <Project>{08b9ed41-e60a-41f2-9988-f84c72e4af96}</Project>
       <Name>CES.CoreApi.GeoLocation</Name>
-    </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\..\Foundation\CES.CoreApi.Security\CES.CoreApi.Security.csproj">
-      <Project>{bab197c1-fc36-4070-b1fa-ffc0d6bd1d79}</Project>
-      <Name>CES.CoreApi.Security</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup />

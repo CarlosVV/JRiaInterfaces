@@ -5,10 +5,6 @@ using CES.CoreApi.GeoLocation.Logic.Parsers;
 using CES.CoreApi.GeoLocation.Logic.Processors;
 using CES.CoreApi.GeoLocation.Logic.Providers;
 using SimpleInjector;
-using CES.CoreApi.Security.Interfaces;
-using CES.CoreApi.Security.Managers;
-using CES.CoreApi.Security.Providers;
-using CES.CoreApi.Security.WebApi.Interfaces;
 using CES.CoreApi.GeoLocation.Interfaces;
 
 namespace CES.CoreApi.GeoLocation.Api.Configuration
@@ -17,23 +13,17 @@ namespace CES.CoreApi.GeoLocation.Api.Configuration
     {
         public static void RegisterDependencies(Container container)
         {
-            RegisterFoundation(container);
+  
             RegisterAutomapper(container);
             RegisterProcessors(container);
             RegisterUrlBuilders(container);
             RegisterParsers(container);
             RegisterProviders(container);     
-            RegisterFactories(container); 
-			RegisterSecurity(container);
+            RegisterFactories(container); 	
             container.Verify();
         }
 
-        private static void RegisterFoundation(Container container)
-        {         
-            container.Register<IApplicationAuthenticator, ApplicationAuthenticator>();             
-            container.Register<IApplicationAuthorizator, ApplicationAuthorizator>();
-            container.Register<IIdentityProvider, IdentityProvider>();
-        }
+  
 		
 
 		private static void RegisterAutomapper(Container container)
@@ -108,9 +98,6 @@ namespace CES.CoreApi.GeoLocation.Api.Configuration
         }       
 
 
-		private static void RegisterSecurity(Container container)
-		{
-			container.Register<IWebApiRequestHeaderParametersService, WebApiRequestHeaderParametersService>();
-		}
+		
     }
 }

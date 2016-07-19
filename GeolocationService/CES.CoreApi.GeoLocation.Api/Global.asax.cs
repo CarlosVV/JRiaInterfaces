@@ -1,10 +1,6 @@
 ﻿using CES.CoreApi.GeoLocation.Api.Attributes;
 using CES.CoreApi.GeoLocation.Api.Configuration;
 using CES.CoreApi.GeoLocation.Api.Logger;
-using CES.CoreApi.Security.Interfaces;
-using CES.CoreApi.Security.WebApi.Interfaces;
-using CES.CoreApi.Security.WebAPI.Filters;
-using CES.CoreAPI.Security.WebApi.Filters;
 using SimpleInjector;
 using SimpleInjector.Integration.WebApi;
 using System.Web.Http;
@@ -25,10 +21,10 @@ namespace CES.CoreApi.GeoLocation.Api
 
 			CompositionRoot.RegisterDependencies(container);
 			GlobalConfiguration.Configuration.Filters.Add(new CoreApiExceptionFilterAttribute());
-			GlobalConfiguration.Configuration.Filters.Add(new AuthenticationManager(container.GetInstance<IApplicationAuthenticator>(), container.GetInstance<IWebApiRequestHeaderParametersService>()));
-			GlobalConfiguration.Configuration.Filters.Add(new AuthorizationManager(container.GetInstance<IApplicationAuthorizator>()));
 			GlobalConfiguration.Configuration.Services.Add(typeof(IExceptionLogger), new WebApiExceptionLogger());
-			
+
+			GlobalConfiguration.Configuration.Filters.Add(new AuthenticationFilter("GeoLocation"));
+
 		}
 	}
 }
