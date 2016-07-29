@@ -2,7 +2,7 @@
 using CES.CoreApi.GeoLocation.Enumerations;
 using CES.CoreApi.GeoLocation.Models;
 using CES.CoreApi.GeoLocation.Api.ViewModels;
-using CES.CoreApi.GeoLocation.Api.ViewModels;
+
 
 
 namespace CES.CoreApi.GeoLocation.Api.Configuration
