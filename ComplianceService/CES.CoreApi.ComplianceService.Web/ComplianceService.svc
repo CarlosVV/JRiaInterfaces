@@ -1,5 +1,0 @@
-﻿<%@ ServiceHost 
-    Language="C#" 
-    Debug="true" 
-    Service="CES.CoreApi.Compliance.Service.ComplianceService" 
-    Factory="CES.CoreApi.Compliance.Service.Factory.ComplianceServiceHostFactory" %>
