@@ -14,17 +14,7 @@ From Operator.zip
 --------------------------------------------------------------------------------------------------------------------------------------------------------
 Note: You can find certificates zip files under CES.CoreApi.PayoutTests >Resources > Certificates
 --------------------------------------------------------------------------------------------------------------------------------------------------------
-Web Api Config Settings 
-=======================
-Already installed:(Just for info)
- <system.web>
-    <compilation debug="true" targetFramework="4.6.1" />
-    <httpRuntime targetFramework="4.6" />
-  </system.web>
-<runtime>
-		<AppContextSwitchOverrides value="Switch.System.IdentityModel.DisableMultipleDNSEntriesInSANCertificate=true" />
-</runtime>
--------------------------------------------------------------------------------------------------------------------------------------------------------
+
 How can we give IIS the correct permissions to read a certificate from the certificate store?
 1)	Open the certificates MMC.
 2)	Open MMC
@@ -44,6 +34,17 @@ Prefix the following to the AppPool name "IIS AppPool\"  then click "Check Name"
 It should find the AppPool,  remove the prefix and then it should add OK.
 Do this for both the client and server certs.
 -----------------------------------------------------------------------------------------------------------------------------------------------------
+Web Api Config Settings 
+=======================
+Already installed:(Just for info)
+ <system.web>
+    <compilation debug="true" targetFramework="4.6.1" />
+    <httpRuntime targetFramework="4.6" />
+  </system.web>
+<runtime>
+		<AppContextSwitchOverrides value="Switch.System.IdentityModel.DisableMultipleDNSEntriesInSANCertificate=true" />
+</runtime>
+-------------------------------------------------------------------------------------------------------------------------------------------------------
 SoapUI Porject  
 ==============
 You can find it the project under CES.CoreApi.PayoutTests >Resources > SoapUI-Project

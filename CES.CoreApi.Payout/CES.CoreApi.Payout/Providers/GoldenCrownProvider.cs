@@ -68,7 +68,7 @@ namespace CES.CoreApi.Payout.Providers
 			if(response.Transaction.OrderStatus == "Expired")
 			{
 				Caching.Cache.Add(string.Format("GoldenCrown_OrderPin_{0}", request.OrderPin), response
-						, new TimeSpan(0,5,0));
+						, new TimeSpan(0,15,0));
 			}
 
 			return response;

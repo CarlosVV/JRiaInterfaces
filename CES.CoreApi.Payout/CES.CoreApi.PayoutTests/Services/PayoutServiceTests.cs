@@ -6,10 +6,12 @@ namespace CES.CoreApi.Payout.Services.Tests
 	[TestClass()]
 	public class PayoutServiceTests
 	{
+		PayoutService service;
 		[TestMethod()]
 		public void GetPayoutOrderInfo_IsAvailable()
 		{
-			var result = PayoutService.GetTransactionInfo(new PayoutOrderRequest
+			service = new PayoutService();
+			var result = service.GetTransactionInfo(new PayoutOrderRequest
 			{
 				AgentId = 23392811,
 				AgentLocId = 25055911,

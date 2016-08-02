@@ -12,26 +12,27 @@ namespace CES.CoreApi.Payout.Services
 
 	public class PayoutService
 	{
-		private readonly PayoutRepository repository;
-		private static readonly Lazy<PayoutService> @this 
-				= new Lazy<PayoutService>(() => new PayoutService(new PayoutRepository()));
-		
-		private PayoutService(PayoutRepository repository)
+		private  PayoutRepository _repository =null;
+		private GoldenCrownCachedProvider _provider =null;
+		//private static readonly Lazy<PayoutService> @this 
+		//		= new Lazy<PayoutService>(() => new PayoutService(new PayoutRepository()));
+
+		public PayoutService()
 		{
-			this.repository = repository;
+			_repository =new PayoutRepository();
 		}
 		/// <summary>
 		/// Handle request and route it to Golden Crown web service  or Ria repository 
 		/// </summary>
 		/// <param name="request"></param>
 		/// <returns></returns>
-		public static PayoutOrderResponse GetTransactionInfo(PayoutOrderRequest request)
+		public  PayoutOrderResponse GetTransactionInfo(PayoutOrderRequest request)
 		{
 			Regex regex = new Regex(AppSettings.GoldenCrownPinRegex);
 			if (regex.Match(request.OrderPin).Success)
 			{
-				var provider = new GoldenCrownCachedProvider();
-				var serviceResponse=  provider.GetTransactionInfo(request);
+				_provider = new GoldenCrownCachedProvider();
+				var serviceResponse= _provider.GetTransactionInfo(request);
 				if (serviceResponse.Transaction == null)
 					return serviceResponse;
 				serviceResponse.Transaction.PayoutCurrency = GetCurrencyByCode(serviceResponse.Transaction.PayoutCurrency);
@@ -39,7 +40,7 @@ namespace CES.CoreApi.Payout.Services
 				return serviceResponse;
 			}
 
-			var result = @this.Value.repository.GetTransactionInfo(request);		
+			var result = _repository.GetTransactionInfo(request);		
 			return result;
 		}
 		/// <summary>
@@ -47,9 +48,9 @@ namespace CES.CoreApi.Payout.Services
 		/// </summary>
 		/// <param name="request"></param>
 		/// <param name="response"></param>
-		private static void SetExternalTransactionInfo(PayoutOrderRequest request,PayoutOrderResponse response)
+		private  void SetExternalTransactionInfo(PayoutOrderRequest request,PayoutOrderResponse response)
 		{
-			var transactionInfo = @this.Value.repository.GetExternalTransactionInfo(request, response);
+			var transactionInfo = _repository.GetExternalTransactionInfo(request, response);
 			response.Fields = transactionInfo.Fields;
 			response.CustomerServiceMessages = transactionInfo.CustomerServiceMessages;
 		}
@@ -58,7 +59,7 @@ namespace CES.CoreApi.Payout.Services
 		/// </summary>
 		/// <param name="code"></param>
 		/// <returns></returns>
-		private static string GetCurrencyByCode(string code)
+		private  string GetCurrencyByCode(string code)
 		{
 			var cache = new IsoCurrencyCachedRepository();
 			var currenies = cache.GetCurrencies();
