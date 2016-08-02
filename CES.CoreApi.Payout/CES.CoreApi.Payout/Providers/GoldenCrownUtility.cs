@@ -70,7 +70,7 @@ namespace CES.CoreApi.Payout.Providers
 			return new Amount { Value = moneyAmt, Currency = funds.Cur};
 		}
 
-		internal static void SetSender(this Person person, OrderInfo transaction)
+		internal static void SetSender(this Person person, Transaction transaction)
 		{
 			
 			var name = person.FullName.Split(' ');
@@ -107,7 +107,7 @@ namespace CES.CoreApi.Payout.Providers
 			//}
 
 		}
-		internal static void SetBeneficiary(this Person person, OrderInfo transaction)
+		internal static void SetBeneficiary(this Person person, Transaction transaction)
 		{
 
 			var name = person.FullName.Split(' ');

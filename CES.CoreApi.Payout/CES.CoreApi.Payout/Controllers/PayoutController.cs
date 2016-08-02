@@ -17,7 +17,7 @@ namespace CES.CoreApi.Payout.Controllers
 		public TransactionInfoResponse GetTransaction(TransactionInfoRequest request)
 		{
 			/**/
-			var requestModel = Mapper.Map<TransactionRequest>(request);
+			var requestModel = Mapper.Map<PayoutOrderRequest>(request);
 			var responseModel = PayoutService.GetPayoutOrderInfo(requestModel);
 			/**/
 			var response = Mapper.Map<TransactionInfoResponse>(responseModel);

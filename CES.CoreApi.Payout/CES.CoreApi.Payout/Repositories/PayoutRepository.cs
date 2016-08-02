@@ -18,10 +18,10 @@ namespace CES.CoreApi.Payout.Repositories
 			_sqlMapper = DatabaseName.CreateSqlMapper();
 		}
 
-		public PayoutOrderInfo GetTransactionInfo(TransactionRequest payoutOrderInfo)
+		public PayoutOrderResponse GetTransactionInfo(PayoutOrderRequest payoutOrderInfo)
 		{
 			var response = null as PayoutQueryResponse;
-			var transaction = null as OrderInfo;
+			var transaction = null as Transaction;
 			var messages = null as IEnumerable<CustomerServiceMessage>;
 			var fields = null as IEnumerable<PayoutField>;
 			using (var sql = _sqlMapper.CreateQueryAgain(DatabaseName.Main, "mt_sp_Payout_OrderInfo_Get"))
@@ -42,13 +42,13 @@ namespace CES.CoreApi.Payout.Repositories
 				{
 
 					response = reader.QueryOne<PayoutQueryResponse>();
-					transaction = reader.QueryOne<OrderInfo>();
+					transaction = reader.QueryOne<Transaction>();
 					messages = reader.Query<CustomerServiceMessage>();
 					fields = reader.Query<PayoutField>();
 				});								
 			}			
 		
-			return new PayoutOrderInfo
+			return new PayoutOrderResponse
 			{				
 				Response = response,
 				Transaction = transaction,
@@ -58,10 +58,10 @@ namespace CES.CoreApi.Payout.Repositories
 			}; 
 		}
 
-		public PayoutOrderInfo GetExternalTransactionInfo(TransactionRequest request, PayoutOrderInfo info)
+		public PayoutOrderResponse GetExternalTransactionInfo(PayoutOrderRequest request, PayoutOrderResponse info)
 		{
 			var response = null as PayoutQueryResponse;
-			var transaction = null as OrderInfo;
+			var transaction = null as Transaction;
 			var messages = null as IEnumerable<CustomerServiceMessage>;
 			var fields = null as IEnumerable<PayoutField>;
 			using (var sql = _sqlMapper.CreateQueryAgain(DatabaseName.Main, "mt_sp_Payout_OrderInfo_Get_External"))
@@ -140,13 +140,13 @@ namespace CES.CoreApi.Payout.Repositories
 				{
 
 					response = reader.QueryOne<PayoutQueryResponse>();
-					transaction = reader.QueryOne<OrderInfo>();
+					transaction = reader.QueryOne<Transaction>();
 					messages = reader.Query<CustomerServiceMessage>();
 					fields = reader.Query<PayoutField>();
 				});
 			}
 
-			return new PayoutOrderInfo
+			return new PayoutOrderResponse
 			{
 				Response = response,
 				Transaction = transaction,

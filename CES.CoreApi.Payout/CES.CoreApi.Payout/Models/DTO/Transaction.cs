@@ -3,7 +3,7 @@
 namespace CES.CoreApi.Payout.Models
 {
 
-	public class OrderInfo
+	public class Transaction
 	{
 
 		public int OrderId { get; set; }

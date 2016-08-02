@@ -139,15 +139,15 @@
     </Compile>
     <Compile Include="Models\DTO\Currency.cs" />
     <Compile Include="Models\DTO\CustomerServiceMessage.cs" />
-    <Compile Include="Models\PayoutOrderInfo.cs" />
+    <Compile Include="Models\PayoutOrderResponse.cs" />
     <Compile Include="Models\DTO\PayoutField.cs" />
     <Compile Include="Providers\GoldenCrownProxy.cs" />
     <Compile Include="Providers\GoldenCrownProvider.cs" />
     <Compile Include="Models\Amount.cs" />
     <Compile Include="Models\Beneficiary.cs" />
-    <Compile Include="Models\TransactionRequest.cs" />
+    <Compile Include="Models\PayoutOrderRequest.cs" />
     <Compile Include="Models\DTO\PayoutQueryResponse.cs" />
-    <Compile Include="Models\DTO\OrderInfo.cs" />
+    <Compile Include="Models\DTO\Transaction.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Providers\GoldenCrownUtility.cs" />
     <Compile Include="Repositories\DatabaseName.cs" />

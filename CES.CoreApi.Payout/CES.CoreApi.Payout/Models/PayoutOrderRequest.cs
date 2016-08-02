@@ -1,8 +1,7 @@
 ﻿using System;
-
 namespace CES.CoreApi.Payout.ViewModels
 {
-	public class TransactionRequest
+	public class PayoutOrderRequest
 	{
 		public int AgentId { get; set; }
 		public int AgentLocId { get; set; }
@@ -13,7 +12,6 @@ namespace CES.CoreApi.Payout.ViewModels
 		public string OrderPin { get; set; }
 		public string CountryTo { get; set; }
 		public string StateTo { get; set; }
-		public DateTime LocalTime { get;  set; }
-	
+		public DateTime LocalTime { get;  set; }	
 	}
 }

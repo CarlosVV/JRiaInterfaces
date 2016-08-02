@@ -18,9 +18,9 @@ namespace CES.CoreApi.Payout.Providers
 
 		}
 
-		public PayoutOrderInfo GetPayoutOrderInfo(TransactionRequest request)
+		public PayoutOrderResponse GetPayoutOrderInfo(PayoutOrderRequest request)
 		{
-			var response = new PayoutOrderInfo { ProviderInfo = _dataProvider };
+			var response = new PayoutOrderResponse { ProviderInfo = _dataProvider };
 		
 			ReqTxList transactionRequest = new ReqTxList();		
 			transactionRequest.Filter = new Filter
@@ -43,7 +43,7 @@ namespace CES.CoreApi.Payout.Providers
 				return null;
 
 			Tx tx = providerResponse[0];
-			response.Transaction = Mapper.Map<OrderInfo>(tx);
+			response.Transaction = Mapper.Map<Transaction>(tx);
 			response.Transaction.OrderStatus = tx.TransferStatus.ToOrderStatusString();
 			var amt = tx.PayData.PayFunds.GetAmount();
 			response.Transaction.PayoutAmount = amt.Value;
