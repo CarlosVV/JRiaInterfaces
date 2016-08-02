@@ -63,6 +63,7 @@
   <ItemGroup>
     <None Include="App.config" />
     <None Include="Resources\Certificates\Operator.zip" />
+    <None Include="Resources\SoapUI-Project\SoapUI-Payout-Project.zip" />
     <None Include="Resources\Certificates\TChain.zip" />
   </ItemGroup>
   <ItemGroup />

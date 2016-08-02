@@ -21,11 +21,7 @@ namespace CES.CoreApi.Payout.Services.Tests
 				UserLoginId = 1
 
 			});
-
-
-			Assert.AreEqual(true, result.Response.AvailableForPayout);
-
-		//	Assert.AreEqual(1916206551, result.Transaction.OrderId);
+			Assert.AreEqual(true, result.Response.AvailableForPayout);		
 		}
 	}
 }
