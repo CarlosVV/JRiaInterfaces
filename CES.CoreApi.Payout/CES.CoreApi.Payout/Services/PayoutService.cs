@@ -12,14 +12,15 @@ namespace CES.CoreApi.Payout.Services
 
 	public class PayoutService
 	{
-		private  PayoutRepository _repository =null;
+		private PayoutRepository _repository =null;
+		private PersistenceRepository _persistenceRepository = null;
 		private GoldenCrownCachedProvider _provider =null;
-		//private static readonly Lazy<PayoutService> @this 
-		//		= new Lazy<PayoutService>(() => new PayoutService(new PayoutRepository()));
+
 
 		public PayoutService()
 		{
-			_repository =new PayoutRepository();
+			_repository = new PayoutRepository();
+			_persistenceRepository = new PersistenceRepository();
 		}
 		/// <summary>
 		/// Handle request and route it to Golden Crown web service  or Ria repository 
@@ -29,6 +30,7 @@ namespace CES.CoreApi.Payout.Services
 		public  PayoutOrderResponse GetTransactionInfo(PayoutOrderRequest request)
 		{
 			Regex regex = new Regex(AppSettings.GoldenCrownPinRegex);
+			var id = _persistenceRepository.GetPersistenceId(request.UserId);
 			if (regex.Match(request.OrderPin).Success)
 			{
 				_provider = new GoldenCrownCachedProvider();
@@ -37,10 +39,12 @@ namespace CES.CoreApi.Payout.Services
 					return serviceResponse;
 				serviceResponse.Transaction.PayoutCurrency = GetCurrencyByCode(serviceResponse.Transaction.PayoutCurrency);
 				SetExternalTransactionInfo(request, serviceResponse);
+				serviceResponse.PersistenceId = id;
 				return serviceResponse;
 			}
 
-			var result = _repository.GetTransactionInfo(request);		
+			var result = _repository.GetTransactionInfo(request);
+			result.PersistenceId = id;
 			return result;
 		}
 		/// <summary>

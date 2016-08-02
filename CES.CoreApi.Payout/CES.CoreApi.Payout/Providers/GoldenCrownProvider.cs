@@ -35,14 +35,14 @@ namespace CES.CoreApi.Payout.Providers
 
 			var providerResponse = null as Tx[];
 			Stopwatch stopwatch = new Stopwatch();
+			//
 			stopwatch.Start();
 			using (ServicePortClient client = GoldenCrownUtility.CreateServicePortClient())
-			{
-			
-				providerResponse = client.TxList(transactionRequest);
-			
+			{			
+				providerResponse = client.TxList(transactionRequest);			
 			}
 			stopwatch.Stop();
+			//
 			Logging.Log.Info(string.Format("Provider : GoldenCrown , Service Method TxList, Duration {0} Milliseconds", stopwatch.ElapsedMilliseconds));
 
 			if (providerResponse == null || providerResponse.Length < 1)
@@ -68,7 +68,7 @@ namespace CES.CoreApi.Payout.Providers
 			if(response.Transaction.OrderStatus == "Expired")
 			{
 				Caching.Cache.Add(string.Format("GoldenCrown_OrderPin_{0}", request.OrderPin), response
-						, new TimeSpan(0,15,0));
+						, new TimeSpan(2,0,0));
 			}
 
 			return response;
