@@ -11,15 +11,16 @@ namespace CES.CoreApi.Payout.Controllers
 	public class PayoutController : ApiController
 	{
 
-		[HttpGet]
+		//[HttpGet]
 		[HttpPost]
 		[Route("Transaction")]
 		public TransactionInfoResponse GetTransaction(TransactionInfoRequest request)
 		{
-			/**/
+			/*Request Mapper*/
 			var requestModel = Mapper.Map<PayoutOrderRequest>(request);
+
 			var responseModel = PayoutService.GetPayoutOrderInfo(requestModel);
-			/**/
+			/*Response Mapper*/
 			var response = Mapper.Map<TransactionInfoResponse>(responseModel);
 			response.SenderInfo = Mapper.Map<Sender>(responseModel.Transaction);
 			response.BeneficiaryInfo = Mapper.Map<Beneficiary>(responseModel.Transaction);

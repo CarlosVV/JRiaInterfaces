@@ -151,8 +151,7 @@ namespace CES.CoreApi.Payout.Repositories
 				Response = response,
 				Transaction = transaction,
 				CustomerServiceMessages = messages,
-				Fields = fields,
-				ProviderInfo = _dataProvider
+				Fields = fields				
 			};
 		}
 

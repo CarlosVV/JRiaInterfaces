@@ -7,7 +7,7 @@ namespace CES.CoreApi.Payout.Repositories
 	///This is to register connection strings.
 	///If you don’t use main and  ReadOnlyTransactional please remove them or replace them
 	/// </summary>
-	public class DatabaseName
+	internal class DatabaseName
 	{
 		public static readonly string Main = "main";
 		public static readonly string ReadOnlyTransactional = "readonlyTransactional";

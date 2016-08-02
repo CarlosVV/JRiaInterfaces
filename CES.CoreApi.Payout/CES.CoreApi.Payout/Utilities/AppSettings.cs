@@ -1,57 +1,50 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using System.Configuration;
+﻿using System.Configuration;
 
 namespace CES.CoreApi.Payout.Utilities
 {
-	public class AppSettings
+	public  static class AppSettings
 	{
+		private static int ToNumber(this string value)
+		{
+			int num;
+			int.TryParse(value, out num);
+			return num;
+		}
 		public static int AppId
 		{
 			get
 			{
-				int appId;
-				int.TryParse(ConfigurationManager.AppSettings["ApplicationId"], out appId);
-				return appId;
+				return ConfigurationManager.AppSettings["ApplicationId"].ToNumber();
 			}
 		}
 		public static int AppObjectId
 		{
 			get
-			{
-				int appObjectId;
-				int.TryParse(ConfigurationManager.AppSettings["AppObjectId"], out appObjectId);
-				return appObjectId;
+			{			
+				return ConfigurationManager.AppSettings["AppObjectId"].ToNumber();				
 			}
 		}
 
 		public static int RiaProviderId
 		{
 			get
-			{
-				int riaProviderId;
-				int.TryParse(ConfigurationManager.AppSettings["riaProviderId"], out riaProviderId);
-				return riaProviderId;
+			{			
+				return ConfigurationManager.AppSettings["riaProviderId"].ToNumber();				
 			}
 		}
 		public static int GoldenCrownProviderId
 		{
 			get
 			{
-				int goldenCrownProviderId;
-				int.TryParse(ConfigurationManager.AppSettings["goldenCrownProviderId"], out goldenCrownProviderId);
-				return goldenCrownProviderId;
+				return ConfigurationManager.AppSettings["goldenCrownProviderId"].ToNumber();
+
 			}
 		}
 		public static float GoldenCrownInterfaceVersion
 		{
 			get
 			{
-				float version;
-				float.TryParse(ConfigurationManager.AppSettings["goldenCrownInterfaceVersion"], out version);
-				return version;
+				return ConfigurationManager.AppSettings["goldenCrownInterfaceVersion"].ToNumber();			
 			}
 		}
 
@@ -102,27 +95,6 @@ namespace CES.CoreApi.Payout.Utilities
 			}
 		}
 
-		public static  string XML()
-		{
-			//			<? xml version = "1.0" ?>< Requirements xmlns:xsi = "http://www.w3.org/2001/XMLSchema-instance" xmlns: xsd = "http://www.w3.org/2001/XMLSchema" >
-
-			//	  < Field >
-
-			//		< FieldName > BeneficiaryNameLast1 </ FieldName >
-
-			//		< RequirementType > Required </ RequirementType >
-
-			//	  </ Field >
-
-			//	  < Field >
-
-			//		< FieldName > BeneficiaryNameFirst </ FieldName >
-
-			//		< RequirementType > Required </ RequirementType >
-
-			//	  </ Field >
-			//	</ Requirements >
-			return null;
-		}
+		
 	}
 }
