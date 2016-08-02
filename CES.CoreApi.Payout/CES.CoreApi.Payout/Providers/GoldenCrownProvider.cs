@@ -46,7 +46,10 @@ namespace CES.CoreApi.Payout.Providers
 			Logging.Log.Info(string.Format("Provider : GoldenCrown , Service Method TxList, Duration {0} Milliseconds", stopwatch.ElapsedMilliseconds));
 
 			if (providerResponse == null || providerResponse.Length < 1)
-				return null;
+			{
+				response.Message = "No data founds from Golden Crown";
+				return response;
+			}
 
 			Tx tx = providerResponse[0];
 			response.Transaction = Mapper.Map<Transaction>(tx);

@@ -32,6 +32,8 @@ namespace CES.CoreApi.Payout.Services
 			{
 				var provider = new GoldenCrownCachedProvider();
 				var serviceResponse=  provider.GetTransactionInfo(request);
+				if (serviceResponse.Transaction == null)
+					return serviceResponse;
 				serviceResponse.Transaction.PayoutCurrency = GetCurrencyByCode(serviceResponse.Transaction.PayoutCurrency);
 				SetExternalTransactionInfo(request, serviceResponse);
 				return serviceResponse;
