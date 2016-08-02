@@ -9,15 +9,15 @@ namespace CES.CoreApi.Payout.Controllers
 
 	[RoutePrefix("moneytransfer/payout")]
 	public class PayoutController : ApiController
-	{	
+	{
 
 		[HttpGet]
 		[HttpPost]
 		[Route("Transaction")]
-		public object GetTransaction(TransactionInfoRequest request)
+		public TransactionInfoResponse GetTransaction(TransactionInfoRequest request)
 		{
 			/**/
-			var requestModel = Mapper.Map<OrderRequest>(request);
+			var requestModel = Mapper.Map<TransactionRequest>(request);
 			var responseModel = PayoutService.GetPayoutOrderInfo(requestModel);
 			/**/
 			var response = Mapper.Map<TransactionInfoResponse>(responseModel);
@@ -25,6 +25,5 @@ namespace CES.CoreApi.Payout.Controllers
 			response.BeneficiaryInfo = Mapper.Map<Beneficiary>(responseModel.Transaction);
 			return response;
 		}
-
 	}
 }

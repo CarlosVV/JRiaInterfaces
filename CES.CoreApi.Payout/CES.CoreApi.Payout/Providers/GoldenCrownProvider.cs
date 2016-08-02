@@ -10,11 +10,15 @@ namespace CES.CoreApi.Payout.Providers
 		private DataProvider _dataProvider;
 		public GoldenCrownProvider()
 		{
-			_dataProvider = new DataProvider { ProviderName = "Golden Crown", ProviderId = AppSettings.GoldenCrownProviderId };
+			_dataProvider = new DataProvider
+			{
+				ProviderName = "Golden Crown",
+				ProviderId = AppSettings.GoldenCrownProviderId
+			};
 
 		}
 
-		public PayoutOrderInfo GetPayoutOrderInfo(OrderRequest request)
+		public PayoutOrderInfo GetPayoutOrderInfo(TransactionRequest request)
 		{
 			var response = new PayoutOrderInfo { ProviderInfo = _dataProvider };
 		
@@ -39,7 +43,7 @@ namespace CES.CoreApi.Payout.Providers
 				return null;
 
 			Tx tx = providerResponse[0];
-			response.Transaction = Mapper.Map<TransactionInfo>(tx);
+			response.Transaction = Mapper.Map<OrderInfo>(tx);
 			response.Transaction.OrderStatus = tx.TransferStatus.ToOrderStatusString();
 			var amt = tx.PayData.PayFunds.GetAmount();
 			response.Transaction.PayoutAmount = amt.Value;

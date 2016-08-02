@@ -2,7 +2,7 @@
 
 namespace CES.CoreApi.Payout.ViewModels
 {
-	public class OrderRequest
+	public class TransactionRequest
 	{
 		public int AgentId { get; set; }
 		public int AgentLocId { get; set; }

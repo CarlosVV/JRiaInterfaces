@@ -18,10 +18,10 @@ namespace CES.CoreApi.Payout.Repositories
 			_sqlMapper = DatabaseName.CreateSqlMapper();
 		}
 
-		public PayoutOrderInfo GetTransactionInfo(OrderRequest payoutOrderInfo)
+		public PayoutOrderInfo GetTransactionInfo(TransactionRequest payoutOrderInfo)
 		{
 			var response = null as PayoutQueryResponse;
-			var transaction = null as TransactionInfo;
+			var transaction = null as OrderInfo;
 			var messages = null as IEnumerable<CustomerServiceMessage>;
 			var fields = null as IEnumerable<PayoutField>;
 			using (var sql = _sqlMapper.CreateQueryAgain(DatabaseName.Main, "mt_sp_Payout_OrderInfo_Get"))
@@ -42,7 +42,7 @@ namespace CES.CoreApi.Payout.Repositories
 				{
 
 					response = reader.QueryOne<PayoutQueryResponse>();
-					transaction = reader.QueryOne<TransactionInfo>();
+					transaction = reader.QueryOne<OrderInfo>();
 					messages = reader.Query<CustomerServiceMessage>();
 					fields = reader.Query<PayoutField>();
 				});								
@@ -58,10 +58,10 @@ namespace CES.CoreApi.Payout.Repositories
 			}; 
 		}
 
-		public PayoutOrderInfo GetExternalTransactionInfo(OrderRequest request, PayoutOrderInfo info)
+		public PayoutOrderInfo GetExternalTransactionInfo(TransactionRequest request, PayoutOrderInfo info)
 		{
 			var response = null as PayoutQueryResponse;
-			var transaction = null as TransactionInfo;
+			var transaction = null as OrderInfo;
 			var messages = null as IEnumerable<CustomerServiceMessage>;
 			var fields = null as IEnumerable<PayoutField>;
 			using (var sql = _sqlMapper.CreateQueryAgain(DatabaseName.Main, "mt_sp_Payout_OrderInfo_Get_External"))
@@ -140,7 +140,7 @@ namespace CES.CoreApi.Payout.Repositories
 				{
 
 					response = reader.QueryOne<PayoutQueryResponse>();
-					transaction = reader.QueryOne<TransactionInfo>();
+					transaction = reader.QueryOne<OrderInfo>();
 					messages = reader.Query<CustomerServiceMessage>();
 					fields = reader.Query<PayoutField>();
 				});

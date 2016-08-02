@@ -8,10 +8,10 @@ namespace CES.CoreApi.Payout.App_Start
 	{
 		public static void RegisterMappings()
 		{
-			Mapper.CreateMap<TransactionInfoRequest, OrderRequest>();
-			Mapper.CreateMap<TransactionInfo, Beneficiary>();
-			Mapper.CreateMap<TransactionInfo, Sender>();
-			Mapper.CreateMap<TransactionInfo, TransactionInfoResponse>();
+			Mapper.CreateMap<TransactionInfoRequest, TransactionRequest>();
+			Mapper.CreateMap<OrderInfo, Beneficiary>();
+			Mapper.CreateMap<OrderInfo, Sender>();
+			Mapper.CreateMap<OrderInfo, TransactionInfoResponse>();
 			Mapper.CreateMap<PayoutOrderInfo, TransactionInfoResponse>()
 					.ForMember(dest => dest.OrderId, opts => opts.MapFrom(src => src.Transaction.OrderId))
 					.ForMember(dest => dest.OrderDate, opts => opts.MapFrom(src => src.Transaction.OrderDate))
@@ -30,7 +30,7 @@ namespace CES.CoreApi.Payout.App_Start
 					.ForMember(dest => dest.NetAmount, opts => opts.MapFrom(src => src.Transaction.NetAmount));
 
 
-			Mapper.CreateMap<Tx, TransactionInfo>()
+			Mapper.CreateMap<Tx, OrderInfo>()
 				.ForMember(dest => dest.PIN, opts => opts.MapFrom(src => src.OID))
 				.ForMember(dest => dest.OrderDate, opts => opts.MapFrom(src => src.TransferDate))
 				.ForMember(dest => dest.OrderDate, opts => opts.MapFrom(src => src.TransferDate))

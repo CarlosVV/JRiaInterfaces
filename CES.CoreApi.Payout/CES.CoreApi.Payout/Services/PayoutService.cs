@@ -20,7 +20,7 @@ namespace CES.CoreApi.Payout.Services
 			this.repository = repository;
 		}
 
-		public static PayoutOrderInfo GetPayoutOrderInfo(OrderRequest request)
+		public static PayoutOrderInfo GetPayoutOrderInfo(TransactionRequest request)
 		{
 			Regex regex = new Regex(AppSettings.GoldenCrownPinRegex);
 			if (regex.Match(request.OrderPin).Success)
@@ -35,7 +35,7 @@ namespace CES.CoreApi.Payout.Services
 			return result;
 		}
 
-		private static void SetExternalTransactionInfo(OrderRequest request,PayoutOrderInfo transaction)
+		private static void SetExternalTransactionInfo(TransactionRequest request,PayoutOrderInfo transaction)
 		{
 			var transactionInfo = @this.Value.repository.GetExternalTransactionInfo(request, transaction);
 			transaction.Fields = transactionInfo.Fields;

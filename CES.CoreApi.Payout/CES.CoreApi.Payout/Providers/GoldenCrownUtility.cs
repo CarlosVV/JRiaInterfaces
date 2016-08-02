@@ -1,9 +1,6 @@
 ﻿using CES.CoreApi.Payout.Models;
 using CES.CoreApi.Payout.Utilities;
-using CES.CoreApi.Payout.ViewModels;
 using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Net;
 using System.Net.Security;
 using System.Security.Cryptography.X509Certificates;
@@ -11,7 +8,6 @@ using System.ServiceModel;
 using System.ServiceModel.Channels;
 using System.ServiceModel.Description;
 using System.ServiceModel.Security;
-using System.Web;
 
 namespace CES.CoreApi.Payout.Providers
 {
@@ -74,7 +70,7 @@ namespace CES.CoreApi.Payout.Providers
 			return new Amount { Value = moneyAmt, Currency = funds.Cur};
 		}
 
-		internal static void SetSender(this Person person, TransactionInfo transaction)
+		internal static void SetSender(this Person person, OrderInfo transaction)
 		{
 			
 			var name = person.FullName.Split(' ');
@@ -111,7 +107,7 @@ namespace CES.CoreApi.Payout.Providers
 			//}
 
 		}
-		internal static void SetBeneficiary(this Person person, TransactionInfo transaction)
+		internal static void SetBeneficiary(this Person person, OrderInfo transaction)
 		{
 
 			var name = person.FullName.Split(' ');
