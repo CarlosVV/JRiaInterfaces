@@ -13,7 +13,7 @@ namespace CES.CoreApi.Payout.Providers
 {
 	public static class GoldenCrownUtility
 	{
-		public static  int  ToInt(this string value)
+		public static int ToInt(this string value)
 		{
 			int num;
 			int.TryParse(value, out num);
@@ -67,18 +67,18 @@ namespace CES.CoreApi.Payout.Providers
 			decimal power = Decimal.Parse(Math.Pow(10, precision).ToString());
 			decimal moneyAmt = amount / power;
 
-			return new Amount { Value = moneyAmt, Currency = funds.Cur};
+			return new Amount { Value = moneyAmt, Currency = funds.Cur };
 		}
 
 		internal static void SetSender(this Person person, Transaction transaction)
 		{
-			
+
 			var name = person.FullName.Split(' ');
 			for (int i = 0; i < name.Length; i++)
 			{
 				if (i == 0)
 					transaction.CustomerNameLast1 = name[i];
-				else if( i ==1)
+				else if (i == 1)
 					transaction.CustomerNameFirst = name[i];
 				else if (i == 2)
 					transaction.CustomerNameMid = name[i];
@@ -101,10 +101,7 @@ namespace CES.CoreApi.Payout.Providers
 			}
 			transaction.CustState = "N/A";
 			transaction.CustomerTelNo = person.Phone;
-			//if(person.PaperCredentials != null)
-			//{
 
-			//}
 
 		}
 		internal static void SetBeneficiary(this Person person, Transaction transaction)
@@ -138,11 +135,6 @@ namespace CES.CoreApi.Payout.Providers
 			}
 			transaction.BenState = "N/A";
 			transaction.BenTelNo = person.Phone;
-			//if(person.PaperCredentials != null)
-			//{
-
-			//}
-
 		}
 
 		#region Config

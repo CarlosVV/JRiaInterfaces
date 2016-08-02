@@ -2,6 +2,7 @@
 using CES.CoreApi.Payout.Models;
 using CES.CoreApi.Payout.Utilities;
 using CES.CoreApi.Payout.ViewModels;
+using System.Diagnostics;
 
 namespace CES.CoreApi.Payout.Providers
 {
@@ -10,12 +11,9 @@ namespace CES.CoreApi.Payout.Providers
 		private DataProvider _dataProvider;
 		public GoldenCrownProvider()
 		{
-			_dataProvider = new DataProvider
-			{
-				ProviderName = "Golden Crown",
+			_dataProvider = new DataProvider { ProviderName = "Golden Crown",
 				ProviderId = AppSettings.GoldenCrownProviderId
 			};
-
 		}
 
 		public PayoutOrderResponse GetPayoutOrderInfo(PayoutOrderRequest request)
@@ -35,10 +33,17 @@ namespace CES.CoreApi.Payout.Providers
 			transactionRequest.AgentID = request.AgentLocId.ToString();
 
 			var providerResponse = null as Tx[];
+			Stopwatch stopwatch = new Stopwatch();
+			stopwatch.Start();
 			using (ServicePortClient client = GoldenCrownUtility.CreateServicePortClient())
 			{
+			
 				providerResponse = client.TxList(transactionRequest);
+			
 			}
+			stopwatch.Stop();
+			Logging.Log.Info(string.Format("Provider : GoldenCrown , Service Method TxList, Duration {0} Milliseconds", stopwatch.ElapsedMilliseconds));
+
 			if (providerResponse == null || providerResponse.Length < 1)
 				return null;
 
