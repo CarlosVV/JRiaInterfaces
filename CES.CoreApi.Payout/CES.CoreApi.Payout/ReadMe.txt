@@ -1,4 +1,4 @@
-﻿Requirment to use Golden Crown  Web Service
+﻿Requirment to run and test Golden Crown  Web Service
 
 
 
