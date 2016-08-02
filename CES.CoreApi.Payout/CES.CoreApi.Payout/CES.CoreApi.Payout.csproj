@@ -141,6 +141,7 @@
     <Compile Include="Models\DTO\CustomerServiceMessage.cs" />
     <Compile Include="Models\PayoutOrderResponse.cs" />
     <Compile Include="Models\DTO\PayoutField.cs" />
+    <Compile Include="Providers\GoldenCrownCachedProvider.cs" />
     <Compile Include="Providers\GoldenCrownProxy.cs" />
     <Compile Include="Providers\GoldenCrownProvider.cs" />
     <Compile Include="Models\Amount.cs" />

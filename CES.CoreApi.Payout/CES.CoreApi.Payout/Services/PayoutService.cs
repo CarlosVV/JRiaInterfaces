@@ -25,13 +25,13 @@ namespace CES.CoreApi.Payout.Services
 		/// </summary>
 		/// <param name="request"></param>
 		/// <returns></returns>
-		public static PayoutOrderResponse GetPayoutOrderInfo(PayoutOrderRequest request)
+		public static PayoutOrderResponse GetTransactionInfo(PayoutOrderRequest request)
 		{
 			Regex regex = new Regex(AppSettings.GoldenCrownPinRegex);
 			if (regex.Match(request.OrderPin).Success)
 			{
-				GoldenCrownProvider provider = new GoldenCrownProvider();
-				var serviceResponse=  provider.GetPayoutOrderInfo(request);
+				var provider = new GoldenCrownCachedProvider();
+				var serviceResponse=  provider.GetTransactionInfo(request);
 				serviceResponse.Transaction.PayoutCurrency = GetCurrencyByCode(serviceResponse.Transaction.PayoutCurrency);
 				SetExternalTransactionInfo(request, serviceResponse);
 				return serviceResponse;
