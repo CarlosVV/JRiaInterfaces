@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using CES.CoreApi.Payout.Models;
+using CES.CoreApi.Payout.Providers;
 using CES.CoreApi.Payout.ViewModels;
 namespace CES.CoreApi.Payout.App_Start
 {
@@ -26,9 +27,16 @@ namespace CES.CoreApi.Payout.App_Start
 					.ForMember(dest => dest.PayAgentBranchNo, opts => opts.MapFrom(src => src.Transaction.PayAgentBranchNo))
 					.ForMember(dest => dest.DeliveryMethod, opts => opts.MapFrom(src => src.Transaction.DeliveryMethod))
 					.ForMember(dest => dest.BeneficiaryTax, opts => opts.MapFrom(src => src.Transaction.BeneficiaryTax))
-					.ForMember(dest => dest.NetAmount, opts => opts.MapFrom(src => src.Transaction.NetAmount))
+					.ForMember(dest => dest.NetAmount, opts => opts.MapFrom(src => src.Transaction.NetAmount));
 
-;
+
+			Mapper.CreateMap<Tx, TransactionInfo>()
+				.ForMember(dest => dest.PIN, opts => opts.MapFrom(src => src.OID))
+				.ForMember(dest => dest.OrderDate, opts => opts.MapFrom(src => src.TransferDate))
+				.ForMember(dest => dest.OrderDate, opts => opts.MapFrom(src => src.TransferDate))
+				
+				
+				;
 
 		}
 	}

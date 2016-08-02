@@ -1,4 +1,6 @@
-﻿namespace CES.CoreApi.Payout.ViewModels
+﻿using System;
+
+namespace CES.CoreApi.Payout.ViewModels
 {
 	public class TransactionInfoRequest
 	{
@@ -13,6 +15,6 @@
 		public int? UserId { get { return RequesterInfo?.UserId; } }
 		public int? UserLoginId { get { return RequesterInfo?.UserLoginId; } }
 		public string Locale { get { return RequesterInfo?.Locale; } }
-
+		public DateTime? LocalTime { get { return RequesterInfo?.LocalTime; } }
 	}
 }

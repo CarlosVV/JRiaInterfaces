@@ -1,5 +1,4 @@
 ﻿
-
 namespace CES.CoreApi.Payout.Models
 {
 	public class PayoutField

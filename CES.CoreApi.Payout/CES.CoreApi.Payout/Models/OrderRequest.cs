@@ -1,4 +1,6 @@
-﻿namespace CES.CoreApi.Payout.ViewModels
+﻿using System;
+
+namespace CES.CoreApi.Payout.ViewModels
 {
 	public class OrderRequest
 	{
@@ -11,6 +13,7 @@
 		public string OrderPin { get; set; }
 		public string CountryTo { get; set; }
 		public string StateTo { get; set; }
-
+		public DateTime LocalTime { get;  set; }
+	
 	}
 }

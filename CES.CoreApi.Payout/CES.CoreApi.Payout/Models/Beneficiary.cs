@@ -6,7 +6,6 @@ namespace CES.CoreApi.Payout.Models
 	public class Beneficiary
 	{
 		//public string Name { get; set; }
-
 	
 		[DataMember(Name = "FirstName")]
 		public string BeneficiaryNameFirst { get; set; }

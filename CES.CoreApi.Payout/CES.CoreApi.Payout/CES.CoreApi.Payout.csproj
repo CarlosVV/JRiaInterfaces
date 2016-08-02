@@ -51,6 +51,10 @@
       <HintPath>..\packages\AutoMapper.3.3.1\lib\net40\AutoMapper.Net4.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="CES.Caching, Version=1.0.0.23, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\CES.Caching.1.0.0.23\lib\net452\CES.Caching.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="CES.Data.Sql, Version=1.0.0.38, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\CES.Data.SQL.1.0.0.38\lib\net461\CES.Data.Sql.dll</HintPath>
       <Private>True</Private>
@@ -77,7 +81,11 @@
     </Reference>
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="Newtonsoft.Json, Version=9.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
-      <HintPath>..\packages\CES.Security.CoreApi.1.0.0.8\lib\net461\Newtonsoft.Json.dll</HintPath>
+      <HintPath>..\packages\CES.Caching.1.0.0.23\lib\net452\Newtonsoft.Json.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="StackExchange.Redis, Version=1.1.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\CES.Caching.1.0.0.23\lib\net452\StackExchange.Redis.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="System.Net.Http" />
@@ -86,6 +94,7 @@
       <Private>True</Private>
     </Reference>
     <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.ServiceModel" />
     <Reference Include="System.Web.DynamicData" />
     <Reference Include="System.Web.Entity" />
     <Reference Include="System.Web.ApplicationServices" />
@@ -128,17 +137,22 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\DTO\Currency.cs" />
     <Compile Include="Models\DTO\CustomerServiceMessage.cs" />
     <Compile Include="Models\PayoutOrderInfo.cs" />
     <Compile Include="Models\DTO\PayoutField.cs" />
-    <Compile Include="Providers\GoldenCrownRepository.cs" />
+    <Compile Include="Providers\GoldenCrownProxy.cs" />
+    <Compile Include="Providers\GoldenCrownProvider.cs" />
     <Compile Include="Models\Amount.cs" />
     <Compile Include="Models\Beneficiary.cs" />
     <Compile Include="Models\OrderRequest.cs" />
     <Compile Include="Models\DTO\PayoutQueryResponse.cs" />
     <Compile Include="Models\DTO\TransactionInfo.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Providers\GoldenCrownUtility.cs" />
     <Compile Include="Repositories\DatabaseName.cs" />
+    <Compile Include="Repositories\IsoCurrencyCachedRepository.cs" />
+    <Compile Include="Repositories\IsoCurrencyRepository.cs" />
     <Compile Include="Repositories\PayoutRepository.cs" />
     <Compile Include="Repositories\PersistenceRepository.cs" />
     <Compile Include="Services\PayoutService.cs" />
