@@ -21,7 +21,7 @@ namespace CES.CoreApi.Payout.Services
 			this.repository = repository;
 		}
 		/// <summary>
-		/// Request route request to Golden crown or ria 
+		/// Handle request and route it to Golden Crown web service  or Ria repository 
 		/// </summary>
 		/// <param name="request"></param>
 		/// <returns></returns>
