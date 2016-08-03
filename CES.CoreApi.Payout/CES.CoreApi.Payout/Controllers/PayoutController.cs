@@ -24,7 +24,7 @@ namespace CES.CoreApi.Payout.Controllers
 		//[HttpGet]
 		[HttpPost]
 		[Route("Transaction")]
-		public TransactionInfoResponse GetTransaction(TransactionInfoRequest request)
+		public IHttpActionResult GetTransaction(TransactionInfoRequest request)
 		{
 			/*Request Mapper*/
 			var requestModel = Mapper.Map<PayoutOrderRequest>(request);
@@ -34,15 +34,8 @@ namespace CES.CoreApi.Payout.Controllers
 			var response = Mapper.Map<TransactionInfoResponse>(responseModel);
 			response.SenderInfo = Mapper.Map<Sender>(responseModel.Transaction);
 			response.BeneficiaryInfo = Mapper.Map<Beneficiary>(responseModel.Transaction);
-			return response;
+			return  Content(HttpStatusCode.OK, response);
 		}
 
-		private HttpResponseMessage PrepareHttpResponse<T>(HttpStatusCode httpStatusCode, T response)
-		{
-			var httpResponse = Request.CreateResponse(httpStatusCode);
-			httpResponse.Content = new StringContent(JsonConvert.SerializeObject(response), Encoding.UTF8, "application/json");
-
-			return httpResponse;
-		}
 	}
 }
