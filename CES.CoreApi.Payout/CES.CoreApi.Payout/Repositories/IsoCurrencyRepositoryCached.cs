@@ -5,7 +5,7 @@ using System.Collections.Generic;
 
 namespace CES.CoreApi.Payout.Repositories
 {
-	public class IsoCurrencyCachedRepository: IsoCurrencyRepository
+	public class IsoCurrencyRepositoryCached: IsoCurrencyRepository
 	{
 		public override IEnumerable<Currency> GetCurrencies()
 		{

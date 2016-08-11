@@ -14,7 +14,7 @@ namespace CES.CoreApi.Payout.Services
 	{
 		private PayoutRepository _repository =null;
 		private PersistenceRepository _persistenceRepository = null;
-		private GoldenCrownCachedProvider _provider =null;
+		private GoldenCrownProviderCached _provider =null;
 
 
 		public PayoutService()
@@ -33,7 +33,7 @@ namespace CES.CoreApi.Payout.Services
 			var id = _persistenceRepository.GetPersistenceId(request.UserId);
 			if (regex.Match(request.OrderPin).Success)
 			{
-				_provider = new GoldenCrownCachedProvider();
+				_provider = new GoldenCrownProviderCached();
 				var serviceResponse= _provider.GetTransactionInfo(request);
 				if (serviceResponse.Transaction == null)
 					return serviceResponse;
@@ -65,7 +65,7 @@ namespace CES.CoreApi.Payout.Services
 		/// <returns></returns>
 		private  string GetCurrencyByCode(string code)
 		{
-			var cache = new IsoCurrencyCachedRepository();
+			var cache = new IsoCurrencyRepositoryCached();
 			var currenies = cache.GetCurrencies();
 			var query = from c in currenies where c.IsoCode == code select c.Symbol;
 			return query.FirstOrDefault();

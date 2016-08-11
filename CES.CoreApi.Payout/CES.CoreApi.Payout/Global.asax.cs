@@ -16,9 +16,9 @@ namespace CES.CoreApi.Payout
 			/*To client application auth*/
 			GlobalConfiguration.Configuration.Filters.Add(new AuthenticationFilter("CES.CoreApi.Payout"));
 			/*To return custom error messages*/
-			GlobalConfiguration.Configuration.Filters.Add(new CoreApiExceptionFilterAttribute());
+			GlobalConfiguration.Configuration.Filters.Add(new CustomExceptionFilterAttribute());
 			/*To capture htto request message and http response message: You comment out this line if you want to stop it*/
-			GlobalConfiguration.Configuration.MessageHandlers.Add(new CoreApiHttpMessageHandler());
+			GlobalConfiguration.Configuration.MessageHandlers.Add(new HttpMessageHandler());
 			AutoMapperConfig.RegisterMappings();
 		}
 	}

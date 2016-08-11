@@ -1,15 +1,15 @@
-﻿using System;
+﻿
 using System.Net.Http;
 using System.Threading;
 using System.Threading.Tasks;
 
 namespace CES.CoreApi.Payout.Filters
 {
-	public class CoreApiHttpMessageHandler : DelegatingHandler
+	public class HttpMessageHandler : DelegatingHandler
 	{
 		protected override async Task<HttpResponseMessage> SendAsync(HttpRequestMessage request, CancellationToken cancellationToken)
 		{
-			Guid id = Guid.NewGuid();
+			var id = request.GetCorrelationId();
 			if (request.Content != null)
 			{
 				if (request.Method.Method == "GET")
@@ -31,6 +31,7 @@ namespace CES.CoreApi.Payout.Filters
 			{
 
 				var response = task.Result;
+				response.Headers.Add("ResponseId", id.ToString());
 				if (response.Content != null)
 				{
 					/*Optional to log response*/

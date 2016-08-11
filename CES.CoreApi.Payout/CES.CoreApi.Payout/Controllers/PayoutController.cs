@@ -2,10 +2,7 @@
 using CES.CoreApi.Payout.Models;
 using CES.CoreApi.Payout.Services;
 using CES.CoreApi.Payout.ViewModels;
-using Newtonsoft.Json;
 using System.Net;
-using System.Net.Http;
-using System.Text;
 using System.Web.Http;
 
 namespace CES.CoreApi.Payout.Controllers
@@ -14,7 +11,7 @@ namespace CES.CoreApi.Payout.Controllers
 	[RoutePrefix("MoneyTransfer/Payout")]
 	public class PayoutController : ApiController
 	{
-		private PayoutService _payoutService = null;
+		private PayoutService _payoutService;
 
 		public PayoutController()
 		{

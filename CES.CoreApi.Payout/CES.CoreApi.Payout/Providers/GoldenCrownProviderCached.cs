@@ -4,7 +4,7 @@ using CES.CoreApi.Payout.ViewModels;
 
 namespace CES.CoreApi.Payout.Providers
 {
-	public class GoldenCrownCachedProvider :GoldenCrownProvider
+	public class GoldenCrownProviderCached :GoldenCrownProvider
 	{
 		public override PayoutOrderResponse GetTransactionInfo(PayoutOrderRequest request)
 		{
