@@ -7,11 +7,11 @@ namespace CES.CoreApi.Payout.Repositories
 	public class PersistenceRepository
 	{
 		private SqlMapper sqlMapper = DatabaseName.CreateSqlMapper();
-	
+	    private const string  presistenceCreate = "coreApi_sp_PresistenceCreate";
 		internal int GetPersistenceId(int userId)
 		{
 			int persistenceId = 0;
-			using (var sql = sqlMapper.CreateCommand(DatabaseName.Main, "coreApi_sp_PresistenceCreate"))
+			using (var sql = sqlMapper.CreateCommand(DatabaseName.Main, presistenceCreate))
 			{
 				sql.AddParam("@fDisabled", false);
 				sql.AddParam("@fDelete", false);

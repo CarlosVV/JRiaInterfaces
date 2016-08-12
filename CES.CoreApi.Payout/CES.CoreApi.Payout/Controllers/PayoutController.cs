@@ -8,7 +8,7 @@ using System.Web.Http;
 namespace CES.CoreApi.Payout.Controllers
 {
 
-	[RoutePrefix("MoneyTransfer/Payout")]
+	[RoutePrefix("MoneyTransfer")]
 	public class PayoutController : ApiController
 	{
 		private PayoutService _payoutService;
@@ -17,10 +17,9 @@ namespace CES.CoreApi.Payout.Controllers
 		{
 			_payoutService = new PayoutService();
 		}
-
-		//[HttpGet]
+				
 		[HttpPost]
-		[Route("Transaction")]
+		[Route("Payout/Transaction")]
 		public IHttpActionResult GetTransaction(TransactionInfoRequest request)
 		{
 			/*Request Mapper*/
