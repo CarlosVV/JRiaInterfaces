@@ -20,7 +20,9 @@ namespace CES.CoreApi.Payout.ExceptionHandling
 
 		private static string RequestToString(HttpRequestMessage request)
 		{
-			var message = new StringBuilder();
+			var message = new StringBuilder();		
+			 message.Append(request.GetCorrelationId());
+			message.AppendLine("Api:");
 			if (request.Method != null)
 				message.Append(request.Method);
 			if (request.RequestUri != null)

@@ -12,6 +12,13 @@ namespace CES.CoreApi.Payout.ViewModels
 		public string OrderPin { get; set; }
 		public string CountryTo { get; set; }
 		public string StateTo { get; set; }
-		public DateTime LocalTime { get;  set; }	
+		public DateTime LocalTime { get;  set; }
+
+		public SampleRequest @SampleRequest { get; set; }
+
+	}
+	public class SampleRequest 
+	{
+		public int Id { get; set; }
 	}
 }

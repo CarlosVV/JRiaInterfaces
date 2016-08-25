@@ -22,6 +22,7 @@ namespace CES.CoreApi.Payout.Controllers
 		[Route("Payout/Transaction")]
 		public IHttpActionResult GetTransaction(TransactionInfoRequest request)
 		{
+			
 			/*Request Mapper*/
 			var requestModel = Mapper.Map<PayoutOrderRequest>(request);
 

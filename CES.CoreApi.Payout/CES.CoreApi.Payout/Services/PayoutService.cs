@@ -29,6 +29,8 @@ namespace CES.CoreApi.Payout.Services
 		/// <returns></returns>
 		public  PayoutOrderResponse GetTransactionInfo(PayoutOrderRequest request)
 		{
+
+		
 			Regex regex = new Regex(AppSettings.GoldenCrownPinRegex);
 			var id = _persistenceRepository.GetPersistenceId(request.UserId);
 			if (regex.Match(request.OrderPin).Success)
