@@ -30,5 +30,7 @@ namespace CES.CoreApi.GeoLocation.Models
         /// Address which was really verified by data provider
         /// </summary>
         public AddressModel Address { get; set; }
+
+		public  string ResultCodes { get; set; }
     }
 }

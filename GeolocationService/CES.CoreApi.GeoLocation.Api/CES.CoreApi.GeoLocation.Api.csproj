@@ -45,6 +45,10 @@
       <HintPath>..\packages\AutoMapper.4.2.1\lib\net45\AutoMapper.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="CES.Caching, Version=1.0.0.23, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\CES.Caching.1.0.0.23\lib\net452\CES.Caching.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="CES.Logging, Version=1.0.0.35, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\CES.Logging.1.0.0.35\lib\net45\CES.Logging.dll</HintPath>
       <Private>True</Private>
@@ -71,7 +75,7 @@
     </Reference>
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="Newtonsoft.Json, Version=9.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
-      <HintPath>..\packages\CES.Security.CoreApi.1.0.0.18\lib\net461\Newtonsoft.Json.dll</HintPath>
+      <HintPath>..\packages\CES.Caching.1.0.0.23\lib\net452\Newtonsoft.Json.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="SimpleInjector, Version=3.1.3.0, Culture=neutral, PublicKeyToken=984cb50dea722e99, processorArchitecture=MSIL">
@@ -84,6 +88,10 @@
     </Reference>
     <Reference Include="SimpleInjector.Integration.WebApi, Version=3.1.3.0, Culture=neutral, PublicKeyToken=984cb50dea722e99, processorArchitecture=MSIL">
       <HintPath>..\packages\SimpleInjector.Integration.WebApi.3.1.3\lib\net45\SimpleInjector.Integration.WebApi.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="StackExchange.Redis, Version=1.1.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\CES.Caching.1.0.0.23\lib\net452\StackExchange.Redis.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="System.Net.Http" />

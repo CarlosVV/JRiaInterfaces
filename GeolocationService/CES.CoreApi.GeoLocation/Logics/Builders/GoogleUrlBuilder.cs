@@ -88,7 +88,12 @@ namespace CES.CoreApi.GeoLocation.Logic.Builders
                 address.AdministrativeArea,
                 address.PostalCode,
                 address.Country);
-		
+
+			char[] ch = { ','};
+			string[] addresses = addressFormatted.Split(ch, System.StringSplitOptions.RemoveEmptyEntries);
+
+			addressFormatted = string.Join(",", addressFormatted);
+
 			var url = string.Format(CultureInfo.InvariantCulture,
 				"{0}/geocode/xml?address={1}{2}",
 				GeoLocationConfigurationSection.Instance.Google.Url,

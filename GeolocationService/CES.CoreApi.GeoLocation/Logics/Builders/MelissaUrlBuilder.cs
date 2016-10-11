@@ -5,6 +5,7 @@ using CES.CoreApi.GeoLocation.Interfaces;
 using CES.CoreApi.GeoLocation.Models;
 using System;
 using CES.CoreApi.GeoLocation.Configuration;
+using System.Configuration;
 
 namespace CES.CoreApi.GeoLocation.Logic.Builders
 {
@@ -55,8 +56,8 @@ namespace CES.CoreApi.GeoLocation.Logic.Builders
         {
             var url = string.Format(
 				"{0}?format=xml&id={1}&a1={2}&a2={3}&loc={4}&admarea{5}&postal={6}&ctry={7}",
-				"https://address.melissadata.net/V3/WEB/GlobalAddress/doGlobalAddress",
-                "UpTATat0ci3mB-9x2nmDaX**",
+				ConfigurationManager.AppSettings["MelissaDataDoGlobalAddressUrl"],
+				ConfigurationManager.AppSettings["MelissaDataDoGlobalAddressKey"],
                 HttpUtility.UrlEncode(address.Address1),
                 HttpUtility.UrlEncode(address.Address2),
                 HttpUtility.UrlEncode(address.City),

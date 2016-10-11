@@ -21,5 +21,7 @@
         public const string Longitude = "Longitude";
         public const string FormattedAddress = "FormattedAddress";
         public const string SubPremises = "SubPremises";
+
+
     }
 }

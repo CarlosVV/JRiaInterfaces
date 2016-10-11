@@ -47,5 +47,11 @@ namespace CES.CoreApi.GeoLocation.Api.ViewModels
 
 		[DataMember]
 		public string DataProviderText { get { return DataProvider.ToString(); } }
+
+		[DataMember]
+		public string ConfidenceText { get { return Confidence.ToString(); } }
+
+		[DataMember]
+		public string ResultCodes { get; set; }
 	}
 }

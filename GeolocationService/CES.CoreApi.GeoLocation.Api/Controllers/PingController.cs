@@ -11,5 +11,15 @@ namespace CES.CoreApi.GeoLocation.Api
 		{
 			return "OK";
 		}
+
+		[HttpGet]
+		[Route("ClearCache")]
+		public IHttpActionResult ResetCache([FromUri] string key)
+		{
+			//Cache
+			Caching.Cache.Remove(key);
+			return Ok();
+		}
 	}
+
 }

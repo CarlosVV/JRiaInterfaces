@@ -34,12 +34,28 @@
       <HintPath>..\packages\CES.Caching.1.0.0.23\lib\net452\CES.Caching.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="CES.Logging, Version=1.0.0.36, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\CES.Logging.1.0.0.36\lib\net45\CES.Logging.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Gelf4Net, Version=2.0.3.14, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Gelf4Net.2.0.3.14\lib\net40\Gelf4Net.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="log4net, Version=1.2.15.0, Culture=neutral, PublicKeyToken=669e0ddf0bb1aa2a, processorArchitecture=MSIL">
+      <HintPath>..\packages\log4net.2.0.5\lib\net45-full\log4net.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="MoreLinq, Version=1.4.18916.0, Culture=neutral, PublicKeyToken=384d532d7e88985d, processorArchitecture=MSIL">
       <HintPath>..\packages\morelinq.1.4.0\lib\net35\MoreLinq.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="Newtonsoft.Json, Version=9.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <HintPath>..\packages\CES.Caching.1.0.0.23\lib\net452\Newtonsoft.Json.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="RestSharp, Version=105.2.3.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\RestSharp.105.2.3\lib\net46\RestSharp.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="StackExchange.Redis, Version=1.1.0.0, Culture=neutral, processorArchitecture=MSIL">
@@ -76,6 +92,7 @@
     <Compile Include="Enumerations\ImageFormat.cs" />
     <Compile Include="Enumerations\LevelOfConfidence.cs" />
     <Compile Include="Enumerations\MapStyle.cs" />
+    <Compile Include="Models\MelissaDataReturnCode.cs" />
     <Compile Include="Repositories\ClientSettingRepositoryCached.cs" />
     <Compile Include="Tools\ClientHeader.cs" />
     <Compile Include="Tools\EnumTools.cs" />
@@ -154,6 +171,7 @@
     <Compile Include="Tools\XmlTools.cs" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="app.config" />
     <None Include="packages.config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

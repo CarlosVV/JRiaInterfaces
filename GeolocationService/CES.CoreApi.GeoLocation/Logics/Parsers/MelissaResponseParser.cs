@@ -24,12 +24,7 @@ namespace CES.CoreApi.GeoLocation.Logic.Parsers
             IMelissaLevelOfConfidenceProvider levelOfConfidenceProvider)
             : base(DataProviderType.MelissaData)
         {
-            //if (addressParser == null)
-            //    throw new CoreApiException(TechnicalSubSystem.GeoLocationService,
-            //       SubSystemError.GeneralRequiredParameterIsUndefined, "addressParser");
-            //if (levelOfConfidenceProvider == null)
-            //    throw new CoreApiException(TechnicalSubSystem.GeoLocationService,
-            //       SubSystemError.GeneralRequiredParameterIsUndefined, "levelOfConfidenceProvider");
+
 
             _addressParser = addressParser;
             _levelOfConfidenceProvider = levelOfConfidenceProvider;
@@ -115,7 +110,7 @@ namespace CES.CoreApi.GeoLocation.Logic.Parsers
         /// <returns></returns>
         private AutocompleteAddressResponseModel GetAddressAutocompleteResponse(XContainer rootElement, string country)
         {
-            var results = rootElement.Element(MelissaConstants.Results);
+            var results = rootElement.Descendants(MelissaConstants.Results);
             if (results == null)
                 return GetInvalidAddressAutocompleteResponse();
 
@@ -151,11 +146,13 @@ namespace CES.CoreApi.GeoLocation.Logic.Parsers
         /// <returns></returns>
         private ValidateAddressResponseModel GetAddressVerificationResponse(XContainer rootElement, LevelOfConfidence acceptableConfidence)
         {
-            var records = rootElement.Elements(_xNamespace + MelissaConstants.Records).ToList();
-            if (!records.Any())
+			Logging.Log.Info(rootElement);
+
+            var records = rootElement.Descendants(_xNamespace + MelissaConstants.TotalRecords).ToList();
+            if (records.Count <=0 || records[0].Value =="0")
                 return GetInvalidAddressVerificationResponse();
 
-            var matchRecord = GetMatchRecord(records, acceptableConfidence);
+            var matchRecord = GetMatchRecord(rootElement.Descendants(_xNamespace + MelissaConstants.Records), acceptableConfidence);
 
             if (matchRecord == null)
                 return GetInvalidAddressVerificationResponse();
@@ -163,9 +160,11 @@ namespace CES.CoreApi.GeoLocation.Logic.Parsers
             var responseModel = GetValidAddressVerificationResponse(matchRecord.Item1);
             responseModel.Address = _addressParser.ParseAddress(matchRecord.Item2, _xNamespace);
 
-            //Populates location of verified address
-            responseModel.Location = GetLocation(matchRecord.Item2);
 
+
+			responseModel.ResultCodes = GetResultMessage(matchRecord.Item2);
+			//Populates location of verified address
+			responseModel.Location = GetLocation(matchRecord.Item2);
             return responseModel;
         }
 
@@ -177,24 +176,35 @@ namespace CES.CoreApi.GeoLocation.Logic.Parsers
         /// <returns></returns>
         private Tuple<LevelOfConfidence, XElement> GetMatchRecord(IEnumerable<XElement> records, LevelOfConfidence acceptableConfidence)
         {
-            var acceptableConfidenceLevels = GetAcceptableConfidenceLevels(acceptableConfidence);
+          //  var acceptableConfidenceLevels = GetAcceptableConfidenceLevels(acceptableConfidence);
 
             var matchRecord =
                 (from responseRecord in records.Elements(_xNamespace + MelissaConstants.ResponseRecord)
                     let confidence = _levelOfConfidenceProvider.GetLevelOfConfidence(
                         responseRecord.GetValue<string>(MelissaConstants.Results, _xNamespace))
-                    where acceptableConfidenceLevels.Contains((int) confidence)
+                   // where acceptableConfidenceLevels.Contains((int) confidence)
                     select new Tuple<LevelOfConfidence, XElement>(confidence, responseRecord))
                     .FirstOrDefault();
 
             return matchRecord;
         }
 
-        /// <summary>
-        /// Populates Location element by values
-        /// </summary>
-        /// <param name="matchRecord">Match record instance</param>
-        private LocationModel GetLocation(XElement matchRecord)
+		/// <summary>
+		/// Populates Location element by values
+		/// </summary>
+		/// <param name="matchRecord">Match record instance</param>
+		private string GetResultMessage(XElement matchRecord)
+		{
+			return matchRecord.GetValue<string>(MelissaConstants.Results, _xNamespace);
+		}
+
+
+
+		/// <summary>
+		/// Populates Location element by values
+		/// </summary>
+		/// <param name="matchRecord">Match record instance</param>
+		private LocationModel GetLocation(XElement matchRecord)
         {
             return new LocationModel
             {
@@ -232,6 +242,28 @@ namespace CES.CoreApi.GeoLocation.Logic.Parsers
 			throw new NotImplementedException();
 		}
 
+
+		private List<MelissaDataReturnCode> GetMelissaDataReturnCodes()
+		{
+			var items = new List<MelissaDataReturnCode>();
+
+			items.Add(new MelissaDataReturnCode { Code = "AV11", Description = "The address has been partially verified to the Administrative Area (State) Level, which is NOT the highest level possible with the reference data." });
+			items.Add(new MelissaDataReturnCode { Code = "AV12", Description = "he address has been partially verified to the Locality (City) Level, which is NOT the highest level possible with the reference data." });
+			items.Add(new MelissaDataReturnCode { Code = "AV13", Description = "The address has been partially verified to the Thoroughfare (Street) Level, which is NOT the highest level possible with the reference data." });
+			items.Add(new MelissaDataReturnCode { Code = "AV14", Description = "The address has been partially verified to the Premise (House or Building) Level, which is NOT the highest level possible with the reference data." });
+			items.Add(new MelissaDataReturnCode { Code = "AV15", Description = "The address has been partially verified to the SubPremises (Suite) or PO Box Level, which is NOT the highest level possible with the reference data." });
+
+
+			items.Add(new MelissaDataReturnCode { Code = "AV21", Description = "The address has been verified to the Administrative Area (State) Level, which is the highest level possible with the reference da" });
+			items.Add(new MelissaDataReturnCode { Code = "AV22", Description = "The address has been verified to the Locality (City) Level, which is the highest level possible with the reference data." });
+			items.Add(new MelissaDataReturnCode { Code = "AV23", Description = "The address has been verified to the Thoroughfare (Street) Level, which is the highest level possible with the reference data." });
+			items.Add(new MelissaDataReturnCode { Code = "AV24", Description = "The address has been verified to the Premise (House or Building) Level, which is the highest level possible with the reference data." });
+			items.Add(new MelissaDataReturnCode { Code = "AV25", Description = "The address has been verified to the SubPremise (Suite) or PO Box Level, which is the highest level possible with the reference data." });
+
+			
+
+			return items;
+		}
 		#endregion
 	}
 }
