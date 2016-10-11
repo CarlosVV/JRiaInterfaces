@@ -24,6 +24,78 @@ namespace CES.CoreApi.Compliance.Screening.Utilities
 				return ConfigurationManager.AppSettings["AppObjectId"].ToNumber();
 			}
 		}
+              
+        public static string PortalURLCustomer
+        {
+            get
+            {
+                return ConfigurationManager.AppSettings["portalUrlCustomer"];
+            }
+        }
+        public static string PortalURLBeneficiary
+        {
+            get
+            {
+                return ConfigurationManager.AppSettings["portalUrlBeneficiary"];
+            }
+        }
 
-	}
+        public static string PortalURLOnBehalf
+        {
+            get
+            {
+                return ConfigurationManager.AppSettings["portalUrlOnBehalf"];
+            }
+        }
+
+        public static string DefaultRuleCustomer
+        {
+            get
+            {
+                return ConfigurationManager.AppSettings["defaultRuleCustomer"];
+            }
+        }
+
+        public static string DefaultRuleBeneficiary
+        {
+            get
+            {
+                return ConfigurationManager.AppSettings["defaultRuleBeneficiary"];
+            }
+        }
+
+        public static string DefaultRuleOnBehalf
+        {
+            get
+            {
+                return ConfigurationManager.AppSettings["defaultRuleOnBehalf"];
+            }
+        }
+
+        public static string MailFrom
+        {
+            get
+            {
+                return ConfigurationManager.AppSettings["mailFrom"];
+            }
+        }
+        public static string MailTo
+        {
+            get
+            {
+                return ConfigurationManager.AppSettings["mailTo"];
+            }
+        }
+
+        public static bool UseDefaultRules
+        {
+            get
+            {
+                return bool.Parse(ConfigurationManager.AppSettings["useDefaultRules"]);
+            }
+        }
+        
+
+
+    }
 }

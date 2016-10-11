@@ -130,6 +130,7 @@
   <ItemGroup>
     <Compile Include="App_Start\AutoMapperConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
+    <Compile Include="Controllers\RulesController.cs" />
     <Compile Include="Controllers\ScreeningController.cs" />
     <Compile Include="Filters\CustomExceptionLogger.cs" />
     <Compile Include="Filters\HttpMessageHandler.cs" />
@@ -140,8 +141,13 @@
     <Compile Include="Models\ActimizeResponse.cs" />
     <Compile Include="Models\Agent.cs" />
     <Compile Include="Models\CallEventType.cs" />
+    <Compile Include="Models\DeliveryMethod.cs" />
+    <Compile Include="Models\DTO\Constant.cs" />
     <Compile Include="Models\DTO\PartyRuleHits.cs" />
     <Compile Include="Models\DTO\ReviewAlertCreateRequest.cs" />
+    <Compile Include="Models\DTO\ReviewAlertCreateResponse.cs" />
+    <Compile Include="Models\RulesRequest.cs" />
+    <Compile Include="Models\RulesResponse.cs" />
     <Compile Include="Models\Hit.cs" />
     <Compile Include="Models\ID.cs" />
     <Compile Include="Models\IDType.cs" />
@@ -150,9 +156,17 @@
     <Compile Include="Models\Request.cs" />
     <Compile Include="Models\Response.cs" />
     <Compile Include="Models\Rule.cs" />
+    <Compile Include="Models\SendEmailRequest.cs" />
+    <Compile Include="Models\SendEmailResponse.cs" />
     <Compile Include="Models\ServiceIdType.cs" />
     <Compile Include="Providers\Proxies\ActimizeEventHandlerServiceProxy.cs" />
+    <Compile Include="Services\RulesService.cs" />
     <Compile Include="Utilities\AppSettings.cs" />
+    <Compile Include="Utilities\MessageInspector.cs" />
+    <Compile Include="Utilities\MessageInspectorBehavior .cs" />
+    <Compile Include="Utilities\ViewModelUtil.cs" />
+    <Compile Include="ViewModels\GetRulesRequest.cs" />
+    <Compile Include="ViewModels\GetRulesResponse.cs" />
     <Compile Include="ViewModels\ScreeningRequest.cs" />
     <Compile Include="ViewModels\ScreeningResponse.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

@@ -3,7 +3,6 @@
     public enum ServiceIdType
     {
         Undefined = 0,
-        OfficePickup = 1,
-        BankDeposit = 2
+        MT = 111
     }
 }

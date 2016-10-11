@@ -94,7 +94,7 @@ namespace CES.CoreApi.Compliance.Screening.Repositories
                     }
                     //Compose the statement:
                     fullExec = declareStmt + sqlCmd + paramList.Remove(paramList.LastIndexOf(","), 1);
-                    log = fullExec;
+                    log = fullExec.Replace("|", Environment.NewLine); 
                   
                 }
             }

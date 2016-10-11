@@ -1,10 +1,12 @@
 ﻿//using eh.actimize.com;
 using AutoMapper;
 using CES.CoreApi.Compliance.Screening.Models;
+using CES.CoreApi.Compliance.Screening.Utilities;
 using eh.actimize.com;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
 
 namespace CES.CoreApi.Compliance.Screening.Providers
 {
@@ -30,7 +32,7 @@ namespace CES.CoreApi.Compliance.Screening.Providers
         {
 
             var response = new ActimizeResponse();
-            string score;
+            int score;
             bool isAlerted;
             bool hasHits;
             string alertId;
@@ -101,7 +103,7 @@ namespace CES.CoreApi.Compliance.Screening.Providers
 
 
                     },
-                   // alertId:out alertId,
+                    alertId:out alertId,
                     score: out score,
                     isAlerted: out isAlerted,
                     hasHits: out hasHits,
@@ -114,7 +116,9 @@ namespace CES.CoreApi.Compliance.Screening.Providers
                 response.IsAlerted = isAlerted;
                 response.HasHits = hasHits;
                 response.Score = score;
-              
+                response.AlertId = alertId;
+
+
 
                 if (hasHits && hits != null)
                 {
@@ -133,7 +137,7 @@ namespace CES.CoreApi.Compliance.Screening.Providers
         {
 
             var response = new ActimizeResponse();
-            string score;
+            int score;
             string alertId;
             bool isAlerted;
             bool hasHits;
@@ -141,11 +145,13 @@ namespace CES.CoreApi.Compliance.Screening.Providers
             var originatorCountryCd = request.CountryTo;
             MSRealTimeWSProvider_1_Hits_SetType hits = null;
             MSRealTimeWSProvider_1_OriginatorPartyIds_InnerSet_TupleType[] IDs = null;
-
+            var portalURL = string.Empty;     
+                    
 
             //Evaluate ids of request
             if (party.IDs!=null && party.IDs.Any())
             {
+                IDs = new MSRealTimeWSProvider_1_OriginatorPartyIds_InnerSet_TupleType[party.IDs.Count()];
                 for (int index = 0; index < party.IDs.Count(); index++)
                 {
                     var requestID = party.IDs.ElementAt(index);
@@ -158,27 +164,46 @@ namespace CES.CoreApi.Compliance.Screening.Providers
                 }
                
             }
-           
+
+            //Set PortalURL
+            switch(party.Type)
+            {
+                case PartyType.Customer:
+                    portalURL = WebUtility.HtmlDecode(string.Format(AppSettings.PortalURLCustomer,request.OrderId, party.Id));
+                    break;
+
+                case PartyType.Beneficiary:
+                    portalURL = WebUtility.HtmlDecode(string.Format(AppSettings.PortalURLBeneficiary, request.OrderId, party.Id));
+                    break;
+
+                case PartyType.OnBehalfOf:
+                    portalURL = WebUtility.HtmlDecode(string.Format(AppSettings.PortalURLOnBehalf, request.OrderId, party.Id));
+                    break;
+            }
+
+            Logging.Log.Info($"PortalURL ({party.Type}): {portalURL}");
+
 
             EHProxyClient client = new EHProxyClient();
+            client.Endpoint.Behaviors.Add(new MessageInspectorBehavior());
             try
             {
                 EHResult result = client.MSRealTimeWSProvider_1(
-                    searchDefId: "AllSanctions",//rule.SearchDef,
-                    businessUnit: rule.BusinessUnit,
+                    searchDefId: "AllSanctions",// TODO: Remove when Thuan fix rule  rule.SearchDef,
+                    businessUnit: "WLF Global",// TODO: Remove when Thuan fix rule rule.BusinessUnit,
                     partyKey: party.Id.ToString(),
                     messageKey: request.OrderNo,
                     messageInstanceNumber: ((int)request.ServiceId).ToString(),
                     messageRefNumber: string.Empty,
                     messageSourceType: request.EntryType,
-                    messageTypeCd: "Test", //TODO:
+                    messageTypeCd: request.OrderPin ?? string.Empty,
                     messageDateTime: request.TransDateTime.ToString("dd/MM/yyyy"),
                     amount: request.SendTotalAmount.ToString(),
                     currencyCd: request.SendCurrency,
                     productKey: request.ProductId.ToString(),
-                    messageDirection: string.Empty,
+                    messageDirection: party.Type.ToString(),
                     messageInstructions: rule.fActionID.ToString(),
-                    additionalMessageInfo: string.Empty,
+                    additionalMessageInfo: party.Id.ToString(),
                     messageText: string.Empty,
                     originator: new MSRealTimeWSProvider_1_Originator_TupleType
                     {
@@ -233,13 +258,12 @@ namespace CES.CoreApi.Compliance.Screening.Providers
                     },
                     receiving: new MSRealTimeWSProvider_1_Receiving_TupleType { },
                     sending: new MSRealTimeWSProvider_1_Sending_TupleType { },
-                    fiToFiInfo: "",
+                    fiToFiInfo: "",// TODO: Remove when Thuan fix Actimize URL Portal portalURL,
                     customFields: new MSRealTimeWSProvider_1_CustomFields_TupleType
                     {
-
-
+                       
                     },
-                    //alertId: out alertId,
+                    alertId: out alertId,
                     score: out score,
                     isAlerted: out isAlerted,
                     hasHits: out hasHits,
@@ -251,6 +275,7 @@ namespace CES.CoreApi.Compliance.Screening.Providers
                 response.IsAlerted = isAlerted;
                 response.HasHits = hasHits;
                 response.Score = score;
+                response.AlertId = alertId;
 
                 if (hasHits && hits != null)
                 {

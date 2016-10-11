@@ -41,7 +41,7 @@ namespace CES.CoreApi.Compliance.Screening.Controllers
         [Route("transactions")]
         public IHttpActionResult Transactions(ScreeningRequest screeningRequest)
         {
-            // TODO: refactor this for better error, request/response mapping etc.
+            
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
@@ -50,6 +50,12 @@ namespace CES.CoreApi.Compliance.Screening.Controllers
             var request = AutoMapper.Mapper.Map<Request>(screeningRequest);
             var response = _screeningService.ScreeningTransaction(request);
             var screeningResponse = AutoMapper.Mapper.Map<ScreeningResponse>(response);
+
+            if(screeningResponse.Code=="60" )
+                return Content(HttpStatusCode.BadGateway, screeningResponse);  // HTTP 502
+
+            if (screeningResponse.Code == "61")
+                return Content(HttpStatusCode.InternalServerError, screeningResponse);  // HTTP 500
 
             return Content(HttpStatusCode.Created, screeningResponse);  // HTTP 201
         }
