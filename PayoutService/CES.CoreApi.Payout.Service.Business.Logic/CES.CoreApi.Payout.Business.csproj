@@ -1,0 +1,502 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{AC163B62-5B5A-475D-BB80-3B39421F8237}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>CES.CoreApi.Payout.Service.Business.Logic</RootNamespace>
+    <AssemblyName>CES.CoreApi.Payout.Service.Business.Logic</AssemblyName>
+    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="AutoMapper, Version=4.2.1.0, Culture=neutral, PublicKeyToken=be96cd2c38ef1005, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\AutoMapper.4.2.1\lib\net45\AutoMapper.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Newtonsoft.Json, Version=6.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Newtonsoft.Json.6.0.8\lib\net45\Newtonsoft.Json.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="SimpleInjector, Version=3.1.3.0, Culture=neutral, PublicKeyToken=984cb50dea722e99, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\SimpleInjector.3.1.3\lib\net45\SimpleInjector.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.ServiceModel" />
+    <Reference Include="System.Transactions" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Compliance\ComplianceService.cs" />
+    <Compile Include="Configuration\ApiProviderConfigElementCollection.cs" />
+    <Compile Include="Configuration\ApiConfigurationSection.cs" />
+    <Compile Include="Configuration\ApiProviderConfigElement.cs" />
+    <Compile Include="Configuration\ConfigStrinElement.cs" />
+    <Compile Include="Configuration\MethodConfigElement.cs" />
+    <Compile Include="Configuration\MethodConfigElementCollection.cs" />
+    <Compile Include="Data\ResponseCode.cs" />
+    <Compile Include="Data\RiaRepository.cs" />
+    <Compile Include="Email\EmailHelper.cs" />
+    <Compile Include="Exceptions\ComplianceException.cs" />
+    <Compile Include="Exceptions\CountryCodeException.cs" />
+    <Compile Include="Exceptions\InvalidDataException.cs" />
+    <Compile Include="Exceptions\InvalidMoneyException.cs" />
+    <Compile Include="Exceptions\PayoutServiceProcessingException.cs" />
+    <Compile Include="Exceptions\StatusCodeReturnedException.cs" />
+    <Compile Include="Factories\PayoutProviderFactory.cs" />
+    <Compile Include="Interfaces\IDataHelper.cs" />
+    <Compile Include="Interfaces\IEmailHelper.cs" />
+    <Compile Include="Interfaces\IPayoutProcessor.cs" />
+    <Compile Include="Interfaces\IPayoutServiceProvider.cs" />
+    <Compile Include="Interfaces\IPayoutServiceProviderFactory.cs" />
+    <Compile Include="Interfaces\IRiaRepository.cs" />
+    <Compile Include="Log4NetProxy.cs" />
+    <Compile Include="Messages.en-US.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Messages.en-US.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Models\BaseRequest.cs" />
+    <Compile Include="Models\BaseResponse.cs" />
+    <Compile Include="Models\BeneficiaryInfoModel.cs" />
+    <Compile Include="Models\ComplianceProviderResponseModel.cs" />
+    <Compile Include="Models\ComplianceRunModel.cs" />
+    <Compile Include="Models\ConfirmPayoutRequestModel.cs" />
+    <Compile Include="Models\ConfirmPayoutResponseModel.cs" />
+    <Compile Include="Models\CountryCodeModel.cs" />
+    <Compile Include="Models\CreateOrderFromProviderDataResponse.cs" />
+    <Compile Include="Models\CurrencyCodeModel.cs" />
+    <Compile Include="Models\CustomerServiceMessagesModel.cs" />
+    <Compile Include="Models\GetTransactionInfoRequestModel.cs" />
+    <Compile Include="Models\GetTransactionInfoResponseModel.cs" />
+    <Compile Include="Models\IssueModel.cs" />
+    <Compile Include="Models\LocInfoForExternalLocNResponseModel.cs" />
+    <Compile Include="Models\LocInfoForExternaLocNlRequestModel.cs" />
+    <Compile Include="Models\MoneyModel.cs" />
+    <Compile Include="Models\PayoutFieldsModel.cs" />
+    <Compile Include="Models\PayoutMessageCode.cs" />
+    <Compile Include="Models\PayoutTransactionRequestModel.cs" />
+    <Compile Include="Models\PayoutTransactionResponseModel.cs" />
+    <Compile Include="Models\PlaceOnLegalHoldRequestModel.cs" />
+    <Compile Include="Models\PlaceOnLegalHoldResponseModel.cs" />
+    <Compile Include="Models\ProviderInfoModel.cs" />
+    <Compile Include="Models\RegCountryModel.cs" />
+    <Compile Include="Models\RequesterInfoModel.cs" />
+    <Compile Include="Models\ResponseStatus.cs" />
+    <Compile Include="Models\ReturnInfoModel.cs" />
+    <Compile Include="Models\SendEmailRequestModel.cs" />
+    <Compile Include="Models\SendEmailResponseModel.cs" />
+    <Compile Include="Models\SenderInfoModel.cs" />
+    <Compile Include="Models\WLFMatchRuleModel.cs" />
+    <Compile Include="Processors\PayoutProcessor.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Providers\BaseProviderProcess.cs" />
+    <Compile Include="Providers\Correspondents\GoldenCrown\GC_ErrorCode.cs" />
+    <Compile Include="Providers\Correspondents\GoldenCrown\GC_OrderStatus.cs" />
+    <Compile Include="Providers\Correspondents\GoldenCrown\GoldenCrownAPI.cs" />
+    <Compile Include="Providers\Correspondents\GoldenCrown\IDType.cs" />
+    <Compile Include="Providers\Correspondents\GoldenCrown\GoldenCrownPayoutProcess.cs" />
+    <Compile Include="Providers\Correspondents\ICorrespondentAPI.cs" />
+    <Compile Include="Providers\Correspondents\Ria\RiaPayoutProcess.cs" />
+    <Compile Include="Providers\GetTransactionInfoCall.cs" />
+    <Compile Include="Providers\PayoutServiceProvider.cs" />
+    <Compile Include="Providers\PayoutTransactionCall.cs" />
+    <Compile Include="Providers\RiaDatabase\CountryCode.cs" />
+    <Compile Include="Providers\RiaDatabase\DataHelper.cs" />
+    <Compile Include="Providers\RiaDatabase\SQLUtils.cs" />
+    <Compile Include="Service References\GoldenCrownServiceReference\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Compile>
+    <Compile Include="Utilities\ConfigSettings.cs" />
+    <Compile Include="Utilities\Constants.cs" />
+    <Compile Include="Utilities\DamerauLevenshteinDistance.cs" />
+    <Compile Include="Utilities\Enumerations.cs" />
+    <Compile Include="Utilities\LevenshteinDistance.cs" />
+    <Compile Include="Utilities\Messages.cs" />
+    <Compile Include="Utilities\PayouFieldstListExtension.cs" />
+    <Compile Include="Utilities\StoreProcedureConstants.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadata Include="Service References\" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="app.config" />
+    <None Include="packages.config" />
+    <None Include="Service References\GoldenCrownServiceReference\CES.CoreApi.Payout.Service.Business.Logic.GoldenCrownServiceReference.AccDetailResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\GoldenCrownServiceReference\CES.CoreApi.Payout.Service.Business.Logic.GoldenCrownServiceReference.AddFileResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\GoldenCrownServiceReference\CES.CoreApi.Payout.Service.Business.Logic.GoldenCrownServiceReference.AddStatisticsResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\GoldenCrownServiceReference\CES.CoreApi.Payout.Service.Business.Logic.GoldenCrownServiceReference.AdviceResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\GoldenCrownServiceReference\CES.CoreApi.Payout.Service.Business.Logic.GoldenCrownServiceReference.AgentBalanceResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\GoldenCrownServiceReference\CES.CoreApi.Payout.Service.Business.Logic.GoldenCrownServiceReference.AgentListtResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\GoldenCrownServiceReference\CES.CoreApi.Payout.Service.Business.Logic.GoldenCrownServiceReference.AllCurRatesResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\GoldenCrownServiceReference\CES.CoreApi.Payout.Service.Business.Logic.GoldenCrownServiceReference.AnsAccDetail.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\GoldenCrownServiceReference\CES.CoreApi.Payout.Service.Business.Logic.GoldenCrownServiceReference.AnsAdvice.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\GoldenCrownServiceReference\CES.CoreApi.Payout.Service.Business.Logic.GoldenCrownServiceReference.AnsAgentBalance.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\GoldenCrownServiceReference\CES.CoreApi.Payout.Service.Business.Logic.GoldenCrownServiceReference.AnsAgentListt.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\GoldenCrownServiceReference\CES.CoreApi.Payout.Service.Business.Logic.GoldenCrownServiceReference.AnsAllCurRatesCurRates.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\GoldenCrownServiceReference\CES.CoreApi.Payout.Service.Business.Logic.GoldenCrownServiceReference.AnsBalance.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\GoldenCrownServiceReference\CES.CoreApi.Payout.Service.Business.Logic.GoldenCrownServiceReference.AnsCard.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\GoldenCrownServiceReference\CES.CoreApi.Payout.Service.Business.Logic.GoldenCrownServiceReference.AnsCardSupport.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\GoldenCrownServiceReference\CES.CoreApi.Payout.Service.Business.Logic.GoldenCrownServiceReference.AnsChargeOffCard.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\GoldenCrownServiceReference\CES.CoreApi.Payout.Service.Business.Logic.GoldenCrownServiceReference.AnsCheckLimit1.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\GoldenCrownServiceReference\CES.CoreApi.Payout.Service.Business.Logic.GoldenCrownServiceReference.AnsClientTariffCalculation.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\GoldenCrownServiceReference\CES.CoreApi.Payout.Service.Business.Logic.GoldenCrownServiceReference.AnsConfirmation.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\GoldenCrownServiceReference\CES.CoreApi.Payout.Service.Business.Logic.GoldenCrownServiceReference.AnsCreditBankListCreditBankInfo.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\GoldenCrownServiceReference\CES.CoreApi.Payout.Service.Business.Logic.GoldenCrownServiceReference.AnsCurListCurrency.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\GoldenCrownServiceReference\CES.CoreApi.Payout.Service.Business.Logic.GoldenCrownServiceReference.AnsCurrencyRate.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\GoldenCrownServiceReference\CES.CoreApi.Payout.Service.Business.Logic.GoldenCrownServiceReference.AnsDirectionListDirection.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\GoldenCrownServiceReference\CES.CoreApi.Payout.Service.Business.Logic.GoldenCrownServiceReference.AnsEcho.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\GoldenCrownServiceReference\CES.CoreApi.Payout.Service.Business.Logic.GoldenCrownServiceReference.AnsLoan.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\GoldenCrownServiceReference\CES.CoreApi.Payout.Service.Business.Logic.GoldenCrownServiceReference.AnsMGCurListCurrency.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\GoldenCrownServiceReference\CES.CoreApi.Payout.Service.Business.Logic.GoldenCrownServiceReference.AnsMGPayMap.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\GoldenCrownServiceReference\CES.CoreApi.Payout.Service.Business.Logic.GoldenCrownServiceReference.AnsMyInfo.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\GoldenCrownServiceReference\CES.CoreApi.Payout.Service.Business.Logic.GoldenCrownServiceReference.AnsNotice.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\GoldenCrownServiceReference\CES.CoreApi.Payout.Service.Business.Logic.GoldenCrownServiceReference.AnsOnlinePayMap.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\GoldenCrownServiceReference\CES.CoreApi.Payout.Service.Business.Logic.GoldenCrownServiceReference.AnsOuterNotice.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\GoldenCrownServiceReference\CES.CoreApi.Payout.Service.Business.Logic.GoldenCrownServiceReference.AnsPayDocReportTxDocInfo.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\GoldenCrownServiceReference\CES.CoreApi.Payout.Service.Business.Logic.GoldenCrownServiceReference.AnsPayeeDataForUpdate.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\GoldenCrownServiceReference\CES.CoreApi.Payout.Service.Business.Logic.GoldenCrownServiceReference.AnsPayerSearch.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\GoldenCrownServiceReference\CES.CoreApi.Payout.Service.Business.Logic.GoldenCrownServiceReference.AnsPayMap.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\GoldenCrownServiceReference\CES.CoreApi.Payout.Service.Business.Logic.GoldenCrownServiceReference.AnsPaySupport.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\GoldenCrownServiceReference\CES.CoreApi.Payout.Service.Business.Logic.GoldenCrownServiceReference.AnsPersonCheck.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\GoldenCrownServiceReference\CES.CoreApi.Payout.Service.Business.Logic.GoldenCrownServiceReference.AnsPhoneCardListPhoneInfo.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\GoldenCrownServiceReference\CES.CoreApi.Payout.Service.Business.Logic.GoldenCrownServiceReference.AnsReceive.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\GoldenCrownServiceReference\CES.CoreApi.Payout.Service.Business.Logic.GoldenCrownServiceReference.AnsRegCard.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\GoldenCrownServiceReference\CES.CoreApi.Payout.Service.Business.Logic.GoldenCrownServiceReference.AnsReversal.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\GoldenCrownServiceReference\CES.CoreApi.Payout.Service.Business.Logic.GoldenCrownServiceReference.AnsReversalConfirm.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\GoldenCrownServiceReference\CES.CoreApi.Payout.Service.Business.Logic.GoldenCrownServiceReference.AnsSend.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\GoldenCrownServiceReference\CES.CoreApi.Payout.Service.Business.Logic.GoldenCrownServiceReference.AnsSendComplete.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\GoldenCrownServiceReference\CES.CoreApi.Payout.Service.Business.Logic.GoldenCrownServiceReference.AnsTariffCalculation.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\GoldenCrownServiceReference\CES.CoreApi.Payout.Service.Business.Logic.GoldenCrownServiceReference.AnsTransferSearch.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\GoldenCrownServiceReference\CES.CoreApi.Payout.Service.Business.Logic.GoldenCrownServiceReference.AnsUnsoldCardListUnsoldCardInfo.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\GoldenCrownServiceReference\CES.CoreApi.Payout.Service.Business.Logic.GoldenCrownServiceReference.AnsUpdateCard.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\GoldenCrownServiceReference\CES.CoreApi.Payout.Service.Business.Logic.GoldenCrownServiceReference.BalanceResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\GoldenCrownServiceReference\CES.CoreApi.Payout.Service.Business.Logic.GoldenCrownServiceReference.CardResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\GoldenCrownServiceReference\CES.CoreApi.Payout.Service.Business.Logic.GoldenCrownServiceReference.CardSupportResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\GoldenCrownServiceReference\CES.CoreApi.Payout.Service.Business.Logic.GoldenCrownServiceReference.ChargeOffCardResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\GoldenCrownServiceReference\CES.CoreApi.Payout.Service.Business.Logic.GoldenCrownServiceReference.CheckLimitResponse1.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\GoldenCrownServiceReference\CES.CoreApi.Payout.Service.Business.Logic.GoldenCrownServiceReference.CitizenshipListResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\GoldenCrownServiceReference\CES.CoreApi.Payout.Service.Business.Logic.GoldenCrownServiceReference.CitizenshipListType.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\GoldenCrownServiceReference\CES.CoreApi.Payout.Service.Business.Logic.GoldenCrownServiceReference.ClientTariffCalculationResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\GoldenCrownServiceReference\CES.CoreApi.Payout.Service.Business.Logic.GoldenCrownServiceReference.ConfirmationResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\GoldenCrownServiceReference\CES.CoreApi.Payout.Service.Business.Logic.GoldenCrownServiceReference.CredentialType.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\GoldenCrownServiceReference\CES.CoreApi.Payout.Service.Business.Logic.GoldenCrownServiceReference.CredentialTypeListResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\GoldenCrownServiceReference\CES.CoreApi.Payout.Service.Business.Logic.GoldenCrownServiceReference.CreditBankListResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\GoldenCrownServiceReference\CES.CoreApi.Payout.Service.Business.Logic.GoldenCrownServiceReference.CurListResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\GoldenCrownServiceReference\CES.CoreApi.Payout.Service.Business.Logic.GoldenCrownServiceReference.CurrencyRateResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\GoldenCrownServiceReference\CES.CoreApi.Payout.Service.Business.Logic.GoldenCrownServiceReference.DirectionListResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\GoldenCrownServiceReference\CES.CoreApi.Payout.Service.Business.Logic.GoldenCrownServiceReference.EchoResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\GoldenCrownServiceReference\CES.CoreApi.Payout.Service.Business.Logic.GoldenCrownServiceReference.FileInfoType.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\GoldenCrownServiceReference\CES.CoreApi.Payout.Service.Business.Logic.GoldenCrownServiceReference.GetFileResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\GoldenCrownServiceReference\CES.CoreApi.Payout.Service.Business.Logic.GoldenCrownServiceReference.LoanResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\GoldenCrownServiceReference\CES.CoreApi.Payout.Service.Business.Logic.GoldenCrownServiceReference.MGCurListResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\GoldenCrownServiceReference\CES.CoreApi.Payout.Service.Business.Logic.GoldenCrownServiceReference.MGPayMapResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\GoldenCrownServiceReference\CES.CoreApi.Payout.Service.Business.Logic.GoldenCrownServiceReference.MoneyTransferSystem.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\GoldenCrownServiceReference\CES.CoreApi.Payout.Service.Business.Logic.GoldenCrownServiceReference.MTSystemListResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\GoldenCrownServiceReference\CES.CoreApi.Payout.Service.Business.Logic.GoldenCrownServiceReference.MyInfoResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\GoldenCrownServiceReference\CES.CoreApi.Payout.Service.Business.Logic.GoldenCrownServiceReference.NoticeResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\GoldenCrownServiceReference\CES.CoreApi.Payout.Service.Business.Logic.GoldenCrownServiceReference.OnlinePayMapResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\GoldenCrownServiceReference\CES.CoreApi.Payout.Service.Business.Logic.GoldenCrownServiceReference.OuterNoticeResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\GoldenCrownServiceReference\CES.CoreApi.Payout.Service.Business.Logic.GoldenCrownServiceReference.PayDocReportResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\GoldenCrownServiceReference\CES.CoreApi.Payout.Service.Business.Logic.GoldenCrownServiceReference.PayeeDataForUpdateResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\GoldenCrownServiceReference\CES.CoreApi.Payout.Service.Business.Logic.GoldenCrownServiceReference.PayerSearchResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\GoldenCrownServiceReference\CES.CoreApi.Payout.Service.Business.Logic.GoldenCrownServiceReference.PayMapResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\GoldenCrownServiceReference\CES.CoreApi.Payout.Service.Business.Logic.GoldenCrownServiceReference.PaySupportResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\GoldenCrownServiceReference\CES.CoreApi.Payout.Service.Business.Logic.GoldenCrownServiceReference.PersonCheckResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\GoldenCrownServiceReference\CES.CoreApi.Payout.Service.Business.Logic.GoldenCrownServiceReference.PhoneCardListResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\GoldenCrownServiceReference\CES.CoreApi.Payout.Service.Business.Logic.GoldenCrownServiceReference.ReceiveResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\GoldenCrownServiceReference\CES.CoreApi.Payout.Service.Business.Logic.GoldenCrownServiceReference.RegCardResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\GoldenCrownServiceReference\CES.CoreApi.Payout.Service.Business.Logic.GoldenCrownServiceReference.ReportData.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\GoldenCrownServiceReference\CES.CoreApi.Payout.Service.Business.Logic.GoldenCrownServiceReference.ReportDataResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\GoldenCrownServiceReference\CES.CoreApi.Payout.Service.Business.Logic.GoldenCrownServiceReference.ReversalConfirmResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\GoldenCrownServiceReference\CES.CoreApi.Payout.Service.Business.Logic.GoldenCrownServiceReference.ReversalResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\GoldenCrownServiceReference\CES.CoreApi.Payout.Service.Business.Logic.GoldenCrownServiceReference.SendCompleteResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\GoldenCrownServiceReference\CES.CoreApi.Payout.Service.Business.Logic.GoldenCrownServiceReference.SendResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\GoldenCrownServiceReference\CES.CoreApi.Payout.Service.Business.Logic.GoldenCrownServiceReference.TariffCalculationResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\GoldenCrownServiceReference\CES.CoreApi.Payout.Service.Business.Logic.GoldenCrownServiceReference.TransferSearchResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\GoldenCrownServiceReference\CES.CoreApi.Payout.Service.Business.Logic.GoldenCrownServiceReference.TransferToDirectionResponse1.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\GoldenCrownServiceReference\CES.CoreApi.Payout.Service.Business.Logic.GoldenCrownServiceReference.Tx.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\GoldenCrownServiceReference\CES.CoreApi.Payout.Service.Business.Logic.GoldenCrownServiceReference.TxListResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\GoldenCrownServiceReference\CES.CoreApi.Payout.Service.Business.Logic.GoldenCrownServiceReference.UnsoldCardListResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\GoldenCrownServiceReference\CES.CoreApi.Payout.Service.Business.Logic.GoldenCrownServiceReference.UpdateCardResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\GoldenCrownServiceReference\phttp.wsdl" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Messages.en-US.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>Messages.en-US.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadataStorage Include="Service References\GoldenCrownServiceReference\" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\GoldenCrownServiceReference\configuration91.svcinfo" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\GoldenCrownServiceReference\configuration.svcinfo" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\GoldenCrownServiceReference\Reference.svcmap">
+      <Generator>WCF Proxy Generator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\CES.CoreApi.Data\CES.CoreApi.Data.csproj">
+      <Project>{1aa5ba90-02cc-4fd1-81f2-615c374c83a5}</Project>
+      <Name>CES.CoreApi.Data</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\CES.CoreApi.Shared.Persistence\CES.CoreApi.Shared.Persistence.csproj">
+      <Project>{92e6cfd9-1b70-4d82-9447-fdb04971d2d1}</Project>
+      <Name>CES.CoreApi.Shared.Persistence</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\CES.CoreApi.Shared.Providers.Helper\CES.CoreApi.Shared.Providers.Helper.csproj">
+      <Project>{c52cf30b-fe4f-41ba-8c99-db342eae0643}</Project>
+      <Name>CES.CoreApi.Shared.Providers.Helper</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

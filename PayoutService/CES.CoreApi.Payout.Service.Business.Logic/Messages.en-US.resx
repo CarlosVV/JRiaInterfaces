@@ -1,0 +1,213 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="ConfirmPayoutFailed" xml:space="preserve">
+    <value>Confirm Payout Call Failed: </value>
+  </data>
+  <data name="ErrorCountryCodeLength2" xml:space="preserve">
+    <value>Error Country Code must be 2 characters long.</value>
+  </data>
+  <data name="ErrorCountryCodeLength3" xml:space="preserve">
+    <value>Error Country Code must be 3 characters long.</value>
+  </data>
+  <data name="ErrorCountryCodeLetters" xml:space="preserve">
+    <value>Error Country Code can only contain letters.</value>
+  </data>
+  <data name="ErrorDatabaseAccess" xml:space="preserve">
+    <value>Database Access:</value>
+  </data>
+  <data name="ErrorInvalidCountryCode" xml:space="preserve">
+    <value>Invalid Country Code.</value>
+  </data>
+  <data name="ErrorMoneyAmountInvalid" xml:space="preserve">
+    <value>Money amount is not valid.</value>
+  </data>
+  <data name="ErrorMoneyBadPrecision" xml:space="preserve">
+    <value>Money has wrong # of decimal places.  Expected 2, but found: </value>
+  </data>
+  <data name="ErrorMoneyCurrencyCode" xml:space="preserve">
+    <value>Invalid Currency Code. </value>
+  </data>
+  <data name="ErrorMoneyCurrencyLength" xml:space="preserve">
+    <value>Currency must be exactly 3 characters long.</value>
+  </data>
+  <data name="ErrorMoneyFailedToCreate" xml:space="preserve">
+    <value>Failed to Create Money value: </value>
+  </data>
+  <data name="ErrorMoneyMismatchedCurrency" xml:space="preserve">
+    <value>Cannot perform operations on Mis-Matched Currencies.</value>
+  </data>
+  <data name="ErrorMoneyNegativeAmount" xml:space="preserve">
+    <value>Money Amount must be a postive number.</value>
+  </data>
+  <data name="ErrorMoneyNullCurrency" xml:space="preserve">
+    <value>Money Currency cannot be NULL.</value>
+  </data>
+  <data name="GCNotExactlyOneOrderForPin" xml:space="preserve">
+    <value>GoldenCrown did not return exactly 1 order for the PIN :</value>
+  </data>
+  <data name="GCResponseNull" xml:space="preserve">
+    <value>GoldenCrown Response is null. </value>
+  </data>
+  <data name="GCServiceError" xml:space="preserve">
+    <value>GC:</value>
+  </data>
+  <data name="GCZeroOrdersForPIN" xml:space="preserve">
+    <value>GoldenCrown did not return any orders for the PIN.</value>
+  </data>
+  <data name="GC_Call" xml:space="preserve">
+    <value>Call: </value>
+  </data>
+  <data name="GetTransactionInfoFailed" xml:space="preserve">
+    <value>Get Transaction Info Call Failed.</value>
+  </data>
+  <data name="InvalidIDType" xml:space="preserve">
+    <value>Invalid ID Type.  </value>
+  </data>
+  <data name="InvalidOrderPIN" xml:space="preserve">
+    <value>Invalid Order PIN.</value>
+  </data>
+  <data name="InvalidRequestMessage" xml:space="preserve">
+    <value>Invalid Request Message.  Missing required elements.</value>
+  </data>
+  <data name="MissingBeneficiaryName" xml:space="preserve">
+    <value>Missing Beneficiary Name.  </value>
+  </data>
+  <data name="MissingPayoutAmount" xml:space="preserve">
+    <value>Transaction has no payout amount recorded.</value>
+  </data>
+  <data name="PayoutTransactionFailed" xml:space="preserve">
+    <value>Payout Transaction Call Failed: </value>
+  </data>
+  <data name="PINDidNotMatchPartner" xml:space="preserve">
+    <value>The Order PIN entered does not match any Partner Orders.</value>
+  </data>
+  <data name="CouldNotCreateProviderInstance" xml:space="preserve">
+    <value>Could not create Provider Instance.</value>
+  </data>
+  <data name="NoProviderFound" xml:space="preserve">
+    <value>No Provider found for this transaction.</value>
+  </data>
+  <data name="NoProviderInterfaceFound" xml:space="preserve">
+    <value>No Provider Interface found.</value>
+  </data>
+  <data name="PayoutTransactionRepositoryFailed" xml:space="preserve">
+    <value>Payout Transaction Call in Repository Failed:</value>
+  </data>
+</root>
