@@ -1,0 +1,44 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 14
+VisualStudioVersion = 14.0.25123.0
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CES.CoreApi.Compliance.Alert", "CES.CoreApi.Compliance.Alert\CES.CoreApi.Compliance.Alert.csproj", "{F8D4FE62-FCD3-48CC-AEB5-19851B3B8C1C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CES.CoreApi.Compliance.Alert.Tests", "CES.CoreApi.Compliance.Alert.Tests\CES.CoreApi.Compliance.Alert.Tests.csproj", "{D9C080C8-2B49-414C-92FC-594A9B1192AE}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CES.CoreApi.Compliance.Alert.Business", "CES.CoreApi.Compliance.Alert.Business\CES.CoreApi.Compliance.Alert.Business.csproj", "{077BB667-D00E-4680-BB8D-F2918A91D004}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CES.CoreApi.Compliance.Alert.Business.Tests", "CES.CoreApi.Compliance.Alert.Business.Tests\CES.CoreApi.Compliance.Alert.Business.Tests.csproj", "{969D9758-9092-42A4-93C0-81B073DA6043}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{F8D4FE62-FCD3-48CC-AEB5-19851B3B8C1C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F8D4FE62-FCD3-48CC-AEB5-19851B3B8C1C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F8D4FE62-FCD3-48CC-AEB5-19851B3B8C1C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F8D4FE62-FCD3-48CC-AEB5-19851B3B8C1C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D9C080C8-2B49-414C-92FC-594A9B1192AE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D9C080C8-2B49-414C-92FC-594A9B1192AE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D9C080C8-2B49-414C-92FC-594A9B1192AE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D9C080C8-2B49-414C-92FC-594A9B1192AE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{077BB667-D00E-4680-BB8D-F2918A91D004}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{077BB667-D00E-4680-BB8D-F2918A91D004}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{077BB667-D00E-4680-BB8D-F2918A91D004}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{077BB667-D00E-4680-BB8D-F2918A91D004}.Release|Any CPU.Build.0 = Release|Any CPU
+		{969D9758-9092-42A4-93C0-81B073DA6043}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{969D9758-9092-42A4-93C0-81B073DA6043}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{969D9758-9092-42A4-93C0-81B073DA6043}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{969D9758-9092-42A4-93C0-81B073DA6043}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		EnterpriseLibraryConfigurationToolBinariesPathV6 = packages\EnterpriseLibrary.Common.6.0.1304.0\lib\NET45;packages\EnterpriseLibrary.Data.6.0.1304.0\lib\NET45;packages\EnterpriseLibrary.Validation.6.0.1304.0\lib\NET45
+		EnterpriseLibraryConfigurationToolBinariesPath = packages\EnterpriseLibrary.Caching.5.0.505.0\lib\NET35
+	EndGlobalSection
+EndGlobal

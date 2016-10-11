@@ -1,0 +1,28 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 14
+VisualStudioVersion = 14.0.25123.0
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CES.CoreApi.Compliance.Screening", "CES.CoreApi.Compliance.Screening\CES.CoreApi.Compliance.Screening.csproj", "{8461B5FA-D1E1-47DE-B405-65E3C0E8F98A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ScreeningUnitTest", "ScreeningUnitTest\ScreeningUnitTest.csproj", "{A5EA401B-C95F-41F9-B428-D7AAE4DE107B}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{8461B5FA-D1E1-47DE-B405-65E3C0E8F98A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8461B5FA-D1E1-47DE-B405-65E3C0E8F98A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8461B5FA-D1E1-47DE-B405-65E3C0E8F98A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8461B5FA-D1E1-47DE-B405-65E3C0E8F98A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A5EA401B-C95F-41F9-B428-D7AAE4DE107B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A5EA401B-C95F-41F9-B428-D7AAE4DE107B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A5EA401B-C95F-41F9-B428-D7AAE4DE107B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A5EA401B-C95F-41F9-B428-D7AAE4DE107B}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
