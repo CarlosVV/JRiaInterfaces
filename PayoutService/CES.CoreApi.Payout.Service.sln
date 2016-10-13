@@ -9,16 +9,18 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CES.CoreApi.Payout", "CES.C
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CES.CoreApi.Payout.Test", "PayoutService.Test\CES.CoreApi.Payout.Test.csproj", "{41188DAE-13C0-452A-B3DC-6E51534B8780}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{A318351B-4AD2-4E9D-9B1B-60E77D52A1D9}"
-	ProjectSection(SolutionItems) = preProject
-		NuGet.config = NuGet.config
-	EndProjectSection
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CES.CoreApi.Data", "CES.CoreApi.Data\CES.CoreApi.Data.csproj", "{1AA5BA90-02CC-4FD1-81F2-615C374C83A5}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CES.CoreApi.Shared.Persistence", "CES.CoreApi.Shared.Persistence\CES.CoreApi.Shared.Persistence.csproj", "{92E6CFD9-1B70-4D82-9447-FDB04971D2D1}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CES.CoreApi.Shared.Providers.Helper", "CES.CoreApi.Shared.Providers.Helper\CES.CoreApi.Shared.Providers.Helper.csproj", "{C52CF30B-FE4F-41BA-8C99-DB342EAE0643}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{8305FB3E-6298-43AF-ADC1-F795450E7901}"
+	ProjectSection(SolutionItems) = preProject
+		NuGet.config = NuGet.config
+		..\..\..\Users\yibeltalh.RIADEV\Downloads\NuGet.exe = ..\..\..\Users\yibeltalh.RIADEV\Downloads\NuGet.exe
+		..\..\..\Users\yibeltalh.RIADEV\Downloads\NuGet.targets = ..\..\..\Users\yibeltalh.RIADEV\Downloads\NuGet.targets
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
