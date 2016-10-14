@@ -16,8 +16,8 @@ namespace CES.CoreApi.GeoLocation.Api.ViewModels
     
         public string Country { get; set; }
 
-     
-        public string AdministrativeArea { get; set; }
+
+		public string AdministrativeArea { get; set; }
 
    
         public string City { get; set; }

@@ -31,6 +31,10 @@ namespace CES.CoreApi.GeoLocation.Models
         /// </summary>
         public AddressModel Address { get; set; }
 
+		public AddressComponent @AddressComponent { get; set; }
+
 		public  string ResultCodes { get; set; }
+
+		public string ProviderMessage { get; set; }
     }
 }

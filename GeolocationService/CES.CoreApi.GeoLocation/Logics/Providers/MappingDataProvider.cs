@@ -33,7 +33,7 @@ namespace CES.CoreApi.GeoLocation.Logic.Providers
             var url = urlBuilder.BuildUrl(center, size, outputParameters, pushPins);
 
             //Get raw response from data provider
-            var rawResponse = _responseProvider.GetBinaryResponse(url, providerType);
+            var rawResponse = _responseProvider.GetBinaryResponse(url);
 
             //Parse raw response
             var parser = _responseParserFactory.GetInstance<IResponseParser>(providerType);

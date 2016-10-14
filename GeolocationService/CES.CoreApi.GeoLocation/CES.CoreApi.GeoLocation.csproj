@@ -75,7 +75,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ApiClients\HttpClientHelper.cs" />
     <Compile Include="Attributes\GoogleImageFormatAttribute.cs" />
     <Compile Include="Attributes\GoogleMapTypeAttribute.cs" />
     <Compile Include="Configuration\BasicConfiguration.cs" />
@@ -92,6 +91,7 @@
     <Compile Include="Enumerations\ImageFormat.cs" />
     <Compile Include="Enumerations\LevelOfConfidence.cs" />
     <Compile Include="Enumerations\MapStyle.cs" />
+    <Compile Include="Logics\Parsers\ProviderResponses\Google.cs" />
     <Compile Include="Models\MelissaDataReturnCode.cs" />
     <Compile Include="Repositories\ClientSettingRepositoryCached.cs" />
     <Compile Include="Tools\ClientHeader.cs" />

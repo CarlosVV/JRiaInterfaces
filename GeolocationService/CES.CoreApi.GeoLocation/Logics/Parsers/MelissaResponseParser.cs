@@ -52,21 +52,83 @@ namespace CES.CoreApi.GeoLocation.Logic.Parsers
                 : GetAddressAutocompleteResponse(rootElement, country);
         }
 
-        /// <summary>
-        /// Parses Address Verification data response
-        /// </summary>
-        /// <param name="dataResponse">Data response instance</param>
-        /// <param name="acceptableConfidence">Acceptable level of confidence</param>
-        /// <returns></returns>
-        public ValidateAddressResponseModel ParseValidateAddressResponse(DataResponse dataResponse, LevelOfConfidence acceptableConfidence)
+		class Result
+		{
+			public string Results { get; set; }
+			public string FormattedAddress { get; set; }
+			public string AddressLine1 { get; set; }
+			public string AddressLine2 { get; set; }
+			public string Locality { get; set; }
+			public string AdministrativeArea { get; set; }
+			public string PostalCode { get; set; }
+			public string CountryName { get; set; }
+			public string CountryISO3166_1_Alpha2 { get; set; }
+
+			public string SubPremisesNumber { get; set; }
+			public string Latitude { get; set; }
+			public string Longitude { get; set; }
+
+		}
+
+		class M
+		{
+			public string TransmissionResults { get; set; }
+			public List<Result> Records { get; set; }
+		}
+
+
+		/// <summary>
+		/// Parses Address Verification data response
+		/// </summary>
+		/// <param name="dataResponse">Data response instance</param>
+		/// <param name="acceptableConfidence">Acceptable level of confidence</param>
+		/// <returns></returns>
+		public ValidateAddressResponseModel ParseValidateAddressResponse(DataResponse dataResponse, LevelOfConfidence acceptableConfidence)
         {
-            var rootElement = GetResponseDocument(dataResponse);
+			var x = Newtonsoft.Json.JsonConvert.DeserializeObject<M>(dataResponse.RawResponse);
+			if (x != null && x.Records != null && x.Records.Count > 0)
+			{
+				var add = x.Records[0];
+				var r = new ValidateAddressResponseModel
+				{
+					Address = new AddressModel
+					{
+						Address1 = add.AddressLine1,
+						Address2 = add.AddressLine2,
+						AdministrativeArea = add.AdministrativeArea,
+						City = add.Locality,
+						Country = add.CountryISO3166_1_Alpha2,
+						FormattedAddress = add.FormattedAddress,
+						PostalCode = add.PostalCode,
+						UnitOrApartment = add.SubPremisesNumber
 
-            return rootElement == null
-                ? GetInvalidAddressVerificationResponse("")
-                : GetAddressVerificationResponse(rootElement, acceptableConfidence);
-        }
+					},
+					
+					Location = new LocationModel
+					{
 
+						Latitude = GetSafeDouble(add.Latitude),
+						Longitude = GetSafeDouble(add.Longitude)
+					}
+
+				};
+
+				return r;
+			}
+			return GetInvalidAddressVerificationResponse("");
+			//var rootElement = GetResponseDocument(dataResponse);
+
+			//         return rootElement == null
+			//             ? GetInvalidAddressVerificationResponse("")
+			//             : GetAddressVerificationResponse(rootElement, acceptableConfidence);
+		}
+
+		private double GetSafeDouble(string value)
+		{
+			double id;
+			double.TryParse(value, out id);
+			return id;
+		}
         /// <summary>
         /// Parses geo coding data response
         /// </summary>
@@ -146,7 +208,7 @@ namespace CES.CoreApi.GeoLocation.Logic.Parsers
         /// <returns></returns>
         private ValidateAddressResponseModel GetAddressVerificationResponse(XContainer rootElement, LevelOfConfidence acceptableConfidence)
         {
-			Logging.Log.Info(rootElement);
+	
 
             var records = rootElement.Descendants(_xNamespace + MelissaConstants.TotalRecords).ToList();
             if (records.Count <=0 || records[0].Value =="0")

@@ -9,20 +9,12 @@ namespace CES.CoreApi.GeoLocation.Logic.Providers
 {
     public class DataResponseProvider : IDataResponseProvider
     {
-       // private readonly IHttpClientProxy2 _httpClientProxy;
-
-        public DataResponseProvider()
-        {          
-            
-       
-        }
-
-        public DataResponse GetResponse(string requestUrl, DataProviderType providerType)
+   
+        public DataResponse GetResponse(string requestUrl)
         {
-            //if (string.IsNullOrEmpty(requestUrl))
-            //    throw new CoreApiException(TechnicalSubSystem.GeoLocationService, SubSystemError.GeneralRequiredParameterIsUndefined, "requestUrl");
+			Logging.Log.Info(requestUrl);
 
-            using (var httpClient = new HttpClient())
+			using (var httpClient = new HttpClient())
             {
                 var responseMessage = httpClient.GetAsync(requestUrl).Result;
 
@@ -30,16 +22,14 @@ namespace CES.CoreApi.GeoLocation.Logic.Providers
                     responseMessage.Content.ReadAsStringAsync().Result,
                     responseMessage.StatusCode,
                     responseMessage.IsSuccessStatusCode);
-
-                return dataResponse;
+				Logging.Log.Info(dataResponse.RawResponse);
+				return dataResponse;
             }
         }
 
-        public BinaryDataResponse GetBinaryResponse(string requestUrl, DataProviderType providerType)
+        public BinaryDataResponse GetBinaryResponse(string requestUrl)
         {
-            //if (string.IsNullOrEmpty(requestUrl))
-            //    throw new CoreApiException(TechnicalSubSystem.GeoLocationService, SubSystemError.GeneralRequiredParameterIsUndefined, "requestUrl");
-			
+		
             using (var httpClient = new HttpClient())
             {
                 var responseMessage = httpClient.GetAsync(requestUrl).Result;
@@ -48,7 +38,7 @@ namespace CES.CoreApi.GeoLocation.Logic.Providers
                     responseMessage.Content.ReadAsByteArrayAsync().Result,
                     responseMessage.StatusCode,
                     responseMessage.IsSuccessStatusCode);
-
+			
 				return dataResponse;
             }
         }

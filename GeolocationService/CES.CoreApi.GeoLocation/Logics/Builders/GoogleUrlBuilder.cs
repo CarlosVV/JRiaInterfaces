@@ -80,27 +80,22 @@ namespace CES.CoreApi.GeoLocation.Logic.Builders
 		/// <param name="address">Address instance to geocode or verify</param>
 		/// <returns></returns>
 		public string BuildUrl(AddressModel address)
-        {
-            var addressFormatted = string.Join(",",
-                address.Address1,
-                address.Address2,
-                address.City,
-                address.AdministrativeArea,
-                address.PostalCode,
-                address.Country);
+		{
+			var addressFormatted = string.Join(",",
+				address.Address1,
+				address.Address2,
+				address.City,
+				address.AdministrativeArea,
+				address.PostalCode
+				);
 
-			char[] ch = { ','};
+			char[] ch = { ',' };
 			string[] addresses = addressFormatted.Split(ch, System.StringSplitOptions.RemoveEmptyEntries);
 
 			addressFormatted = string.Join(",", addressFormatted);
-
-			var url = string.Format(CultureInfo.InvariantCulture,
-				"{0}/geocode/xml?address={1}{2}",
-				GeoLocationConfigurationSection.Instance.Google.Url,
-                HttpUtility.UrlEncode(addressFormatted),
-                GetLicenseKeyParameter());
-            return url;
-        }
+			var url = $"{GeoLocationConfigurationSection.Instance.Google.Url}/geocode/xml?address={HttpUtility.UrlEncode(addressFormatted)}&components=country:{address.Country}{GetLicenseKeyParameter()}";
+			return url;
+		}
 
         /// <summary>
         /// Builds URL for free formatted address geocoding or verification
@@ -134,17 +129,18 @@ namespace CES.CoreApi.GeoLocation.Logic.Builders
             return url;
         }
 
-        #endregion
+		#endregion
 
-        #region private methods
+		#region private methods
 
-        private string GetLicenseKeyParameter()
-        {
+		private string GetLicenseKeyParameter()
+		{
 			var key = GeoLocationConfigurationSection.Instance.Google.Key;
-            return string.IsNullOrEmpty(key)
-                ? string.Empty
-                : string.Format(CultureInfo.InvariantCulture, KeyTemplate, key);
-        }
+			if (string.IsNullOrEmpty(key))
+				return string.Empty;
+
+			return $"&key={key}";
+		}
 
         #endregion
     }

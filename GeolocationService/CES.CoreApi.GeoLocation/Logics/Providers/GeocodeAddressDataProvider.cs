@@ -61,7 +61,7 @@ namespace CES.CoreApi.GeoLocation.Logic.Providers
         private GeocodeAddressResponseModel Process(DataProviderType providerType, LevelOfConfidence acceptableConfidence, string url)
         {
             //Get raw response from data provider
-            var rawResponse = _responseProvider.GetResponse(url, providerType);
+            var rawResponse = _responseProvider.GetResponse(url);
 
             //Parse raw response
             var parser = _responseParserFactory.GetInstance<IResponseParser>(providerType);

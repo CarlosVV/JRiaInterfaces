@@ -8,6 +8,7 @@ using CES.CoreApi.GeoLocation.Interfaces;
 using CES.CoreApi.GeoLocation.Logic.Constants;
 using CES.CoreApi.GeoLocation.Enumerations;
 using CES.CoreApi.GeoLocation.Models;
+using System.Collections.Generic;
 
 namespace CES.CoreApi.GeoLocation.Logic.Parsers
 {
@@ -22,12 +23,7 @@ namespace CES.CoreApi.GeoLocation.Logic.Parsers
             IGoogleLevelOfConfidenceProvider levelOfConfidenceProvider)
             : base(DataProviderType.Google)
         {
-            //if (addressParser == null)
-            //    throw new CoreApiException(TechnicalSubSystem.GeoLocationService,
-            //        SubSystemError.GeneralRequiredParameterIsUndefined, "addressParser");
-            //if (levelOfConfidenceProvider == null)
-            //    throw new CoreApiException(TechnicalSubSystem.GeoLocationService,
-            //        SubSystemError.GeneralRequiredParameterIsUndefined, "levelOfConfidenceProvider");
+         
             _addressParser = addressParser;
             _levelOfConfidenceProvider = levelOfConfidenceProvider;
         }
@@ -61,12 +57,75 @@ namespace CES.CoreApi.GeoLocation.Logic.Parsers
         /// <returns></returns>
         public ValidateAddressResponseModel ParseValidateAddressResponse(DataResponse dataResponse, LevelOfConfidence acceptableConfidence)
         {
-            var rootElement = GetResponseDocument(dataResponse);
+		 var rootElement = GetResponseDocument(dataResponse);
+			//var result = Newtonsoft.Json.JsonConvert.DeserializeObject<Logics.Parsers.ProviderResponses.GoogleGeocode>(dataResponse.RawResponse);
+			//ValidateAddressResponseModel model = new ValidateAddressResponseModel();
+			//var addressModel = new AddressModel();
+			//var addressComponent = new AddressComponent();
+			//var location = new LocationModel();
+			//model.ProviderMessage = result.status;
+			//foreach (var item in result.results)
+			//{
+			//	if (item.geometry != null && item.geometry.location != null)
+			//	{
+			//		location.Latitude = item.geometry.location.lat;
+			//		location.Longitude = item.geometry.location.lng;
+			//	}
 
-            return rootElement == null
-                ? GetInvalidAddressVerificationResponse("")
-                : GetAddressVerificationResponse(rootElement, acceptableConfidence);
-        }
+			//	addressComponent.FormattedAddress = item.formatted_address;
+			//	model.ResultCodes = string.Join(",", item.types);		
+			//	foreach (var address in item.address_components)
+			//	{
+			//		if (HasAddressComponent(address.types, GoogleConstants.StreetNumber))
+			//		{
+			//			addressComponent.StreetNumber = address.short_name;
+			//		}
+			//		if (HasAddressComponent(address.types, GoogleConstants.Street))
+			//		{
+			//			addressComponent.Street = address.short_name;
+			//			addressComponent.StreetLongName = address.long_name;
+			//		}
+			//		if (HasAddressComponent(address.types, GoogleConstants.City))
+			//		{
+			//			addressComponent.Locality = address.short_name;
+			//			addressComponent.LocalityLongName = address.long_name;
+			//		}
+			//		if (HasAddressComponent(address.types, GoogleConstants.AdministrativeArea))
+			//		{
+			//			addressComponent.AdministrativeArea = address.short_name;
+			//			addressComponent.AdministrativeAreaLongName = address.long_name;
+			//		}
+			//		if (HasAddressComponent(address.types, GoogleConstants.Country))
+			//		{
+			//			addressComponent.Country = address.short_name;
+			//			addressComponent.CountryName = address.long_name;
+			//		}
+			//		if (HasAddressComponent(address.types, GoogleConstants.PostalCode))
+			//		{
+			//			addressComponent.PostalCode = address.short_name;						
+			//		}
+			//	}
+			//}
+			//model.Location = location;
+			//model.Address = addressModel;
+			//model.AddressComponent = addressComponent;
+			//model.DataProvider = DataProviderType.Google;
+			//return model;
+
+			return rootElement == null
+				? GetInvalidAddressVerificationResponse("")
+				: GetAddressVerificationResponse(rootElement, acceptableConfidence);
+
+
+			return GetInvalidAddressVerificationResponse("");
+
+		}
+
+		private bool HasAddressComponent(List<string> items, string key)
+		{
+			var result = from q in items where q.Equals(key, StringComparison.OrdinalIgnoreCase) select q;
+			return result.Count() > 0;
+		}
 
         /// <summary>
         /// Parses geo coding data response

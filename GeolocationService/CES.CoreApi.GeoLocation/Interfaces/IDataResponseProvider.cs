@@ -6,7 +6,7 @@ namespace CES.CoreApi.GeoLocation.Interfaces
 {
     public interface IDataResponseProvider
     {
-        DataResponse GetResponse(string requestUrl, DataProviderType providerType);
-        BinaryDataResponse GetBinaryResponse(string url, DataProviderType providerType);
+        DataResponse GetResponse(string requestUrl);
+        BinaryDataResponse GetBinaryResponse(string url);
     }
 }

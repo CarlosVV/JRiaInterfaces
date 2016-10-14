@@ -30,10 +30,13 @@ namespace CES.CoreApi.GeoLocation.Api.ViewModels
         [DataMember(Name = "Address")]
         public ValidatedAddress Address { get; set; }
 
-        /// <summary>
-        /// A string specifying the confidence of the result.
-        /// </summary>
-        [DataMember]
+		[DataMember]
+		public object AddressComponent { get; set; }
+
+		/// <summary>
+		/// A string specifying the confidence of the result.
+		/// </summary>
+		[DataMember]
         public Confidence Confidence { get; set; }
 
 		//[DataMember]
