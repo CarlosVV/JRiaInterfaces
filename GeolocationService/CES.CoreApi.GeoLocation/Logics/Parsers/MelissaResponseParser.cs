@@ -91,6 +91,8 @@ namespace CES.CoreApi.GeoLocation.Logic.Parsers
 				var add = x.Records[0];
 				var r = new ValidateAddressResponseModel
 				{
+					DataProvider = DataProviderType.MelissaData,
+					ResultCodes =  add.Results,
 					Address = new AddressModel
 					{
 						Address1 = add.AddressLine1,

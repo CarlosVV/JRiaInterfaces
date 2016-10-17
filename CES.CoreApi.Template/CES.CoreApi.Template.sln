@@ -5,8 +5,6 @@ VisualStudioVersion = 14.0.25420.1
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CES.CoreApi.WebApi", "CES.CoreApi.WebApi\CES.CoreApi.WebApi.csproj", "{206BFDCA-E5D0-43D6-9643-9D1B6AAF3BB9}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CES.CoreApi.TemplateInstall","CES.CoreApi.TemplateInstall\CoreApiArchitectureTemplateInstall.csproj", "{335ADD57-D536-48B9-B237-B2E406E5B923}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -17,10 +15,6 @@ Global
 		{206BFDCA-E5D0-43D6-9643-9D1B6AAF3BB9}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{206BFDCA-E5D0-43D6-9643-9D1B6AAF3BB9}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{206BFDCA-E5D0-43D6-9643-9D1B6AAF3BB9}.Release|Any CPU.Build.0 = Release|Any CPU
-		{335ADD57-D536-48B9-B237-B2E406E5B923}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{335ADD57-D536-48B9-B237-B2E406E5B923}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{335ADD57-D536-48B9-B237-B2E406E5B923}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{335ADD57-D536-48B9-B237-B2E406E5B923}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

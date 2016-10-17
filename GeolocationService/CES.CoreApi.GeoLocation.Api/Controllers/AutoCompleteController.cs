@@ -72,22 +72,22 @@ namespace CES.CoreApi.GeoLocation.Api
 
 
 
-		[HttpPost]
-		[Route("v2/address/validate")]
-		public virtual ValidateAddressResponse DoValidateAddress(AddressRequest request)
-		{
-			//var result = Utilities.RequestValidator.Validate(request);
-			//if (result != null)
-			//	return result;
-			var address = mapper.Map<AddressRequest, AddressModel>(request);
+		//[HttpPost]
+		//[Route("v2/address/validate")]
+		//public virtual ValidateAddressResponse DoValidateAddress(AddressRequest request)
+		//{
+		//	//var result = Utilities.RequestValidator.Validate(request);
+		//	//if (result != null)
+		//	//	return result;
+		//	var address = mapper.Map<AddressRequest, AddressModel>(request);
 
-			//var level = mapper.Map<Confidence, LevelOfConfidence>(request.MinimumConfidence);
+		//	//var level = mapper.Map<Confidence, LevelOfConfidence>(request.MinimumConfidence);
 
-			var responseModel = addressServiceRequestProcessor.ValidateAddress(address, LevelOfConfidence.High);
+		//	var responseModel = addressServiceRequestProcessor.ValidateAddress(address, LevelOfConfidence.High);
 
 
-			return mapper.Map<ValidateAddressResponseModel, ValidateAddressResponse>(responseModel);
-		}
+		//	return mapper.Map<ValidateAddressResponseModel, ValidateAddressResponse>(responseModel);
+		//}
 
 
 		[HttpPost]

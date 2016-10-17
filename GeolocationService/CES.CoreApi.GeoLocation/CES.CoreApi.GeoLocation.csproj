@@ -93,6 +93,13 @@
     <Compile Include="Enumerations\MapStyle.cs" />
     <Compile Include="Logics\Parsers\ProviderResponses\Google.cs" />
     <Compile Include="Models\MelissaDataReturnCode.cs" />
+    <Compile Include="Models\Requests\AddressRequest.cs" />
+    <Compile Include="Models\Responses\AddressValidationResponse.cs" />
+    <Compile Include="Providers\Google\GoogleProvider.cs" />
+    <Compile Include="Providers\Google\JsonModels\AddressComponent.cs" />
+    <Compile Include="Providers\Google\JsonModels\GeocodeResult.cs" />
+    <Compile Include="Providers\Google\JsonModels\Geometry.cs" />
+    <Compile Include="Providers\Google\JsonModels\GeometryLocation.cs" />
     <Compile Include="Repositories\ClientSettingRepositoryCached.cs" />
     <Compile Include="Tools\ClientHeader.cs" />
     <Compile Include="Tools\EnumTools.cs" />
@@ -173,6 +180,10 @@
   <ItemGroup>
     <None Include="app.config" />
     <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Providers\Bing\" />
+    <Folder Include="Providers\MelissaData\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

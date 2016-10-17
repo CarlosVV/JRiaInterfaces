@@ -136,6 +136,7 @@
   <ItemGroup>
     <Compile Include="App_Start\CompositionRoot.cs" />
     <Compile Include="App_Start\GeoLocationMapperProfile.cs" />
+    <Compile Include="Controllers\AddressValidationController.cs" />
     <Compile Include="Controllers\AutoCompleteController.cs" />
     <Compile Include="Controllers\GeoCodeAddressController.cs" />
     <Compile Include="Controllers\MapController.cs" />

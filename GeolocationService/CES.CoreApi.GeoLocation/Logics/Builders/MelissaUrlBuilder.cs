@@ -55,7 +55,7 @@ namespace CES.CoreApi.GeoLocation.Logic.Builders
         public string BuildUrl(AddressModel address)
         {
             var url = string.Format(
-				"{0}?format=json&id={1}&a1={2}&a2={3}&loc={4}&admarea{5}&postal={6}&ctry={7}",
+				"{0}?format=json&id={1}&a1={2}&a2={3}&loc={4}&admarea{5}&postal={6}&ctry={7}&opt=DeliveryLines:ON",
 				ConfigurationManager.AppSettings["MelissaDataDoGlobalAddressUrl"],
 				ConfigurationManager.AppSettings["MelissaDataDoGlobalAddressKey"],
                 HttpUtility.UrlEncode(address.Address1),
