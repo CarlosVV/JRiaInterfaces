@@ -43,8 +43,8 @@ namespace CES.CoreApi.Payout.Controllers
 		/// <returns></returns>
 		[HttpPost]
 		[Route("payout/getTransactionInfo")]
-		[Route("payout/v1/Transaction")]
-		[Route("payout/Transaction")]
+		[Route("payout/v1/TransactionInfo")]
+		[Route("payout/TransactionInfo")]
 		public IHttpActionResult GetTransactionInfo(GetTransactionInfoRequest request)
 		{
 			GetTransactionInfoResponse response = null;
