@@ -164,6 +164,7 @@
     <Compile Include="Utilities\AppSettings.cs" />
     <Compile Include="Utilities\MessageInspector.cs" />
     <Compile Include="Utilities\MessageInspectorBehavior .cs" />
+    <Compile Include="Utilities\ModelStateExtensions.cs" />
     <Compile Include="Utilities\ViewModelUtil.cs" />
     <Compile Include="ViewModels\GetRulesRequest.cs" />
     <Compile Include="ViewModels\GetRulesResponse.cs" />

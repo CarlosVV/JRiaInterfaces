@@ -44,8 +44,8 @@ namespace CES.CoreApi.Compliance.Screening.Repositories
                     fNameTypeID = PartyType.Customer,
                     fMatchTypeID = 10,
                     fIssueItemID=1605,                    
-                    SearchDef = "Test",
-                    BusinessUnit = "All"                   
+                    SearchDef = "All Sanctions1",
+                    BusinessUnit = "TRG-Americas-US-MTCoreRTSanctions-Internal"
 
                 },
                  new Rule() {
@@ -58,8 +58,8 @@ namespace CES.CoreApi.Compliance.Screening.Repositories
                     fNameTypeID = PartyType.OnBehalfOf,
                     fMatchTypeID = 10,
                     fIssueItemID=1655,
-                    SearchDef = "Test",
-                    BusinessUnit = "All"
+                    SearchDef = "All Sanctions1",
+                    BusinessUnit = "TRG-Americas-US-MTCoreRTSanctions-Internal"
 
                 },
                    new Rule() {
@@ -72,44 +72,45 @@ namespace CES.CoreApi.Compliance.Screening.Repositories
                     fNameTypeID =PartyType.Beneficiary,
                     fMatchTypeID = 10,
                     fIssueItemID=1705,
-                    SearchDef = "Test",
-                    BusinessUnit = "All"
+                    SearchDef = "All Sanctions1",
+                    BusinessUnit = "TRG-Americas-US-MTCoreRTSanctions-Internal"
 
                 },
             };
         }
 
-        /// <summary>
-        /// THIS IS MOCKED, replaces params with VALID data
-        /// </summary>
-        /// <param name="transAmount"></param>
-        /// <param name="countryFrom"></param>
-        /// <param name="countryTo"></param>
-        /// <param name="firstName"></param>
-        /// <param name="lastName"></param>
-        /// <returns></returns>
+
+        public virtual IEnumerable<Rule> GetScreeningRulesForTransaction(RulesRequest request, int providerID=0)
+        {
+            return GetScreeningRules(request.TransDateTime, request.RuntimeID, request.ServiceId, request.ProductId, request.CountryFromId, request.CountryToId, request.ReceivingAgentID, request.ReceivingAgentLocID, request.PayAgentID, request.PayAgentLocID, request.DeliveryMethod, request.EntryTypeId, request.SendCurrency, request.SendAmount, request.SendTotalAmount, request.PartyType, providerID);
+        }
+
         public virtual IEnumerable<Rule> GetScreeningRulesForTransaction(Request request, PartyType partyType, int providerID)
+        {
+            return GetScreeningRules(request.TransDateTime, request.RuntimeID, request.ServiceId, request.ProductId, request.CountryFromId, request.CountryToId, request.ReceivingAgent.ID, request.ReceivingAgent.LocID, request.PayAgent.ID, request.PayAgent.LocID, request.DeliveryMethod, request.EntryTypeId, request.SendCurrency, request.SendAmount, request.SendTotalAmount, partyType, providerID);
+        }
+        private  IEnumerable<Rule> GetScreeningRules(DateTime transDateTime, int runtimeID, ServiceIdType serviceId, int productId, int countryFromId, int countryToId, int receivingAgentID, int receivingAgentLocID, int payAgentID, int payAgentLocID, DeliveryMethod  deliveryMethod, int entryTypId, string sendCurrency, double sendAmount, double sendTotalAmount, PartyType partyType, int providerID =0)
         {
             #region SPCallLog
             var parameters = new Collection<SqlParameter>();
             parameters.Add(new SqlParameter("@lAppID", AppSettings.AppId));
             parameters.Add(new SqlParameter("@lAppObjectID", AppSettings.AppObjectId));
             parameters.Add(new SqlParameter("@lUserNameID", 1));
-            parameters.Add(new SqlParameter("@TransDate", request.TransDateTime));
-            parameters.Add(new SqlParameter("@lRunTimeID", request.RuntimeID));
-            parameters.Add(new SqlParameter("@lServiceID", (int)request.ServiceId));
-            parameters.Add(new SqlParameter("@lProductID", request.ProductId));
-            parameters.Add(new SqlParameter("@lCountryFromID", request.CountryFromId));
-            parameters.Add(new SqlParameter("@lCountryToID", request.CountryToId));
-            parameters.Add(new SqlParameter("@lRecAgentID", request.ReceivingAgent.ID));
-            parameters.Add(new SqlParameter("@lRecAgentLocID", request.ReceivingAgent.LocID));
-            parameters.Add(new SqlParameter("@lPayAgentID", request.PayAgent.ID));
-            parameters.Add(new SqlParameter("@lPayAgentLocID", request.PayAgent.LocID));
-            parameters.Add(new SqlParameter("@lDeliveryMethodID", (int)request.DeliveryMethod));
-            parameters.Add(new SqlParameter("@lEntryTypeID", request.EntryTypId));
-            parameters.Add(new SqlParameter("@sCurrency", request.SendCurrency));
-            parameters.Add(new SqlParameter("@mOrderAmount", request.SendAmount));
-            parameters.Add(new SqlParameter("@mTotalAmount", request.SendTotalAmount));
+            parameters.Add(new SqlParameter("@TransDate", transDateTime));
+            parameters.Add(new SqlParameter("@lRunTimeID", runtimeID));
+            parameters.Add(new SqlParameter("@lServiceID", (int)serviceId));
+            parameters.Add(new SqlParameter("@lProductID", productId));
+            parameters.Add(new SqlParameter("@lCountryFromID", countryFromId));
+            parameters.Add(new SqlParameter("@lCountryToID", countryToId));
+            parameters.Add(new SqlParameter("@lRecAgentID", receivingAgentID));
+            parameters.Add(new SqlParameter("@lRecAgentLocID", receivingAgentLocID));
+            parameters.Add(new SqlParameter("@lPayAgentID", payAgentID));
+            parameters.Add(new SqlParameter("@lPayAgentLocID", payAgentLocID));
+            parameters.Add(new SqlParameter("@lDeliveryMethodID", (int)deliveryMethod));
+            parameters.Add(new SqlParameter("@lEntryTypeID", entryTypId));
+            parameters.Add(new SqlParameter("@sCurrency", sendCurrency));
+            parameters.Add(new SqlParameter("@mOrderAmount", sendAmount));
+            parameters.Add(new SqlParameter("@mTotalAmount", sendTotalAmount));
             var callLog = Database.LogSPCall(SpGetRules, parameters);
             Logging.Log.Info(callLog);
             #endregion
@@ -121,21 +122,21 @@ namespace CES.CoreApi.Compliance.Screening.Repositories
                 sql.AddParam("@lAppID", AppSettings.AppId);
                 sql.AddParam("@lAppObjectID", AppSettings.AppObjectId);
                 sql.AddParam("@lUserNameID", 1);
-                sql.AddParam("@TransDate", request.TransDateTime);
-                sql.AddParam("@lRunTimeID", request.RuntimeID);
-                sql.AddParam("@lServiceID", request.ServiceId); 
-                sql.AddParam("@lProductID", request.ProductId);
-                sql.AddParam("@lCountryFromID", request.CountryFromId);
-                sql.AddParam("@lCountryToID", request.CountryToId);
-                sql.AddParam("@lRecAgentID", request.ReceivingAgent.ID);
-                sql.AddParam("@lRecAgentLocID", request.ReceivingAgent.LocID);
-                sql.AddParam("@lPayAgentID", request.PayAgent.ID);
-                sql.AddParam("@lPayAgentLocID", request.PayAgent.LocID);
-                sql.AddParam("@lDeliveryMethodID", request.DeliveryMethod); 
-                sql.AddParam("@lEntryTypeID", request.EntryTypId); 
-                sql.AddParam("@sCurrency", request.SendCurrency);
-                sql.AddParam("@mOrderAmount", request.SendAmount);
-                sql.AddParam("@mTotalAmount", request.SendTotalAmount);
+                sql.AddParam("@TransDate", transDateTime);
+                sql.AddParam("@lRunTimeID", runtimeID);
+                sql.AddParam("@lServiceID", serviceId); 
+                sql.AddParam("@lProductID", productId);
+                sql.AddParam("@lCountryFromID", countryFromId);
+                sql.AddParam("@lCountryToID", countryToId);
+                sql.AddParam("@lRecAgentID", receivingAgentID);
+                sql.AddParam("@lRecAgentLocID", receivingAgentLocID);
+                sql.AddParam("@lPayAgentID", payAgentID);
+                sql.AddParam("@lPayAgentLocID", payAgentLocID);
+                sql.AddParam("@lDeliveryMethodID", deliveryMethod ); 
+                sql.AddParam("@lEntryTypeID", entryTypId); 
+                sql.AddParam("@sCurrency", sendCurrency);
+                sql.AddParam("@mOrderAmount", sendAmount);
+                sql.AddParam("@mTotalAmount", sendTotalAmount);
 
               
                 var rules=sql.Query<Rule>();

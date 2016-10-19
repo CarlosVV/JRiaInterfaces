@@ -94,8 +94,31 @@ namespace CES.CoreApi.Compliance.Screening.Utilities
                 return bool.Parse(ConfigurationManager.AppSettings["useDefaultRules"]);
             }
         }
-        
 
+        public static bool LogResponseActimize
+        {
+            get
+            {
+                return bool.Parse(ConfigurationManager.AppSettings["logResponseActimize"]);
+            }
+        }
+
+
+        public static string UrlPep
+        {
+            get
+            {
+                return ConfigurationManager.AppSettings["urlPep"];
+            }
+        }
+
+        public static string UrlSanctions
+        {
+            get
+            {
+                return ConfigurationManager.AppSettings["urlSanctions"];
+            }
+        }
 
     }
 }

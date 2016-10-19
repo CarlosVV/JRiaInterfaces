@@ -24,6 +24,9 @@ namespace CES.CoreApi.Compliance.Screening
                .ForMember(dest => dest.HoldFlag, opts => opts.MapFrom(src => src.LegalHold))
                .ForMember(dest => dest.Status, opts => opts.MapFrom(src => src.StatusActimize))
                .ForMember(dest => dest.ActionTaken, opts => opts.MapFrom(src => src.RuleWasApply.fActionID));
+
+            Mapper.CreateMap<GetRulesRequest, RulesRequest>();
+            Mapper.CreateMap<RulesResponse, GetRulesResponse>();
         }
     }
 }

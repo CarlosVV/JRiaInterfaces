@@ -23,5 +23,6 @@ namespace CES.CoreApi.Compliance.Screening.Models
         public double SendAmount { get; set; }
         public double SendTotalAmount { get; set; }
         public PartyType PartyType { get; set; }
+        public int EntryTypeId { get; set; }
     }
 }

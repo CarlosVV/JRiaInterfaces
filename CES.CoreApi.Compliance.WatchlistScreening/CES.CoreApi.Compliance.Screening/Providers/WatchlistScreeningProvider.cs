@@ -183,14 +183,20 @@ namespace CES.CoreApi.Compliance.Screening.Providers
 
             Logging.Log.Info($"PortalURL ({party.Type}): {portalURL}");
 
+            var containPep = (rule.SearchDef ?? "").ToUpper().Contains("PEP");
+            var urlServices = (containPep ? AppSettings.UrlPep : AppSettings.UrlSanctions);
+
+            Logging.Log.Info($"UrlService: {urlServices} ({(containPep?"PEP": "Sanctions")})");
 
             EHProxyClient client = new EHProxyClient();
+            client.Endpoint.Address = new System.ServiceModel.EndpointAddress(urlServices);
             client.Endpoint.Behaviors.Add(new MessageInspectorBehavior());
             try
             {
+                
                 EHResult result = client.MSRealTimeWSProvider_1(
-                    searchDefId: "AllSanctions",// TODO: Remove when Thuan fix rule  rule.SearchDef,
-                    businessUnit: "WLF Global",// TODO: Remove when Thuan fix rule rule.BusinessUnit,
+                    searchDefId: rule.SearchDef,
+                    businessUnit: rule.BusinessUnit,
                     partyKey: party.Id.ToString(),
                     messageKey: request.OrderNo,
                     messageInstanceNumber: ((int)request.ServiceId).ToString(),

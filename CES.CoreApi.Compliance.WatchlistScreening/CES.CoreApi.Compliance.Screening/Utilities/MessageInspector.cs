@@ -35,21 +35,22 @@ namespace CES.CoreApi.Compliance.Screening.Utilities
 
         public void AfterReceiveReply(ref System.ServiceModel.Channels.Message reply, object correlationState)
         {
-            ////TEST: Receive very long XML :o
+          
+            if (AppSettings.LogResponseActimize)
+            {
+                MessageBuffer buffer = reply.CreateBufferedCopy(int.MaxValue);
+                reply = buffer.CreateMessage();
+                var copy = buffer.CreateMessage();
 
-            //MessageBuffer buffer = reply.CreateBufferedCopy(int.MaxValue);
-            //reply = buffer.CreateMessage();
-            //var copy = buffer.CreateMessage();
+                XmlDocument oDoc = new XmlDocument();
+                using (XmlWriter writer = oDoc.CreateNavigator().AppendChild())
+                {
+                    copy.WriteMessage(writer);
+                    writer.Close();
+                }
 
-            //XmlDocument oDoc = new XmlDocument();
-            //using (XmlWriter writer = oDoc.CreateNavigator().AppendChild())
-            //{
-            //    copy.WriteMessage(writer);
-            //    writer.Close();
-            //}
-
-            //Logging.Log.Info($"Response from Actimize:{Environment.NewLine} {FormatXml(oDoc.OuterXml)}");
-
+                Logging.Log.Info($"Response from Actimize:{Environment.NewLine} {FormatXml(oDoc.OuterXml)}");
+            }
 
         }
 

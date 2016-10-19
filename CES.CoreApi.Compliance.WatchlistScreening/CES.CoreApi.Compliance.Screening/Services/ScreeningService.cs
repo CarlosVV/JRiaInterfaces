@@ -60,7 +60,7 @@ namespace CES.CoreApi.Compliance.Screening.Services
                 if(entryTypes.Any())
                 {
                     var entryType = entryTypes.FirstOrDefault(e => e.fName == request.EntryType);
-                    request.EntryTypId = (entryType == null ? 0:entryType.fKey2);                   
+                    request.EntryTypeId = (entryType == null ? 0:entryType.fKey2);                   
                 }
               
                 rules = _repository.GetScreeningRulesForTransaction(request, party.Type, 201).ToList(); //201: Actimize            
@@ -276,7 +276,9 @@ namespace CES.CoreApi.Compliance.Screening.Services
                         ContryFrom = request.CountryFrom,
                         fNameTypeID = partyType,
                         SearchDef = defaultRule[0],
-                        BusinessUnit = defaultRule[1]
+                        BusinessUnit = defaultRule[1],
+                        fIssueItemID = int.Parse(defaultRule[3]),
+
                     }};
 
             return rules;

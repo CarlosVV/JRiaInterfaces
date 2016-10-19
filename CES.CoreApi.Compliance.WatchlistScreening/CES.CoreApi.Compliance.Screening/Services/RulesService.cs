@@ -27,6 +27,15 @@ namespace CES.CoreApi.Compliance.Screening.Services
 
         public virtual RulesResponse GetRules(RulesRequest request)
         {
+            //Get EntryTypeID
+            var entryTypes = _repositoryCached.GetEntryTypes();
+            if (entryTypes.Any())
+            {
+                var entryType = entryTypes.FirstOrDefault(e => e.fName == request.EntryType);
+                request.EntryTypeId = (entryType == null ? 0 : entryType.fKey2);
+            }
+
+            var rules = _repository.GetScreeningRulesForTransaction(request);
             throw new NotImplementedException();
         }
 

@@ -7,6 +7,6 @@ namespace CES.CoreApi.Compliance.Screening.Models
 {
     public class RulesResponse
     {
-       
+       public List<Rule> Rules { get; set; }
     }
 }

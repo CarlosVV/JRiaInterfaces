@@ -23,6 +23,15 @@ namespace CES.CoreApi.Compliance.Screening.Utilities
             return value != ServiceIdType.Undefined;
         }
 
+        public static bool ValidSDeliveryMethod(DeliveryMethod value)
+        {
+            return value != DeliveryMethod.Undefined;
+        }
+        public static bool ValidPartyType(PartyType  value)
+        {
+            return value != PartyType.Undefined;
+        }
+
         public static PartyType GetPartyTypeByRuntime(int runTime)
         {
             switch (runTime)

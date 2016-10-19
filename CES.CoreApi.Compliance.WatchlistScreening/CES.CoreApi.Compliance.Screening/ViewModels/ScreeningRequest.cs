@@ -47,7 +47,7 @@ namespace CES.CoreApi.Compliance.Screening.ViewModels
             RuleFor(x => x.CallEvent).Must(ViewModelUtil.ValidCallEventType).WithMessage("CallEvent is invalid");
             RuleFor(x => x.ServiceId).Must(ViewModelUtil.ValidServiceIdType).WithMessage("ServiceId is invalid");
             RuleFor(x => x.EntryType).NotEmpty().WithMessage("EntryType is required").Length(1, 100).WithMessage("EntryType invalid lenght");
-            RuleFor(r => r.ProductId).NotNull().WithMessage("ProductId is required").GreaterThan(0).WithMessage("ProductId is required");
+            //RuleFor(r => r.ProductId).NotNull().WithMessage("ProductId is required").GreaterThan(0).WithMessage("ProductId is required");
             RuleFor(r => r.RuntimeID).NotNull().WithMessage("RuntimeID is required").GreaterThan(0).WithMessage("RuntimeID is required");
             RuleFor(r => r.TransDateTime).NotNull().WithMessage("TransDateTime is required").Must(ViewModelUtil.ValidDate).WithMessage("TransDateTime is required");
             RuleFor(r => r.CountryFrom).NotNull().WithMessage("CountryFrom is required").NotEmpty().WithMessage("CountryFrom must not be empty").Length(2, 2).WithMessage("CountryFrom invalid lenght");
@@ -59,12 +59,12 @@ namespace CES.CoreApi.Compliance.Screening.ViewModels
             //Receiving Agent
             RuleFor(r => r.ReceivingAgent).NotNull().WithMessage("ReceivingAgent is required");
             RuleFor(r => r.ReceivingAgent.ID).NotNull().WithMessage("ReceivingAgent.ID is required").GreaterThan(0).WithMessage("ReceivingAgent.ID is required");
-            RuleFor(r => r.ReceivingAgent.LocID).NotNull().WithMessage("ReceivingAgent.LocID is required").GreaterThan(0).WithMessage("ReceivingAgent.LocID is required");
+            //RuleFor(r => r.ReceivingAgent.LocID).NotNull().WithMessage("ReceivingAgent.LocID is required").GreaterThan(0).WithMessage("ReceivingAgent.LocID is required");
 
             //Pay Agent
             RuleFor(r => r.PayAgent).NotNull().WithMessage("PayAgent is required");
             RuleFor(r => r.PayAgent.ID).NotNull().WithMessage("PayAgent.ID is required").GreaterThan(0).WithMessage("PayAgent.ID is required");
-            RuleFor(r => r.PayAgent.LocID).NotNull().WithMessage("PayAgent.LocID is required").GreaterThan(0).WithMessage("PayAgent.LocID is required");
+            //RuleFor(r => r.PayAgent.LocID).NotNull().WithMessage("PayAgent.LocID is required").GreaterThan(0).WithMessage("PayAgent.LocID is required");
 
 
             RuleFor(r => r.Parties).Must(p => p != null && p.Count() > 0).WithMessage("Please fill Party items");

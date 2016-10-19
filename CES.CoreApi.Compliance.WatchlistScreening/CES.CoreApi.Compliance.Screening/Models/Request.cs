@@ -24,7 +24,7 @@ namespace CES.CoreApi.Compliance.Screening.Models
         public string OrderNo { get; set; }
         public ServiceIdType ServiceId { get; set; }
         public string EntryType { get; set; }
-        public int EntryTypId { get; set; }
+        public int EntryTypeId { get; set; }
         public string TransferReason { get; set; }
         public CallEventType CallEvent { get; set; }
         public string OrderPin { get; set; }
