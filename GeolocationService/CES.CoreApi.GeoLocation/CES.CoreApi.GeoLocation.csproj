@@ -95,11 +95,15 @@
     <Compile Include="Models\MelissaDataReturnCode.cs" />
     <Compile Include="Models\Requests\AddressRequest.cs" />
     <Compile Include="Models\Responses\AddressValidationResponse.cs" />
+    <Compile Include="Models\Responses\Validate\AddressComponent.cs" />
     <Compile Include="Providers\Google\GoogleProvider.cs" />
     <Compile Include="Providers\Google\JsonModels\AddressComponent.cs" />
     <Compile Include="Providers\Google\JsonModels\GeocodeResult.cs" />
     <Compile Include="Providers\Google\JsonModels\Geometry.cs" />
     <Compile Include="Providers\Google\JsonModels\GeometryLocation.cs" />
+    <Compile Include="Providers\MelissaData\JsonModels\GlobalAddressRecord.cs" />
+    <Compile Include="Providers\MelissaData\MelissaDataProvider.cs" />
+    <Compile Include="Providers\Shared\FuzzyMatch.cs" />
     <Compile Include="Repositories\ClientSettingRepositoryCached.cs" />
     <Compile Include="Tools\ClientHeader.cs" />
     <Compile Include="Tools\EnumTools.cs" />
@@ -183,7 +187,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Providers\Bing\" />
-    <Folder Include="Providers\MelissaData\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

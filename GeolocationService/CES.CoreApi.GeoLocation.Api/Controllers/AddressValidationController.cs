@@ -1,4 +1,5 @@
 ﻿using CES.CoreApi.GeoLocation.Providers;
+using CES.CoreApi.GeoLocation.Providers.MelissaData;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -18,7 +19,8 @@ namespace CES.CoreApi.GeoLocation.Api.Controllers
 		{
 
 
-			GoogleProvider p = new GoogleProvider();
+		//	GoogleProvider p = new GoogleProvider();
+			MelissaDataProvider p = new MelissaDataProvider();
 			var x = p.DoValidation(request);
 			return Content(HttpStatusCode.OK, x);
 		}

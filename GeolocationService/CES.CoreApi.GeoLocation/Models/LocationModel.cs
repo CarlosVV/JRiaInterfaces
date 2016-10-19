@@ -11,5 +11,7 @@
         /// Representing degrees of latitude.
         /// </summary>
         public double Latitude { get; set; }
-    }
+
+		public string LocationType { get; set; }
+	}
 }
