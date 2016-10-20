@@ -33,7 +33,7 @@ namespace CES.CoreApi.Compliance.Screening.Filters
 				ObjectContent content = response.Content as ObjectContent;
 				if (content != null)
 				{
-					Logging.Log.Info($"{id}-Response-\n{content.ReadAsStringAsync().Result}");
+					Logging.Log.Info($"{id}-Response\n{content.ReadAsStringAsync().Result}");
 				}
 
 				return response;
