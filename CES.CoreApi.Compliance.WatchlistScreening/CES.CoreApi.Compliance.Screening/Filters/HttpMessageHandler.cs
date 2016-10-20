@@ -15,13 +15,13 @@ namespace CES.CoreApi.Compliance.Screening.Filters
 			{
 				if (request.Method.Method == "GET")
 				{
-					Logging.Log.Info(string.Format("{0}-{1}", id, request.RequestUri.AbsoluteUri));
+					Logging.Log.Info($"{id}-Request-{request.Method.Method}\n {request.RequestUri.AbsoluteUri}");
 				}
 				else
 				{
 					await request.Content.ReadAsStringAsync().ContinueWith(task =>
 					{
-						Logging.Log.Info(string.Format("{0}-{1}", id, task.Result, request.RequestUri.AbsoluteUri));
+						Logging.Log.Info($"{id}-Request-{request.Method.Method}\n {task.Result}");
 					}, cancellationToken);
 				}
 			}
@@ -33,7 +33,7 @@ namespace CES.CoreApi.Compliance.Screening.Filters
 				ObjectContent content = response.Content as ObjectContent;
 				if (content != null)
 				{
-					Logging.Log.Info(string.Format("{0}-{1}", id, content.ReadAsStringAsync().Result));
+					Logging.Log.Info($"{id}-Response-\n{content.ReadAsStringAsync().Result}");
 				}
 
 				return response;
