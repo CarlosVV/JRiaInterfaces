@@ -110,6 +110,8 @@ namespace CES.CoreApi.GeoLocation.Providers
 					if (HasAddressComponent(address.types, GoogleConstants.PostalCode))
 					{
 						addressComponent.PostalCode = address.short_name;
+						weight += FuzzyMatch.Compute(address.short_name, addressRequest.PostalCode);
+
 					}
 				}
 				var other = new SeeAlso { Location = location, AddressComponents = addressComponent, Types = string.Join(",", item.types), ResultCodes = resultCode, Weight = weight };
@@ -123,15 +125,41 @@ namespace CES.CoreApi.GeoLocation.Providers
 				response.AddressComponent = pick.MainPick.AddressComponents;
 				response.Location = pick.MainPick.Location;
 				response.SeeAlso = pick.Alternates;
-				response.Weight = pick.MainPick.Weight;
+				response.Distance = pick.MainPick.Weight;
+
+
+				response.Address = new AddressModel
+				{
+					Address1 = GetAddress1(response.AddressComponent.FormattedAddress),
+					AdministrativeArea = response.AddressComponent.AdministrativeArea,
+					City = response.AddressComponent.Locality,
+					Country = response.AddressComponent.Country,
+					PostalCode = response.AddressComponent.PostalCode,
+					FormattedAddress = response.AddressComponent.FormattedAddress,
+					CountryName = response.AddressComponent.CountryName
+
+				};
 			}
-		
 			response.RowData = result;
 			response.ResultCodes = resultCode;
 			response.ProviderMessage = result.status;			
 			response.DataProvider = Enumerations.DataProviderType.Google;
 			response.DataProviderName = "Google";
 			return response;
+		}
+
+		private string GetAddress1(string  formattedAddress)
+		{
+			if (string.IsNullOrEmpty(formattedAddress))
+				return null;
+
+			char[] ch = { ',' };
+
+			var  addresses = formattedAddress.Split(ch, StringSplitOptions.RemoveEmptyEntries);
+
+			if (addresses.Length > 0)
+				return addresses[0];
+			return null;
 		}
 		
 	}

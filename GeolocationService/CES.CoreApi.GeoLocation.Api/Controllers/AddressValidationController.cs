@@ -19,8 +19,8 @@ namespace CES.CoreApi.GeoLocation.Api.Controllers
 		{
 
 
-		//	GoogleProvider p = new GoogleProvider();
-			MelissaDataProvider p = new MelissaDataProvider();
+			GoogleProvider p = new GoogleProvider();
+			//MelissaDataProvider p = new MelissaDataProvider();
 			var x = p.DoValidation(request);
 			return Content(HttpStatusCode.OK, x);
 		}

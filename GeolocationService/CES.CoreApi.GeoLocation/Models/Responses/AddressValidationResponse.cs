@@ -10,13 +10,13 @@ namespace CES.CoreApi.GeoLocation.Models.Responses
 {
 	public class AddressValidationResponse
 	{
-		public object Address { get; set; }
+		public AddressModel Address { get; set; }
 		public object Location { get; set; }
 
 		public AddressComponent AddressComponent{ get; set; }
 		public string ResultCodes { get; set; }
 
-		public int Weight { get; set; }
+		public int Distance { get; set; }
 		public DataProviderType DataProvider { get; set; }
 		public string DataProviderName { get; set; }
 		public string ProviderMessage { get; set; }
