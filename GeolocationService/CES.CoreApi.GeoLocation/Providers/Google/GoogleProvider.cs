@@ -4,13 +4,11 @@ using CES.CoreApi.GeoLocation.Logic.Providers;
 using CES.CoreApi.GeoLocation.Models;
 using CES.CoreApi.GeoLocation.Models.Requests;
 using CES.CoreApi.GeoLocation.Models.Responses;
-using CES.CoreApi.GeoLocation.Models.Responses.Validate;
 using CES.CoreApi.GeoLocation.Providers.Google.JsonModels;
 using CES.CoreApi.GeoLocation.Providers.Shared;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
-using System.Dynamic;
 using System.Linq;
 
 namespace CES.CoreApi.GeoLocation.Providers
@@ -70,7 +68,7 @@ namespace CES.CoreApi.GeoLocation.Providers
 					}
 					location.LocationType = item.geometry.location_type;
 
-					resultCode = $"{response.ResultCodes},{item.geometry.location_type}";
+					resultCode = $"{resultCode},{item.geometry.location_type}";
 				}
 				addressComponent = new Models.Responses.Validate.AddressComponent();
 				addressComponent.FormattedAddress = item.formatted_address;
@@ -130,7 +128,7 @@ namespace CES.CoreApi.GeoLocation.Providers
 
 				response.Address = new AddressModel
 				{
-					Address1 = GetAddress1(response.AddressComponent.FormattedAddress),
+					Address1 = GetAddress1(response.AddressComponent.FormattedAddress, response.AddressComponent.Street),
 					AdministrativeArea = response.AddressComponent.AdministrativeArea,
 					City = response.AddressComponent.Locality,
 					Country = response.AddressComponent.Country,
@@ -148,7 +146,7 @@ namespace CES.CoreApi.GeoLocation.Providers
 			return response;
 		}
 
-		private string GetAddress1(string  formattedAddress)
+		private string GetAddress1(string  formattedAddress, string address)
 		{
 			if (string.IsNullOrEmpty(formattedAddress))
 				return null;
@@ -156,10 +154,25 @@ namespace CES.CoreApi.GeoLocation.Providers
 			char[] ch = { ',' };
 
 			var  addresses = formattedAddress.Split(ch, StringSplitOptions.RemoveEmptyEntries);
+			int min = 100000;
+			int m = 0;
+			string temp = "";
+			if (addresses.Length > 0)			
+			 temp = addresses[0];
+			foreach (var item in addresses)
+			{
+				m = FuzzyMatch.Compute(item, address);
+				if(m <min)
+				{
+					min = m;
+					temp = item;
+				}
+			}
 
-			if (addresses.Length > 0)
-				return addresses[0];
-			return null;
+			return temp.Trim();
+
+			
+			
 		}
 		
 	}
