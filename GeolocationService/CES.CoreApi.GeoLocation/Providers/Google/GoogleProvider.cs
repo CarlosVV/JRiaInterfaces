@@ -125,7 +125,7 @@ namespace CES.CoreApi.GeoLocation.Providers
 				response.SeeAlso = pick.Alternates;
 				response.Distance = pick.MainPick.Weight;
 
-
+			
 				response.Address = new AddressModel
 				{
 					Address1 = GetAddress1(response.AddressComponent.FormattedAddress, response.AddressComponent.Street),
@@ -148,7 +148,7 @@ namespace CES.CoreApi.GeoLocation.Providers
 
 		private string GetAddress1(string  formattedAddress, string address)
 		{
-			if (string.IsNullOrEmpty(formattedAddress))
+			if (string.IsNullOrEmpty(formattedAddress) || string.IsNullOrEmpty(address))
 				return null;
 
 			char[] ch = { ',' };
