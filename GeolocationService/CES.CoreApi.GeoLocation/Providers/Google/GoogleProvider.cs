@@ -10,6 +10,7 @@ using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Web;
 
 namespace CES.CoreApi.GeoLocation.Providers
 {
@@ -29,7 +30,7 @@ namespace CES.CoreApi.GeoLocation.Providers
 			string[] addresses = addressFormatted.Split(ch, System.StringSplitOptions.RemoveEmptyEntries);
 
 			addressFormatted = string.Join(",", addresses);
-			var url = $"https://maps.googleapis.com/maps/api/geocode/json?address={addressFormatted}&components=country:{address.Country}";
+			var url = $"https://maps.googleapis.com/maps/api/geocode/json?address={HttpUtility.UrlEncode(addressFormatted)}&components=country:{address.Country}";
 			return url;
 		}
 		private bool HasAddressComponent(List<string> items, string key)
@@ -128,7 +129,7 @@ namespace CES.CoreApi.GeoLocation.Providers
 			
 				response.Address = new AddressModel
 				{
-					Address1 = GetAddress1(response.AddressComponent.FormattedAddress, response.AddressComponent.Street),
+					Address1 = GetAddress1(response.AddressComponent),
 					AdministrativeArea = response.AddressComponent.AdministrativeArea,
 					City = response.AddressComponent.Locality,
 					Country = response.AddressComponent.Country,
@@ -146,26 +147,57 @@ namespace CES.CoreApi.GeoLocation.Providers
 			return response;
 		}
 
-		private string GetAddress1(string  formattedAddress, string address)
+		private string GetAddress1(CES.CoreApi.GeoLocation.Models.Responses.Validate.AddressComponent comp)
 		{
-			if (string.IsNullOrEmpty(formattedAddress) || string.IsNullOrEmpty(address))
+			if (comp == null)
+				return string.Empty;
+
+			if (string.IsNullOrEmpty(comp.FormattedAddress) || string.IsNullOrEmpty(comp.Street))
 				return null;
 
 			char[] ch = { ',' };
 
-			var  addresses = formattedAddress.Split(ch, StringSplitOptions.RemoveEmptyEntries);
+			var  addresses = comp.FormattedAddress.Split(ch, StringSplitOptions.RemoveEmptyEntries);
+			var items = new List<string>();
+			string value;
+			foreach (var item in addresses)
+			{
+				value = item.Trim(); 
+
+				if (!string.IsNullOrEmpty(comp.AdministrativeArea) && value.Equals(comp.AdministrativeArea, StringComparison.OrdinalIgnoreCase))
+					continue;
+				if (!string.IsNullOrEmpty(comp.AdministrativeAreaLongName) && value.Equals(comp.AdministrativeAreaLongName, StringComparison.OrdinalIgnoreCase))
+					continue;
+				if (!string.IsNullOrEmpty(comp.Locality) && value.Equals(comp.Locality, StringComparison.OrdinalIgnoreCase))
+					continue;
+				if (!string.IsNullOrEmpty(comp.LocalityLongName) && value.Equals(comp.LocalityLongName, StringComparison.OrdinalIgnoreCase))
+					continue;
+				if (!string.IsNullOrEmpty(comp.Country) && value.Equals(comp.Country, StringComparison.OrdinalIgnoreCase))
+					continue;
+				if (!string.IsNullOrEmpty(comp.CountryName) && value.Equals(comp.CountryName, StringComparison.OrdinalIgnoreCase))
+					continue;
+
+				items.Add(item);
+
+			}
+			if(items.Count ==1)
+				return items[0];
+
 			int min = 100000;
 			int m = 0;
 			string temp = "";
-			if (addresses.Length > 0)			
-			 temp = addresses[0];
-			foreach (var item in addresses)
+			if (items.Count > 0)			
+			 temp = items[0];
+			foreach (var item in items)
 			{
-				m = FuzzyMatch.Compute(item, address);
+			
+					
+				m = FuzzyMatch.Compute(item, comp.Street);
 				if(m <min)
 				{
 					min = m;
 					temp = item;
+
 				}
 			}
 

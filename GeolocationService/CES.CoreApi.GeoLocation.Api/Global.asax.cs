@@ -3,6 +3,7 @@ using CES.Security.CoreApi;
 using FluentValidation.WebApi;
 using SimpleInjector;
 using SimpleInjector.Integration.WebApi;
+using System.Text;
 using System.Web.Http;
 using System.Web.Http.ExceptionHandling;
 
@@ -12,7 +13,9 @@ namespace CES.CoreApi.GeoLocation.Api
     {
 		
         protected void Application_Start()        {
-			
+
+		
+
 			GlobalConfiguration.Configure(WebApiConfig.Register);
 			var container = new Container();
 			container.Options.DefaultScopedLifestyle = new WebApiRequestLifestyle();
