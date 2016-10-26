@@ -6,6 +6,7 @@ using System.Web.Http.ExceptionHandling;
 using System.Web.Optimization;
 using CES.CoreApi.Payout.Api.Filters;
 using CES.Security.CoreApi;
+using System.Text;
 
 namespace CES.CoreApi.Payout.Api
 {
@@ -22,11 +23,10 @@ namespace CES.CoreApi.Payout.Api
 
 			GlobalConfiguration.Configuration.MessageHandlers.Add(new HttpMessageHandler());
 
-			
-           
-		
 	
-            BundleConfig.RegisterBundles(BundleTable.Bundles);
+
+
+			BundleConfig.RegisterBundles(BundleTable.Bundles);
 
             AreaRegistration.RegisterAllAreas();
 	

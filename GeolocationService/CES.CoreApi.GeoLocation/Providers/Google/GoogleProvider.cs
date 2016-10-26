@@ -6,6 +6,7 @@ using CES.CoreApi.GeoLocation.Models.Requests;
 using CES.CoreApi.GeoLocation.Models.Responses;
 using CES.CoreApi.GeoLocation.Providers.Google.JsonModels;
 using CES.CoreApi.GeoLocation.Providers.Shared;
+using CES.CoreApi.GeoLocation.Repositories;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
@@ -16,22 +17,50 @@ namespace CES.CoreApi.GeoLocation.Providers
 {
 	public class GoogleProvider
 	{
-
-		private string BuildUrl(AddressRequest address)
+		class AddressRequestMode
 		{
+			public AddressRequest RequestModifed { get; set; }
+			public string Url { get; set; }
+		}
+
+		private string ZipCodeValidation(string zip)
+		{
+			if (string.IsNullOrEmpty(zip))
+				return string.Empty;
+
+			foreach (var item in zip)
+			{
+				if (item != '0')
+					return zip;
+			}
+
+			return string.Empty;
+		}
+
+		private AddressRequestMode BuildUrl(AddressRequest address)
+		{
+			var RequestMode = new AddressRequestMode();
+			address.PostalCode = ZipCodeValidation(address.PostalCode);
+
 			var addressFormatted = string.Join(",",
-				address.Address1,
-				address.Address2,
-				address.City,			
+				address.Address1,								
 				address.PostalCode
 				);
+			ClientSettingRepository repo = new ClientSettingRepository();
+			var stateName =repo.GetStateName(1, address.AdministrativeArea, address.Country);
 
 			char[] ch = { ',' };
 			string[] addresses = addressFormatted.Split(ch, System.StringSplitOptions.RemoveEmptyEntries);
 
 			addressFormatted = string.Join(",", addresses);
-			var url = $"https://maps.googleapis.com/maps/api/geocode/json?address={HttpUtility.UrlEncode(addressFormatted)}&components=country:{address.Country}";
-			return url;
+			var url = $"https://maps.googleapis.com/maps/api/geocode/json?address={HttpUtility.UrlEncode(addressFormatted)}&components=country:{address.Country}|locality:{address.City}|administrative_area:{HttpUtility.UrlEncode(stateName)}";
+
+			RequestMode.RequestModifed = address;
+			RequestMode.RequestModifed.AdministrativeArea = stateName;
+	
+			RequestMode.Url = url;
+
+			return RequestMode;
 		}
 		private bool HasAddressComponent(List<string> items, string key)
 		{
@@ -44,7 +73,8 @@ namespace CES.CoreApi.GeoLocation.Providers
 		public AddressValidationResponse DoValidation(AddressRequest addressRequest)
 		{
 			IDataResponseProvider client = new DataResponseProvider();
-			var providerResponse = client.GetResponse(BuildUrl(addressRequest));	
+			var requestMode = BuildUrl(addressRequest);
+			var providerResponse = client.GetResponse(requestMode.Url);	
 			var result = JsonConvert.DeserializeObject<GeocodeResults>(providerResponse.RawResponse);
 			var response = new AddressValidationResponse();
 			var others = new List<SeeAlso>();
@@ -138,6 +168,16 @@ namespace CES.CoreApi.GeoLocation.Providers
 					CountryName = response.AddressComponent.CountryName
 
 				};
+
+				if(response.AddressComponent != null)
+				{
+					response.CountryMatch = GetGrade(response.AddressComponent.CountryName, requestMode.RequestModifed.Country);
+					response.StateMatch = GetGrade(response.AddressComponent.AdministrativeAreaLongName, requestMode.RequestModifed.AdministrativeArea);
+					response.CityMatch = GetGrade(response.AddressComponent.Locality, requestMode.RequestModifed.City);
+					response.AddressMatch = GetGrade(response.AddressComponent.Street, requestMode.RequestModifed.Address1);
+					response.PostalCodeMatch = GetGrade(response.AddressComponent.PostalCode, requestMode.RequestModifed.PostalCode);
+				}
+
 			}
 			response.RowData = result;
 			response.ResultCodes = resultCode;
@@ -147,6 +187,28 @@ namespace CES.CoreApi.GeoLocation.Providers
 			return response;
 		}
 
+
+		private double GetGrade(string google, string requestMode)
+		{
+			if (string.IsNullOrEmpty(google) && string.IsNullOrEmpty(requestMode))
+				return 100;
+
+
+			if (string.IsNullOrEmpty(google))
+				return 0;
+
+			if (string.IsNullOrEmpty(requestMode))
+				return 0;
+
+			if (google.Trim().Equals(requestMode.Trim(), StringComparison.OrdinalIgnoreCase))
+				return 100;
+
+			var f = FuzzyMatch.Compute(google.ToLower().Trim(), requestMode.ToLower().Trim());
+			return (((double)f / (double)google.Length)*100);
+
+			//return 0;
+
+		}
 		private string GetAddress1(CES.CoreApi.GeoLocation.Models.Responses.Validate.AddressComponent comp)
 		{
 			if (comp == null)
@@ -155,6 +217,8 @@ namespace CES.CoreApi.GeoLocation.Providers
 			if (string.IsNullOrEmpty(comp.FormattedAddress) || string.IsNullOrEmpty(comp.Street))
 				return null;
 
+
+		
 			char[] ch = { ',' };
 
 			var  addresses = comp.FormattedAddress.Split(ch, StringSplitOptions.RemoveEmptyEntries);

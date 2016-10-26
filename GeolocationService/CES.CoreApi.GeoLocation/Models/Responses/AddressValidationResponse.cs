@@ -14,6 +14,11 @@ namespace CES.CoreApi.GeoLocation.Models.Responses
 		public object Location { get; set; }
 
 		public AddressComponent AddressComponent{ get; set; }
+		public double CountryMatch { get; set; }
+		public double PostalCodeMatch { get; set; }
+		public double StateMatch { get; set; }
+		public double CityMatch { get; set; }
+		public double AddressMatch { get; set; }
 		public string ResultCodes { get; set; }
 
 		public int Distance { get; set; }
@@ -22,6 +27,7 @@ namespace CES.CoreApi.GeoLocation.Models.Responses
 		public string ProviderMessage { get; set; }
 		public List<SeeAlso> @SeeAlso { get; set; }
 		public object RowData { get; set; }
+
 
 	}
 
