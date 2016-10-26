@@ -205,7 +205,7 @@ namespace CES.CoreApi.GeoLocation.Providers
 				return 100;
 
 			var f = FuzzyMatch.Compute(google.ToLower().Trim(), requestMode.ToLower().Trim());
-			return (double)f/ (double)google.Length *100;
+			return    100- ((double)f/ (double)google.Length *100);
 
 			//return 0;
 
