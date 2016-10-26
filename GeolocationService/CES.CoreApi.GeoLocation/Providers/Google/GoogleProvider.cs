@@ -174,10 +174,11 @@ namespace CES.CoreApi.GeoLocation.Providers
 					response.CountryMatch = GetGrade(response.AddressComponent.CountryName, requestMode.RequestModifed.Country);
 					response.StateMatch = GetGrade(response.AddressComponent.AdministrativeAreaLongName, requestMode.RequestModifed.AdministrativeArea);
 					response.CityMatch = GetGrade(response.AddressComponent.Locality, requestMode.RequestModifed.City);
-					response.AddressMatch = GetGrade(response.AddressComponent.Street, requestMode.RequestModifed.Address1);
+			
 					response.PostalCodeMatch = GetGrade(response.AddressComponent.PostalCode, requestMode.RequestModifed.PostalCode);
 				}
 
+				response.AddressMatch = GetGrade(response.Address.Address1, requestMode.RequestModifed.Address1);
 			}
 			response.RowData = result;
 			response.ResultCodes = resultCode;
@@ -204,7 +205,7 @@ namespace CES.CoreApi.GeoLocation.Providers
 				return 100;
 
 			var f = FuzzyMatch.Compute(google.ToLower().Trim(), requestMode.ToLower().Trim());
-			return (((double)f / (double)google.Length)*100);
+			return (double)f/ (double)google.Length *100;
 
 			//return 0;
 
