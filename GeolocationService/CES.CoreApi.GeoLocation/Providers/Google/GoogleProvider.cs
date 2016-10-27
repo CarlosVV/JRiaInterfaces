@@ -20,6 +20,7 @@ namespace CES.CoreApi.GeoLocation.Providers
 		class AddressRequestMode
 		{
 			public AddressRequest RequestModifed { get; set; }
+			public string StateShort { get; set; }
 			public string Url { get; set; }
 		}
 
@@ -27,32 +28,45 @@ namespace CES.CoreApi.GeoLocation.Providers
 		{
 			if (string.IsNullOrEmpty(zip))
 				return string.Empty;
-
+			string result = "";
+			int count = 0;
 			foreach (var item in zip)
 			{
 				if (item != '0')
-					return zip;
+				{
+					result = zip.Substring(count);
+					return result;
+				}
+				count++;
 			}
+
 
 			return string.Empty;
 		}
 
+		
 		private AddressRequestMode BuildUrl(AddressRequest address)
 		{
 			var RequestMode = new AddressRequestMode();
 			address.PostalCode = ZipCodeValidation(address.PostalCode);
 
-			var addressFormatted = string.Join(",",
-				address.Address1,								
-				address.PostalCode
-				);
+			//var addressFormatted = string.Join(",",
+			//	address.Address1,								
+			//	address.PostalCode
+			//	);
 			ClientSettingRepository repo = new ClientSettingRepository();
+			RequestMode.StateShort = address.AdministrativeArea;
 			var stateName =repo.GetStateName(1, address.AdministrativeArea, address.Country);
 
-			char[] ch = { ',' };
-			string[] addresses = addressFormatted.Split(ch, System.StringSplitOptions.RemoveEmptyEntries);
+			//char[] ch = { ',' };
+			//string[] addresses = addressFormatted.Split(ch, System.StringSplitOptions.RemoveEmptyEntries);
 
-			addressFormatted = string.Join(",", addresses);
+			var addressFormatted = $"{address.Address1.Replace(",", "")}";
+			if(!string.IsNullOrEmpty(address.PostalCode))
+			{
+				addressFormatted = $"{addressFormatted},{address.PostalCode}";
+			}
+
 			var url = $"https://maps.googleapis.com/maps/api/geocode/json?address={HttpUtility.UrlEncode(addressFormatted)}&components=country:{address.Country}|locality:{address.City}|administrative_area:{HttpUtility.UrlEncode(stateName)}";
 
 			RequestMode.RequestModifed = address;
@@ -172,7 +186,20 @@ namespace CES.CoreApi.GeoLocation.Providers
 				if(response.AddressComponent != null)
 				{
 					response.CountryMatch = GetGrade(response.AddressComponent.CountryName, requestMode.RequestModifed.Country);
-					response.StateMatch = GetGrade(response.AddressComponent.AdministrativeAreaLongName, requestMode.RequestModifed.AdministrativeArea);
+					if(response.CountryMatch <100)
+						response.CountryMatch = GetGrade(response.AddressComponent.Country, requestMode.RequestModifed.Country);
+
+					 double stateMatch1 = GetGrade(response.AddressComponent.AdministrativeAreaLongName, requestMode.RequestModifed.AdministrativeArea);
+					response.StateMatch = stateMatch1;
+					if (stateMatch1 < 100)
+					{
+						double stateMatch2 = GetGrade(response.AddressComponent.AdministrativeArea, requestMode.StateShort);
+						if (stateMatch2 > stateMatch1)
+							response.StateMatch = stateMatch2;
+						
+					}
+
+
 					response.CityMatch = GetGrade(response.AddressComponent.Locality, requestMode.RequestModifed.City);
 			
 					response.PostalCodeMatch = GetGrade(response.AddressComponent.PostalCode, requestMode.RequestModifed.PostalCode);
@@ -194,6 +221,10 @@ namespace CES.CoreApi.GeoLocation.Providers
 			if (string.IsNullOrEmpty(google) && string.IsNullOrEmpty(requestMode))
 				return 100;
 
+			if (!string.IsNullOrEmpty(google) && string.IsNullOrEmpty(requestMode))
+				return 110;
+
+
 
 			if (string.IsNullOrEmpty(google))
 				return 0;
@@ -205,6 +236,9 @@ namespace CES.CoreApi.GeoLocation.Providers
 				return 100;
 
 			var f = FuzzyMatch.Compute(google.ToLower().Trim(), requestMode.ToLower().Trim());
+			if (f <= 0)
+				return 100;
+
 			return    100- ((double)f/ (double)google.Length *100);
 
 			//return 0;
@@ -223,6 +257,11 @@ namespace CES.CoreApi.GeoLocation.Providers
 			char[] ch = { ',' };
 
 			var  addresses = comp.FormattedAddress.Split(ch, StringSplitOptions.RemoveEmptyEntries);
+			if (addresses.Length == 1)
+				return string.Empty;
+
+			
+
 			var items = new List<string>();
 			string value;
 			foreach (var item in addresses)
@@ -241,6 +280,11 @@ namespace CES.CoreApi.GeoLocation.Providers
 					continue;
 				if (!string.IsNullOrEmpty(comp.CountryName) && value.Equals(comp.CountryName, StringComparison.OrdinalIgnoreCase))
 					continue;
+				if (!string.IsNullOrEmpty(comp.PostalCode) && value.Equals(comp.PostalCode, StringComparison.OrdinalIgnoreCase))
+					continue;
+				if (!string.IsNullOrEmpty(comp.PostalCode) && value.EndsWith(comp.PostalCode))
+					continue;
+
 
 				items.Add(item);
 
@@ -248,25 +292,21 @@ namespace CES.CoreApi.GeoLocation.Providers
 			if(items.Count ==1)
 				return items[0];
 
-			int min = 100000;
-			int m = 0;
-			string temp = "";
-			if (items.Count > 0)			
-			 temp = items[0];
-			foreach (var item in items)
+			List<int> rank = new List<int>();
+			int min = 0;
+			for (int  i=0; i < items.Count; i++)
 			{
-			
-					
-				m = FuzzyMatch.Compute(item, comp.Street);
-				if(m <min)
+				int m = FuzzyMatch.Compute(items[i].ToLower().Trim(), comp.Street.ToLower().Trim());
+				if (min < m)
 				{
-					min = m;
-					temp = item;
-
+					min = i;
 				}
+					
+				rank.Add(m);
+				
 			}
 
-			return temp.Trim();
+			return items[min];
 
 			
 			
