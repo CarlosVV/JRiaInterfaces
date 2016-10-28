@@ -260,7 +260,7 @@ namespace CES.CoreApi.GeoLocation.Providers
 
 		}
 
-		private double GetGrade(string google, string requestMode)
+		private int GetGrade(string google, string requestMode)
 		{
 
 			if (string.IsNullOrEmpty(google) && string.IsNullOrEmpty(requestMode))
@@ -286,7 +286,8 @@ namespace CES.CoreApi.GeoLocation.Providers
 			if (f <= 0)
 				return 100;
 
-			return    100- ((double)f/ (double)google.Length *100);
+			double   g =  100- ((double)f/ (double)google.Length *100);
+			return Convert.ToInt16(g);
 
 
 		}
