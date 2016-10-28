@@ -7,6 +7,7 @@ using CES.CoreApi.GeoLocation.Models.Responses;
 using CES.CoreApi.GeoLocation.Providers.Google.JsonModels;
 using CES.CoreApi.GeoLocation.Providers.Shared;
 using CES.CoreApi.GeoLocation.Repositories;
+using CES.CoreApi.GeoLocation.Tools;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
@@ -173,7 +174,7 @@ namespace CES.CoreApi.GeoLocation.Providers
 			
 				response.Address = new AddressModel
 				{
-					Address1 = GetAddress1(response.AddressComponent),
+					Address1 = GetGradeAddress(response.AddressComponent,""),
 					AdministrativeArea = response.AddressComponent.AdministrativeArea,
 					City = response.AddressComponent.Locality,
 					Country = response.AddressComponent.Country,
@@ -189,23 +190,34 @@ namespace CES.CoreApi.GeoLocation.Providers
 					if(response.CountryMatch <100)
 						response.CountryMatch = GetGrade(response.AddressComponent.Country, requestMode.RequestModifed.Country);
 
-					 double stateMatch1 = GetGrade(response.AddressComponent.AdministrativeAreaLongName, requestMode.RequestModifed.AdministrativeArea);
-					response.StateMatch = stateMatch1;
-					if (stateMatch1 < 100)
+					response.StateMatch = GetGrade(response.AddressComponent.AdministrativeAreaLongName, requestMode.RequestModifed.AdministrativeArea);
+					
+					if (response.StateMatch < 100)
 					{
 						double stateMatch2 = GetGrade(response.AddressComponent.AdministrativeArea, requestMode.StateShort);
-						if (stateMatch2 > stateMatch1)
+						if (stateMatch2 > response.StateMatch)
 							response.StateMatch = stateMatch2;
 						
 					}
 
 
 					response.CityMatch = GetGrade(response.AddressComponent.Locality, requestMode.RequestModifed.City);
-			
+
+					if (response.CityMatch < 100)
+					{
+						double stateMatch2 = GetGrade(response.AddressComponent.LocalityLongName, requestMode.RequestModifed.City);
+						if (stateMatch2 > response.CityMatch)
+							response.CityMatch = stateMatch2;
+
+					}
+
+
 					response.PostalCodeMatch = GetGrade(response.AddressComponent.PostalCode, requestMode.RequestModifed.PostalCode);
 				}
 
 				response.AddressMatch = GetGrade(response.Address.Address1, requestMode.RequestModifed.Address1);
+
+
 			}
 			response.RowData = result;
 			response.ResultCodes = resultCode;
@@ -215,9 +227,42 @@ namespace CES.CoreApi.GeoLocation.Providers
 			return response;
 		}
 
+		private string GetGradeAddress(Models.Responses.Validate.AddressComponent  comp, string requestMode)
+		{
+			string value = comp.FormattedAddress;
+			if (!string.IsNullOrEmpty(comp.AdministrativeArea))
+				value = value.Replace(comp.AdministrativeArea,"");
+			if (!string.IsNullOrEmpty(comp.AdministrativeAreaLongName) )
+				value = value.Replace(comp.AdministrativeAreaLongName, "");
+			if (!string.IsNullOrEmpty(comp.Locality) )
+				value = value.Replace(comp.Locality, "");
+			if (!string.IsNullOrEmpty(comp.LocalityLongName) )
+				value = value.Replace(comp.LocalityLongName, "");
+			if (!string.IsNullOrEmpty(comp.Country))
+				value = value.Replace(comp.Country, "");
+			if (!string.IsNullOrEmpty(comp.CountryName))
+				value = value.Replace(comp.CountryName, "");
+			if (!string.IsNullOrEmpty(comp.PostalCode))
+				value = value.Replace(comp.PostalCode, "");
+			string r = value;
+			for (int i =  value.Length-1; i >0; i--)
+			{
+				if (value[i] == ' ' || value[i] == ',')
+					continue;
+				 else
+				{
+					return value.Substring(0, i+1);
+					}
+			}
+
+			return r;
+
+
+		}
 
 		private double GetGrade(string google, string requestMode)
 		{
+
 			if (string.IsNullOrEmpty(google) && string.IsNullOrEmpty(requestMode))
 				return 100;
 
@@ -235,16 +280,17 @@ namespace CES.CoreApi.GeoLocation.Providers
 			if (google.Trim().Equals(requestMode.Trim(), StringComparison.OrdinalIgnoreCase))
 				return 100;
 
-			var f = FuzzyMatch.Compute(google.ToLower().Trim(), requestMode.ToLower().Trim());
+			JaroWrinklerDistance distance = new JaroWrinklerDistance();
+			var f = distance.Apply(google.ToLower().Trim(), requestMode.ToLower().Trim());
+			//var f = FuzzyMatch.Compute(google.ToLower().Trim(), requestMode.ToLower().Trim());
 			if (f <= 0)
 				return 100;
 
 			return    100- ((double)f/ (double)google.Length *100);
 
-			//return 0;
 
 		}
-		private string GetAddress1(CES.CoreApi.GeoLocation.Models.Responses.Validate.AddressComponent comp)
+		private string GetAddress1(Models.Responses.Validate.AddressComponent comp)
 		{
 			if (comp == null)
 				return string.Empty;
@@ -262,10 +308,15 @@ namespace CES.CoreApi.GeoLocation.Providers
 
 			
 
-			var items = new List<string>();
+				var items = new List<string>();
 			string value;
+		
 			foreach (var item in addresses)
 			{
+				if (item.Contains(comp.Street) || item.Contains(comp.StreetLongName))
+					return item;
+
+			
 				value = item.Trim(); 
 
 				if (!string.IsNullOrEmpty(comp.AdministrativeArea) && value.Equals(comp.AdministrativeArea, StringComparison.OrdinalIgnoreCase))
