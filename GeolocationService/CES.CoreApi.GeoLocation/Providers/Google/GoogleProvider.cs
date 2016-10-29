@@ -12,6 +12,7 @@ using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text;
 using System.Web;
 
 namespace CES.CoreApi.GeoLocation.Providers
@@ -227,16 +228,21 @@ namespace CES.CoreApi.GeoLocation.Providers
 			return response;
 		}
 
-		private string GetGradeAddress(Models.Responses.Validate.AddressComponent  comp, string requestMode)
+		private string GetGradeAddress(Models.Responses.Validate.AddressComponent comp, string requestMode)
 		{
+			if (comp == null)
+				return string.Empty;
+
 			string value = comp.FormattedAddress;
+			if (string.IsNullOrEmpty(value))
+				return string.Empty;
 			if (!string.IsNullOrEmpty(comp.AdministrativeArea))
-				value = value.Replace(comp.AdministrativeArea,"");
-			if (!string.IsNullOrEmpty(comp.AdministrativeAreaLongName) )
+				value = value.Replace(comp.AdministrativeArea, "");
+			if (!string.IsNullOrEmpty(comp.AdministrativeAreaLongName))
 				value = value.Replace(comp.AdministrativeAreaLongName, "");
-			if (!string.IsNullOrEmpty(comp.Locality) )
+			if (!string.IsNullOrEmpty(comp.Locality))
 				value = value.Replace(comp.Locality, "");
-			if (!string.IsNullOrEmpty(comp.LocalityLongName) )
+			if (!string.IsNullOrEmpty(comp.LocalityLongName))
 				value = value.Replace(comp.LocalityLongName, "");
 			if (!string.IsNullOrEmpty(comp.Country))
 				value = value.Replace(comp.Country, "");
@@ -244,18 +250,34 @@ namespace CES.CoreApi.GeoLocation.Providers
 				value = value.Replace(comp.CountryName, "");
 			if (!string.IsNullOrEmpty(comp.PostalCode))
 				value = value.Replace(comp.PostalCode, "");
-			string r = value;
-			for (int i =  value.Length-1; i >0; i--)
+
+			if (string.IsNullOrEmpty(value))
+				return string.Empty;
+
+
+
+
+			char[] ch = { ',' };
+			string[] rs = value.Trim().Split(ch, StringSplitOptions.RemoveEmptyEntries);
+			StringBuilder sb = new StringBuilder();
+			int count = 0;
+			foreach (var item in rs)
 			{
-				if (value[i] == ' ' || value[i] == ',')
+				if (string.IsNullOrEmpty(item.Trim()))
 					continue;
-				 else
+				count++;
+				if (count > 1)
 				{
-					return value.Substring(0, i+1);
-					}
+					sb.Append($", {item}");
+				}
+				else {
+				sb.Append(item);
+				}
 			}
 
-			return r;
+			return sb.ToString();
+
+			//return string.Join(",", rs).Trim();
 
 
 		}
