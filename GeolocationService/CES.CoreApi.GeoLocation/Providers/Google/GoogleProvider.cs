@@ -11,6 +11,7 @@ using CES.CoreApi.GeoLocation.Tools;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Web;
@@ -118,7 +119,7 @@ namespace CES.CoreApi.GeoLocation.Providers
 					resultCode = $"{resultCode},{item.geometry.location_type}";
 				}
 				addressComponent = new Models.Responses.Validate.AddressComponent();
-				addressComponent.FormattedAddress = item.formatted_address;
+				addressComponent.FormattedAddress = RemoveDiacritics(item.formatted_address);
 			
 				foreach (var address in item.address_components)
 				{
@@ -158,7 +159,7 @@ namespace CES.CoreApi.GeoLocation.Providers
 					}
 					if (HasAddressComponent(address.types, GoogleConstants.City))
 					{
-						addressComponent.Locality = address.short_name;
+						addressComponent.Locality = RemoveDiacritics(address.short_name);
 						addressComponent.LocalityLongName = address.long_name;
 
 						addressComponent.CityDistance = GetGrade(addressComponent.Locality, addressRequest.City);
@@ -176,7 +177,8 @@ namespace CES.CoreApi.GeoLocation.Providers
 						addressComponent.AdministrativeAreaLongName = address.long_name;
 						if (address.short_name.EndsWith("."))
 						{
-							addressComponent.StateDistance = GetGrade(address.short_name.Replace(".", ""), requestMode.StateShort);
+							addressComponent.AdministrativeArea = address.short_name.Replace(".", "");
+							addressComponent.StateDistance = GetGrade(addressComponent.AdministrativeArea, requestMode.StateShort);
 						}
 
 						if (addressComponent.StateDistance < 100)
@@ -272,6 +274,23 @@ namespace CES.CoreApi.GeoLocation.Providers
 			return response;
 		}
 
+		static string RemoveDiacritics(string text)
+		{
+			var normalizedString = text.Normalize(NormalizationForm.FormD);
+			var stringBuilder = new StringBuilder();
+
+			foreach (var c in normalizedString)
+			{
+				var unicodeCategory = CharUnicodeInfo.GetUnicodeCategory(c);
+				if (unicodeCategory != UnicodeCategory.NonSpacingMark)
+				{
+					stringBuilder.Append(c);
+				}
+			}
+
+			return stringBuilder.ToString().Normalize(NormalizationForm.FormC);
+		}
+
 		private string GetGradeAddress(Models.Responses.Validate.AddressComponent comp, string requestMode)
 		{
 			if (comp == null)
@@ -347,12 +366,8 @@ namespace CES.CoreApi.GeoLocation.Providers
 				return 100;
 
 			JaroWrinklerDistance distance = new JaroWrinklerDistance();
-			var f = distance.Apply(google.ToLower().Trim(), requestMode.ToLower().Trim());
-			//var f = FuzzyMatch.Compute(google.ToLower().Trim(), requestMode.ToLower().Trim());
-			//if (f <= 0)
-			//	return 100;
-
-		//	double   g =  100- ((double)f/ (double)google.Length *100);
+			var f = distance.Apply(RemoveDiacritics(google).ToLower().Trim(), RemoveDiacritics(requestMode).ToLower().Trim());
+		
 			return Convert.ToInt16(f *100);
 
 
