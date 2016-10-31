@@ -177,8 +177,8 @@ namespace CES.CoreApi.GeoLocation.Providers
 						addressComponent.AdministrativeAreaLongName = address.long_name;
 						if (address.short_name.EndsWith("."))
 						{
-							addressComponent.AdministrativeArea = address.short_name.Replace(".", "");
-							addressComponent.StateDistance = GetGrade(addressComponent.AdministrativeArea, requestMode.StateShort);
+						
+							addressComponent.StateDistance = GetGrade(address.short_name.Replace(".", ""), requestMode.StateShort);
 						}
 
 						if (addressComponent.StateDistance < 100)
@@ -234,7 +234,7 @@ namespace CES.CoreApi.GeoLocation.Providers
 				response.Address = new AddressModel
 				{
 					Address1 = GetGradeAddress(response.AddressComponent,""),
-					AdministrativeArea = response.AddressComponent.AdministrativeArea,
+					AdministrativeArea = RemoveLastDot(response.AddressComponent.AdministrativeArea),
 					City = response.AddressComponent.Locality,
 					Country = response.AddressComponent.Country,
 					PostalCode = response.AddressComponent.PostalCode,
@@ -272,6 +272,15 @@ namespace CES.CoreApi.GeoLocation.Providers
 			response.DataProvider = Enumerations.DataProviderType.Google;
 			response.DataProviderName = "Google";
 			return response;
+		}
+
+		private string RemoveLastDot(string value)
+		{
+			if (string.IsNullOrEmpty(value))
+				return string.Empty;
+			if (value.EndsWith("."))
+				return value.Replace(".", "");
+			return value;
 		}
 
 		static string RemoveDiacritics(string text)
