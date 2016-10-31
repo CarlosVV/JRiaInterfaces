@@ -20,9 +20,12 @@ namespace CES.CoreApi.GeoLocation.Providers.Shared
 				return new AddressPick { MainPick = all.FirstOrDefault() };
 
 			var pick = new AddressPick { Alternates = new List<SeeAlso>() };
+			var q = null as List<SeeAlso>;
 
+		
+			 q = (from p in all  select p).OrderByDescending(o => o.AddressComponents.TotalAddressAndZipDistance).ThenBy(n => n.AddressComponents.PostalCodeDistance).ToList();
 
-			var q = (from p in all select p).OrderBy(o => o.Weight);
+		
 
 			if (q != null)
 			{

@@ -11,10 +11,15 @@
 		public string AdministrativeArea { get; set; }
 		public string AdministrativeAreaLongName { get; set; }
 		public string PostalCode { get; set; }
+		public string PostalCodeLongName { get; set; }
 		public string Country { get; set; }
 		public string CountryName { get; set; }
 
+		public double AddressDistance { get; set; }
+		public double CityDistance { get; set; }
+		public double StateDistance { get; set; }
+		public double PostalCodeDistance { get; set; }
 
-	
+		public double TotalAddressAndZipDistance { get { return AddressDistance + PostalCodeDistance; } }
 	}
 }

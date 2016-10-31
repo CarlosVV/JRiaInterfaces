@@ -89,7 +89,7 @@ namespace CES.CoreApi.GeoLocation.Providers.MelissaData
 					response.AddressComponent = pick.MainPick.AddressComponents;
 					response.Location = pick.MainPick.Location;
 					response.SeeAlso = pick.Alternates;
-					response.Distance = pick.MainPick.Weight;
+					//response.Distance = pick.MainPick.Weight;
 					response.ResultCodes = pick.MainPick.ResultCodes;
 				}
 			}

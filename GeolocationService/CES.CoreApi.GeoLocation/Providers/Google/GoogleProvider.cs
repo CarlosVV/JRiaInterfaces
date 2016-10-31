@@ -131,33 +131,75 @@ namespace CES.CoreApi.GeoLocation.Providers
 					{
 						addressComponent.Street = address.short_name;
 						addressComponent.StreetLongName = address.long_name;
-						weight += FuzzyMatch.Compute(addressComponent.Street, addressRequest.Address1);
-						weight += FuzzyMatch.Compute(addressComponent.StreetLongName, addressRequest.Address1);
+						
+						addressComponent.AddressDistance = GetGrade($"{addressComponent.StreetNumber} {addressComponent.Street}", addressRequest.Address1);
+						if (addressComponent.AddressDistance < 100)
+						{
+							weight = GetGrade($"{addressComponent.Street} {addressComponent.StreetNumber}", addressRequest.Address1);
+							if (weight > addressComponent.AddressDistance)
+								addressComponent.AddressDistance = weight;
+						}
+						if (addressComponent.AddressDistance < 100)
+						{
+							weight = GetGrade($"{addressComponent.StreetNumber}  {addressComponent.StreetLongName}", addressRequest.Address1);
+							if (weight > addressComponent.AddressDistance)
+								addressComponent.AddressDistance = weight;
+						}
+
+						if (addressComponent.AddressDistance < 100)
+						{
+							weight = GetGrade($"{addressComponent.StreetLongName} {addressComponent.StreetNumber} ", addressRequest.Address1);
+							if (weight > addressComponent.AddressDistance)
+								addressComponent.AddressDistance = weight;
+						}
 					}
 					if (HasAddressComponent(address.types, GoogleConstants.City))
 					{
 						addressComponent.Locality = address.short_name;
 						addressComponent.LocalityLongName = address.long_name;
 
+						addressComponent.CityDistance = GetGrade(addressComponent.Locality, addressRequest.City);
+						if (addressComponent.CityDistance < 100)
+						{
+							weight = GetGrade(addressComponent.LocalityLongName, addressRequest.City);
+							if (weight > addressComponent.CityDistance)
+								addressComponent.CityDistance = weight;
+						}
+
 					}
 					if (HasAddressComponent(address.types, GoogleConstants.AdministrativeArea))
 					{
 						addressComponent.AdministrativeArea = address.short_name;
 						addressComponent.AdministrativeAreaLongName = address.long_name;
-						weight += FuzzyMatch.Compute(addressComponent.AdministrativeArea, addressRequest.AdministrativeArea);
-						weight += FuzzyMatch.Compute(addressComponent.AdministrativeAreaLongName, addressRequest.AdministrativeArea);
+						addressComponent.StateDistance  = GetGrade(addressComponent.AdministrativeArea, requestMode.RequestModifed.AdministrativeArea);
+						if (addressComponent.StateDistance < 100)
+						{
+							weight = GetGrade(addressComponent.AdministrativeAreaLongName, requestMode.RequestModifed.AdministrativeArea);
+							if (weight > addressComponent.StateDistance)
+								addressComponent.StateDistance = weight;
+						}
 					}
+
 					if (HasAddressComponent(address.types, GoogleConstants.Country))
 					{
 						addressComponent.Country = address.short_name;
 						addressComponent.CountryName = address.long_name;
 					}
+
 					if (HasAddressComponent(address.types, GoogleConstants.PostalCode))
 					{
 						addressComponent.PostalCode = address.short_name;
-						weight += FuzzyMatch.Compute(address.short_name, addressRequest.PostalCode);
+						addressComponent.PostalCodeLongName = address.long_name;
+						addressComponent.PostalCodeDistance = GetGrade(address.short_name, requestMode.RequestModifed.PostalCode);
 
+						if (addressComponent.PostalCodeDistance < 100)
+						{
+							weight = GetGrade(address.long_name, requestMode.RequestModifed.PostalCode);
+							if (weight > addressComponent.PostalCodeDistance)
+								addressComponent.PostalCodeDistance = weight;
+						}
 					}
+				
 				}
 				var other = new SeeAlso { Location = location, AddressComponents = addressComponent, Types = string.Join(",", item.types), ResultCodes = resultCode, Weight = weight };
 			
@@ -170,9 +212,9 @@ namespace CES.CoreApi.GeoLocation.Providers
 				response.AddressComponent = pick.MainPick.AddressComponents;
 				response.Location = pick.MainPick.Location;
 				response.SeeAlso = pick.Alternates;
-				response.Distance = pick.MainPick.Weight;
+				//response.Distance = pick.MainPick.Weight;
+				response.ResultCodes = pick.MainPick.ResultCodes;
 
-			
 				response.Address = new AddressModel
 				{
 					Address1 = GetGradeAddress(response.AddressComponent,""),
@@ -191,37 +233,21 @@ namespace CES.CoreApi.GeoLocation.Providers
 					if(response.CountryMatch <100)
 						response.CountryMatch = GetGrade(response.AddressComponent.Country, requestMode.RequestModifed.Country);
 
-					response.StateMatch = GetGrade(response.AddressComponent.AdministrativeAreaLongName, requestMode.RequestModifed.AdministrativeArea);
-					
-					if (response.StateMatch < 100)
-					{
-						double stateMatch2 = GetGrade(response.AddressComponent.AdministrativeArea, requestMode.StateShort);
-						if (stateMatch2 > response.StateMatch)
-							response.StateMatch = stateMatch2;
-						
-					}
+					response.StateMatch = response.AddressComponent.StateDistance;
+					response.CityMatch = response.AddressComponent.CityDistance;
+					response.PostalCodeMatch = response.AddressComponent.PostalCodeDistance ==0? GetGrade(response.AddressComponent.PostalCode, requestMode.RequestModifed.PostalCode)
+							: response.AddressComponent.PostalCodeDistance;
+					response.AddressMatch = response.AddressComponent.AddressDistance;
 
-
-					response.CityMatch = GetGrade(response.AddressComponent.Locality, requestMode.RequestModifed.City);
-
-					if (response.CityMatch < 100)
-					{
-						double stateMatch2 = GetGrade(response.AddressComponent.LocalityLongName, requestMode.RequestModifed.City);
-						if (stateMatch2 > response.CityMatch)
-							response.CityMatch = stateMatch2;
-
-					}
-
-
-					response.PostalCodeMatch = GetGrade(response.AddressComponent.PostalCode, requestMode.RequestModifed.PostalCode);
+				
 				}
 
-				response.AddressMatch = GetGrade(response.Address.Address1, requestMode.RequestModifed.Address1);
+				//response.AddressMatch = GetGrade(response.Address.Address1, requestMode.RequestModifed.Address1);
 
 
 			}
 			response.RowData = result;
-			response.ResultCodes = resultCode;
+
 			response.ProviderMessage = result.status;			
 			response.DataProvider = Enumerations.DataProviderType.Google;
 			response.DataProviderName = "Google";
@@ -305,8 +331,8 @@ namespace CES.CoreApi.GeoLocation.Providers
 			JaroWrinklerDistance distance = new JaroWrinklerDistance();
 			var f = distance.Apply(google.ToLower().Trim(), requestMode.ToLower().Trim());
 			//var f = FuzzyMatch.Compute(google.ToLower().Trim(), requestMode.ToLower().Trim());
-			if (f <= 0)
-				return 100;
+			//if (f <= 0)
+			//	return 100;
 
 		//	double   g =  100- ((double)f/ (double)google.Length *100);
 			return Convert.ToInt16(f *100);

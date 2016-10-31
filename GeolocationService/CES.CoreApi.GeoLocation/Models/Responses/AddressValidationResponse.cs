@@ -14,14 +14,15 @@ namespace CES.CoreApi.GeoLocation.Models.Responses
 		public object Location { get; set; }
 
 		public AddressComponent AddressComponent{ get; set; }
-		public double CountryMatch { get; set; }
-		public double PostalCodeMatch { get; set; }
+		public double CountryMatch { get; set; }	
 		public double StateMatch { get; set; }
 		public double CityMatch { get; set; }
+		public double PostalCodeMatch { get; set; }
 		public double AddressMatch { get; set; }
+
 		public string ResultCodes { get; set; }
 
-		public int Distance { get; set; }
+		//public int Distance { get; set; }
 		public DataProviderType DataProvider { get; set; }
 		public string DataProviderName { get; set; }
 		public string ProviderMessage { get; set; }
