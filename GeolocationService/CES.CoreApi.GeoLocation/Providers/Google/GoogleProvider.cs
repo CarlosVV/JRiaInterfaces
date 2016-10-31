@@ -308,8 +308,8 @@ namespace CES.CoreApi.GeoLocation.Providers
 			if (f <= 0)
 				return 100;
 
-			double   g =  100- ((double)f/ (double)google.Length *100);
-			return Convert.ToInt16(g);
+		//	double   g =  100- ((double)f/ (double)google.Length *100);
+			return Convert.ToInt16(f *100);
 
 
 		}
