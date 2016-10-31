@@ -152,6 +152,9 @@ namespace CES.CoreApi.GeoLocation.Providers
 							if (weight > addressComponent.AddressDistance)
 								addressComponent.AddressDistance = weight;
 						}
+
+
+
 					}
 					if (HasAddressComponent(address.types, GoogleConstants.City))
 					{
@@ -171,7 +174,18 @@ namespace CES.CoreApi.GeoLocation.Providers
 					{
 						addressComponent.AdministrativeArea = address.short_name;
 						addressComponent.AdministrativeAreaLongName = address.long_name;
-						addressComponent.StateDistance  = GetGrade(addressComponent.AdministrativeArea, requestMode.RequestModifed.AdministrativeArea);
+						if (address.short_name.EndsWith("."))
+						{
+							addressComponent.StateDistance = GetGrade(address.short_name.Replace(".", ""), requestMode.StateShort);
+						}
+
+						if (addressComponent.StateDistance < 100)
+						{
+
+							weight = GetGrade(addressComponent.AdministrativeArea, requestMode.RequestModifed.AdministrativeArea);
+							if (weight > addressComponent.StateDistance)
+								addressComponent.StateDistance = weight;
+						}
 						if (addressComponent.StateDistance < 100)
 						{
 							weight = GetGrade(addressComponent.AdministrativeAreaLongName, requestMode.RequestModifed.AdministrativeArea);
@@ -241,8 +255,12 @@ namespace CES.CoreApi.GeoLocation.Providers
 
 				
 				}
-
-				//response.AddressMatch = GetGrade(response.Address.Address1, requestMode.RequestModifed.Address1);
+				if (response.AddressMatch < 100)
+				{
+					int dis = GetGrade(response.Address.Address1, requestMode.RequestModifed.Address1);
+					if (dis > response.AddressMatch)
+						response.AddressMatch = dis;
+				}
 
 
 			}
