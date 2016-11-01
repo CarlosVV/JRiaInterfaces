@@ -18,7 +18,7 @@ using System.Web;
 
 namespace CES.CoreApi.GeoLocation.Providers
 {
-	public class GoogleProvider
+	public class GoogleProvider : IGeoLocationProvider
 	{
 		class AddressRequestMode
 		{
@@ -87,7 +87,7 @@ namespace CES.CoreApi.GeoLocation.Providers
 
 	
 
-		public AddressValidationResponse DoValidation(AddressRequest addressRequest)
+		public AddressValidationResponse Validation(AddressRequest addressRequest)
 		{
 			IDataResponseProvider client = new DataResponseProvider();
 			var requestMode = BuildUrl(addressRequest);
@@ -142,7 +142,7 @@ namespace CES.CoreApi.GeoLocation.Providers
 						}
 						if (addressComponent.AddressDistance < 100)
 						{
-							weight = GetGrade($"{addressComponent.StreetNumber}  {addressComponent.StreetLongName}", addressRequest.Address1);
+							weight = GetGrade($"{addressComponent.StreetNumber} {addressComponent.StreetLongName}", addressRequest.Address1);
 							if (weight > addressComponent.AddressDistance)
 								addressComponent.AddressDistance = weight;
 						}
@@ -304,10 +304,13 @@ namespace CES.CoreApi.GeoLocation.Providers
 		{
 			if (comp == null)
 				return string.Empty;
-
+			
 			string value = comp.FormattedAddress;
 			if (string.IsNullOrEmpty(value))
 				return string.Empty;
+			if(value.EndsWith("USA",StringComparison.OrdinalIgnoreCase))
+				value = value.Replace("USA", "");
+
 			if (!string.IsNullOrEmpty(comp.AdministrativeArea))
 				value = value.Replace(comp.AdministrativeArea, "");
 			if (!string.IsNullOrEmpty(comp.AdministrativeAreaLongName))

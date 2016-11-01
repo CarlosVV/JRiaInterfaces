@@ -21,12 +21,11 @@ namespace CES.CoreApi.GeoLocation.Repositories
 			var connectionString = ConfigurationManager.ConnectionStrings["Main"].ConnectionString;
 			using (var connection = new SqlConnection(connectionString))
 			{
-				var cmd = new SqlCommand("[dbo].[fx_sp_Constant_State_GetByCountryCode]", connection)
+				var cmd = new SqlCommand("[dbo].[sys_sp_StatesByCountry_List]", connection)
 				{
 					CommandType = CommandType.StoredProcedure
-				};
-				cmd.Parameters.AddWithValue("@lAppId", applicationId);
-				cmd.Parameters.AddWithValue("@sStateCode", stateCode);
+				};			
+				cmd.Parameters.AddWithValue("@sState", stateCode);
 				cmd.Parameters.AddWithValue("@sCountry", country);
 				connection.Open();
 				using (SqlDataReader dr = cmd.ExecuteReader(CommandBehavior.Default))
@@ -34,7 +33,7 @@ namespace CES.CoreApi.GeoLocation.Repositories
 					
 					if (dr.Read())
 					{
-						stateName = dr["StateName"].ToString();
+						stateName = dr["fState"].ToString();
 					}
 
 				}
