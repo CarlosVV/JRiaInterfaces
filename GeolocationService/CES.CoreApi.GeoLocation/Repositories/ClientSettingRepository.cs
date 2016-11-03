@@ -16,6 +16,9 @@ namespace CES.CoreApi.GeoLocation.Repositories
 
 		public virtual string GetStateName(int applicationId, string stateCode, string country)
 		{
+			if (string.IsNullOrEmpty(stateCode) || string.IsNullOrEmpty(country))
+				return stateCode;
+
 			string stateName = stateCode;
 
 			var connectionString = ConfigurationManager.ConnectionStrings["Main"].ConnectionString;

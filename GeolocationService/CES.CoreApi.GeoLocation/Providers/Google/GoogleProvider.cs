@@ -60,13 +60,18 @@ namespace CES.CoreApi.GeoLocation.Providers
 
 		
 
-			var addressFormatted = $"{address.Address1.Replace(",", "")}";
+			var addressFormatted = $"{address.Address1.Replace(",", " ")}";
 			if(!string.IsNullOrEmpty(address.PostalCode))
 			{
 				addressFormatted = $"{addressFormatted},{address.PostalCode}";
 			}
 
-			var url = $"{Configuration.AppSettings.GoogleMapGeocodeUrl}?address={HttpUtility.UrlEncode(addressFormatted)}&components=country:{address.Country}|locality:{address.City}|administrative_area:{HttpUtility.UrlEncode(stateName)}";
+			string state = string.Empty;
+			if(!RequestMode.StateShort.Equals(stateName))
+			{
+				state = $"|administrative_area:{ HttpUtility.UrlEncode(stateName)}";
+			}
+			var url = $"{Configuration.AppSettings.GoogleMapGeocodeUrl}?address={HttpUtility.UrlEncode(addressFormatted)}&components=country:{address.Country}|locality:{address.City}{state}";
 
 			RequestMode.RequestModifed = address;
 			RequestMode.RequestModifed.AdministrativeArea = stateName;
