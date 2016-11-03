@@ -35,12 +35,20 @@
       <HintPath>..\..\packages\AutoMapper.5.1.1\lib\net45\AutoMapper.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="CES.Caching, Version=1.0.0.23, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\CES.Caching.1.0.0.23\lib\net452\CES.Caching.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="Newtonsoft.Json, Version=9.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\Newtonsoft.Json.9.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
+      <HintPath>..\..\packages\CES.Caching.1.0.0.23\lib\net452\Newtonsoft.Json.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="SimpleInjector, Version=3.2.2.0, Culture=neutral, PublicKeyToken=984cb50dea722e99, processorArchitecture=MSIL">
       <HintPath>..\..\packages\SimpleInjector.3.2.2\lib\net45\SimpleInjector.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="StackExchange.Redis, Version=1.1.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\CES.Caching.1.0.0.23\lib\net452\StackExchange.Redis.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="System" />
@@ -116,6 +124,7 @@
     <Compile Include="Models\SendEmailRequestModel.cs" />
     <Compile Include="Models\SendEmailResponseModel.cs" />
     <Compile Include="Models\SenderInfoModel.cs" />
+    <Compile Include="Models\ServiceConfiguration.cs" />
     <Compile Include="Models\WLFMatchRuleModel.cs" />
     <Compile Include="Processors\PayoutProcessor.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -138,11 +147,14 @@
     <Compile Include="Providers\RiaDatabase\CountryCode.cs" />
     <Compile Include="Providers\RiaDatabase\DataHelper.cs" />
     <Compile Include="Providers\RiaDatabase\SQLUtils.cs" />
+    <Compile Include="Repositories\ConfigurationRepository.cs" />
+    <Compile Include="Repositories\ConfigurationRepositoryCached.cs" />
     <Compile Include="Service References\GoldenCrownServiceReference\Reference.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Compile>
+    <Compile Include="Services\ConfigurationService.cs" />
     <Compile Include="Utilities\ConfigSettings.cs" />
     <Compile Include="Utilities\Constants.cs" />
     <Compile Include="Utilities\DamerauLevenshteinDistance.cs" />

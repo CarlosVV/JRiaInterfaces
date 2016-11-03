@@ -191,6 +191,7 @@
     <Compile Include="Areas\HelpPage\SampleGeneration\TextSample.cs" />
     <Compile Include="Areas\HelpPage\XmlDocumentationProvider.cs" />
     <Compile Include="Client.cs" />
+    <Compile Include="Controllers\PinTrafficController.cs" />
     <Compile Include="Filters\CustomExceptionLogger.cs" />
     <Compile Include="Filters\CustomExceptionsAttribute.cs" />
     <Compile Include="Filters\HttpMessageHandler.cs" />
