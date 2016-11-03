@@ -16,5 +16,15 @@ namespace CES.CoreApi.GeoLocation.Configuration
 			}
 
 		}
+		public static string GoogleMapGeocodeUrl
+		{
+			get
+			{
+
+				return ConfigurationManager.AppSettings["GoogleMapGeocodeUrl"];
+				
+			}
+
+		}
 	}
 }

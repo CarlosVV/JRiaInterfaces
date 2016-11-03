@@ -53,16 +53,12 @@ namespace CES.CoreApi.GeoLocation.Providers
 			var RequestMode = new AddressRequestMode();
 			address.PostalCode = ZipCodeValidation(address.PostalCode);
 
-			//var addressFormatted = string.Join(",",
-			//	address.Address1,								
-			//	address.PostalCode
-			//	);
+	
 			ClientSettingRepository repo = new ClientSettingRepository();
 			RequestMode.StateShort = address.AdministrativeArea;
 			var stateName =repo.GetStateName(1, address.AdministrativeArea, address.Country);
 
-			//char[] ch = { ',' };
-			//string[] addresses = addressFormatted.Split(ch, System.StringSplitOptions.RemoveEmptyEntries);
+		
 
 			var addressFormatted = $"{address.Address1.Replace(",", "")}";
 			if(!string.IsNullOrEmpty(address.PostalCode))
@@ -70,7 +66,7 @@ namespace CES.CoreApi.GeoLocation.Providers
 				addressFormatted = $"{addressFormatted},{address.PostalCode}";
 			}
 
-			var url = $"https://maps.googleapis.com/maps/api/geocode/json?address={HttpUtility.UrlEncode(addressFormatted)}&components=country:{address.Country}|locality:{address.City}|administrative_area:{HttpUtility.UrlEncode(stateName)}";
+			var url = $"{Configuration.AppSettings.GoogleMapGeocodeUrl}?address={HttpUtility.UrlEncode(addressFormatted)}&components=country:{address.Country}|locality:{address.City}|administrative_area:{HttpUtility.UrlEncode(stateName)}";
 
 			RequestMode.RequestModifed = address;
 			RequestMode.RequestModifed.AdministrativeArea = stateName;
@@ -352,7 +348,7 @@ namespace CES.CoreApi.GeoLocation.Providers
 
 			return sb.ToString();
 
-			//return string.Join(",", rs).Trim();
+			
 
 
 		}
