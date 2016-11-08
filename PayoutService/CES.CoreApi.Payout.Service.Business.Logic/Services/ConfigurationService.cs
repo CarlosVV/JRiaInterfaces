@@ -22,9 +22,11 @@ namespace CES.CoreApi.Payout.Service.Business.Logic.Services
 
 		public object GetProvider(string pin)
 		{
-		
+			if (string.IsNullOrEmpty(pin))
+				return null;
+
 			var result = repositor.GetConfigurations();
-			//var apiSettings = (from q in result select new   { q.Settings }) as IList<ApiSetting>;
+			string pinValue = AdjustPin(pin);
 			foreach (var item in result)
 			{
 				foreach (var setting in item.Settings)
@@ -32,14 +34,33 @@ namespace CES.CoreApi.Payout.Service.Business.Logic.Services
 					if(setting.Key.Equals("PinRegExp",System.StringComparison.OrdinalIgnoreCase))
 					{
 						Regex rgx = new Regex(setting.Value.ToString(), RegexOptions.IgnoreCase);
-						if (rgx.Match(pin).Success)
-							return new {  item.ProviderId, item.ProviderName };
+						if (rgx.Match(pinValue).Success)
+							return new {  item.ProviderId, item.ProviderName, Pin=pin, SuggestedPin = pinValue, VerificationLevel = "Regex" };
 					}
 				}
 			}
 
-			return null;
+			return new { ProviderId = 5002, ProviderName = "Ria", Pin = pin, SuggestedPin = pinValue, VerificationLevel = "Default"};
+			}
 
+		private string AdjustPin(string value)
+		{
+			if (value.StartsWith("00"))
+				return value;
+			Regex rgx = new Regex("^[A-Za-z][A-Za-z0-9]*(?:_[A-Za-z0-9]+)*$", RegexOptions.IgnoreCase);
+			if (rgx.Match(value).Success)
+				return value;
+
+			rgx = new Regex("^[0-9]{9}$", RegexOptions.IgnoreCase);
+			if (rgx.Match(value).Success)
+				return $"00{value}";
+
+			rgx = new Regex("^0[0-9]{9}$", RegexOptions.IgnoreCase);
+			if (rgx.Match(value).Success)
+				return $"0{value}";
+
+
+			return value;
 		}
 	}
 }
