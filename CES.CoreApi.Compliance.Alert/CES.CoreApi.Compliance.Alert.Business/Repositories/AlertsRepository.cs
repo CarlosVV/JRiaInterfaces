@@ -21,7 +21,7 @@ namespace CES.CoreApi.Compliance.Alert.Business.Repositories
 			
 				cmdQry.AddParam("@lAppID", CoreApiApplicationId);
 				cmdQry.AddParam("@lAppObjectID", AlertsServiceAppObjectId);
-				cmdQry.AddParam("@lProviderID", 2);
+				cmdQry.AddParam("@lProviderID", 201);
 				cmdQry.AddParam("@AlertID", reviewAlertRequest.AlertId);
 				cmdQry.AddParam("@lServiceID", reviewAlertRequest.ServiceId);
 				cmdQry.AddParam("@lTransactionID", reviewAlertRequest.TransactionId);
