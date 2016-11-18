@@ -58,7 +58,7 @@ namespace CES.CoreApi.Payout.Controllers
 			}
 
 			Logging.Log.Info("for PIN: " + request.OrderPIN + ". AgentID: " + request.RequesterInfo.AgentID);
-
+		
 			//Convert request to internal version:
 			GetTransactionInfoRequestModel internalRequest =
 				_mappingHelper.Map<GetTransactionInfoRequest, GetTransactionInfoRequestModel>(request);

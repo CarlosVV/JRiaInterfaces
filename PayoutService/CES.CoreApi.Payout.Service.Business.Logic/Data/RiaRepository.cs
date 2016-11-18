@@ -13,7 +13,6 @@ using System.Data.SqlTypes;
 using CES.CoreApi.Data.Base;
 using CES.CoreApi.Data.Models;
 using CES.CoreApi.Data.Enumerations;
-using CES.CoreApi.Payout.Service.Business.Logic.Compliance;
 using System.Linq;
 
 namespace CES.CoreApi.Payout.Service.Business.Logic.Data
@@ -214,7 +213,7 @@ namespace CES.CoreApi.Payout.Service.Business.Logic.Data
         {
             var request = new DatabaseRequest<GetTransactionInfoResponseModel>
             {
-                ProcedureName = StoreProcedureConstants.PayoutGetOrderInfo,
+                ProcedureName = StoreProcedureConstants.mt_sp_Payout_OrderInfo_Get,
                 IsCacheable = false,
                 DatabaseType = DatabaseType.Main,
                 Parameters = new Collection<SqlParameter>
@@ -228,8 +227,8 @@ namespace CES.CoreApi.Payout.Service.Business.Logic.Data
                     new SqlParameter("@lOrderID",requestModel.OrderID),
                     new SqlParameter("@OrderRefNo",requestModel.OrderPIN),
                     new SqlParameter("@OrderLookupCode",DBNull.Value),
-                    new SqlParameter("@AgentCountry",requestModel.CountryTo),
-                    new SqlParameter("@AgentState",requestModel.StateTo)
+                    new SqlParameter("@AgentCountry",requestModel.RequesterInfo.AgentCountry.ToSafeDbString()),
+                    new SqlParameter("@AgentState",requestModel.RequesterInfo.AgentState.ToSafeDbString())
                 },
                 Shaper = reader => GetOrderInfo(reader)
             };

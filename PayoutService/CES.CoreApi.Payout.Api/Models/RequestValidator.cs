@@ -25,15 +25,15 @@ namespace CES.CoreApi.Payout.Facade.Utilities
                 if (!IsValidString(request.OrderPIN)) { return new GetTransactionInfoResponse(1003, "missing OrderPIN."); }
                 if (request.RequesterInfo.UserID < 1) { return new GetTransactionInfoResponse(1004, "missing UserID."); }
                 if (request.RequesterInfo.UserLoginID < 1) { return new GetTransactionInfoResponse(1005, "missing UserLoginID."); }
-                if (request.CountryTo.Length < 1) { return new GetTransactionInfoResponse(1006, "missing CountryTo."); }
+               // if (request.CountryTo.Length < 1) { return new GetTransactionInfoResponse(1006, "missing CountryTo."); }
 
                 //Make sure no values are null:
-                request.CountryTo = request.CountryTo ?? "";
-                request.OrderID = request.OrderID; //int so must have value
-                request.OrderPIN = request.OrderPIN ?? "";
+               // request.CountryTo = request.CountryTo ?? "";
+              //  request.OrderID = request.OrderID; //int so must have value
+                //request.OrderPIN = request.OrderPIN ?? "";
                 request.PersistenceID = request.PersistenceID; //int so must have value
                 request.RequesterInfo = ValidateRequesterInfo(request.RequesterInfo);
-                request.StateTo = request.StateTo ?? "";
+               // request.StateTo = request.StateTo ?? "";
 
                 //If everything succeeded, then return an empty response object.
                 return new GetTransactionInfoResponse(0, string.Empty);

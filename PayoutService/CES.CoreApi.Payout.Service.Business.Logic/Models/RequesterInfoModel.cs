@@ -22,5 +22,8 @@ namespace CES.CoreApi.Payout.Service.Business.Contract.Models
         public int TimezoneID { get; set; }
         public string Locale { get; set; }//required
         public string Version { get; set; }
-    }
+
+		public string AgentCountry { get; set; }
+		public string AgentState { get; set; }
+	}
 }

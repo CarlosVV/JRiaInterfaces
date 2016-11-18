@@ -162,6 +162,7 @@
     <Compile Include="Utilities\LevenshteinDistance.cs" />
     <Compile Include="Utilities\Messages.cs" />
     <Compile Include="Utilities\PayouFieldstListExtension.cs" />
+    <Compile Include="Utilities\SafeCast.cs" />
     <Compile Include="Utilities\StoreProcedureConstants.cs" />
   </ItemGroup>
   <ItemGroup>

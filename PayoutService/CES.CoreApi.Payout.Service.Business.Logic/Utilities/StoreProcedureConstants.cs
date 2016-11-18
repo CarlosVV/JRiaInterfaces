@@ -8,7 +8,7 @@ namespace CES.CoreApi.Payout.Service.Business.Logic.Utilities
 {
     public class StoreProcedureConstants
     {
-        public const string PayoutGetOrderInfo = "mt_sp_Payout_OrderInfo_Get";
+        public const string mt_sp_Payout_OrderInfo_Get = "mt_sp_Payout_OrderInfo_Get";
         public const string PayoutGetOrderInfoExternal = "mt_sp_Payout_OrderInfo_Get_External";
         public const string PayoutConfirmExternalValidate = "mt_sp_Payout_Confirm_External_Validate";
         public const string PayoutConfirmComplianceWatchList = "mt_sp_Payout_Confirm_Compliance_WatchList";
