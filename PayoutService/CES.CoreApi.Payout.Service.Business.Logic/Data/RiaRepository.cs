@@ -258,7 +258,7 @@ namespace CES.CoreApi.Payout.Service.Business.Logic.Data
         {
             var request = new DatabaseRequest<GetTransactionInfoResponseModel>
             {
-                ProcedureName = StoreProcedureConstants.PayoutGetOrderInfoExternal,
+                ProcedureName = StoreProcedureConstants.mt_sp_Payout_OrderInfo_Get_External,
                 IsCacheable = false,
                 DatabaseType = DatabaseType.Main,
                 Parameters = new Collection<SqlParameter>
@@ -270,9 +270,9 @@ namespace CES.CoreApi.Payout.Service.Business.Logic.Data
                     new SqlParameter("@lUserNameID",originalRequest.RequesterInfo.UserID),
                     new SqlParameter("@sLocale",originalRequest.RequesterInfo.Locale),
                     new SqlParameter("@TellerDrawerInstanceID", -1),//TODO: Can we get this?
-                    new SqlParameter("@AgentCountry", originalRequest.CountryTo),
+                    new SqlParameter("@AgentCountry", originalRequest.RequesterInfo.AgentCountry.ToSafeDbString()),
                     new SqlParameter("@lAgentCountryID", -1), //TODO: Can we get this?
-                    new SqlParameter("@AgentState", originalRequest.StateTo),
+                    new SqlParameter("@AgentState", originalRequest.RequesterInfo.AgentState.ToSafeDbString()),
                     new SqlParameter("@Payout_LocalTime", originalRequest.RequesterInfo.LocalTime),
                     new SqlParameter("@SendAgentID", providerCallResponse.ProviderInfo.ProviderID),
                     new SqlParameter("@SendAgentLocID", -1),// providerCallResponse.RecAgentID),//TODO: This is the location returned from provider (GC uses a string, but this field is an INT)
