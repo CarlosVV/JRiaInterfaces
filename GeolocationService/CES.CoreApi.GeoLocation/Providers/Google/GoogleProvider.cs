@@ -4,6 +4,7 @@ using CES.CoreApi.GeoLocation.Logic.Providers;
 using CES.CoreApi.GeoLocation.Models;
 using CES.CoreApi.GeoLocation.Models.Requests;
 using CES.CoreApi.GeoLocation.Models.Responses;
+using CES.CoreApi.GeoLocation.Providers;
 using CES.CoreApi.GeoLocation.Providers.Google.JsonModels;
 using CES.CoreApi.GeoLocation.Providers.Shared;
 using CES.CoreApi.GeoLocation.Repositories;
@@ -16,42 +17,19 @@ using System.Linq;
 using System.Text;
 using System.Web;
 
-namespace CES.CoreApi.GeoLocation.Providers
+namespace CES.CoreApi.GeoLocation.Providers.Google
 {
 	public class GoogleProvider : IGeoLocationProvider
 	{
-		class AddressRequestMode
-		{
-			public AddressRequest RequestModifed { get; set; }
-			public string StateShort { get; set; }
-			public string Url { get; set; }
-		}
+		
 
-		private string ZipCodeValidation(string zip)
-		{
-			if (string.IsNullOrEmpty(zip))
-				return string.Empty;
-			string result = "";
-			int count = 0;
-			foreach (var item in zip)
-			{
-				if (item != '0')
-				{
-					result = zip.Substring(count);
-					return result;
-				}
-				count++;
-			}
-
-
-			return string.Empty;
-		}
+	
 
 		
 		private AddressRequestMode BuildUrl(AddressRequest address)
 		{
 			var RequestMode = new AddressRequestMode();
-			address.PostalCode = ZipCodeValidation(address.PostalCode);
+			address.PostalCode =  FuzzyMatch.ZipCodeValidation(address.PostalCode);
 
 	
 			ClientSettingRepository repo = new ClientSettingRepository();
@@ -120,7 +98,7 @@ namespace CES.CoreApi.GeoLocation.Providers
 					resultCode = $"{resultCode},{item.geometry.location_type}";
 				}
 				addressComponent = new Models.Responses.Validate.AddressComponent();
-				addressComponent.FormattedAddress = RemoveDiacritics(item.formatted_address);
+				addressComponent.FormattedAddress = FuzzyMatch.RemoveDiacritics(item.formatted_address);
 			
 				foreach (var address in item.address_components)
 				{
@@ -160,7 +138,7 @@ namespace CES.CoreApi.GeoLocation.Providers
 					}
 					if (HasAddressComponent(address.types, GoogleConstants.City))
 					{
-						addressComponent.Locality = RemoveDiacritics(address.short_name);
+						addressComponent.Locality = FuzzyMatch.RemoveDiacritics(address.short_name);
 						addressComponent.LocalityLongName = address.long_name;
 
 						addressComponent.CityDistance = GetGrade(addressComponent.Locality, addressRequest.City);
@@ -235,7 +213,7 @@ namespace CES.CoreApi.GeoLocation.Providers
 				response.Address = new AddressModel
 				{
 					Address1 = GetGradeAddress(response.AddressComponent,""),
-					AdministrativeArea = RemoveLastDot(response.AddressComponent.AdministrativeArea),
+					AdministrativeArea = FuzzyMatch.RemoveLastDot(response.AddressComponent.AdministrativeArea),
 					City = response.AddressComponent.Locality,
 					Country = response.AddressComponent.Country,
 					PostalCode = response.AddressComponent.PostalCode,
@@ -268,38 +246,15 @@ namespace CES.CoreApi.GeoLocation.Providers
 
 			}
 			response.RowData = result;
-
 			response.ProviderMessage = result.status;			
 			response.DataProvider = Enumerations.DataProviderType.Google;
 			response.DataProviderName = "Google";
 			return response;
 		}
 
-		private string RemoveLastDot(string value)
-		{
-			if (string.IsNullOrEmpty(value))
-				return string.Empty;
-			if (value.EndsWith("."))
-				return value.Replace(".", "");
-			return value;
-		}
+		
 
-		static string RemoveDiacritics(string text)
-		{
-			var normalizedString = text.Normalize(NormalizationForm.FormD);
-			var stringBuilder = new StringBuilder();
-
-			foreach (var c in normalizedString)
-			{
-				var unicodeCategory = CharUnicodeInfo.GetUnicodeCategory(c);
-				if (unicodeCategory != UnicodeCategory.NonSpacingMark)
-				{
-					stringBuilder.Append(c);
-				}
-			}
-
-			return stringBuilder.ToString().Normalize(NormalizationForm.FormC);
-		}
+		
 
 		private string GetGradeAddress(Models.Responses.Validate.AddressComponent comp, string requestMode)
 		{
@@ -379,84 +334,13 @@ namespace CES.CoreApi.GeoLocation.Providers
 				return 100;
 
 			JaroWrinklerDistance distance = new JaroWrinklerDistance();
-			var f = distance.Apply(RemoveDiacritics(google).ToLower().Trim(), RemoveDiacritics(requestMode).ToLower().Trim());
+			var f = distance.Apply(FuzzyMatch.RemoveDiacritics(google).ToLower().Trim(), FuzzyMatch.RemoveDiacritics(requestMode).ToLower().Trim());
 		
 			return Convert.ToInt16(f *100);
 
 
 		}
-		private string GetAddress1(Models.Responses.Validate.AddressComponent comp)
-		{
-			if (comp == null)
-				return string.Empty;
-
-			if (string.IsNullOrEmpty(comp.FormattedAddress) || string.IsNullOrEmpty(comp.Street))
-				return null;
-
-
-		
-			char[] ch = { ',' };
-
-			var  addresses = comp.FormattedAddress.Split(ch, StringSplitOptions.RemoveEmptyEntries);
-			if (addresses.Length == 1)
-				return string.Empty;
-
-			
-
-				var items = new List<string>();
-			string value;
-		
-			foreach (var item in addresses)
-			{
-				if (item.Contains(comp.Street) || item.Contains(comp.StreetLongName))
-					return item;
-
-			
-				value = item.Trim(); 
-
-				if (!string.IsNullOrEmpty(comp.AdministrativeArea) && value.Equals(comp.AdministrativeArea, StringComparison.OrdinalIgnoreCase))
-					continue;
-				if (!string.IsNullOrEmpty(comp.AdministrativeAreaLongName) && value.Equals(comp.AdministrativeAreaLongName, StringComparison.OrdinalIgnoreCase))
-					continue;
-				if (!string.IsNullOrEmpty(comp.Locality) && value.Equals(comp.Locality, StringComparison.OrdinalIgnoreCase))
-					continue;
-				if (!string.IsNullOrEmpty(comp.LocalityLongName) && value.Equals(comp.LocalityLongName, StringComparison.OrdinalIgnoreCase))
-					continue;
-				if (!string.IsNullOrEmpty(comp.Country) && value.Equals(comp.Country, StringComparison.OrdinalIgnoreCase))
-					continue;
-				if (!string.IsNullOrEmpty(comp.CountryName) && value.Equals(comp.CountryName, StringComparison.OrdinalIgnoreCase))
-					continue;
-				if (!string.IsNullOrEmpty(comp.PostalCode) && value.Equals(comp.PostalCode, StringComparison.OrdinalIgnoreCase))
-					continue;
-				if (!string.IsNullOrEmpty(comp.PostalCode) && value.EndsWith(comp.PostalCode))
-					continue;
-
-
-				items.Add(item);
-
-			}
-			if(items.Count ==1)
-				return items[0];
-
-			List<int> rank = new List<int>();
-			int min = 0;
-			for (int  i=0; i < items.Count; i++)
-			{
-				int m = FuzzyMatch.Compute(items[i].ToLower().Trim(), comp.Street.ToLower().Trim());
-				if (min < m)
-				{
-					min = i;
-				}
-					
-				rank.Add(m);
-				
-			}
-
-			return items[min];
-
-			
-			
-		}
+	
 		
 	}
 	

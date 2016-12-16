@@ -2,6 +2,7 @@
 using CES.CoreApi.GeoLocation.Models.Responses;
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -10,7 +11,52 @@ namespace CES.CoreApi.GeoLocation.Providers.Shared
 {
 	internal static class FuzzyMatch
 	{
-	
+		public static string RemoveLastDot(string value)
+		{
+			if (string.IsNullOrEmpty(value))
+				return string.Empty;
+			if (value.EndsWith("."))
+				return value.Replace(".", "");
+			return value;
+		}
+
+		public static string RemoveDiacritics(string text)
+		{
+			var normalizedString = text.Normalize(NormalizationForm.FormD);
+			var stringBuilder = new StringBuilder();
+
+			foreach (var c in normalizedString)
+			{
+				var unicodeCategory = CharUnicodeInfo.GetUnicodeCategory(c);
+				if (unicodeCategory != UnicodeCategory.NonSpacingMark)
+				{
+					stringBuilder.Append(c);
+				}
+			}
+
+			return stringBuilder.ToString().Normalize(NormalizationForm.FormC);
+		}
+
+		public static string ZipCodeValidation(string zip)
+		{
+			if (string.IsNullOrEmpty(zip))
+				return string.Empty;
+			string result = "";
+			int count = 0;
+			foreach (var item in zip)
+			{
+				if (item != '0')
+				{
+					result = zip.Substring(count);
+					return result;
+				}
+				count++;
+			}
+
+
+			return string.Empty;
+		}
+
 		public static AddressPick CorePick(List<SeeAlso> all, AddressRequest addressRequest)
 		{
 			if (all == null || all.Count < 1)

@@ -96,6 +96,7 @@
     <Compile Include="Models\Requests\AddressRequest.cs" />
     <Compile Include="Models\Responses\AddressValidationResponse.cs" />
     <Compile Include="Models\Responses\Validate\AddressComponent.cs" />
+    <Compile Include="Providers\AddressRequestMode.cs" />
     <Compile Include="Providers\Google\GoogleProvider.cs" />
     <Compile Include="Providers\Google\JsonModels\AddressComponent.cs" />
     <Compile Include="Providers\Google\JsonModels\GeocodeResult.cs" />

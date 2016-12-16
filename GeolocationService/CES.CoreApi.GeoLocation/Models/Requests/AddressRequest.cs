@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace CES.CoreApi.GeoLocation.Models.Requests
+﻿namespace CES.CoreApi.GeoLocation.Models.Requests
 {
 	public class AddressRequest
 	{
@@ -19,6 +13,7 @@ namespace CES.CoreApi.GeoLocation.Models.Requests
 
 		public string Country { get; set; }
 
+		public int ProviderId { get; set; }
 
 	}
 }
