@@ -1,4 +1,5 @@
 ﻿using CES.CoreApi.GeoLocation.Providers;
+using CES.CoreApi.GeoLocation.Providers.Bing;
 using CES.CoreApi.GeoLocation.Providers.Google;
 using CES.CoreApi.GeoLocation.Providers.MelissaData;
 using System.Net;
@@ -22,7 +23,7 @@ namespace CES.CoreApi.GeoLocation.Api.Controllers
 			}	
 			else if (request.ProviderId == 2)
 			{//   Bing = 2,
-
+				provider = new BingProvider();
 			}
 			else
 			{

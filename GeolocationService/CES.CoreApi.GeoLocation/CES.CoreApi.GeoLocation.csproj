@@ -97,6 +97,12 @@
     <Compile Include="Models\Responses\AddressValidationResponse.cs" />
     <Compile Include="Models\Responses\Validate\AddressComponent.cs" />
     <Compile Include="Providers\AddressRequestMode.cs" />
+    <Compile Include="Providers\Bing\BingProvider.cs" />
+    <Compile Include="Providers\Bing\JsonModels\BingResult.cs" />
+    <Compile Include="Providers\Bing\JsonModels\BingResource.cs" />
+    <Compile Include="Providers\Bing\JsonModels\BingAddress.cs" />
+    <Compile Include="Providers\Bing\JsonModels\GeocodePoints.cs" />
+    <Compile Include="Providers\Bing\JsonModels\Point.cs" />
     <Compile Include="Providers\Google\GoogleProvider.cs" />
     <Compile Include="Providers\Google\JsonModels\AddressComponent.cs" />
     <Compile Include="Providers\Google\JsonModels\GeocodeResult.cs" />
@@ -188,9 +194,7 @@
     <None Include="app.config" />
     <None Include="packages.config" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Providers\Bing\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

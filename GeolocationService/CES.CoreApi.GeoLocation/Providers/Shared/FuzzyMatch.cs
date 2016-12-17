@@ -1,5 +1,6 @@
 ﻿using CES.CoreApi.GeoLocation.Models.Requests;
 using CES.CoreApi.GeoLocation.Models.Responses;
+using CES.CoreApi.GeoLocation.Tools;
 using System;
 using System.Collections.Generic;
 using System.Globalization;
@@ -9,8 +10,37 @@ using System.Threading.Tasks;
 
 namespace CES.CoreApi.GeoLocation.Providers.Shared
 {
+
 	internal static class FuzzyMatch
 	{
+		public static int GetGrade(string geoLocationValue, string requestMode)
+		{
+
+			if (string.IsNullOrEmpty(geoLocationValue) && string.IsNullOrEmpty(requestMode))
+				return 100;
+
+			if (!string.IsNullOrEmpty(geoLocationValue) && string.IsNullOrEmpty(requestMode))
+				return 110;
+
+
+
+			if (string.IsNullOrEmpty(geoLocationValue))
+				return 0;
+
+			if (string.IsNullOrEmpty(requestMode))
+				return 0;
+
+			if (geoLocationValue.Trim().Equals(requestMode.Trim(), StringComparison.OrdinalIgnoreCase))
+				return 100;
+
+			JaroWrinklerDistance distance = new JaroWrinklerDistance();
+			var f = distance.Apply(RemoveDiacritics(geoLocationValue).ToLower().Trim(),RemoveDiacritics(requestMode).ToLower().Trim());
+
+			return Convert.ToInt16(f * 100);
+
+
+		}
+
 		public static string RemoveLastDot(string value)
 		{
 			if (string.IsNullOrEmpty(value))

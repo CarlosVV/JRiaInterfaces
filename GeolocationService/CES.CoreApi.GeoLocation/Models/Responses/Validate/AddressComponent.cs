@@ -1,4 +1,6 @@
-﻿namespace CES.CoreApi.GeoLocation.Models.Responses.Validate
+﻿using Newtonsoft.Json;
+
+namespace CES.CoreApi.GeoLocation.Models.Responses.Validate
 {
 	public class AddressComponent
 	{
@@ -15,11 +17,15 @@
 		public string Country { get; set; }
 		public string CountryName { get; set; }
 
+		[JsonIgnore]
 		public double AddressDistance { get; set; }
+		[JsonIgnore]
 		public double CityDistance { get; set; }
+		[JsonIgnore]
 		public double StateDistance { get; set; }
+		[JsonIgnore]
 		public double PostalCodeDistance { get; set; }
-
+		[JsonIgnore]
 		public double TotalAddressAndZipDistance { get { return AddressDistance + PostalCodeDistance; } }
 	}
 }

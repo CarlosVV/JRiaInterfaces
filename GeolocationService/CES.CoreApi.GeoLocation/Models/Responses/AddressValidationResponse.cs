@@ -1,5 +1,6 @@
 ﻿using CES.CoreApi.GeoLocation.Enumerations;
 using CES.CoreApi.GeoLocation.Models.Responses.Validate;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -26,6 +27,7 @@ namespace CES.CoreApi.GeoLocation.Models.Responses
 		public DataProviderType DataProvider { get; set; }
 		public string DataProviderName { get; set; }
 		public string ProviderMessage { get; set; }
+		[JsonIgnore]
 		public List<SeeAlso> @SeeAlso { get; set; }
 		public object RowData { get; set; }
 
