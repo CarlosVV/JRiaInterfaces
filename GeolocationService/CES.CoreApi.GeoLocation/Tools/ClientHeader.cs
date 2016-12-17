@@ -25,5 +25,25 @@ namespace CES.CoreApi.GeoLocation.Tools
 			return false;
 			
 		}
+
+		public static int GetApplicationId()
+		{
+			var ctx = System.Web.HttpContext.Current.Request.Headers;
+			var countryProviderSelections = null as IEnumerable<string>;
+			countryProviderSelections = ctx.GetValues("ApplicationId");
+			if (countryProviderSelections == null)
+				return 0;
+			
+			var key = string.Join("", countryProviderSelections);
+			if (!string.IsNullOrEmpty(key))
+			{
+				int appId;
+				int.TryParse(key, out appId);
+				return appId;
+			}
+			
+			return 0;
+
+		}
 	}
 }

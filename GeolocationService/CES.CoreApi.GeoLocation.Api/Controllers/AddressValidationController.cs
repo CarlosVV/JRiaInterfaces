@@ -15,21 +15,8 @@ namespace CES.CoreApi.GeoLocation.Api.Controllers
 		[Route("address/validate")]
 		public virtual IHttpActionResult ValidateAddress(Models.Requests.AddressRequest request)
 		{
-			//MelissaData = 1,     
-			IGeoLocationProvider provider = null;
-			if (request.ProviderId == 1)
-			{
-				provider = new MelissaDataProvider();
-			}	
-			else if (request.ProviderId == 2)
-			{//   Bing = 2,
-				provider = new BingProvider();
-			}
-			else
-			{
-				provider = new GoogleProvider();
-			}
-
+			
+			var provider = new GeoLocationFactory();
 			var result = provider.Validation(request);
 			return Content(HttpStatusCode.OK, result);
 		}

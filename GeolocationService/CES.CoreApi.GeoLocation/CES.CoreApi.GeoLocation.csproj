@@ -103,6 +103,7 @@
     <Compile Include="Providers\Bing\JsonModels\BingAddress.cs" />
     <Compile Include="Providers\Bing\JsonModels\GeocodePoints.cs" />
     <Compile Include="Providers\Bing\JsonModels\Point.cs" />
+    <Compile Include="Providers\GeoLocationFactory.cs" />
     <Compile Include="Providers\Google\GoogleProvider.cs" />
     <Compile Include="Providers\Google\JsonModels\AddressComponent.cs" />
     <Compile Include="Providers\Google\JsonModels\GeocodeResult.cs" />
