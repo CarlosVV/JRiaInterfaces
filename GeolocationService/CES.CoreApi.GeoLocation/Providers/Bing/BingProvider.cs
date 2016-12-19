@@ -15,7 +15,6 @@ namespace CES.CoreApi.GeoLocation.Providers.Bing
 {
 	public class BingProvider : IGeoLocationProvider
 	{
-
 		private AddressRequestMode BuildUrl(AddressRequest address)
 		{
 			var requestBuilder = new AddressRequestMode { StateShort = address.AdministrativeArea };

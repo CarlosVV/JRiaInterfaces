@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 
 namespace CES.CoreApi.GeoLocation.Providers.Bing.JsonModels
 {
@@ -14,8 +10,7 @@ namespace CES.CoreApi.GeoLocation.Providers.Bing.JsonModels
 		public string statusDescription { get; set; }
 	}
 
-	public class BingResourceSet
-	{
+	public class BingResourceSet	{
 		public List<BingResource> resources { get; set; }
 	}
 }

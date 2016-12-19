@@ -1,7 +1,4 @@
 ﻿using CES.CoreApi.GeoLocation.Providers;
-using CES.CoreApi.GeoLocation.Providers.Bing;
-using CES.CoreApi.GeoLocation.Providers.Google;
-using CES.CoreApi.GeoLocation.Providers.MelissaData;
 using System.Net;
 using System.Web.Http;
 

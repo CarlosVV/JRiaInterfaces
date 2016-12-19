@@ -47,7 +47,7 @@ namespace CES.CoreApi.GeoLocation.Providers
 			var cached = new ClientSettingRepositoryCached();
 			var serviceData = cached.GetClientSetting(AppSettings.ApplicationId);
 			if (serviceData == null)
-				return new GoogleProvider();
+				return new MelissaDataProvider();
 
 			var clientSettings = JsonConvert.DeserializeObject<List<ClientAppSetting>>(serviceData);
 			var useCountry = ClientHeader.IsCountryProviderSelection();
@@ -67,12 +67,18 @@ namespace CES.CoreApi.GeoLocation.Providers
 			}
 			if (clientSetting == null)
 			{
-				foreach (var item in clientSettings)
+				if (!string.IsNullOrEmpty(countryCode))
 				{
-					if (countryCode == item.CountryCode)
+					if (countryCode.Length > 1)
+						countryCode = DataSetting.GetCode(countryCode);
+
+					foreach (var item in clientSettings)
 					{
-						clientSetting = item;
-						break;
+						if (countryCode == item.CountryCode)
+						{
+							clientSetting = item;
+							break;
+						}
 					}
 				}
 			}
@@ -89,7 +95,7 @@ namespace CES.CoreApi.GeoLocation.Providers
 			}
 
 			if (clientSetting == null)
-				return new GoogleProvider();
+				return new MelissaDataProvider();
 			foreach (var setting in clientSetting.DataProviders)
 			{
 				if (setting.DataProviderServiceType == Enumerations.DataProviderServiceType.Geocoding) {
@@ -114,7 +120,7 @@ namespace CES.CoreApi.GeoLocation.Providers
 			{
 				return new MelissaDataProvider();
 			}
-			return new GoogleProvider();
+			return new MelissaDataProvider();
 		}
 	}
 }

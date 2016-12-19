@@ -114,6 +114,7 @@
     <Compile Include="Providers\MelissaData\MelissaDataProvider.cs" />
     <Compile Include="Providers\Shared\FuzzyMatch.cs" />
     <Compile Include="Repositories\ClientSettingRepositoryCached.cs" />
+    <Compile Include="Repositories\DataSetting.cs" />
     <Compile Include="Tools\ClientHeader.cs" />
     <Compile Include="Tools\EnumTools.cs" />
     <Compile Include="Interfaces\IAddressAutocompleteDataProvider.cs" />
