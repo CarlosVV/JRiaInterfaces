@@ -109,6 +109,7 @@
     <Compile Include="Providers\Google\JsonModels\GeocodeResult.cs" />
     <Compile Include="Providers\Google\JsonModels\Geometry.cs" />
     <Compile Include="Providers\Google\JsonModels\GeometryLocation.cs" />
+    <Compile Include="Providers\Google\SignUrl.cs" />
     <Compile Include="Providers\IGeoLocationProvider.cs" />
     <Compile Include="Providers\MelissaData\JsonModels\GlobalAddressRecord.cs" />
     <Compile Include="Providers\MelissaData\MelissaDataProvider.cs" />

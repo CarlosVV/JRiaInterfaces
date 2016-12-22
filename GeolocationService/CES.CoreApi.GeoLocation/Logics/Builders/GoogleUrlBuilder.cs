@@ -7,6 +7,7 @@ using CES.CoreApi.GeoLocation.Models;
 using CES.CoreApi.GeoLocation.Enumerations;
 using CES.CoreApi.GeoLocation.Attributes;
 using CES.CoreApi.GeoLocation.Configuration;
+using CES.CoreApi.GeoLocation.Providers.Google;
 
 namespace CES.CoreApi.GeoLocation.Logic.Builders
 {
@@ -64,13 +65,19 @@ namespace CES.CoreApi.GeoLocation.Logic.Builders
 		public string BuildUrl(AutocompleteAddressModel address, int maxRecords)
 		{
 			var query = _addressQueryBuilder.Build(address.Address1, address.AdministrativeArea, address.Country);
+			string key = string.Empty;
+			if (!string.IsNullOrEmpty(AppSettings.GoogleClientId) && AppSettings.GoogleUseKeyForAutoComplete)
+			{
+				key = $"&client={AppSettings.GoogleClientId}";
+			}
 
-			var url = string.Format(CultureInfo.InvariantCulture,
-				"{0}/geocode/xml?address={1}{2}",
-				GeoLocationConfigurationSection.Instance.Google.Url,
-				query,
-				GetLicenseKeyParameter());
+			var url = $"{GeoLocationConfigurationSection.Instance.Google.Url}/geocode/xml?address={query}{key}";
 
+
+			if (!string.IsNullOrEmpty(key))
+			{
+				return SignUrl.Sign(url, AppSettings.GooglePrivateCryptoKey);
+			}
 			return url;
 		}
 
@@ -104,11 +111,17 @@ namespace CES.CoreApi.GeoLocation.Logic.Builders
         /// <returns></returns>
         public string BuildUrl(string address)
         {
-            var url = string.Format(CultureInfo.InvariantCulture,
-				"{0}/geocode/xml?address={1}{2}",
-				GeoLocationConfigurationSection.Instance.Google.Url,
-                HttpUtility.UrlEncode(address),
-                GetLicenseKeyParameter());
+			string key = string.Empty;
+			//if (!string.IsNullOrEmpty(AppSettings.GoogleClientId))
+			//{
+			//	key = $"&client={AppSettings.GoogleClientId}";
+			//}
+
+			var url = $"{GeoLocationConfigurationSection.Instance.Google.Url}/geocode/xml?address={HttpUtility.UrlEncode(address)}{key}";
+			if(!string.IsNullOrEmpty(key))
+			{
+				return SignUrl.Sign(url, AppSettings.GooglePrivateCryptoKey);
+			}
             return url;
         }
 

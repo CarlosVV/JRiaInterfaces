@@ -1,4 +1,5 @@
-﻿using CES.CoreApi.GeoLocation.Interfaces;
+﻿using CES.CoreApi.GeoLocation.Configuration;
+using CES.CoreApi.GeoLocation.Interfaces;
 using CES.CoreApi.GeoLocation.Logic.Constants;
 using CES.CoreApi.GeoLocation.Logic.Providers;
 using CES.CoreApi.GeoLocation.Models;
@@ -49,12 +50,20 @@ namespace CES.CoreApi.GeoLocation.Providers.Google
 			{
 				state = $"|administrative_area:{ HttpUtility.UrlEncode(stateName)}";
 			}
-			var url = $"{Configuration.AppSettings.GoogleMapGeocodeUrl}?address={HttpUtility.UrlEncode(addressFormatted)}&components=country:{address.Country}|locality:{address.City}{state}";
+			string client = string.Empty;
+			if(!string.IsNullOrEmpty(AppSettings.GoogleClientId) && AppSettings.GoogleUseKeyForAddressValidate)
+			{
+				client = $"&client={AppSettings.GoogleClientId}";
+			}
+			var url = $"{AppSettings.GoogleMapGeocodeUrl}address={HttpUtility.UrlEncode(addressFormatted)}&components=country:{address.Country}|locality:{address.City}{state}{client}";
 
 			RequestMode.RequestModifed = address;
 			RequestMode.RequestModifed.AdministrativeArea = stateName;
-	
 			RequestMode.Url = url;
+			if (!string.IsNullOrEmpty(client))
+			{
+				RequestMode.Url = SignUrl.Sign(url, AppSettings.GooglePrivateCryptoKey);
+			}
 
 			return RequestMode;
 		}
@@ -71,6 +80,13 @@ namespace CES.CoreApi.GeoLocation.Providers.Google
 			IDataResponseProvider client = new DataResponseProvider();
 			var requestMode = BuildUrl(addressRequest);
 			var providerResponse = client.GetResponse(requestMode.Url);	
+			if(providerResponse != null&& providerResponse.RawResponse != null && providerResponse.RawResponse.ToLower().Contains("unable to authenticate the request."))
+			{
+				return new AddressValidationResponse { DataProviderName = "Google",
+					DataProvider = Enumerations.DataProviderType.Google,
+					ResultCodes= providerResponse.RawResponse,
+					ProviderMessage = providerResponse.RawResponse };
+			}
 			var result = JsonConvert.DeserializeObject<GeocodeResults>(providerResponse.RawResponse);
 			var response = new AddressValidationResponse();
 			var others = new List<SeeAlso>();

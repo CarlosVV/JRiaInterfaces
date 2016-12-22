@@ -26,5 +26,40 @@ namespace CES.CoreApi.GeoLocation.Configuration
 			}
 
 		}
+		public static string GoogleClientId
+		{
+			get
+			{
+
+				return ConfigurationManager.AppSettings["GoogleClientId"];
+
+			}
+
+		}
+		public static string GooglePrivateCryptoKey
+		{
+			get
+			{
+				return ConfigurationManager.AppSettings["GooglePrivateCryptoKey"];
+			}
+		}
+		public static bool GoogleUseKeyForAutoComplete
+		{
+			get
+			{
+				bool value;
+				bool.TryParse(ConfigurationManager.AppSettings["GoogleUseKeyForAutoComplete"], out value);
+				return value;
+			}
+		}
+		public static bool GoogleUseKeyForAddressValidate
+		{
+			get
+			{
+				bool value;
+				bool.TryParse(ConfigurationManager.AppSettings["GoogleUseKeyForAddressValidate"], out value);
+				return value;
+			}
+		}
 	}
 }
