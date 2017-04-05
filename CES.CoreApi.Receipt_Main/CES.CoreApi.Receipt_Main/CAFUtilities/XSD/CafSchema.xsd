@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xs:schema attributeFormDefault="unqualified" elementFormDefault="qualified" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:element name="AUTORIZACION">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="CAF">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="DA">
+                <xs:complexType>
+                  <xs:sequence>
+                    <xs:element name="RE" type="xs:string" />
+                    <xs:element name="RS" type="xs:string" />
+                    <xs:element name="TD" type="xs:unsignedByte" />
+                    <xs:element name="RNG">
+                      <xs:complexType>
+                        <xs:sequence>
+                          <xs:element name="D" type="xs:unsignedByte" />
+                          <xs:element name="H" type="xs:unsignedByte" />
+                        </xs:sequence>
+                      </xs:complexType>
+                    </xs:element>
+                    <xs:element name="FA" type="xs:date" />
+                    <xs:element name="RSAPK">
+                      <xs:complexType>
+                        <xs:sequence>
+                          <xs:element name="M" type="xs:string" />
+                          <xs:element name="E" type="xs:string" />
+                        </xs:sequence>
+                      </xs:complexType>
+                    </xs:element>
+                    <xs:element name="IDK" type="xs:unsignedShort" />
+                  </xs:sequence>
+                </xs:complexType>
+              </xs:element>
+              <xs:element name="FRMA">
+                <xs:complexType>
+                  <xs:simpleContent>
+                    <xs:extension base="xs:string">
+                      <xs:attribute name="algoritmo" type="xs:string" use="required" />
+                    </xs:extension>
+                  </xs:simpleContent>
+                </xs:complexType>
+              </xs:element>
+            </xs:sequence>
+            <xs:attribute name="version" type="xs:decimal" use="required" />
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="RSASK" type="xs:string" />
+        <xs:element name="RSAPUBK" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+</xs:schema>
