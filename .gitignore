@@ -162,3 +162,4 @@ $RECYCLE.BIN/
 /MTServices/CES.CoreApi.MTServicesWebApiHost/CES.CoreApi.MTServicesWSIISHost_Package
 /BankAccountService/CES.CoreApi.BankAccount.Service.Web/CES.CoreApi.BankAccount.Service.Web_Package
 /CES.CoreApi.IDValidation/packages
+/CES.CoreApi.Receipt_Main/packages
