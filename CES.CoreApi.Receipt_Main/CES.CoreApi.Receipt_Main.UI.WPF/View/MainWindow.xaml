@@ -57,7 +57,7 @@
                                         x:Name="MenuToggleButton"/>
                         <materialDesign:PopupBox DockPanel.Dock="Right" PlacementMode="BottomAndAlignRightEdges" StaysOpen="False">
                             <StackPanel>
-                                <Button Content="Hello World" />
+                                <Button Content="Hello World" Click="MenuPopupButton_OnClick"/>
                                 <Button Content="Nice Popup" />
                                 <Button Content="Can't Touch This" IsEnabled="False" />
                                 <Separator/>
