@@ -16,43 +16,30 @@ using CES.CoreApi.Receipt_Main.UI.WPF.View;
 
 namespace CES.CoreApi.Receipt_Main.UI.WPF
 {
-    /// <summary>
-    /// Interaction logic for App.xaml
-    /// </summary>
     public partial class App : Application
     {
         private IKernel container;
-        
-        private AuthenticationViewModel authviewModel;
 
         protected override void OnStartup(StartupEventArgs e)
         {
-            //Create a custom principal with an anonymous identity at startup
-            CustomPrincipal customPrincipal = new CustomPrincipal();
+            var customPrincipal = new CustomPrincipal();
             AppDomain.CurrentDomain.SetThreadPrincipal(customPrincipal);
+            ConfigureDependencies();
 
-            IocKernel.Initialize(new IocConfiguration());
             base.OnStartup(e);
-            //ConfigureContainer();
-            //ComposeObjects();
-            authviewModel = new AuthenticationViewModel();
-            //Show the login view            
-            IView loginWindow = new LoginWindow(authviewModel);
+
+            IView loginWindow = container.Get<LoginWindow>();
             loginWindow.Show();
         }
 
-        private void ConfigureContainer()
+        private void ConfigureDependencies()
         {
-            this.container = new StandardKernel();
-            container.Bind<IUserService>().To<UserService>().InTransientScope();
-            container.Bind<IUserRepository>().To<UserRepository>().InTransientScope();
-            container.Bind<IAuthenticationService>().To<AuthenticationService>();
+            container = new StandardKernel(new MyModule());
         }
-
         private void ComposeObjects()
         {
             Current.MainWindow = this.container.Get<MainWindow>();
-            Current.MainWindow.Title = "Tax Receipt Management Application";
+            Current.MainWindow.Title = "Ria Financial";
         }
     }
 }

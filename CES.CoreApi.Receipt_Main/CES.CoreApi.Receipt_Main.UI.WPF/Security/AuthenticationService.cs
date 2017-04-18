@@ -50,15 +50,7 @@ namespace CES.CoreApi.Receipt_Main.UI.WPF.Security
             }
         }
 
-        private static readonly List<InternalUserData> _users = new List<InternalUserData>()
-        {
-            //new InternalUserData("Mark", "mark@company.com",
-            //"MB5PYIsbI2YzCUe34Q5ZU2VferIoI4Ttd+ydolWV0OE=", new string[] { "Administrators" }),
-            //new InternalUserData("John", "john@company.com",
-            //"hMaLizwzOQ5LeOnMuj+C6W75Zl5CXXYbwDSHWW9ZOXc=", new string[] { })
-
-
-        };
+       
 
         public AuthenticationService(IUserService userService)
         {
@@ -70,8 +62,7 @@ namespace CES.CoreApi.Receipt_Main.UI.WPF.Security
             //var hash = CalculateHash(clearTextPassword, username);
             var userData = _userService.GetAllUsers().FirstOrDefault(u => u.Name.Equals(username)
                 && u.Password.Equals(CalculateHash(clearTextPassword, u.Name)));
-            //InternalUserData userData = _users.FirstOrDefault(u => u.Username.Equals(username)
-            //    && u.HashedPassword.Equals(CalculateHash(clearTextPassword, u.Username)));
+
             if (userData == null)
                 throw new UnauthorizedAccessException("Access denied. Please provide some valid credentials.");
 

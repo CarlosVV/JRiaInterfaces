@@ -5,31 +5,28 @@ using System.Collections.Generic;
 using System.Data.Entity;
 using System.Data.Entity.ModelConfiguration.Conventions;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Reflection.Emit;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace CES.CoreApi.Receipt_Main.Repository
 {
-    public class UserRepository : DbContext, IUserRepository
+    public class UserRepository : BaseRepository<User>, IUserRepository
     {
-        public virtual DbSet<User> Users { get; set; }
-        public UserRepository()
-            : base("name=main")
+        public UserRepository(DbContext _dbContext)
+            : base(_dbContext)
         {
         }
-        protected override void OnModelCreating(DbModelBuilder modelBuilder)
-        {
-            modelBuilder.Conventions.Remove<PluralizingTableNameConvention>();
-        }
+        
         public User find(string id)
         {
-            return Users.Find(id);
+            return this.Get(p=> p.Id.ToString() == id);
         }
 
-        public IEnumerable<User> find(Func<User, bool> where)
+        public IEnumerable<User> find(Expression<Func<User, bool>> where)
         {
-            return Users.Where(where);
+            return this.GetAll(where);
         }
     }
 }

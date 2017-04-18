@@ -17,7 +17,7 @@ namespace CES.CoreApi.Receipt_Main.Model
         public Guid Id { get; set; }
         public string Name { get; set; }
         public string Email { get; set; }
-        public string StoreId { get; set; }
+        public Guid? StoreId { get; set; }
         public string Password { get; set; }
         public bool Disabled { get; set; }
         public bool Deleted { get; set; }

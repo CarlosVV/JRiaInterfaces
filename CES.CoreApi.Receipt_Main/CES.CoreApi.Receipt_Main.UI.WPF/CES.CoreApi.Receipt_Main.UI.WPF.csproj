@@ -97,8 +97,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="IocConfiguration.cs" />
-    <Compile Include="IocKernel.cs" />
+    <Compile Include="MyModule.cs" />
     <Compile Include="View\AdminWindow.xaml.cs">
       <DependentUpon>AdminWindow.xaml</DependentUpon>
     </Compile>

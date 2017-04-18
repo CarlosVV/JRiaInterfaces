@@ -20,18 +20,17 @@ namespace CES.CoreApi.Receipt_Main.UI.WPF.ViewModel
 
     public class AuthenticationViewModel : IViewModel, INotifyPropertyChanged
     {
-        [Inject]
-        public IAuthenticationService authenticationService { private get; set; }
+        
         private readonly IAuthenticationService _authenticationService;
         private readonly DelegateCommand<object> _loginCommand;
         private readonly DelegateCommand<object> _logoutCommand;
         private readonly DelegateCommand<object> _showViewCommand;
         private string _username;
-        private string _status;     
+        private string _status;       
 
-        public AuthenticationViewModel()
+        public AuthenticationViewModel(IAuthenticationService authenticationService)
         {
-            _authenticationService = this.authenticationService;
+            _authenticationService = authenticationService;
             _loginCommand = new DelegateCommand<object>(Login, CanLogin);
             _logoutCommand = new DelegateCommand<object>(Logout, CanLogout);
             _showViewCommand = new DelegateCommand<object>(ShowView, CanShow);
@@ -116,7 +115,7 @@ namespace CES.CoreApi.Receipt_Main.UI.WPF.ViewModel
 
         private void Logout(object parameter)
         {
-            CustomPrincipal customPrincipal = Thread.CurrentPrincipal as CustomPrincipal;
+            var customPrincipal = Thread.CurrentPrincipal as CustomPrincipal;
             if (customPrincipal != null)
             {
                 customPrincipal.Identity = new AnonymousIdentity();
