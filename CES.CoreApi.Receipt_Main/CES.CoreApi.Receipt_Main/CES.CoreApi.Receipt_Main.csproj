@@ -257,6 +257,8 @@
     <Compile Include="Models\TaxSearchCAFByTypeResponse.cs" />
     <Compile Include="Models\TaxSearchDocumentRequest.cs" />
     <Compile Include="Models\TaxSearchDocumentResponse.cs" />
+    <Compile Include="Models\TaxSIIGetDocumentBatchRequest.cs" />
+    <Compile Include="Models\TaxSIIGetDocumentBatchResponse.cs" />
     <Compile Include="Models\TaxSIIGetDocumentRequest.cs" />
     <Compile Include="Models\TaxSIIGetDocumentResponse.cs" />
     <Compile Include="Models\TaxSIISendDocumentRequest.cs" />
@@ -318,6 +320,7 @@
     <Compile Include="Validators\ServiceTaxGetFolioRequestViewModelValidator.cs" />
     <Compile Include="Validators\ServiceTaxSearchCAFByTypeRequestViewModelValidator.cs" />
     <Compile Include="Validators\ServiceTaxSearchDocumentRequestViewModelValidator.cs" />
+    <Compile Include="Validators\ServiceTaxSIIGetDocumentBatchRequestViewModelValidator.cs" />
     <Compile Include="Validators\ServiceTaxSIIGetDocumentRequestViewModelValidator.cs" />
     <Compile Include="Validators\ServiceTaxSIISendDocumentRequestViewModelValidator.cs" />
     <Compile Include="Validators\ServiceTaxUpdateCAFRequestViewModelValidator.cs" />
@@ -339,6 +342,8 @@
     <Compile Include="ViewModels\ServiceTaxCreateCAFResponseViewModel.cs" />
     <Compile Include="ViewModels\ServiceTaxSearchDocumentRequestViewModel.cs" />
     <Compile Include="ViewModels\ServiceTaxSearchDocumentResponseViewModel.cs" />
+    <Compile Include="ViewModels\ServiceTaxSIIGetDocumentBatchRequestViewModel.cs" />
+    <Compile Include="ViewModels\ServiceTaxSIIGetDocumentBatchResponseViewModel.cs" />
     <Compile Include="ViewModels\ServiceTaxSIIGetDocumentRequestViewModel.cs" />
     <Compile Include="ViewModels\ServiceTaxSIIGetDocumentResponseViewModel.cs" />
     <Compile Include="ViewModels\ServiceTaxSIISendDocumentRequestViewModel.cs" />

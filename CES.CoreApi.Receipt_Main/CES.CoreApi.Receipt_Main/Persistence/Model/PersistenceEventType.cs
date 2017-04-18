@@ -56,6 +56,7 @@ namespace CES.CoreApi.Shared.Persistence.Model
         TaxCreateDocumentResponse = 64,
         TaxSearchDocumentResponse = 65,
         TaxGenerateReceiptResponse = 66,
+        TaxSIIGetDocumentBatchResponse = 67,
     }
 }
 

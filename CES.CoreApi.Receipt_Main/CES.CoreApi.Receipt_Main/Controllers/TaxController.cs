@@ -455,5 +455,49 @@ namespace CES.CoreApi.Receipt_Main.Controllers
         {
             throw new NotImplementedException();
         }
+        //Get Document from SII
+        [HttpPost]
+        [Route("tax/sii/document/get")]
+        public IHttpActionResult SIIGetDocumentBatch(ServiceTaxSIIGetDocumentBatchRequestViewModel request)
+        {
+            #region Persistence
+            //var client = new Client();
+            //request.PersistenceID = client.GetPersistenceID();           
+            #endregion
+
+            _logService.LogInfoObjectToJson("Request", request);
+            Logging.Log.Info("Generating request...");
+
+            var results = new ServiceTaxSIIGetDocumentBatchRequestViewModelValidator().Validate(request);
+
+            if (!results.IsValid)
+            {
+                return Content(HttpStatusCode.BadRequest, results);
+            }
+
+            var taxSIIGetDocumentBatchInternalRequest = AutoMapper.Mapper.Map<TaxSIIGetDocumentBatchRequest>(request);
+
+            //taxGenerateReceiptInternalRequest.HeaderInfo = new HeaderInfo
+            //{
+            //    ApplicationId = HeaderHelper.ApplicationId,
+            //    CesUserId = HeaderHelper.CesUserId,
+            //    CesAppObjectId = HeaderHelper.CesAppObjectId,
+            //    CesRequestTime = HeaderHelper.CesRequestTime,
+            //};
+
+            Logging.Log.Info("Processing call...");
+            var serviceResponse = _docservice.CreateTaskSiiGetDocumentBatch(taxSIIGetDocumentBatchInternalRequest);
+            Logging.Log.Info("Processed Successfully.");
+
+            Logging.Log.Info("Returning Response.");
+
+            var response = AutoMapper.Mapper.Map<ServiceTaxSIIGetDocumentBatchResponseViewModel>(serviceResponse);
+
+            #region Persistence
+            _persistenceHelper.CreatePersistence<ServiceTaxSIIGetDocumentBatchResponseViewModel>(response, 0, 0, PersistenceEventType.TaxSIIGetDocumentBatchResponse);
+            #endregion
+
+            return Content(HttpStatusCode.OK, response);
+        }
     }
 }

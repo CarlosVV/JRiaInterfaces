@@ -91,7 +91,7 @@ namespace CES.CoreApi.Receipt_Main.Services
             //TODO: Populate all depending objects in the model
             PopulateDocumentModel(response.Document);
 
-            //TODO: Creae PDF for Document Stored
+            //TODO: Create PDF for Document Stored
             CreatePDF(response.Document);
 
             
@@ -110,6 +110,15 @@ namespace CES.CoreApi.Receipt_Main.Services
         private void PopulateDocumentModel(Document document)
         {
             throw new NotImplementedException();
+        }
+
+        internal TaxSIIGetDocumentBatchResponse CreateTaskSiiGetDocumentBatch(TaxSIIGetDocumentBatchRequest taxSIIGetDocumentBatchInternalRequest)
+        {
+            var response = null as TaxSIIGetDocumentBatchResponse;
+
+
+
+            return response;
         }
     }
 }
