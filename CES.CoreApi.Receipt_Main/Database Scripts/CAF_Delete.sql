@@ -1,9 +1,0 @@
-USE [CES.CoreApi.Receipt_MainDB]
-
-GO
-
-CREATE PROCEDURE [CAF_Delete]
-@Id UNIQUEIDENTIFIER
-AS 
-DELETE [dbo].[CAF]
-WHERE Id = @Id
