@@ -10,12 +10,12 @@ namespace CES.CoreApi.Receipt_Main.Repositories
 {
     public class DocumentRepository
     {
-        private const string usp_DocumentInsert = "usp_DocumentInsert";
-        private const string usp_DocumentUpdate = "usp_DocumentUpdate";
-        private const string usp_DocumentDelete = "usp_DocumentDelete";
-        private const string usp_DocumentSelect = "usp_DocumentSelect";
-        private const string usp_DocumentSearch = "usp_DocumentSearch";
-        private const string usp_DocumentSelectByOrderNumberAndFolio = "usp_DocumentSelectByOrderNumberAndFolio";
+        private const string usp_DocumentInsert = "coreapi_sp_systblApp_CoreAPI_Document_Create";
+        private const string usp_DocumentUpdate = "coreapi_sp_systblApp_CoreAPI_Document_Update";
+        private const string usp_DocumentDelete = "coreapi_sp_systblApp_CoreAPI_Document_Delete";
+        private const string usp_DocumentSelect = "coreapi_sp_systblApp_CoreAPI_Document_Get";
+        private const string usp_DocumentSearch = "coreapi_sp_systblApp_CoreAPI_Document_Search";
+        private const string usp_DocumentSelectByOrderNumberAndFolio = "coreapi_sp_systblApp_CoreAPI_Document_SelectByOrderNumberAndFolio";
 
         private SqlMapper _sqlMapper = DatabaseName.CreateSqlMapper();
 
@@ -91,14 +91,13 @@ namespace CES.CoreApi.Receipt_Main.Repositories
             }
         }
 
-        public virtual IEnumerable<DocumentSearchResultItem> Search(string documentid, string documentnumber, string documenttypecode, string itemcode, string receiverfirstname, string receivermiddlename
-            , string receiverlastname1, string receiverlastname2, string senderfirstname, string sendermiddlename, string senderlastname1, string senderlastname2, int? documentfolio
-            , string documentbranch, string documenttellernumber, string documenttellername, DateTime? documentissued, decimal? documenttotalamount)
+        public virtual IEnumerable<DocumentSearchResultItem> Search(string documentid, string documenttypecode, string itemcode, string receiverfirstname, string receivermiddlename
+                , string receiverlastname1, string receiverlastname2, string senderfirstname, string sendermiddlename, string senderlastname1, string senderlastname2, int? documentfolio
+                , string documentbranch, string documenttellernumber, string documenttellername, DateTime? documentissued, decimal? documenttotalamount)
         {
             using (var sql = _sqlMapper.CreateQuery(DatabaseName.Transactional, usp_DocumentSearch))
             {
-                sql.AddParam("@DocumentId", documentid);
-                sql.AddParam("@DocumentNumber", documentnumber);
+                sql.AddParam("@DocumentId", documentid);               
                 sql.AddParam("@DocumentTypeCode", documenttypecode);
                 sql.AddParam("@ItemCode", itemcode);
                 sql.AddParam("@ReceiverFirstName", receiverfirstname);
@@ -124,7 +123,7 @@ namespace CES.CoreApi.Receipt_Main.Repositories
         {
             using (var sql = _sqlMapper.CreateQuery(DatabaseName.Transactional, usp_DocumentSelectByOrderNumberAndFolio))
             {
-                sql.AddParam("@OrderNumber", ordernumber);
+                sql.AddParam("@OrderNo", ordernumber);
                 sql.AddParam("@Folio", folio);
                 return sql.Query<Document>();
             }

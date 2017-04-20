@@ -9,10 +9,10 @@ namespace CES.CoreApi.Receipt_Main.Repositories
 {
     public class ItemRepository
     {
-        private const string usp_ItemInsert = "usp_ItemInsert";
-        private const string usp_ItemUpdate = "usp_ItemUpdate";
-        private const string usp_ItemDelete = "usp_ItemDelete";
-        private const string usp_ItemSelect = "usp_ItemSelect";
+        private const string usp_ItemInsert = "coreapi_sp_systblApp_CoreAPI_Item_Create";
+        private const string usp_ItemUpdate = "coreapi_sp_systblApp_CoreAPI_Item_Update";
+        private const string usp_ItemDelete = "coreapi_sp_systblApp_CoreAPI_Item_Delete";
+        private const string usp_ItemSelect = "coreapi_sp_systblApp_CoreAPI_Item_Get";
         private SqlMapper _sqlMapper = DatabaseName.CreateSqlMapper();
 
         public virtual void Create(Item entity)

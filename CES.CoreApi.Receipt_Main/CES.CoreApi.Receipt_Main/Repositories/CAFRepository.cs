@@ -14,10 +14,10 @@ namespace CES.CoreApi.Receipt_Main.Repositories
 {
     public class CAFRepository
     {
-        private const string spCreateCAF = "CAF_Insert";
-        private const string spUpdateCAF = "CAF_Update";
-        private const string spDeleteCAF = "CAF_Delete";
-        private const string spSelectCAF = "CAF_Select";
+        private const string spCreateCAF = "[dbo].[coreapi_sp_systblApp_CoreAPI_Caf_Create]";
+        private const string spUpdateCAF = "[dbo].[coreapi_sp_systblApp_CoreAPI_Caf_Update]";
+        private const string spDeleteCAF = "[dbo].[coreapi_sp_systblApp_CoreAPI_Caf_Delete]";
+        private const string spSelectCAF = "[dbo].[coreapi_sp_systblApp_CoreAPI_Caf_Get]";
         private SqlMapper _sqlMapper = DatabaseName.CreateSqlMapper();
         public virtual void Create(CAF entity)
         {

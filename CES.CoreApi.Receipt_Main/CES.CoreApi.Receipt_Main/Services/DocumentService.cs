@@ -32,13 +32,13 @@ namespace CES.CoreApi.Receipt_Main.Services
             {
                 if(request.Document.SenderId == null && request.Document.Sender != null)
                 {
-                    _subjectrepository.Create(request.Document.Sender);
+                    _subjectrepository.CreateTaxEntity(request.Document.Sender);
                     request.Document.SenderId = request.Document.Sender.Id;
                 }
 
                 if (request.Document.ReceiverId == null && request.Document.Receiver != null)
                 {
-                    _subjectrepository.Create(request.Document.Receiver);
+                    _subjectrepository.CreateTaxEntity(request.Document.Receiver);
                     request.Document.ReceiverId = request.Document.Receiver.Id;
                 }
 
@@ -70,8 +70,8 @@ namespace CES.CoreApi.Receipt_Main.Services
         {
             var response = new TaxSearchDocumentResponse();
 
-            var results = _documentrepository.Search(r.DocumentId, r.DocumentNumber, r.DocumentTypeCode, r.ItemCode, r.ReceiverFirstName, r.ReceiverMiddleName, r.ReceiverLastName1, r.ReceiverLastName2,
-                r.SenderFirstName, r.SenderMiddleName, r.SenderLastName1, r.SenderLastName2, r.DocumentFolio, r.DocumentBranch, r.DocumentTellerNumber, r.DocumentTellerName, r.DocumentIssued, r.DocumentTotalAmount);
+            var results = _documentrepository.Search(r.DocumentId, r.DocumentTypeCode, r.ItemCode, r.ReceiverFirstName, r.ReceiverMiddleName, r.ReceiverLastName1, r.ReceiverLastName2, r.SenderFirstName,
+                r.SenderMiddleName, r.SenderLastName1, r.SenderLastName2, r.DocumentFolio, r.DocumentBranch, r.DocumentTellerNumber, r.DocumentTellerName, r.DocumentIssued, r.DocumentTotalAmount);
 
             response.Results = results.ToList();
             response.ResponseTime = DateTime.Now;
