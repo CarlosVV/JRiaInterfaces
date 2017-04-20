@@ -51,32 +51,32 @@ namespace CES.CoreApi.Receipt_Main.Repositories
 
         public virtual void CreateAddress(Address entity)
         {
-            using (var sql = _sqlMapper.CreateCommand(DatabaseName.Transactional, usp_SubjectInsert))
-            {
-                entity.Id = Guid.NewGuid().ToString();
+            //using (var sql = _sqlMapper.CreateCommand(DatabaseName.Transactional, usp_SubjectInsert))
+            //{
+            //    entity.Id = Guid.NewGuid().ToString();
 
-                sql.AddParam("@Id", entity.Id);
-                sql.AddParam("@Entity", entity.FirstName);
-                sql.AddParam("@Address", entity.MidleName);
-                sql.AddParam("@LastName1", entity.LastName1);
-                sql.AddParam("@LastName2", entity.LastName2);
-                sql.AddParam("@FullName", entity.FullName);
-                sql.AddParam("@Gender", entity.Gender);
-                sql.AddParam("@Occupation", entity.Ocupation);
-                sql.AddParam("@DateOfBirth", entity.DateOfBirth);
-                sql.AddParam("@Nationality", entity.Nationality);
-                sql.AddParam("@CountryOfBirth", entity.CountryOfBirth);
-                sql.AddParam("@Phone", entity.Phone);
-                sql.AddParam("@CellPhone", entity.CellPhone);
-                sql.AddParam("@Email", entity.Email);
-                sql.AddParam("@EconomicActivity", entity.EconomicActivity);
-                sql.AddParam("@ModifiedBy", entity.ModifiedBy);
-                sql.AddParam("@CreatedBy", entity.CreatedBy);
-                sql.AddParam("@CreatedOn", entity.ModifiedOn);
-                sql.AddParam("@ModifiedOn", entity.ModifiedOn);
+            //    sql.AddParam("@Id", entity.Id);
+            //    sql.AddParam("@Entity", entity.FirstName);
+            //    sql.AddParam("@Address", entity.MidleName);
+            //    sql.AddParam("@LastName1", entity.LastName1);
+            //    sql.AddParam("@LastName2", entity.LastName2);
+            //    sql.AddParam("@FullName", entity.FullName);
+            //    sql.AddParam("@Gender", entity.Gender);
+            //    sql.AddParam("@Occupation", entity.Ocupation);
+            //    sql.AddParam("@DateOfBirth", entity.DateOfBirth);
+            //    sql.AddParam("@Nationality", entity.Nationality);
+            //    sql.AddParam("@CountryOfBirth", entity.CountryOfBirth);
+            //    sql.AddParam("@Phone", entity.Phone);
+            //    sql.AddParam("@CellPhone", entity.CellPhone);
+            //    sql.AddParam("@Email", entity.Email);
+            //    sql.AddParam("@EconomicActivity", entity.EconomicActivity);
+            //    sql.AddParam("@ModifiedBy", entity.ModifiedBy);
+            //    sql.AddParam("@CreatedBy", entity.CreatedBy);
+            //    sql.AddParam("@CreatedOn", entity.ModifiedOn);
+            //    sql.AddParam("@ModifiedOn", entity.ModifiedOn);
 
-                sql.Execute();
-            }
+            //    sql.Execute();
+            //}
         }
     }
 }
