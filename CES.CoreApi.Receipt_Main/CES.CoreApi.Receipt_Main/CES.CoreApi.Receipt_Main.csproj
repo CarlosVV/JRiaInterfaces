@@ -65,6 +65,14 @@
       <HintPath>..\packages\CES.Security.CoreApi.1.0.0.18\lib\net461\CES.Security.CoreApi.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="FluentValidation, Version=6.2.1.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\FluentValidation.6.2.1.0\lib\Net45\FluentValidation.dll</HintPath>
       <Private>True</Private>
@@ -88,6 +96,14 @@
     </Reference>
     <Reference Include="Newtonsoft.Json, Version=9.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <HintPath>..\packages\CES.Security.CoreApi.1.0.0.18\lib\net461\Newtonsoft.Json.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Ninject, Version=3.2.0.0, Culture=neutral, PublicKeyToken=c7192dc5380945e7, processorArchitecture=MSIL">
+      <HintPath>..\packages\Ninject.3.2.2.0\lib\net45-full\Ninject.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Ninject.Web.Common, Version=3.2.0.0, Culture=neutral, PublicKeyToken=c7192dc5380945e7, processorArchitecture=MSIL">
+      <HintPath>..\packages\Ninject.Web.Common.3.2.3.0\lib\net45-full\Ninject.Web.Common.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="StackExchange.Redis, Version=1.1.0.0, Culture=neutral, processorArchitecture=MSIL">
@@ -172,6 +188,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_Start\AutoMapperConfig.cs" />
+    <Compile Include="App_Start\Ninject.Http.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Areas\HelpPage\ApiDescriptionExtensions.cs" />
     <Compile Include="Areas\HelpPage\App_Start\HelpPageConfig.cs" />
@@ -217,7 +234,6 @@
     <Compile Include="Models\DocumentSearchResultItem.cs" />
     <Compile Include="Models\DocumentType.cs" />
     <Compile Include="Models\DTOs\Address.cs" />
-    <Compile Include="Models\DTOs\CAF.cs" />
     <Compile Include="Models\DTOs\Document.cs" />
     <Compile Include="Models\DTOs\DocumentDetail.cs" />
     <Compile Include="Models\DTOs\DocumentType.cs" />
@@ -392,6 +408,20 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Providers\RIA\" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\CES.CoreApi.Receipt_Main.Domain\CES.CoreApi.Receipt_Main.Domain.csproj">
+      <Project>{0425505a-b947-4575-bf39-0f633f40c42d}</Project>
+      <Name>CES.CoreApi.Receipt_Main.Domain</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\CES.CoreApi.Receipt_Main.Model\CES.CoreApi.Receipt_Main.Model.csproj">
+      <Project>{6101f4e8-e19b-48ff-80a1-0acddb73653a}</Project>
+      <Name>CES.CoreApi.Receipt_Main.Model</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\CES.CoreApi.Receipt_Main.Repository\CES.CoreApi.Receipt_Main.Repository.csproj">
+      <Project>{89f0fce4-56de-41c2-9942-52739242c3b2}</Project>
+      <Name>CES.CoreApi.Receipt_Main.Repository</Name>
+    </ProjectReference>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

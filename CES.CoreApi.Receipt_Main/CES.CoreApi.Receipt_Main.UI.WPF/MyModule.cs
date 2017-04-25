@@ -24,7 +24,7 @@ namespace CES.CoreApi.Receipt_Main.UI.WPF
             Bind<IAuthenticationService>().To<AuthenticationService>();
             Bind<AuthenticationViewModel>().ToSelf();
             Bind<LoginWindow>().ToSelf();
-            Bind<DbContext>().To<MyDbContext>();
+            Bind<DbContext>().To<ReceiptDbContext>();
         }
     }
 }

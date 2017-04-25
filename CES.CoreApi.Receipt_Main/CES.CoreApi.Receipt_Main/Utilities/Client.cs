@@ -13,7 +13,7 @@ using CES.CoreApi.Shared.Persistence.Model;
 using System.Collections.Generic;
 using System.Net.Http.Headers;
 using CES.CoreApi.Receipt_Main.Models;
-using CES.CoreApi.Receipt_Main.Models.DTOs;
+using CES.CoreApi.Receipt_Main.Model.Documents;
 using CES.CoreApi.Receipt_Main.ViewModels;
 using System.Web.Http.Controllers;
 
@@ -28,11 +28,11 @@ namespace CES.CoreApi.Receipt_Main.Utilities
         private readonly IPersistenceHelper _persistenceHelper;
         private readonly LogService _logService;
         private readonly HttpRequestMessage _request;
-        public Client(HttpRequestMessage request)
+        public Client()
         {
             _persistenceHelper = new PersistenceHelper(new PersistenceRepository());
             _logService = new LogService();
-            _request = request;
+            _request = HttpContext.Current.Items["MS_HttpRequestMessage"] as HttpRequestMessage;
         }
         public string GetCorrelationId(HttpRequestMessage request)
         {
@@ -72,7 +72,7 @@ namespace CES.CoreApi.Receipt_Main.Utilities
 
             try
             {
-                if (request.RequestUri.AbsoluteUri.ToLower().Contains("/receipt/tax/caf"))
+                if (request.Method.Method.Equals("Post")  && request.RequestUri.AbsoluteUri.ToLower().Contains("/receipt/tax/caf"))
                 {
 
                     var serviceTaxCreateCAFRequestViewModel = JsonConvert.DeserializeObject<ServiceTaxCreateCAFRequestViewModel>(jsonContent);

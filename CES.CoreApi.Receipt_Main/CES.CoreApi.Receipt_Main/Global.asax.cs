@@ -3,6 +3,7 @@ using CES.CoreApi.Receipt_Main.ExceptionHandling;
 using CES.CoreApi.Receipt_Main.Filters;
 using CES.Security.CoreApi;
 using FluentValidation.WebApi;
+using Ninject.Http;
 using System.Web.Http;
 using System.Web.Http.ExceptionHandling;
 
@@ -25,6 +26,8 @@ namespace CES.CoreApi.Receipt_Main
             AutoMapperConfig.RegisterMappings();
 
             FluentValidationModelValidatorProvider.Configure(GlobalConfiguration.Configuration);
+
+            NinjectHttpContainer.RegisterModules(NinjectHttpModules.Modules);
         }
 
     }

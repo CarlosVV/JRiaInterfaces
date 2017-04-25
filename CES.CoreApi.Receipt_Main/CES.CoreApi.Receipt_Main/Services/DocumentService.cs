@@ -1,11 +1,12 @@
 ﻿using CES.CoreApi.Receipt_Main.Models;
-using CES.CoreApi.Receipt_Main.Models.DTOs;
+using CES.CoreApi.Receipt_Main.Model.Documents;
 using CES.CoreApi.Receipt_Main.Repositories;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Transactions;
 using System.Web;
+using CES.CoreApi.Receipt_Main.Models.DTOs;
 
 namespace CES.CoreApi.Receipt_Main.Services
 {
@@ -32,24 +33,24 @@ namespace CES.CoreApi.Receipt_Main.Services
             {
                 if(request.Document.SenderId == null && request.Document.Sender != null)
                 {
-                    _subjectrepository.CreateTaxEntity(request.Document.Sender);
+                    //_subjectrepository.CreateTaxEntity(request.Document.Sender);
                     request.Document.SenderId = request.Document.Sender.Id;
                 }
 
                 if (request.Document.ReceiverId == null && request.Document.Receiver != null)
                 {
-                    _subjectrepository.CreateTaxEntity(request.Document.Receiver);
+                    //_subjectrepository.CreateTaxEntity(request.Document.Receiver);
                     request.Document.ReceiverId = request.Document.Receiver.Id;
                 }
 
-                _documentrepository.Create(request.Document);
+                //_documentrepository.Create(request.Document);
 
                 foreach (var dtl in request.Document.DocumentDetails)
                 {
                     dtl.DocumentId = request.Document.DocumentId;
                     if (dtl.ItemId != null && dtl.Item != null)
                     {
-                        _itemrepository.Create(dtl.Item);
+                        //_itemrepository.Create(dtl.Item);
                         dtl.ItemId = dtl.Item.ItemId;
                     }
                    

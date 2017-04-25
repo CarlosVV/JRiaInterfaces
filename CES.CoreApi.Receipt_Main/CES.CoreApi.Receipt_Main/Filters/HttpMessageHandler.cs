@@ -32,7 +32,7 @@ namespace CES.CoreApi.Receipt_Main.Filters
             try
             {
                 //var ctx = request.Properties[HttpPropertyKeys.RequestContextKey] as System.Web.Http.Controllers.HttpRequestContext;
-                var client = new Client(request);
+                var client = new Client();
 
                 id = client.GetCorrelationId(request);
                 Logging.Log.Id = id.ToString();

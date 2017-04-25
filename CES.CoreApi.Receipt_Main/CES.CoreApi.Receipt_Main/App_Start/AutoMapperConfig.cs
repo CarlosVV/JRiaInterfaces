@@ -1,6 +1,6 @@
 ﻿using AutoMapper;
 using CES.CoreApi.Receipt_Main.Models;
-using CES.CoreApi.Receipt_Main.Models.DTOs;
+using CES.CoreApi.Receipt_Main.Model.Documents;
 using CES.CoreApi.Receipt_Main.ViewModels;
 
 namespace CES.CoreApi.Receipt_Main.App_Start

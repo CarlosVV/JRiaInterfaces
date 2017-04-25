@@ -41,22 +41,26 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Cashier.cs" />
-    <Compile Include="Functionality.cs" />
-    <Compile Include="FunctionRole.cs" />
-    <Compile Include="Menu.cs" />
+    <Compile Include="Documents\Caf.cs" />
+    <Compile Include="Repositories\ICafRepository.cs" />
+    <Compile Include="Security\Cashier.cs" />
+    <Compile Include="Security\Functionality.cs" />
+    <Compile Include="Security\FunctionRole.cs" />
+    <Compile Include="Security\Menu.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repositories\IUserRepository.cs" />
-    <Compile Include="Role.cs" />
+    <Compile Include="Security\Role.cs" />
+    <Compile Include="Services\ICafService.cs" />
     <Compile Include="Services\IUserService.cs" />
-    <Compile Include="Store.cs" />
-    <Compile Include="User.cs" />
-    <Compile Include="UserRole.cs" />
+    <Compile Include="Security\Store.cs" />
+    <Compile Include="Security\User.cs" />
+    <Compile Include="Security\UserRole.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
     <None Include="packages.config" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

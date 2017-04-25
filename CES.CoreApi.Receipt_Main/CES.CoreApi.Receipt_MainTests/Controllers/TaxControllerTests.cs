@@ -13,12 +13,14 @@ using CES.Security.CoreApi;
 using FluentValidation.WebApi;
 using System.Web.Http;
 using System.Web.Http.ExceptionHandling;
+using CES.CoreApi.Receipt_Main.Model.Services;
 
 namespace CES.CoreApi.Receipt_Main.Controllers.Tests
 {
     [TestClass()]
     public class TaxControllerTests
     {
+        ICafService _service;
         [TestInitialize()]
         public void InitTest()
         {
@@ -50,8 +52,8 @@ namespace CES.CoreApi.Receipt_Main.Controllers.Tests
 
         [TestMethod()]
         public void PostCreateCAFTest()
-        {
-            var controller = new TaxController();
+        {            
+            var controller = new TaxController(_service);
             var request = new ViewModels.ServiceTaxCreateCAFRequestViewModel
             {
                 CAFContent = CAFValidatorTests.GetDataToTest()

@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using CES.CoreApi.Receipt_Main.Model.Documents;
 
 namespace CES.CoreApi.Receipt_Main.Repositories.Tests
 {
@@ -16,7 +17,7 @@ namespace CES.CoreApi.Receipt_Main.Repositories.Tests
         {
             var repository = new CAFRepository();
 
-            var obj = new Models.DTOs.CAF
+            var obj = new Caf
             {
                 CompanyTaxId = "123456",
                 CompanyLegalName = "company1",
@@ -35,9 +36,9 @@ namespace CES.CoreApi.Receipt_Main.Repositories.Tests
         {
             var repository = new CAFRepository();
 
-            var obj = new Models.DTOs.CAF
+            var obj = new Caf
             {
-                Id = "9E98325F-EB83-43D1-B80E-C66117C45CE9",
+                Id = Guid.Parse("9E98325F-EB83-43D1-B80E-C66117C45CE9"),
                 CompanyTaxId = "123456",
                 CompanyLegalName = "company1 Update",
                 DocumentType = 66,

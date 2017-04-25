@@ -1,10 +1,11 @@
 ﻿using CES.CoreApi.Receipt_Main.Models;
-using CES.CoreApi.Receipt_Main.Models.DTOs;
+using CES.CoreApi.Receipt_Main.Model.Documents;
 using CES.Data.Sql;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
+using CES.CoreApi.Receipt_Main.Models.DTOs;
 
 namespace CES.CoreApi.Receipt_Main.Repositories
 {

@@ -1,5 +1,5 @@
 ﻿using CES.CoreApi.Receipt_Main.Models;
-using CES.CoreApi.Receipt_Main.Models.DTOs;
+using CES.CoreApi.Receipt_Main.Model.Documents;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,7 +9,7 @@ namespace CES.CoreApi.Receipt_Main.ViewModels
 {
     public class ServiceTaxGetFolioResponseViewModel
     {
-        public CAF CAF { get; set; }
+        public Caf CAF { get; set; }
         public int NextFolioNumber { get; set; }
         public DateTime TransferDate { get; set; }
         public ReturnInfo ReturnInfo { get; set; }

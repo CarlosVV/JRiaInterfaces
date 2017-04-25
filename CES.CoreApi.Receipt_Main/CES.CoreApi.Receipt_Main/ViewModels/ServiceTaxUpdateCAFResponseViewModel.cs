@@ -1,5 +1,5 @@
 ﻿using CES.CoreApi.Receipt_Main.Models;
-using CES.CoreApi.Receipt_Main.Models.DTOs;
+using CES.CoreApi.Receipt_Main.Model.Documents;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,7 +13,7 @@ namespace CES.CoreApi.Receipt_Main.ViewModels
         public ReturnInfo ReturnInfo { get; set; }
         public DateTime ResponseTime { get; set; }
         public DateTime ResponseTimeUTC { get; set; }
-        public CAF CAF { get; set; }
+        public Caf CAF { get; set; }
         public bool ProcessResult { get; set; }
     }
 }

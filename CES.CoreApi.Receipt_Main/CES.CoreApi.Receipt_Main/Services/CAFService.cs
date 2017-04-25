@@ -1,30 +1,32 @@
 ﻿using CES.CoreApi.Receipt_Main.CAFUtilities;
 using CES.CoreApi.Receipt_Main.Models;
-using CES.CoreApi.Receipt_Main.Models.DTOs;
+using CES.CoreApi.Receipt_Main.Model.Documents;
 using CES.CoreApi.Receipt_Main.Repositories;
 using CES.CoreApi.Receipt_Main.Validators;
 using System;
-using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Web;
-using CES.CoreApi.Receipt_Main.ViewModels;
+using CES.CoreApi.Receipt_Main.Model.Services;
+
 
 namespace CES.CoreApi.Receipt_Main.Services
 {
     public class CAFService
     {
+        private ICafService _cafdomain;
         private CAFRepository _repository = null;
         private CAFValidator _validator = null;
         private CAFParser _parser = null;
         public bool Successful = false;
         public string ErrorCode { get; set; }
         public string ErrorMessage { get; set; }
-        public CAFService()
+        public CAFService(ICafService cafdomain)
         {
             _repository = new CAFRepository();
             _validator = new CAFValidator();
             _parser = new CAFParser();
+            _cafdomain = cafdomain;
         }
         public TaxCreateCAFResponse CreateCAF(TaxCreateCAFRequest request)
         {
@@ -52,8 +54,10 @@ namespace CES.CoreApi.Receipt_Main.Services
                 var objCAF = _parser.GetCAFObjectFromString(xml);
 
                 Logging.Log.Info("Insert into DB");
-                var objDbCaf = CreateCAFModel(null, xml, objCAF);
-                _repository.Create(objDbCaf);
+                var objDbCaf = CreateCAFModel(Guid.NewGuid(), xml, objCAF);
+
+                _cafdomain.CreateCaf(objDbCaf);
+
                 response.CAF = objDbCaf;
                 response.ProcessResult = true;
                 Successful = true;
@@ -76,7 +80,7 @@ namespace CES.CoreApi.Receipt_Main.Services
 
             if (results != null)
             {
-                response.Results = results.ToList();
+                //response.Results = results.ToList();
                 response.ProcessResult = true;
                 response.ReturnInfo = new ReturnInfo() { ErrorCode = 1, ErrorMessage = null, ResultProcess = true };
             }
@@ -110,9 +114,10 @@ namespace CES.CoreApi.Receipt_Main.Services
                 var objCAF = _parser.GetCAFObjectFromString(xml);
 
                 Logging.Log.Info("Insert into DB");
-                var objDbCaf = CreateCAFModel(request.Id, xml, objCAF);
+                var objDbCaf = CreateCAFModel(Guid.Parse(request.Id), xml, objCAF);
 
                 var result = _repository.Update(objDbCaf);
+
                 response.ReturnInfo = new ReturnInfo() { ErrorCode = 56, ErrorMessage = ErrorMessage, ResultProcess = result };
                 response.CAF = objDbCaf;
                 response.ProcessResult = result;
@@ -171,7 +176,7 @@ namespace CES.CoreApi.Receipt_Main.Services
                 var objDbCAF = result.OrderByDescending(m=> m.DateAuthorization).FirstOrDefault();
                 var objXmlCAF = _parser.GetCAFObjectFromString(objDbCAF.FileContent);
 
-                response.NextFolioNumber = objDbCAF.FolioCurrentNumber + 1;
+                response.NextFolioNumber = objDbCAF.FolioCurrentNumber.Value + 1;
                 response.CAF = objDbCAF;
                 response.ReturnInfo = new ReturnInfo() { ErrorCode = 1, ErrorMessage = "Process done", ResultProcess = true };
                 response.ResponseTime = DateTime.Today;
@@ -238,14 +243,14 @@ namespace CES.CoreApi.Receipt_Main.Services
             return response;
         }
         
-        private CAF CreateCAFModel(string id, string xml, AUTORIZACION objCAF)
+        private Caf CreateCAFModel(Guid? id, string xml, AUTORIZACION objCAF)
         {
-            return new CAF
+            return new Caf
             {
                 Id = id,
                 CompanyTaxId = objCAF.CAF.DA.RE,
                 CompanyLegalName = objCAF.CAF.DA.RS,
-                DateAuthorization = objCAF.CAF.DA.FA.ToString(),
+                DateAuthorization = objCAF.CAF.DA.FA.ToShortDateString(),
                 DocumentType = objCAF.CAF.DA.TD,
                 FolioStartNumber = objCAF.CAF.DA.RNG.D,
                 FolioEndNumber = objCAF.CAF.DA.RNG.H,

@@ -1,4 +1,4 @@
-﻿using CES.CoreApi.Receipt_Main.Models.DTOs;
+﻿using CES.CoreApi.Receipt_Main.Model.Documents;
 using CES.CoreApi.Receipt_Main.Utilities;
 using CES.Data.Sql;
 using System;
@@ -19,11 +19,11 @@ namespace CES.CoreApi.Receipt_Main.Repositories
         private const string spDeleteCAF = "[dbo].[coreapi_sp_systblApp_CoreAPI_Caf_Delete]";
         private const string spSelectCAF = "[dbo].[coreapi_sp_systblApp_CoreAPI_Caf_Get]";
         private SqlMapper _sqlMapper = DatabaseName.CreateSqlMapper();
-        public virtual void Create(CAF entity)
+        public virtual void Create(Caf entity)
         {
             using (var sql = _sqlMapper.CreateCommand(DatabaseName.Transactional, spCreateCAF))
             {
-                entity.Id = Guid.NewGuid().ToString();
+                entity.Id = Guid.NewGuid();
                 sql.AddParam("@Id", entity.Id);
                 sql.AddParam("@CompanyTaxId", entity.CompanyTaxId);
                 sql.AddParam("@CompanyLegalName", entity.CompanyLegalName);
@@ -38,7 +38,7 @@ namespace CES.CoreApi.Receipt_Main.Repositories
             }
         }
 
-        public virtual bool Update(CAF entity)
+        public virtual bool Update(Caf entity)
         {
             using (var sql = _sqlMapper.CreateCommand(DatabaseName.Transactional, spUpdateCAF))
             {
@@ -70,9 +70,9 @@ namespace CES.CoreApi.Receipt_Main.Repositories
             }
         }
 
-        public virtual IEnumerable<CAF> Get(string id, int? documentType, int? folioCurrentNumber, int? folioStartNumber, int? folioEndNumber)
+        public virtual IEnumerable<Caf> Get(string id, int? documentType, int? folioCurrentNumber, int? folioStartNumber, int? folioEndNumber)
         {
-            var results = new List<CAF>();
+            var results = new List<Caf>();
 
             using (var cn = new SqlConnection(ConfigurationManager.ConnectionStrings[DatabaseName.Transactional].ConnectionString))
             {
@@ -92,9 +92,9 @@ namespace CES.CoreApi.Receipt_Main.Repositories
                         {
                             //Id CompanyTaxId    CompanyLegalName DocumentType    FolioCurrentNumber FolioStartNumber    FolioEndNumber DateAuthorization   FileContent
                             //07BEFF77 - 27FF - 4CDA - 910B - 032594D210BE    76134934 - 1  RIA CHILE SERVICIOS FINANCIEROS SPA 33  0   1   20  2 / 27 / 2015 <? xml version = "1.0" ?>                    
-                            results.Add(new CAF
+                            results.Add(new Caf
                             {
-                                Id = reader[0].ToString(),
+                                Id = Guid.Parse(reader[0].ToString()),
                                 CompanyTaxId = reader.GetSafeValue<string>("CompanyTaxId"),
                                 CompanyLegalName = reader.GetSafeValue<string>("CompanyLegalName"),
                                 DocumentType = reader.GetSafeValue<int>("DocumentType"),
