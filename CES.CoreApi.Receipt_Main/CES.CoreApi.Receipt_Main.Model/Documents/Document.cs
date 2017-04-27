@@ -62,5 +62,9 @@ namespace CES.CoreApi.Receipt_Main.Model.Documents
         public DateTime? fModified { get; set; }
 
         public int? fModifiedID { get; set; }
+
+        public TaxEntity Sender { get; set; }
+        public TaxEntity Receiver { get; set; }
+        public IEnumerable<Document_Detail> DocumentDetails { get; set; }
     }
 }

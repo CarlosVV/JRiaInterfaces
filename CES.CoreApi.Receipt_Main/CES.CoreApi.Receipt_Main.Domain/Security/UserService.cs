@@ -17,5 +17,20 @@ namespace CES.CoreApi.Receipt_Main.Domain
         {
             return repo.find(user => !user.Disabled && !user.Deleted).ToList();
         }
+        public void CreateUser(User objectEntry)
+        {
+            this.repo.CreateUser(objectEntry);
+            this.repo.SaveChanges();
+        }
+        public void UpdateUser(User objectEntry)
+        {
+            this.repo.UpdateUser(objectEntry);
+            this.repo.SaveChanges();
+        }
+        public void RemoveUser(User objectEntry)
+        {
+            this.repo.RemoveUser(objectEntry);
+            this.repo.SaveChanges();
+        }
     }
 }

@@ -48,10 +48,10 @@
     <Compile Include="Documents\EntityIdentification.cs" />
     <Compile Include="Documents\IdentificationType.cs" />
     <Compile Include="Documents\Item.cs" />
-    <Compile Include="Documents\Task.cs" />
-    <Compile Include="Documents\TaskDetail.cs" />
-    <Compile Include="Documents\TaskStatus.cs" />
-    <Compile Include="Documents\TaskType.cs" />
+    <Compile Include="Tasks\Task.cs" />
+    <Compile Include="Tasks\TaskDetail.cs" />
+    <Compile Include="Tasks\TaskStatus.cs" />
+    <Compile Include="Tasks\TaskType.cs" />
     <Compile Include="Documents\TaxAddress.cs" />
     <Compile Include="Documents\TaxEntity.cs" />
     <Compile Include="Repositories\ITaxAddressRepository.cs" />

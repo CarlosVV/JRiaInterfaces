@@ -41,5 +41,6 @@ namespace CES.CoreApi.Receipt_Main.Model.Documents
         public DateTime? fModified { get; set; }
 
         public int? fModifiedID { get; set; }
+        public Item Item { get; set; }
     }
 }

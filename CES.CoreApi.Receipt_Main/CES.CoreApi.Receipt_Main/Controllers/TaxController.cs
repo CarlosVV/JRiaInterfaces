@@ -19,8 +19,7 @@ namespace CES.CoreApi.Receipt_Main.Controllers
 {
     [RoutePrefix("receipt")]
     public class TaxController : ApiController
-    {
-        private ICafService _cafdomain;
+    {        
         private CAFService _cafservice;
         private DocumentService _docservice;
         private readonly LogService _logService;

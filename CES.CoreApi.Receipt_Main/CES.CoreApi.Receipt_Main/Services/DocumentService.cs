@@ -6,7 +6,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Transactions;
 using System.Web;
-using CES.CoreApi.Receipt_Main.Models.DTOs;
+//using CES.CoreApi.Receipt_Main.Models.DTOs;
 
 namespace CES.CoreApi.Receipt_Main.Services
 {
@@ -47,14 +47,14 @@ namespace CES.CoreApi.Receipt_Main.Services
 
                 foreach (var dtl in request.Document.DocumentDetails)
                 {
-                    dtl.DocumentId = request.Document.DocumentId;
+                    dtl.DocumentId = request.Document.Id;
                     if (dtl.ItemId != null && dtl.Item != null)
                     {
                         //_itemrepository.Create(dtl.Item);
-                        dtl.ItemId = dtl.Item.ItemId;
+                        dtl.ItemId = dtl.Item.Id;
                     }
                    
-                    _detallerepository.Create(dtl);
+                    //_detallerepository.Create(dtl);
                 }
 
                 tx.Complete();
@@ -86,9 +86,10 @@ namespace CES.CoreApi.Receipt_Main.Services
         {
             var response = new TaxGenerateReceiptResponse();
 
-            var document = _documentrepository.GetByOrderNumberAndFolio(request.OrderNumber, request.Folio);
+            var document = null as List<Document>;// = _documentrepository.GetByOrderNumberAndFolio(request.OrderNumber, request.Folio);
 
             response.Document = document.FirstOrDefault();
+            
             //TODO: Populate all depending objects in the model
             PopulateDocumentModel(response.Document);
 
