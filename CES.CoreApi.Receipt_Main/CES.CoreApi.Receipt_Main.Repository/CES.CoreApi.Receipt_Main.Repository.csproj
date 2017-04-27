@@ -50,6 +50,24 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="BaseRepository.cs" />
+    <Compile Include="CashierRepository.cs" />
+    <Compile Include="Document_DetailRepository.cs" />
+    <Compile Include="Document_TypeRepository.cs" />
+    <Compile Include="DocumentRepository.cs" />
+    <Compile Include="EntityIdentificationRepository.cs" />
+    <Compile Include="FunctionalityRepository.cs" />
+    <Compile Include="FunctionRoleRepository.cs" />
+    <Compile Include="IdentificationTypeRepository.cs" />
+    <Compile Include="ItemRepository.cs" />
+    <Compile Include="MenuRepository.cs" />
+    <Compile Include="RoleRepository.cs" />
+    <Compile Include="StoreRepository.cs" />
+    <Compile Include="TaskDetailRepository.cs" />
+    <Compile Include="TaskRepository.cs" />
+    <Compile Include="TaskStatusRepository.cs" />
+    <Compile Include="TaskTypeRepository.cs" />
+    <Compile Include="TaxAddressRepository.cs" />
+    <Compile Include="TaxEntityRepository.cs" />
     <Compile Include="CafRepository.cs" />
     <Compile Include="ReceiptDbContext.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

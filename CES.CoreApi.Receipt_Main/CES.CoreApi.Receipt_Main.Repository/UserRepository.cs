@@ -18,7 +18,12 @@ namespace CES.CoreApi.Receipt_Main.Repository
             : base(_dbContext)
         {
         }
-        
+
+        public void CreateUser(User obj)
+        {
+            throw new NotImplementedException();
+        }
+
         public User find(string id)
         {
             return this.Get(p=> p.Id.ToString() == id);
@@ -27,6 +32,21 @@ namespace CES.CoreApi.Receipt_Main.Repository
         public IEnumerable<User> find(Expression<Func<User, bool>> where)
         {
             return this.GetAll(where);
+        }
+
+        public void RemoveUser(User obj)
+        {
+            this.RemoveUser(obj);
+        }
+
+        public void SaveChanges()
+        {
+            this.SaveChanges();
+        }
+
+        public void UpdateUser(User obj)
+        {
+            this.UpdateUser(obj);
         }
     }
 }
