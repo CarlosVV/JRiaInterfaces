@@ -7,13 +7,13 @@ using System.Threading.Tasks;
 
 namespace CES.CoreApi.Receipt_Main.Model.Repositories
 {
-    public interface IUserRepository
+    public interface IMenuRepository
     {
-        User find(string id);
-        IEnumerable<User> find(Expression<Func<User, bool>> where);
-        void CreateUser(User obj);
-        void UpdateUser(User obj);
-        void RemoveUser(User obj);
+        Menu find(string id);
+        IEnumerable<Menu> find(Expression<Func<Menu, bool>> where);
+        void CreateMenu(Menu obj);
+        void UpdateMenu(Menu obj);
+        void RemoveMenu(Menu obj);
         void SaveChanges();
     }
 }

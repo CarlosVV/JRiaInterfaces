@@ -74,15 +74,15 @@ namespace CES.CoreApi.Receipt_Main.UI.WPF.ViewModel
 
         private void Login(object parameter)
         {
-            PasswordBox passwordBox = parameter as PasswordBox;
-            string clearTextPassword = passwordBox.Password;
+            var passwordBox = parameter as PasswordBox;
+            var clearTextPassword = passwordBox.Password;
             try
             {
                 //Validate credentials through the authentication service
-                User user = _authenticationService.AuthenticateUser(Username, clearTextPassword);
+                var user = _authenticationService.AuthenticateUser(Username, clearTextPassword);
 
                 //Get the current principal object
-                CustomPrincipal customPrincipal = Thread.CurrentPrincipal as CustomPrincipal;
+                var customPrincipal = Thread.CurrentPrincipal as CustomPrincipal;
                 if (customPrincipal == null)
                     throw new ArgumentException("The application's default thread principal must be set to a CustomPrincipal object on startup.");
 
@@ -104,7 +104,7 @@ namespace CES.CoreApi.Receipt_Main.UI.WPF.ViewModel
             }
             catch (Exception ex)
             {
-                Status = string.Format("ERROR: {0}", ex.Message);
+                Status = $"ERROR: {ex.Message}";
             }
         }
 
@@ -165,8 +165,7 @@ namespace CES.CoreApi.Receipt_Main.UI.WPF.ViewModel
 
         private void NotifyPropertyChanged(string propertyName)
         {
-            if (PropertyChanged != null)
-                PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
         #endregion
     }
