@@ -12,7 +12,7 @@
         TextOptions.TextRenderingMode="Auto"        
         Background="{DynamicResource MaterialDesignPaper}"
         FontFamily="{StaticResource MaterialDesignFont}" Icon="../ria-financial-squarelogo.png"
-        WindowStartupLocation="CenterScreen" WindowStyle="ToolWindow">
+        WindowStartupLocation="CenterScreen" WindowStyle="ToolWindow" Visibility="{Binding IsVisible,Mode=TwoWay,Converter={StaticResource BooleanToVisibilityConverter}}">
     <Window.Resources>
         <ResourceDictionary>
             <BooleanToVisibilityConverter x:Key="booleanToVisibilityConverter"/>
@@ -40,11 +40,11 @@
         <TextBlock Text="{Binding AuthenticatedUser}" Grid.Row="0" Grid.Column="1"
                FontSize="14" HorizontalAlignment="Right" TextWrapping="Wrap" FontWeight="Bold"
                Margin="0,2,2,2" Grid.RowSpan="2"/>
-        <TextBlock Text="Username:" Grid.Row="2" Grid.Column="0" />
-        <TextBlock Text="Password:" Grid.Row="3" Grid.Column="0" />
+        <TextBlock Text="Username:" Grid.Row="2" Grid.Column="0" Margin="10"/>
+        <TextBlock Text="Password:" Grid.Row="3" Grid.Column="0" Margin="10"/>
         <TextBox Text="{Binding Username}" Grid.Row="2" Grid.Column="1" />
         <PasswordBox x:Name="passwordBox" Grid.Row="3" Grid.Column="1" />
-        <StackPanel Orientation="Horizontal" Grid.Row="4" Grid.Column="1">
+        <StackPanel Orientation="Horizontal" Grid.Row="4" Grid.Column="1" HorizontalAlignment="Center" Margin="20">
             <Button Content="Log in" Command="{Binding LoginCommand, Mode=OneTime}"
             CommandParameter="{Binding ElementName=passwordBox}"
             HorizontalAlignment="Center"/>
@@ -54,11 +54,11 @@
         </StackPanel>
         <TextBlock Text="{Binding Status}" Grid.Row="5" Grid.Column="1"
                HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="Red" TextWrapping="Wrap" Margin="265,0,266,0" />
-        <StackPanel Grid.Row="6" Grid.Column="1" VerticalAlignment="Center" Margin="0,43,0,42">
+        <!--<StackPanel Grid.Row="6" Grid.Column="1" VerticalAlignment="Center" Margin="0,43,0,42">
             <Button Content="Show secret view" Command="{Binding ShowViewCommand}"
               HorizontalAlignment="Center" />
             <Button Content="Show admin view" Command="{Binding ShowViewCommand}" CommandParameter="Admin"
               HorizontalAlignment="Center" Margin="2,2,0,0" />
-        </StackPanel>
+        </StackPanel>-->
     </Grid>
 </Window>

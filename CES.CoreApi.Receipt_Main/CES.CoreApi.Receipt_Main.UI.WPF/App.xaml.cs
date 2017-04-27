@@ -25,6 +25,7 @@ namespace CES.CoreApi.Receipt_Main.UI.WPF
             var customPrincipal = new CustomPrincipal();
             AppDomain.CurrentDomain.SetThreadPrincipal(customPrincipal);
             ConfigureDependencies();
+            ComposeObjects();
 
             base.OnStartup(e);
 

@@ -1,4 +1,5 @@
 ﻿using CES.CoreApi.Receipt_Main.Model.Services;
+using CES.CoreApi.Receipt_Main.UI.WPF.Model;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -16,41 +17,40 @@ namespace CES.CoreApi.Receipt_Main.UI.WPF.Security
     public class AuthenticationService : IAuthenticationService
     {
         private IUserService _userService;
-        private class InternalUserData
-        {
-            public InternalUserData(string username, string email, string hashedPassword, string[] roles)
-            {
-                Username = username;
-                Email = email;
-                HashedPassword = hashedPassword;
-                Roles = roles;
-            }
-            public string Username
-            {
-                get;
-                private set;
-            }
 
-            public string Email
-            {
-                get;
-                private set;
-            }
+        //private class InternalUserData
+        //{
+        //    //public InternalUserData(string username, string email, string hashedPassword, string[] roles)
+        //    //{
+        //    //    Username = username;
+        //    //    Email = email;
+        //    //    HashedPassword = hashedPassword;
+        //    //    Roles = roles;
+        //    //}
+        //    public string Username
+        //    {
+        //        get;
+        //        private set;
+        //    }
 
-            public string HashedPassword
-            {
-                get;
-                private set;
-            }
+        //    public string Email
+        //    {
+        //        get;
+        //        private set;
+        //    }
 
-            public string[] Roles
-            {
-                get;
-                private set;
-            }
-        }
+        //    public string HashedPassword
+        //    {
+        //        get;
+        //        private set;
+        //    }
 
-       
+        //    public string[] Roles
+        //    {
+        //        get;
+        //        private set;
+        //    }
+        //}
 
         public AuthenticationService(IUserService userService)
         {
@@ -79,32 +79,5 @@ namespace CES.CoreApi.Receipt_Main.UI.WPF.Security
             // Return the hash as a base64 encoded string to be compared to the stored password
             return Convert.ToBase64String(hash);
         }
-    }
-
-    public class User
-    {
-        public User(string username, string email, string[] roles)
-        {
-            Username = username;
-            Email = email;
-            Roles = roles;
-        }
-        public string Username
-        {
-            get;
-            set;
-        }
-
-        public string Email
-        {
-            get;
-            set;
-        }
-
-        public string[] Roles
-        {
-            get;
-            set;
-        }
-    }
+    }   
 }

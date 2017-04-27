@@ -10,6 +10,7 @@ namespace CES.CoreApi.Receipt_Main.UI.WPF.Security
     {
         public AnonymousIdentity()
             : base(string.Empty, string.Empty, new string[] { })
-        { }
+        {
+        }
     }
 }

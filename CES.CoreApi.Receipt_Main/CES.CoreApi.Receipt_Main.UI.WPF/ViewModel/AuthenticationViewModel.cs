@@ -1,4 +1,5 @@
-﻿using CES.CoreApi.Receipt_Main.UI.WPF.Security;
+﻿using CES.CoreApi.Receipt_Main.Domain;
+using CES.CoreApi.Receipt_Main.UI.WPF.Security;
 using CES.CoreApi.Receipt_Main.UI.WPF.View;
 using Ninject;
 using Prism.Commands;
@@ -16,17 +17,14 @@ using System.Windows.Controls;
 
 namespace CES.CoreApi.Receipt_Main.UI.WPF.ViewModel
 {
-    public interface IViewModel { }
-
     public class AuthenticationViewModel : IViewModel, INotifyPropertyChanged
-    {
-        
+    {        
         private readonly IAuthenticationService _authenticationService;
         private readonly DelegateCommand<object> _loginCommand;
         private readonly DelegateCommand<object> _logoutCommand;
         private readonly DelegateCommand<object> _showViewCommand;
         private string _username;
-        private string _status;       
+        private string _status;
 
         public AuthenticationViewModel(IAuthenticationService authenticationService)
         {
@@ -61,6 +59,17 @@ namespace CES.CoreApi.Receipt_Main.UI.WPF.ViewModel
         {
             get { return _status; }
             set { _status = value; NotifyPropertyChanged("Status"); }
+        }
+
+        private bool _IsVisible;
+        public bool IsVisible
+        {
+            get { return _IsVisible; }
+            set
+            {
+                _IsVisible = value;
+                NotifyPropertyChanged("IsVisible");
+            }
         }
         #endregion
 
@@ -97,6 +106,9 @@ namespace CES.CoreApi.Receipt_Main.UI.WPF.ViewModel
                 Username = string.Empty; //reset
                 passwordBox.Password = string.Empty; //reset
                 Status = string.Empty;
+                IsVisible = false;
+                //NotifyPropertyChanged("Visible");
+                Application.Current.MainWindow.Show();
             }
             catch (UnauthorizedAccessException)
             {
