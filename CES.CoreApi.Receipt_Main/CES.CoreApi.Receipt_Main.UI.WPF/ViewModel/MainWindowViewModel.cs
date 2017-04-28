@@ -14,9 +14,10 @@ namespace CES.CoreApi.Receipt_Main.UI.WPF.ViewModel
         {
             MenuElements = new[]
             {
-                new MenuElement {Label = "Actions", Content =  new CafManagement() },
-                new MenuElement{Label = "Search Documents" },
-                new MenuElement{Label = "Send to EIS" }
+                new MenuElement {Label = "Actions"},
+                new MenuElement {Label = "Search Documents" },
+                new MenuElement {Label = "Send to EIS" },
+                new MenuElement {Label = "CAF Load", Content = new CafManagement() }
             };
         }
         public MenuElement[] MenuElements { get; }

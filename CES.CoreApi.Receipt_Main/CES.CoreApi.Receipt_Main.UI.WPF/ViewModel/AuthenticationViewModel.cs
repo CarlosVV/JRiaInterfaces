@@ -153,14 +153,14 @@ namespace CES.CoreApi.Receipt_Main.UI.WPF.ViewModel
         {
             try
             {
-                Status = string.Empty;
-                IView view;
-                if (parameter == null)
-                    view = new SecretWindow();
-                else
-                    view = new AdminWindow();
+               // Status = string.Empty;
+               // IView view;
+               // if (parameter == null)
+               //     view = new SecretWindow();
+               // else
+               //     view = new AdminWindow();
 
-               ((Window)view).Show();
+               //((Window)view).Show();
             }
             catch (SecurityException)
             {

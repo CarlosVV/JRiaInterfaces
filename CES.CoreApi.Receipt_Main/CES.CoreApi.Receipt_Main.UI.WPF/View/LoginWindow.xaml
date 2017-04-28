@@ -4,15 +4,17 @@
         xmlns:system="clr-namespace:System;assembly=mscorlib"
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         xmlns:local="clr-namespace:CES.CoreApi.Receipt_Main.UI.WPF.View"
-        Title="LoginWindow" Height="300" Width="600"
+        Title="Ingresar al Sistema" Height="300" Width="600"
         TextElement.Foreground="{DynamicResource MaterialDesignBody}"
         TextElement.FontWeight="Regular"
         TextElement.FontSize="13"
         TextOptions.TextFormattingMode="Ideal" 
         TextOptions.TextRenderingMode="Auto"        
         Background="{DynamicResource MaterialDesignPaper}"
-        FontFamily="{StaticResource MaterialDesignFont}" Icon="../ria-financial-squarelogo.png"
-        WindowStartupLocation="CenterScreen" WindowStyle="ToolWindow" Visibility="{Binding IsVisible,Mode=TwoWay,Converter={StaticResource BooleanToVisibilityConverter}}">
+        FontFamily="{StaticResource MaterialDesignFont}" 
+        Icon="../ria-financial-squarelogo.png"
+        WindowStartupLocation="CenterScreen" WindowStyle="ToolWindow" 
+        Visibility="{Binding IsVisible,Mode=TwoWay,Converter={StaticResource BooleanToVisibilityConverter}}">
     <Window.Resources>
         <ResourceDictionary>
             <BooleanToVisibilityConverter x:Key="booleanToVisibilityConverter"/>
@@ -37,28 +39,14 @@
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
-        <TextBlock Text="{Binding AuthenticatedUser}" Grid.Row="0" Grid.Column="1"
-               FontSize="14" HorizontalAlignment="Right" TextWrapping="Wrap" FontWeight="Bold"
-               Margin="0,2,2,2" Grid.RowSpan="2"/>
-        <TextBlock Text="Username:" Grid.Row="2" Grid.Column="0" Margin="10"/>
-        <TextBlock Text="Password:" Grid.Row="3" Grid.Column="0" Margin="10"/>
-        <TextBox Text="{Binding Username}" Grid.Row="2" Grid.Column="1" />
-        <PasswordBox x:Name="passwordBox" Grid.Row="3" Grid.Column="1" />
+        <materialDesign:PackIcon Grid.Row="2" Grid.Column="0" Kind="Account" Foreground="{Binding ElementName=FolioEndTextBox, Path=BorderBrush}" />
+        <TextBox Text="{Binding Username}" Grid.Row="2" Grid.Column="1" Margin="0 12 0 0" materialDesign:HintAssist.Hint="Usuario" Style="{StaticResource MaterialDesignFloatingHintTextBox}"/>
+        <materialDesign:PackIcon Grid.Row="3" Grid.Column="0" Kind="Key" Margin="0 12 0 0" Foreground="{Binding ElementName=FloatingPasswordBox, Path=BorderBrush}" />
+        <PasswordBox x:Name="passwordBox" Grid.Row="3" Margin="0 12 0 0" Grid.Column="1" materialDesign:HintAssist.Hint="Password" Style="{StaticResource MaterialDesignFloatingHintPasswordBox}" />
         <StackPanel Orientation="Horizontal" Grid.Row="4" Grid.Column="1" HorizontalAlignment="Center" Margin="20">
-            <Button Content="Log in" Command="{Binding LoginCommand, Mode=OneTime}"
-            CommandParameter="{Binding ElementName=passwordBox}"
-            HorizontalAlignment="Center"/>
-            <Button Content="Log out" Command="{Binding LogoutCommand, Mode=OneTime}"
-            Visibility="{Binding IsAuthenticated, Converter={StaticResource booleanToVisibilityConverter}}"
-            HorizontalAlignment="Center" Margin="2,0,0,0"/>
+            <Button Content="Ingresar" Command="{Binding LoginCommand, Mode=OneTime}" CommandParameter="{Binding ElementName=passwordBox}" HorizontalAlignment="Center"/>
+            <Button Content="Salir" Command="{Binding LogoutCommand, Mode=OneTime}" Visibility="{Binding IsAuthenticated, Converter={StaticResource booleanToVisibilityConverter}}" HorizontalAlignment="Center" Margin="2,0,0,0"/>
         </StackPanel>
-        <TextBlock Text="{Binding Status}" Grid.Row="5" Grid.Column="1"
-               HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="Red" TextWrapping="Wrap" Margin="265,0,266,0" />
-        <!--<StackPanel Grid.Row="6" Grid.Column="1" VerticalAlignment="Center" Margin="0,43,0,42">
-            <Button Content="Show secret view" Command="{Binding ShowViewCommand}"
-              HorizontalAlignment="Center" />
-            <Button Content="Show admin view" Command="{Binding ShowViewCommand}" CommandParameter="Admin"
-              HorizontalAlignment="Center" Margin="2,2,0,0" />
-        </StackPanel>-->
+        <TextBlock Text="{Binding Status}" Grid.Row="5" TextWrapping="Wrap" Grid.Column="1" HorizontalAlignment="Left" VerticalAlignment="Top" Foreground="Red"  Margin="20,0,20,0" />
     </Grid>
 </Window>
