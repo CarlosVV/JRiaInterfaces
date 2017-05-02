@@ -69,7 +69,7 @@
             <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
         <TextBlock Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" Style="{StaticResource MaterialDesignHeadlineTextBlock}">Administración de CAFs</TextBlock>
-        <materialDesign:PackIcon Grid.Row="1" Grid.Column="0" Kind="Numeric" Foreground="{Binding ElementName=FolioStartTextBox, Path=BorderBrush}" />
+        <materialDesign:PackIcon Grid.Row="1" Grid.Column="0" Kind="Numeric" Foreground="{Binding ElementName=FolioStartTextBox, Path=BorderBrush}" VerticalAlignment="Center" Margin="4 0 4 0" />
         <TextBox Grid.Row="1" Grid.Column="1" 
 				    x:Name="FolioStartTextBox"
 				    materialDesign:HintAssist.Hint="Folio Inicio"
