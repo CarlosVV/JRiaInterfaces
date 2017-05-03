@@ -39,14 +39,21 @@
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
+        <!--Usuario-->
         <materialDesign:PackIcon Grid.Row="2" Grid.Column="0" Kind="Account" Foreground="{Binding ElementName=FolioEndTextBox, Path=BorderBrush}" />
         <TextBox Text="{Binding Username}" Grid.Row="2" Grid.Column="1" Margin="0 12 0 0" materialDesign:HintAssist.Hint="Usuario" Style="{StaticResource MaterialDesignFloatingHintTextBox}"/>
+        
+        <!--Password-->
         <materialDesign:PackIcon Grid.Row="3" Grid.Column="0" Kind="Key" Margin="0 12 0 0" Foreground="{Binding ElementName=FloatingPasswordBox, Path=BorderBrush}" />
         <PasswordBox x:Name="passwordBox" Grid.Row="3" Margin="0 12 0 0" Grid.Column="1" materialDesign:HintAssist.Hint="Password" Style="{StaticResource MaterialDesignFloatingHintPasswordBox}" />
+
+        <!--Button Ingresar-->
         <StackPanel Orientation="Horizontal" Grid.Row="4" Grid.Column="1" HorizontalAlignment="Center" Margin="20">
             <Button Content="Ingresar" Command="{Binding LoginCommand, Mode=OneTime}" CommandParameter="{Binding ElementName=passwordBox}" HorizontalAlignment="Center"/>
             <Button Content="Salir" Command="{Binding LogoutCommand, Mode=OneTime}" Visibility="{Binding IsAuthenticated, Converter={StaticResource booleanToVisibilityConverter}}" HorizontalAlignment="Center" Margin="2,0,0,0"/>
         </StackPanel>
+
+        <!--Estado-->
         <TextBlock Text="{Binding Status}" Grid.Row="5" TextWrapping="Wrap" Grid.Column="1" HorizontalAlignment="Left" VerticalAlignment="Top" Foreground="Red"  Margin="20,0,20,0" />
     </Grid>
 </Window>

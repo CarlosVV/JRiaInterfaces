@@ -103,7 +103,14 @@
     <Compile Include="Model\SubMenuItem.cs" />
     <Compile Include="Model\User.cs" />
     <Compile Include="MyModule.cs" />
+    <Compile Include="ViewModel\CafFormViewModel.cs" />
     <Compile Include="ViewModel\CafManagementViewModel.cs" />
+    <Compile Include="ViewModel\CashiersViewModel.cs" />
+    <Compile Include="ViewModel\CheckListViewModel.cs" />
+    <Compile Include="ViewModel\DownloadSiiDocumentsViewModel.cs" />
+    <Compile Include="ViewModel\GenerateCreditNotesViewModel.xaml.cs">
+      <DependentUpon>GenerateCreditNotesViewModel.xaml</DependentUpon>
+    </Compile>
     <Compile Include="ViewModel\MainWindowViewModel.cs" />
     <Compile Include="ViewModel\CafResultSelectableViewModel.cs" />
     <Compile Include="ViewModel\IViewModel.cs" />
@@ -113,13 +120,68 @@
     <Compile Include="View\CafManagement.xaml.cs">
       <DependentUpon>CafManagement.xaml</DependentUpon>
     </Compile>
+    <Compile Include="View\Cashiers.xaml.cs">
+      <DependentUpon>Cashiers.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\CheckList.xaml.cs">
+      <DependentUpon>CheckList.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\DownloadSiiDocuments.xaml.cs">
+      <DependentUpon>DownloadSiiDocuments.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\GenerateCreditNotes.xaml.cs">
+      <DependentUpon>GenerateCreditNotes.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\LoginWindow.xaml.cs">
       <DependentUpon>LoginWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Parameters.xaml.cs">
+      <DependentUpon>Parameters.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Printers.xaml.cs">
+      <DependentUpon>Printers.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\SearchDocuments.xaml.cs">
+      <DependentUpon>SearchDocuments.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\SendToEIS.xaml.cs">
+      <DependentUpon>SendToEIS.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Services.xaml.cs">
+      <DependentUpon>Services.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\SiiVatConciliation.xaml.cs">
+      <DependentUpon>SiiVatConciliation.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\StoreForm.xaml.cs">
+      <DependentUpon>StoreForm.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\StoreManagement.xaml.cs">
+      <DependentUpon>StoreManagement.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\SubMenuList.xaml.cs">
       <DependentUpon>SubMenuList.xaml</DependentUpon>
     </Compile>
+    <Compile Include="View\TaxDocumentForm.xaml.cs">
+      <DependentUpon>TaxDocumentForm.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\ToDoDocumentsReport.xaml.cs">
+      <DependentUpon>ToDoDocumentsReport.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\UnDoDocumentsReport.xaml.cs">
+      <DependentUpon>UnDoDocumentsReport.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\UserForm.xaml.cs">
+      <DependentUpon>UserForm.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\UserManagement.xaml.cs">
+      <DependentUpon>UserManagement.xaml</DependentUpon>
+    </Compile>
     <Page Include="Domain\SampleMessageDialog.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="ViewModel\GenerateCreditNotesViewModel.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -128,6 +190,22 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\CafManagement.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Cashiers.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\CheckList.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\DownloadSiiDocuments.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\GenerateCreditNotes.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -156,7 +234,59 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="View\Parameters.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Printers.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\SearchDocuments.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\SendToEIS.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Services.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\SiiVatConciliation.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\StoreForm.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\StoreManagement.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="View\SubMenuList.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\TaxDocumentForm.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\ToDoDocumentsReport.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\UnDoDocumentsReport.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\UserForm.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\UserManagement.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

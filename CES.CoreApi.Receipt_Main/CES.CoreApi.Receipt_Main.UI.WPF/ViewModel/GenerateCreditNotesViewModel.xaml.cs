@@ -1,5 +1,4 @@
-﻿using CES.CoreApi.Receipt_Main.UI.WPF.ViewModel;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -14,17 +13,16 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace CES.CoreApi.Receipt_Main.UI.WPF.View
+namespace CES.CoreApi.Receipt_Main.UI.WPF.ViewModel
 {
     /// <summary>
-    /// Interaction logic for CafForm.xaml
+    /// Interaction logic for GenerateCreditNotesViewModel.xaml
     /// </summary>
-    public partial class CafForm : UserControl
+    public partial class GenerateCreditNotesViewModel : UserControl
     {
-        public CafForm()
+        public GenerateCreditNotesViewModel()
         {
             InitializeComponent();
-            DataContext = new CafFormViewModel();
-        }        
+        }
     }
 }

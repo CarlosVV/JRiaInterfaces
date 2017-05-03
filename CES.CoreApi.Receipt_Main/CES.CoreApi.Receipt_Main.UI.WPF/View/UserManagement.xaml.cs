@@ -1,5 +1,4 @@
-﻿using CES.CoreApi.Receipt_Main.UI.WPF.ViewModel;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -17,14 +16,13 @@ using System.Windows.Shapes;
 namespace CES.CoreApi.Receipt_Main.UI.WPF.View
 {
     /// <summary>
-    /// Interaction logic for CafForm.xaml
+    /// Interaction logic for UserManagement.xaml
     /// </summary>
-    public partial class CafForm : UserControl
+    public partial class UserManagement : UserControl
     {
-        public CafForm()
+        public UserManagement()
         {
             InitializeComponent();
-            DataContext = new CafFormViewModel();
-        }        
+        }
     }
 }

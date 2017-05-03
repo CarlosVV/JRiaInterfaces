@@ -6,7 +6,7 @@
              xmlns:local="clr-namespace:CES.CoreApi.Receipt_Main.UI.WPF.View"
              xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
              mc:Ignorable="d" 
-             d:DesignHeight="300" d:DesignWidth="300">
+             d:DesignHeight="300" d:DesignWidth="800">
     <UserControl.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
@@ -40,13 +40,73 @@
             </Style>-->
         </ResourceDictionary>
     </UserControl.Resources>
-    <Grid>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="Auto"></ColumnDefinition>
-        </Grid.ColumnDefinitions>
-        <Grid.RowDefinitions>
-            <RowDefinition Height="Auto"></RowDefinition>
-        </Grid.RowDefinitions>
-        <TextBlock Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" Style="{StaticResource MaterialDesignHeadlineTextBlock}">Common Fields</TextBlock>
-    </Grid>
+    <Border Padding="5">
+        <StackPanel>
+            <TextBlock Text="Edit/New CAF" Padding="10" FontWeight="Bold"/>
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="5*" />
+                </Grid.ColumnDefinitions>
+                <!--ID-->
+                <TextBlock Grid.Column="0" Text="ID" Padding="2" Margin="0,0,67,0"/>
+                <TextBox IsReadOnly="True" Grid.ColumnSpan="2" Margin="80,8,0,8"/>
+            </Grid>
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+
+                <!--Folio Inicio-->
+                <TextBlock Grid.Column="0" Text="Folio Inicio" Padding="2" Margin="0,0,67,0"/>
+                <TextBox Grid.ColumnSpan="2" Margin="80,8,0,8"/>
+
+                <!--Folio Fin-->
+                <TextBlock Grid.Column="2" Text="Folio Fin" Padding="2" Margin="0,0,76,0"/>
+                <TextBox Grid.Column="2" Grid.ColumnSpan="2" Margin="56,8,0,8"/>
+
+                <!--Tienda-->
+                <TextBlock Grid.Column="4" Text="Tienda" Padding="2" Margin="0,0,89,0"/>
+                <TextBox Grid.Column="4" Grid.ColumnSpan="2" Margin="48,8,0,8"/>
+
+            </Grid>
+
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="3*" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+
+                <!--Contenido-->
+                <TextBlock Grid.Column="0" Text="Contenido"  Padding="2"/>
+                <TextBox Grid.ColumnSpan="2" Margin="80,8,0,8" />
+
+                <!--Boton Cargar-->
+                <StackPanel Grid.Column="2">
+                    <Button  Content="Cargar archivo..." Margin="10 0 5 5"/>
+                    <CheckBox Content="Deshabilitar" Margin="10 0 5 5"/>
+                </StackPanel>                
+            </Grid>
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+               
+                <StackPanel Grid.Column="0" Orientation="Horizontal" HorizontalAlignment="Center">
+                    <!--Boton Cargar-->
+                    <Button  Content="Guardar" Margin="10,0,0,0"/>
+                    <!--Boton Limpiar-->
+                    <Button  Content="Limpiar" Margin="10 0 0 0"/>
+                    <!--Boton Cancelar-->
+                    <Button  Content="Cancelar" Margin="10 0 10 0"/>
+                </StackPanel>
+            </Grid>
+        </StackPanel>        
+    </Border>  
 </UserControl>
