@@ -16,11 +16,11 @@ using System.Windows.Shapes;
 namespace CES.CoreApi.Receipt_Main.UI.WPF.View
 {
     /// <summary>
-    /// Interaction logic for SubMenuList.xaml
+    /// Interaction logic for AssignFunctionsToRoles.xaml
     /// </summary>
-    public partial class SubMenuList : UserControl
+    public partial class AssignFunctionsToRoles : UserControl
     {
-        public SubMenuList()
+        public AssignFunctionsToRoles()
         {
             InitializeComponent();
         }

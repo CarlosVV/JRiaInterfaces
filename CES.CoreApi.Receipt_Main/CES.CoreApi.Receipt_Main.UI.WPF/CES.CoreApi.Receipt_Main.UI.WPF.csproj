@@ -103,17 +103,36 @@
     <Compile Include="Model\SubMenuItem.cs" />
     <Compile Include="Model\User.cs" />
     <Compile Include="MyModule.cs" />
+    <Compile Include="ViewModel\ActivityDetailViewModel.cs" />
+    <Compile Include="ViewModel\AssignFunctionsToRolesViewModel.cs" />
     <Compile Include="ViewModel\CafFormViewModel.cs" />
     <Compile Include="ViewModel\CafManagementViewModel.cs" />
     <Compile Include="ViewModel\CashiersViewModel.cs" />
     <Compile Include="ViewModel\CheckListViewModel.cs" />
     <Compile Include="ViewModel\DownloadSiiDocumentsViewModel.cs" />
-    <Compile Include="ViewModel\GenerateCreditNotesViewModel.xaml.cs">
-      <DependentUpon>GenerateCreditNotesViewModel.xaml</DependentUpon>
-    </Compile>
+    <Compile Include="ViewModel\GenerateCreditNotesViewModel.cs" />
     <Compile Include="ViewModel\MainWindowViewModel.cs" />
     <Compile Include="ViewModel\CafResultSelectableViewModel.cs" />
     <Compile Include="ViewModel\IViewModel.cs" />
+    <Compile Include="ViewModel\ParametersViewModel.cs" />
+    <Compile Include="ViewModel\PrintersViewModel.cs" />
+    <Compile Include="ViewModel\SearchDocumentosViewModel.cs" />
+    <Compile Include="ViewModel\SendToEISViewModel.cs" />
+    <Compile Include="ViewModel\ServicesViewModel.cs" />
+    <Compile Include="ViewModel\SiiVatConciliationViewModel.cs" />
+    <Compile Include="ViewModel\StoreFormViewModel.cs" />
+    <Compile Include="ViewModel\StoreManagementViewModel.cs" />
+    <Compile Include="ViewModel\TaxDocumentFormViewModel.cs" />
+    <Compile Include="ViewModel\ToDoDocumentsReportViewModel.cs" />
+    <Compile Include="ViewModel\UnDoDocumentsReportViewModel.cs" />
+    <Compile Include="ViewModel\UserFormViewModel.cs" />
+    <Compile Include="ViewModel\UserManagementViewModel.cs" />
+    <Compile Include="View\ActivityDetail.xaml.cs">
+      <DependentUpon>ActivityDetail.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\AssignFunctionsToRoles.xaml.cs">
+      <DependentUpon>AssignFunctionsToRoles.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\CafForm.xaml.cs">
       <DependentUpon>CafForm.xaml</DependentUpon>
     </Compile>
@@ -159,9 +178,6 @@
     <Compile Include="View\StoreManagement.xaml.cs">
       <DependentUpon>StoreManagement.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\SubMenuList.xaml.cs">
-      <DependentUpon>SubMenuList.xaml</DependentUpon>
-    </Compile>
     <Compile Include="View\TaxDocumentForm.xaml.cs">
       <DependentUpon>TaxDocumentForm.xaml</DependentUpon>
     </Compile>
@@ -181,7 +197,11 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="ViewModel\GenerateCreditNotesViewModel.xaml">
+    <Page Include="View\ActivityDetail.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\AssignFunctionsToRoles.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -263,10 +283,6 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\StoreManagement.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="View\SubMenuList.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

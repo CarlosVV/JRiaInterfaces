@@ -13,14 +13,14 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace CES.CoreApi.Receipt_Main.UI.WPF.ViewModel
+namespace CES.CoreApi.Receipt_Main.UI.WPF.View
 {
     /// <summary>
-    /// Interaction logic for GenerateCreditNotesViewModel.xaml
+    /// Interaction logic for ActivityDetail.xaml
     /// </summary>
-    public partial class GenerateCreditNotesViewModel : UserControl
+    public partial class ActivityDetail : UserControl
     {
-        public GenerateCreditNotesViewModel()
+        public ActivityDetail()
         {
             InitializeComponent();
         }

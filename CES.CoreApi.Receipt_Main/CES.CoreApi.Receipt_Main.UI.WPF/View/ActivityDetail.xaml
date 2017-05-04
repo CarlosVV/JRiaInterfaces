@@ -1,0 +1,38 @@
+﻿<UserControl x:Class="CES.CoreApi.Receipt_Main.UI.WPF.View.ActivityDetail"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:CES.CoreApi.Receipt_Main.UI.WPF.View"
+             mc:Ignorable="d" 
+             d:DesignHeight="800" d:DesignWidth="800">
+    <Border Padding="10">
+        <StackPanel>
+            <TextBlock Text="Registro de Actividades" FontWeight="Bold"/>
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="4*"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <TextBlock Grid.Column="0" Text="Buscar:" Margin="0 10 0 0"/>
+                <TextBox Grid.Column="1" Padding="2"/>
+                <StackPanel Grid.Column="2" HorizontalAlignment="Center" Orientation="Horizontal">
+                    <Button Content="Buscar"  Margin="0 10 0 0"/>
+                </StackPanel>
+            </Grid>
+            <DataGrid Grid.Column="0" Margin="0 10 2 0">
+                <DataGrid.Columns>
+                    <DataGridTextColumn Header="Caja"></DataGridTextColumn>
+                    <DataGridTextColumn Header="OrderNo"></DataGridTextColumn>
+                    <DataGridTextColumn Header="Folio"></DataGridTextColumn>
+                    <DataGridTextColumn Header="Tipo"></DataGridTextColumn>
+                    <DataGridTextColumn Header="Fecha"></DataGridTextColumn>
+                    <DataGridTextColumn Header="Enviado"></DataGridTextColumn>
+                    <DataGridTextColumn Header="Impreso"></DataGridTextColumn>
+                    <DataGridTextColumn Header="Ver"></DataGridTextColumn>
+                </DataGrid.Columns>
+            </DataGrid>
+        </StackPanel>
+    </Border>
+</UserControl>

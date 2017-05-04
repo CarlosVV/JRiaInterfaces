@@ -5,8 +5,69 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:CES.CoreApi.Receipt_Main.UI.WPF.View"
              mc:Ignorable="d" 
-             d:DesignHeight="300" d:DesignWidth="300">
-    <Grid>
-            
-    </Grid>
+             d:DesignHeight="800" d:DesignWidth="800">
+    <Border Padding="10">
+        <StackPanel>
+            <TextBlock Text="Buscar Documentos" FontWeight="Bold"/>
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="2*"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="2*"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="2*"/>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*" />
+                    <RowDefinition Height="*" />
+                </Grid.RowDefinitions>
+                <Label Grid.Column="0" Grid.Row="0" Content="Fecha inicio" Margin="0 0 0 0" />
+                <Label Grid.Column="2" Grid.Row="0" Content="Fecha fin" Margin="0 0 0 0"/>
+                <Label Grid.Column="4" Grid.Row="0" Content="RUT" Margin="0 0 0 0"/>
+                <Label Grid.Column="0" Grid.Row="1" Content="Ordenes/Folios" Margin="0 0 0 0" />
+                <Label Grid.Column="2" Grid.Row="1" Content="Tipo" Margin="0 0 0 0"/>
+                <Label Grid.Column="4" Grid.Row="1" Content="Keyword" Margin="0 0 0 0"/>
+                
+                <TextBox Grid.Column="1" Grid.Row="0" Padding="2"  Margin="5" TextWrapping="Wrap" AcceptsReturn="True" AcceptsTab="True"/>
+                <TextBox Grid.Column="3" Grid.Row="0" Padding="2"  Margin="5" TextWrapping="Wrap" AcceptsReturn="True" AcceptsTab="True"/>
+                <TextBox Grid.Column="5" Grid.Row="0" Padding="2"  Margin="5" TextWrapping="Wrap" AcceptsReturn="True" AcceptsTab="True"/>
+                <TextBox Grid.Column="1" Grid.Row="1" Padding="2"  Margin="5" TextWrapping="Wrap" AcceptsReturn="True" AcceptsTab="True"/>
+                <ComboBox Grid.Column="3" Grid.Row="1" Margin="0,0,0,68">
+                    <ComboBoxItem Content="Boletas" IsSelected="True"></ComboBoxItem>
+                    <ComboBoxItem Content="Facturas"></ComboBoxItem>
+                </ComboBox>
+                <TextBox Grid.Column="5" Grid.Row="1" Padding="2"  Margin="5,5,5,56" TextWrapping="Wrap" AcceptsReturn="True" AcceptsTab="True"/>
+
+            </Grid>
+            <StackPanel  HorizontalAlignment="Center" Orientation="Horizontal">
+                <Button Content="Buscar"  Margin="10 10 0 0"/>
+                <Button Content="Limpiar"  Margin="10 10 0 0"/>
+            </StackPanel>
+            <TextBlock Text="Resultados" Margin="0 10 0 0" FontWeight="Bold"/>
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <DataGrid Grid.Column="0" Margin="0 10 0 0 ">
+                    <DataGrid.Columns>
+                        <DataGridCheckBoxColumn Header="Seleccionar"></DataGridCheckBoxColumn>
+                        <DataGridTextColumn Header="OrderNo"></DataGridTextColumn>
+                        <DataGridTextColumn Header="Folio"></DataGridTextColumn>
+                        <DataGridTextColumn Header="Fecha"></DataGridTextColumn>
+                        <DataGridTextColumn Header="Caja"></DataGridTextColumn>
+                        <DataGridTextColumn Header="Status"></DataGridTextColumn>
+                    </DataGrid.Columns>
+                </DataGrid>
+
+            </Grid>
+            <StackPanel  HorizontalAlignment="Center" Orientation="Horizontal">
+                <Button Content="Enviar"  Margin="10 10 0 0"/>
+                <Button Content="Reenviar"  Margin="10 10 0 0"/>
+                <Button Content="Imprimir"  Margin="10 10 0 0"/>
+            </StackPanel>
+            <TextBlock Text="Status" FontWeight="Bold"/>
+            <TextBlock Text="Enviando..."  Margin="10 10 0 0" Background="Green" Padding="10" Foreground="LightGray"/>
+        </StackPanel>
+    </Border>
 </UserControl>

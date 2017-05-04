@@ -14,6 +14,7 @@ namespace CES.CoreApi.Receipt_Main.UI.WPF.Model
     {
         private string _label;
         private object _content;
+        private string _menuType;
         private ScrollBarVisibility _horizontalScrollBarVisibilityRequirement;
         private ScrollBarVisibility _verticalScrollBarVisibilityRequirement;
         private Thickness _marginRequirement = new Thickness(16);
@@ -26,6 +27,11 @@ namespace CES.CoreApi.Receipt_Main.UI.WPF.Model
         {
             get { return _content; }
             set { this.MutateVerbose(ref _content, value, RaisePropertyChanged()); }
+        }
+        public string MenuStyleType
+        {
+            get { return _menuType; }
+            set { this.MutateVerbose(ref _menuType, value, RaisePropertyChanged()); }
         }
 
         public ScrollBarVisibility HorizontalScrollBarVisibilityRequirement

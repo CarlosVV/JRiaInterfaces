@@ -81,5 +81,10 @@ namespace CES.CoreApi.Receipt_Main.UI.WPF
 
             await DialogHost.Show(sampleMessageDialog, "RootDialog");
         }
+
+        private void Window_Unloaded(object sender, RoutedEventArgs e)
+        {
+            Application.Current.Shutdown();
+        }
     }
 }

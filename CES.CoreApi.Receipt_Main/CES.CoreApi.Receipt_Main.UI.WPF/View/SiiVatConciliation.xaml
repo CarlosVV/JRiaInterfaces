@@ -5,8 +5,100 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:CES.CoreApi.Receipt_Main.UI.WPF.View"
              mc:Ignorable="d" 
-             d:DesignHeight="300" d:DesignWidth="300">
-    <Grid>
-            
-    </Grid>
+             d:DesignHeight="800" d:DesignWidth="800">
+    <Border Padding="10">
+        <StackPanel>
+            <TextBlock Text="Concialiación VAT SII" FontWeight="Heavy" FontSize="14" />
+            <StackPanel>
+                <TextBlock Text="Nueva Conciliación" FontWeight="Bold"   Margin="0 10 0 10"/>
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="2*"/>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="*"/>
+                    </Grid.RowDefinitions>
+                    <Label Grid.Column="0" Grid.Row="0" Content="Razón Social"></Label>
+                    <Label Grid.Column="0" Grid.Row="1" Content="Giro"></Label>
+                    <Label Grid.Column="0" Grid.Row="2" Content="Dirección"></Label>
+                    <Label Grid.Column="0" Grid.Row="3" Content="Comuna"></Label>
+
+                    <Label Grid.Column="2" Grid.Row="0" Content="Fecha de emisión"></Label>
+                    <Label Grid.Column="2" Grid.Row="1" Content="RUT"></Label>
+                    <Label Grid.Column="2" Grid.Row="2" Content="Cond. Venta"></Label>
+                    <Label Grid.Column="2" Grid.Row="3" Content="Tipo"></Label>
+
+                    <Label Grid.Column="4" Grid.Row="4" Content="Fecha vencimiento"></Label>
+
+                    <TextBox Grid.Column="1" Grid.Row="0" />
+                    <TextBox Grid.Column="1" Grid.Row="1" />
+                    <TextBox Grid.Column="1" Grid.Row="2" />
+                    <TextBox Grid.Column="1" Grid.Row="3" />
+
+                    <TextBox Grid.Column="3" Grid.Row="0" />
+                    <TextBox Grid.Column="3" Grid.Row="1" />
+                    <TextBox Grid.Column="3" Grid.Row="2" />
+                    <ComboBox Grid.Column="3" Grid.Row="3">
+                        <ComboBoxItem Content="BOLETA" IsSelected="True"></ComboBoxItem>
+                        <ComboBoxItem Content="FACTURA"></ComboBoxItem>
+                        <ComboBoxItem Content="NOTA DE CREDITO"></ComboBoxItem>
+                        <ComboBoxItem Content="NOTA DE DEBITO"></ComboBoxItem>
+                    </ComboBox>
+
+                    <TextBox Grid.Column="5" Grid.Row="4" />
+                </Grid>
+
+            </StackPanel>
+            <TextBlock Text="Documentos referenciados" FontWeight="Bold"   Margin="0 10 0 10"/>
+            <Grid Margin="0 10 0 0">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="11*"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <DataGrid Grid.Column="0" Margin="0 10 0 0 ">
+                    <DataGrid.Columns>
+                        <DataGridTextColumn Header="Tipo Documento"></DataGridTextColumn>
+                        <DataGridTextColumn Header="Folio"></DataGridTextColumn>
+                        <DataGridTextColumn Header="Fecha"></DataGridTextColumn>
+                    </DataGrid.Columns>
+                </DataGrid>
+                <StackPanel Grid.Column="1" Margin="0 10 0 0 ">
+                    <Button Content="+" VerticalAlignment="Center" HorizontalAlignment="Center"></Button>
+                </StackPanel>
+            </Grid>
+            <TextBlock Text="Detalle de Documento" FontWeight="Bold"   Margin="0 10 0 10"/>
+            <Grid Margin="0 10 0 0">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="10*"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <DataGrid Grid.Column="0" Margin="0 10 0 0 ">
+                    <DataGrid.Columns>
+                        <DataGridTextColumn Width="7*" Header="Descripción"></DataGridTextColumn>
+                        <DataGridTextColumn Header="Total"></DataGridTextColumn>
+                    </DataGrid.Columns>
+                </DataGrid>
+                <StackPanel Grid.Column="1" Margin="0 10 0 0 ">
+                    <Button Content="+" VerticalAlignment="Center" HorizontalAlignment="Center"></Button>
+                </StackPanel>
+            </Grid>
+            <StackPanel  HorizontalAlignment="Center" Orientation="Horizontal">
+                <Button Content="Nuevo"  Margin="10 10 0 0"/>
+                <Button Content="Enviar"  Margin="10 10 0 0"/>
+                <Button Content="Limpiar"  Margin="10 10 0 0"/>
+                <Button Content="Cancelar"  Margin="10 10 0 0"/>
+            </StackPanel>
+            <TextBlock Text="Status" FontWeight="Bold"/>
+            <TextBlock Text="Enviando..."  Margin="10 10 0 0" Background="Green" Padding="10" Foreground="LightGray"/>
+        </StackPanel>
+    </Border>
 </UserControl>
