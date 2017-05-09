@@ -4,7 +4,7 @@
         xmlns:model="clr-namespace:CES.CoreApi.Receipt_Main.UI.WPF.Model"
         xmlns:system="clr-namespace:System;assembly=mscorlib"
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
-        Title="Ria Financial" Height="800" Width="1100"
+        Title="Ria Financial" Height="600" Width="800"
         TextElement.Foreground="{DynamicResource MaterialDesignBody}"
         TextElement.FontWeight="Regular"
         TextElement.FontSize="13"
@@ -13,8 +13,7 @@
         Background="{DynamicResource MaterialDesignPaper}"
         FontFamily="{StaticResource MaterialDesignFont}" 
         Icon="../ria-financial-squarelogo.png" 
-        WindowStartupLocation="CenterScreen" 
-        WindowState="Maximized"
+        WindowStartupLocation="CenterScreen"        
         Unloaded="Window_Unloaded">
     <Window.Resources>
         <ResourceDictionary>
@@ -56,12 +55,14 @@
                                                 <DataTrigger Binding="{Binding MenuStyleType}" Value="Header1">
                                                     <Setter Property="FontWeight" Value="Bold"/>
                                                     <Setter Property="Margin" Value="32 0 32 0"/>
+                                                    <Setter Property="FocusVisualStyle" Value="{x:Null}" />
                                                 </DataTrigger>
                                                 <DataTrigger Binding="{Binding MenuStyleType}" Value="Item1">
                                                     <Setter Property="Margin" Value="38 0 32 0"/>
                                                 </DataTrigger>
                                                 <DataTrigger Binding="{Binding MenuStyleType}" Value="Header2">
                                                     <Setter Property="Margin" Value="38 0 32 0"/>
+                                                    <Setter Property="FocusVisualStyle" Value="{x:Null}" />
                                                 </DataTrigger>
                                                 <DataTrigger Binding="{Binding MenuStyleType}" Value="Item2">
                                                     <Setter Property="Margin" Value="48 0 32 0"/>

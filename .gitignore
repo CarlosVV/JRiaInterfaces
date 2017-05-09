@@ -163,3 +163,4 @@ $RECYCLE.BIN/
 /BankAccountService/CES.CoreApi.BankAccount.Service.Web/CES.CoreApi.BankAccount.Service.Web_Package
 /CES.CoreApi.IDValidation/packages
 /CES.CoreApi.Receipt_Main/packages
+/CES.CoreApi.Receipt_Main/CES.CoreApi.Receipt_Main.DemoWpfLoadLocalDb/packages/EntityFramework.6.1.3

@@ -17,7 +17,7 @@ namespace CES.CoreApi.Receipt_Main.UI.WPF.ViewModel
                 new MenuElement {Label = "Acciones", MenuStyleType = "Header1", Content = new ActivityDetail()},
                 new MenuElement {Label = "Buscar Documentos", Content = new SearchDocuments(), MenuStyleType = "Item1"},
                 new MenuElement {Label = "Enviar a SII", Content = new SendToEIS(), MenuStyleType = "Item1"},
-                new MenuElement {Label = "Cargar Caf", MenuStyleType = "Header2"},
+                new MenuElement {Label = "Cargar Caf", Content = new CafManagement(), MenuStyleType = "Header2"},
                 new MenuElement {Label = "Buscar Caf", Content = new CafManagement(), MenuStyleType = "Item2" },
                 new MenuElement {Label = "Nuevo Caf", Content = new CafForm(), MenuStyleType = "Item2" },
                 new MenuElement {Label = "Nuevo Documento", Content = new TaxDocumentForm(), MenuStyleType = "Item1"},

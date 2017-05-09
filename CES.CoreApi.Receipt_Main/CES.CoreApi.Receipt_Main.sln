@@ -25,6 +25,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CES.CoreApi.Receipt_Main.Mo
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CES.CoreApi.Receipt_Main.Domain", "CES.CoreApi.Receipt_Main.Domain\CES.CoreApi.Receipt_Main.Domain.csproj", "{0425505A-B947-4575-BF39-0F633F40C42D}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WpfDemoCargaLocalDb", "CES.CoreApi.Receipt_Main.DemoWpfLoadLocalDb\DemoWpfLoadLocalDb\WpfDemoCargaLocalDb.csproj", "{FBC0FC39-ABF0-451A-9920-72DD9D493A8F}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -55,6 +57,10 @@ Global
 		{0425505A-B947-4575-BF39-0F633F40C42D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{0425505A-B947-4575-BF39-0F633F40C42D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{0425505A-B947-4575-BF39-0F633F40C42D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FBC0FC39-ABF0-451A-9920-72DD9D493A8F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FBC0FC39-ABF0-451A-9920-72DD9D493A8F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FBC0FC39-ABF0-451A-9920-72DD9D493A8F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FBC0FC39-ABF0-451A-9920-72DD9D493A8F}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
