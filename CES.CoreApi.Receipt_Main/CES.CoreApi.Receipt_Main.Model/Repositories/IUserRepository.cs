@@ -1,4 +1,5 @@
-﻿using System;
+﻿using CES.CoreApi.Receipt_Main.Model.Security;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
@@ -9,11 +10,11 @@ namespace CES.CoreApi.Receipt_Main.Model.Repositories
 {
     public interface IUserRepository
     {
-        User find(string id);
-        IEnumerable<User> find(Expression<Func<User, bool>> where);
-        void CreateUser(User obj);
-        void UpdateUser(User obj);
-        void RemoveUser(User obj);
+        systblApp_TaxReceipt_User find(string id);
+        IEnumerable<systblApp_TaxReceipt_User> find(Expression<Func<systblApp_TaxReceipt_User, bool>> where);
+        void CreateUser(systblApp_TaxReceipt_User obj);
+        void UpdateUser(systblApp_TaxReceipt_User obj);
+        void RemoveUser(systblApp_TaxReceipt_User obj);
         void SaveChanges();
     }
 }

@@ -1,4 +1,5 @@
 ﻿using CES.CoreApi.Receipt_Main.Model.Documents;
+using CES.CoreApi.Receipt_Main.Model.Security;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,10 +10,10 @@ namespace CES.CoreApi.Receipt_Main.Model.Services
 {
     public interface IFunctionRoleService
     {
-        List<FunctionRole> GetAllFunctionRoles();
-        void CreateFunctionRole(FunctionRole objectEntry);
-        void UpdateFunctionRole(FunctionRole objectEntry);
-        void RemoveFunctionRole(FunctionRole objectEntry);
+        List<systblApp_TaxReceipt_FunctionRole> GetAllFunctionRoles();
+        void CreateFunctionRole(systblApp_TaxReceipt_FunctionRole objectEntry);
+        void UpdateFunctionRole(systblApp_TaxReceipt_FunctionRole objectEntry);
+        void RemoveFunctionRole(systblApp_TaxReceipt_FunctionRole objectEntry);
         
     }
 }

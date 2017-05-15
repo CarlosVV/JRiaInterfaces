@@ -1,6 +1,7 @@
 ﻿using CES.CoreApi.Receipt_Main.Model;
 using CES.CoreApi.Receipt_Main.Model.Documents;
 using CES.CoreApi.Receipt_Main.Model.Repositories;
+using CES.CoreApi.Receipt_Main.Model.Security;
 using System;
 using System.Collections.Generic;
 using System.Data.Entity;
@@ -12,32 +13,32 @@ using System.Threading.Tasks;
 
 namespace CES.CoreApi.Receipt_Main.Repository
 {
-    public class MenuRepository : BaseRepository<Menu>, IMenuRepository
+    public class MenuRepository : BaseRepository<systblApp_TaxReceipt_Menu>, IMenuRepository
     {
         public MenuRepository(DbContext _dbContext)
             : base(_dbContext)
         {
         }
 
-        public Menu find(string id)
+        public systblApp_TaxReceipt_Menu find(string id)
         {
             return this.Get(p => p.Id.ToString() == id);
         }
 
-        public IEnumerable<Menu> find(Expression<Func<Menu, bool>> where)
+        public IEnumerable<systblApp_TaxReceipt_Menu> find(Expression<Func<systblApp_TaxReceipt_Menu, bool>> where)
         {
             return this.GetAll(where);
         }
 
-        public void CreateMenu(Menu obj)
+        public void CreateMenu(systblApp_TaxReceipt_Menu obj)
         {
             this.Add(obj);
         }
-        public void UpdateMenu(Menu obj)
+        public void UpdateMenu(systblApp_TaxReceipt_Menu obj)
         {
             this.Update(obj);
         }
-        public void RemoveMenu(Menu obj)
+        public void RemoveMenu(systblApp_TaxReceipt_Menu obj)
         {
             this.Delete(obj);
         }

@@ -9,10 +9,10 @@ namespace CES.CoreApi.Receipt_Main.Model.Services
 {
     public interface ITaxEntityService
     {
-        List<TaxEntity> GetAllTaxEntitys();
-        void CreateTaxEntity(TaxEntity objectEntry);
-        void UpdateTaxEntity(TaxEntity objectEntry);
-        void RemoveTaxEntity(TaxEntity objectEntry);
+        List<systblApp_CoreAPI_TaxEntity> GetAllTaxEntitys();
+        void CreateTaxEntity(systblApp_CoreAPI_TaxEntity objectEntry);
+        void UpdateTaxEntity(systblApp_CoreAPI_TaxEntity objectEntry);
+        void RemoveTaxEntity(systblApp_CoreAPI_TaxEntity objectEntry);
         
     }
 }

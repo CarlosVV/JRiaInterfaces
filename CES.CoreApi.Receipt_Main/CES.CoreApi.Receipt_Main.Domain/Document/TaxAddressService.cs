@@ -16,22 +16,22 @@ namespace CES.CoreApi.Receipt_Main.Domain
         {
             repo = repository;
         }
-        public List<TaxAddress> GetAllTaxAddresss()
+        public List<systblApp_CoreAPI_TaxAddress> GetAllTaxAddresss()
         {
             return repo.find(c => !c.fDisabled.Value && !c.fDelete.Value).ToList();
         }
 
-        public void CreateTaxAddress(TaxAddress objectEntry)
+        public void CreateTaxAddress(systblApp_CoreAPI_TaxAddress objectEntry)
         {
             this.repo.CreateTaxAddress(objectEntry);
             this.repo.SaveChanges();          
         }
-        public void UpdateTaxAddress(TaxAddress objectEntry)
+        public void UpdateTaxAddress(systblApp_CoreAPI_TaxAddress objectEntry)
         {
             this.repo.UpdateTaxAddress(objectEntry);
             this.repo.SaveChanges();
         }
-        public void RemoveTaxAddress(TaxAddress objectEntry)
+        public void RemoveTaxAddress(systblApp_CoreAPI_TaxAddress objectEntry)
         {
             this.repo.RemoveTaxAddress(objectEntry);
             this.repo.SaveChanges();

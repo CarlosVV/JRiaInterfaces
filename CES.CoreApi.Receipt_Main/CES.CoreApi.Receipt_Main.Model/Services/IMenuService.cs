@@ -1,4 +1,5 @@
 ﻿using CES.CoreApi.Receipt_Main.Model.Documents;
+using CES.CoreApi.Receipt_Main.Model.Security;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,10 +10,10 @@ namespace CES.CoreApi.Receipt_Main.Model.Services
 {
     public interface IMenuService
     {
-        List<Menu> GetAllMenus();
-        void CreateMenu(Menu objectEntry);
-        void UpdateMenu(Menu objectEntry);
-        void RemoveMenu(Menu objectEntry);
+        List<systblApp_TaxReceipt_Menu> GetAllMenus();
+        void CreateMenu(systblApp_TaxReceipt_Menu objectEntry);
+        void UpdateMenu(systblApp_TaxReceipt_Menu objectEntry);
+        void RemoveMenu(systblApp_TaxReceipt_Menu objectEntry);
         
     }
 }

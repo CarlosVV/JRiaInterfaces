@@ -1,4 +1,5 @@
 ﻿using CES.CoreApi.Receipt_Main.Model.Documents;
+using CES.CoreApi.Receipt_Main.Model.Security;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,11 +11,11 @@ namespace CES.CoreApi.Receipt_Main.Model.Repositories
 {
     public interface IUserRoleRepository
     {
-        UserRole find(string id);
-        IEnumerable<UserRole> find(Expression<Func<UserRole, bool>> where);
-        void CreateUserRole(UserRole obj);
-        void UpdateUserRole(UserRole obj);
-        void RemoveUserRole(UserRole obj);
+        systblApp_TaxReceipt_UserRole find(string id);
+        IEnumerable<systblApp_TaxReceipt_UserRole> find(Expression<Func<systblApp_TaxReceipt_UserRole, bool>> where);
+        void CreateUserRole(systblApp_TaxReceipt_UserRole obj);
+        void UpdateUserRole(systblApp_TaxReceipt_UserRole obj);
+        void RemoveUserRole(systblApp_TaxReceipt_UserRole obj);
         void SaveChanges();
     }
 }

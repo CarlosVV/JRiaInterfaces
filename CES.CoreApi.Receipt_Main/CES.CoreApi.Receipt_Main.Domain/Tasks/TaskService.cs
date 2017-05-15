@@ -1,6 +1,7 @@
 ﻿using CES.CoreApi.Receipt_Main.Model.Documents;
 using CES.CoreApi.Receipt_Main.Model.Repositories;
 using CES.CoreApi.Receipt_Main.Model.Services;
+using CES.CoreApi.Receipt_Main.Model.Tasks;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -15,22 +16,22 @@ namespace CES.CoreApi.Receipt_Main.Domain
         {
             repo = repository;
         }
-        public List<Task> GetAllTasks()
+        public List<systblApp_CoreAPI_Task> GetAllTasks()
         {
             return repo.find(c => !c.fDisabled.Value && !c.fDelete.Value).ToList();
         }
 
-        public void CreateTask(Task objectEntry)
+        public void CreateTask(systblApp_CoreAPI_Task objectEntry)
         {
             this.repo.CreateTask(objectEntry);
             this.repo.SaveChanges();          
         }
-        public void UpdateTask(Task objectEntry)
+        public void UpdateTask(systblApp_CoreAPI_Task objectEntry)
         {
             this.repo.UpdateTask(objectEntry);
             this.repo.SaveChanges();
         }
-        public void RemoveTask(Task objectEntry)
+        public void RemoveTask(systblApp_CoreAPI_Task objectEntry)
         {
             this.repo.RemoveTask(objectEntry);
             this.repo.SaveChanges();

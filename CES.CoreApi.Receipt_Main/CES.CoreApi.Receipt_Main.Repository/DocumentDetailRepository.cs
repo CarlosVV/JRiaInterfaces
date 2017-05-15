@@ -1,5 +1,4 @@
-﻿using CES.CoreApi.Receipt_Main.Model;
-using CES.CoreApi.Receipt_Main.Model.Documents;
+﻿using CES.CoreApi.Receipt_Main.Model.Documents;
 using CES.CoreApi.Receipt_Main.Model.Repositories;
 using System;
 using System.Collections.Generic;
@@ -12,32 +11,32 @@ using System.Threading.Tasks;
 
 namespace CES.CoreApi.Receipt_Main.Repository
 {
-    public class CashierRepository : BaseRepository<Cashier>, ICashierRepository
+    public class DocumentDetailRepository : BaseRepository<systblApp_CoreAPI_DocumentDetail>, IDocumentDetailRepository
     {
-        public CashierRepository(DbContext _dbContext)
+        public DocumentDetailRepository(DbContext _dbContext)
             : base(_dbContext)
         {
         }
 
-        public Cashier find(string id)
+        public systblApp_CoreAPI_DocumentDetail find(string id)
         {
             return this.Get(p => p.Id.ToString() == id);
         }
 
-        public IEnumerable<Cashier> find(Expression<Func<Cashier, bool>> where)
+        public IEnumerable<systblApp_CoreAPI_DocumentDetail> find(Expression<Func<systblApp_CoreAPI_DocumentDetail, bool>> where)
         {
             return this.GetAll(where);
         }
 
-        public void CreateCashier(Cashier obj)
+        public void CreateDocumentDetail(systblApp_CoreAPI_DocumentDetail obj)
         {
             this.Add(obj);
         }
-        public void UpdateCashier(Cashier obj)
+        public void UpdateDocumentDetail(systblApp_CoreAPI_DocumentDetail obj)
         {
             this.Update(obj);
         }
-        public void RemoveCashier(Cashier obj)
+        public void RemoveDocumentDetail(systblApp_CoreAPI_DocumentDetail obj)
         {
             this.Delete(obj);
         }

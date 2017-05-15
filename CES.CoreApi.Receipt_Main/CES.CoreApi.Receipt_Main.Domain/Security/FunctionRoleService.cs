@@ -1,6 +1,7 @@
 ﻿using CES.CoreApi.Receipt_Main.Model;
 using CES.CoreApi.Receipt_Main.Model.Documents;
 using CES.CoreApi.Receipt_Main.Model.Repositories;
+using CES.CoreApi.Receipt_Main.Model.Security;
 using CES.CoreApi.Receipt_Main.Model.Services;
 using System;
 using System.Collections.Generic;
@@ -17,22 +18,22 @@ namespace CES.CoreApi.Receipt_Main.Domain
         {
             repo = repository;
         }
-        public List<FunctionRole> GetAllFunctionRoles()
+        public List<systblApp_TaxReceipt_FunctionRole> GetAllFunctionRoles()
         {
             return repo.find(c => !c.fDisabled.Value && !c.fDelete.Value).ToList();
         }
 
-        public void CreateFunctionRole(FunctionRole objectEntry)
+        public void CreateFunctionRole(systblApp_TaxReceipt_FunctionRole objectEntry)
         {
             this.repo.CreateFunctionRole(objectEntry);
             this.repo.SaveChanges();          
         }
-        public void UpdateFunctionRole(FunctionRole objectEntry)
+        public void UpdateFunctionRole(systblApp_TaxReceipt_FunctionRole objectEntry)
         {
             this.repo.UpdateFunctionRole(objectEntry);
             this.repo.SaveChanges();
         }
-        public void RemoveFunctionRole(FunctionRole objectEntry)
+        public void RemoveFunctionRole(systblApp_TaxReceipt_FunctionRole objectEntry)
         {
             this.repo.RemoveFunctionRole(objectEntry);
             this.repo.SaveChanges();

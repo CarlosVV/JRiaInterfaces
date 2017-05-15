@@ -10,7 +10,7 @@ namespace CES.CoreApi.Receipt_Main.ViewModels
 {
     public class ServiceTaxGenerateReceiptResponseViewModel
     {
-        public Document Document { get; set; }
+        public systblApp_CoreAPI_Document Document { get; set; }
         public byte[] PDF { get; set; }
         public DateTime TransferDate { get; set; }
         public ReturnInfo ReturnInfo { get; set; }

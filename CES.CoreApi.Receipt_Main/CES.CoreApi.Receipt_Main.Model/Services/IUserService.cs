@@ -1,4 +1,5 @@
-﻿using System;
+﻿using CES.CoreApi.Receipt_Main.Model.Security;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,9 +9,9 @@ namespace CES.CoreApi.Receipt_Main.Model.Services
 {
     public interface IUserService
     {
-        List<User> GetAllUsers();
-        void CreateUser(User objectEntry);
-        void UpdateUser(User objectEntry);
-        void RemoveUser(User objectEntry);
+        List<systblApp_TaxReceipt_User> GetAllUsers();
+        void CreateUser(systblApp_TaxReceipt_User objectEntry);
+        void UpdateUser(systblApp_TaxReceipt_User objectEntry);
+        void RemoveUser(systblApp_TaxReceipt_User objectEntry);
     }
 }

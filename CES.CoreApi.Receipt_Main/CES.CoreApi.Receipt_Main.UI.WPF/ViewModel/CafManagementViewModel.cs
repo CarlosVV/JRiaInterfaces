@@ -1,5 +1,6 @@
 ﻿using CES.CoreApi.Receipt_Main.Model;
 using CES.CoreApi.Receipt_Main.Model.Documents;
+using CES.CoreApi.Receipt_Main.Model.Security;
 using CES.CoreApi.Receipt_Main.UI.WPF.Model;
 using System;
 using System.Collections.Generic;
@@ -17,7 +18,7 @@ namespace CES.CoreApi.Receipt_Main.UI.WPF.ViewModel
         private string _foliostart;
         private string _folioend;
         private Document_Type _selectedDocumentTypeValue;
-        private Store _selectedStoreValue;
+        private systblApp_TaxReceipt_Store _selectedStoreValue;
         private readonly ObservableCollection<CafResultSelectableViewModel> _cafResults;
         private bool? _isAllCafResultsSelected;
         public event PropertyChangedEventHandler PropertyChanged;
@@ -33,9 +34,9 @@ namespace CES.CoreApi.Receipt_Main.UI.WPF.ViewModel
 
             SelectedDocumentTypeValue = DocumentTypeList.FirstOrDefault();
             //TODO: Get Stores from DB
-            StoreList = new List<Store>();
-            StoreList.Add(new Store { Id = Guid.NewGuid(), Name = "Banderas" });
-            StoreList.Add(new Store { Id = Guid.NewGuid(), Name = "Catedral" });
+            StoreList = new List<systblApp_TaxReceipt_Store>();
+            StoreList.Add(new systblApp_TaxReceipt_Store { Id = 1, Name = "Banderas" });
+            StoreList.Add(new systblApp_TaxReceipt_Store { Id = 2, Name = "Catedral" });
             SelectedStoreValue = StoreList.First();
 
             //TODO: Load Serch Result
@@ -70,7 +71,7 @@ namespace CES.CoreApi.Receipt_Main.UI.WPF.ViewModel
             }
         }
 
-        public Store SelectedStoreValue
+        public systblApp_TaxReceipt_Store SelectedStoreValue
         {
             get { return _selectedStoreValue; }
             set
@@ -80,7 +81,7 @@ namespace CES.CoreApi.Receipt_Main.UI.WPF.ViewModel
         }
 
         public IList<Document_Type> DocumentTypeList { get; }
-        public IList<Store> StoreList { get; }
+        public IList<systblApp_TaxReceipt_Store> StoreList { get; }
         public ObservableCollection<CafResultSelectableViewModel> CafResults
         {
             get { return _cafResults; }

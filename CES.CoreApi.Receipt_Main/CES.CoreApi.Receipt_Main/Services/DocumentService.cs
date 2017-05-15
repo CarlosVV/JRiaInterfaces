@@ -27,44 +27,46 @@ namespace CES.CoreApi.Receipt_Main.Services
 
         internal TaxCreateDocumentResponse CreateDocument(TaxCreateDocumentRequest request)
         {
-            var response = new TaxCreateDocumentResponse();
+            //var response = new TaxCreateDocumentResponse();
 
-            using (var tx = new TransactionScope(TransactionScopeOption.Suppress))
-            {
-                if(request.Document.SenderId == null && request.Document.Sender != null)
-                {
-                    //_subjectrepository.CreateTaxEntity(request.Document.Sender);
-                    request.Document.SenderId = request.Document.Sender.Id;
-                }
+            //using (var tx = new TransactionScope(TransactionScopeOption.Suppress))
+            //{
+            //    if(request.Document.SenderId == null && request.Document.Sender != null)
+            //    {
+            //        //_subjectrepository.CreateTaxEntity(request.Document.Sender);
+            //        request.Document.SenderId = request.Document.Sender.Id;
+            //    }
 
-                if (request.Document.ReceiverId == null && request.Document.Receiver != null)
-                {
-                    //_subjectrepository.CreateTaxEntity(request.Document.Receiver);
-                    request.Document.ReceiverId = request.Document.Receiver.Id;
-                }
+            //    if (request.Document.ReceiverId == null && request.Document.Receiver != null)
+            //    {
+            //        //_subjectrepository.CreateTaxEntity(request.Document.Receiver);
+            //        request.Document.ReceiverId = request.Document.Receiver.Id;
+            //    }
 
-                //_documentrepository.Create(request.Document);
+            //    //_documentrepository.Create(request.Document);
 
-                foreach (var dtl in request.Document.DocumentDetails)
-                {
-                    dtl.DocumentId = request.Document.Id;
-                    if (dtl.ItemId != null && dtl.Item != null)
-                    {
-                        //_itemrepository.Create(dtl.Item);
-                        dtl.ItemId = dtl.Item.Id;
-                    }
-                   
-                    //_detallerepository.Create(dtl);
-                }
+            //    foreach (var dtl in request.Document.DocumentDetails)
+            //    {
+            //        dtl.DocumentId = request.Document.Id;
+            //        if (dtl.ItemId != null && dtl.Item != null)
+            //        {
+            //            //_itemrepository.Create(dtl.Item);
+            //            dtl.ItemId = dtl.Item.Id;
+            //        }
 
-                tx.Complete();
-            }
+            //        //_detallerepository.Create(dtl);
+            //    }
 
-            response.ResponseTime = DateTime.Now;
-            response.TransferDate = DateTime.Now;
-            response.ResponseTimeUTC = DateTime.UtcNow;
-            response.ReturnInfo = new ReturnInfo {ErrorCode  = 1, ErrorMessage = "Process Done", ResultProcess = true};
-            return response;
+            //    tx.Complete();
+            //}
+
+            //response.ResponseTime = DateTime.Now;
+            //response.TransferDate = DateTime.Now;
+            //response.ResponseTimeUTC = DateTime.UtcNow;
+            //response.ReturnInfo = new ReturnInfo {ErrorCode  = 1, ErrorMessage = "Process Done", ResultProcess = true};
+            //return response;
+
+            throw new NotImplementedException();
         }
 
         internal object SearchDocument(TaxSearchDocumentRequest r)
@@ -86,15 +88,15 @@ namespace CES.CoreApi.Receipt_Main.Services
         {
             var response = new TaxGenerateReceiptResponse();
 
-            var document = null as List<Document>;// = _documentrepository.GetByOrderNumberAndFolio(request.OrderNumber, request.Folio);
+           // var document = null as List<Document>;// = _documentrepository.GetByOrderNumberAndFolio(request.OrderNumber, request.Folio);
 
-            response.Document = document.FirstOrDefault();
+            //response.Document = document.FirstOrDefault();
             
             //TODO: Populate all depending objects in the model
-            PopulateDocumentModel(response.Document);
+            //PopulateDocumentModel(response.Document);
 
             //TODO: Create PDF for Document Stored
-            CreatePDF(response.Document);
+            //CreatePDF(response.Document);
 
             
             response.ResponseTime = DateTime.Now;
@@ -104,15 +106,15 @@ namespace CES.CoreApi.Receipt_Main.Services
             return response;
         }
 
-        private void CreatePDF(Document document)
-        {
-            throw new NotImplementedException();
-        }
+        //private void CreatePDF(Document document)
+        //{
+        //    throw new NotImplementedException();
+        //}
 
-        private void PopulateDocumentModel(Document document)
-        {
-            throw new NotImplementedException();
-        }
+        //private void PopulateDocumentModel(Document document)
+        //{
+        //    throw new NotImplementedException();
+        //}
 
         internal TaxSIIGetDocumentBatchResponse CreateTaskSiiGetDocumentBatch(TaxSIIGetDocumentBatchRequest taxSIIGetDocumentBatchInternalRequest)
         {

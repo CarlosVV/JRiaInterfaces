@@ -10,11 +10,11 @@ namespace CES.CoreApi.Receipt_Main.Model.Repositories
 {
     public interface ITaxEntityRepository
     {
-        TaxEntity find(string id);
-        IEnumerable<TaxEntity> find(Expression<Func<TaxEntity, bool>> where);
-        void CreateTaxEntity(TaxEntity obj);
-        void UpdateTaxEntity(TaxEntity obj);
-        void RemoveTaxEntity(TaxEntity obj);
+        systblApp_CoreAPI_TaxEntity find(string id);
+        IEnumerable<systblApp_CoreAPI_TaxEntity> find(Expression<Func<systblApp_CoreAPI_TaxEntity, bool>> where);
+        void CreateTaxEntity(systblApp_CoreAPI_TaxEntity obj);
+        void UpdateTaxEntity(systblApp_CoreAPI_TaxEntity obj);
+        void RemoveTaxEntity(systblApp_CoreAPI_TaxEntity obj);
         void SaveChanges();
     }
 }

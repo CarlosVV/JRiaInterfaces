@@ -16,22 +16,22 @@ namespace CES.CoreApi.Receipt_Main.Domain
         {
             repo = repository;
         }
-        public List<Caf> GetAllCafs()
+        public List<systblApp_CoreAPI_Caf> GetAllCafs()
         {
             return repo.find(c => !c.fDisabled.Value && !c.fDelete.Value).ToList();
         }
 
-        public void CreateCaf(Caf objectEntry)
+        public void CreateCaf(systblApp_CoreAPI_Caf objectEntry)
         {
             this.repo.CreateCaf(objectEntry);
             this.repo.SaveChanges();          
         }
-        public void UpdateCaf(Caf objectEntry)
+        public void UpdateCaf(systblApp_CoreAPI_Caf objectEntry)
         {
             this.repo.UpdateCaf(objectEntry);
             this.repo.SaveChanges();
         }
-        public void RemoveCaf(Caf objectEntry)
+        public void RemoveCaf(systblApp_CoreAPI_Caf objectEntry)
         {
             this.repo.RemoveCaf(objectEntry);
             this.repo.SaveChanges();

@@ -1,5 +1,6 @@
 ﻿using CES.CoreApi.Receipt_Main.Model.Documents;
 using CES.CoreApi.Receipt_Main.Model.Repositories;
+using CES.CoreApi.Receipt_Main.Model.Tasks;
 using System;
 using System.Collections.Generic;
 using System.Data.Entity;
@@ -11,32 +12,32 @@ using System.Threading.Tasks;
 
 namespace CES.CoreApi.Receipt_Main.Repository
 {
-    public class TaskDetailRepository : BaseRepository<TaskDetail>, ITaskDetailRepository
+    public class TaskDetailRepository : BaseRepository<systblApp_CoreAPI_TaskDetail>, ITaskDetailRepository
     {
         public TaskDetailRepository(DbContext _dbContext)
             : base(_dbContext)
         {
         }
 
-        public TaskDetail find(string id)
+        public systblApp_CoreAPI_TaskDetail find(string id)
         {
             return this.Get(p => p.Id.ToString() == id);
         }
 
-        public IEnumerable<TaskDetail> find(Expression<Func<TaskDetail, bool>> where)
+        public IEnumerable<systblApp_CoreAPI_TaskDetail> find(Expression<Func<systblApp_CoreAPI_TaskDetail, bool>> where)
         {
             return this.GetAll(where);
         }
 
-        public void CreateTaskDetail(TaskDetail obj)
+        public void CreateTaskDetail(systblApp_CoreAPI_TaskDetail obj)
         {
             this.Add(obj);
         }
-        public void UpdateTaskDetail(TaskDetail obj)
+        public void UpdateTaskDetail(systblApp_CoreAPI_TaskDetail obj)
         {
             this.Update(obj);
         }
-        public void RemoveTaskDetail(TaskDetail obj)
+        public void RemoveTaskDetail(systblApp_CoreAPI_TaskDetail obj)
         {
             this.Delete(obj);
         }

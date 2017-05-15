@@ -10,11 +10,11 @@ namespace CES.CoreApi.Receipt_Main.Model.Repositories
 {
     public interface ITaxAddressRepository
     {
-        TaxAddress find(string id);
-        IEnumerable<TaxAddress> find(Expression<Func<TaxAddress, bool>> where);
-        void CreateTaxAddress(TaxAddress obj);
-        void UpdateTaxAddress(TaxAddress obj);
-        void RemoveTaxAddress(TaxAddress obj);
+        systblApp_CoreAPI_TaxAddress find(string id);
+        IEnumerable<systblApp_CoreAPI_TaxAddress> find(Expression<Func<systblApp_CoreAPI_TaxAddress, bool>> where);
+        void CreateTaxAddress(systblApp_CoreAPI_TaxAddress obj);
+        void UpdateTaxAddress(systblApp_CoreAPI_TaxAddress obj);
+        void RemoveTaxAddress(systblApp_CoreAPI_TaxAddress obj);
         void SaveChanges();
     }
 }

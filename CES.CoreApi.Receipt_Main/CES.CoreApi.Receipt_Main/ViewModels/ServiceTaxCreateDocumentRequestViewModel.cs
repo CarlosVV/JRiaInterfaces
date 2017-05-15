@@ -9,6 +9,6 @@ namespace CES.CoreApi.Receipt_Main.ViewModels
 {
     public class ServiceTaxCreateDocumentRequestViewModel
     {
-        public Document Document {get; set;}
+        public systblApp_CoreAPI_Document Document {get; set;}
     }
 }

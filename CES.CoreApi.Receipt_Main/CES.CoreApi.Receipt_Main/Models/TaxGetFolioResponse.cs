@@ -8,7 +8,7 @@ namespace CES.CoreApi.Receipt_Main.Models
 {
     public class TaxGetFolioResponse
     {
-        public Caf CAF { get; set; }
+        public systblApp_CoreAPI_Caf CAF { get; set; }
         public int NextFolioNumber { get; set; }
         public DateTime TransferDate { get; set; }
         public ReturnInfo ReturnInfo { get; set; }

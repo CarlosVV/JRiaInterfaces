@@ -306,7 +306,6 @@
     <Compile Include="Providers\Log4NetProxy.cs" />
     <Compile Include="Providers\LogService.cs" />
     <Compile Include="Providers\ProviderCodesToCoreApi.cs" />
-    <Compile Include="Repositories\CAFRepository.cs" />
     <Compile Include="Repositories\CodesRepository.cs" />
     <Compile Include="Repositories\CodesRepositoryCached.cs" />
     <Compile Include="Repositories\DatabaseName.cs" />

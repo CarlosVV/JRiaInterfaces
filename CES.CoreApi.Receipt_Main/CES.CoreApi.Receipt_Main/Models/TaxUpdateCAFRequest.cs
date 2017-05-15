@@ -7,7 +7,7 @@ namespace CES.CoreApi.Receipt_Main.Models
 {
     public class TaxUpdateCAFRequest
     {
-        public string Id { get; set; }
+        public int Id { get; set; }
         public string CAFContent { get; set; }
     }
 }

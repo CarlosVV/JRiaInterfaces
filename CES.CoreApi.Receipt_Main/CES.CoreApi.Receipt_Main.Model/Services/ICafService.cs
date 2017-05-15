@@ -9,10 +9,10 @@ namespace CES.CoreApi.Receipt_Main.Model.Services
 {
     public interface ICafService
     {
-        List<Caf> GetAllCafs();
-        void CreateCaf(Caf objectEntry);
-        void UpdateCaf(Caf objectEntry);
-        void RemoveCaf(Caf objectEntry);
+        List<systblApp_CoreAPI_Caf> GetAllCafs();
+        void CreateCaf(systblApp_CoreAPI_Caf objectEntry);
+        void UpdateCaf(systblApp_CoreAPI_Caf objectEntry);
+        void RemoveCaf(systblApp_CoreAPI_Caf objectEntry);
         
     }
 }

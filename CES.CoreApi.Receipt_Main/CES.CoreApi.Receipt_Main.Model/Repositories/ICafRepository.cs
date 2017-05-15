@@ -10,11 +10,11 @@ namespace CES.CoreApi.Receipt_Main.Model.Repositories
 {
     public interface ICafRepository
     {
-        Caf find(string id);
-        IEnumerable<Caf> find(Expression<Func<Caf, bool>> where);
-        void CreateCaf(Caf obj);
-        void UpdateCaf(Caf obj);
-        void RemoveCaf(Caf obj);
+        systblApp_CoreAPI_Caf find(string id);
+        IEnumerable<systblApp_CoreAPI_Caf> find(Expression<Func<systblApp_CoreAPI_Caf, bool>> where);
+        void CreateCaf(systblApp_CoreAPI_Caf obj);
+        void UpdateCaf(systblApp_CoreAPI_Caf obj);
+        void RemoveCaf(systblApp_CoreAPI_Caf obj);
         void SaveChanges();
     }
 }

@@ -10,11 +10,11 @@ namespace CES.CoreApi.Receipt_Main.Model.Repositories
 {
     public interface IDocumentRepository
     {
-        Document find(string id);
-        IEnumerable<Document> find(Expression<Func<Document, bool>> where);
-        void CreateDocument(Document obj);
-        void UpdateDocument(Document obj);
-        void RemoveDocument(Document obj);
+        systblApp_CoreAPI_Document find(string id);
+        IEnumerable<systblApp_CoreAPI_Document> find(Expression<Func<systblApp_CoreAPI_Document, bool>> where);
+        void CreateDocument(systblApp_CoreAPI_Document obj);
+        void UpdateDocument(systblApp_CoreAPI_Document obj);
+        void RemoveDocument(systblApp_CoreAPI_Document obj);
         void SaveChanges();
     }
 }

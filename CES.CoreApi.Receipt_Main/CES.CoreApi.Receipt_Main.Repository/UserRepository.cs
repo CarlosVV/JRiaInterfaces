@@ -1,5 +1,6 @@
 ﻿using CES.CoreApi.Receipt_Main.Model;
 using CES.CoreApi.Receipt_Main.Model.Repositories;
+using CES.CoreApi.Receipt_Main.Model.Security;
 using System;
 using System.Collections.Generic;
 using System.Data.Entity;
@@ -12,29 +13,29 @@ using System.Threading.Tasks;
 
 namespace CES.CoreApi.Receipt_Main.Repository
 {
-    public class UserRepository : BaseRepository<User>, IUserRepository
+    public class UserRepository : BaseRepository<systblApp_TaxReceipt_User>, IUserRepository
     {
         public UserRepository(DbContext _dbContext)
             : base(_dbContext)
         {
         }
 
-        public void CreateUser(User obj)
+        public void CreateUser(systblApp_TaxReceipt_User obj)
         {
             throw new NotImplementedException();
         }
 
-        public User find(string id)
+        public systblApp_TaxReceipt_User find(string id)
         {
             return this.Get(p=> p.Id.ToString() == id);
         }
 
-        public IEnumerable<User> find(Expression<Func<User, bool>> where)
+        public IEnumerable<systblApp_TaxReceipt_User> find(Expression<Func<systblApp_TaxReceipt_User, bool>> where)
         {
             return this.GetAll(where);
         }
 
-        public void RemoveUser(User obj)
+        public void RemoveUser(systblApp_TaxReceipt_User obj)
         {
             this.RemoveUser(obj);
         }
@@ -44,7 +45,7 @@ namespace CES.CoreApi.Receipt_Main.Repository
             this.SaveChanges();
         }
 
-        public void UpdateUser(User obj)
+        public void UpdateUser(systblApp_TaxReceipt_User obj)
         {
             this.UpdateUser(obj);
         }

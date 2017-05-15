@@ -109,6 +109,7 @@
     <Compile Include="ViewModel\CafManagementViewModel.cs" />
     <Compile Include="ViewModel\CashiersViewModel.cs" />
     <Compile Include="ViewModel\CheckListViewModel.cs" />
+    <Compile Include="ViewModel\Document_Type.cs" />
     <Compile Include="ViewModel\DownloadSiiDocumentsViewModel.cs" />
     <Compile Include="ViewModel\GenerateCreditNotesViewModel.cs" />
     <Compile Include="ViewModel\MainWindowViewModel.cs" />

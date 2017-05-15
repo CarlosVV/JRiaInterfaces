@@ -1,4 +1,5 @@
-﻿using System;
+﻿using CES.CoreApi.Receipt_Main.Model.Security;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
@@ -9,11 +10,11 @@ namespace CES.CoreApi.Receipt_Main.Model.Repositories
 {
     public interface IMenuRepository
     {
-        Menu find(string id);
-        IEnumerable<Menu> find(Expression<Func<Menu, bool>> where);
-        void CreateMenu(Menu obj);
-        void UpdateMenu(Menu obj);
-        void RemoveMenu(Menu obj);
+        systblApp_TaxReceipt_Menu find(string id);
+        IEnumerable<systblApp_TaxReceipt_Menu> find(Expression<Func<systblApp_TaxReceipt_Menu, bool>> where);
+        void CreateMenu(systblApp_TaxReceipt_Menu obj);
+        void UpdateMenu(systblApp_TaxReceipt_Menu obj);
+        void RemoveMenu(systblApp_TaxReceipt_Menu obj);
         void SaveChanges();
     }
 }

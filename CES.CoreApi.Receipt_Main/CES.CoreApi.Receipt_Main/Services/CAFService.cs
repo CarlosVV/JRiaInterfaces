@@ -15,7 +15,7 @@ namespace CES.CoreApi.Receipt_Main.Services
     public class CAFService
     {
         private ICafService _cafdomain;
-        private CAFRepository _repository = null;
+        //private CAFRepository _repository = null;
         private CAFValidator _validator = null;
         private CAFParser _parser = null;
         public bool Successful = false;
@@ -23,7 +23,7 @@ namespace CES.CoreApi.Receipt_Main.Services
         public string ErrorMessage { get; set; }
         public CAFService(ICafService cafdomain)
         {
-            _repository = new CAFRepository();
+            //_repository = new CAFRepository();
             _validator = new CAFValidator();
             _parser = new CAFParser();
             _cafdomain = cafdomain;
@@ -54,7 +54,7 @@ namespace CES.CoreApi.Receipt_Main.Services
                 var objCAF = _parser.GetCAFObjectFromString(xml);
 
                 Logging.Log.Info("Insert into DB");
-                var objDbCaf = CreateCAFModel(Guid.NewGuid(), xml, objCAF);
+                var objDbCaf = CreateCAFModel(null, xml, objCAF);
 
                 _cafdomain.CreateCaf(objDbCaf);
 
@@ -76,7 +76,8 @@ namespace CES.CoreApi.Receipt_Main.Services
         internal TaxSearchCAFByTypeResponse SearchCaf(TaxSearchCAFByTypeRequest request)
         {
             var response = new TaxSearchCAFByTypeResponse();
-            var results =_repository.Get(request.Id, request.DocumentType, request.FolioCurrentNumber, request.FolioStartNumber, request.FolioEndNumber);
+            var results = _cafdomain.GetAllCafs();//.
+                //(request.Id, request.DocumentType, request.FolioCurrentNumber, request.FolioStartNumber, request.FolioEndNumber);
 
             if (results != null)
             {
@@ -114,14 +115,14 @@ namespace CES.CoreApi.Receipt_Main.Services
                 var objCAF = _parser.GetCAFObjectFromString(xml);
 
                 Logging.Log.Info("Insert into DB");
-                var objDbCaf = CreateCAFModel(Guid.Parse(request.Id), xml, objCAF);
+                var objDbCaf = CreateCAFModel(request.Id, xml, objCAF);
 
-                var result = _repository.Update(objDbCaf);
+                _cafdomain.UpdateCaf(objDbCaf);
 
-                response.ReturnInfo = new ReturnInfo() { ErrorCode = 56, ErrorMessage = ErrorMessage, ResultProcess = result };
+                response.ReturnInfo = new ReturnInfo() { ErrorCode = 56, ErrorMessage = ErrorMessage, ResultProcess = true };
                 response.CAF = objDbCaf;
-                response.ProcessResult = result;
-                Successful = result;
+                response.ProcessResult = true;
+                Successful = true;
             }
             catch (Exception ex)
             {
@@ -140,10 +141,11 @@ namespace CES.CoreApi.Receipt_Main.Services
             try
             {               
                 Logging.Log.Info("Deleting CAF in DB");
-                var result = _repository.Delete(request.Id);
-                response.ReturnInfo = new ReturnInfo() { ErrorCode = 56, ErrorMessage = ErrorMessage, ResultProcess = result };               
-                response.ProcessResult = result;
-                Successful = result;
+                var caf = _cafdomain.GetAllCafs().Where(m => m.Id == request.Id).First();
+                _cafdomain.RemoveCaf(caf);
+                response.ReturnInfo = new ReturnInfo() { ErrorCode = 56, ErrorMessage = ErrorMessage, ResultProcess = true };               
+                response.ProcessResult = true;
+                Successful = true;
             }
             catch (Exception ex)
             {
@@ -162,7 +164,12 @@ namespace CES.CoreApi.Receipt_Main.Services
             try
             {
                 Logging.Log.Info("Getting Folio in DB");
-                var result = _repository.Get(request.Id, request.DocumentType, request.FolioCurrentNumber, null, null);
+                //var result = _repository.Get(request.Id, request.DocumentType, request.FolioCurrentNumber, null, null);
+                var result = _cafdomain.GetAllCafs().Where(m =>
+                       request.Id == m.Id && 
+                       request.DocumentType == m.DocumentType &&
+                       request.FolioCurrentNumber == m.FolioCurrentNumber
+                );
 
                 if (result == null && result.Count() == 0)
                 {
@@ -173,10 +180,10 @@ namespace CES.CoreApi.Receipt_Main.Services
                 }
 
                 //Obtener el Ultimo Folio con el criterios ingresado
-                var objDbCAF = result.OrderByDescending(m=> m.DateAuthorization).FirstOrDefault();
+                var objDbCAF = result.OrderByDescending(m=> m.AuthorizationDate).FirstOrDefault();
                 var objXmlCAF = _parser.GetCAFObjectFromString(objDbCAF.FileContent);
 
-                response.NextFolioNumber = objDbCAF.FolioCurrentNumber.Value + 1;
+                response.NextFolioNumber = objDbCAF.FolioCurrentNumber + 1;
                 response.CAF = objDbCAF;
                 response.ReturnInfo = new ReturnInfo() { ErrorCode = 1, ErrorMessage = "Process done", ResultProcess = true };
                 response.ResponseTime = DateTime.Today;
@@ -210,7 +217,7 @@ namespace CES.CoreApi.Receipt_Main.Services
                     return response;
                 }
 
-                var results = _repository.Get(request.Id, request.DocumentType, folioCurrentNumber, null, null);
+                var results = _cafdomain.GetAllCafs().Where(m => m.Id == request.Id && m.DocumentType == request.DocumentType && m.FolioCurrentNumber == folioCurrentNumber); //m. request.DocumentType, folioCurrentNumber, null, null);
 
                 if (results == null && results.Count() == 0)
                 {
@@ -220,14 +227,14 @@ namespace CES.CoreApi.Receipt_Main.Services
                     return response;
                 }
 
-                var objDbCaf = results.OrderByDescending(m => m.DateAuthorization).FirstOrDefault();
+                var objDbCaf = results.OrderByDescending(m => m.AuthorizationDate).FirstOrDefault();
                 var objXmlCAF = _parser.GetCAFObjectFromString(objDbCaf.FileContent);               
 
                 objDbCaf.FolioCurrentNumber = request.NextFolioNumber.Value;
 
-                var result = _repository.Update(objDbCaf);              
-                Successful = result;
-                response.ReturnInfo = new ReturnInfo() { ErrorCode = 1, ErrorMessage = "Process done", ResultProcess = result };
+                _cafdomain.UpdateCaf(objDbCaf);              
+                Successful = true;
+                response.ReturnInfo = new ReturnInfo() { ErrorCode = 1, ErrorMessage = "Process done", ResultProcess = true };
                 response.ResponseTime = DateTime.Today;
                 response.ResponseTime = DateTime.UtcNow;
                 response.TransferDate = DateTime.Now;
@@ -243,15 +250,20 @@ namespace CES.CoreApi.Receipt_Main.Services
             return response;
         }
         
-        private Caf CreateCAFModel(Guid? id, string xml, AUTORIZACION objCAF)
+        private systblApp_CoreAPI_Caf CreateCAFModel(int? id, string xml, AUTORIZACION objCAF)
         {
-            return new Caf
+            int newid = 0;
+            if(id == 0)
             {
-                Id = id,
-                CompanyTaxId = objCAF.CAF.DA.RE,
+                newid = _cafdomain.GetAllCafs().Max(p => p.Id) + 1;
+            }
+            return new systblApp_CoreAPI_Caf
+            {
+                Id = newid,
+                CompanyRUT = objCAF.CAF.DA.RE,
                 CompanyLegalName = objCAF.CAF.DA.RS,
-                DateAuthorization = objCAF.CAF.DA.FA.ToShortDateString(),
-                DocumentType = objCAF.CAF.DA.TD,
+                AuthorizationDate = objCAF.CAF.DA.FA,
+                DocumentType = objCAF.CAF.DA.TD.ToString(),
                 FolioStartNumber = objCAF.CAF.DA.RNG.D,
                 FolioEndNumber = objCAF.CAF.DA.RNG.H,
                 FileContent = xml

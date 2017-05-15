@@ -6,7 +6,7 @@ namespace CES.CoreApi.Receipt_Main.Services
 {
     public class DocumentSearchResult
     {
-        public IEnumerable<Document> Results;
+        public IEnumerable<systblApp_CoreAPI_Document> Results;
 
     }
 }

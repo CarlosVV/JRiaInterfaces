@@ -11,32 +11,32 @@ using System.Threading.Tasks;
 
 namespace CES.CoreApi.Receipt_Main.Repository
 {
-    public class CafRepository : BaseRepository<Caf>, ICafRepository
+    public class CafRepository : BaseRepository<systblApp_CoreAPI_Caf>, ICafRepository
     {
         public CafRepository(DbContext _dbContext)
             : base(_dbContext)
         {
         }
 
-        public Caf find(string id)
+        public systblApp_CoreAPI_Caf find(string id)
         {
             return this.Get(p => p.Id.ToString() == id);
         }
 
-        public IEnumerable<Caf> find(Expression<Func<Caf, bool>> where)
+        public IEnumerable<systblApp_CoreAPI_Caf> find(Expression<Func<systblApp_CoreAPI_Caf, bool>> where)
         {
             return this.GetAll(where);
         }
 
-        public void CreateCaf(Caf obj)
+        public void CreateCaf(systblApp_CoreAPI_Caf obj)
         {
             this.Add(obj);
         }
-        public void UpdateCaf(Caf obj)
+        public void UpdateCaf(systblApp_CoreAPI_Caf obj)
         {
             this.Update(obj);
         }
-        public void RemoveCaf(Caf obj)
+        public void RemoveCaf(systblApp_CoreAPI_Caf obj)
         {
             this.Delete(obj);
         }

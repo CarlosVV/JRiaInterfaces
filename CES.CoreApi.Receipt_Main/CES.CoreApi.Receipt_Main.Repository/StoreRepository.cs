@@ -1,6 +1,7 @@
 ﻿using CES.CoreApi.Receipt_Main.Model;
 using CES.CoreApi.Receipt_Main.Model.Documents;
 using CES.CoreApi.Receipt_Main.Model.Repositories;
+using CES.CoreApi.Receipt_Main.Model.Security;
 using System;
 using System.Collections.Generic;
 using System.Data.Entity;
@@ -12,32 +13,32 @@ using System.Threading.Tasks;
 
 namespace CES.CoreApi.Receipt_Main.Repository
 {
-    public class StoreRepository : BaseRepository<Store>, IStoreRepository
+    public class StoreRepository : BaseRepository<systblApp_TaxReceipt_Store>, IStoreRepository
     {
         public StoreRepository(DbContext _dbContext)
             : base(_dbContext)
         {
         }
 
-        public Store find(string id)
+        public systblApp_TaxReceipt_Store find(string id)
         {
             return this.Get(p => p.Id.ToString() == id);
         }
 
-        public IEnumerable<Store> find(Expression<Func<Store, bool>> where)
+        public IEnumerable<systblApp_TaxReceipt_Store> find(Expression<Func<systblApp_TaxReceipt_Store, bool>> where)
         {
             return this.GetAll(where);
         }
 
-        public void CreateStore(Store obj)
+        public void CreateStore(systblApp_TaxReceipt_Store obj)
         {
             this.Add(obj);
         }
-        public void UpdateStore(Store obj)
+        public void UpdateStore(systblApp_TaxReceipt_Store obj)
         {
             this.Update(obj);
         }
-        public void RemoveStore(Store obj)
+        public void RemoveStore(systblApp_TaxReceipt_Store obj)
         {
             this.Delete(obj);
         }

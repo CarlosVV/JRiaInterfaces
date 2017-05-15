@@ -1,4 +1,5 @@
 ﻿using CES.CoreApi.Receipt_Main.Model.Documents;
+using CES.CoreApi.Receipt_Main.Model.Security;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,11 +11,11 @@ namespace CES.CoreApi.Receipt_Main.Model.Repositories
 {
     public interface IFunctionalityRepository
     {
-        Functionality find(string id);
-        IEnumerable<Functionality> find(Expression<Func<Functionality, bool>> where);
-        void CreateFunctionality(Functionality obj);
-        void UpdateFunctionality(Functionality obj);
-        void RemoveFunctionality(Functionality obj);
+        systblApp_TaxReceipt_Functionality find(string id);
+        IEnumerable<systblApp_TaxReceipt_Functionality> find(Expression<Func<systblApp_TaxReceipt_Functionality, bool>> where);
+        void CreateFunctionality(systblApp_TaxReceipt_Functionality obj);
+        void UpdateFunctionality(systblApp_TaxReceipt_Functionality obj);
+        void RemoveFunctionality(systblApp_TaxReceipt_Functionality obj);
         void SaveChanges();
     }
 }
