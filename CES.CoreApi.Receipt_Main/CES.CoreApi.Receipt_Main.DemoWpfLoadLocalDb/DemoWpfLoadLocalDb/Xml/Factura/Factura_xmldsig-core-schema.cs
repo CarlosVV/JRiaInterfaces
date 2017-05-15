@@ -124,7 +124,7 @@ namespace WpfLocalDb.Xml.Factura {
         
         private System.DateTime fchResolField;
         
-        private byte nroResolField;
+        private int nroResolField;
         
         private System.DateTime tmstFirmaEnvField;
         
@@ -174,7 +174,7 @@ namespace WpfLocalDb.Xml.Factura {
         }
         
         /// <remarks/>
-        public byte NroResol {
+        public int NroResol {
             get {
                 return this.nroResolField;
             }
@@ -223,12 +223,12 @@ namespace WpfLocalDb.Xml.Factura {
     [System.Xml.Serialization.XmlTypeAttribute(AnonymousType=true, Namespace="http://www.sii.cl/SiiDte")]
     public partial class EnvioDTESetDTECaratulaSubTotDTE {
         
-        private byte tpoDTEField;
+        private int tpoDTEField;
         
-        private byte nroDTEField;
+        private int nroDTEField;
         
         /// <remarks/>
-        public byte TpoDTE {
+        public int TpoDTE {
             get {
                 return this.tpoDTEField;
             }
@@ -238,7 +238,7 @@ namespace WpfLocalDb.Xml.Factura {
         }
         
         /// <remarks/>
-        public byte NroDTE {
+        public int NroDTE {
             get {
                 return this.nroDTEField;
             }
@@ -320,13 +320,13 @@ namespace WpfLocalDb.Xml.Factura {
     [System.Xml.Serialization.XmlRootAttribute("SPKIData", Namespace="http://www.w3.org/2000/09/xmldsig#", IsNullable=false)]
     public partial class SPKIDataType {
         
-        private byte[][] sPKISexpField;
+        private int[][] sPKISexpField;
         
         private System.Xml.XmlElement anyField;
         
         /// <remarks/>
         [System.Xml.Serialization.XmlElementAttribute("SPKISexp", DataType="base64Binary")]
-        public byte[][] SPKISexp {
+        public int[][] SPKISexp {
             get {
                 return this.sPKISexpField;
             }
@@ -362,8 +362,8 @@ namespace WpfLocalDb.Xml.Factura {
         
         /// <remarks/>
         [System.Xml.Serialization.XmlAnyElementAttribute()]
-        [System.Xml.Serialization.XmlElementAttribute("PGPKeyID", typeof(byte[]), DataType="base64Binary")]
-        [System.Xml.Serialization.XmlElementAttribute("PGPKeyPacket", typeof(byte[]), DataType="base64Binary")]
+        [System.Xml.Serialization.XmlElementAttribute("PGPKeyID", typeof(int[]), DataType="base64Binary")]
+        [System.Xml.Serialization.XmlElementAttribute("PGPKeyPacket", typeof(int[]), DataType="base64Binary")]
         [System.Xml.Serialization.XmlChoiceIdentifierAttribute("ItemsElementName")]
         public object[] Items {
             get {
@@ -453,10 +453,10 @@ namespace WpfLocalDb.Xml.Factura {
         
         /// <remarks/>
         [System.Xml.Serialization.XmlAnyElementAttribute()]
-        [System.Xml.Serialization.XmlElementAttribute("X509CRL", typeof(byte[]), DataType="base64Binary")]
-        [System.Xml.Serialization.XmlElementAttribute("X509Certificate", typeof(byte[]), DataType="base64Binary")]
+        [System.Xml.Serialization.XmlElementAttribute("X509CRL", typeof(int[]), DataType="base64Binary")]
+        [System.Xml.Serialization.XmlElementAttribute("X509Certificate", typeof(int[]), DataType="base64Binary")]
         [System.Xml.Serialization.XmlElementAttribute("X509IssuerSerial", typeof(X509IssuerSerialType))]
-        [System.Xml.Serialization.XmlElementAttribute("X509SKI", typeof(byte[]), DataType="base64Binary")]
+        [System.Xml.Serialization.XmlElementAttribute("X509SKI", typeof(int[]), DataType="base64Binary")]
         [System.Xml.Serialization.XmlElementAttribute("X509SubjectName", typeof(string))]
         [System.Xml.Serialization.XmlChoiceIdentifierAttribute("ItemsElementName")]
         public object[] Items {
@@ -615,13 +615,13 @@ namespace WpfLocalDb.Xml.Factura {
     [System.Xml.Serialization.XmlRootAttribute("RSAKeyValue", Namespace="http://www.w3.org/2000/09/xmldsig#", IsNullable=false)]
     public partial class RSAKeyValueType {
         
-        private byte[] modulusField;
+        private int[] modulusField;
         
-        private byte[] exponentField;
+        private int[] exponentField;
         
         /// <remarks/>
         [System.Xml.Serialization.XmlElementAttribute(DataType="base64Binary")]
-        public byte[] Modulus {
+        public int[] Modulus {
             get {
                 return this.modulusField;
             }
@@ -632,7 +632,7 @@ namespace WpfLocalDb.Xml.Factura {
         
         /// <remarks/>
         [System.Xml.Serialization.XmlElementAttribute(DataType="base64Binary")]
-        public byte[] Exponent {
+        public int[] Exponent {
             get {
                 return this.exponentField;
             }
@@ -651,23 +651,23 @@ namespace WpfLocalDb.Xml.Factura {
     [System.Xml.Serialization.XmlRootAttribute("DSAKeyValue", Namespace="http://www.w3.org/2000/09/xmldsig#", IsNullable=false)]
     public partial class DSAKeyValueType {
         
-        private byte[] pField;
+        private int[] pField;
         
-        private byte[] qField;
+        private int[] qField;
         
-        private byte[] gField;
+        private int[] gField;
         
-        private byte[] yField;
+        private int[] yField;
         
-        private byte[] jField;
+        private int[] jField;
         
-        private byte[] seedField;
+        private int[] seedField;
         
-        private byte[] pgenCounterField;
+        private int[] pgenCounterField;
         
         /// <remarks/>
         [System.Xml.Serialization.XmlElementAttribute(DataType="base64Binary")]
-        public byte[] P {
+        public int[] P {
             get {
                 return this.pField;
             }
@@ -678,7 +678,7 @@ namespace WpfLocalDb.Xml.Factura {
         
         /// <remarks/>
         [System.Xml.Serialization.XmlElementAttribute(DataType="base64Binary")]
-        public byte[] Q {
+        public int[] Q {
             get {
                 return this.qField;
             }
@@ -689,7 +689,7 @@ namespace WpfLocalDb.Xml.Factura {
         
         /// <remarks/>
         [System.Xml.Serialization.XmlElementAttribute(DataType="base64Binary")]
-        public byte[] G {
+        public int[] G {
             get {
                 return this.gField;
             }
@@ -700,7 +700,7 @@ namespace WpfLocalDb.Xml.Factura {
         
         /// <remarks/>
         [System.Xml.Serialization.XmlElementAttribute(DataType="base64Binary")]
-        public byte[] Y {
+        public int[] Y {
             get {
                 return this.yField;
             }
@@ -711,7 +711,7 @@ namespace WpfLocalDb.Xml.Factura {
         
         /// <remarks/>
         [System.Xml.Serialization.XmlElementAttribute(DataType="base64Binary")]
-        public byte[] J {
+        public int[] J {
             get {
                 return this.jField;
             }
@@ -722,7 +722,7 @@ namespace WpfLocalDb.Xml.Factura {
         
         /// <remarks/>
         [System.Xml.Serialization.XmlElementAttribute(DataType="base64Binary")]
-        public byte[] Seed {
+        public int[] Seed {
             get {
                 return this.seedField;
             }
@@ -733,7 +733,7 @@ namespace WpfLocalDb.Xml.Factura {
         
         /// <remarks/>
         [System.Xml.Serialization.XmlElementAttribute(DataType="base64Binary")]
-        public byte[] PgenCounter {
+        public int[] PgenCounter {
             get {
                 return this.pgenCounterField;
             }
@@ -895,7 +895,7 @@ namespace WpfLocalDb.Xml.Factura {
         
         private string idField;
         
-        private byte[] valueField;
+        private int[] valueField;
         
         /// <remarks/>
         [System.Xml.Serialization.XmlAttributeAttribute(DataType="ID")]
@@ -910,7 +910,7 @@ namespace WpfLocalDb.Xml.Factura {
         
         /// <remarks/>
         [System.Xml.Serialization.XmlTextAttribute(DataType="base64Binary")]
-        public byte[] Value {
+        public int[] Value {
             get {
                 return this.valueField;
             }
@@ -970,7 +970,7 @@ namespace WpfLocalDb.Xml.Factura {
         
         private DigestMethodType digestMethodField;
         
-        private byte[] digestValueField;
+        private int[] digestValueField;
         
         private string idField;
         
@@ -1001,7 +1001,7 @@ namespace WpfLocalDb.Xml.Factura {
         
         /// <remarks/>
         [System.Xml.Serialization.XmlElementAttribute(DataType="base64Binary")]
-        public byte[] DigestValue {
+        public int[] DigestValue {
             get {
                 return this.digestValueField;
             }
@@ -1458,20 +1458,20 @@ namespace WpfLocalDb.Xml.Factura {
     [System.Xml.Serialization.XmlTypeAttribute(AnonymousType=true, Namespace="http://www.sii.cl/SiiDte")]
     public partial class EnvioDTESetDTEDTEDocumentoEncabezadoIdDoc {
         
-        private byte tipoDTEField;
+        private int tipoDTEField;
         
-        private byte folioField;
+        private int folioField;
         
         private System.DateTime fchEmisField;
         
-        private byte fmaPagoField;
+        private int fmaPagoField;
         
         private EnvioDTESetDTEDTEDocumentoEncabezadoIdDocMntPagos mntPagosField;
         
         private System.DateTime fchVencField;
         
         /// <remarks/>
-        public byte TipoDTE {
+        public int TipoDTE {
             get {
                 return this.tipoDTEField;
             }
@@ -1481,7 +1481,7 @@ namespace WpfLocalDb.Xml.Factura {
         }
         
         /// <remarks/>
-        public byte Folio {
+        public int Folio {
             get {
                 return this.folioField;
             }
@@ -1502,7 +1502,7 @@ namespace WpfLocalDb.Xml.Factura {
         }
         
         /// <remarks/>
-        public byte FmaPago {
+        public int FmaPago {
             get {
                 return this.fmaPagoField;
             }
@@ -1543,7 +1543,7 @@ namespace WpfLocalDb.Xml.Factura {
         
         private System.DateTime fchPagoField;
         
-        private uint mntPagoField;
+        private int mntPagoField;
         
         /// <remarks/>
         [System.Xml.Serialization.XmlElementAttribute(DataType="date")]
@@ -1557,7 +1557,7 @@ namespace WpfLocalDb.Xml.Factura {
         }
         
         /// <remarks/>
-        public uint MntPago {
+        public int MntPago {
             get {
                 return this.mntPagoField;
             }
@@ -1581,7 +1581,7 @@ namespace WpfLocalDb.Xml.Factura {
         
         private string giroEmisField;
         
-        private uint actecoField;
+        private int actecoField;
         
         private string dirOrigenField;
         
@@ -1620,7 +1620,7 @@ namespace WpfLocalDb.Xml.Factura {
         }
         
         /// <remarks/>
-        public uint Acteco {
+        public int Acteco {
             get {
                 return this.actecoField;
             }
@@ -1761,18 +1761,18 @@ namespace WpfLocalDb.Xml.Factura {
     [System.Xml.Serialization.XmlTypeAttribute(AnonymousType=true, Namespace="http://www.sii.cl/SiiDte")]
     public partial class EnvioDTESetDTEDTEDocumentoEncabezadoTotales {
         
-        private uint mntNetoField;
+        private int mntNetoField;
         
-        private byte mntExeField;
+        private int mntExeField;
         
-        private byte tasaIVAField;
+        private int tasaIVAField;
         
-        private uint iVAField;
+        private int iVAField;
         
-        private uint mntTotalField;
+        private int mntTotalField;
         
         /// <remarks/>
-        public uint MntNeto {
+        public int MntNeto {
             get {
                 return this.mntNetoField;
             }
@@ -1782,7 +1782,7 @@ namespace WpfLocalDb.Xml.Factura {
         }
         
         /// <remarks/>
-        public byte MntExe {
+        public int MntExe {
             get {
                 return this.mntExeField;
             }
@@ -1792,7 +1792,7 @@ namespace WpfLocalDb.Xml.Factura {
         }
         
         /// <remarks/>
-        public byte TasaIVA {
+        public int TasaIVA {
             get {
                 return this.tasaIVAField;
             }
@@ -1802,7 +1802,7 @@ namespace WpfLocalDb.Xml.Factura {
         }
         
         /// <remarks/>
-        public uint IVA {
+        public int IVA {
             get {
                 return this.iVAField;
             }
@@ -1812,7 +1812,7 @@ namespace WpfLocalDb.Xml.Factura {
         }
         
         /// <remarks/>
-        public uint MntTotal {
+        public int MntTotal {
             get {
                 return this.mntTotalField;
             }
@@ -1830,18 +1830,18 @@ namespace WpfLocalDb.Xml.Factura {
     [System.Xml.Serialization.XmlTypeAttribute(AnonymousType=true, Namespace="http://www.sii.cl/SiiDte")]
     public partial class EnvioDTESetDTEDTEDocumentoDetalle {
         
-        private byte nroLinDetField;
+        private int nroLinDetField;
         
         private string nmbItemField;
         
-        private byte qtyItemField;
+        private int qtyItemField;
         
-        private uint prcItemField;
+        private int prcItemField;
         
-        private uint montoItemField;
+        private int montoItemField;
         
         /// <remarks/>
-        public byte NroLinDet {
+        public int NroLinDet {
             get {
                 return this.nroLinDetField;
             }
@@ -1861,7 +1861,7 @@ namespace WpfLocalDb.Xml.Factura {
         }
         
         /// <remarks/>
-        public byte QtyItem {
+        public int QtyItem {
             get {
                 return this.qtyItemField;
             }
@@ -1871,7 +1871,7 @@ namespace WpfLocalDb.Xml.Factura {
         }
         
         /// <remarks/>
-        public uint PrcItem {
+        public int PrcItem {
             get {
                 return this.prcItemField;
             }
@@ -1881,7 +1881,7 @@ namespace WpfLocalDb.Xml.Factura {
         }
         
         /// <remarks/>
-        public uint MontoItem {
+        public int MontoItem {
             get {
                 return this.montoItemField;
             }
@@ -1899,7 +1899,7 @@ namespace WpfLocalDb.Xml.Factura {
     [System.Xml.Serialization.XmlTypeAttribute(AnonymousType=true, Namespace="http://www.sii.cl/SiiDte")]
     public partial class EnvioDTESetDTEDTEDocumentoReferencia {
         
-        private byte nroLinRefField;
+        private int nroLinRefField;
         
         private string tpoDocRefField;
         
@@ -1908,7 +1908,7 @@ namespace WpfLocalDb.Xml.Factura {
         private System.DateTime fchRefField;
         
         /// <remarks/>
-        public byte NroLinRef {
+        public int NroLinRef {
             get {
                 return this.nroLinRefField;
             }
@@ -2005,9 +2005,9 @@ namespace WpfLocalDb.Xml.Factura {
         
         private string reField;
         
-        private byte tdField;
+        private int tdField;
         
-        private byte fField;
+        private int fField;
         
         private System.DateTime feField;
         
@@ -2015,7 +2015,7 @@ namespace WpfLocalDb.Xml.Factura {
         
         private string rSRField;
         
-        private uint mNTField;
+        private int mNTField;
         
         private string iT1Field;
         
@@ -2034,7 +2034,7 @@ namespace WpfLocalDb.Xml.Factura {
         }
         
         /// <remarks/>
-        public byte TD {
+        public int TD {
             get {
                 return this.tdField;
             }
@@ -2044,7 +2044,7 @@ namespace WpfLocalDb.Xml.Factura {
         }
         
         /// <remarks/>
-        public byte F {
+        public int F {
             get {
                 return this.fField;
             }
@@ -2085,7 +2085,7 @@ namespace WpfLocalDb.Xml.Factura {
         }
         
         /// <remarks/>
-        public uint MNT {
+        public int MNT {
             get {
                 return this.mNTField;
             }
@@ -2183,7 +2183,7 @@ namespace WpfLocalDb.Xml.Factura {
         
         private string rsField;
         
-        private byte tdField;
+        private int tdField;
         
         private EnvioDTESetDTEDTEDocumentoTEDDDCAFDARNG rNGField;
         
@@ -2191,7 +2191,7 @@ namespace WpfLocalDb.Xml.Factura {
         
         private EnvioDTESetDTEDTEDocumentoTEDDDCAFDARSAPK rSAPKField;
         
-        private ushort iDKField;
+        private int iDKField;
         
         /// <remarks/>
         public string RE {
@@ -2214,7 +2214,7 @@ namespace WpfLocalDb.Xml.Factura {
         }
         
         /// <remarks/>
-        public byte TD {
+        public int TD {
             get {
                 return this.tdField;
             }
@@ -2255,7 +2255,7 @@ namespace WpfLocalDb.Xml.Factura {
         }
         
         /// <remarks/>
-        public ushort IDK {
+        public int IDK {
             get {
                 return this.iDKField;
             }
@@ -2273,12 +2273,12 @@ namespace WpfLocalDb.Xml.Factura {
     [System.Xml.Serialization.XmlTypeAttribute(AnonymousType=true, Namespace="http://www.sii.cl/SiiDte")]
     public partial class EnvioDTESetDTEDTEDocumentoTEDDDCAFDARNG {
         
-        private byte dField;
+        private int dField;
         
-        private byte hField;
+        private int hField;
         
         /// <remarks/>
-        public byte D {
+        public int D {
             get {
                 return this.dField;
             }
@@ -2288,7 +2288,7 @@ namespace WpfLocalDb.Xml.Factura {
         }
         
         /// <remarks/>
-        public byte H {
+        public int H {
             get {
                 return this.hField;
             }
@@ -2476,10 +2476,10 @@ namespace WpfLocalDb.Xml.Factura {
     [System.Xml.Serialization.XmlTypeAttribute(AnonymousType=true, Namespace="http://www.sii.cl/SiiDte")]
     public partial class EnvioDTEPersonalizadosDocPersonalizadoImpresion {
         
-        private byte personalizado_01Field;
+        private int personalizado_01Field;
         
         /// <remarks/>
-        public byte Personalizado_01 {
+        public int Personalizado_01 {
             get {
                 return this.personalizado_01Field;
             }
@@ -2497,10 +2497,10 @@ namespace WpfLocalDb.Xml.Factura {
     [System.Xml.Serialization.XmlTypeAttribute(AnonymousType=true, Namespace="http://www.sii.cl/SiiDte")]
     public partial class EnvioDTEPersonalizadosDocPersonalizadoImpresionDetalle {
         
-        private byte personNroLinDetField;
+        private int personNroLinDetField;
         
         /// <remarks/>
-        public byte PersonNroLinDet {
+        public int PersonNroLinDet {
             get {
                 return this.personNroLinDetField;
             }

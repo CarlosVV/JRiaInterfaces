@@ -8,17 +8,20 @@ namespace WpfLocalDb.Repository
 
     public partial class systblApp_CoreAPI_Caf
     {
-        public Guid Id { get; set; }
+        [DatabaseGenerated(DatabaseGeneratedOption.None)]
+        public int Id { get; set; }
 
         [Required]
-        [StringLength(15)]
+        [StringLength(10)]
         public string CompanyRUT { get; set; }
 
         [Required]
         [StringLength(50)]
         public string CompanyLegalName { get; set; }
 
-        public int DocumentType { get; set; }
+        [Required]
+        [StringLength(10)]
+        public string DocumentType { get; set; }
 
         public int FolioCurrentNumber { get; set; }
 
@@ -27,7 +30,7 @@ namespace WpfLocalDb.Repository
         public int FolioEndNumber { get; set; }
 
         [Column(TypeName = "date")]
-        public DateTime DateAuthorization { get; set; }
+        public DateTime AuthorizationDate { get; set; }
 
         [Required]
         public string FileContent { get; set; }

@@ -8,29 +8,41 @@ namespace WpfLocalDb.Repository
 
     public partial class systblApp_CoreAPI_Document
     {
-        public Guid Id { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public systblApp_CoreAPI_Document()
+        {
+            DocumentDetails = new HashSet<systblApp_CoreAPI_DocumentDetail>();
+            DocumentReferences = new HashSet<systblApp_CoreAPI_DocumentReference>();
+            TaskDetails = new HashSet<systblApp_CoreAPI_TaskDetail>();
+            Activity = new HashSet<systblApp_TaxReceipt_Activity>();
+        }
+
+        [DatabaseGenerated(DatabaseGeneratedOption.None)]
+        public int Id { get; set; }
 
         [Required]
         [StringLength(20)]
         public string OrderNo { get; set; }
 
-        public int DocumentType { get; set; }
+        [Required]
+        [StringLength(10)]
+        public string DocumentType { get; set; }
 
         public int Folio { get; set; }
-
-        [StringLength(100)]
-        public string Branch { get; set; }
 
         [StringLength(255)]
         public string Description { get; set; }
 
-        [StringLength(100)]
-        public string TellerNumber { get; set; }
+        [StringLength(50)]
+        public string StoreName { get; set; }
+
+        [StringLength(10)]
+        public string CashRegisterNumber { get; set; }
 
         [StringLength(100)]
-        public string TellerName { get; set; }
+        public string CashierName { get; set; }
 
-        public DateTime Issued { get; set; }
+        public DateTime IssuedDate { get; set; }
 
         [Column(TypeName = "money")]
         public decimal? ExemptAmount { get; set; }
@@ -39,14 +51,14 @@ namespace WpfLocalDb.Repository
         public decimal Amount { get; set; }
 
         [Column(TypeName = "money")]
-        public decimal Tax { get; set; }
+        public decimal TaxAmount { get; set; }
 
         [Column(TypeName = "money")]
         public decimal TotalAmount { get; set; }
 
-        public Guid SenderId { get; set; }
+        public int SenderId { get; set; }
 
-        public Guid ReceiverId { get; set; }
+        public int ReceiverId { get; set; }
 
         public bool? SentToSII { get; set; }
 
@@ -57,6 +69,10 @@ namespace WpfLocalDb.Repository
         public int RecAgent { get; set; }
 
         public int? PayAgent { get; set; }
+
+        public DateTime TimestampDocument { get; set; }
+
+        public DateTime TimestampSent { get; set; }
 
         public bool? fDisabled { get; set; }
 
@@ -69,5 +85,21 @@ namespace WpfLocalDb.Repository
         public DateTime? fModified { get; set; }
 
         public int? fModifiedID { get; set; }
+
+        public virtual systblApp_CoreAPI_TaxEntity Sender { get; set; }
+
+        public virtual systblApp_CoreAPI_TaxEntity Receiver { get; set; }
+
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<systblApp_CoreAPI_DocumentDetail> DocumentDetails { get; set; }
+
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<systblApp_CoreAPI_DocumentReference> DocumentReferences { get; set; }
+
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<systblApp_CoreAPI_TaskDetail> TaskDetails { get; set; }
+
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<systblApp_TaxReceipt_Activity> Activity { get; set; }
     }
 }

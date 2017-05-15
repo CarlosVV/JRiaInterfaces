@@ -8,9 +8,10 @@ namespace WpfLocalDb.Repository
 
     public partial class systblApp_CoreAPI_TaxAddress
     {
-        public Guid Id { get; set; }
+        [DatabaseGenerated(DatabaseGeneratedOption.None)]
+        public int Id { get; set; }
 
-        public Guid? Entity { get; set; }
+        public int? TaxEntityId { get; set; }
 
         [StringLength(150)]
         public string Address { get; set; }
@@ -38,5 +39,7 @@ namespace WpfLocalDb.Repository
         public DateTime? fModified { get; set; }
 
         public int? fModifiedID { get; set; }
+
+        public virtual systblApp_CoreAPI_TaxEntity TaxEntity { get; set; }
     }
 }

@@ -8,13 +8,16 @@ namespace WpfLocalDb.Repository
 
     public partial class systblApp_CoreAPI_TaskDetail
     {
-        public Guid Id { get; set; }
+        [DatabaseGenerated(DatabaseGeneratedOption.None)]
+        public int Id { get; set; }
 
-        public Guid? Task { get; set; }
+        public int? TaskId { get; set; }
 
         public string StateObject { get; set; }
 
         public string ResultObject { get; set; }
+
+        public int? DocumentId { get; set; }
 
         public bool? fDisabled { get; set; }
 
@@ -27,5 +30,9 @@ namespace WpfLocalDb.Repository
         public DateTime? fModified { get; set; }
 
         public int? fModifiedID { get; set; }
+
+        public virtual systblApp_CoreAPI_Document Document { get; set; }
+
+        public virtual systblApp_CoreAPI_Task Task { get; set; }
     }
 }

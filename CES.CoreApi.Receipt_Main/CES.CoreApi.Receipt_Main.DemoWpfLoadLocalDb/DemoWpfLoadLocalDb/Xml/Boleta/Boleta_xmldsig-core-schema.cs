@@ -124,7 +124,7 @@ namespace WpfLocalDb.Xml.Boleta {
         
         private System.DateTime fchResolField;
         
-        private byte nroResolField;
+        private int nroResolField;
         
         private System.DateTime tmstFirmaEnvField;
         
@@ -174,7 +174,7 @@ namespace WpfLocalDb.Xml.Boleta {
         }
         
         /// <remarks/>
-        public byte NroResol {
+        public int NroResol {
             get {
                 return this.nroResolField;
             }
@@ -223,12 +223,12 @@ namespace WpfLocalDb.Xml.Boleta {
     [System.Xml.Serialization.XmlTypeAttribute(AnonymousType=true, Namespace="http://www.sii.cl/SiiDte")]
     public partial class EnvioBOLETASetDTECaratulaSubTotDTE {
         
-        private byte tpoDTEField;
+        private int tpoDTEField;
         
-        private byte nroDTEField;
+        private int nroDTEField;
         
         /// <remarks/>
-        public byte TpoDTE {
+        public int TpoDTE {
             get {
                 return this.tpoDTEField;
             }
@@ -238,7 +238,7 @@ namespace WpfLocalDb.Xml.Boleta {
         }
         
         /// <remarks/>
-        public byte NroDTE {
+        public int NroDTE {
             get {
                 return this.nroDTEField;
             }
@@ -1445,16 +1445,16 @@ namespace WpfLocalDb.Xml.Boleta {
     [System.Xml.Serialization.XmlTypeAttribute(AnonymousType=true, Namespace="http://www.sii.cl/SiiDte")]
     public partial class EnvioBOLETASetDTEDTEDocumentoEncabezadoIdDoc {
         
-        private byte tipoDTEField;
+        private int tipoDTEField;
         
-        private uint folioField;
+        private int folioField;
         
         private System.DateTime fchEmisField;
         
-        private byte indServicioField;
+        private int indServicioField;
         
         /// <remarks/>
-        public byte TipoDTE {
+        public int TipoDTE {
             get {
                 return this.tipoDTEField;
             }
@@ -1464,7 +1464,7 @@ namespace WpfLocalDb.Xml.Boleta {
         }
         
         /// <remarks/>
-        public uint Folio {
+        public int Folio {
             get {
                 return this.folioField;
             }
@@ -1485,7 +1485,7 @@ namespace WpfLocalDb.Xml.Boleta {
         }
         
         /// <remarks/>
-        public byte IndServicio {
+        public int IndServicio {
             get {
                 return this.indServicioField;
             }
@@ -1509,7 +1509,7 @@ namespace WpfLocalDb.Xml.Boleta {
         
         private string giroEmisorField;
         
-        private uint cdgSIISucurField;
+        private int cdgSIISucurField;
         
         private string dirOrigenField;
         
@@ -1548,7 +1548,7 @@ namespace WpfLocalDb.Xml.Boleta {
         }
         
         /// <remarks/>
-        public uint CdgSIISucur {
+        public int CdgSIISucur {
             get {
                 return this.cdgSIISucurField;
             }
@@ -1629,10 +1629,10 @@ namespace WpfLocalDb.Xml.Boleta {
     [System.Xml.Serialization.XmlTypeAttribute(AnonymousType=true, Namespace="http://www.sii.cl/SiiDte")]
     public partial class EnvioBOLETASetDTEDTEDocumentoEncabezadoTotales {
         
-        private ushort mntTotalField;
+        private decimal mntTotalField;
         
         /// <remarks/>
-        public ushort MntTotal {
+        public decimal MntTotal {
             get {
                 return this.mntTotalField;
             }
@@ -1650,18 +1650,18 @@ namespace WpfLocalDb.Xml.Boleta {
     [System.Xml.Serialization.XmlTypeAttribute(AnonymousType=true, Namespace="http://www.sii.cl/SiiDte")]
     public partial class EnvioBOLETASetDTEDTEDocumentoDetalle {
         
-        private byte nroLinDetField;
+        private int nroLinDetField;
         
         private string nmbItemField;
         
-        private byte qtyItemField;
+        private int qtyItemField;
         
-        private ushort prcItemField;
+        private decimal prcItemField;
         
-        private ushort montoItemField;
+        private decimal montoItemField;
         
         /// <remarks/>
-        public byte NroLinDet {
+        public int NroLinDet {
             get {
                 return this.nroLinDetField;
             }
@@ -1681,7 +1681,7 @@ namespace WpfLocalDb.Xml.Boleta {
         }
         
         /// <remarks/>
-        public byte QtyItem {
+        public int QtyItem {
             get {
                 return this.qtyItemField;
             }
@@ -1691,7 +1691,7 @@ namespace WpfLocalDb.Xml.Boleta {
         }
         
         /// <remarks/>
-        public ushort PrcItem {
+        public decimal PrcItem {
             get {
                 return this.prcItemField;
             }
@@ -1701,7 +1701,7 @@ namespace WpfLocalDb.Xml.Boleta {
         }
         
         /// <remarks/>
-        public ushort MontoItem {
+        public decimal MontoItem {
             get {
                 return this.montoItemField;
             }
@@ -1767,9 +1767,9 @@ namespace WpfLocalDb.Xml.Boleta {
         
         private string reField;
         
-        private byte tdField;
+        private int tdField;
         
-        private uint fField;
+        private int fField;
         
         private System.DateTime feField;
         
@@ -1777,7 +1777,7 @@ namespace WpfLocalDb.Xml.Boleta {
         
         private string rSRField;
         
-        private ushort mNTField;
+        private decimal mNTField;
         
         private string iT1Field;
         
@@ -1796,7 +1796,7 @@ namespace WpfLocalDb.Xml.Boleta {
         }
         
         /// <remarks/>
-        public byte TD {
+        public int TD {
             get {
                 return this.tdField;
             }
@@ -1806,7 +1806,7 @@ namespace WpfLocalDb.Xml.Boleta {
         }
         
         /// <remarks/>
-        public uint F {
+        public int F {
             get {
                 return this.fField;
             }
@@ -1847,7 +1847,7 @@ namespace WpfLocalDb.Xml.Boleta {
         }
         
         /// <remarks/>
-        public ushort MNT {
+        public decimal MNT {
             get {
                 return this.mNTField;
             }
@@ -1945,7 +1945,7 @@ namespace WpfLocalDb.Xml.Boleta {
         
         private string rsField;
         
-        private byte tdField;
+        private int tdField;
         
         private EnvioBOLETASetDTEDTEDocumentoTEDDDCAFDARNG rNGField;
         
@@ -1953,7 +1953,7 @@ namespace WpfLocalDb.Xml.Boleta {
         
         private EnvioBOLETASetDTEDTEDocumentoTEDDDCAFDARSAPK rSAPKField;
         
-        private ushort iDKField;
+        private int iDKField;
         
         /// <remarks/>
         public string RE {
@@ -1976,7 +1976,7 @@ namespace WpfLocalDb.Xml.Boleta {
         }
         
         /// <remarks/>
-        public byte TD {
+        public int TD {
             get {
                 return this.tdField;
             }
@@ -2017,7 +2017,7 @@ namespace WpfLocalDb.Xml.Boleta {
         }
         
         /// <remarks/>
-        public ushort IDK {
+        public int IDK {
             get {
                 return this.iDKField;
             }
@@ -2035,12 +2035,12 @@ namespace WpfLocalDb.Xml.Boleta {
     [System.Xml.Serialization.XmlTypeAttribute(AnonymousType=true, Namespace="http://www.sii.cl/SiiDte")]
     public partial class EnvioBOLETASetDTEDTEDocumentoTEDDDCAFDARNG {
         
-        private uint dField;
+        private int dField;
         
-        private uint hField;
+        private int hField;
         
         /// <remarks/>
-        public uint D {
+        public int D {
             get {
                 return this.dField;
             }
@@ -2050,7 +2050,7 @@ namespace WpfLocalDb.Xml.Boleta {
         }
         
         /// <remarks/>
-        public uint H {
+        public int H {
             get {
                 return this.hField;
             }

@@ -8,7 +8,14 @@ namespace WpfLocalDb.Repository
 
     public partial class systblApp_CoreAPI_Task
     {
-        public Guid Id { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public systblApp_CoreAPI_Task()
+        {
+            TaskDetail = new HashSet<systblApp_CoreAPI_TaskDetail>();
+        }
+
+        [DatabaseGenerated(DatabaseGeneratedOption.None)]
+        public int Id { get; set; }
 
         public int TaskType { get; set; }
 
@@ -40,5 +47,8 @@ namespace WpfLocalDb.Repository
         public DateTime? fModified { get; set; }
 
         public int? fModifiedID { get; set; }
+
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<systblApp_CoreAPI_TaskDetail> TaskDetail { get; set; }
     }
 }

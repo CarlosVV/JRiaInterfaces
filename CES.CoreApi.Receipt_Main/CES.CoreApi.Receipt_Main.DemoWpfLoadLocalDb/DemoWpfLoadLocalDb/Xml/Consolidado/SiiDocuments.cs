@@ -1447,7 +1447,7 @@ namespace SiiDocuments {
         
         private byte tipoDTEField;
         
-        private uint folioField;
+        private int folioField;
         
         private System.DateTime fchEmisField;
         
@@ -1464,7 +1464,7 @@ namespace SiiDocuments {
         }
         
         /// <remarks/>
-        public uint Folio {
+        public int Folio {
             get {
                 return this.folioField;
             }
@@ -1509,7 +1509,7 @@ namespace SiiDocuments {
         
         private string giroEmisorField;
         
-        private uint cdgSIISucurField;
+        private int cdgSIISucurField;
         
         private string dirOrigenField;
         
@@ -1548,7 +1548,7 @@ namespace SiiDocuments {
         }
         
         /// <remarks/>
-        public uint CdgSIISucur {
+        public int CdgSIISucur {
             get {
                 return this.cdgSIISucurField;
             }
@@ -1629,10 +1629,10 @@ namespace SiiDocuments {
     [System.Xml.Serialization.XmlTypeAttribute(AnonymousType=true, Namespace="http://www.sii.cl/SiiDte")]
     public partial class EnvioBOLETASetDTEDTEDocumentoEncabezadoTotales {
         
-        private ushort mntTotalField;
+        private decimal mntTotalField;
         
         /// <remarks/>
-        public ushort MntTotal {
+        public decimal MntTotal {
             get {
                 return this.mntTotalField;
             }
@@ -1650,18 +1650,18 @@ namespace SiiDocuments {
     [System.Xml.Serialization.XmlTypeAttribute(AnonymousType=true, Namespace="http://www.sii.cl/SiiDte")]
     public partial class EnvioBOLETASetDTEDTEDocumentoDetalle {
         
-        private byte nroLinDetField;
+        private int nroLinDetField;
         
         private string nmbItemField;
         
-        private byte qtyItemField;
+        private int qtyItemField;
         
-        private ushort prcItemField;
+        private decimal prcItemField;
         
-        private ushort montoItemField;
+        private decimal montoItemField;
         
         /// <remarks/>
-        public byte NroLinDet {
+        public int NroLinDet {
             get {
                 return this.nroLinDetField;
             }
@@ -1681,7 +1681,7 @@ namespace SiiDocuments {
         }
         
         /// <remarks/>
-        public byte QtyItem {
+        public int QtyItem {
             get {
                 return this.qtyItemField;
             }
@@ -1691,7 +1691,7 @@ namespace SiiDocuments {
         }
         
         /// <remarks/>
-        public ushort PrcItem {
+        public decimal PrcItem {
             get {
                 return this.prcItemField;
             }
@@ -1701,7 +1701,7 @@ namespace SiiDocuments {
         }
         
         /// <remarks/>
-        public ushort MontoItem {
+        public decimal MontoItem {
             get {
                 return this.montoItemField;
             }
@@ -1769,7 +1769,7 @@ namespace SiiDocuments {
         
         private byte tdField;
         
-        private uint fField;
+        private int fField;
         
         private System.DateTime feField;
         
@@ -1777,7 +1777,7 @@ namespace SiiDocuments {
         
         private string rSRField;
         
-        private ushort mNTField;
+        private decimal mNTField;
         
         private string iT1Field;
         
@@ -1806,7 +1806,7 @@ namespace SiiDocuments {
         }
         
         /// <remarks/>
-        public uint F {
+        public int F {
             get {
                 return this.fField;
             }
@@ -1847,7 +1847,7 @@ namespace SiiDocuments {
         }
         
         /// <remarks/>
-        public ushort MNT {
+        public decimal MNT {
             get {
                 return this.mNTField;
             }
@@ -1953,7 +1953,7 @@ namespace SiiDocuments {
         
         private EnvioBOLETASetDTEDTEDocumentoTEDDDCAFDARSAPK rSAPKField;
         
-        private ushort iDKField;
+        private int iDKField;
         
         /// <remarks/>
         public string RE {
@@ -2017,7 +2017,7 @@ namespace SiiDocuments {
         }
         
         /// <remarks/>
-        public ushort IDK {
+        public int IDK {
             get {
                 return this.iDKField;
             }
@@ -2035,12 +2035,12 @@ namespace SiiDocuments {
     [System.Xml.Serialization.XmlTypeAttribute(AnonymousType=true, Namespace="http://www.sii.cl/SiiDte")]
     public partial class EnvioBOLETASetDTEDTEDocumentoTEDDDCAFDARNG {
         
-        private uint dField;
+        private int dField;
         
-        private uint hField;
+        private int hField;
         
         /// <remarks/>
-        public uint D {
+        public int D {
             get {
                 return this.dField;
             }
@@ -2050,7 +2050,7 @@ namespace SiiDocuments {
         }
         
         /// <remarks/>
-        public uint H {
+        public int H {
             get {
                 return this.hField;
             }
@@ -2767,7 +2767,7 @@ namespace SiiDocuments {
         
         private System.DateTime fchPagoField;
         
-        private uint mntPagoField;
+        private int mntPagoField;
         
         /// <remarks/>
         [System.Xml.Serialization.XmlElementAttribute(DataType="date")]
@@ -2781,7 +2781,7 @@ namespace SiiDocuments {
         }
         
         /// <remarks/>
-        public uint MntPago {
+        public int MntPago {
             get {
                 return this.mntPagoField;
             }
@@ -2805,7 +2805,7 @@ namespace SiiDocuments {
         
         private string giroEmisField;
         
-        private uint actecoField;
+        private int actecoField;
         
         private string dirOrigenField;
         
@@ -2844,7 +2844,7 @@ namespace SiiDocuments {
         }
         
         /// <remarks/>
-        public uint Acteco {
+        public int Acteco {
             get {
                 return this.actecoField;
             }
@@ -2985,18 +2985,18 @@ namespace SiiDocuments {
     [System.Xml.Serialization.XmlTypeAttribute(AnonymousType=true, Namespace="http://www.sii.cl/SiiDte")]
     public partial class EnvioDTESetDTEDTEDocumentoEncabezadoTotales {
         
-        private uint mntNetoField;
+        private int mntNetoField;
         
         private byte mntExeField;
         
         private byte tasaIVAField;
         
-        private uint iVAField;
+        private int iVAField;
         
-        private uint mntTotalField;
+        private int mntTotalField;
         
         /// <remarks/>
-        public uint MntNeto {
+        public int MntNeto {
             get {
                 return this.mntNetoField;
             }
@@ -3026,7 +3026,7 @@ namespace SiiDocuments {
         }
         
         /// <remarks/>
-        public uint IVA {
+        public int IVA {
             get {
                 return this.iVAField;
             }
@@ -3036,7 +3036,7 @@ namespace SiiDocuments {
         }
         
         /// <remarks/>
-        public uint MntTotal {
+        public int MntTotal {
             get {
                 return this.mntTotalField;
             }
@@ -3060,9 +3060,9 @@ namespace SiiDocuments {
         
         private byte qtyItemField;
         
-        private uint prcItemField;
+        private int prcItemField;
         
-        private uint montoItemField;
+        private int montoItemField;
         
         /// <remarks/>
         public byte NroLinDet {
@@ -3095,7 +3095,7 @@ namespace SiiDocuments {
         }
         
         /// <remarks/>
-        public uint PrcItem {
+        public int PrcItem {
             get {
                 return this.prcItemField;
             }
@@ -3105,7 +3105,7 @@ namespace SiiDocuments {
         }
         
         /// <remarks/>
-        public uint MontoItem {
+        public int MontoItem {
             get {
                 return this.montoItemField;
             }
@@ -3239,7 +3239,7 @@ namespace SiiDocuments {
         
         private string rSRField;
         
-        private uint mNTField;
+        private int mNTField;
         
         private string iT1Field;
         
@@ -3309,7 +3309,7 @@ namespace SiiDocuments {
         }
         
         /// <remarks/>
-        public uint MNT {
+        public int MNT {
             get {
                 return this.mNTField;
             }
@@ -3415,7 +3415,7 @@ namespace SiiDocuments {
         
         private EnvioDTESetDTEDTEDocumentoTEDDDCAFDARSAPK rSAPKField;
         
-        private ushort iDKField;
+        private int iDKField;
         
         /// <remarks/>
         public string RE {
@@ -3479,7 +3479,7 @@ namespace SiiDocuments {
         }
         
         /// <remarks/>
-        public ushort IDK {
+        public int IDK {
             get {
                 return this.iDKField;
             }

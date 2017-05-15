@@ -85,36 +85,50 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="Repository\Activity.cs" />
-    <Compile Include="Repository\ActivityDetail.cs" />
-    <Compile Include="Repository\ActivityStatu.cs" />
-    <Compile Include="Repository\ActivityType.cs" />
-    <Compile Include="Repository\Cashier.cs" />
-    <Compile Include="Repository\Functionality.cs" />
-    <Compile Include="Repository\FunctionRole.cs" />
-    <Compile Include="Repository\Menu.cs" />
-    <Compile Include="Repository\Parameter.cs" />
-    <Compile Include="Repository\ParameterCategory.cs" />
-    <Compile Include="Repository\Role.cs" />
-    <Compile Include="Repository\Store.cs" />
-    <Compile Include="Repository\sysdiagram.cs" />
+    <Compile Include="BuscarFolioWindow.xaml.cs">
+      <DependentUpon>BuscarFolioWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="CrearProductoWindow.xaml.cs">
+      <DependentUpon>CrearProductoWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Repository\systblApp_CoreAPI_Caf.cs" />
     <Compile Include="Repository\systblApp_CoreAPI_Document.cs" />
-    <Compile Include="Repository\systblApp_CoreAPI_Document_Detail.cs" />
+    <Compile Include="Repository\systblApp_CoreAPI_DocumentDetail.cs" />
+    <Compile Include="Repository\systblApp_CoreAPI_DocumentReference.cs" />
+    <Compile Include="Repository\systblApp_CoreApi_Sequence.cs" />
     <Compile Include="Repository\systblApp_CoreAPI_Task.cs" />
     <Compile Include="Repository\systblApp_CoreAPI_TaskDetail.cs" />
     <Compile Include="Repository\systblApp_CoreAPI_TaxAddress.cs" />
     <Compile Include="Repository\systblApp_CoreAPI_TaxEntity.cs" />
+    <Compile Include="Repository\systblApp_TaxReceipt_Activity.cs" />
+    <Compile Include="Repository\systblApp_TaxReceipt_ActivityDetail.cs" />
+    <Compile Include="Repository\systblApp_TaxReceipt_CashRegister.cs" />
+    <Compile Include="Repository\systblApp_TaxReceipt_Functionality.cs" />
+    <Compile Include="Repository\systblApp_TaxReceipt_FunctionRole.cs" />
+    <Compile Include="Repository\systblApp_TaxReceipt_Menu.cs" />
+    <Compile Include="Repository\systblApp_TaxReceipt_Parameter.cs" />
+    <Compile Include="Repository\systblApp_TaxReceipt_ParameterCategory.cs" />
+    <Compile Include="Repository\systblApp_TaxReceipt_Printer.cs" />
+    <Compile Include="Repository\systblApp_TaxReceipt_Role.cs" />
+    <Compile Include="Repository\systblApp_TaxReceipt_Store.cs" />
+    <Compile Include="Repository\systblApp_TaxReceipt_User.cs" />
+    <Compile Include="Repository\systblApp_TaxReceipt_UserRole.cs" />
     <Compile Include="Repository\TaxDb.cs" />
-    <Compile Include="Repository\User.cs" />
-    <Compile Include="Repository\UserRole.cs" />
     <Compile Include="Utilities\XmlDocumentParser.cs" />
     <Compile Include="Utilities\XmlHelper.cs" />
     <Compile Include="Xml\Boleta\Boleta_xmldsig-core-schema.cs" />
-    <Compile Include="Xml\Consolidado\SiiDocuments.cs" />
     <Compile Include="Xml\Factura\Factura_xmldsig-core-schema.cs" />
     <Compile Include="Xml\NotaDeCredito\NotaDeCredito_xmldsig-core-schema.cs" />
     <Compile Include="Xml\NotaDeDebito\NotaDeDebito_xmldsig-core-schema.cs" />
+    <Compile Include="Xml\Validator\XmlFormatValidator.cs" />
+    <Page Include="BuscarFolioWindow.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="CrearProductoWindow.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -156,9 +170,159 @@
     <AppDesigner Include="Properties\" />
     <None Include="Xml\Boleta\Boleta.xsd">
       <SubType>Designer</SubType>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Xml\Boleta\ConsumoFolio_v10.xsd">
+      <SubType>Designer</SubType>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Xml\Boleta\ConsumoFolio_v10.xsdconfig">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Xml\Boleta\DTE_v10.xsd">
+      <SubType>Designer</SubType>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Xml\Boleta\DTE_v10.xsdconfig">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Xml\Boleta\EnvioBOLETA_v11.xsd">
+      <SubType>Designer</SubType>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Xml\Boleta\EnvioBOLETA_v11.xsdconfig">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Xml\Boleta\EnvioDTE_v10.xsd">
+      <SubType>Designer</SubType>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Xml\Boleta\EnvioDTE_v10.xsdconfig">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Xml\Boleta\EnvioRecibos_v10.xsd">
+      <SubType>Designer</SubType>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Xml\Boleta\EnvioRecibos_v10.xsdconfig">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Xml\Boleta\IntroducedByNIC-Autorizacion.xsd">
+      <SubType>Designer</SubType>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Xml\Boleta\IntroducedByNIC-Autorizacion.xsdconfig">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Xml\Boleta\IntroducedByNIC-RecepcionDTE.xsd">
+      <SubType>Designer</SubType>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Xml\Boleta\IntroducedByNIC-Semilla.xsd">
+      <SubType>Designer</SubType>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Xml\Boleta\IntroducedByNIC-Semilla.xsdconfig">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Xml\Boleta\IntroducedByNIC-SemillaRequest.xsd">
+      <SubType>Designer</SubType>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Xml\Boleta\IntroducedByNIC-TedBarCode.xsd">
+      <SubType>Designer</SubType>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Xml\Boleta\LceCal_v10.xsd">
+      <SubType>Designer</SubType>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Xml\Boleta\LceCoCertif_v10.xsd">
+      <SubType>Designer</SubType>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Xml\Boleta\LceSiiTypes_v10.xsd">
+      <SubType>Designer</SubType>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Xml\Boleta\LibroBOLETA.xsdconfig">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Xml\Boleta\LibroBOLETA_v10.xsd">
+      <SubType>Designer</SubType>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Xml\Boleta\LibroCV.xsdconfig">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Xml\Boleta\LibroCV_v10.xsd">
+      <SubType>Designer</SubType>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Xml\Boleta\LibroGuia.xsdconfig">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Xml\Boleta\LibroGuia_v10.xsd">
+      <SubType>Designer</SubType>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Xml\Boleta\NICbase.xsdconfig">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Xml\Boleta\prepare-BOLETA.xsdconfig">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Xml\Boleta\prepare-ConsumoFolio.xsdconfig">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Xml\Boleta\prepare-LibroBOLETA.xsdconfig">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Xml\Boleta\prepare-LibroCV.xsdconfig">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Xml\Boleta\prepare-LibroGuia.xsdconfig">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Xml\Boleta\Recibos_v10.xsd">
+      <SubType>Designer</SubType>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Xml\Boleta\Recibos_v10.xsdconfig">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Xml\Boleta\RespSIILibros_v10.xsd">
+      <SubType>Designer</SubType>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Xml\Boleta\RespSIILibros_v10.xsdconfig">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Xml\Boleta\RespSII_v10.xsd">
+      <SubType>Designer</SubType>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Xml\Boleta\RespSII_v10.xsdconfig">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Xml\Boleta\RespuestaEnvioDTE.xsdconfig">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Xml\Boleta\RespuestaEnvioDTE_v10.xsd">
+      <SubType>Designer</SubType>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Xml\Boleta\SiiTypes_v10.xsd">
+      <SubType>Designer</SubType>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Include="Xml\Boleta\xmldsig-core-schema.xsd">
       <SubType>Designer</SubType>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Xml\Boleta\xmldsignature_v10.xsd">
+      <SubType>Designer</SubType>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Include="Xml\Factura\Factura.xsd">
       <SubType>Designer</SubType>
@@ -197,7 +361,9 @@
     </BootstrapperPackage>
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Xml\Boleta\Boleta.xml" />
+    <Resource Include="Xml\Boleta\Boleta.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Xml\NotaDeCredito\NotaDeCredito.xml" />
