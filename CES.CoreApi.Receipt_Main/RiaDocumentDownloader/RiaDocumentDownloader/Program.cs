@@ -12,12 +12,12 @@ namespace RiaDocumentDownloader
 {
     public class Program
     {
+        private static readonly string rut = "76134934-1";
         private static int foliostart;
         private static int folioend;
         private static string doctype;
-        private static string folder;
-        public static string xml_out;
-        private static readonly string rut = "76134934-1";
+        private static string xml_in;
+        public static string xml_out;        
         private object obj_lock = new object(); 
         public static readonly log4net.ILog log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
         
@@ -28,7 +28,7 @@ namespace RiaDocumentDownloader
                 doctype = ConfigurationManager.AppSettings["doctype"] != null ? ConfigurationManager.AppSettings["doctype"] : doctype;
                 foliostart = ConfigurationManager.AppSettings["foliostart"] != null ? int.Parse(ConfigurationManager.AppSettings["foliostart"]) : foliostart;
                 folioend = ConfigurationManager.AppSettings["folioend"] != null ? int.Parse(ConfigurationManager.AppSettings["folioend"]) : folioend;
-                folder = ConfigurationManager.AppSettings["folder"] != null ? ConfigurationManager.AppSettings["folder"] : folder;
+                xml_in = ConfigurationManager.AppSettings["xml_in"] != null ? ConfigurationManager.AppSettings["xml_in"] : xml_in;
                 xml_out = ConfigurationManager.AppSettings["xml_out"] != null ? ConfigurationManager.AppSettings["xml_out"] : xml_out;
 
                 doctype = (args.Length >= 1) ? args[0] : doctype;
@@ -39,9 +39,9 @@ namespace RiaDocumentDownloader
                 Console.WriteLine($"Folio Inicio: {foliostart}");
                 Console.WriteLine($"Folio Final: {folioend}");
                 Console.WriteLine($"Tipo Doc: {doctype}");
-                Console.WriteLine($"Folder: {folder}");
+                Console.WriteLine($"Folder: {xml_in}");
 
-                var objDocumentDownloader = new DocumentDownloader(foliostart, folioend, doctype, folder, xml_out, rut, log);
+                var objDocumentDownloader = new DocumentDownloader(foliostart, folioend, doctype, xml_in, xml_out, rut, log);
                 objDocumentDownloader.DescargarDocumentosFromGDE();
             }
             catch(Exception ex)

@@ -19,19 +19,20 @@ namespace CES.CoreApi.Receipt_Main.UI.WPF.ViewModel
         private readonly IDocumentService _documentService;
         private readonly DelegateCommand<object> _searchRangesCommand;
         private readonly Func<string, string, bool> _confirm;
-        private readonly ObservableCollection<CafResultSelectableViewModel> _documentsToDownload;
+        private ObservableCollection<DocumentSearchToDownloadSelectableViewModel> _documentsToDownload;
         private int currentProgress;
         private object lock_object = new object();
+        private string doctype = "39";
+        private DateTime startDate = new DateTime(2017, 4, 1);
+        private DateTime endDate = new DateTime(2017, 5, 1);
+        private List<Tuple<int, int>> intervalList;
         public DownloadSiiDocumentsViewModel(Func<string, string, bool> confirm, IDocumentService documentService)
         {
             _confirm = confirm;
             _documentService = documentService;
+            _documentsToDownload = new ObservableCollection<DocumentSearchToDownloadSelectableViewModel>();
             _searchRangesCommand = new DelegateCommand<object>(SearchRanges, CanSearchRanges);
-            //this._searchRangesCommand = new DelegateCommand(o => this.worker.RunWorkerAsync(), o => !this.worker.IsBusy);
-
             worker = new BackgroundWorker();
-            //this.worker.DoWork += this.worker_DoWork;
-            //this.worker.ProgressChanged += this.ProgressChanged;
         }
 
         #region Properties
@@ -43,9 +44,18 @@ namespace CES.CoreApi.Receipt_Main.UI.WPF.ViewModel
                 if (this.currentProgress != value)
                 {
                     this.currentProgress = value;
-                    //this.OnPropertyChanged(() => this.CurrentProgress);
                     NotifyPropertyChanged("CurrentProgress");
                 }
+            }
+        }
+
+        public ObservableCollection<DocumentSearchToDownloadSelectableViewModel> DocumentsToDownload
+        {
+            get { return _documentsToDownload; }
+            set
+            {
+                _documentsToDownload = value;
+                NotifyPropertyChanged("DocumentsToDownload");
             }
         }
         #endregion
@@ -57,17 +67,6 @@ namespace CES.CoreApi.Receipt_Main.UI.WPF.ViewModel
 
         private void SearchRanges(object parameter)
         {
-            //var doSearch = _confirm("¿Está seguro?", "Confirmar Buscar");
-            /*
-                SELECT fDocType, fStart, fStop FROM (
-	            SELECT m.Folio + 1 as fStart, m.DocumentTYpe as fDocType,
-		            (SELECT min(Folio) - 1 from [systblApp_CoreAPI_Document] (nolock) as x 
-	            WHERE x.Folio > m.Folio and x.DocumentType=m.DocumentType) as fStop
-	            FROM [systblApp_CoreAPI_Document] (nolock) as m 
-	            left outer join [systblApp_CoreAPI_Document] as r on m.Folio = r.Folio - 1 and m.DocumentType=r.DocumentType 
-	            WHERE r.Folio is null  and m.DocumentType = 39 and m.IssuedDate >= '2017/01/01 00:00:00'
-                ) as x
-            */
             worker.WorkerReportsProgress = true;
             worker.DoWork += worker_DoWork;
             worker.ProgressChanged += worker_ProgressChanged;
@@ -81,15 +80,16 @@ namespace CES.CoreApi.Receipt_Main.UI.WPF.ViewModel
         private void worker_ProgressChanged(object sender, ProgressChangedEventArgs e)
         {
             this.CurrentProgress = e.ProgressPercentage;
+
+            if(currentProgress ==  100)
+            {
+                intervalList.OrderBy(m => m.Item1).ToList().ForEach(m => { DocumentsToDownload.Add(new DocumentSearchToDownloadSelectableViewModel() { DocType = doctype, Start = $"{m.Item1}", End = $"{m.Item2}" }); });
+            }
         }
         private void SearchDynamicFilters(BackgroundWorker sender)
         {
-            var doctype = "39";
-            var startDate = new DateTime(2017, 4, 1);
-            var endDate = new DateTime(2017, 5, 1);
             //var documentListGlobal = _documentService.GetAllDocumentsFoliosByType(doctype, null, null);
             var documentList = _documentService.GetAllDocumentsFoliosByType(doctype, startDate, endDate);
-
             var iProgress = 20;
             sender.ReportProgress(iProgress);
 
@@ -102,11 +102,10 @@ namespace CES.CoreApi.Receipt_Main.UI.WPF.ViewModel
             sender.ReportProgress(iProgress);
 
             var differenceList = CreateDifferenceList(finalGapIds);
-            var intervalList = GroupIntervals(differenceList);
             iProgress = iProgress + 40;
             sender.ReportProgress(iProgress);
-            var resultados = intervalList.OrderBy(m => m.Item1).Select(m => new { DocType = doctype, Start = m.Item1, Stop = m.Item2 }).ToList();
 
+            intervalList = GroupIntervals(differenceList);                     
             iProgress = 100;
             sender.ReportProgress(iProgress);
         }
@@ -124,8 +123,6 @@ namespace CES.CoreApi.Receipt_Main.UI.WPF.ViewModel
                             Tuple.Create(
                                 Tuple.Create(index, folio),
                                 tmpBeforeFoliosList[index] - folio)).AsParallel().ToList();
-
-            //differenceList.Add(Tuple.Create(Tuple.Create(0, 0), 0));
 
             return differenceList;
         }
@@ -166,6 +163,10 @@ namespace CES.CoreApi.Receipt_Main.UI.WPF.ViewModel
             }
 
             return true;
+        }
+        private Action<PropertyChangedEventArgs> RaisePropertyChanged()
+        {
+            return args => PropertyChanged?.Invoke(this, args);
         }
 
         #region INotifyPropertyChanged Members

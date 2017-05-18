@@ -14,21 +14,22 @@ namespace RiaDocumentDownloader
 {
     public class DocumentDownloader
     {
-        private int _folioInicio = 483148;
-        private int _folioFinal = 2000000;
-        private string _tipo_documento = "39";//Boletas
-        private readonly string _folder = "C:\\Users\\cvalderrama\\OneDrive for Business\\XML\\";
+        private int _foliostart = 483148;
+        private int _folioend = 2000000;
+        private string _doctype = "39";//Boletas
+        private readonly string _xml_in = "C:\\Users\\cvalderrama\\xml_in\\";
         private readonly string _xml_out = "C:\\Users\\cvalderrama\\xml_out\\";
+        private readonly string _xml_not = "C:\\Users\\cvalderrama\\xml_not\\";
         private string _rut = "76134934-1";
         private object _obj_lock = new object();
         private readonly log4net.ILog _log;
 
-        public DocumentDownloader(int folioInicio, int folioFinal, string tipo_documento, string folder, string xml_out, string rut, log4net.ILog log)
+        public DocumentDownloader(int foliostart, int folioend, string doctype, string xml_in, string xml_out, string rut, log4net.ILog log)
         {
-            _folioInicio = folioInicio;
-            _folioFinal = folioFinal;
-            _tipo_documento = tipo_documento;
-            _folder = folder;
+            _foliostart = foliostart;
+            _folioend = folioend;
+            _doctype = doctype;
+            _xml_in = xml_in;
             _xml_out = xml_out;
             _rut = rut;
             _log = log;
@@ -48,8 +49,8 @@ namespace RiaDocumentDownloader
             int[] foliosToDownloadFromService;
             try
             {
-                initialFolioListToDownload = Enumerable.Range(_folioInicio, _folioFinal - _folioInicio + 1).ToArray();
-                xmlDocumentListDownloaded = GetXmlDocsDownloaded(_folder);
+                initialFolioListToDownload = Enumerable.Range(_foliostart, _folioend - _foliostart + 1).ToArray();
+                xmlDocumentListDownloaded = GetXmlDocsDownloaded(_xml_in);
                 xmlDocumentListInProcess = GetXmlDocsDownloaded(_xml_out);
                 xmlDocumentListNotExisting = GetXmlDocsNotExistingInService();
                 existingFolioDownloaded = new SortedList<int, int>();
@@ -120,7 +121,7 @@ namespace RiaDocumentDownloader
                         cancelationToken.Dispose();
                     }
 
-                    Console.WriteLine($"Descarga Finalizada: De {_folioInicio} hasta {_folioFinal} ");
+                    Console.WriteLine($"Descarga Finalizada: De {_foliostart} hasta {_folioend} ");
                 }
 
                 Console.WriteLine($"Documentos descargados: {foliosToDownloadFromService.Length}");
@@ -158,23 +159,26 @@ namespace RiaDocumentDownloader
         private void SaveXmlDocument(int folio)
         {
             string respuesta;
-            var result = RetrieveXML(int.Parse(_tipo_documento), folio, out respuesta);
+            var result = RetrieveXML(int.Parse(_doctype), folio, out respuesta);
             SaveXmlDocumentToRepository(folio, respuesta, result);
         }
 
         private void SaveXmlDocumentToRepository(int folio, string respuesta, bool result)
         {
-            var extname = result ? "XML" : "NOT";
-            using (var writer = new StreamWriter($"{_folder}BO{folio}.{extname}", false))
+            var name = result ? $"{_xml_in}BO{folio}.XML" : $"{_xml_not}BO{folio}.NOT";
+            if (!File.Exists(name))
             {
-                writer.Write(respuesta);
-                writer.Close();
-            }
+                using (var writer = new StreamWriter(name, false))
+                {
+                    writer.Write(respuesta);
+                    writer.Close();
+                }
+            }            
         }
 
         private string[] GetXmlDocsNotExistingInService()
         {
-            return Directory.GetFiles($"{_folder}", "*.not");
+            return Directory.GetFiles($"{_xml_not}", "*.not");
         }
 
         private string[] GetXmlDocsDownloaded(string folder)
@@ -234,7 +238,7 @@ namespace RiaDocumentDownloader
                 db.Configuration.ProxyCreationEnabled = false;
                 db.Configuration.ValidateOnSaveEnabled = false;
 
-                return db.systblApp_CoreAPI_Document.Where(t => t.DocumentType == _tipo_documento).Select(m => m.Folio).ToArray();
+                return db.systblApp_CoreAPI_Document.Where(t => t.DocumentType == _doctype).Select(m => m.Folio).ToArray();
             }
         }
     }

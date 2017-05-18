@@ -14,25 +14,29 @@ namespace RiaDocumentDbUploader
 {
     public class DocumentUploader
     {
-        private TaxDb db = new TaxDb();
-        private static readonly decimal TaxRate = 0.19m;
-        private static Dictionary<string, systblApp_CoreAPI_TaxEntity> TaxEntityCache;
-        private static Dictionary<string, systblApp_TaxReceipt_Store> StoreCache;
-        private static int _filesToProcess = 30;
-        private string _tipo_documento = "39";
-        private static int chunkfolio = 100;
-        private static string _folder = "C:\\Users\\cvalderrama\\OneDrive for Business\\XML\\";
-        private static string _xml_out = "C:\\Users\\cvalderrama\\xml_out\\";
-        private object object_lock = new Object();
+        private TaxDb _db = new TaxDb();
+        private static readonly decimal _TaxRate = 0.19m;
+        private static Dictionary<string, systblApp_CoreAPI_TaxEntity> _TaxEntityCache;
+        private static Dictionary<string, systblApp_TaxReceipt_Store> _StoreCache;
+        private string _doctype;
+        private int? _folioend;
+        private int? _foliostart;
+        private static string _xml_in;
+        private static string _xml_out;
+        private object _object_lock = new Object();
+        private static int _filesToProcess;
+        private static int _chunkfolio = 100;
 
-        public DocumentUploader(string folder, int filesToProcess, string xml_out, string tipo_documento)
+        public DocumentUploader(string doctype, string xml_in, string xml_out, int filesToProcess, int? foliostart, int? folioend)
         {
-            _folder = folder;
-            _filesToProcess = filesToProcess;
+            _doctype = doctype;
+            _xml_in = xml_in;
             _xml_out = xml_out;
-            _tipo_documento = tipo_documento;
-            TaxEntityCache = new Dictionary<string, systblApp_CoreAPI_TaxEntity>();
-            StoreCache = new Dictionary<string, systblApp_TaxReceipt_Store>();
+            _filesToProcess = filesToProcess;            
+            _foliostart = foliostart;
+            _folioend = folioend;
+            _TaxEntityCache = new Dictionary<string, systblApp_CoreAPI_TaxEntity>();
+            _StoreCache = new Dictionary<string, systblApp_TaxReceipt_Store>();
         }
         public void CargarDocumentosEnBd()
         {
@@ -75,8 +79,8 @@ namespace RiaDocumentDbUploader
 
                     if (existingdocsInFolder == null)
                     {
-                        existingdocsInFolder = GetExistingXmlDocumentsDownloaded();
-                        existingdocsInProcess = GetExistingXmlDocumentsDownloaded();
+                        existingdocsInFolder = GetExistingXmlDocumentsDownloaded(_xml_in);
+                        existingdocsInProcess = GetExistingXmlDocumentsDownloaded(_xml_out);
 
                         documentsExistingDowloadedByFolio = new SortedList<int, string>();
                         documentsExistingInProcessByFolio = new SortedList<int, string>();
@@ -86,6 +90,7 @@ namespace RiaDocumentDbUploader
 
                         documentsExistingDowloadedByFolioToProcess = documentsExistingDowloadedByFolio.Except(documentsExistingInProcessByFolio);
                         documentsExistingDowloadedByFolioToProcess = documentsExistingDowloadedByFolioToProcess.Except(existingdocsInDb.Select(p => new KeyValuePair<int, string>(p, null)));
+                        documentsExistingDowloadedByFolioToProcess = documentsExistingDowloadedByFolioToProcess.Where(m => (!_foliostart.HasValue || m.Key >= _foliostart) && (!_folioend.HasValue || m.Key <= _folioend));
                     }
 
                     if (_filesToProcess > documentsExistingDowloadedByFolioToProcess.Count())
@@ -107,13 +112,13 @@ namespace RiaDocumentDbUploader
 
                     totalOfDocuments = documentsToInsertInDb.Count();
 
-                    if (chunkfolio > totalOfDocuments)
+                    if (_chunkfolio > totalOfDocuments)
                     {
-                        chunkfolio = totalOfDocuments;
+                        _chunkfolio = totalOfDocuments;
                     }
 
-                    numberofchk = totalOfDocuments / chunkfolio;
-                    restchunk = totalOfDocuments % chunkfolio;
+                    numberofchk = totalOfDocuments / _chunkfolio;
+                    restchunk = totalOfDocuments % _chunkfolio;
                     folioInicio = documentsToInsertInDb.First().Key;
                     folioFinal = documentsToInsertInDb.Last().Key;
 
@@ -128,7 +133,7 @@ namespace RiaDocumentDbUploader
                             continue;
                         }
 
-                        if(DocumentExistInDatabase(_tipo_documento, folio))
+                        if (DocumentExistInDatabase(_doctype, folio))
                         {
                             continue;
                         }
@@ -167,17 +172,17 @@ namespace RiaDocumentDbUploader
 
         private bool DocumentExistInDatabase(string _tipo_documento, int folio)
         {
-            using(var ctx = new TaxDb())
+            using (var ctx = new TaxDb())
             {
                 return ctx.systblApp_CoreAPI_Document.Any(t => t.DocumentType == _tipo_documento && t.Folio == folio);
-            }           
+            }
         }
 
         private void GetXmlDocumentsParsedToUploadInDatabase(XmlDocumentParser<EnvioBOLETA> parserBoletas, string respuesta, SortedList<int, EnvioBOLETA> documentsToInsertInDb, IEnumerable<KeyValuePair<int, string>> docs)
         {
             Parallel.ForEach(docs, (docfile) =>
             {
-                lock (object_lock)
+                lock (_object_lock)
                 {
                     if (System.IO.File.Exists(docfile.Value))
                     {
@@ -209,7 +214,7 @@ namespace RiaDocumentDbUploader
                                 Console.WriteLine($"[{docfile.Value}] Archivo XML no tiene datos");
                             }
                         }
-                    }                    
+                    }
                 }
             });
         }
@@ -218,7 +223,7 @@ namespace RiaDocumentDbUploader
         {
             Parallel.ForEach(existingdocsInFolder, (docfile) =>
             {
-                lock (object_lock)
+                lock (_object_lock)
                 {
                     var existingfolio = int.Parse(Path.GetFileNameWithoutExtension(docfile).Substring(2));
                     documentsExistingByFolio.Add(existingfolio, docfile);
@@ -226,16 +231,16 @@ namespace RiaDocumentDbUploader
             });
         }
 
-        private IEnumerable<string> GetExistingXmlDocumentsDownloaded()
+        private IEnumerable<string> GetExistingXmlDocumentsDownloaded(string folder)
         {
-            return Directory.GetFiles($"{_folder}", "*.xml");
+            return Directory.GetFiles($"{folder}", "*.xml");
         }
 
         private IEnumerable<int> GetExistingDocumentsInDatabase()
         {
             using (var ctx = new TaxDb())
             {
-                return ctx.systblApp_CoreAPI_Document.Where(t => t.DocumentType == _tipo_documento).Select(m => m.Folio).ToArray();
+                return ctx.systblApp_CoreAPI_Document.Where(t => t.DocumentType == _doctype).Select(m => m.Folio).ToArray();
             }
         }
 
@@ -255,9 +260,9 @@ namespace RiaDocumentDbUploader
 
             CreateDocument(indexchunk, objBoleta, ref detailids, ref docids, senderEntity, receiverEntity);
 
-            if (indexchunk >= chunkfolio || folio == folioFinal)
+            if (indexchunk >= _chunkfolio || folio == folioFinal)
             {
-                db.SaveChanges();
+                _db.SaveChanges();
                 acumchunk = acumchunk + indexchunk;
                 indexchunk = 0;
                 docids = null;
@@ -269,19 +274,19 @@ namespace RiaDocumentDbUploader
         {
             if (detailids == null)
             {
-                detailids = ReserveNewIds("systblApp_CoreAPI_DocumentDetail", chunkfolio);
+                detailids = ReserveNewIds("systblApp_CoreAPI_DocumentDetail", _chunkfolio);
             }
 
             if (docids == null)
             {
-                docids = ReserveNewIds("systblApp_CoreAPI_Document", chunkfolio);
+                docids = ReserveNewIds("systblApp_CoreAPI_Document", _chunkfolio);
             }
 
             var dbBoleta = MapDocumentFromXmlObject(docids[indexchunk - 1], objBoleta, senderEntity, receiverEntity);
 
             AddDocumentDetailFromXmlObject(detailids[indexchunk - 1], objBoleta, dbBoleta);
 
-            db.systblApp_CoreAPI_Document.Add(dbBoleta);
+            _db.systblApp_CoreAPI_Document.Add(dbBoleta);
         }
 
         private void CreateTaxEntities(EnvioBOLETA objBoleta, string rutSender, string rutReceiver, out int? idSender, out int? idReceiver, systblApp_CoreAPI_TaxEntity senderEntity, systblApp_CoreAPI_TaxEntity receiverEntity)
@@ -333,7 +338,7 @@ namespace RiaDocumentDbUploader
         public int GetStoreId(string storename)
         {
             systblApp_TaxReceipt_Store entity;
-            if (StoreCache.TryGetValue(storename, out entity))
+            if (_StoreCache.TryGetValue(storename, out entity))
             {
                 return entity.Id;
             }
@@ -343,7 +348,7 @@ namespace RiaDocumentDbUploader
                 entity = db1.systblApp_TaxReceipt_Store.Where(m => m.Name.Equals(storename)).FirstOrDefault();
                 if (entity != null)
                 {
-                    StoreCache.Add(storename, entity);
+                    _StoreCache.Add(storename, entity);
                     return entity.Id;
                 }
                 return 0;
@@ -353,7 +358,7 @@ namespace RiaDocumentDbUploader
         private bool TaxEntityExists(string rut, out int? id)
         {
             systblApp_CoreAPI_TaxEntity entity;
-            if (TaxEntityCache.TryGetValue(rut, out entity))
+            if (_TaxEntityCache.TryGetValue(rut, out entity))
             {
                 id = entity.Id;
                 return true;
@@ -366,7 +371,7 @@ namespace RiaDocumentDbUploader
 
                 if (entity != null)
                 {
-                    TaxEntityCache.Add(rut, entity);
+                    _TaxEntityCache.Add(rut, entity);
                     id = entity.Id;
                     return true;
                 }
@@ -403,7 +408,7 @@ namespace RiaDocumentDbUploader
         private systblApp_CoreAPI_Document MapDocumentFromXmlObject(int id, EnvioBOLETA objBoleta, systblApp_CoreAPI_TaxEntity senderEntity, systblApp_CoreAPI_TaxEntity receiverEntity)
         {
             var totalamount = objBoleta.SetDTE.DTE.Documento.Encabezado.Totales.MntTotal;
-            var amount = Math.Floor(objBoleta.SetDTE.DTE.Documento.Encabezado.Totales.MntTotal / (1 + TaxRate));
+            var amount = Math.Floor(objBoleta.SetDTE.DTE.Documento.Encabezado.Totales.MntTotal / (1 + _TaxRate));
             var tax = totalamount - amount;
             var storename = GetCustomFieldFromDocument(objBoleta, "Tienda");
 
