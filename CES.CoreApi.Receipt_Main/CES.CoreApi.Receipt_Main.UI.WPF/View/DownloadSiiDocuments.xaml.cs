@@ -1,4 +1,6 @@
-﻿using System;
+﻿using CES.CoreApi.Receipt_Main.Model.Services;
+using CES.CoreApi.Receipt_Main.UI.WPF.ViewModel;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -20,9 +22,14 @@ namespace CES.CoreApi.Receipt_Main.UI.WPF.View
     /// </summary>
     public partial class DownloadSiiDocuments : UserControl
     {
-        public DownloadSiiDocuments()
+        private readonly IDocumentService _documentService;
+        public DownloadSiiDocuments(IDocumentService documentService)
         {
             InitializeComponent();
+            _documentService = documentService;
+            var confirm = (Func<string, string, bool>)((msg, capt) => MessageBox.Show(msg, capt, MessageBoxButton.YesNo) == MessageBoxResult.Yes);
+            var viewModel = new DownloadSiiDocumentsViewModel(confirm, _documentService);
+            DataContext = viewModel;
         }
     }
 }

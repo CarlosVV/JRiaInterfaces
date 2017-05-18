@@ -51,7 +51,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="DTEBOXClienteNET20">
-      <HintPath>..\..\..\..\..\Desktop\DTEBOXClienteNET20\DTEBOXClienteNET20.dll</HintPath>
+      <HintPath>..\..\RiaDocumentDownloader\DTEBOXClienteNET20\DTEBOXClienteNET20.dll</HintPath>
     </Reference>
     <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
       <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.dll</HintPath>
@@ -373,22 +373,6 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Xml\Factura\Factura.xml" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="App_Data\CES.CoreApi.Receipt_MainDB.mdf">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="App_Data\CES.CoreApi.Receipt_MainDB_log.ldf">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-      <DependentUpon>CES.CoreApi.Receipt_MainDB.mdf</DependentUpon>
-    </Content>
-    <Content Include="App_Data\MydbLocal.ldf">
-      <DependentUpon>MydbLocal.mdf</DependentUpon>
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="App_Data\MydbLocal.mdf">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
   </ItemGroup>
   <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

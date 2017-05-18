@@ -49,8 +49,8 @@
 
         <!--Button Ingresar-->
         <StackPanel Orientation="Horizontal" Grid.Row="4" Grid.Column="1" HorizontalAlignment="Center" Margin="20">
-            <Button Content="Ingresar" Command="{Binding LoginCommand, Mode=OneTime}" CommandParameter="{Binding ElementName=passwordBox}" HorizontalAlignment="Center"/>
-            <Button Content="Salir" Command="{Binding LogoutCommand, Mode=OneTime}" Visibility="{Binding IsAuthenticated, Converter={StaticResource booleanToVisibilityConverter}}" HorizontalAlignment="Center" Margin="2,0,0,0"/>
+            <Button Content="Ingresar" IsDefault="True" Command="{Binding LoginCommand, Mode=OneTime}" CommandParameter="{Binding ElementName=passwordBox}" HorizontalAlignment="Center"/>
+            <Button Content="Salir" IsCancel="True" Command="{Binding LogoutCommand, Mode=OneTime}" Visibility="{Binding IsAuthenticated, Converter={StaticResource booleanToVisibilityConverter}}" HorizontalAlignment="Center" Margin="2,0,0,0"/>
         </StackPanel>
 
         <!--Estado-->

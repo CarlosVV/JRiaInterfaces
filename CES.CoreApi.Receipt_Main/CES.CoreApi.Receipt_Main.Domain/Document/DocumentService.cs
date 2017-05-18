@@ -21,6 +21,12 @@ namespace CES.CoreApi.Receipt_Main.Domain
             return repo.find(c => !c.fDisabled.Value && !c.fDelete.Value).ToList();
         }
 
+        public List<int> GetAllDocumentsFoliosByType(string doctype, DateTime? startDate, DateTime? endDate)
+        {
+            return repo.find(m => m.DocumentType.Equals(doctype) && (!startDate.HasValue || startDate.Value <= m.IssuedDate)
+            && (!endDate.HasValue || endDate.Value > m.IssuedDate)).Select(p => p.Folio).ToList();
+        }
+
         public void CreateDocument(systblApp_CoreAPI_Document objectEntry)
         {
             this.repo.CreateDocument(objectEntry);

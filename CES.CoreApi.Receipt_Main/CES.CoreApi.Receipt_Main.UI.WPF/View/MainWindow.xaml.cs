@@ -28,12 +28,15 @@ namespace CES.CoreApi.Receipt_Main.UI.WPF
     public partial class MainWindow : Window, IView
     {
         private readonly IUserService _userservice;
-        public MainWindow(IUserService userservice)
+        private readonly IDocumentService _documentService;
+        public MainWindow(IUserService userservice, IDocumentService documentService)
         {
             _userservice = userservice;
+            _documentService = documentService;
+
             InitializeComponent();
 
-            DataContext = new MainWindowViewModel();
+            DataContext = new MainWindowViewModel(_documentService);
 
             Task.Factory.StartNew(() =>
             {

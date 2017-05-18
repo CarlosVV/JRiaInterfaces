@@ -5,7 +5,9 @@ using CES.CoreApi.Receipt_Main.Model.Security;
 using CES.CoreApi.Receipt_Main.Model.Tasks;
 using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Data.Entity;
+using System.Data.Entity.Infrastructure;
 using System.Data.Entity.ModelConfiguration.Conventions;
 using System.Linq;
 using System.Text;
@@ -15,9 +17,22 @@ namespace CES.CoreApi.Receipt_Main.Repository
 {
     public partial class ReceiptDbContext : DbContext
     {
+        public int CommandTimeout
+        {
+            get
+            {
+                int commandTimeout = 180;
+                if(ConfigurationManager.AppSettings["CommandTimeout"] != null && int.TryParse(ConfigurationManager.AppSettings["CommandTimeout"], out commandTimeout))
+                {
+                    return commandTimeout;
+                }
+                return commandTimeout;
+            }
+        }
         public ReceiptDbContext()
             : base("name=main")
         {
+            ((IObjectContextAdapter)this).ObjectContext.CommandTimeout = CommandTimeout;
         }
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {          

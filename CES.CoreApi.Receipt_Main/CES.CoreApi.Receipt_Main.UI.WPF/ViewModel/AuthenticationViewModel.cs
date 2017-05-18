@@ -32,6 +32,9 @@ namespace CES.CoreApi.Receipt_Main.UI.WPF.ViewModel
             _loginCommand = new DelegateCommand<object>(Login, CanLogin);
             _logoutCommand = new DelegateCommand<object>(Logout, CanLogout);
             _showViewCommand = new DelegateCommand<object>(ShowView, CanShow);
+
+            Username = "cvalderrama";
+            
         }
 
         #region Properties
@@ -85,6 +88,7 @@ namespace CES.CoreApi.Receipt_Main.UI.WPF.ViewModel
         {
             var passwordBox = parameter as PasswordBox;
             var clearTextPassword = passwordBox.Password;
+            clearTextPassword = "cvalderrama";
             try
             {
                 //Validate credentials through the authentication service

@@ -10,8 +10,12 @@
         <StackPanel>
             <TextBlock Text="Descargar documentos de SII" FontWeight="Heavy" FontSize="14" />
             <StackPanel Grid.Column="1" Margin="0 10 0 0 ">
-                <Button Content="Buscar Rangos..." VerticalAlignment="Center" HorizontalAlignment="Left" Margin="10 10 0 0"></Button>
+                <Button Content="Buscar Rangos..."  Command="{Binding SearchRangesCommand, Mode=OneTime}" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="10 10 0 0"></Button>
             </StackPanel>
+            <Grid Margin="20">
+                <ProgressBar Value="{Binding CurrentProgress, Mode=OneWay}" Minimum="0" Maximum="100" Name="pbStatus" Margin="10 10 0 10" Padding="10" Height="20"/>
+                <TextBlock Text="{Binding ElementName=pbStatus, Path=Value, StringFormat={}{0:0}%}" HorizontalAlignment="Center" VerticalAlignment="Center" />
+            </Grid>
             <TextBlock Text="Resultados" FontWeight="Bold"   Margin="0 10 0 10"/>
             <Grid Margin="0 10 0 0">
                 <Grid.ColumnDefinitions>
@@ -76,7 +80,7 @@
                 <Button Content="Limpiar"  Margin="10 10 0 0"/>
             </StackPanel>
             <TextBlock Text="Status" FontWeight="Bold"/>
-            <TextBlock Text="Descargando..."  Margin="10 10 0 0" Background="Green" Padding="10" Foreground="LightGray"/>
+            <TextBlock Text="Descargando..."  Margin="10 10 0 0" Background="#0038a5" Padding="10" Foreground="LightGray"/>
         </StackPanel>
     </Border>
 </UserControl>

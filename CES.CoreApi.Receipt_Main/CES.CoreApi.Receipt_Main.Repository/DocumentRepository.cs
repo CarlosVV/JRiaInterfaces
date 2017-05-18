@@ -25,7 +25,7 @@ namespace CES.CoreApi.Receipt_Main.Repository
 
         public IEnumerable<systblApp_CoreAPI_Document> find(Expression<Func<systblApp_CoreAPI_Document, bool>> where)
         {
-            return this.GetAll(where);
+            return this.GetWhere(where);
         }
 
         public void CreateDocument(systblApp_CoreAPI_Document obj)
