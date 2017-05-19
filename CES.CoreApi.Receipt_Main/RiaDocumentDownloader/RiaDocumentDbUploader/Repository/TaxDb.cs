@@ -4,12 +4,27 @@ namespace WpfLocalDb.Repository
     using System.Data.Entity;
     using System.ComponentModel.DataAnnotations.Schema;
     using System.Linq;
+    using System.Configuration;
+    using System.Data.Entity.Infrastructure;
 
     public partial class TaxDb : DbContext
     {
+        public int CommandTimeout
+        {
+            get
+            {
+                int commandTimeout = 180;
+                if (ConfigurationManager.AppSettings["CommandTimeout"] != null && int.TryParse(ConfigurationManager.AppSettings["CommandTimeout"], out commandTimeout))
+                {
+                    return commandTimeout;
+                }
+                return commandTimeout;
+            }
+        }
         public TaxDb()
             : base("name=TaxDb")
         {
+            ((IObjectContextAdapter)this).ObjectContext.CommandTimeout = CommandTimeout;
         }
         public virtual DbSet<systblApp_CoreApi_Sequence> systblApp_CoreApi_Sequence { get; set; }
         public virtual DbSet<systblApp_CoreAPI_Caf> systblApp_CoreAPI_Caf { get; set; }

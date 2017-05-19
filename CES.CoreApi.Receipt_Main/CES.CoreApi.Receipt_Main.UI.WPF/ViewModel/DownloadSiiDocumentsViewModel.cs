@@ -1,12 +1,14 @@
 ﻿using CES.CoreApi.Receipt_Main.Domain;
 using CES.CoreApi.Receipt_Main.Model.Services;
 using CES.CoreApi.Receipt_Main.Repository;
+using CES.CoreApi.Receipt_Main.UI.WPF.Helpers;
 using Prism.Commands;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
@@ -20,6 +22,7 @@ namespace CES.CoreApi.Receipt_Main.UI.WPF.ViewModel
         private readonly DelegateCommand<object> _searchRangesCommand;
         private readonly Func<string, string, bool> _confirm;
         private ObservableCollection<DocumentSearchToDownloadSelectableViewModel> _documentsToDownload;
+        private bool? _isAllDocumentResultsSelected;
         private int currentProgress;
         private object lock_object = new object();
         private string doctype = "39";
@@ -33,6 +36,7 @@ namespace CES.CoreApi.Receipt_Main.UI.WPF.ViewModel
             _documentsToDownload = new ObservableCollection<DocumentSearchToDownloadSelectableViewModel>();
             _searchRangesCommand = new DelegateCommand<object>(SearchRanges, CanSearchRanges);
             worker = new BackgroundWorker();
+            MyCommand = new RelayCommand(MyCommandAction);
         }
 
         #region Properties
@@ -56,6 +60,30 @@ namespace CES.CoreApi.Receipt_Main.UI.WPF.ViewModel
             {
                 _documentsToDownload = value;
                 NotifyPropertyChanged("DocumentsToDownload");
+            }
+        }
+
+        public RelayCommand MyCommand { get; set; }
+        private void MyCommandAction(object obj)
+        {
+            foreach (var item in DocumentsToDownload)
+            {
+                item.IsSelected = (bool)obj;
+            }
+        }
+        public bool? IsAllDocumentResultsSelected
+        {
+            get { return _isAllDocumentResultsSelected; }
+            set
+            {
+                if (_isAllDocumentResultsSelected == value) return;
+
+                _isAllDocumentResultsSelected = value;
+
+                if (_isAllDocumentResultsSelected.HasValue)
+                    SelectAll(_isAllDocumentResultsSelected.Value, DocumentsToDownload);
+
+                NotifyPropertyChanged();
             }
         }
         #endregion
@@ -164,6 +192,14 @@ namespace CES.CoreApi.Receipt_Main.UI.WPF.ViewModel
 
             return true;
         }
+     
+        private void SelectAll(bool select, IEnumerable<DocumentSearchToDownloadSelectableViewModel> models)
+        {
+            foreach (var model in models)
+            {
+                model.IsSelected = select;
+            }
+        }
         private Action<PropertyChangedEventArgs> RaisePropertyChanged()
         {
             return args => PropertyChanged?.Invoke(this, args);
@@ -172,10 +208,11 @@ namespace CES.CoreApi.Receipt_Main.UI.WPF.ViewModel
         #region INotifyPropertyChanged Members
         public event PropertyChangedEventHandler PropertyChanged;
 
-        private void NotifyPropertyChanged(string propertyName)
+        private void NotifyPropertyChanged([CallerMemberName] string propertyName = null)
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
+               
         #endregion
     }
 }

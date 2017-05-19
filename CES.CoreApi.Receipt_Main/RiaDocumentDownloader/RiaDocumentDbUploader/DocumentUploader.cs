@@ -32,7 +32,7 @@ namespace RiaDocumentDbUploader
             _doctype = doctype;
             _xml_in = xml_in;
             _xml_out = xml_out;
-            _filesToProcess = filesToProcess;            
+            _filesToProcess = filesToProcess;
             _foliostart = foliostart;
             _folioend = folioend;
             _TaxEntityCache = new Dictionary<string, systblApp_CoreAPI_TaxEntity>();
@@ -167,6 +167,38 @@ namespace RiaDocumentDbUploader
             catch (Exception ex)
             {
                 Console.WriteLine($"Error en folio {folio}: {ex.Message}");
+
+                if (ex.InnerException != null)
+                {
+                    Console.WriteLine($"{ex.InnerException.Message}");
+                }
+
+                try
+                {
+                    if (detailids != null && docids != null)
+                    {
+                        RollbackSequenceAssigment(detailids, docids);
+                    }
+                }
+                catch(Exception ex2)
+                {
+                    Console.WriteLine($"Error rollback ids en folio {folio}: {ex2.Message}");
+                }
+              
+            }
+        }
+
+        private void RollbackSequenceAssigment(List<int> detailids, List<int> docids)
+        {
+            using (var _db1 = new TaxDb())
+            {
+                var documentSequence = _db1.systblApp_CoreApi_Sequence.Where(m => m.EntityName == "systblApp_CoreAPI_Document").FirstOrDefault();
+                var documentDetailSequence = _db1.systblApp_CoreApi_Sequence.Where(m => m.EntityName == "systblApp_CoreAPI_DocumentDetail").FirstOrDefault();
+                documentSequence.CurrentId = docids.FirstOrDefault() - 1;
+                documentDetailSequence.CurrentId = detailids.FirstOrDefault() - 1;
+                _db1.Entry(documentSequence).State = EntityState.Modified;
+                _db1.Entry(documentDetailSequence).State = EntityState.Modified;
+                _db1.SaveChanges();
             }
         }
 

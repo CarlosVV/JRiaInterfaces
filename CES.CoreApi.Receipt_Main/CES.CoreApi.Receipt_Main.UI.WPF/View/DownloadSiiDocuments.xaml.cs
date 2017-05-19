@@ -31,5 +31,19 @@ namespace CES.CoreApi.Receipt_Main.UI.WPF.View
             var viewModel = new DownloadSiiDocumentsViewModel(confirm, _documentService);
             DataContext = viewModel;
         }
+
+        private void UpCheckbox_Checked(object sender, RoutedEventArgs e)
+        {
+            //checkBox1 = cbxall (your up checkbox)
+            //if (sender.IsChecked == true)
+            //{
+            //    dataGrid1.Items.OfType<YourClass>().ToList().ForEach(x => x.IsChecked = true);
+            //}
+            //else
+            //{
+            //    dataGrid1.Items.OfType<YourClass>().ToList().ForEach(x => x.IsChecked = false);
+            //}
+        }
+
     }
 }
