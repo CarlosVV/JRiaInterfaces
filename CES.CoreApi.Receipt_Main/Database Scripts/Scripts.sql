@@ -16,7 +16,7 @@ select * from  [dbo].[systblApp_CoreAPI_DocumentDetail] (nolock)
 select * from [dbo].systblApp_CoreAPI_taxentity(nolock)
 select * from [dbo].systblApp_CoreAPI_taxaddress(nolock)
 
-select * from [dbo].[systblApp_CoreAPI_Document](nolock) where Folio = 525157
+select * from [dbo].[systblApp_CoreAPI_Document](nolock) where Folio = 486750
 select count(*) from [dbo].[systblApp_CoreAPI_Document](nolock)  
 select max(Id) from  [dbo].[systblApp_CoreAPI_Document] (nolock)
 select min(Folio) from [dbo].[systblApp_CoreAPI_Document](nolock)  
@@ -58,7 +58,7 @@ SELECT fDocType, fStart, fStop FROM (
 	as fStop
 	FROM [systblApp_CoreAPI_Document] (nolock) as m 
 	left outer join [systblApp_CoreAPI_Document] (nolock) as r on m.Folio = r.Folio - 1 and m.DocumentType=r.DocumentType 
-	WHERE r.Folio is null  and m.DocumentType = 39 and m.IssuedDate >= '2017/01/01 00:00:00'
+	WHERE r.Folio is null  and m.DocumentType = 39 and m.IssuedDate >= '2017/01/01 00:00:00'  and m.IssuedDate < '2017/06/01 00:00:00'
 ) as x
 order by fStart
 

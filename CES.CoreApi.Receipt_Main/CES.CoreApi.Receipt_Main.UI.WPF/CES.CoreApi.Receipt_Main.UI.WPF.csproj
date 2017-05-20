@@ -117,6 +117,7 @@
     <Compile Include="ViewModel\MainWindowViewModel.cs" />
     <Compile Include="ViewModel\CafResultSelectableViewModel.cs" />
     <Compile Include="ViewModel\IViewModel.cs" />
+    <Compile Include="ViewModel\NewDocumentToDownloadViewModel.cs" />
     <Compile Include="ViewModel\ParametersViewModel.cs" />
     <Compile Include="ViewModel\PrintersViewModel.cs" />
     <Compile Include="ViewModel\SearchDocumentosViewModel.cs" />
@@ -130,6 +131,7 @@
     <Compile Include="ViewModel\UnDoDocumentsReportViewModel.cs" />
     <Compile Include="ViewModel\UserFormViewModel.cs" />
     <Compile Include="ViewModel\UserManagementViewModel.cs" />
+    <Compile Include="ViewModel\ViewModelBase.cs" />
     <Compile Include="View\ActivityDetail.xaml.cs">
       <DependentUpon>ActivityDetail.xaml</DependentUpon>
     </Compile>

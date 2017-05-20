@@ -86,11 +86,15 @@ namespace RiaDocumentDbUploader
                         documentsExistingInProcessByFolio = new SortedList<int, string>();
 
                         GetExistingDocuments(documentsExistingDowloadedByFolio, existingdocsInFolder);
-                        GetExistingDocuments(documentsExistingInProcessByFolio, existingdocsInProcess);
+                        GetExistingDocuments(documentsExistingInProcessByFolio, existingdocsInProcess);                       
 
                         documentsExistingDowloadedByFolioToProcess = documentsExistingDowloadedByFolio.Except(documentsExistingInProcessByFolio);
                         documentsExistingDowloadedByFolioToProcess = documentsExistingDowloadedByFolioToProcess.Except(existingdocsInDb.Select(p => new KeyValuePair<int, string>(p, null)));
                         documentsExistingDowloadedByFolioToProcess = documentsExistingDowloadedByFolioToProcess.Where(m => (!_foliostart.HasValue || m.Key >= _foliostart) && (!_folioend.HasValue || m.Key <= _folioend));
+
+                        var docsNotInDbButInProcessFolder = documentsExistingInProcessByFolio.Where(p => !existingdocsInDb.Any(m => m == p.Key));
+
+                        documentsExistingDowloadedByFolioToProcess = documentsExistingDowloadedByFolioToProcess.Concat(docsNotInDbButInProcessFolder);
                     }
 
                     if (_filesToProcess > documentsExistingDowloadedByFolioToProcess.Count())
@@ -180,11 +184,11 @@ namespace RiaDocumentDbUploader
                         RollbackSequenceAssigment(detailids, docids);
                     }
                 }
-                catch(Exception ex2)
+                catch (Exception ex2)
                 {
                     Console.WriteLine($"Error rollback ids en folio {folio}: {ex2.Message}");
                 }
-              
+
             }
         }
 

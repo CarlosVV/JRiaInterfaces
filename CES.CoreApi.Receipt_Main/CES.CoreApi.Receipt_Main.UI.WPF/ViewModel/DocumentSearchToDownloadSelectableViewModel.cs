@@ -1,4 +1,5 @@
-﻿using System;
+﻿using CES.CoreApi.Receipt_Main.UI.WPF.Helpers;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
@@ -11,10 +12,22 @@ namespace CES.CoreApi.Receipt_Main.UI.WPF.ViewModel
     public class DocumentSearchToDownloadSelectableViewModel : INotifyPropertyChanged
     {
         private bool _isSelected;
+        private int _id;
         private string _type;
         private string _start;
         private string _end;
         private string _current;
+
+        public int ID
+        {
+            get { return _id; }
+            set
+            {
+                if (_id == value) return;
+                _id = value;
+                OnPropertyChanged();
+            }
+        }
         public bool IsSelected
         {
             get { return _isSelected; }
@@ -68,6 +81,15 @@ namespace CES.CoreApi.Receipt_Main.UI.WPF.ViewModel
                 OnPropertyChanged();
             }
         }
+        //public RelayCommand ShowEditRangeCommand { get; set; }
+        //private void ShowEditRangeCommandAction(object obj)
+        //{
+        //    //var edit = DocumentsToDownload.Where(m => m.ID == int.Parse(obj.ToString())).FirstOrDefault();
+        //    //NewDocumentToDownload.Start = edit.Start;
+        //    //NewDocumentToDownload.Start = edit.End;
+        //    //NewDocumentToDownload.ID = edit.ID;
+        //    Current = obj.ToString();
+        //}
         public event PropertyChangedEventHandler PropertyChanged;
 
         protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
