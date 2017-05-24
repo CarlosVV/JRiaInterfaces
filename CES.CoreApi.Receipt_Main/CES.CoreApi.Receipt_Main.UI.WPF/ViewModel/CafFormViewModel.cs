@@ -7,8 +7,22 @@ using System.Threading.Tasks;
 
 namespace CES.CoreApi.Receipt_Main.UI.WPF.ViewModel
 {
-    public class CafFormViewModel : INotifyPropertyChanged
+    public class CafFormViewModel : ViewModelBase
     {
-        public event PropertyChangedEventHandler PropertyChanged;
+        private int _folioCurrentNumber;
+
+        public int FolioCurrentNumber
+        {
+            get
+            {
+                return _folioCurrentNumber;
+            }
+
+            set 
+            {
+                _folioCurrentNumber = value;
+                NotifiyPropertyChanged();
+            }
+        }
     }
 }

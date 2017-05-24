@@ -23,17 +23,19 @@ namespace CES.CoreApi.Receipt_Main.Domain
 
         public void CreateTaxAddress(systblApp_CoreAPI_TaxAddress objectEntry)
         {
-            this.repo.CreateTaxAddress(objectEntry);
-            this.repo.SaveChanges();          
+            this.repo.CreateTaxAddress(objectEntry);      
         }
         public void UpdateTaxAddress(systblApp_CoreAPI_TaxAddress objectEntry)
         {
             this.repo.UpdateTaxAddress(objectEntry);
-            this.repo.SaveChanges();
         }
         public void RemoveTaxAddress(systblApp_CoreAPI_TaxAddress objectEntry)
         {
             this.repo.RemoveTaxAddress(objectEntry);
+        }
+
+        public void SaveChanges()
+        {
             this.repo.SaveChanges();
         }
     }

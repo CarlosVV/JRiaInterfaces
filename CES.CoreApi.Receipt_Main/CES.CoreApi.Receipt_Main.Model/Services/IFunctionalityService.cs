@@ -14,6 +14,6 @@ namespace CES.CoreApi.Receipt_Main.Model.Services
         void CreateFunctionality(systblApp_TaxReceipt_Functionality objectEntry);
         void UpdateFunctionality(systblApp_TaxReceipt_Functionality objectEntry);
         void RemoveFunctionality(systblApp_TaxReceipt_Functionality objectEntry);
-        
+        void SaveChanges();
     }
 }

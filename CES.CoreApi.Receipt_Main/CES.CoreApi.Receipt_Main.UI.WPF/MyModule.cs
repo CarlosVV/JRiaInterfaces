@@ -21,12 +21,28 @@ namespace CES.CoreApi.Receipt_Main.UI.WPF
         {         
             Bind<IUserService>().To<UserService>();
             Bind<IUserRepository>().To<UserRepository>();
+
             Bind<IAuthenticationService>().To<AuthenticationService>();
             Bind<AuthenticationViewModel>().ToSelf();
             Bind<LoginWindow>().ToSelf();
+
             Bind<DbContext>().To<ReceiptDbContext>();
+
             Bind<IDocumentService>().To<DocumentService>();
             Bind<IDocumentRepository>().To<DocumentRepository>();
+
+            Bind<ITaxEntityService>().To<TaxEntityService>();
+            Bind<ITaxEntityRepository>().To<TaxEntityRepository>();
+
+            Bind<ITaxAddressService>().To<TaxAddressService>();
+            Bind<ITaxAddressRepository>().To<TaxAddressRepository>();
+
+            Bind<ISequenceService>().To<SequenceService>();
+            Bind<ISequenceRepository>().To<SequenceRepository>();
+
+            Bind<IStoreService>().To<StoreService>();
+            Bind<IStoreRepository>().To<StoreRepository>();
+
         }
     }
 }

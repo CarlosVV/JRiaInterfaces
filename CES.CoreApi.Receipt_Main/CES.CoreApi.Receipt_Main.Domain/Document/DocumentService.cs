@@ -29,17 +29,19 @@ namespace CES.CoreApi.Receipt_Main.Domain
 
         public void CreateDocument(systblApp_CoreAPI_Document objectEntry)
         {
-            this.repo.CreateDocument(objectEntry);
-            this.repo.SaveChanges();          
+            this.repo.CreateDocument(objectEntry);       
         }
         public void UpdateDocument(systblApp_CoreAPI_Document objectEntry)
         {
             this.repo.UpdateDocument(objectEntry);
-            this.repo.SaveChanges();
         }
         public void RemoveDocument(systblApp_CoreAPI_Document objectEntry)
         {
-            this.repo.RemoveDocument(objectEntry);
+            this.repo.RemoveDocument(objectEntry);            
+        }
+
+        public void SaveChanges()
+        {
             this.repo.SaveChanges();
         }
     }

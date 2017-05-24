@@ -13,6 +13,6 @@ namespace CES.CoreApi.Receipt_Main.Model.Services
         void CreateCaf(systblApp_CoreAPI_Caf objectEntry);
         void UpdateCaf(systblApp_CoreAPI_Caf objectEntry);
         void RemoveCaf(systblApp_CoreAPI_Caf objectEntry);
-        
+        void SaveChanges();
     }
 }

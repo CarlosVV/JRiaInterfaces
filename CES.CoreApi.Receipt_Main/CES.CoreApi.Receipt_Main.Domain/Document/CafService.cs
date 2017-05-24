@@ -23,17 +23,18 @@ namespace CES.CoreApi.Receipt_Main.Domain
 
         public void CreateCaf(systblApp_CoreAPI_Caf objectEntry)
         {
-            this.repo.CreateCaf(objectEntry);
-            this.repo.SaveChanges();          
+            this.repo.CreateCaf(objectEntry);     
         }
         public void UpdateCaf(systblApp_CoreAPI_Caf objectEntry)
         {
             this.repo.UpdateCaf(objectEntry);
-            this.repo.SaveChanges();
         }
         public void RemoveCaf(systblApp_CoreAPI_Caf objectEntry)
         {
             this.repo.RemoveCaf(objectEntry);
+        }
+        public void SaveChanges()
+        {
             this.repo.SaveChanges();
         }
     }

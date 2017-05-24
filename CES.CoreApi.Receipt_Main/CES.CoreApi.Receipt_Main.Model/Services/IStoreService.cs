@@ -14,6 +14,6 @@ namespace CES.CoreApi.Receipt_Main.Model.Services
         void CreateStore(systblApp_TaxReceipt_Store objectEntry);
         void UpdateStore(systblApp_TaxReceipt_Store objectEntry);
         void RemoveStore(systblApp_TaxReceipt_Store objectEntry);
-        
+        void SaveChanges();
     }
 }

@@ -14,6 +14,6 @@ namespace CES.CoreApi.Receipt_Main.Model.Services
         void CreateMenu(systblApp_TaxReceipt_Menu objectEntry);
         void UpdateMenu(systblApp_TaxReceipt_Menu objectEntry);
         void RemoveMenu(systblApp_TaxReceipt_Menu objectEntry);
-        
+        void SaveChanges();
     }
 }

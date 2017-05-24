@@ -14,6 +14,6 @@ namespace CES.CoreApi.Receipt_Main.Model.Services
         void CreateUserRole(systblApp_TaxReceipt_UserRole objectEntry);
         void UpdateUserRole(systblApp_TaxReceipt_UserRole objectEntry);
         void RemoveUserRole(systblApp_TaxReceipt_UserRole objectEntry);
-        
+        void SaveChanges();
     }
 }

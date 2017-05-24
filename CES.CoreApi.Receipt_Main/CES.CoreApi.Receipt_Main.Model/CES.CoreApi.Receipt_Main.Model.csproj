@@ -41,11 +41,16 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Documents\BoletaXmlDocument.cs" />
     <Compile Include="Documents\systblApp_CoreAPI_Caf.cs" />
     <Compile Include="Documents\systblApp_CoreAPI_Document.cs" />
     <Compile Include="Documents\systblApp_CoreAPI_DocumentDetail.cs" />
     <Compile Include="Documents\systblApp_CoreAPI_DocumentReference.cs" />
     <Compile Include="Documents\systblApp_CoreApi_Sequence.cs" />
+    <Compile Include="Repositories\IDocumentReferenceRepository.cs" />
+    <Compile Include="Repositories\ISequenceRepository.cs" />
+    <Compile Include="Services\IDocumentReferenceService.cs" />
+    <Compile Include="Services\ISequenceService.cs" />
     <Compile Include="Tasks\systblApp_CoreAPI_Task.cs" />
     <Compile Include="Tasks\systblApp_CoreAPI_TaskDetail.cs" />
     <Compile Include="Documents\systblApp_CoreAPI_TaxAddress.cs" />

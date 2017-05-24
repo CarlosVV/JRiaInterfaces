@@ -58,6 +58,7 @@
     <Compile Include="FunctionRoleRepository.cs" />
     <Compile Include="MenuRepository.cs" />
     <Compile Include="RoleRepository.cs" />
+    <Compile Include="SequenceRepository.cs" />
     <Compile Include="StoreRepository.cs" />
     <Compile Include="TaskDetailRepository.cs" />
     <Compile Include="TaskRepository.cs" />

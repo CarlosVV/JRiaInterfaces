@@ -16,7 +16,7 @@ select * from  [dbo].[systblApp_CoreAPI_DocumentDetail] (nolock)
 select * from [dbo].systblApp_CoreAPI_taxentity(nolock)
 select * from [dbo].systblApp_CoreAPI_taxaddress(nolock)
 
-select * from [dbo].[systblApp_CoreAPI_Document](nolock) where Folio = 486750
+select * from [dbo].[systblApp_CoreAPI_Document](nolock) where Folio = 1010027
 select count(*) from [dbo].[systblApp_CoreAPI_Document](nolock)  
 select max(Id) from  [dbo].[systblApp_CoreAPI_Document] (nolock)
 select min(Folio) from [dbo].[systblApp_CoreAPI_Document](nolock)  

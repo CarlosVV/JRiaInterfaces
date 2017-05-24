@@ -13,6 +13,6 @@ namespace CES.CoreApi.Receipt_Main.Model.Services
         void CreateTaxAddress(systblApp_CoreAPI_TaxAddress objectEntry);
         void UpdateTaxAddress(systblApp_CoreAPI_TaxAddress objectEntry);
         void RemoveTaxAddress(systblApp_CoreAPI_TaxAddress objectEntry);
-        
+        void SaveChanges();
     }
 }

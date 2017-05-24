@@ -11,13 +11,11 @@ namespace CES.CoreApi.Receipt_Main.UI.WPF.ViewModel
 {
     public class MainWindowViewModel
     {
-        private readonly IDocumentService _documentService;
-        public MainWindowViewModel(IDocumentService documentService)
+        public MainWindowViewModel(IDocumentService documentService, ITaxEntityService taxEntityService, ITaxAddressService taxAddressService, ISequenceService sequenceService, IStoreService storeService)
         {
-            _documentService = documentService;
             MenuElements = new[]
             {
-                new MenuElement {Label = "Acciones", MenuStyleType = "Header1", Content = new DownloadSiiDocuments(_documentService)},
+                new MenuElement {Label = "Acciones", MenuStyleType = "Header1", Content = new DownloadSiiDocuments(documentService, taxEntityService, taxAddressService, sequenceService, storeService)},
                 new MenuElement {Label = "Buscar Documentos", Content = new SearchDocuments(), MenuStyleType = "Item1"},
                 new MenuElement {Label = "Enviar a SII", Content = new SendToEIS(), MenuStyleType = "Item1"},
                 new MenuElement {Label = "Cargar Caf", Content = new CafManagement(), MenuStyleType = "Header2"},
@@ -25,7 +23,7 @@ namespace CES.CoreApi.Receipt_Main.UI.WPF.ViewModel
                 new MenuElement {Label = "Nuevo Caf", Content = new CafForm(), MenuStyleType = "Item2" },
                 new MenuElement {Label = "Nuevo Documento", Content = new TaxDocumentForm(), MenuStyleType = "Item1"},
                 new MenuElement {Label = "Generar Notas de Crédito", Content = new GenerateCreditNotes(), MenuStyleType = "Item1"},
-                new MenuElement {Label = "Descargar Documentos de SII", Content = new DownloadSiiDocuments(_documentService), MenuStyleType = "Item1"},
+                new MenuElement {Label = "Descargar Documentos de SII", Content = new DownloadSiiDocuments(documentService, taxEntityService, taxAddressService, sequenceService, storeService), MenuStyleType = "Item1"},
                 new MenuElement {Label = "Conciliar SiiVAT", Content = new SiiVatConciliation(), MenuStyleType = "Item1"},
                 new MenuElement {Label = "Seguridad", MenuStyleType = "Header1"},
                 new MenuElement {Label = "Usuarios y Roles", MenuStyleType = "Header2"},

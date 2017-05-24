@@ -13,5 +13,6 @@ namespace CES.CoreApi.Receipt_Main.Model.Services
         void CreateUser(systblApp_TaxReceipt_User objectEntry);
         void UpdateUser(systblApp_TaxReceipt_User objectEntry);
         void RemoveUser(systblApp_TaxReceipt_User objectEntry);
+        void SaveChanges();
     }
 }

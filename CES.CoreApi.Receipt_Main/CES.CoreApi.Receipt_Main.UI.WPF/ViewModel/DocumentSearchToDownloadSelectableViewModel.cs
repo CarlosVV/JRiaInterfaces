@@ -1,4 +1,5 @@
 ﻿using CES.CoreApi.Receipt_Main.UI.WPF.Helpers;
+using Prism.Mvvm;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -9,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace CES.CoreApi.Receipt_Main.UI.WPF.ViewModel
 {
-    public class DocumentSearchToDownloadSelectableViewModel : INotifyPropertyChanged
+    public class DocumentSearchToDownloadSelectableViewModel : BindableBase
     {
         private bool _isSelected;
         private int _id;
@@ -17,15 +18,20 @@ namespace CES.CoreApi.Receipt_Main.UI.WPF.ViewModel
         private string _start;
         private string _end;
         private string _current;
+        private bool _isDynamic;
+        private bool _isViewEditVisible;
+        private string _downloadStatus;
+        private int _numberOfFolios;
+        private int _processed;
+        private int _pending;
+        private string _detail;
 
         public int ID
         {
             get { return _id; }
             set
             {
-                if (_id == value) return;
-                _id = value;
-                OnPropertyChanged();
+                SetProperty(ref _id, value);
             }
         }
         public bool IsSelected
@@ -33,9 +39,7 @@ namespace CES.CoreApi.Receipt_Main.UI.WPF.ViewModel
             get { return _isSelected; }
             set
             {
-                if (_isSelected == value) return;
-                _isSelected = value;
-                OnPropertyChanged();
+                SetProperty(ref _isSelected, value);
             }
         }
 
@@ -44,9 +48,7 @@ namespace CES.CoreApi.Receipt_Main.UI.WPF.ViewModel
             get { return _type; }
             set
             {
-                if (_type == value) return;
-                _type = value;
-                OnPropertyChanged();
+                SetProperty(ref _type, value);
             }
         }
 
@@ -55,9 +57,7 @@ namespace CES.CoreApi.Receipt_Main.UI.WPF.ViewModel
             get { return _start; }
             set
             {
-                if (_start == value) return;
-                _start = value;
-                OnPropertyChanged();
+                SetProperty(ref _start, value);
             }
         }
 
@@ -66,35 +66,74 @@ namespace CES.CoreApi.Receipt_Main.UI.WPF.ViewModel
             get { return _end; }
             set
             {
-                if (_end == value) return;
-                _end = value;
-                OnPropertyChanged();
+                SetProperty(ref _end, value);
             }
         }
         public string Current
         {
-            get { return _end; }
+            get { return _current; }
             set
             {
-                if (_current == value) return;
-                _current = value;
-                OnPropertyChanged();
+                SetProperty(ref _current, value);
             }
         }
-        //public RelayCommand ShowEditRangeCommand { get; set; }
-        //private void ShowEditRangeCommandAction(object obj)
-        //{
-        //    //var edit = DocumentsToDownload.Where(m => m.ID == int.Parse(obj.ToString())).FirstOrDefault();
-        //    //NewDocumentToDownload.Start = edit.Start;
-        //    //NewDocumentToDownload.Start = edit.End;
-        //    //NewDocumentToDownload.ID = edit.ID;
-        //    Current = obj.ToString();
-        //}
-        public event PropertyChangedEventHandler PropertyChanged;
 
-        protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
+        public bool IsDynamic
         {
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+            get { return _isDynamic; }
+            set
+            {
+                SetProperty(ref _isDynamic, value);
+            }
+        }
+
+        public bool IsViewEditVisible
+        {
+            get { return _isViewEditVisible; }
+            set
+            {
+                SetProperty(ref _isViewEditVisible, value);
+            }
+        }
+        public int NumberOfFolios
+        {
+            get { return _numberOfFolios; }
+            set
+            {
+                SetProperty(ref _numberOfFolios, value);
+            }
+        }
+        public int Processed
+        {
+            get { return _processed; }
+            set
+            {
+                SetProperty(ref _processed, value);
+            }
+        }
+        public int Pending
+        {
+            get { return _pending; }
+            set
+            {
+                SetProperty(ref _pending, value);
+            }
+        }
+        public string DownloadStatus
+        {
+            get { return _downloadStatus; }
+            set
+            {
+                SetProperty(ref _downloadStatus, value);
+            }
+        }
+        public string Detail
+        {
+            get { return _detail; }
+            set
+            {
+                SetProperty(ref _detail, value);
+            }
         }
     }
 }

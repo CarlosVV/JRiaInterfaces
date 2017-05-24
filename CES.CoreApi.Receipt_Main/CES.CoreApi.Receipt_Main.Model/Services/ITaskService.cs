@@ -14,6 +14,6 @@ namespace CES.CoreApi.Receipt_Main.Model.Services
         void CreateTask(systblApp_CoreAPI_Task objectEntry);
         void UpdateTask(systblApp_CoreAPI_Task objectEntry);
         void RemoveTask(systblApp_CoreAPI_Task objectEntry);
-        
+        void SaveChanges();
     }
 }

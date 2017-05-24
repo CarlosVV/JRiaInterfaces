@@ -23,7 +23,7 @@ namespace CES.CoreApi.Receipt_Main.UI.WPF.ViewModel
         private bool? _isAllCafResultsSelected;
         public event PropertyChangedEventHandler PropertyChanged;
 
-        public CafManagementViewModel()
+        public CafManagementViewModel(Func<string, string, bool> msgbox, Func<string, string, bool> confirm)
         {
             DocumentTypeList = new List<Document_Type>();
             //TODO: Get Document Type from DB

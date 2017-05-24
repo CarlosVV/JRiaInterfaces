@@ -18,7 +18,7 @@ namespace CES.CoreApi.Receipt_Main.UI.WPF
 {
     public partial class App : Application
     {
-        private IKernel container;
+        public static IKernel container;
 
         protected override void OnStartup(StartupEventArgs e)
         {
@@ -39,7 +39,7 @@ namespace CES.CoreApi.Receipt_Main.UI.WPF
         }
         private void ComposeObjects()
         {
-            Current.MainWindow = this.container.Get<MainWindow>();
+            Current.MainWindow = App.container.Get<MainWindow>();
             Current.MainWindow.Title = "Ria Financial";
         }
     }

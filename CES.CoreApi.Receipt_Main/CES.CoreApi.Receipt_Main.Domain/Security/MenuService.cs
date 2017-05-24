@@ -26,16 +26,20 @@ namespace CES.CoreApi.Receipt_Main.Domain
         public void CreateMenu(systblApp_TaxReceipt_Menu objectEntry)
         {
             this.repo.CreateMenu(objectEntry);
-            this.repo.SaveChanges();          
+         
         }
         public void UpdateMenu(systblApp_TaxReceipt_Menu objectEntry)
         {
             this.repo.UpdateMenu(objectEntry);
-            this.repo.SaveChanges();
+           
         }
         public void RemoveMenu(systblApp_TaxReceipt_Menu objectEntry)
         {
             this.repo.RemoveMenu(objectEntry);
+          
+        }
+        public void SaveChanges()
+        {
             this.repo.SaveChanges();
         }
     }

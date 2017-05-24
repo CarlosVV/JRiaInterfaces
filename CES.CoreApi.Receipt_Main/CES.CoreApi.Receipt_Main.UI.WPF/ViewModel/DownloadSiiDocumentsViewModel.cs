@@ -1,4 +1,6 @@
 ﻿using CES.CoreApi.Receipt_Main.Domain;
+using CES.CoreApi.Receipt_Main.Model.Documents;
+using CES.CoreApi.Receipt_Main.Model.Security;
 using CES.CoreApi.Receipt_Main.Model.Services;
 using CES.CoreApi.Receipt_Main.Repository;
 using CES.CoreApi.Receipt_Main.UI.WPF.Helpers;
@@ -10,16 +12,23 @@ using System.ComponentModel;
 using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Text;
-using System.Threading;
 using System.Threading.Tasks;
+using System.Threading.Tasks.Dataflow;
+using System.Windows.Data;
 
 namespace CES.CoreApi.Receipt_Main.UI.WPF.ViewModel
 {
     public class DownloadSiiDocumentsViewModel : INotifyPropertyChanged
     {
+        private readonly DocumentDownloader _documentDownloader;
+        private readonly XmlDocumentParser<EnvioBOLETA> _parserBoletas;
         private NewDocumentToDownloadViewModel _newDocumentToDownload;
-        private readonly BackgroundWorker _worker;
+        private BackgroundWorker _worker;
         private readonly IDocumentService _documentService;
+        private readonly ITaxEntityService _taxEntityService;
+        private readonly ITaxAddressService _taxAddressService;
+        private readonly ISequenceService _sequenceService;
+        private readonly IStoreService _storeService;
         private readonly DelegateCommand<object> _searchRangesCommand;
         private readonly DelegateCommand<object> _addNewRangeCommand;
         private readonly DelegateCommand<object> _cleanNewRangeCommand;
@@ -27,33 +36,46 @@ namespace CES.CoreApi.Receipt_Main.UI.WPF.ViewModel
         private readonly DelegateCommand<object> _downloadDocumentsCommand;
         private readonly DelegateCommand<object> _cleanFormCommand;
         private readonly Func<string, string, bool> _confirm;
-        private ObservableCollection<DocumentSearchToDownloadSelectableViewModel> _documentsToDownload;
+        private readonly Func<string, string, bool> _msgbox;
         private string _gridStatus;
         private bool? _isAllDocumentResultsSelected;
         private int _currentProgress;
-        private object _lock_object = new object();
         private string _doctype = "39";
         private readonly static DateTime _startDate = new DateTime(DateTime.Now.Year, 2, 1); //new DateTime(DateTime.Now.Year, DateTime.Now.AddMonths(-1).Month, 1);
         private readonly static DateTime _endDate = new DateTime(DateTime.Now.Year, 3, 1); // new DateTime(DateTime.Now.Year, DateTime.Now.Month, 1);
         private List<Tuple<int, int>> _intervalList;
-        public DownloadSiiDocumentsViewModel(Func<string, string, bool> confirm, IDocumentService documentService)
+        private DocumentHelper _documentHelper;
+
+        public DownloadSiiDocumentsViewModel(Func<string, string, bool> msgbox, Func<string, string, bool> confirm, IDocumentService documentService, ITaxEntityService taxEntityService, ITaxAddressService taxAddressService, ISequenceService sequenceService, IStoreService storeService)
         {
             _confirm = confirm;
+            _msgbox = msgbox;
             _documentService = documentService;
+            _taxEntityService = taxEntityService;
+            _taxAddressService = taxAddressService;
+            _sequenceService = sequenceService;
+            _storeService = storeService;
             _worker = new BackgroundWorker();
-            _documentsToDownload = new ObservableCollection<DocumentSearchToDownloadSelectableViewModel>();
-            SelectAllCheckboxColumnCommand = new RelayCommand(SelectAllCheckboxColumnCommandAction);
-            ShowEditRangeCommand = new RelayCommand(ShowEditRangeCommandAction);
             _searchRangesCommand = new DelegateCommand<object>(SearchRanges, CanSearchRanges);
             _addNewRangeCommand = new DelegateCommand<object>(AddNewRange, CanSearchRanges);
             _cleanNewRangeCommand = new DelegateCommand<object>(CleanNewRange, CanSearchRanges);
             _cancelNewRangeCommand = new DelegateCommand<object>(CancelNewRange, CanSearchRanges);
             _downloadDocumentsCommand = new DelegateCommand<object>(DownloadDocuments, CanSearchRanges);
             _cleanFormCommand = new DelegateCommand<object>(CleanForm, CanSearchRanges);
-
+            SelectAllCheckboxColumnCommand = new RelayCommand(SelectAllCheckboxColumnCommandAction);
+            ShowEditRangeCommand = new RelayCommand(ShowEditRangeCommandAction);
+            _documentDownloader = new DocumentDownloader();
+            _parserBoletas = new XmlDocumentParser<EnvioBOLETA>();
 
             NewDocumentToDownload = new NewDocumentToDownloadViewModel();
+            NewDocumentToDownload.ID = -1;
+            DocumentsToDownload = new ObservableCollection<DocumentSearchToDownloadSelectableViewModel>();
+            this.ViewSource = new CollectionViewSource();
+            ViewSource.Source = DocumentsToDownload;
             GridStatus = "Número de Registros: 0";
+
+            _documentHelper = new DocumentHelper(documentService, taxEntityService, taxAddressService, sequenceService, storeService);
+
         }
 
         #region Properties
@@ -75,11 +97,9 @@ namespace CES.CoreApi.Receipt_Main.UI.WPF.ViewModel
             get { return this._gridStatus; }
             private set
             {
-                if (this.DocumentsToDownload.Count() != 0)
-                {
-                    this._gridStatus = value;
-                    NotifyPropertyChanged();
-                }
+
+                this._gridStatus = value;
+                NotifyPropertyChanged();
             }
         }
 
@@ -95,16 +115,8 @@ namespace CES.CoreApi.Receipt_Main.UI.WPF.ViewModel
             }
         }
 
-        public ObservableCollection<DocumentSearchToDownloadSelectableViewModel> DocumentsToDownload
-        {
-            get { return _documentsToDownload; }
-            set
-            {
-                _documentsToDownload = value;
-                NotifyPropertyChanged("DocumentsToDownload");
-            }
-        }
-
+        public ObservableCollection<DocumentSearchToDownloadSelectableViewModel> DocumentsToDownload { get; set; }
+        public CollectionViewSource ViewSource { get; set; }
 
         #endregion
 
@@ -150,7 +162,7 @@ namespace CES.CoreApi.Receipt_Main.UI.WPF.ViewModel
         private void SearchRanges(object parameter)
         {
             DocumentsToDownload.Clear();
-
+            _worker = new BackgroundWorker();
             _worker.WorkerReportsProgress = true;
             _worker.DoWork += worker_DoWork;
             _worker.ProgressChanged += worker_ProgressChanged;
@@ -170,24 +182,35 @@ namespace CES.CoreApi.Receipt_Main.UI.WPF.ViewModel
 
         private void AddNewRange(object parameter)
         {
-            if (this.NewDocumentToDownload.ID == 0)
+            var start = this.NewDocumentToDownload.Start;
+            var end = this.NewDocumentToDownload.End;
+            var numberoffolios = int.Parse(end) - int.Parse(start) + 1;
+
+            if (this.NewDocumentToDownload.ID == -1)
             {
-                var start = this.NewDocumentToDownload.Start;
-                var end = this.NewDocumentToDownload.End;
-                this.DocumentsToDownload.Add(new DocumentSearchToDownloadSelectableViewModel {ID = DocumentsToDownload.Last().ID + 1,  DocType = _doctype, Start = start, End = end });
+                this.DocumentsToDownload.Add(new DocumentSearchToDownloadSelectableViewModel
+                {
+                    ID = DocumentsToDownload.Last().ID + 1,
+                    DocType = _doctype,
+                    Start = start,
+                    End = end,
+                    IsViewEditVisible = true,
+                    NumberOfFolios = numberoffolios
+                });
             }
             else
             {
-                NewDocumentToDownload.ID = NewDocumentToDownload.ID;
-                DocumentsToDownload[NewDocumentToDownload.ID].Start = NewDocumentToDownload.Start;
-                DocumentsToDownload[NewDocumentToDownload.ID].End = NewDocumentToDownload.End;
-                NotifyPropertyChanged("DocumentsToDownload");
+                DocumentsToDownload[NewDocumentToDownload.ID - 1].NumberOfFolios = numberoffolios;
+                DocumentsToDownload[NewDocumentToDownload.ID - 1].Start = start;
+                DocumentsToDownload[NewDocumentToDownload.ID - 1].End = end;
             }
 
-            this.NewDocumentToDownload.ID = 0;
-            this.NewDocumentToDownload.DocType = string.Empty;
+            this.NewDocumentToDownload.ID = -1;
             this.NewDocumentToDownload.Start = string.Empty;
             this.NewDocumentToDownload.End = string.Empty;
+            this.NewDocumentToDownload.DocType = string.Empty;
+
+            ViewSource.View.Refresh();
         }
 
         private bool CanAddNewRanges(object parameter)
@@ -229,9 +252,14 @@ namespace CES.CoreApi.Receipt_Main.UI.WPF.ViewModel
 
         private void DownloadDocuments(object parameter)
         {
+            this.CurrentProgress = 0;
+            _worker = new BackgroundWorker();
+            _worker.WorkerReportsProgress = true;
+            _worker.DoWork += worker_DoWorkDownload;
+            _worker.ProgressChanged += workerDownload_ProgressChanged;
 
+            _worker.RunWorkerAsync();
         }
-
         private bool CanDownloadDocuments(object parameter)
         {
             if (_worker.IsBusy)
@@ -241,11 +269,9 @@ namespace CES.CoreApi.Receipt_Main.UI.WPF.ViewModel
 
             return true;
         }
-
         private void CleanForm(object parameter)
         {
         }
-
         private bool CanCleanForm(object parameter)
         {
             if (_worker.IsBusy)
@@ -262,6 +288,99 @@ namespace CES.CoreApi.Receipt_Main.UI.WPF.ViewModel
         {
             SearchDynamicFilters(sender as BackgroundWorker);
         }
+
+        private void worker_DoWorkDownload(object sender, DoWorkEventArgs e)
+        {
+            var bgw = sender as BackgroundWorker;
+            List<int> detailids = null;
+            List<int> docids = null;
+            var indexchunk = 1;
+            var acumchunk = 0;
+            int iprogress = 0;
+            var documentsSelected = DocumentsToDownload.Where(m => m.IsSelected);
+            var numberOfDocs = documentsSelected.Count();
+            int i = 1;
+
+            try
+            {
+                foreach (var rangeFolio in documentsSelected)
+                {
+                    var indexRange = rangeFolio.ID - 1;
+                    DocumentsToDownload[indexRange].DownloadStatus = "Descargando...";
+                    iprogress = (int)Math.Ceiling((i / (double)numberOfDocs) * 100);
+                    bgw.ReportProgress(iprogress);
+
+                    if (iprogress > 100) iprogress = 100;
+
+                    detailids = null;
+                    docids = null;
+                    indexchunk = 1;
+                    acumchunk = 0;
+                    iprogress = 0;
+
+                    var folioinicio = int.Parse(rangeFolio.Start);
+                    var foliofin = int.Parse(rangeFolio.End);
+                    var numfolios = foliofin - folioinicio + 1;
+
+                    if (numfolios < _documentHelper.Chunkfolio)
+                    {
+                        _documentHelper.Chunkfolio = numfolios;
+                    }
+
+                    DocumentsToDownload[indexRange].Pending = numfolios;
+                    DocumentsToDownload[indexRange].Processed = 0;
+                    bgw.ReportProgress(iprogress);
+
+                    try
+                    {
+                        for (int folio = folioinicio; folio <= foliofin; folio++)
+                        {
+                            var respuesta = string.Empty;
+                            _documentDownloader.RetrieveXML(int.Parse(_doctype), folio, out respuesta);
+                            var documentXmlObject = _parserBoletas.GetDocumentObjectFromString(respuesta);
+                            _documentHelper.SaveDocument(folio, foliofin, ref indexchunk, ref acumchunk, documentXmlObject, ref detailids, ref docids);
+
+                            DocumentsToDownload[indexRange].Pending = DocumentsToDownload[indexRange].Pending - 1;
+                            DocumentsToDownload[indexRange].Processed = DocumentsToDownload[indexRange].Processed + 1;
+                            bgw.ReportProgress(iprogress);
+                            indexchunk++;
+                        }
+
+                        DocumentsToDownload[indexRange].DownloadStatus = "Descarga Finalizada";
+                    }
+                    catch (Exception ex)
+                    {
+                        DocumentsToDownload[indexRange].DownloadStatus = "Error en descarga";
+                        DocumentsToDownload[indexRange].Detail = ex.ToString();
+                    }
+                    finally
+                    {
+                        bgw.ReportProgress(iprogress);
+                    }
+
+                    i++;
+                }
+            }
+            catch (Exception ex)
+            {
+                _msgbox(ex.ToString(), "Error");
+            }
+            finally
+            {
+                bgw.ReportProgress(99);
+            }
+        }
+
+        private void workerDownload_ProgressChanged(object sender, ProgressChangedEventArgs e)
+        {
+            this.CurrentProgress = e.ProgressPercentage;
+            ViewSource.View.Refresh();
+
+            if (CurrentProgress == 100)
+            {
+                _msgbox("Descarga Finalizada", "Descarga");
+            }
+        }
         private void worker_ProgressChanged(object sender, ProgressChangedEventArgs e)
         {
             this.CurrentProgress = e.ProgressPercentage;
@@ -276,18 +395,23 @@ namespace CES.CoreApi.Receipt_Main.UI.WPF.ViewModel
                         DocumentsToDownload.Add(new DocumentSearchToDownloadSelectableViewModel()
                         {
                             ID = ++index,
-                            DocType = _doctype,
                             Start = $"{m.Item1}",
-                            End = $"{m.Item2}"
+                            End = $"{m.Item2}",
+                            DocType = _doctype,
+                            IsDynamic = true,
+                            IsViewEditVisible = false,
+                            NumberOfFolios = m.Item2 - m.Item1 + 1
                         });
                     });
 
+                ViewSource.View.Refresh();
                 GridStatus = $"Número de Registros: {DocumentsToDownload.Count()}";
+                _msgbox("Busqueda Finalizada", "Busqueda");
             }
         }
         private void SearchDynamicFilters(BackgroundWorker sender)
         {
-            var iProgress = 2;
+            var iProgress = 5;
             sender.ReportProgress(iProgress);
             var documentListGlobal = _documentService.GetAllDocumentsFoliosByType(_doctype, null, null).AsParallel();
             iProgress = 10;
@@ -355,7 +479,6 @@ namespace CES.CoreApi.Receipt_Main.UI.WPF.ViewModel
 
             return intervalList;
         }
-
         private List<Tuple<int, int>> FixFolioRangesWhenExistInDatabase(List<Tuple<int, int>> intervalFolioList, IEnumerable<int> documentListGlobal)
         {
             var newIntervalFolioList = new List<Tuple<int, int>>();
@@ -387,7 +510,6 @@ namespace CES.CoreApi.Receipt_Main.UI.WPF.ViewModel
 
             return newIntervalFolioList;
         }
-
         private void SelectAll(bool select, IEnumerable<DocumentSearchToDownloadSelectableViewModel> models)
         {
             foreach (var model in models)

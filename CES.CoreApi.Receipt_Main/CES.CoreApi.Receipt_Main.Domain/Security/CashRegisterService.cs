@@ -26,16 +26,20 @@ namespace CES.CoreApi.Receipt_Main.Domain
         public void CreateCashRegister(systblApp_TaxReceipt_CashRegister objectEntry)
         {
             this.repo.CreateCashRegister(objectEntry);
-            this.repo.SaveChanges();          
+       
         }
         public void UpdateCashRegister(systblApp_TaxReceipt_CashRegister objectEntry)
         {
             this.repo.UpdateCashRegister(objectEntry);
-            this.repo.SaveChanges();
+
         }
         public void RemoveCashRegister(systblApp_TaxReceipt_CashRegister objectEntry)
         {
             this.repo.RemoveCashRegister(objectEntry);
+
+        }
+        public void SaveChanges()
+        {
             this.repo.SaveChanges();
         }
     }

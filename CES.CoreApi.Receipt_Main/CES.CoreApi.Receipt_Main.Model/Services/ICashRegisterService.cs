@@ -15,6 +15,6 @@ namespace CES.CoreApi.Receipt_Main.Model.Services
             (systblApp_TaxReceipt_CashRegister objectEntry);
         void UpdateCashRegister(systblApp_TaxReceipt_CashRegister objectEntry);
         void RemoveCashRegister(systblApp_TaxReceipt_CashRegister objectEntry);
-        
+        void SaveChanges();
     }
 }

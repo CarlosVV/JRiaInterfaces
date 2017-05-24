@@ -38,7 +38,7 @@ namespace CES.CoreApi.Receipt_Main.Repository
         {          
             modelBuilder.Conventions.Remove<PluralizingTableNameConvention>();
             //modelBuilder.Entity<User>().ToTable("User");
-            //modelBuilder.Entity<Caf>().ToTable("systblApp_CoreAPI_Caf");
+            modelBuilder.Entity<systblApp_CoreApi_Sequence>().ToTable("systblApp_CoreApi_Sequence");
 
             modelBuilder.Entity<systblApp_CoreAPI_Document>()
                 .Property(e => e.ExemptAmount)

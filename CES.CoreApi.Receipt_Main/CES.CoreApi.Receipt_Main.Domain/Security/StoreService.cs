@@ -26,16 +26,21 @@ namespace CES.CoreApi.Receipt_Main.Domain
         public void CreateStore(systblApp_TaxReceipt_Store objectEntry)
         {
             this.repo.CreateStore(objectEntry);
-            this.repo.SaveChanges();          
+          
         }
         public void UpdateStore(systblApp_TaxReceipt_Store objectEntry)
         {
             this.repo.UpdateStore(objectEntry);
-            this.repo.SaveChanges();
+           
         }
         public void RemoveStore(systblApp_TaxReceipt_Store objectEntry)
         {
             this.repo.RemoveStore(objectEntry);
+            
+        }
+
+        public void SaveChanges()
+        {
             this.repo.SaveChanges();
         }
     }

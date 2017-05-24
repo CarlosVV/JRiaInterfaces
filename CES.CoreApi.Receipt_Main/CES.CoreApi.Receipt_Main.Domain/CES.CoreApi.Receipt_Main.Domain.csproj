@@ -49,6 +49,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Document\SequenceService.cs" />
     <Compile Include="Security\UserRoleService.cs" />
     <Compile Include="Document\TaxEntityService.cs" />
     <Compile Include="Document\TaxAddressService.cs" />

@@ -24,16 +24,21 @@ namespace CES.CoreApi.Receipt_Main.Domain
         public void CreateTask(systblApp_CoreAPI_Task objectEntry)
         {
             this.repo.CreateTask(objectEntry);
-            this.repo.SaveChanges();          
+           
         }
         public void UpdateTask(systblApp_CoreAPI_Task objectEntry)
         {
             this.repo.UpdateTask(objectEntry);
-            this.repo.SaveChanges();
+          
         }
         public void RemoveTask(systblApp_CoreAPI_Task objectEntry)
         {
             this.repo.RemoveTask(objectEntry);
+           
+        }
+
+        public void SaveChanges()
+        {
             this.repo.SaveChanges();
         }
     }

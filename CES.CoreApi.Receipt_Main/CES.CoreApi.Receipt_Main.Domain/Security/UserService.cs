@@ -20,17 +20,18 @@ namespace CES.CoreApi.Receipt_Main.Domain
         }
         public void CreateUser(systblApp_TaxReceipt_User objectEntry)
         {
-            this.repo.CreateUser(objectEntry);
-            this.repo.SaveChanges();
+            this.repo.CreateUser(objectEntry);          
         }
         public void UpdateUser(systblApp_TaxReceipt_User objectEntry)
         {
-            this.repo.UpdateUser(objectEntry);
-            this.repo.SaveChanges();
+            this.repo.UpdateUser(objectEntry);          
         }
         public void RemoveUser(systblApp_TaxReceipt_User objectEntry)
         {
-            this.repo.RemoveUser(objectEntry);
+            this.repo.RemoveUser(objectEntry);           
+        }
+        public void SaveChanges()
+        {
             this.repo.SaveChanges();
         }
     }

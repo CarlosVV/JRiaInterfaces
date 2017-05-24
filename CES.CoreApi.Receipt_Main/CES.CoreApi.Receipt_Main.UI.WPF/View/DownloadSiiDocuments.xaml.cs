@@ -22,28 +22,14 @@ namespace CES.CoreApi.Receipt_Main.UI.WPF.View
     /// </summary>
     public partial class DownloadSiiDocuments : UserControl
     {
-        private readonly IDocumentService _documentService;
-        public DownloadSiiDocuments(IDocumentService documentService)
+        public DownloadSiiDocuments(IDocumentService documentService, ITaxEntityService taxEntityService, ITaxAddressService taxAddressService, ISequenceService sequenceService, IStoreService storeService)
         {
             InitializeComponent();
-            _documentService = documentService;
+
             var confirm = (Func<string, string, bool>)((msg, capt) => MessageBox.Show(msg, capt, MessageBoxButton.YesNo) == MessageBoxResult.Yes);
-            var viewModel = new DownloadSiiDocumentsViewModel(confirm, _documentService);
+            var msgbox = (Func<string, string, bool>)((msg, capt) => MessageBox.Show(msg, capt, MessageBoxButton.OK) == MessageBoxResult.OK);
+            var viewModel = new DownloadSiiDocumentsViewModel(msgbox, confirm, documentService, taxEntityService, taxAddressService, sequenceService, storeService);
             DataContext = viewModel;
         }
-
-        private void UpCheckbox_Checked(object sender, RoutedEventArgs e)
-        {
-            //checkBox1 = cbxall (your up checkbox)
-            //if (sender.IsChecked == true)
-            //{
-            //    dataGrid1.Items.OfType<YourClass>().ToList().ForEach(x => x.IsChecked = true);
-            //}
-            //else
-            //{
-            //    dataGrid1.Items.OfType<YourClass>().ToList().ForEach(x => x.IsChecked = false);
-            //}
-        }
-
     }
 }

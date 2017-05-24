@@ -23,17 +23,19 @@ namespace CES.CoreApi.Receipt_Main.Domain
 
         public void CreateTaxEntity(systblApp_CoreAPI_TaxEntity objectEntry)
         {
-            this.repo.CreateTaxEntity(objectEntry);
-            this.repo.SaveChanges();          
+            this.repo.CreateTaxEntity(objectEntry);      
         }
         public void UpdateTaxEntity(systblApp_CoreAPI_TaxEntity objectEntry)
         {
             this.repo.UpdateTaxEntity(objectEntry);
-            this.repo.SaveChanges();
         }
         public void RemoveTaxEntity(systblApp_CoreAPI_TaxEntity objectEntry)
         {
             this.repo.RemoveTaxEntity(objectEntry);
+        }
+
+        public void SaveChanges()
+        {
             this.repo.SaveChanges();
         }
     }

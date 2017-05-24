@@ -29,14 +29,14 @@ namespace CES.CoreApi.Receipt_Main.UI.WPF
     {
         private readonly IUserService _userservice;
         private readonly IDocumentService _documentService;
-        public MainWindow(IUserService userservice, IDocumentService documentService)
+        public MainWindow(IUserService userservice, IDocumentService documentService, ITaxEntityService taxEntityService, ITaxAddressService taxAddressService, ISequenceService sequenceService, IStoreService storeService)
         {
             _userservice = userservice;
             _documentService = documentService;
 
             InitializeComponent();
 
-            DataContext = new MainWindowViewModel(_documentService);
+            DataContext = new MainWindowViewModel(documentService, taxEntityService, taxAddressService, sequenceService, storeService);
 
             Task.Factory.StartNew(() =>
             {

@@ -13,6 +13,6 @@ namespace CES.CoreApi.Receipt_Main.Model.Services
         void CreateTaxEntity(systblApp_CoreAPI_TaxEntity objectEntry);
         void UpdateTaxEntity(systblApp_CoreAPI_TaxEntity objectEntry);
         void RemoveTaxEntity(systblApp_CoreAPI_TaxEntity objectEntry);
-        
+        void SaveChanges();
     }
 }

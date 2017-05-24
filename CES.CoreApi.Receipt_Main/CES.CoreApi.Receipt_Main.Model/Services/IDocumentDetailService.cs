@@ -13,6 +13,6 @@ namespace CES.CoreApi.Receipt_Main.Model.Services
         void CreateDocumentDetail(systblApp_CoreAPI_DocumentDetail objectEntry);
         void UpdateDocumentDetail(systblApp_CoreAPI_DocumentDetail objectEntry);
         void RemoveDocumentDetail(systblApp_CoreAPI_DocumentDetail objectEntry);
-        
+        void SaveChanges();
     }
 }

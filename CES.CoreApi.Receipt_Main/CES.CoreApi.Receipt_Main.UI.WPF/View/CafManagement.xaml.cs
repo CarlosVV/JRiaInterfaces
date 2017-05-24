@@ -24,7 +24,11 @@ namespace CES.CoreApi.Receipt_Main.UI.WPF.View
         public CafManagement()
         {
             InitializeComponent();
-            DataContext = new CafManagementViewModel();
+
+            var confirm = (Func<string, string, bool>)((msg, capt) => MessageBox.Show(msg, capt, MessageBoxButton.YesNo) == MessageBoxResult.Yes);
+            var msgbox = (Func<string, string, bool>)((msg, capt) => MessageBox.Show(msg, capt, MessageBoxButton.OK) == MessageBoxResult.OK);
+
+            DataContext = new CafManagementViewModel(msgbox, confirm);
         }
 
         private void UserControl_Loaded(object sender, RoutedEventArgs e)

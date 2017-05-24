@@ -13,6 +13,7 @@ namespace CES.CoreApi.Receipt_Main.Model.Services
         List<systblApp_TaxReceipt_Role> GetAllRoles();
         void CreateRole(systblApp_TaxReceipt_Role objectEntry);
         void UpdateRole(systblApp_TaxReceipt_Role objectEntry);
-        void RemoveRole(systblApp_TaxReceipt_Role objectEntry);        
+        void RemoveRole(systblApp_TaxReceipt_Role objectEntry);
+        void SaveChanges();
     }
 }

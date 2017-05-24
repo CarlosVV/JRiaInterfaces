@@ -22,7 +22,7 @@ namespace CES.CoreApi.Receipt_Main.UI.WPF.ViewModel
             {
                 if (_isSelected == value) return;
                 _isSelected = value;
-                OnPropertyChanged();
+                NotifiyPropertyChanged();
             }
         }        
 
@@ -33,7 +33,7 @@ namespace CES.CoreApi.Receipt_Main.UI.WPF.ViewModel
             {
                 if (_id == value) return;
                 _id = value;
-                OnPropertyChanged();
+                NotifiyPropertyChanged();
             }
         }
 
@@ -44,7 +44,7 @@ namespace CES.CoreApi.Receipt_Main.UI.WPF.ViewModel
             {
                 if (_type == value) return;
                 _type = value;
-                OnPropertyChanged();
+                NotifiyPropertyChanged();
             }
         }
 
@@ -55,7 +55,7 @@ namespace CES.CoreApi.Receipt_Main.UI.WPF.ViewModel
             {
                 if (_date == value) return;
                 _date = value;
-                OnPropertyChanged();
+                NotifiyPropertyChanged();
             }
         }
         public string Start
@@ -65,7 +65,7 @@ namespace CES.CoreApi.Receipt_Main.UI.WPF.ViewModel
             {
                 if (_start == value) return;
                 _start = value;
-                OnPropertyChanged();
+                NotifiyPropertyChanged();
             }
         }
 
@@ -76,7 +76,7 @@ namespace CES.CoreApi.Receipt_Main.UI.WPF.ViewModel
             {
                 if (_end == value) return;
                 _end = value;
-                OnPropertyChanged();
+                NotifiyPropertyChanged();
             }
         }
 
@@ -87,13 +87,13 @@ namespace CES.CoreApi.Receipt_Main.UI.WPF.ViewModel
             {
                 if (_current == value) return;
                 _current = value;
-                OnPropertyChanged();
+                NotifiyPropertyChanged();
             }
         }
 
         public event PropertyChangedEventHandler PropertyChanged;
 
-        protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
+        protected virtual void NotifiyPropertyChanged([CallerMemberName] string propertyName = null)
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }

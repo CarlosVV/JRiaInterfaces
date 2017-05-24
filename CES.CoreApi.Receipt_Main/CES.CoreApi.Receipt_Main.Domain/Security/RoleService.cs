@@ -26,16 +26,20 @@ namespace CES.CoreApi.Receipt_Main.Domain
         public void CreateRole(systblApp_TaxReceipt_Role objectEntry)
         {
             this.repo.CreateRole(objectEntry);
-            this.repo.SaveChanges();          
+          
         }
         public void UpdateRole(systblApp_TaxReceipt_Role objectEntry)
         {
             this.repo.UpdateRole(objectEntry);
-            this.repo.SaveChanges();
+          
         }
         public void RemoveRole(systblApp_TaxReceipt_Role objectEntry)
         {
             this.repo.RemoveRole(objectEntry);
+           
+        }
+        public void SaveChanges()
+        {
             this.repo.SaveChanges();
         }
     }
