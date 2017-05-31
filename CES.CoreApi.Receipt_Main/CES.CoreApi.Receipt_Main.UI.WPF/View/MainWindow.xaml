@@ -14,7 +14,8 @@
         FontFamily="{StaticResource MaterialDesignFont}" 
         Icon="../ria-financial-squarelogo.png" 
         WindowStartupLocation="CenterScreen"        
-        Unloaded="Window_Unloaded">
+        Unloaded="Window_Unloaded"
+        ResizeMode="NoResize">
     <Window.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>

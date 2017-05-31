@@ -5,8 +5,13 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:CES.CoreApi.Receipt_Main.UI.WPF.View"
              xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+             xmlns:model="clr-namespace:CES.CoreApi.Receipt_Main.UI.WPF.Model"
+             xmlns:model1="clr-namespace:CES.CoreApi.Receipt_Main.UI.WPF.ViewModel"
              mc:Ignorable="d" 
-             d:DesignHeight="300" d:DesignWidth="800">
+             d:DesignHeight="800" d:DesignWidth="800"
+             d:DataContext="{d:DesignInstance model1:CafFormViewModel, d:IsDesignTimeCreatable=False}"
+             xmlns:md="https://github.com/fantasticfiasco/mvvm-dialogs" 
+             md:DialogServiceViews.IsRegistered="True">
     <UserControl.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
@@ -42,71 +47,158 @@
     </UserControl.Resources>
     <Border Padding="5">
         <StackPanel>
-            <TextBlock Text="Edit/New CAF" Padding="10" FontWeight="Bold"/>
+            <TextBlock Text="Edit/New CAF" Padding="10" FontWeight="Bold" VerticalAlignment="Bottom"/>
+
             <Grid>
                 <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="*" />
-                    <ColumnDefinition Width="5*" />
+                    <ColumnDefinition Width="0.15*"/>
+                    <ColumnDefinition Width="0.25*"/>
+                    <ColumnDefinition Width="0.25*"/>
+                    <ColumnDefinition Width="0.25*"/>
+                    <ColumnDefinition Width="0.25*"/>
+                    <ColumnDefinition Width="0.25*"/>
+                    <ColumnDefinition Width="0.25*"/>
                 </Grid.ColumnDefinitions>
                 <!--ID-->
-                <TextBlock Grid.Column="0" Text="ID" Padding="2" Margin="0,0,67,0"/>
-                <TextBox IsReadOnly="True" Grid.ColumnSpan="2" Margin="80,8,0,8"/>
-            </Grid>
-            <Grid>
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="*" />
-                    <ColumnDefinition Width="*" />
-                    <ColumnDefinition Width="*" />
-                    <ColumnDefinition Width="*" />
-                    <ColumnDefinition Width="*" />
-                    <ColumnDefinition Width="*" />
-                </Grid.ColumnDefinitions>
+                <TextBox Grid.Column="0" Width="50" Margin="0,0,10,0" HorizontalAlignment="Left"  IsReadOnly="True"   materialDesign:HintAssist.Hint="ID"
+                    Style="{StaticResource MaterialDesignFloatingHintTextBox}">
+                    <TextBox.Text>
+                        <Binding Path="ID" UpdateSourceTrigger="PropertyChanged">
+                            <Binding.ValidationRules>
+                                <model:NotEmptyValidationRule ValidatesOnTargetUpdated="True" />
+                            </Binding.ValidationRules>
+                        </Binding>
+                    </TextBox.Text>
+                </TextBox>
 
                 <!--Folio Inicio-->
-                <TextBlock Grid.Column="0" Text="Folio Inicio" Padding="2" Margin="0,0,67,0"/>
-                <TextBox Grid.ColumnSpan="2" Margin="80,8,0,8"/>
+                <TextBox  Grid.Column="1" Width="100" Margin="0,0,10,0" HorizontalAlignment="Left"  VerticalAlignment="Bottom" materialDesign:HintAssist.Hint="Folio Inicio"
+                    Style="{StaticResource MaterialDesignFloatingHintTextBox}"  >
+                    <TextBox.Text>
+                        <Binding Path="FolioStartNumber" UpdateSourceTrigger="PropertyChanged">
+                            <Binding.ValidationRules>
+                                <model:NotEmptyValidationRule ValidatesOnTargetUpdated="True" />
+                            </Binding.ValidationRules>
+                        </Binding>
+                    </TextBox.Text>
+                </TextBox>
 
                 <!--Folio Fin-->
-                <TextBlock Grid.Column="2" Text="Folio Fin" Padding="2" Margin="0,0,76,0"/>
-                <TextBox Grid.Column="2" Grid.ColumnSpan="2" Margin="56,8,0,8"/>
-
+                <TextBox Grid.Column="2" Width="100" Margin="0,0,10,0" HorizontalAlignment="Left"  VerticalAlignment="Bottom" materialDesign:HintAssist.Hint="Folio Fin"
+                    Style="{StaticResource MaterialDesignFloatingHintTextBox}"  >
+                    <TextBox.Text>
+                        <Binding Path="FolioEndNumber" UpdateSourceTrigger="PropertyChanged">
+                            <Binding.ValidationRules>
+                                <model:NotEmptyValidationRule ValidatesOnTargetUpdated="True" />
+                            </Binding.ValidationRules>
+                        </Binding>
+                    </TextBox.Text>
+                </TextBox>
+                <!--Folio Fin-->
+                <ComboBox Grid.Column="3" 
+                   x:Name="DocumenTypeComboBox"
+                  materialDesign:HintAssist.Hint="Tipo Documento" 
+                  Style="{StaticResource MaterialDesignFloatingHintComboBox}"
+                  ItemsSource="{Binding DocumentTypeList}"                          
+                  SelectedValue="{Binding SelectedDocumentTypeValue}">
+                    <ComboBox.SelectedItem>
+                        <Binding Path="SelectedDocumentTypeValue" Mode="TwoWay" UpdateSourceTrigger="PropertyChanged">
+                            <Binding.ValidationRules>
+                                <model:NotEmptyValidationRule ValidatesOnTargetUpdated="True"/>
+                            </Binding.ValidationRules>
+                        </Binding>
+                    </ComboBox.SelectedItem>
+                    <ComboBox.ItemTemplate>
+                        <DataTemplate>
+                            <StackPanel Orientation="Horizontal">
+                                <TextBlock Text="{Binding Description}"></TextBlock>
+                            </StackPanel>
+                        </DataTemplate>
+                    </ComboBox.ItemTemplate>
+                    <ComboBox.ItemsPanel>
+                        <ItemsPanelTemplate>
+                            <VirtualizingStackPanel />
+                        </ItemsPanelTemplate>
+                    </ComboBox.ItemsPanel>
+                </ComboBox>
                 <!--Tienda-->
-                <TextBlock Grid.Column="4" Text="Tienda" Padding="2" Margin="0,0,89,0"/>
-                <TextBox Grid.Column="4" Grid.ColumnSpan="2" Margin="48,8,0,8"/>
+                <ComboBox Grid.Column="4" 
+                   x:Name="StoreComboBox"
+                  materialDesign:HintAssist.Hint="Tienda" 
+                  Style="{StaticResource MaterialDesignFloatingHintComboBox}"
+                  ItemsSource="{Binding StoreList}"                          
+                  SelectedValue="{Binding SelectedStoreValue}">
+                    <ComboBox.SelectedItem>
+                        <Binding Path="SelectedStoreValue" Mode="TwoWay" UpdateSourceTrigger="PropertyChanged">
+                            <Binding.ValidationRules>
+                                <model:NotEmptyValidationRule ValidatesOnTargetUpdated="True"/>
+                            </Binding.ValidationRules>
+                        </Binding>
+                    </ComboBox.SelectedItem>
+                    <ComboBox.ItemTemplate>
+                        <DataTemplate>
+                            <StackPanel Orientation="Horizontal">
+                                <TextBlock Text="{Binding Name}"></TextBlock>
+                            </StackPanel>
+                        </DataTemplate>
+                    </ComboBox.ItemTemplate>
+                    <ComboBox.ItemsPanel>
+                        <ItemsPanelTemplate>
+                            <VirtualizingStackPanel />
+                        </ItemsPanelTemplate>
+                    </ComboBox.ItemsPanel>
+                </ComboBox>
 
             </Grid>
 
-            <Grid>
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="*" />
-                    <ColumnDefinition Width="3*" />
-                    <ColumnDefinition Width="*" />
-                </Grid.ColumnDefinitions>
-
-                <!--Contenido-->
-                <TextBlock Grid.Column="0" Text="Contenido"  Padding="2"/>
-                <TextBox Grid.ColumnSpan="2" Margin="80,8,0,8" />
-
-                <!--Boton Cargar-->
-                <StackPanel Grid.Column="2">
-                    <Button  Content="Cargar archivo..." Margin="10 0 5 5"/>
-                    <CheckBox Content="Deshabilitar" Margin="10 0 5 5"/>
-                </StackPanel>                
-            </Grid>
-            <Grid>
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="*" />
-                </Grid.ColumnDefinitions>
-               
-                <StackPanel Grid.Column="0" Orientation="Horizontal" HorizontalAlignment="Center">
+            <!--Contenido-->
+            <TextBox AcceptsReturn="True"
+                     AcceptsTab="True"
+                     TextWrapping="Wrap"
+                     VerticalScrollBarVisibility="Visible"
+                     VerticalAlignment="Top"
+                     materialDesign:HintAssist.Hint="Contenido"
+                     Style="{StaticResource MaterialDesignFloatingHintTextBox}"
+                     HorizontalAlignment="Left" 
+                     Width="595" 
+                     Height="112"
+                     Margin="0, 10, 10, 10">
+                <TextBox.Text>
+                    <Binding Path="XmlContent" UpdateSourceTrigger="PropertyChanged">                        
+                        <Binding.ValidationRules>
+                            <model:NotEmptyValidationRule ValidatesOnTargetUpdated="True" />
+                        </Binding.ValidationRules>
+                    </Binding>
+                </TextBox.Text>
+            </TextBox>
+            <CheckBox Content="Deshabilitar" IsChecked="True"
+                      Margin="0, 10, 10, 10"/>
+            <StackPanel>
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+                    
+                    <!--Boton Cargar Archivo-->
+                    <Button Grid.Column="0"  Width="140" Content="Cargar archivo..."  Height="Auto" Margin="0,0,10,0" HorizontalAlignment="Left" AutomationProperties.AutomationId="MZ16xHTzYE2UP8S9vd-EGw" Command="{Binding OpenFileCommand}" />
+                    
                     <!--Boton Cargar-->
-                    <Button  Content="Guardar" Margin="10,0,0,0"/>
+                    <Button Grid.Column="1" Width="140"  Content="Guardar" Height="Auto" Margin="0,0,10,0" HorizontalAlignment="Left"  Command="{Binding SaveCommand}"/>
+
                     <!--Boton Limpiar-->
-                    <Button  Content="Limpiar" Margin="10 0 0 0"/>
+                    <Button Grid.Column="2" Width="140"  Content="Limpiar" Height="Auto" Margin="0,0,10,0" HorizontalAlignment="Left"  Command="{Binding CleanCommand}"/>
+
                     <!--Boton Cancelar-->
-                    <Button  Content="Cancelar" Margin="10 0 10 0"/>
-                </StackPanel>
-            </Grid>
+                    <Button Grid.Column="3" Width="140"  Content="Cancelar" Height="Auto" HorizontalAlignment="Left"  Command="{Binding CancelCommand}"/>
+                </Grid>
+
+            </StackPanel>
+            <TextBlock Text="{Binding Status}" Background="Blue" Foreground="White" FontWeight="Bold" Margin="10 10 10 10" Height="25"></TextBlock>
         </StackPanel>        
-    </Border>  
+    </Border>
 </UserControl>

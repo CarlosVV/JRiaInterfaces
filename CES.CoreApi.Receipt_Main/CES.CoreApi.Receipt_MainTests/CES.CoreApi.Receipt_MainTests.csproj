@@ -121,25 +121,9 @@
     <Compile Include="Validators\CAFValidatorTests.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\CES.CoreApi.Receipt_Main.Domain\CES.CoreApi.Receipt_Main.Domain.csproj">
-      <Project>{0425505a-b947-4575-bf39-0f633f40c42d}</Project>
-      <Name>CES.CoreApi.Receipt_Main.Domain</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\CES.CoreApi.Receipt_Main.Model\CES.CoreApi.Receipt_Main.Model.csproj">
-      <Project>{6101f4e8-e19b-48ff-80a1-0acddb73653a}</Project>
-      <Name>CES.CoreApi.Receipt_Main.Model</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\CES.CoreApi.Receipt_Main.Repository\CES.CoreApi.Receipt_Main.Repository.csproj">
-      <Project>{89f0fce4-56de-41c2-9942-52739242c3b2}</Project>
-      <Name>CES.CoreApi.Receipt_Main.Repository</Name>
-    </ProjectReference>
     <ProjectReference Include="..\CES.CoreApi.Receipt_Main.UI.WPF\CES.CoreApi.Receipt_Main.UI.WPF.csproj">
       <Project>{9c1db4ee-dc86-4e9d-afa1-4aae36504a5a}</Project>
       <Name>CES.CoreApi.Receipt_Main.UI.WPF</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\CES.CoreApi.Receipt_Main\CES.CoreApi.Receipt_Main.csproj">
-      <Project>{55BF8FE7-E012-4DC0-A90A-458F992610E5}</Project>
-      <Name>CES.CoreApi.Receipt_Main</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

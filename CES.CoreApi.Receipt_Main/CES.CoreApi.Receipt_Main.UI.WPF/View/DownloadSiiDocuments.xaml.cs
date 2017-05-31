@@ -1,5 +1,6 @@
-﻿using CES.CoreApi.Receipt_Main.Model.Services;
+﻿using CES.CoreApi.Receipt_Main.Domain.Core.Services;
 using CES.CoreApi.Receipt_Main.UI.WPF.ViewModel;
+using MvvmDialogs;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -22,7 +23,8 @@ namespace CES.CoreApi.Receipt_Main.UI.WPF.View
     /// </summary>
     public partial class DownloadSiiDocuments : UserControl
     {
-        public DownloadSiiDocuments(IDocumentService documentService, ITaxEntityService taxEntityService, ITaxAddressService taxAddressService, ISequenceService sequenceService, IStoreService storeService)
+        public DownloadSiiDocuments(IDocumentService documentService, ITaxEntityService taxEntityService, ITaxAddressService taxAddressService, 
+            ISequenceService sequenceService, IStoreService storeService)
         {
             InitializeComponent();
 

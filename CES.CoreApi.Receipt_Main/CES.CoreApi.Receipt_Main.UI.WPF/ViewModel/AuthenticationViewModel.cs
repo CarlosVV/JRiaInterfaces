@@ -1,5 +1,5 @@
 ﻿using CES.CoreApi.Receipt_Main.Domain;
-using CES.CoreApi.Receipt_Main.UI.WPF.Security;
+using CES.CoreApi.Receipt_Main.Infrastructure.Core.Security;
 using CES.CoreApi.Receipt_Main.UI.WPF.View;
 using Ninject;
 using Prism.Commands;
@@ -112,7 +112,7 @@ namespace CES.CoreApi.Receipt_Main.UI.WPF.ViewModel
                 Status = string.Empty;
                 IsVisible = false;
                 //NotifyPropertyChanged("Visible");
-                Application.Current.MainWindow.Show();
+                System.Windows.Application.Current.MainWindow.Show();
             }
             catch (UnauthorizedAccessException)
             {

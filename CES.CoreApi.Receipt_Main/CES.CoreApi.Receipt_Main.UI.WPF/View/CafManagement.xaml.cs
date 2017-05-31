@@ -31,8 +31,6 @@ namespace CES.CoreApi.Receipt_Main.UI.WPF.View
             DataContext = new CafManagementViewModel(msgbox, confirm);
         }
 
-        private void UserControl_Loaded(object sender, RoutedEventArgs e)
-        {
-        }
+      
     }
 }

@@ -1,6 +1,7 @@
-﻿using CES.CoreApi.Receipt_Main.Model.Services;
+﻿using CES.CoreApi.Receipt_Main.Domain.Core.Services;
 using CES.CoreApi.Receipt_Main.UI.WPF.Model;
 using CES.CoreApi.Receipt_Main.UI.WPF.View;
+using MvvmDialogs;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,7 +12,7 @@ namespace CES.CoreApi.Receipt_Main.UI.WPF.ViewModel
 {
     public class MainWindowViewModel
     {
-        public MainWindowViewModel(IDocumentService documentService, ITaxEntityService taxEntityService, ITaxAddressService taxAddressService, ISequenceService sequenceService, IStoreService storeService)
+        public MainWindowViewModel(IDocumentService documentService, ITaxEntityService taxEntityService, ITaxAddressService taxAddressService, ISequenceService sequenceService, IStoreService storeService, IDialogService dialogService)
         {
             MenuElements = new[]
             {
@@ -20,7 +21,7 @@ namespace CES.CoreApi.Receipt_Main.UI.WPF.ViewModel
                 new MenuElement {Label = "Enviar a SII", Content = new SendToEIS(), MenuStyleType = "Item1"},
                 new MenuElement {Label = "Cargar Caf", Content = new CafManagement(), MenuStyleType = "Header2"},
                 new MenuElement {Label = "Buscar Caf", Content = new CafManagement(), MenuStyleType = "Item2" },
-                new MenuElement {Label = "Nuevo Caf", Content = new CafForm(), MenuStyleType = "Item2" },
+                new MenuElement {Label = "Nuevo Caf", Content = new CafForm(storeService, dialogService), MenuStyleType = "Item2" },
                 new MenuElement {Label = "Nuevo Documento", Content = new TaxDocumentForm(), MenuStyleType = "Item1"},
                 new MenuElement {Label = "Generar Notas de Crédito", Content = new GenerateCreditNotes(), MenuStyleType = "Item1"},
                 new MenuElement {Label = "Descargar Documentos de SII", Content = new DownloadSiiDocuments(documentService, taxEntityService, taxAddressService, sequenceService, storeService), MenuStyleType = "Item1"},

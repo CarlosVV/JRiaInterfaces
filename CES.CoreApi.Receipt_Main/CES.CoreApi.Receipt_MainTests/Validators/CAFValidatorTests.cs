@@ -14,7 +14,7 @@ namespace CES.CoreApi.Receipt_Main.Validators.Tests
         [TestMethod()]
         public void ValidateTest()
         {
-            CAFValidator validator = new CAFValidator();
+            CafValidator validator = new CafValidator();
             var result = validator.Validate(GetDataToTest());
             Assert.IsTrue(result);
         }

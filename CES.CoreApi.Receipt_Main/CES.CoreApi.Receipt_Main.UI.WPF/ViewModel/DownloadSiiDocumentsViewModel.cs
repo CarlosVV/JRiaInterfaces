@@ -1,8 +1,25 @@
-﻿using CES.CoreApi.Receipt_Main.Domain;
-using CES.CoreApi.Receipt_Main.Model.Documents;
-using CES.CoreApi.Receipt_Main.Model.Security;
-using CES.CoreApi.Receipt_Main.Model.Services;
-using CES.CoreApi.Receipt_Main.Repository;
+﻿/*
+ Descargar Folios
+-	Agregar Rango Fecha desde hasta 
+-	Agregar Tipoi default boleta
+-	Mensaje aparece antes de la descarga
+-	Cantidad de documentos a descargar
+-	Antes de descargar ver si existen en la base de datos y no insertar duplicado
+-	despues que finaliza la descarga eliminar el check
+-	despues de la descarga al sacar el check se cae
+-	remoiver los message box
+-	limpiar no esta funcionando
+-	cuando no descargue 50 folios seguidos parar la descarga para ese rango
+-	agregar rangos permanentes y temporales y al limpiar o buscar deben quedar los permanentes
+-	indicar el número de documentos que existen en el rango desde hasta en la base de datos
+-	Al estar la base de datos vacia no permite agregar rangos manuales y el buscar se cae
+ 
+ */
+
+using CES.CoreApi.Receipt_Main.Application.Core.Document;
+using CES.CoreApi.Receipt_Main.Domain.Core.Documents;
+using CES.CoreApi.Receipt_Main.Domain.Core.Services;
+using CES.CoreApi.Receipt_Main.Infrastructure.Core;
 using CES.CoreApi.Receipt_Main.UI.WPF.Helpers;
 using Prism.Commands;
 using System;
@@ -44,7 +61,7 @@ namespace CES.CoreApi.Receipt_Main.UI.WPF.ViewModel
         private readonly static DateTime _startDate = new DateTime(DateTime.Now.Year, 2, 1); //new DateTime(DateTime.Now.Year, DateTime.Now.AddMonths(-1).Month, 1);
         private readonly static DateTime _endDate = new DateTime(DateTime.Now.Year, 3, 1); // new DateTime(DateTime.Now.Year, DateTime.Now.Month, 1);
         private List<Tuple<int, int>> _intervalList;
-        private DocumentHelper _documentHelper;
+        private DocumentHandlerService _documentHelper;
 
         public DownloadSiiDocumentsViewModel(Func<string, string, bool> msgbox, Func<string, string, bool> confirm, IDocumentService documentService, ITaxEntityService taxEntityService, ITaxAddressService taxAddressService, ISequenceService sequenceService, IStoreService storeService)
         {
@@ -74,7 +91,7 @@ namespace CES.CoreApi.Receipt_Main.UI.WPF.ViewModel
             ViewSource.Source = DocumentsToDownload;
             GridStatus = "Número de Registros: 0";
 
-            _documentHelper = new DocumentHelper(documentService, taxEntityService, taxAddressService, sequenceService, storeService);
+            _documentHelper = new DocumentHandlerService(documentService, taxEntityService, taxAddressService, sequenceService, storeService);
 
         }
 

@@ -1,10 +1,13 @@
-﻿using CES.CoreApi.Receipt_Main.Domain;
-using CES.CoreApi.Receipt_Main.Model.Repositories;
-using CES.CoreApi.Receipt_Main.Model.Services;
-using CES.CoreApi.Receipt_Main.Repository;
-using CES.CoreApi.Receipt_Main.UI.WPF.Security;
+﻿using CES.CoreApi.Receipt_Main.Application.Core;
+using CES.CoreApi.Receipt_Main.Domain;
+using CES.CoreApi.Receipt_Main.Domain.Core.Repositories;
+using CES.CoreApi.Receipt_Main.Domain.Core.Services;
+using CES.CoreApi.Receipt_Main.Infrastructure.Core.Security;
+using CES.CoreApi.Receipt_Main.Infrastructure.Data;
+using CES.CoreApi.Receipt_Main.Infrastructure.Data.Repository;
 using CES.CoreApi.Receipt_Main.UI.WPF.View;
 using CES.CoreApi.Receipt_Main.UI.WPF.ViewModel;
+using MvvmDialogs;
 using Ninject.Modules;
 using System;
 using System.Collections.Generic;
@@ -42,6 +45,9 @@ namespace CES.CoreApi.Receipt_Main.UI.WPF
 
             Bind<IStoreService>().To<StoreService>();
             Bind<IStoreRepository>().To<StoreRepository>();
+
+            //SimpleIoc.Default.Register<IDialogService>(() => new DialogService());
+            Bind<IDialogService>().To<DialogService>();          
 
         }
     }

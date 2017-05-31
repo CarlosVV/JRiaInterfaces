@@ -1,6 +1,7 @@
-﻿using CES.CoreApi.Receipt_Main.Model;
-using CES.CoreApi.Receipt_Main.Model.Documents;
-using CES.CoreApi.Receipt_Main.Model.Security;
+﻿
+using CES.CoreApi.Receipt_Main.Domain.Core.Documents;
+using CES.CoreApi.Receipt_Main.Domain.Core.Security;
+using CES.CoreApi.Receipt_Main.UI.WPF.Helpers;
 using CES.CoreApi.Receipt_Main.UI.WPF.Model;
 using System;
 using System.Collections.Generic;
@@ -22,15 +23,12 @@ namespace CES.CoreApi.Receipt_Main.UI.WPF.ViewModel
         private readonly ObservableCollection<CafResultSelectableViewModel> _cafResults;
         private bool? _isAllCafResultsSelected;
         public event PropertyChangedEventHandler PropertyChanged;
+        private CafApiService _cafApiService = null;
 
         public CafManagementViewModel(Func<string, string, bool> msgbox, Func<string, string, bool> confirm)
         {
-            DocumentTypeList = new List<Document_Type>();
-            //TODO: Get Document Type from DB
-            DocumentTypeList.Add(new Document_Type { Code = "39", Description = "Boleta" });
-            DocumentTypeList.Add(new Document_Type { Code = "56", Description = "Factura" });
-            DocumentTypeList.Add(new Document_Type { Code = "57", Description = "Nota de Credito" });
-            DocumentTypeList.Add(new Document_Type { Code = "58", Description = "Nota de Debio" });
+            _cafApiService = new CafApiService();
+            DocumentTypeList = DocumentTypeHelper.LoadDocumenTypes();
 
             SelectedDocumentTypeValue = DocumentTypeList.FirstOrDefault();
             //TODO: Get Stores from DB
@@ -40,7 +38,7 @@ namespace CES.CoreApi.Receipt_Main.UI.WPF.ViewModel
             SelectedStoreValue = StoreList.First();
 
             //TODO: Load Serch Result
-            _cafResults = CreateData();
+            //_cafResults = CreateData();
 
         }
 

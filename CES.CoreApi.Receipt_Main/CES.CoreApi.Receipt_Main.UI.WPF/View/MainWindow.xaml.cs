@@ -1,8 +1,9 @@
-﻿using CES.CoreApi.Receipt_Main.Model.Services;
+﻿using CES.CoreApi.Receipt_Main.Domain.Core.Services;
 using CES.CoreApi.Receipt_Main.UI.WPF.Domain;
 using CES.CoreApi.Receipt_Main.UI.WPF.View;
 using CES.CoreApi.Receipt_Main.UI.WPF.ViewModel;
 using MaterialDesignThemes.Wpf;
+using MvvmDialogs;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -29,14 +30,15 @@ namespace CES.CoreApi.Receipt_Main.UI.WPF
     {
         private readonly IUserService _userservice;
         private readonly IDocumentService _documentService;
-        public MainWindow(IUserService userservice, IDocumentService documentService, ITaxEntityService taxEntityService, ITaxAddressService taxAddressService, ISequenceService sequenceService, IStoreService storeService)
+        public MainWindow(IUserService userservice, IDocumentService documentService, ITaxEntityService taxEntityService, 
+            ITaxAddressService taxAddressService, ISequenceService sequenceService, IStoreService storeService, IDialogService dialogService)
         {
             _userservice = userservice;
             _documentService = documentService;
 
             InitializeComponent();
 
-            DataContext = new MainWindowViewModel(documentService, taxEntityService, taxAddressService, sequenceService, storeService);
+            DataContext = new MainWindowViewModel(documentService, taxEntityService, taxAddressService, sequenceService, storeService, dialogService);
 
             Task.Factory.StartNew(() =>
             {
@@ -87,7 +89,7 @@ namespace CES.CoreApi.Receipt_Main.UI.WPF
 
         private void Window_Unloaded(object sender, RoutedEventArgs e)
         {
-            Application.Current.Shutdown();
+            System.Windows.Application.Current.Shutdown();
         }
     }
 }
