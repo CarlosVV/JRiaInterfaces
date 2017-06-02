@@ -1,6 +1,8 @@
 ﻿using CES.CoreApi.Receipt_Main.Domain.Core.Documents;
 using CES.CoreApi.Receipt_Main.Domain.Core.Security;
 using CES.CoreApi.Receipt_Main.Domain.Core.Services;
+using CES.CoreApi.Receipt_Main.Infrastructure.Data;
+using CES.CoreApi.Receipt_Main.Infrastructure.Data.Repository;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -302,7 +304,7 @@ namespace CES.CoreApi.Receipt_Main.Application.Core.Document
 
         private Tuple<int, int> GetNewId(string entityName, int quantity)
         {
-            //_sequenceService = App.container.Get<ISequenceService>();
+            _sequenceService = new SequenceService(new SequenceRepository(new ReceiptDbContext()));  ;//App.container.Get<ISequenceService>();
             var entity = _sequenceService.GetAllSequences().Where(m => m.EntityName.Equals(entityName)).FirstOrDefault(); //db1.systblApp_CoreApi_Sequence.Find(entityName);
             var start = entity.CurrentId == null ? entity.StartId : entity.CurrentId.Value + 1;
             var nextId = entity.CurrentId == null ? quantity : entity.CurrentId.Value + quantity;

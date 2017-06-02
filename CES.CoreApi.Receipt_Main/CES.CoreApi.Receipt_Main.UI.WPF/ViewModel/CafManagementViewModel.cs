@@ -25,15 +25,14 @@ namespace CES.CoreApi.Receipt_Main.UI.WPF.ViewModel
         private Document_Type _selectedDocumentTypeValue;
         private systblApp_TaxReceipt_Store _selectedStoreValue;
         private readonly ObservableCollection<CafResultSelectableViewModel> _cafResults;
-        private bool? _isAllCafResultsSelected;
-
         private CafApiService _cafApiService = null;
+        private readonly IDialogService dialogService;
+        private readonly IStoreService storeService;
         private string _status;
         private int _folioCurrentNumber;
         private int _folioStartNumber;
         private int _folioEndNumber;
-        private readonly IDialogService dialogService;
-        private readonly IStoreService storeService;
+        private bool? _isAllCafResultsSelected;
 
         public CafManagementViewModel(Func<string, string, bool> msgbox, Func<string, string, bool> confirm, IStoreService storeService, IDialogService dialogService)
         {
@@ -82,7 +81,8 @@ namespace CES.CoreApi.Receipt_Main.UI.WPF.ViewModel
         public ICommand SearchCommand { get; }
         public ICommand DeleteCommand { get; }
         public RelayCommand SelectAllCheckboxColumnCommand { get; set; }
-        public RelayCommand ShowEditCafCommand { get; set; }
+
+        public ICommand ShowDialogCommand { get; }
         public int FolioCurrentNumber
         {
             get
@@ -160,7 +160,6 @@ namespace CES.CoreApi.Receipt_Main.UI.WPF.ViewModel
             get { return _cafResults; }
         }
 
-
         private void Clear(object obj)
         {
             FolioStartNumber = 0;
@@ -219,17 +218,6 @@ namespace CES.CoreApi.Receipt_Main.UI.WPF.ViewModel
             {
                 Trace.WriteLine(ex);
                 Status = $"{ex.Message}";
-            }
-        }
-        public ICommand ShowDialogCommand { get; }
-        private void ShowDialog(Func<CafFormViewModel, bool?> showDialog)
-        {
-            var dialogViewModel = new CafFormViewModel(storeService, dialogService);
-
-            bool? success = showDialog(dialogViewModel);
-            if (success == true)
-            {
-                
             }
         }
 

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using CES.CoreApi.Receipt_Main.UI.WPF.ViewModel;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -20,9 +21,11 @@ namespace CES.CoreApi.Receipt_Main.UI.WPF.View
     /// </summary>
     public partial class AddEditRanges : UserControl
     {
-        public AddEditRanges()
+        public AddEditRanges(NewDocumentToDownloadViewModel objectRange)
         {
             InitializeComponent();
+
+            DataContext = new AddEditRangesViewModel(objectRange);
         }
     }
 }

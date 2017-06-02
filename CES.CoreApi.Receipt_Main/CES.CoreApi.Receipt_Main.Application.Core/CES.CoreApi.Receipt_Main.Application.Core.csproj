@@ -53,6 +53,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Document\ParameterService.cs" />
     <Compile Include="Document\DocumentHandlerService.cs" />
     <Compile Include="Document\DocumentTypeHelper.cs" />
     <Compile Include="Document\SequenceService.cs" />

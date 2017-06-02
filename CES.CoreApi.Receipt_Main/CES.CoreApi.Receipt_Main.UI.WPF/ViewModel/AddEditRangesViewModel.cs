@@ -10,9 +10,23 @@ namespace CES.CoreApi.Receipt_Main.UI.WPF.ViewModel
     public class AddEditRangesViewModel : ViewModelBase
     {
         public IDocumentService documentService;
-        public AddEditRangesViewModel(IDocumentService documentService)
+        private NewDocumentToDownloadViewModel _newDocumentToDownload;
+        public AddEditRangesViewModel(NewDocumentToDownloadViewModel objectRange)
         {
-            this.documentService = documentService;
+            //this.documentService = documentService;
+            _newDocumentToDownload = objectRange;
+        }
+
+        public NewDocumentToDownloadViewModel NewDocumentToDownload
+        {
+            get { return this._newDocumentToDownload; }
+            private set
+            {
+
+                this._newDocumentToDownload = value;
+                NotifyPropertyChanged();
+
+            }
         }
     }
 }
