@@ -7,12 +7,12 @@
              xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
              xmlns:model="clr-namespace:CES.CoreApi.Receipt_Main.UI.WPF.Model"
              xmlns:model1="clr-namespace:CES.CoreApi.Receipt_Main.UI.WPF.ViewModel"
+             xmlns:md="https://github.com/fantasticfiasco/mvvm-dialogs"
              mc:Ignorable="d" 
              d:DesignHeight="300" d:DesignWidth="800"
              d:DataContext="{d:DesignInstance model1:CafManagementViewModel, d:IsDesignTimeCreatable=False}">
     <UserControl.Resources>
-        <ResourceDictionary>
-            
+        <ResourceDictionary>            
             <ResourceDictionary.MergedDictionaries>
                 <!-- note you only need bring in these extra resource dictionaries when using non-default styles, so only bring them into your controls where the default style is not what you want -->
                 <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.ComboBox.xaml" />
@@ -20,6 +20,21 @@
                 <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.TextBox.xaml" />
                 <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.DataGrid.xaml" />
             </ResourceDictionary.MergedDictionaries>
+            <DataGridCheckBoxColumn x:Key="SelectAllCheckboxColumn" Binding="{Binding IsSelected}" 
+                                            ElementStyle="{StaticResource MaterialDesignDataGridCheckBoxColumnStyle}"
+                                            EditingElementStyle="{StaticResource MaterialDesignDataGridCheckBoxColumnEditingStyle}">
+                <DataGridCheckBoxColumn.Header>
+                    <!--padding to allow hit test to pass thru for sorting -->
+                    <Border Background="Transparent" Padding="6 0 6 0" HorizontalAlignment="Center">
+                        <CheckBox 
+                                            Name="cbxAll" HorizontalAlignment="Center"                                               
+                                            DataContext="{Binding Source={x:Reference dataGrid}, Path=DataContext}" 
+                                            Command="{Binding SelectAllCheckboxColumnCommand}" 
+                                            CommandParameter="{Binding Path=IsChecked, RelativeSource={RelativeSource Self}}"
+                                            />
+                    </Border>
+                </DataGridCheckBoxColumn.Header>
+            </DataGridCheckBoxColumn>
             <Style TargetType="{x:Type TextBox}" BasedOn="{StaticResource MaterialDesignTextBox}">
                 <Setter Property="Margin" Value="0 8 0 8" />
             </Style>
@@ -89,12 +104,12 @@
         </StackPanel>
         <Grid>
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="auto"/>
-                <ColumnDefinition Width="150"/>
-                <ColumnDefinition Width="auto"/>
-                <ColumnDefinition Width="150"/>
-                <ColumnDefinition Width="auto"/>
-                <ColumnDefinition Width="150"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto"></RowDefinition>
@@ -111,35 +126,35 @@
                 <RowDefinition Height="Auto" />
                 <RowDefinition Height="Auto" />
             </Grid.RowDefinitions>
-            <TextBlock Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" Style="{StaticResource MaterialDesignHeadlineTextBlock}">Administración de CAFs</TextBlock>
-            <materialDesign:PackIcon Grid.Row="1" Grid.Column="0" Kind="Numeric" Foreground="{Binding ElementName=FolioStartTextBox, Path=BorderBrush}" VerticalAlignment="Center" Margin="4 0 4 0" />
-            <TextBox Grid.Row="1" Grid.Column="1" 
+
+            <TextBlock Text="Administración de CAFs" Grid.ColumnSpan="4" FontWeight="Heavy" FontSize="20" Margin="10 10 10 10" />
+            <TextBox Grid.Row="1" Grid.Column="0" Width="100" HorizontalAlignment="Left"
 				    x:Name="FolioStartTextBox"
 				    materialDesign:HintAssist.Hint="Folio Inicio"
                     Style="{StaticResource MaterialDesignFloatingHintTextBox}">
                 <TextBox.Text>
-                    <Binding Path="Name" UpdateSourceTrigger="PropertyChanged">
+                    <Binding Path="FolioStartNumber" UpdateSourceTrigger="PropertyChanged">
                         <Binding.ValidationRules>
                             <model:NotEmptyValidationRule ValidatesOnTargetUpdated="True" />
                         </Binding.ValidationRules>
                     </Binding>
                 </TextBox.Text>
             </TextBox>
-            <materialDesign:PackIcon Grid.Row="1" Grid.Column="2" Kind="Numeric" Foreground="{Binding ElementName=FolioEndTextBox, Path=BorderBrush}" />
-            <TextBox Grid.Row="1" Grid.Column="3" 
+
+            <TextBox Grid.Row="1" Grid.Column="1" Width="100" HorizontalAlignment="Left"
 				    x:Name="FolioEndTextBox"
 				    materialDesign:HintAssist.Hint="Folio Fin"
                     Style="{StaticResource MaterialDesignFloatingHintTextBox}">
                 <TextBox.Text>
-                    <Binding Path="Name" UpdateSourceTrigger="PropertyChanged">
+                    <Binding Path="FolioEndNumber" UpdateSourceTrigger="PropertyChanged">
                         <Binding.ValidationRules>
                             <model:NotEmptyValidationRule ValidatesOnTargetUpdated="True" />
                         </Binding.ValidationRules>
                     </Binding>
                 </TextBox.Text>
             </TextBox>
-            <materialDesign:PackIcon Grid.Row="1" Grid.Column="4" Kind="Details" Foreground="{Binding ElementName=FolioEndTextBox, Path=BorderBrush}" />
-            <ComboBox Grid.Row="1" Grid.Column="5" 
+
+            <ComboBox Grid.Row="1" Grid.Column="2" Width="100" HorizontalAlignment="Left"
                    x:Name="StoreComboBox"
                   materialDesign:HintAssist.Hint="Tienda" 
                   Style="{StaticResource MaterialDesignFloatingHintComboBox}"
@@ -165,8 +180,8 @@
                     </ItemsPanelTemplate>
                 </ComboBox.ItemsPanel>
             </ComboBox>
-            <materialDesign:PackIcon Grid.Row="2" Grid.Column="0" Kind="Details" Foreground="{Binding ElementName=FolioEndTextBox, Path=BorderBrush}" />
-            <ComboBox Grid.Row="2" Grid.Column="1" 
+
+            <ComboBox Grid.Row="1" Grid.Column="3" Width="100" HorizontalAlignment="Left"
                    x:Name="DocumenTypeComboBox"
                   materialDesign:HintAssist.Hint="Tipo Documento" 
                   Style="{StaticResource MaterialDesignFloatingHintComboBox}"
@@ -193,28 +208,16 @@
                 </ComboBox.ItemsPanel>
             </ComboBox>
             <StackPanel Orientation="Horizontal" Grid.Row="4" Grid.Column="1" HorizontalAlignment="Center" Margin="5">
-                <Button Content="Buscar" HorizontalAlignment="Center"/>
-                <Button Content="Limpiar" HorizontalAlignment="Center" Margin="2,0,0,0"/>
+                <Button Command="{Binding SearchCommand}"  Content="Buscar" HorizontalAlignment="Center" Height="25" Padding="3"/>
+                <Button Command="{Binding ClearCommand}" Content="Limpiar" HorizontalAlignment="Center" Margin="2,0,0,0" Height="25" Padding="3"/>
             </StackPanel>
 
             <StackPanel Grid.Row="6" Grid.ColumnSpan="6">
                 <TextBlock Style="{StaticResource MaterialDesignSubheadingTextBlock}">Resultados</TextBlock>
-                <DataGrid Margin="0 8 0 0" ItemsSource="{Binding CafResults}" CanUserSortColumns="True" CanUserAddRows="False" AutoGenerateColumns="False"
+                <DataGrid x:Name="dataGrid" Margin="0 8 0 0" ItemsSource="{Binding CafResults}" CanUserSortColumns="True" CanUserAddRows="False" AutoGenerateColumns="False"
                       materialDesign:DataGridAssist.CellPadding="13 8 8 8" materialDesign:DataGridAssist.ColumnHeaderPadding="8">
                     <DataGrid.Columns>
-                        <DataGridCheckBoxColumn Binding="{Binding IsSelected}" 
-                                            ElementStyle="{StaticResource MaterialDesignDataGridCheckBoxColumnStyle}"
-                                            EditingElementStyle="{StaticResource MaterialDesignDataGridCheckBoxColumnEditingStyle}"
-                                            >
-                            <DataGridCheckBoxColumn.Header>
-                                <!--padding to allow hit test to pass thru for sorting -->
-                                <Border Background="Transparent" Padding="6 0 6 0" HorizontalAlignment="Center">
-                                    <CheckBox HorizontalAlignment="Center"                                               
-                                          DataContext="{Binding RelativeSource={RelativeSource AncestorType={x:Type DataGrid}}, Path=DataContext}"
-                                          IsChecked="{Binding IsAllCafResultsSelected}" />
-                                </Border>
-                            </DataGridCheckBoxColumn.Header>
-                        </DataGridCheckBoxColumn>
+                        <StaticResource ResourceKey="SelectAllCheckboxColumn"/>
                         <materialDesign:MaterialDataGridTextColumn Binding="{Binding Id}"
                                                                Header="ID"                                                        
                                                                EditingElementStyle="{StaticResource MaterialDesignDataGridTextColumnPopupEditingStyle}" 
@@ -239,10 +242,22 @@
                                                                Header="Folio Actual"                                                        
                                                                EditingElementStyle="{StaticResource MaterialDesignDataGridTextColumnPopupEditingStyle}" 
                                                                />
+
+                        <materialDesign:MaterialDataGridTextColumn Binding="{Binding Store}"
+                                                               Header="Tienda"                                                        
+                                                               EditingElementStyle="{StaticResource MaterialDesignDataGridTextColumnPopupEditingStyle}" 
+                                                               />
                         <DataGridTemplateColumn>
                             <DataGridTemplateColumn.CellTemplate>
                                 <DataTemplate>
-                                    <Button>Ver/Editar</Button>
+                                    <Grid>
+                                        <Button 
+                                                Content="Ver/Editar" 
+                                                Command="{Binding Path=DataContext.ShowDialogCommand,RelativeSource={RelativeSource AncestorType={x:Type DataGrid}}}" 
+                                                CommandParameter="{Binding}"  
+                                                Visibility="{Binding IsViewEditVisible, Converter={StaticResource BoolToVis}, FallbackValue=Hidden}"
+                                                Height="20" Width="80" Margin="0 0 0 0" Padding="0"/>
+                                    </Grid>
                                 </DataTemplate>
                             </DataGridTemplateColumn.CellTemplate>
                         </DataGridTemplateColumn>
@@ -252,10 +267,11 @@
             </StackPanel>
 
             <StackPanel Orientation="Horizontal" Grid.Row="7" Grid.Column="1" HorizontalAlignment="Center" Margin="5">
-                <Button Content="Eliminar" HorizontalAlignment="Center"/>
+                <Button Command="{Binding DeleteCommand}" Content="Eliminar" HorizontalAlignment="Center"/>
             </StackPanel>
 
         </Grid>
+        <TextBlock Text="{Binding Status}" Background="Blue" Foreground="White" FontWeight="Bold" Margin="10 10 10 10" Height="25"></TextBlock>
     </StackPanel>
    
 </UserControl>

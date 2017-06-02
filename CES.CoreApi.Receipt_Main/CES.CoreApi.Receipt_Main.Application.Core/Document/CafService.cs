@@ -23,6 +23,7 @@ namespace CES.CoreApi.Receipt_Main.Application.Core
 
         public void CreateCaf(systblApp_CoreAPI_Caf objectEntry)
         {
+            objectEntry.Id = GetNewId();
             this._repo.CreateCaf(objectEntry);
         }
         public void UpdateCaf(systblApp_CoreAPI_Caf objectEntry)

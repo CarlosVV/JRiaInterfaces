@@ -7,6 +7,6 @@ namespace CES.CoreApi.Receipt_Main.Domain.Core.Contracts.ViewModels
 {
     public class ServiceTaxDeleteCAFRequestViewModel
     {
-        public string Id { get; set; }
+        public int Id { get; set; }
     }
 }

@@ -1,7 +1,6 @@
 ﻿using CES.CoreApi.Receipt_Main.Domain.Core.Security;
 using CES.CoreApi.Receipt_Main.Infrastructure.Core;
 using CES.CoreApi.Receipt_Main.Domain.Core.Documents;
-using CES.CoreApi.Receipt_Main.Domain.Core.Security;
 using CES.CoreApi.Receipt_Main.Domain.Core.Services;
 using CES.CoreApi.Receipt_Main.UI.WPF.Helpers;
 using CES.CoreApi.Receipt_Main.UI.WPF.Model;
@@ -19,10 +18,13 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using IOPath = System.IO.Path;
+using CES.CoreApi.Receipt_Main.Application.Core;
+using System.Windows.Controls;
+using CES.CoreApi.Receipt_Main.UI.WPF.View;
 
 namespace CES.CoreApi.Receipt_Main.UI.WPF.ViewModel
 {
-    public class CafFormViewModel : ViewModelBase
+    public class CafFormViewModel : ViewModelBase, IModalDialogViewModel
     {
         private int _folioCurrentNumber;
         private int _folioStartNumber;
@@ -36,20 +38,41 @@ namespace CES.CoreApi.Receipt_Main.UI.WPF.ViewModel
         private int _id;
         private bool _disabled;
         private string _status;
-
-        public CafFormViewModel(IStoreService storeService, IDialogService dialogService)
+        private bool? dialogResult;
+        private systblApp_CoreAPI_Caf cafObjectModel;
+        public CafFormViewModel(IStoreService storeService, IDialogService dialogService, systblApp_CoreAPI_Caf cafObjectModel = null)
         {
-            _cafApiService = new CafApiService();
+            _cafApiService = new CafApiService(); 
+
             DocumentTypeList = DocumentTypeHelper.LoadDocumenTypes();
             SelectedDocumentTypeValue = DocumentTypeList.FirstOrDefault();
+
             var stores = storeService.GetAllStores();
             StoreList = stores.ToList();
+            StoreList.Insert(0, new systblApp_TaxReceipt_Store() { Id = 0, Name = "--Seleccione una Tienda --" });
             SelectedStoreValue = StoreList.First();
+
             _dialogService = dialogService;
+
             OpenFileCommand = new RelayCommand(OpenFile);
             SaveCommand = new RelayCommand(Save);
             ClearCommand = new RelayCommand(Clear);
             CancelCommand = new RelayCommand(Cancel);
+
+            OkCommand = new RelayCommand(Ok);
+
+            this.cafObjectModel = cafObjectModel;
+            if (cafObjectModel != null)
+            {
+                ID = cafObjectModel.Id;
+                FolioStartNumber = cafObjectModel.FolioStartNumber;
+                FolioEndNumber = cafObjectModel.FolioEndNumber;
+                FolioCurrentNumber = cafObjectModel.FolioCurrentNumber;
+                XmlContent = cafObjectModel.FileContent;
+                Disabled = cafObjectModel.fDisabled.HasValue ? cafObjectModel.fDisabled.Value : false;
+                SelectedStoreValue = storeService.GetAllStores().Where(s => s.Id == cafObjectModel.RecAgent).FirstOrDefault();
+                SelectedDocumentTypeValue = DocumentTypeList.Where(m=> m.Code == cafObjectModel.DocumentType).FirstOrDefault();
+            }
 
         }
         public int ID
@@ -58,7 +81,7 @@ namespace CES.CoreApi.Receipt_Main.UI.WPF.ViewModel
             set
             {
                 _id = value;
-                NotifiyPropertyChanged();
+                NotifyPropertyChanged();
             }
         }
         public string Path
@@ -68,7 +91,7 @@ namespace CES.CoreApi.Receipt_Main.UI.WPF.ViewModel
             {
 
                 path = value;
-                NotifiyPropertyChanged();
+                NotifyPropertyChanged();
             }
         }
         public string Status
@@ -77,7 +100,7 @@ namespace CES.CoreApi.Receipt_Main.UI.WPF.ViewModel
             set
             {
                 _status = value;
-                NotifiyPropertyChanged();
+                NotifyPropertyChanged();
             }
         }
         public string XmlContent
@@ -86,7 +109,7 @@ namespace CES.CoreApi.Receipt_Main.UI.WPF.ViewModel
             set
             {
                 _xmlContent = value;
-                NotifiyPropertyChanged();
+                NotifyPropertyChanged();
             }
         }
         public ICommand OpenFileCommand { get; }
@@ -99,7 +122,7 @@ namespace CES.CoreApi.Receipt_Main.UI.WPF.ViewModel
             set
             {
                 _selectedStoreValue = value;
-                NotifiyPropertyChanged();
+                NotifyPropertyChanged();
             }
         }
         private void OpenFile(object obj)
@@ -131,7 +154,15 @@ namespace CES.CoreApi.Receipt_Main.UI.WPF.ViewModel
             var cafService = new CafApiService();
             try
             {
-                var result = cafService.CreateCaf(XmlContent).ConfigureAwait(false);
+                if(ID <= 0)
+                {
+                    var result = cafService.CreateCaf(XmlContent, SelectedDocumentTypeValue.Code, FolioStartNumber, FolioEndNumber, SelectedStoreValue.Id);
+                }
+                else
+                {
+                    var result = cafService.UpdateCaf(ID, XmlContent, SelectedDocumentTypeValue.Code, FolioStartNumber, FolioEndNumber, SelectedStoreValue.Id, Disabled);
+                }
+              
                 Status = "Grabación exitosa en Base de Datos";
             }
             catch (Exception ex)
@@ -147,13 +178,14 @@ namespace CES.CoreApi.Receipt_Main.UI.WPF.ViewModel
         private void Cancel(object obj)
         {
         }
+
         public Document_Type SelectedDocumentTypeValue
         {
             get { return _selectedDocumentTypeValue; }
             set
             {
                 _selectedDocumentTypeValue = value;
-                NotifiyPropertyChanged();
+                NotifyPropertyChanged();
             }
         }
         public IList<Document_Type> DocumentTypeList { get; }
@@ -168,7 +200,7 @@ namespace CES.CoreApi.Receipt_Main.UI.WPF.ViewModel
             set
             {
                 _folioCurrentNumber = value;
-                NotifiyPropertyChanged();
+                NotifyPropertyChanged();
             }
         }
 
@@ -182,7 +214,7 @@ namespace CES.CoreApi.Receipt_Main.UI.WPF.ViewModel
             set
             {
                 _folioStartNumber = value;
-                NotifiyPropertyChanged();
+                NotifyPropertyChanged();
             }
         }
 
@@ -196,7 +228,7 @@ namespace CES.CoreApi.Receipt_Main.UI.WPF.ViewModel
             set
             {
                 _folioEndNumber = value;
-                NotifiyPropertyChanged();
+                NotifyPropertyChanged();
             }
         }
         public bool Disabled
@@ -209,8 +241,23 @@ namespace CES.CoreApi.Receipt_Main.UI.WPF.ViewModel
             set
             {
                 _disabled = value;
-                NotifiyPropertyChanged();
+                NotifyPropertyChanged();
             }
+        }
+        public ICommand OkCommand { get; }
+        public bool? DialogResult
+        {
+            get { return dialogResult; }
+            private set
+            {
+                dialogResult = value;
+                NotifyPropertyChanged();
+            }
+        }
+
+        private void Ok(object obj)
+        {
+            DialogResult = true;
         }
     }
 }

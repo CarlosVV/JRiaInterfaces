@@ -1,4 +1,5 @@
-﻿using CES.CoreApi.Receipt_Main.Domain.Core.Services;
+﻿using CES.CoreApi.Receipt_Main.Domain.Core.Documents;
+using CES.CoreApi.Receipt_Main.Domain.Core.Services;
 using CES.CoreApi.Receipt_Main.UI.WPF.ViewModel;
 using MvvmDialogs;
 using System;
@@ -23,10 +24,10 @@ namespace CES.CoreApi.Receipt_Main.UI.WPF.View
     /// </summary>
     public partial class CafForm : UserControl
     {
-        public CafForm(IStoreService storeService, IDialogService dialogService)
+        public CafForm(IStoreService storeService, IDialogService dialogService, systblApp_CoreAPI_Caf obj = null)
         {
             InitializeComponent();
-            DataContext = new CafFormViewModel(storeService, dialogService);
+            DataContext = new CafFormViewModel(storeService, dialogService, obj);
         }        
     }
 }

@@ -4,7 +4,7 @@
         xmlns:model="clr-namespace:CES.CoreApi.Receipt_Main.UI.WPF.Model"
         xmlns:system="clr-namespace:System;assembly=mscorlib"
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
-        Title="Ria Financial" Height="600" Width="800"
+        Title="Ria Financial" Height="750" Width="900"
         TextElement.Foreground="{DynamicResource MaterialDesignBody}"
         TextElement.FontWeight="Regular"
         TextElement.FontSize="13"
@@ -92,7 +92,7 @@
                                 <Button Content="Goodbye"/>
                             </StackPanel>
                         </materialDesign:PopupBox>
-                        <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="22">CAF and Document Management</TextBlock>
+                        <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="22">Tax Receipt Management System</TextBlock>
                     </DockPanel>
                 </materialDesign:ColorZone>
                 <Grid>

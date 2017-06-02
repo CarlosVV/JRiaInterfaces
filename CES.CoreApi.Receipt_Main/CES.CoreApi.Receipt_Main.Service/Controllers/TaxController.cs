@@ -20,14 +20,14 @@ namespace CES.CoreApi.Receipt_Main.Service.Controllers
     [RoutePrefix("receipt")]
     public class TaxController : ApiController
     {        
-        private CafService _cafservice;
-        private DocumentService _docservice;
+        private CafServiceHandler _cafservice;
+        private DocumentServiceHandler _docservice;
         private readonly LogService _logService;
         private readonly IPersistenceHelper _persistenceHelper;
         public TaxController(ICafService cafdomain)
         {
-            _cafservice = new CafService(cafdomain);
-            _docservice = new DocumentService();
+            _cafservice = new CafServiceHandler(cafdomain);
+            _docservice = new  DocumentServiceHandler();
             _logService = new LogService();
             _persistenceHelper = new PersistenceHelper(new PersistenceRepository());
         }
@@ -89,8 +89,8 @@ namespace CES.CoreApi.Receipt_Main.Service.Controllers
         public IHttpActionResult PostSearchCAFByType(ServiceTaxSearchCAFByTypeRequestViewModel request)
         {
             #region Persistence
-            //var client = new Client();
-            //request.PersistenceID = client.GetPersistenceID();           
+            var client = new Client();
+            var persistenceID = client.GetPersistenceID();
             #endregion
 
             _logService.LogInfoObjectToJson("Request", request);
@@ -105,13 +105,13 @@ namespace CES.CoreApi.Receipt_Main.Service.Controllers
 
             var taxSearchCAFByTypeInternalRequest = AutoMapper.Mapper.Map<TaxSearchCAFByTypeRequest>(request);
 
-            //taxSearchCAFByTypeInternalRequest.HeaderInfo = new HeaderInfo
-            //{
-            //    ApplicationId = HeaderHelper.ApplicationId,
-            //    CesUserId = HeaderHelper.CesUserId,
-            //    CesAppObjectId = HeaderHelper.CesAppObjectId,
-            //    CesRequestTime = HeaderHelper.CesRequestTime,
-            //};
+            taxSearchCAFByTypeInternalRequest.HeaderInfo = new HeaderInfo
+            {
+                ApplicationId = HeaderHelper.ApplicationId,
+                CesUserId = HeaderHelper.CesUserId,
+                CesAppObjectId = HeaderHelper.CesAppObjectId,
+                CesRequestTime = HeaderHelper.CesRequestTime,
+            };
 
             Logging.Log.Info("Processing call...");
             var serviceResponse = _cafservice.SearchCaf(taxSearchCAFByTypeInternalRequest);
@@ -120,9 +120,10 @@ namespace CES.CoreApi.Receipt_Main.Service.Controllers
             Logging.Log.Info("Returning Response.");
 
             var response = AutoMapper.Mapper.Map<ServiceTaxSearchCAFByTypeResponseViewModel>(serviceResponse);
+            response.PersistenceId = persistenceID;
 
             #region Persistence
-            _persistenceHelper.CreatePersistence<ServiceTaxSearchCAFByTypeResponseViewModel>(response, 0, 0, PersistenceEventType.TaxSearchCAFResponse);
+            _persistenceHelper.CreatePersistence<ServiceTaxSearchCAFByTypeResponseViewModel>(response, persistenceID, 0, PersistenceEventType.TaxSearchCAFResponse);
             #endregion
 
             return Content(HttpStatusCode.OK, response);
@@ -134,8 +135,8 @@ namespace CES.CoreApi.Receipt_Main.Service.Controllers
         public IHttpActionResult UpdateCAF(ServiceTaxUpdateCAFRequestViewModel request)
         {
             #region Persistence
-            //var client = new Client();
-            //request.PersistenceID = client.GetPersistenceID();           
+            var client = new Client();
+            var persistenceID = client.GetPersistenceID();
             #endregion
 
             _logService.LogInfoObjectToJson("Request", request);
@@ -150,37 +151,40 @@ namespace CES.CoreApi.Receipt_Main.Service.Controllers
 
             var taxUpdateCAFInternalRequest = AutoMapper.Mapper.Map<TaxUpdateCafRequest>(request);
 
-            //taxUpdateCAFInternalRequest.HeaderInfo = new HeaderInfo
-            //{
-            //    ApplicationId = HeaderHelper.ApplicationId,
-            //    CesUserId = HeaderHelper.CesUserId,
-            //    CesAppObjectId = HeaderHelper.CesAppObjectId,
-            //    CesRequestTime = HeaderHelper.CesRequestTime,
-            //};
+            taxUpdateCAFInternalRequest.HeaderInfo = new HeaderInfo
+            {
+                ApplicationId = HeaderHelper.ApplicationId,
+                CesUserId = HeaderHelper.CesUserId,
+                CesAppObjectId = HeaderHelper.CesAppObjectId,
+                CesRequestTime = HeaderHelper.CesRequestTime,
+            };
 
             Logging.Log.Info("Processing call...");
             var serviceResponse = _cafservice.UpdateCAF(taxUpdateCAFInternalRequest);
+            
+
             Logging.Log.Info("Processed Successfully.");
 
             Logging.Log.Info("Returning Response.");
 
             var response = AutoMapper.Mapper.Map<ServiceTaxUpdateCAFResponseViewModel>(serviceResponse);
-
+            response.PersistenceId = persistenceID;
             #region Persistence
-            _persistenceHelper.CreatePersistence<ServiceTaxUpdateCAFResponseViewModel>(response, 0, 0, PersistenceEventType.TaxUpdateCAFResponse);
+            _persistenceHelper.CreatePersistence<ServiceTaxUpdateCAFResponseViewModel>(response, persistenceID, 0, PersistenceEventType.TaxUpdateCAFResponse);
             #endregion
 
             return Content(HttpStatusCode.OK, response);
         }
 
         //Delete   
-        [HttpDelete]
-        [Route("tax/caf")]
+        //[HttpDelete]
+        [HttpPost]
+        [Route("tax/caf/delete")]
         public IHttpActionResult DeleteCAF(ServiceTaxDeleteCAFRequestViewModel request)
         {
             #region Persistence
-            //var client = new Client();
-            //request.PersistenceID = client.GetPersistenceID();           
+            var client = new Client();
+            var persistenceID = client.GetPersistenceID();
             #endregion
 
             _logService.LogInfoObjectToJson("Request", request);
@@ -195,13 +199,13 @@ namespace CES.CoreApi.Receipt_Main.Service.Controllers
 
             var taxDeleteCAFInternalRequest = AutoMapper.Mapper.Map<TaxDeleteCAFRequest>(request);
 
-            //taxDeleteCAFInternalRequest.HeaderInfo = new HeaderInfo
-            //{
-            //    ApplicationId = HeaderHelper.ApplicationId,
-            //    CesUserId = HeaderHelper.CesUserId,
-            //    CesAppObjectId = HeaderHelper.CesAppObjectId,
-            //    CesRequestTime = HeaderHelper.CesRequestTime,
-            //};
+            taxDeleteCAFInternalRequest.HeaderInfo = new HeaderInfo
+            {
+                ApplicationId = HeaderHelper.ApplicationId,
+                CesUserId = HeaderHelper.CesUserId,
+                CesAppObjectId = HeaderHelper.CesAppObjectId,
+                CesRequestTime = HeaderHelper.CesRequestTime,
+            };
 
             Logging.Log.Info("Processing call...");
             var serviceResponse = _cafservice.DeleteCAF(taxDeleteCAFInternalRequest);
@@ -210,9 +214,9 @@ namespace CES.CoreApi.Receipt_Main.Service.Controllers
             Logging.Log.Info("Returning Response.");
 
             var response = AutoMapper.Mapper.Map<ServiceTaxDeleteCAFResponseViewModel>(serviceResponse);
-
+            response.PersistenceId = persistenceID;
             #region Persistence
-            _persistenceHelper.CreatePersistence<ServiceTaxDeleteCAFRequestViewModel>(response, 0, 0, PersistenceEventType.TaxDeleteCAFResponse);
+            _persistenceHelper.CreatePersistence<ServiceTaxDeleteCAFRequestViewModel>(response, persistenceID, 0, PersistenceEventType.TaxDeleteCAFResponse);
             #endregion
 
             return Content(HttpStatusCode.OK, response);
@@ -224,8 +228,8 @@ namespace CES.CoreApi.Receipt_Main.Service.Controllers
         public IHttpActionResult PostGetFolio(ServiceTaxGetFolioRequestViewModel request)
         {
             #region Persistence
-            //var client = new Client();
-            //request.PersistenceID = client.GetPersistenceID();           
+            var client = new Client();
+            var persistenceID = client.GetPersistenceID();
             #endregion
 
             _logService.LogInfoObjectToJson("Request", request);
@@ -240,13 +244,13 @@ namespace CES.CoreApi.Receipt_Main.Service.Controllers
 
             var taxGetFolioInternalRequest = AutoMapper.Mapper.Map<TaxGetFolioRequest>(request);
 
-            //taxGetFolioInternalRequest.HeaderInfo = new HeaderInfo
-            //{
-            //    ApplicationId = HeaderHelper.ApplicationId,
-            //    CesUserId = HeaderHelper.CesUserId,
-            //    CesAppObjectId = HeaderHelper.CesAppObjectId,
-            //    CesRequestTime = HeaderHelper.CesRequestTime,
-            //};
+            taxGetFolioInternalRequest.HeaderInfo = new HeaderInfo
+            {
+                ApplicationId = HeaderHelper.ApplicationId,
+                CesUserId = HeaderHelper.CesUserId,
+                CesAppObjectId = HeaderHelper.CesAppObjectId,
+                CesRequestTime = HeaderHelper.CesRequestTime,
+            };
 
             Logging.Log.Info("Processing call...");
             var serviceResponse = _cafservice.GetFolio(taxGetFolioInternalRequest);
@@ -255,9 +259,10 @@ namespace CES.CoreApi.Receipt_Main.Service.Controllers
             Logging.Log.Info("Returning Response.");
 
             var response = AutoMapper.Mapper.Map<ServiceTaxGetFolioResponseViewModel>(serviceResponse);
-
+            response.PersistenceId = persistenceID;
+            
             #region Persistence
-            _persistenceHelper.CreatePersistence<ServiceTaxGetFolioResponseViewModel>(response, 0, 0, PersistenceEventType.TaxGetFolioResponse);
+            _persistenceHelper.CreatePersistence<ServiceTaxGetFolioResponseViewModel>(response, persistenceID, 0, PersistenceEventType.TaxGetFolioResponse);
             #endregion
 
             return Content(HttpStatusCode.OK, response);
@@ -269,8 +274,8 @@ namespace CES.CoreApi.Receipt_Main.Service.Controllers
         public IHttpActionResult UpdateFolio(ServiceTaxUpdateFolioRequestViewModel request)
         {
             #region Persistence
-            //var client = new Client();
-            //request.PersistenceID = client.GetPersistenceID();           
+            var client = new Client();
+            var persistenceID = client.GetPersistenceID();
             #endregion
 
             _logService.LogInfoObjectToJson("Request", request);
@@ -285,13 +290,13 @@ namespace CES.CoreApi.Receipt_Main.Service.Controllers
 
             var taxUpdateFolioInternalRequest = AutoMapper.Mapper.Map<TaxUpdateFolioRequest>(request);
 
-            //taxUpdateFolioInternalRequest.HeaderInfo = new HeaderInfo
-            //{
-            //    ApplicationId = HeaderHelper.ApplicationId,
-            //    CesUserId = HeaderHelper.CesUserId,
-            //    CesAppObjectId = HeaderHelper.CesAppObjectId,
-            //    CesRequestTime = HeaderHelper.CesRequestTime,
-            //};
+            taxUpdateFolioInternalRequest.HeaderInfo = new HeaderInfo
+            {
+                ApplicationId = HeaderHelper.ApplicationId,
+                CesUserId = HeaderHelper.CesUserId,
+                CesAppObjectId = HeaderHelper.CesAppObjectId,
+                CesRequestTime = HeaderHelper.CesRequestTime,
+            };
 
             Logging.Log.Info("Processing call...");
             var serviceResponse = _cafservice.UpdateFolio(taxUpdateFolioInternalRequest);
@@ -300,9 +305,9 @@ namespace CES.CoreApi.Receipt_Main.Service.Controllers
             Logging.Log.Info("Returning Response.");
 
             var response = AutoMapper.Mapper.Map<ServiceTaxUpdateFolioResponseViewModel>(serviceResponse);
-
+            response.PersistenceId = persistenceID;
             #region Persistence
-            _persistenceHelper.CreatePersistence<ServiceTaxUpdateFolioResponseViewModel>(response, 0, 0, PersistenceEventType.TaxUpdateFolioResponse);
+            _persistenceHelper.CreatePersistence<ServiceTaxUpdateFolioResponseViewModel>(response, persistenceID, 0, PersistenceEventType.TaxUpdateFolioResponse);
             #endregion
 
             return Content(HttpStatusCode.OK, response);
@@ -314,8 +319,8 @@ namespace CES.CoreApi.Receipt_Main.Service.Controllers
         public IHttpActionResult CreateDocument(ServiceTaxCreateDocumentRequestViewModel request)
         {
             #region Persistence
-            //var client = new Client();
-            //request.PersistenceID = client.GetPersistenceID();           
+            var client = new Client();
+            var persistenceID = client.GetPersistenceID();
             #endregion
 
             _logService.LogInfoObjectToJson("Request", request);
@@ -330,13 +335,13 @@ namespace CES.CoreApi.Receipt_Main.Service.Controllers
 
             var taxCreateDocumentInternalRequest = AutoMapper.Mapper.Map<TaxCreateDocumentRequest>(request);
 
-            //taxCreateDocumentInternalRequest.HeaderInfo = new HeaderInfo
-            //{
-            //    ApplicationId = HeaderHelper.ApplicationId,
-            //    CesUserId = HeaderHelper.CesUserId,
-            //    CesAppObjectId = HeaderHelper.CesAppObjectId,
-            //    CesRequestTime = HeaderHelper.CesRequestTime,
-            //};
+            taxCreateDocumentInternalRequest.HeaderInfo = new HeaderInfo
+            {
+                ApplicationId = HeaderHelper.ApplicationId,
+                CesUserId = HeaderHelper.CesUserId,
+                CesAppObjectId = HeaderHelper.CesAppObjectId,
+                CesRequestTime = HeaderHelper.CesRequestTime,
+            };
 
             Logging.Log.Info("Processing call...");
             var serviceResponse = _docservice.CreateDocument(taxCreateDocumentInternalRequest);
@@ -345,9 +350,9 @@ namespace CES.CoreApi.Receipt_Main.Service.Controllers
             Logging.Log.Info("Returning Response.");
 
             var response = AutoMapper.Mapper.Map<ServiceTaxCreateDocumentResponseViewModel>(serviceResponse);
-
+            response.PersistenceId = persistenceID;
             #region Persistence
-            _persistenceHelper.CreatePersistence<ServiceTaxCreateDocumentResponseViewModel>(response, 0, 0, PersistenceEventType.TaxCreateDocumentResponse);
+            _persistenceHelper.CreatePersistence<ServiceTaxCreateDocumentResponseViewModel>(response, persistenceID, 0, PersistenceEventType.TaxCreateDocumentResponse);
             #endregion
 
             return Content(HttpStatusCode.OK, response);
@@ -358,8 +363,8 @@ namespace CES.CoreApi.Receipt_Main.Service.Controllers
         public IHttpActionResult SearchDocument(ServiceTaxSearchDocumentRequestViewModel request)
         {
             #region Persistence
-            //var client = new Client();
-            //request.PersistenceID = client.GetPersistenceID();           
+            var client = new Client();
+            var persistenceID = client.GetPersistenceID();
             #endregion
 
             _logService.LogInfoObjectToJson("Request", request);
@@ -374,13 +379,13 @@ namespace CES.CoreApi.Receipt_Main.Service.Controllers
 
             var taxSearchDocumentInternalRequest = AutoMapper.Mapper.Map<TaxSearchDocumentRequest>(request);
 
-            //taxGenerateInternalRequest.HeaderInfo = new HeaderInfo
-            //{
-            //    ApplicationId = HeaderHelper.ApplicationId,
-            //    CesUserId = HeaderHelper.CesUserId,
-            //    CesAppObjectId = HeaderHelper.CesAppObjectId,
-            //    CesRequestTime = HeaderHelper.CesRequestTime,
-            //};
+            taxSearchDocumentInternalRequest.HeaderInfo = new HeaderInfo
+            {
+                ApplicationId = HeaderHelper.ApplicationId,
+                CesUserId = HeaderHelper.CesUserId,
+                CesAppObjectId = HeaderHelper.CesAppObjectId,
+                CesRequestTime = HeaderHelper.CesRequestTime,
+            };
 
             Logging.Log.Info("Processing call...");
             var serviceResponse = _docservice.SearchDocument(taxSearchDocumentInternalRequest);
@@ -389,9 +394,10 @@ namespace CES.CoreApi.Receipt_Main.Service.Controllers
             Logging.Log.Info("Returning Response.");
 
             var response = AutoMapper.Mapper.Map<ServiceTaxSearchDocumentResponseViewModel>(serviceResponse);
+            response.PersistenceId = persistenceID;
 
             #region Persistence
-            _persistenceHelper.CreatePersistence<ServiceTaxSearchDocumentResponseViewModel>(response, 0, 0, PersistenceEventType.TaxSearchDocumentResponse);
+            _persistenceHelper.CreatePersistence<ServiceTaxSearchDocumentResponseViewModel>(response, persistenceID, 0, PersistenceEventType.TaxSearchDocumentResponse);
             #endregion
 
             return Content(HttpStatusCode.OK, response);
@@ -402,8 +408,8 @@ namespace CES.CoreApi.Receipt_Main.Service.Controllers
         public IHttpActionResult GenerateReceipt(ServiceTaxGenerateReceiptRequestViewModel request)
         {
             #region Persistence
-            //var client = new Client();
-            //request.PersistenceID = client.GetPersistenceID();           
+            var client = new Client();
+            var persistenceID = client.GetPersistenceID();
             #endregion
 
             _logService.LogInfoObjectToJson("Request", request);
@@ -418,13 +424,13 @@ namespace CES.CoreApi.Receipt_Main.Service.Controllers
 
             var taxGenerateReceiptInternalRequest = AutoMapper.Mapper.Map<TaxGenerateReceiptRequest>(request);
 
-            //taxGenerateReceiptInternalRequest.HeaderInfo = new HeaderInfo
-            //{
-            //    ApplicationId = HeaderHelper.ApplicationId,
-            //    CesUserId = HeaderHelper.CesUserId,
-            //    CesAppObjectId = HeaderHelper.CesAppObjectId,
-            //    CesRequestTime = HeaderHelper.CesRequestTime,
-            //};
+            taxGenerateReceiptInternalRequest.HeaderInfo = new HeaderInfo
+            {
+                ApplicationId = HeaderHelper.ApplicationId,
+                CesUserId = HeaderHelper.CesUserId,
+                CesAppObjectId = HeaderHelper.CesAppObjectId,
+                CesRequestTime = HeaderHelper.CesRequestTime,
+            };
 
             Logging.Log.Info("Processing call...");
             var serviceResponse = _docservice.GenerateReceipt(taxGenerateReceiptInternalRequest);
@@ -433,13 +439,15 @@ namespace CES.CoreApi.Receipt_Main.Service.Controllers
             Logging.Log.Info("Returning Response.");
 
             var response = AutoMapper.Mapper.Map<ServiceTaxGenerateReceiptRequestViewModel>(serviceResponse);
+            response.PersistenceId = persistenceID;
 
             #region Persistence
-            _persistenceHelper.CreatePersistence<ServiceTaxGenerateReceiptRequestViewModel>(response, 0, 0, PersistenceEventType.TaxGenerateReceiptResponse);
+            _persistenceHelper.CreatePersistence<ServiceTaxGenerateReceiptRequestViewModel>(response, persistenceID, 0, PersistenceEventType.TaxGenerateReceiptResponse);
             #endregion
 
             return Content(HttpStatusCode.OK, response);
         }
+
         //-	SIISendDocument
         [HttpPost]
         [Route("tax/sii/document")]
@@ -447,21 +455,60 @@ namespace CES.CoreApi.Receipt_Main.Service.Controllers
         {
             throw new NotImplementedException();
         }
+
         //-	SIIGetDocument
         [HttpPost]
         [Route("tax/sii/document/get")]
         public IHttpActionResult SIIGetDocument(ServiceTaxSIIGetDocumentRequestViewModel request)
         {
-            throw new NotImplementedException();
+            #region Persistence
+            var client = new Client();
+            var persistenceID = client.GetPersistenceID();
+            #endregion
+
+            _logService.LogInfoObjectToJson("Request", request);
+            Logging.Log.Info("Generating request...");
+
+            var results = new ServiceTaxSIIGetDocumentRequestViewModelValidator().Validate(request);
+
+            if (!results.IsValid)
+            {
+                return Content(HttpStatusCode.BadRequest, results);
+            }
+
+            var taxSIIGetDocumentInternalRequest = AutoMapper.Mapper.Map<TaxSIIGetDocumentRequest>(request);
+
+            taxSIIGetDocumentInternalRequest.HeaderInfo = new HeaderInfo
+            {
+                ApplicationId = HeaderHelper.ApplicationId,
+                CesUserId = HeaderHelper.CesUserId,
+                CesAppObjectId = HeaderHelper.CesAppObjectId,
+                CesRequestTime = HeaderHelper.CesRequestTime,
+            };
+
+            Logging.Log.Info("Processing call...");
+            var serviceResponse = _docservice.SIIGetDocument(taxSIIGetDocumentInternalRequest);
+            Logging.Log.Info("Processed Successfully.");
+
+            Logging.Log.Info("Returning Response.");
+
+            var response = AutoMapper.Mapper.Map<ServiceTaxSIIGetDocumentResponseViewModel>(serviceResponse);
+            response.PersistenceId = persistenceID;
+
+            #region Persistence
+            _persistenceHelper.CreatePersistence<ServiceTaxSIIGetDocumentResponseViewModel>(response, persistenceID, 0, PersistenceEventType.TaxSIIGetDocumentBatchResponse);
+            #endregion
+
+            return Content(HttpStatusCode.OK, response);
         }
-        //Get Document from SII
+        //Get Document Batch from SII
         [HttpPost]
-        [Route("tax/sii/document/get")]
+        [Route("tax/sii/documentbatch/get")]
         public IHttpActionResult SIIGetDocumentBatch(ServiceTaxSIIGetDocumentBatchRequestViewModel request)
         {
             #region Persistence
-            //var client = new Client();
-            //request.PersistenceID = client.GetPersistenceID();           
+            var client = new Client();
+            var persistenceID = client.GetPersistenceID();
             #endregion
 
             _logService.LogInfoObjectToJson("Request", request);
@@ -476,13 +523,13 @@ namespace CES.CoreApi.Receipt_Main.Service.Controllers
 
             var taxSIIGetDocumentBatchInternalRequest = AutoMapper.Mapper.Map<TaxSIIGetDocumentBatchRequest>(request);
 
-            //taxGenerateReceiptInternalRequest.HeaderInfo = new HeaderInfo
-            //{
-            //    ApplicationId = HeaderHelper.ApplicationId,
-            //    CesUserId = HeaderHelper.CesUserId,
-            //    CesAppObjectId = HeaderHelper.CesAppObjectId,
-            //    CesRequestTime = HeaderHelper.CesRequestTime,
-            //};
+            taxSIIGetDocumentBatchInternalRequest.HeaderInfo = new HeaderInfo
+            {
+                ApplicationId = HeaderHelper.ApplicationId,
+                CesUserId = HeaderHelper.CesUserId,
+                CesAppObjectId = HeaderHelper.CesAppObjectId,
+                CesRequestTime = HeaderHelper.CesRequestTime,
+            };
 
             Logging.Log.Info("Processing call...");
             var serviceResponse = _docservice.CreateTaskSiiGetDocumentBatch(taxSIIGetDocumentBatchInternalRequest);
@@ -491,9 +538,10 @@ namespace CES.CoreApi.Receipt_Main.Service.Controllers
             Logging.Log.Info("Returning Response.");
 
             var response = AutoMapper.Mapper.Map<ServiceTaxSIIGetDocumentBatchResponseViewModel>(serviceResponse);
+            response.PersistenceId = persistenceID;
 
             #region Persistence
-            _persistenceHelper.CreatePersistence<ServiceTaxSIIGetDocumentBatchResponseViewModel>(response, 0, 0, PersistenceEventType.TaxSIIGetDocumentBatchResponse);
+            _persistenceHelper.CreatePersistence<ServiceTaxSIIGetDocumentBatchResponseViewModel>(response, persistenceID, 0, PersistenceEventType.TaxSIIGetDocumentBatchResponse);
             #endregion
 
             return Content(HttpStatusCode.OK, response);

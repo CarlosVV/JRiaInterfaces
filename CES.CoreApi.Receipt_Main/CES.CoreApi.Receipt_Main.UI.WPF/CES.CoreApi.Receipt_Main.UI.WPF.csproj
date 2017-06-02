@@ -157,11 +157,17 @@
     <Compile Include="View\ActivityDetail.xaml.cs">
       <DependentUpon>ActivityDetail.xaml</DependentUpon>
     </Compile>
+    <Compile Include="View\AddEditRanges.xaml.cs">
+      <DependentUpon>AddEditRanges.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\AssignFunctionsToRoles.xaml.cs">
       <DependentUpon>AssignFunctionsToRoles.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\CafForm.xaml.cs">
       <DependentUpon>CafForm.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\CafFormWindowDialog.xaml.cs">
+      <DependentUpon>CafFormWindowDialog.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\CafManagement.xaml.cs">
       <DependentUpon>CafManagement.xaml</DependentUpon>
@@ -228,11 +234,19 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="View\AddEditRanges.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="View\AssignFunctionsToRoles.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\CafForm.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\CafFormWindowDialog.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

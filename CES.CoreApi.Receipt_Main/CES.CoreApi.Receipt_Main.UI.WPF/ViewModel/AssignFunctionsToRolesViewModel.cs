@@ -7,8 +7,8 @@ using System.Threading.Tasks;
 
 namespace CES.CoreApi.Receipt_Main.UI.WPF.ViewModel
 {
-    public class AssignFunctionsToRolesViewModel : INotifyPropertyChanged
+    public class AssignFunctionsToRolesViewModel : ViewModelBase
     {
-        public event PropertyChangedEventHandler PropertyChanged;
+        
     }
 }

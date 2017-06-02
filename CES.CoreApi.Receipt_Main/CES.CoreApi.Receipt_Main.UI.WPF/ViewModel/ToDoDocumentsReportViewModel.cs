@@ -7,8 +7,8 @@ using System.Threading.Tasks;
 
 namespace CES.CoreApi.Receipt_Main.UI.WPF.ViewModel
 {
-    public class ToDoDocumentsReportViewModel : INotifyPropertyChanged
+    public class ToDoDocumentsReportViewModel : ViewModelBase
     {
-        public event PropertyChangedEventHandler PropertyChanged;
+         
     }
 }

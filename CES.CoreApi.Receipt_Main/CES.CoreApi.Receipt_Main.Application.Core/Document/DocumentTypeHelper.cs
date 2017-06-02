@@ -7,7 +7,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Xml.Linq;
 
-namespace CES.CoreApi.Receipt_Main.UI.WPF.Helpers
+namespace CES.CoreApi.Receipt_Main.Application.Core
 {
     public static class DocumentTypeHelper
     {

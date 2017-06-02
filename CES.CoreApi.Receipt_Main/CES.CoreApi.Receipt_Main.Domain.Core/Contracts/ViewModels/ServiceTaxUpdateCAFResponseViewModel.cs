@@ -15,5 +15,6 @@ namespace CES.CoreApi.Receipt_Main.Domain.Core.Contracts.ViewModels
         public DateTime ResponseTimeUTC { get; set; }
         public systblApp_CoreAPI_Caf CAF { get; set; }
         public bool ProcessResult { get; set; }
+        public long PersistenceId { get; set; }
     }
 }

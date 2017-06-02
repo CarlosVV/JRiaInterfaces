@@ -7,6 +7,7 @@ namespace CES.CoreApi.Receipt_Main.Service.Models
 {
     public class TaxDeleteCAFRequest
     {
+        public HeaderInfo HeaderInfo { get; internal set; }
         public int Id { get; set; }
     }
 }

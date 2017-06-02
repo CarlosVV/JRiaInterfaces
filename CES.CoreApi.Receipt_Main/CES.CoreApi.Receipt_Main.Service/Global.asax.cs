@@ -1,4 +1,5 @@
 ﻿using CES.CoreApi.Receipt_Main.Service.App_Start;
+using CES.CoreApi.Receipt_Main.Service.Config;
 using CES.CoreApi.Receipt_Main.Service.ExceptionHandling;
 using CES.CoreApi.Receipt_Main.Service.Filters;
 using CES.Security.CoreApi;
@@ -7,10 +8,11 @@ using Ninject.Http;
 using System.Web.Http;
 using System.Web.Http.ExceptionHandling;
 
-namespace CES.CoreApi.Receipt_Main
-{
+namespace CES.CoreApi.Receipt_Main.Service
+{    
     public class WebApiApplication : System.Web.HttpApplication
     {
+        private Hangfire.BackgroundJobServer _backgroundJobServer;
         protected void Application_Start()
         {
             GlobalConfiguration.Configure(WebApiConfig.Register);
@@ -28,6 +30,10 @@ namespace CES.CoreApi.Receipt_Main
             FluentValidationModelValidatorProvider.Configure(GlobalConfiguration.Configuration);
 
             NinjectHttpContainer.RegisterModules(NinjectHttpModules.Modules);
+
+            HangfireConfig.Start();
+
+            _backgroundJobServer = new Hangfire.BackgroundJobServer();
         }
 
     }

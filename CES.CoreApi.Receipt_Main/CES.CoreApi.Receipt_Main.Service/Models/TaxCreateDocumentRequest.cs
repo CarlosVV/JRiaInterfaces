@@ -9,5 +9,6 @@ namespace CES.CoreApi.Receipt_Main.Service.Models
     public class TaxCreateDocumentRequest
     {
         public systblApp_CoreAPI_Document Document { get; set; }
+        public HeaderInfo HeaderInfo { get; internal set; }
     }
 }

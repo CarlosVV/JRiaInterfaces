@@ -7,8 +7,20 @@ using System.Threading.Tasks;
 
 namespace CES.CoreApi.Receipt_Main.UI.WPF.ViewModel
 {
-    public class UserManagementViewModel : INotifyPropertyChanged
+    public class UserManagementViewModel : ViewModelBase
     {
-        public event PropertyChangedEventHandler PropertyChanged;
+        private string _userName;       
+        public string UserName
+        {
+            get
+            {
+                return _userName;
+            }
+
+            set
+            {
+                _userName = value;
+            }
+        }
     }
 }

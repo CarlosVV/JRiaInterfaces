@@ -13,5 +13,8 @@ namespace CES.CoreApi.Receipt_Main.Service.Models
         public int? FolioStartNumber { get; set; }
         public int? FolioEndNumber { get; set; }
         public string CAFContent { get; set; }
+        public int? FolioCurrentNumber { get; internal set; }
+        public bool Disabled { get; set; }
+        public HeaderInfo HeaderInfo { get; internal set; }
     }
 }

@@ -9,6 +9,7 @@ namespace CES.CoreApi.Receipt_Main.Service.Models
     {
         public int? Id { get; set; }       
         public string DocumentType { get; set; }
-        public int FolioCurrentNumber { get; set; }      
+        public int FolioCurrentNumber { get; set; }
+        public HeaderInfo HeaderInfo { get; internal set; }
     }
 }

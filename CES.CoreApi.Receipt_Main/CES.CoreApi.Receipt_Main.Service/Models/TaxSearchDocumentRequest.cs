@@ -25,5 +25,6 @@ namespace CES.CoreApi.Receipt_Main.Service.Models
         public string DocumentTellerName { get; set; }
         public DateTime? DocumentIssued { get; set; }
         public decimal? DocumentTotalAmount { get; set; }
+        public HeaderInfo HeaderInfo { get; internal set; }
     }
 }

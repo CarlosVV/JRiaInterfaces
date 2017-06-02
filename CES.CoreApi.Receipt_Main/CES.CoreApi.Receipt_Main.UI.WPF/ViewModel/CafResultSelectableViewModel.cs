@@ -14,7 +14,9 @@ namespace CES.CoreApi.Receipt_Main.UI.WPF.ViewModel
         private string _start;
         private string _end;
         private string _current;
-        
+        private string _store;
+        private bool _isViewEditVisible;
+
         public bool IsSelected
         {
             get { return _isSelected; }
@@ -44,6 +46,16 @@ namespace CES.CoreApi.Receipt_Main.UI.WPF.ViewModel
             {
                 if (_type == value) return;
                 _type = value;
+                NotifiyPropertyChanged();
+            }
+        }
+        public string Store
+        {
+            get { return _store; }
+            set
+            {
+                if (_store == value) return;
+                _store = value;
                 NotifiyPropertyChanged();
             }
         }
@@ -82,11 +94,22 @@ namespace CES.CoreApi.Receipt_Main.UI.WPF.ViewModel
 
         public string Current
         {
-            get { return _end; }
+            get { return _current; }
             set
             {
                 if (_current == value) return;
                 _current = value;
+                NotifiyPropertyChanged();
+            }
+        }
+
+        public bool IsViewEditVisible
+        {
+            get { return _isViewEditVisible; }
+            set
+            {
+                if (_isViewEditVisible == value) return;
+                _isViewEditVisible = value;
                 NotifiyPropertyChanged();
             }
         }

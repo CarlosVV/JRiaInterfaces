@@ -1,4 +1,6 @@
-﻿using CES.CoreApi.Receipt_Main.UI.WPF.ViewModel;
+﻿using CES.CoreApi.Receipt_Main.Domain.Core.Services;
+using CES.CoreApi.Receipt_Main.UI.WPF.ViewModel;
+using MvvmDialogs;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -21,16 +23,14 @@ namespace CES.CoreApi.Receipt_Main.UI.WPF.View
     /// </summary>
     public partial class CafManagement : UserControl
     {
-        public CafManagement()
+        public CafManagement(IStoreService storeService , IDialogService dialogService)
         {
             InitializeComponent();
 
             var confirm = (Func<string, string, bool>)((msg, capt) => MessageBox.Show(msg, capt, MessageBoxButton.YesNo) == MessageBoxResult.Yes);
             var msgbox = (Func<string, string, bool>)((msg, capt) => MessageBox.Show(msg, capt, MessageBoxButton.OK) == MessageBoxResult.OK);
 
-            DataContext = new CafManagementViewModel(msgbox, confirm);
-        }
-
-      
+            DataContext = new CafManagementViewModel(msgbox, confirm, storeService, dialogService);
+        }      
     }
 }

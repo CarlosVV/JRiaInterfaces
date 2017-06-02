@@ -7,5 +7,6 @@ namespace CES.CoreApi.Receipt_Main.Domain.Core.Contracts.ViewModels
 {
     public class ServiceTaxSIIGetDocumentRequestViewModel
     {
+        public int Folio { get; set; }
     }
 }

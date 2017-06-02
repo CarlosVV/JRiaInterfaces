@@ -9,5 +9,6 @@ namespace CES.CoreApi.Receipt_Main.Service.Models
     {
         public string OrderNumber { get; set; }
         public int Folio { get; set; }
+        public HeaderInfo HeaderInfo { get; internal set; }
     }
 }
