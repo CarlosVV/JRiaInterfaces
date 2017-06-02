@@ -16,21 +16,13 @@ namespace CES.CoreApi.Receipt_Main.Service
         protected void Application_Start()
         {
             GlobalConfiguration.Configure(WebApiConfig.Register);
-
             GlobalConfiguration.Configuration.Services.Add(typeof(IExceptionLogger), new CustomExceptionLogger());
-            /*To client application auth*/
             GlobalConfiguration.Configuration.Filters.Add(new AuthenticationFilter("CES.CoreApi.Receipt_Main"));
-            /*To return custom error messages*/
-            //GlobalConfiguration.Configuration.Filters.Add(new CustomExceptionFilterAttribute());
-            /*To capture htto request message and http response message: You comment out this line if you want to stop it*/
             GlobalConfiguration.Configuration.MessageHandlers.Add(new HttpMessageHandler());
-            /*To Register Mapper*/
+            GlobalConfiguration.Configuration.Formatters.JsonFormatter.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore;
             AutoMapperConfig.RegisterMappings();
-
             FluentValidationModelValidatorProvider.Configure(GlobalConfiguration.Configuration);
-
             NinjectHttpContainer.RegisterModules(NinjectHttpModules.Modules);
-
             HangfireConfig.Start();
 
             _backgroundJobServer = new Hangfire.BackgroundJobServer();

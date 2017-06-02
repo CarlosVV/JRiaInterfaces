@@ -1,4 +1,5 @@
-﻿using CES.CoreApi.Receipt_Main.Application.Core.Document;
+﻿using CES.CoreApi.Receipt_Main.Application.Core;
+using CES.CoreApi.Receipt_Main.Application.Core.Document;
 using CES.CoreApi.Receipt_Main.Domain.Core.Contracts.Models;
 using CES.CoreApi.Receipt_Main.Domain.Core.Documents;
 using CES.CoreApi.Receipt_Main.Domain.Core.Services;
@@ -115,7 +116,7 @@ namespace CES.CoreApi.Receipt_Main.Service.Services
             var folio = taxSIIGetDocumentInternalRequest.Folio;
             var respuesta = string.Empty;
             var _parserBoletas = new XmlDocumentParser<EnvioBOLETA> ();
-            var indexchunk = 0;
+            var indexchunk = 1;
             var acumchunk = 0;
 
             if (_documentDownloader.RetrieveXML(int.Parse(docType), folio, out respuesta))
@@ -127,7 +128,7 @@ namespace CES.CoreApi.Receipt_Main.Service.Services
                 _documentHelper.SaveDocument(folio, folio, ref indexchunk, ref acumchunk, documentXmlObject, ref detailids, ref docids);
             }
 
-            response.Document = _documentService.GetAllDocuments().Where(m => m.Folio == folio).FirstOrDefault();
+            response.Document = GetDocumentByFolio(folio);
 
             response.ResponseTime = DateTime.Now;
             response.TransferDate = DateTime.Now;
@@ -136,5 +137,11 @@ namespace CES.CoreApi.Receipt_Main.Service.Services
 
             return response;
         }
+
+        private systblApp_CoreAPI_Document GetDocumentByFolio(int folio)
+        {
+            var _documentServiceToSearch = new DocumentService(new DocumentRepository(new ReceiptDbContext()));
+            return _documentServiceToSearch.GetAllDocuments().Where(m => m.Folio == folio).FirstOrDefault();
+        }        
     }
 }

@@ -2,6 +2,7 @@
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -53,7 +54,15 @@ namespace CES.CoreApi.Shared.Persistence.Model
 
         public string GetPersistenceJson()
         {
-            return JsonConvert.SerializeObject(ContentObject);
+            try
+            {
+                return JsonConvert.SerializeObject(ContentObject);
+            }
+            catch (Exception ex)
+            {
+                Trace.Write(ex.ToString());
+                return string.Empty;
+            }
         }
 
 
