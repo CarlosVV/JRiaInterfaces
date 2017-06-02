@@ -8,6 +8,7 @@ using CES.CoreApi.Receipt_Main.Infrastructure.Data.Repository;
 using CES.CoreApi.Receipt_Main.Service.Jobs;
 using CES.CoreApi.Receipt_Main.Service.Models;
 using CES.CoreApi.Receipt_Main.Service.Repositories;
+using Hangfire;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -92,10 +93,10 @@ namespace CES.CoreApi.Receipt_Main.Service.Services
 
         internal TaxSIIGetDocumentBatchResponse CreateTaskSiiGetDocumentBatch(TaxSIIGetDocumentBatchRequest taxSIIGetDocumentBatchInternalRequest)
         {
-            var response = null as TaxSIIGetDocumentBatchResponse;
+            var response = new TaxSIIGetDocumentBatchResponse();
 
             var job = new BatchDownloadJob();
-            job.Execute(taxSIIGetDocumentBatchInternalRequest.FolioStart, taxSIIGetDocumentBatchInternalRequest.FolioEnd);
+            BackgroundJob.Enqueue(() => job.Execute(taxSIIGetDocumentBatchInternalRequest.FolioStart, taxSIIGetDocumentBatchInternalRequest.FolioEnd));
 
             response.ResponseTime = DateTime.Now;
             response.TransferDate = DateTime.Now;

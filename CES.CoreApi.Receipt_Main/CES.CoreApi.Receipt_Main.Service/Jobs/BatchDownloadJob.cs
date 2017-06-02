@@ -21,14 +21,17 @@ namespace CES.CoreApi.Receipt_Main.Service.Jobs
 
         public void BatchDownload()
         {
+
+        }
+        public void Execute(int folioStart, int folioEnd)
+        {
+
             _documentService = new CES.CoreApi.Receipt_Main.Application.Core.DocumentService(new DocumentRepository(new ReceiptDbContext()));
             _taxEntityService = new CES.CoreApi.Receipt_Main.Application.Core.TaxEntityService(new TaxEntityRepository(new ReceiptDbContext()));
             _taxAddressService = new CES.CoreApi.Receipt_Main.Application.Core.TaxAddressService(new TaxAddressRepository(new ReceiptDbContext()));
             _sequenceService = new CES.CoreApi.Receipt_Main.Application.Core.SequenceService(new SequenceRepository(new ReceiptDbContext()));
             _storeService = new CES.CoreApi.Receipt_Main.Application.Core.StoreService(new StoreRepository(new ReceiptDbContext()));
-        }
-        public void Execute(int folioStart, int folioEnd)
-        {
+
             var _documentDownloader = new DocumentDownloader();
             var _documentHelper = new DocumentHandlerService(_documentService, _taxEntityService, _taxAddressService, _sequenceService, _storeService);
 
@@ -39,7 +42,7 @@ namespace CES.CoreApi.Receipt_Main.Service.Jobs
                 var folio = i;
                 var respuesta = string.Empty;
                 var _parserBoletas = new XmlDocumentParser<EnvioBOLETA>();
-                var indexchunk = 0;
+                var indexchunk = 1;
                 var acumchunk = 0;
 
                 if (_documentDownloader.RetrieveXML(int.Parse(docType), folio, out respuesta))

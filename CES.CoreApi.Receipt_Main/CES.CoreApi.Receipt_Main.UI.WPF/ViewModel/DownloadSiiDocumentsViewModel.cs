@@ -1,21 +1,15 @@
-﻿/*
- Descargar Folios
-
- -	indicar el número de documentos que existen en el rango desde hasta en la base de datos
--	Antes de descargar ver si existen en la base de datos y no insertar duplicado
-
--	Al estar la base de datos vacia no permite agregar rangos manuales y el buscar se cae
--	agregar rangos permanentes y temporales y al limpiar o buscar deben quedar los permanentes
-
--	despues que finaliza la descarga eliminar el check
-
--	despues de la descarga al sacar el check se cae
-
-
--	limpiar no esta funcionando
-
- */
-
+﻿using System;
+using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using System.ComponentModel;
+using System.Diagnostics;
+using System.Linq;
+using System.Runtime.CompilerServices;
+using System.Windows.Data;
+using System.Windows.Input;
+using MaterialDesignThemes.Wpf;
+using Newtonsoft.Json;
+using Prism.Commands;
 using CES.CoreApi.Receipt_Main.Application.Core;
 using CES.CoreApi.Receipt_Main.Application.Core.Document;
 using CES.CoreApi.Receipt_Main.Domain.Core.Documents;
@@ -27,21 +21,6 @@ using CES.CoreApi.Receipt_Main.Infrastructure.Data.Repository;
 using CES.CoreApi.Receipt_Main.Repository.Repository;
 using CES.CoreApi.Receipt_Main.UI.WPF.Helpers;
 using CES.CoreApi.Receipt_Main.UI.WPF.View;
-using MaterialDesignThemes.Wpf;
-using Newtonsoft.Json;
-using Prism.Commands;
-using System;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.ComponentModel;
-using System.Diagnostics;
-using System.Linq;
-using System.Runtime.CompilerServices;
-using System.Text;
-using System.Threading.Tasks;
-using System.Threading.Tasks.Dataflow;
-using System.Windows.Data;
-using System.Windows.Input;
 
 namespace CES.CoreApi.Receipt_Main.UI.WPF.ViewModel
 {

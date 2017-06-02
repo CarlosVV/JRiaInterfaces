@@ -43,6 +43,9 @@ namespace CES.CoreApi.Receipt_Main.Service.App_Start
 
             Mapper.CreateMap<ServiceTaxSIIGetDocumentRequestViewModel, TaxSIIGetDocumentRequest>();
             Mapper.CreateMap<TaxSIIGetDocumentResponse, ServiceTaxSIIGetDocumentResponseViewModel>();
+
+            Mapper.CreateMap<ServiceTaxSIIGetDocumentBatchRequestViewModel, TaxSIIGetDocumentBatchRequest>();
+            Mapper.CreateMap<TaxSIIGetDocumentBatchResponse, ServiceTaxSIIGetDocumentBatchResponseViewModel>();
         }
     }
 }
