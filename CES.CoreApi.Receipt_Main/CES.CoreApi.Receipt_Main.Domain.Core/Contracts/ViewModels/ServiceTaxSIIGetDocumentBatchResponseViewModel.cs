@@ -13,5 +13,6 @@ namespace CES.CoreApi.Receipt_Main.Domain.Core.Contracts.ViewModels
         public DateTime ResponseTime { get; set; }
         public DateTime ResponseTimeUTC { get; set; }
         public long PersistenceId { get; set; }
+        public string Status { get; set; }
     }
 }

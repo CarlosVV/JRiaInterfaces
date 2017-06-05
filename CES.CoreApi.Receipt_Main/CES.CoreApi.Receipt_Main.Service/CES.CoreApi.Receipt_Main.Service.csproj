@@ -247,6 +247,7 @@
     <Compile Include="Models\BaseRequestModel.cs" />
     <Compile Include="Models\CoreApiCode.cs" />
     <Compile Include="Models\DocumentType.cs" />
+    <Compile Include="Models\DownloadBatchTaskParameter.cs" />
     <Compile Include="Models\DTOs\Address.cs" />
     <Compile Include="Models\DTOs\Document.cs" />
     <Compile Include="Models\DTOs\DocumentDetail.cs" />

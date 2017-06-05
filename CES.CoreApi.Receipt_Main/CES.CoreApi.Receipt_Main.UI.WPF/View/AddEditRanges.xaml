@@ -14,10 +14,11 @@
             <TextBlock Text="Editar/Agregar Rango" FontWeight="Bold" Margin="0 10 0 10"/>
             <Grid>
                 <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="50"/>
                     <ColumnDefinition Width="100"/>
-                    <ColumnDefinition Width="120"/>
-                    <ColumnDefinition Width="120"/>
-                    <ColumnDefinition Width="150"/>
+                    <ColumnDefinition Width="100"/>
+                    <ColumnDefinition Width="100"/>
+                    <ColumnDefinition Width="100"/>
                 </Grid.ColumnDefinitions>
                 <Grid.RowDefinitions>
                     <RowDefinition Height="*"/>
@@ -34,17 +35,78 @@
                 <TextBox Text="{Binding NewDocumentToDownload.End}" Grid.Column="2" Grid.Row="0"  Margin="10 10 10 0"
                              materialDesign:HintAssist.Hint="Rango hasta" 
                              Style="{StaticResource MaterialDesignFloatingHintTextBox}"/>
-                <ComboBox Grid.Column="3" Grid.Row="0" Margin="10 10 10 0"
-                              materialDesign:HintAssist.Hint="Tipo"
-                              Style="{StaticResource MaterialDesignFloatingHintComboBox}">
-                    <ComboBoxItem Content="BOLETA" IsSelected="True"></ComboBoxItem>
-                    <ComboBoxItem Content="FACTURA"></ComboBoxItem>
-                    <ComboBoxItem Content="NOTA DE CREDITO"></ComboBoxItem>
-                    <ComboBoxItem Content="NOTA DE DEBITO"></ComboBoxItem>
+                <ComboBox Grid.Row="0" Grid.Column="3" 
+                   x:Name="DocumenTypeComboBox"
+                  materialDesign:HintAssist.Hint="Tipo Documento" 
+                  Style="{StaticResource MaterialDesignFloatingHintComboBox}"
+                  ItemsSource="{Binding NewDocumentToDownload.DocumentTypeList}"                          
+                  SelectedValue="{Binding NewDocumentToDownload.SelectedDocumentTypeValue}">
+                    <ComboBox.SelectedItem>
+                        <Binding Path="NewDocumentToDownload.SelectedDocumentTypeValue" Mode="TwoWay" UpdateSourceTrigger="PropertyChanged">
+                            <Binding.ValidationRules>
+                                <model:NotEmptyValidationRule ValidatesOnTargetUpdated="True"/>
+                            </Binding.ValidationRules>
+                        </Binding>
+                    </ComboBox.SelectedItem>
+                    <ComboBox.ItemTemplate>
+                        <DataTemplate>
+                            <StackPanel Orientation="Horizontal">
+                                <TextBlock Text="{Binding Description}"></TextBlock>
+                            </StackPanel>
+                        </DataTemplate>
+                    </ComboBox.ItemTemplate>
+                    <ComboBox.ItemsPanel>
+                        <ItemsPanelTemplate>
+                            <VirtualizingStackPanel />
+                        </ItemsPanelTemplate>
+                    </ComboBox.ItemsPanel>
+                </ComboBox>
+                <ComboBox Grid.Row="0" Grid.Column="4" 
+                   x:Name="RangeType"
+                  materialDesign:HintAssist.Hint="Tipo Rango" 
+                  Style="{StaticResource MaterialDesignFloatingHintComboBox}"
+                  ItemsSource="{Binding NewDocumentToDownload.RangeTypeList}"                          
+                  SelectedValue="{Binding NewDocumentToDownload.SelectedRangeTypeValue}">
+                    <ComboBox.SelectedItem>
+                        <Binding Path="NewDocumentToDownload.SelectedRangeTypeValue" Mode="TwoWay" UpdateSourceTrigger="PropertyChanged">
+                            <Binding.ValidationRules>
+                                <model:NotEmptyValidationRule ValidatesOnTargetUpdated="True"/>
+                            </Binding.ValidationRules>
+                        </Binding>
+                    </ComboBox.SelectedItem>
+                    <ComboBox.ItemTemplate>
+                        <DataTemplate>
+                            <StackPanel Orientation="Horizontal">
+                                <TextBlock Text="{Binding }"></TextBlock>
+                            </StackPanel>
+                        </DataTemplate>
+                    </ComboBox.ItemTemplate>
+                    <ComboBox.ItemsPanel>
+                        <ItemsPanelTemplate>
+                            <VirtualizingStackPanel />
+                        </ItemsPanelTemplate>
+                    </ComboBox.ItemsPanel>
                 </ComboBox>
             </Grid>
             <StackPanel  HorizontalAlignment="Center" Orientation="Horizontal">
-                <Button Content="Aceptar" Command="{x:Static materialDesign:DialogHost.CloseDialogCommand}"  Margin="10 10 0 0"/>
+                <Button Style="{StaticResource MaterialDesignFlatButton}"
+                                        IsDefault="True"
+                                        Margin="0 8 8 0"
+                                        Command="materialDesign:DialogHost.CloseDialogCommand">
+                    <Button.CommandParameter>
+                        <system:Boolean>True</system:Boolean>
+                    </Button.CommandParameter>
+                    Aceptar
+                </Button>
+                <Button Style="{StaticResource MaterialDesignFlatButton}"
+                                        IsCancel="True"
+                                        Margin="0 8 8 0"
+                                        Command="materialDesign:DialogHost.CloseDialogCommand">
+                    <Button.CommandParameter>
+                        <system:Boolean>False</system:Boolean>
+                    </Button.CommandParameter>
+                    Cancelar
+                </Button>
             </StackPanel>
         </StackPanel>
     </Grid>

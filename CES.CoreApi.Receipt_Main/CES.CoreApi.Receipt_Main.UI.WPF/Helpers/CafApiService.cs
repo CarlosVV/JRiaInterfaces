@@ -16,7 +16,7 @@ namespace CES.CoreApi.Receipt_Main.UI.WPF.Helpers
     public class CafApiService
     {
         public static readonly string _url = AppSettings.ApiReceiptServiceUrl;
-        public systblApp_CoreAPI_Caf CreateCaf(string cafcontent, string documentType, int folioStartNumber, int folioEndNumber, int recAgent, bool disable = false)
+        public systblApp_CoreAPI_Caf CreateCaf(string cafcontent, string documentType, int folioStartNumber, int folioEndNumber, int folioCurrentNumber, int recAgent, bool disable = false)
         {
             systblApp_CoreAPI_Caf obj = null;
             using (var client = new HttpClient())
@@ -26,6 +26,7 @@ namespace CES.CoreApi.Receipt_Main.UI.WPF.Helpers
                 caf.CAFContent = HttpUtility.HtmlEncode(cafcontent);
                 caf.FolioStartNumber = folioStartNumber;
                 caf.FolioEndNumber = folioEndNumber;
+                caf.FolioCurrentNumber = folioCurrentNumber;
                 caf.RecAgent = recAgent;
 
                 var jsonstring = JsonConvert.SerializeObject(caf);
@@ -75,7 +76,7 @@ namespace CES.CoreApi.Receipt_Main.UI.WPF.Helpers
             return obj;
         }
 
-        public systblApp_CoreAPI_Caf UpdateCaf(int id, string cafcontent, string documentType, int folioStartNumber, int folioEndNumber, int recAgent, bool disabled = false)
+        public systblApp_CoreAPI_Caf UpdateCaf(int id, string cafcontent, string documentType, int folioStartNumber, int folioEndNumber, int folioCurrentNumber, int recAgent, bool disabled = false)
         {
             systblApp_CoreAPI_Caf obj = null;
             using (var client = new HttpClient())
@@ -86,6 +87,7 @@ namespace CES.CoreApi.Receipt_Main.UI.WPF.Helpers
                 caf.CAFContent = HttpUtility.HtmlEncode(cafcontent);
                 caf.FolioStartNumber = folioStartNumber;
                 caf.FolioEndNumber = folioEndNumber;
+                caf.FolioCurrentNumber = folioCurrentNumber;
                 caf.RecAgent = recAgent;
                 caf.Disabled = disabled;
 

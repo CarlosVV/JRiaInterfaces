@@ -1,25 +1,12 @@
 ﻿using CES.CoreApi.Receipt_Main.Domain.Core.Services;
-using CES.CoreApi.Receipt_Main.UI.WPF.Domain;
-using CES.CoreApi.Receipt_Main.UI.WPF.View;
 using CES.CoreApi.Receipt_Main.UI.WPF.ViewModel;
-using MaterialDesignThemes.Wpf;
 using MvvmDialogs;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
-using System.Windows.Controls;
 using System.Windows.Controls.Primitives;
-using System.Windows.Data;
-using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 
 namespace CES.CoreApi.Receipt_Main.UI.WPF
 {
@@ -76,16 +63,16 @@ namespace CES.CoreApi.Receipt_Main.UI.WPF
             MenuToggleButton.IsChecked = false;
         }
 
-        private async void MenuPopupButton_OnClick(object sender, RoutedEventArgs e)
-        {
-            var user = _userservice.GetAllUsers().FirstOrDefault();
-            var sampleMessageDialog = new SampleMessageDialog
-            {
-                Message = { Text = $"{((ButtonBase)sender).Content} {user.Name}" }
-            };
+        //private async void MenuPopupButton_OnClick(object sender, RoutedEventArgs e)
+        //{
+        //    //var user = _userservice.GetAllUsers().FirstOrDefault();
+        //    //var sampleMessageDialog = new SampleMessageDialog
+        //    //{
+        //    //    Message = { Text = $"{((ButtonBase)sender).Content} {user.Name}" }
+        //    //};
 
-            await DialogHost.Show(sampleMessageDialog, "RootDialog");
-        }
+        //    //await DialogHost.Show(sampleMessageDialog, "RootDialog");
+        //}
 
         private void Window_Unloaded(object sender, RoutedEventArgs e)
         {

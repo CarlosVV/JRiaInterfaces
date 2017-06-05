@@ -13,7 +13,7 @@ namespace CES.CoreApi.Receipt_Main.UI.WPF.ViewModel
     public class DocumentSearchToDownloadSelectableViewModel : BindableBase
     {
         private bool _isSelected;
-        private int _id;
+        private string _id;
         private string _type;
         private string _start;
         private string _end;
@@ -25,8 +25,9 @@ namespace CES.CoreApi.Receipt_Main.UI.WPF.ViewModel
         private int _processed;
         private int _pending;
         private string _detail;
+        private string _rangetype;
 
-        public int ID
+        public string ID
         {
             get { return _id; }
             set
@@ -133,6 +134,15 @@ namespace CES.CoreApi.Receipt_Main.UI.WPF.ViewModel
             set
             {
                 SetProperty(ref _detail, value);
+            }
+        }
+
+        public string RangeType
+        {
+            get { return _rangetype; }
+            set
+            {
+                SetProperty(ref _rangetype, value);
             }
         }
     }

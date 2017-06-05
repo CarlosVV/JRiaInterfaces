@@ -44,7 +44,7 @@ namespace CES.CoreApi.Receipt_Main.UI.WPF.ViewModel
         {
             _cafApiService = new CafApiService(); 
 
-            DocumentTypeList = DocumentTypeHelper.LoadDocumenTypes();
+            DocumentTypeList = DocumentTypeHelper.GetDocumenTypes();
             SelectedDocumentTypeValue = DocumentTypeList.FirstOrDefault();
 
             var stores = storeService.GetAllStores();
@@ -61,6 +61,8 @@ namespace CES.CoreApi.Receipt_Main.UI.WPF.ViewModel
 
             OkCommand = new RelayCommand(Ok);
 
+            Disabled = false;
+
             this.cafObjectModel = cafObjectModel;
             if (cafObjectModel != null)
             {
@@ -69,7 +71,7 @@ namespace CES.CoreApi.Receipt_Main.UI.WPF.ViewModel
                 FolioEndNumber = cafObjectModel.FolioEndNumber;
                 FolioCurrentNumber = cafObjectModel.FolioCurrentNumber;
                 XmlContent = cafObjectModel.FileContent;
-                Disabled = cafObjectModel.fDisabled.HasValue ? cafObjectModel.fDisabled.Value : false;
+                Disabled = cafObjectModel.fDisabled.HasValue  ? cafObjectModel.fDisabled.Value : false;
                 SelectedStoreValue = storeService.GetAllStores().Where(s => s.Id == cafObjectModel.RecAgent).FirstOrDefault();
                 SelectedDocumentTypeValue = DocumentTypeList.Where(m=> m.Code == cafObjectModel.DocumentType).FirstOrDefault();
             }
@@ -147,20 +149,36 @@ namespace CES.CoreApi.Receipt_Main.UI.WPF.ViewModel
                 FolioStartNumber = xmlobject.CAF.DA.RNG.D;
                 FolioEndNumber = xmlobject.CAF.DA.RNG.H;
                 _selectedDocumentTypeValue = DocumentTypeList.Where(m => m.Code == xmlobject.CAF.DA.TD.ToString()).FirstOrDefault();
+                Disabled = false;
             }
         }
         private void Save(object obj)
         {
             var cafService = new CafApiService();
+
+            var storeid = 0;
+            var doctype = "39";
+
+            if (SelectedDocumentTypeValue != null)
+            {
+                doctype = SelectedDocumentTypeValue.Code;
+            }
+
+            if (SelectedStoreValue != null)
+            {
+                storeid = SelectedStoreValue.Id;
+            }
+
+
             try
             {
                 if(ID <= 0)
                 {
-                    var result = cafService.CreateCaf(XmlContent, SelectedDocumentTypeValue.Code, FolioStartNumber, FolioEndNumber, SelectedStoreValue.Id);
+                    var result = cafService.CreateCaf(XmlContent, doctype, FolioStartNumber, FolioEndNumber,  FolioCurrentNumber, storeid);
                 }
                 else
                 {
-                    var result = cafService.UpdateCaf(ID, XmlContent, SelectedDocumentTypeValue.Code, FolioStartNumber, FolioEndNumber, SelectedStoreValue.Id, Disabled);
+                    var result = cafService.UpdateCaf(ID, XmlContent, doctype, FolioStartNumber, FolioEndNumber, FolioCurrentNumber, storeid, Disabled);
                 }
               
                 Status = "Grabación exitosa en Base de Datos";
@@ -174,6 +192,9 @@ namespace CES.CoreApi.Receipt_Main.UI.WPF.ViewModel
         }
         private void Clear(object obj)
         {
+            FolioCurrentNumber = 0;
+            FolioEndNumber = 0;
+            FolioStartNumber = 0;
         }
         private void Cancel(object obj)
         {

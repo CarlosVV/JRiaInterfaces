@@ -11,6 +11,7 @@ namespace CES.CoreApi.Receipt_Main.Service.Models
         public int? RecAgent { get; set; }
         public int? FolioStartNumber { get; set; }
         public int? FolioEndNumber { get; set; }
+        public int? FolioCurrentNumber { get; set; }
         public string CAFContent { get; set; }
         public HeaderInfo HeaderInfo { get; internal set; }
     }

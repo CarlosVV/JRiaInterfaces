@@ -1,20 +1,27 @@
-﻿using System;
+﻿using CES.CoreApi.Receipt_Main.Application.Core;
+using CES.CoreApi.Receipt_Main.Domain.Core.Documents;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Linq;
-using System.Runtime.CompilerServices;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace CES.CoreApi.Receipt_Main.UI.WPF.ViewModel
 {
-    public class NewDocumentToDownloadViewModel : INotifyPropertyChanged
+    public class NewDocumentToDownloadViewModel : ViewModelBase
     {
-        private int _id;
+
+        private string _id;
         private string _docType;
         private string _start;
         private string _end;
-        public int ID
+        private Document_Type _selectedDocumentTypeValue;
+        private string _selectedRangeTypeValue;
+        public NewDocumentToDownloadViewModel()
+        {
+            DocumentTypeList = DocumentTypeHelper.GetDocumenTypes();
+            RangeTypeList = new List<string>();
+            RangeTypeList.Add("Permanente");
+            RangeTypeList.Add("Temporal");
+        }
+
+        public string ID
         {
             get { return _id; }
             set
@@ -50,17 +57,29 @@ namespace CES.CoreApi.Receipt_Main.UI.WPF.ViewModel
                 _end = value;
                 NotifyPropertyChanged();
             }
-        }       
-
-
-        #region INotifyPropertyChanged Members
-        public event PropertyChangedEventHandler PropertyChanged;
-
-        private void NotifyPropertyChanged([CallerMemberName] string propertyName = null)
-        {
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
 
-        #endregion
+        public Document_Type SelectedDocumentTypeValue
+        {
+            get { return _selectedDocumentTypeValue; }
+            set
+            {
+                _selectedDocumentTypeValue = value;
+                NotifyPropertyChanged();
+            }
+        }
+
+        public string SelectedRangeTypeValue
+        {
+            get { return _selectedRangeTypeValue; }
+            set
+            {
+                _selectedRangeTypeValue = value;
+                NotifyPropertyChanged();
+            }
+        }
+
+        public IList<Document_Type> DocumentTypeList { get; }
+        public IList<string> RangeTypeList { get; }
     }
 }

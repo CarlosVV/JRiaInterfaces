@@ -11,7 +11,7 @@ namespace CES.CoreApi.Receipt_Main.Application.Core
 {
     public static class DocumentTypeHelper
     {
-        public static List<Document_Type> LoadDocumenTypes()
+        public static List<Document_Type> GetDocumenTypes()
         {
             var DocumentTypeList = new List<Document_Type>();
             DocumentTypeList.Add(new Document_Type { Code = "39", Description = "Boleta" });

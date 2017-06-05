@@ -12,5 +12,6 @@ namespace CES.CoreApi.Receipt_Main.Domain.Core.Contracts.ViewModels
         public int? FolioStartNumber { get; set; }
         public int? FolioEndNumber { get; set; }
         public string CAFContent { get; set; }
+        public int FolioCurrentNumber { get; set; }
     }
 }

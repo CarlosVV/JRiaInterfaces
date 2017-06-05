@@ -12,5 +12,6 @@ namespace CES.CoreApi.Receipt_Main.Service.Models
         public ReturnInfo ReturnInfo { get; set; }
         public DateTime ResponseTime { get; set; }
         public DateTime ResponseTimeUTC { get; set; }
+        public string Status { get;  set; }
     }
 }

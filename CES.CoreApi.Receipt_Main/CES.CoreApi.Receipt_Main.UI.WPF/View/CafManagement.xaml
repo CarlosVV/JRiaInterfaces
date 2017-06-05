@@ -12,7 +12,7 @@
              d:DesignHeight="300" d:DesignWidth="800"
              d:DataContext="{d:DesignInstance model1:CafManagementViewModel, d:IsDesignTimeCreatable=False}">
     <UserControl.Resources>
-        <ResourceDictionary>            
+        <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
                 <!-- note you only need bring in these extra resource dictionaries when using non-default styles, so only bring them into your controls where the default style is not what you want -->
                 <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.ComboBox.xaml" />
@@ -214,55 +214,65 @@
 
             <StackPanel Grid.Row="6" Grid.ColumnSpan="6">
                 <TextBlock Style="{StaticResource MaterialDesignSubheadingTextBlock}">Resultados</TextBlock>
-                <DataGrid x:Name="dataGrid" Margin="0 8 0 0" ItemsSource="{Binding CafResults}" CanUserSortColumns="True" CanUserAddRows="False" AutoGenerateColumns="False"
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"></ColumnDefinition>
+                        <ColumnDefinition Width="40"></ColumnDefinition>
+                    </Grid.ColumnDefinitions>
+                    <DataGrid Grid.Column="0" x:Name="dataGrid" Margin="0 8 0 0" ItemsSource="{Binding CafResults}" CanUserSortColumns="True" CanUserAddRows="False" AutoGenerateColumns="False"
                       materialDesign:DataGridAssist.CellPadding="13 8 8 8" materialDesign:DataGridAssist.ColumnHeaderPadding="8">
-                    <DataGrid.Columns>
-                        <StaticResource ResourceKey="SelectAllCheckboxColumn"/>
-                        <materialDesign:MaterialDataGridTextColumn Binding="{Binding Id}"
+                        <DataGrid.Columns>
+                            <StaticResource ResourceKey="SelectAllCheckboxColumn"/>
+                            <materialDesign:MaterialDataGridTextColumn Binding="{Binding Id}"
                                                                Header="ID"                                                        
                                                                EditingElementStyle="{StaticResource MaterialDesignDataGridTextColumnPopupEditingStyle}" 
                                                                />
-                        <materialDesign:MaterialDataGridTextColumn Binding="{Binding Type}"
+                            <materialDesign:MaterialDataGridTextColumn Binding="{Binding Type}"
                                                                Header="Tipo"                                                        
                                                                EditingElementStyle="{StaticResource MaterialDesignDataGridTextColumnPopupEditingStyle}" 
                                                                />
-                        <materialDesign:MaterialDataGridTextColumn Binding="{Binding Date}"
+                            <materialDesign:MaterialDataGridTextColumn Binding="{Binding Date}"
                                                                Header="Fecha"                                                        
                                                                EditingElementStyle="{StaticResource MaterialDesignDataGridTextColumnPopupEditingStyle}" 
                                                                />
-                        <materialDesign:MaterialDataGridTextColumn Binding="{Binding Start}"
+                            <materialDesign:MaterialDataGridTextColumn Binding="{Binding Start}"
                                                                Header="Folio Inicio"                                                        
                                                                EditingElementStyle="{StaticResource MaterialDesignDataGridTextColumnPopupEditingStyle}" 
                                                                />
-                        <materialDesign:MaterialDataGridTextColumn Binding="{Binding End}"
+                            <materialDesign:MaterialDataGridTextColumn Binding="{Binding End}"
                                                                Header="Folio Fin"                                                        
                                                                EditingElementStyle="{StaticResource MaterialDesignDataGridTextColumnPopupEditingStyle}" 
                                                                />
-                        <materialDesign:MaterialDataGridTextColumn Binding="{Binding Current}"
+                            <materialDesign:MaterialDataGridTextColumn Binding="{Binding Current}"
                                                                Header="Folio Actual"                                                        
                                                                EditingElementStyle="{StaticResource MaterialDesignDataGridTextColumnPopupEditingStyle}" 
                                                                />
 
-                        <materialDesign:MaterialDataGridTextColumn Binding="{Binding Store}"
+                            <materialDesign:MaterialDataGridTextColumn Binding="{Binding Store}"
                                                                Header="Tienda"                                                        
                                                                EditingElementStyle="{StaticResource MaterialDesignDataGridTextColumnPopupEditingStyle}" 
                                                                />
-                        <DataGridTemplateColumn>
-                            <DataGridTemplateColumn.CellTemplate>
-                                <DataTemplate>
-                                    <Grid>
-                                        <Button 
+                            <DataGridTemplateColumn>
+                                <DataGridTemplateColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <Grid>
+                                            <Button 
                                                 Content="Ver/Editar" 
                                                 Command="{Binding Path=DataContext.ShowDialogCommand,RelativeSource={RelativeSource AncestorType={x:Type DataGrid}}}" 
                                                 CommandParameter="{Binding}"  
                                                 Visibility="{Binding IsViewEditVisible, Converter={StaticResource BoolToVis}, FallbackValue=Hidden}"
                                                 Height="20" Width="80" Margin="0 0 0 0" Padding="0"/>
-                                    </Grid>
-                                </DataTemplate>
-                            </DataGridTemplateColumn.CellTemplate>
-                        </DataGridTemplateColumn>
-                    </DataGrid.Columns>
-                </DataGrid>
+                                        </Grid>
+                                    </DataTemplate>
+                                </DataGridTemplateColumn.CellTemplate>
+                            </DataGridTemplateColumn>
+                        </DataGrid.Columns>
+                    </DataGrid>
+                    <StackPanel Grid.Column="1" Margin="0 10 0 0 ">
+                        <Button Command="{Binding ShowDialogCommand}" Content="+" VerticalAlignment="Center" HorizontalAlignment="Center"></Button>
+                    </StackPanel>
+
+                </Grid>
 
             </StackPanel>
 
@@ -273,5 +283,5 @@
         </Grid>
         <TextBlock Text="{Binding Status}" Background="Blue" Foreground="White" FontWeight="Bold" Margin="10 10 10 10" Height="25"></TextBlock>
     </StackPanel>
-   
+
 </UserControl>

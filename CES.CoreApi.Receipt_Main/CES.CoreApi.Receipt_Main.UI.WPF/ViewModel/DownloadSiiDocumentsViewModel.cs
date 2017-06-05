@@ -26,6 +26,7 @@ namespace CES.CoreApi.Receipt_Main.UI.WPF.ViewModel
 {
     public class DownloadSiiDocumentsViewModel : INotifyPropertyChanged
     {
+        private const string ID_NEW = "(Nuevo)";
         private readonly DocumentDownloader _documentDownloader;
         private readonly XmlDocumentParser<EnvioBOLETA> _parserBoletas;
         private NewDocumentToDownloadViewModel _newDocumentToDownload;
@@ -36,7 +37,6 @@ namespace CES.CoreApi.Receipt_Main.UI.WPF.ViewModel
         private readonly ISequenceService _sequenceService;
         private readonly IStoreService _storeService;
         private readonly DelegateCommand<object> _searchRangesCommand;
-        private readonly DelegateCommand<object> _addNewRangeCommand;
         private readonly DelegateCommand<object> _cleanNewRangeCommand;
         private readonly DelegateCommand<object> _cancelNewRangeCommand;
         private readonly DelegateCommand<object> _downloadDocumentsCommand;
@@ -65,7 +65,6 @@ namespace CES.CoreApi.Receipt_Main.UI.WPF.ViewModel
             _storeService = storeService;
             _worker = new BackgroundWorker();
             _searchRangesCommand = new DelegateCommand<object>(SearchRanges, CanSearchRanges);
-            _addNewRangeCommand = new DelegateCommand<object>(AddNewRange, CanSearchRanges);
             _cleanNewRangeCommand = new DelegateCommand<object>(CleanNewRange, CanSearchRanges);
             _cancelNewRangeCommand = new DelegateCommand<object>(CancelNewRange, CanSearchRanges);
             _downloadDocumentsCommand = new DelegateCommand<object>(DownloadDocuments, CanSearchRanges);
@@ -76,7 +75,7 @@ namespace CES.CoreApi.Receipt_Main.UI.WPF.ViewModel
             _parserBoletas = new XmlDocumentParser<EnvioBOLETA>();
 
             NewDocumentToDownload = new NewDocumentToDownloadViewModel();
-            NewDocumentToDownload.ID = -1;
+            NewDocumentToDownload.ID = ID_NEW;
             DocumentsToDownload = new ObservableCollection<DocumentSearchToDownloadSelectableViewModel>();
             this.ViewSource = new CollectionViewSource();
             ViewSource.Source = DocumentsToDownload;
@@ -84,7 +83,7 @@ namespace CES.CoreApi.Receipt_Main.UI.WPF.ViewModel
 
             _documentHelper = new DocumentHandlerService(documentService, taxEntityService, taxAddressService, sequenceService, storeService);
 
-            DocumentTypeList = DocumentTypeHelper.LoadDocumenTypes();
+            DocumentTypeList = DocumentTypeHelper.GetDocumenTypes();
             SelectedDocumentTypeValue = DocumentTypeList.FirstOrDefault();
 
             var datetime = DateTime.Now.AddMonths(-1);
@@ -189,7 +188,7 @@ namespace CES.CoreApi.Receipt_Main.UI.WPF.ViewModel
 
         public ICommand ShowDialogCommand { get; }
         public DelegateCommand<object> SearchRangesCommand { get { return _searchRangesCommand; } }
-        public DelegateCommand<object> AddNewRangeCommand { get { return _addNewRangeCommand; } }
+       
         public DelegateCommand<object> CleanNewRangeCommand { get { return _cleanNewRangeCommand; } }
         public DelegateCommand<object> CancelNewRangeCommand { get { return _cancelNewRangeCommand; } }
         public DelegateCommand<object> DownloadDocumentsCommand { get { return _downloadDocumentsCommand; } }
@@ -204,17 +203,25 @@ namespace CES.CoreApi.Receipt_Main.UI.WPF.ViewModel
             {
                 NewDocumentToDownload.ID = objRange.ID;
                 NewDocumentToDownload.DocType = objRange.DocType;
+                NewDocumentToDownload.SelectedDocumentTypeValue = DocumentTypeHelper.GetDocumenTypes().Where(m => m.Description == objRange.DocType).FirstOrDefault();
                 NewDocumentToDownload.Start = objRange.Start;
                 NewDocumentToDownload.End = objRange.End;
+                NewDocumentToDownload.SelectedRangeTypeValue = objRange.RangeType;
+            }
+            else
+            {
+                ClearAddRangeDialog();
             }
 
-            var dialog = new AddEditRanges(NewDocumentToDownload) { };
+            var dialog = new AddEditRanges(NewDocumentToDownload);
 
             DialogHost.Show(dialog, DialogCloseEvenHandler);
         }
 
         public void DialogCloseEvenHandler(object sender, DialogClosingEventArgs args)
         {
+            if (!Equals(args.Parameter, true)) return;
+
             var dialog = args.Session.Content as AddEditRanges;
 
             var viewModelResult = dialog.DataContext as AddEditRangesViewModel;
@@ -223,23 +230,27 @@ namespace CES.CoreApi.Receipt_Main.UI.WPF.ViewModel
             {
                 NewDocumentToDownload = viewModelResult.NewDocumentToDownload;
 
+                if (string.IsNullOrWhiteSpace(this.NewDocumentToDownload.Start)) return;
+                if (string.IsNullOrWhiteSpace(this.NewDocumentToDownload.End)) return;
+
 
                 var start = this.NewDocumentToDownload.Start;
                 var end = this.NewDocumentToDownload.End;
                 var numberoffolios = int.Parse(end) - int.Parse(start) + 1;
 
-                if (this.NewDocumentToDownload.ID == -1)
+                if (this.NewDocumentToDownload.ID == ID_NEW)
                 {
                     var id = 0;
                     if (DocumentsToDownload.Count > 0)
                     {
-                        id = DocumentsToDownload.Last().ID + 1;
+                        id = int.Parse(DocumentsToDownload.Last().ID) + 1;
                     }
 
                     this.DocumentsToDownload.Add(new DocumentSearchToDownloadSelectableViewModel
                     {
-                        ID = id,
+                        ID = id.ToString(),
                         DocType = SelectedDocumentTypeValue.Code,
+                        RangeType = NewDocumentToDownload.SelectedRangeTypeValue,
                         Start = start,
                         End = end,
                         IsViewEditVisible = true,
@@ -249,26 +260,34 @@ namespace CES.CoreApi.Receipt_Main.UI.WPF.ViewModel
                 }
                 else
                 {
-                    DocumentsToDownload[NewDocumentToDownload.ID].NumberOfFolios = numberoffolios;
-                    DocumentsToDownload[NewDocumentToDownload.ID].Start = start;
-                    DocumentsToDownload[NewDocumentToDownload.ID].End = end;
+                    var index = 0;
+                    if (int.TryParse(NewDocumentToDownload.ID, out index))
+                    {
+                        DocumentsToDownload[index].NumberOfFolios = numberoffolios;
+                        DocumentsToDownload[index].Start = start;
+                        DocumentsToDownload[index].End = end;
+                    }
                 }
-
-                this.NewDocumentToDownload.ID = -1;
-                this.NewDocumentToDownload.Start = string.Empty;
-                this.NewDocumentToDownload.End = string.Empty;
-                this.NewDocumentToDownload.DocType = string.Empty;
 
                 UpdateRangesInDB();
 
                 ViewSource.View.Refresh();
             }
 
+            ClearAddRangeDialog();
+        }
+
+        private void ClearAddRangeDialog()
+        {
+            this.NewDocumentToDownload.ID = ID_NEW;
+            this.NewDocumentToDownload.Start = string.Empty;
+            this.NewDocumentToDownload.End = string.Empty;
+            this.NewDocumentToDownload.DocType = string.Empty;
         }
 
         private void UpdateRangesInDB()
         {
-            var rangesGrid = this.DocumentsToDownload.Where(m => m.IsViewEditVisible);
+            var rangesGrid = this.DocumentsToDownload.Where(m => m.RangeType == "Permanente");
             var newValue = JsonConvert.SerializeObject(rangesGrid);
             var objRangeDb = parameterService.GetAllParameters().Where(m => m.Name == "Download_Ranges").FirstOrDefault();
 
@@ -304,12 +323,12 @@ namespace CES.CoreApi.Receipt_Main.UI.WPF.ViewModel
             {
                 var valRangeDb = objRangeDb.Value;
                 var ranges = JsonConvert.DeserializeObject<List<DocumentSearchToDownloadSelectableViewModel>>(valRangeDb); // as ObservableCollection<DocumentSearchToDownloadSelectableViewModel>;
-                var idInit = DocumentsToDownload.Count == 0 ? 0 : DocumentsToDownload.Last().ID + 1;
+                var idInit = DocumentsToDownload.Count == 0 ? 0 : int.Parse(DocumentsToDownload.Last().ID) + 1;
                 foreach (var r in ranges)
                 {
                     DocumentsToDownload.Add(new DocumentSearchToDownloadSelectableViewModel
                     {
-                        ID = idInit,
+                        ID = idInit.ToString(),
                         Current = r.Current,
                         DocType = r.DocType,
                         Start = r.Start,
@@ -361,8 +380,8 @@ namespace CES.CoreApi.Receipt_Main.UI.WPF.ViewModel
             DocumentsToDownload.Clear();
             _worker = new BackgroundWorker();
             _worker.WorkerReportsProgress = true;
-            _worker.DoWork += worker_DoWork;
-            _worker.ProgressChanged += worker_ProgressChanged;
+            _worker.DoWork += worker_SearchDynamicRanges;
+            _worker.ProgressChanged += workerSearchRanges_ProgressChanged;
 
             _worker.RunWorkerAsync();
         }
@@ -375,39 +394,6 @@ namespace CES.CoreApi.Receipt_Main.UI.WPF.ViewModel
             }
 
             return true;
-        }
-
-        private void AddNewRange(object parameter)
-        {
-            var start = this.NewDocumentToDownload.Start;
-            var end = this.NewDocumentToDownload.End;
-            var numberoffolios = int.Parse(end) - int.Parse(start) + 1;
-
-            if (this.NewDocumentToDownload.ID == -1)
-            {
-                this.DocumentsToDownload.Add(new DocumentSearchToDownloadSelectableViewModel
-                {
-                    ID = DocumentsToDownload.Last().ID + 1,
-                    DocType = SelectedDocumentTypeValue.Code,
-                    Start = start,
-                    End = end,
-                    IsViewEditVisible = true,
-                    NumberOfFolios = numberoffolios
-                });
-            }
-            else
-            {
-                DocumentsToDownload[NewDocumentToDownload.ID - 1].NumberOfFolios = numberoffolios;
-                DocumentsToDownload[NewDocumentToDownload.ID - 1].Start = start;
-                DocumentsToDownload[NewDocumentToDownload.ID - 1].End = end;
-            }
-
-            this.NewDocumentToDownload.ID = -1;
-            this.NewDocumentToDownload.Start = string.Empty;
-            this.NewDocumentToDownload.End = string.Empty;
-            this.NewDocumentToDownload.DocType = string.Empty;
-
-            ViewSource.View.Refresh();
         }
 
         private bool CanAddNewRanges(object parameter)
@@ -452,7 +438,7 @@ namespace CES.CoreApi.Receipt_Main.UI.WPF.ViewModel
             this.CurrentProgress = 0;
             _worker = new BackgroundWorker();
             _worker.WorkerReportsProgress = true;
-            _worker.DoWork += worker_DoWorkDownload;
+            _worker.DoWork += worker_DownloadDocuments;
             _worker.ProgressChanged += workerDownload_ProgressChanged;
 
             _worker.RunWorkerAsync();
@@ -494,12 +480,54 @@ namespace CES.CoreApi.Receipt_Main.UI.WPF.ViewModel
 
         #endregion
 
-        private void worker_DoWork(object sender, DoWorkEventArgs e)
+        private void worker_SearchDynamicRanges(object sender, DoWorkEventArgs e)
         {
-            SearchDynamicFilters(sender as BackgroundWorker);
+            var backgroundWorker = sender as BackgroundWorker;
+
+            var iProgress = 5;
+            backgroundWorker.ReportProgress(iProgress);
+            var documentListGlobal = _documentService.GetAllDocumentsFoliosByType(SelectedDocumentTypeValue.Code, null, null).AsParallel();
+            iProgress = 10;
+            backgroundWorker.ReportProgress(iProgress);
+            var documentList = _documentService.GetAllDocumentsFoliosByType(SelectedDocumentTypeValue.Code, _startDate, _endDate).AsParallel();
+            iProgress = 20;
+            backgroundWorker.ReportProgress(iProgress);
+
+            if (documentList.Count() == 0)
+            {
+                iProgress = 0;
+                backgroundWorker.ReportProgress(iProgress, "No hay documentos en el rango de fecha y con las condiciones de busqueda.");
+                return;
+            }
+
+            var folioInicio = documentList.Min();
+            var folioFinal = documentList.Max();
+            var initialIds = Enumerable.Range(folioInicio, folioFinal - folioInicio + 1).AsParallel().ToArray();
+            var finalGapIds = initialIds.Except(documentList).AsParallel().ToArray();
+
+            iProgress = iProgress + 30;
+            backgroundWorker.ReportProgress(iProgress);
+
+            var differenceList = CreateDifferenceList(finalGapIds);
+
+            if (differenceList.Count == 0)
+            {
+                iProgress = 100;
+                backgroundWorker.ReportProgress(iProgress, "No hubo rangos encontrados para los parámetros suministrados");
+                return;
+            }
+
+            iProgress = iProgress + 40;
+            backgroundWorker.ReportProgress(iProgress);
+
+            _intervalList = GroupIntervals(differenceList);
+            _intervalList = FixFolioRangesWhenExistInDatabase(_intervalList, documentListGlobal);
+
+            iProgress = 100;
+            backgroundWorker.ReportProgress(iProgress);
         }
 
-        private void worker_DoWorkDownload(object sender, DoWorkEventArgs e)
+        private void worker_DownloadDocuments(object sender, DoWorkEventArgs e)
         {
             var bgw = sender as BackgroundWorker;
             List<int> detailids = null;
@@ -519,8 +547,8 @@ namespace CES.CoreApi.Receipt_Main.UI.WPF.ViewModel
             {
                 foreach (var rangeFolio in documentsSelected)
                 {
-                    var indexRange = rangeFolio.ID;
-                    DocumentsToDownload[indexRange].DownloadStatus = "Descargando...";
+                    var indexRange = int.Parse(rangeFolio.ID);
+                    DocumentsToDownload[indexRange].DownloadStatus = $"Descargando Folios...";
                     iprogress = (int)Math.Ceiling((i / (double)numberOfDocs) * 100);
                     bgw.ReportProgress(iprogress);
 
@@ -661,12 +689,11 @@ namespace CES.CoreApi.Receipt_Main.UI.WPF.ViewModel
 
             if (CurrentProgress == 100)
             {
-                //_msgbox("Descarga Finalizada", "Descarga");
                 Trace.Write("Descarga Finalizada");
                 Status = "Descarga Finalizada";
             }
         }
-        private void worker_ProgressChanged(object sender, ProgressChangedEventArgs e)
+        private void workerSearchRanges_ProgressChanged(object sender, ProgressChangedEventArgs e)
         {
             this.CurrentProgress = e.ProgressPercentage;
 
@@ -679,64 +706,34 @@ namespace CES.CoreApi.Receipt_Main.UI.WPF.ViewModel
             {
                 var index = 0;
                 DocumentsToDownload.Clear();
-                _intervalList.OrderBy(m => m.Item1).ToList().
-                    ForEach(m =>
-                    {
-                        DocumentsToDownload.Add(new DocumentSearchToDownloadSelectableViewModel()
-                        {
-                            ID = ++index,
-                            Start = $"{m.Item1}",
-                            End = $"{m.Item2}",
-                            DocType = SelectedDocumentTypeValue.Code,
-                            IsDynamic = true,
-                            IsViewEditVisible = false,
-                            NumberOfFolios = m.Item2 - m.Item1 + 1
-                        });
-                    });
+
+                if (_intervalList != null)
+                {
+                    _intervalList.OrderBy(m => m.Item1).ToList().
+                   ForEach(m =>
+                   {
+                       DocumentsToDownload.Add(new DocumentSearchToDownloadSelectableViewModel()
+                       {
+                           ID = (index).ToString(),
+                           Start = $"{m.Item1}",
+                           End = $"{m.Item2}",
+                           DocType = SelectedDocumentTypeValue.Code,
+                           IsDynamic = true,
+                           IsViewEditVisible = false,
+                           NumberOfFolios = m.Item2 - m.Item1 + 1
+                       });
+                   });
+                }
+
+                RetrieveRangesFromDB();
 
                 ViewSource.View.Refresh();
                 GridStatus = $"Número de Registros: {DocumentsToDownload.Count()}";
-                //_msgbox("Busqueda Finalizada", "Busqueda");
                 Trace.Write("Busqueda Finalizada");
                 Status = "Busqueda Finalizada";
             }
         }
-        private void SearchDynamicFilters(BackgroundWorker sender)
-        {
-            var iProgress = 5;
-            sender.ReportProgress(iProgress);
-            var documentListGlobal = _documentService.GetAllDocumentsFoliosByType(SelectedDocumentTypeValue.Code, null, null).AsParallel();
-            iProgress = 10;
-            sender.ReportProgress(iProgress);
-            var documentList = _documentService.GetAllDocumentsFoliosByType(SelectedDocumentTypeValue.Code, _startDate, _endDate).AsParallel();
-            iProgress = 20;
-            sender.ReportProgress(iProgress);
-
-            if (documentList.Count() == 0)
-            {
-                iProgress = 0;
-                sender.ReportProgress(iProgress, "No hay documentos en el rango de fecha y con las condiciones de busqueda.");
-                return;
-            }
-
-            var folioInicio = documentList.Min();
-            var folioFinal = documentList.Max();
-            var initialIds = Enumerable.Range(folioInicio, folioFinal - folioInicio + 1).AsParallel().ToArray();
-            var finalGapIds = initialIds.Except(documentList).AsParallel().ToArray();
-
-            iProgress = iProgress + 30;
-            sender.ReportProgress(iProgress);
-
-            var differenceList = CreateDifferenceList(finalGapIds);
-            iProgress = iProgress + 40;
-            sender.ReportProgress(iProgress);
-
-            _intervalList = GroupIntervals(differenceList);
-            _intervalList = FixFolioRangesWhenExistInDatabase(_intervalList, documentListGlobal);
-
-            iProgress = 100;
-            sender.ReportProgress(iProgress);
-        }
+       
         private List<Tuple<Tuple<int, int>, int>> CreateDifferenceList(int[] finalGapIds)
         {
             List<Tuple<Tuple<int, int>, int>> differenceList;
@@ -789,6 +786,13 @@ namespace CES.CoreApi.Receipt_Main.UI.WPF.ViewModel
                 var currentEndFolio = r.Item2;
 
                 var rangeFoundInDb = documentListGlobal.Where(m => m >= currentStartFolio && m <= currentEndFolio).OrderBy(m => m).AsParallel().ToArray();
+
+                if (rangeFoundInDb.Length == 0)
+                {
+                    newIntervalFolioList.Add(Tuple.Create(currentStartFolio, currentEndFolio));
+                    continue;
+                }
+
                 var firstFolioInDb = rangeFoundInDb.FirstOrDefault();
                 var lastFolioInDb = rangeFoundInDb.LastOrDefault();
 
@@ -801,11 +805,17 @@ namespace CES.CoreApi.Receipt_Main.UI.WPF.ViewModel
 
             var lastRangeFolio = newIntervalFolioList.Last();
             var lastRangeFolioList = Enumerable.Range(lastRangeFolio.Item1, lastRangeFolio.Item2 - lastRangeFolio.Item1 + 1);
-            var intersectionWithDbFolios = lastRangeFolioList.Intersect(documentListGlobal.OrderBy(m => m)).AsParallel();
-            var firstIntersectedFolioFound = intersectionWithDbFolios.FirstOrDefault();
-            newIntervalFolioList.RemoveAt(newIntervalFolioList.Count() - 1);
 
-            if (firstIntersectedFolioFound > lastRangeFolio.Item1) newIntervalFolioList.Add(Tuple.Create(lastRangeFolio.Item1, firstIntersectedFolioFound - 1));
+
+            var intersectionWithDbFolios = lastRangeFolioList.Intersect(documentListGlobal.OrderBy(m => m)).AsParallel();
+
+            if (intersectionWithDbFolios.Count() > 0)
+            {
+                var firstIntersectedFolioFound = intersectionWithDbFolios.FirstOrDefault();
+                newIntervalFolioList.RemoveAt(newIntervalFolioList.Count() - 1);
+
+                if (firstIntersectedFolioFound > lastRangeFolio.Item1) newIntervalFolioList.Add(Tuple.Create(lastRangeFolio.Item1, firstIntersectedFolioFound - 1));
+            }
 
             return newIntervalFolioList;
         }

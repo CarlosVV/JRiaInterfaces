@@ -53,7 +53,7 @@ namespace CES.CoreApi.Receipt_Main.Service.Services
 
 
                 Logging.Log.Info("Insert into DB");
-                var objDbCaf = CreateCAFModel(request.FolioStartNumber, request.FolioEndNumber, 0, request.RecAgent, xml, objCAF);
+                var objDbCaf = CreateCAFModel(request.FolioStartNumber, request.FolioEndNumber, request.FolioCurrentNumber, request.RecAgent, xml, objCAF);
 
                 if (ValidateCaf(objDbCaf))
                 {

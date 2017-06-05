@@ -4,6 +4,7 @@
         xmlns:model="clr-namespace:CES.CoreApi.Receipt_Main.UI.WPF.Model"
         xmlns:system="clr-namespace:System;assembly=mscorlib"
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+        xml:lang="es-CL"
         Title="Ria Financial" Height="750" Width="900"
         TextElement.Foreground="{DynamicResource MaterialDesignBody}"
         TextElement.FontWeight="Regular"
@@ -15,7 +16,7 @@
         Icon="../ria-financial-squarelogo.png" 
         WindowStartupLocation="CenterScreen"        
         Unloaded="Window_Unloaded"
-        ResizeMode="NoResize">
+        ResizeMode="CanResize">
     <Window.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
@@ -85,7 +86,7 @@
                                         x:Name="MenuToggleButton"/>
                         <materialDesign:PopupBox DockPanel.Dock="Right" PlacementMode="BottomAndAlignRightEdges" StaysOpen="False">
                             <StackPanel>
-                                <Button Content="Hello World" Click="MenuPopupButton_OnClick"/>
+                                <Button Content="Hello World"/>
                                 <Button Content="Nice Popup" />
                                 <Button Content="Can't Touch This" IsEnabled="False" />
                                 <Separator/>

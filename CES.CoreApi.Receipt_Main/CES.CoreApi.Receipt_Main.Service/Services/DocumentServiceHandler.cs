@@ -10,6 +10,7 @@ using CES.CoreApi.Receipt_Main.Service.Jobs;
 using CES.CoreApi.Receipt_Main.Service.Models;
 using CES.CoreApi.Receipt_Main.Service.Repositories;
 using Hangfire;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -92,12 +93,44 @@ namespace CES.CoreApi.Receipt_Main.Service.Services
         //    throw new NotImplementedException();
         //}
 
-        internal TaxSIIGetDocumentBatchResponse CreateTaskSiiGetDocumentBatch(TaxSIIGetDocumentBatchRequest taxSIIGetDocumentBatchInternalRequest)
+        internal TaxSIIGetDocumentBatchResponse CreateTaskSiiGetDocumentBatch(TaxSIIGetDocumentBatchRequest request)
         {
             var response = new TaxSIIGetDocumentBatchResponse();
 
-            var job = new BatchDownloadJob();
-            BackgroundJob.Enqueue(() => job.Execute(taxSIIGetDocumentBatchInternalRequest.FolioStart, taxSIIGetDocumentBatchInternalRequest.FolioEnd));
+            var taskService = new TaskService(new TaskRepository(new ReceiptDbContext()));
+
+            var parameters = new DownloadBatchTaskParameter { FolioStart = request.FolioStart, FolioEnd = request.FolioEnd };
+            var jsonParameters = JsonConvert.SerializeObject(parameters);
+
+            var task = taskService.GetAllTasks().Where(m => m.TaskType == 1 && m.Method == "Batch" && m.RequestObject == jsonParameters).FirstOrDefault();
+
+            if (task != null)
+            {
+                response.Status = $"Descargados {CountFoliosInDb(request.FolioStart, request.FolioEnd).ToString()} de {request.FolioEnd - request.FolioStart + 1}";
+            }
+            else
+            {
+                var id = taskService.GetAllTasks().Count() + 1;
+                var newtask = new Domain.Core.Tasks.systblApp_CoreAPI_Task()
+                {
+                    Id = id,
+                    TaskType = 1,
+                    Status = 1,
+                    CountExecution = 0,
+                    StartDateTime = DateTime.Now,
+                    RequestObject = jsonParameters,
+                    Method = "Batch"
+                };
+
+                taskService.CreateTask(newtask);
+
+                taskService.SaveChanges();
+
+                response.Status = $"Descarga iniciada de {request.FolioStart} a {request.FolioEnd}";
+
+                var job = new BatchDownloadJob();
+                BackgroundJob.Enqueue(() => job.Execute(id));
+            }
 
             response.ResponseTime = DateTime.Now;
             response.TransferDate = DateTime.Now;
@@ -115,7 +148,7 @@ namespace CES.CoreApi.Receipt_Main.Service.Services
             var docType = "39";
             var folio = taxSIIGetDocumentInternalRequest.Folio;
             var respuesta = string.Empty;
-            var _parserBoletas = new XmlDocumentParser<EnvioBOLETA> ();
+            var _parserBoletas = new XmlDocumentParser<EnvioBOLETA>();
             var indexchunk = 1;
             var acumchunk = 0;
 
@@ -142,6 +175,17 @@ namespace CES.CoreApi.Receipt_Main.Service.Services
         {
             var _documentServiceToSearch = new DocumentService(new DocumentRepository(new ReceiptDbContext()));
             return _documentServiceToSearch.GetAllDocuments().Where(m => m.Folio == folio).FirstOrDefault();
-        }        
+        }
+        private bool ExistsFolioInDB(int folio)
+        {
+            var _documentServiceToSearch = new DocumentService(new DocumentRepository(new ReceiptDbContext()));
+            return _documentServiceToSearch.GetAllDocuments().Any(m => m.Folio == folio);
+        }
+
+        private int CountFoliosInDb(int folioStart, int folioEnd)
+        {
+            var _documentServiceToSearch = new DocumentService(new DocumentRepository(new ReceiptDbContext()));
+            return _documentServiceToSearch.GetAllDocuments().Count(m => m.Folio >= folioStart && m.Folio <= folioEnd);
+        }
     }
 }

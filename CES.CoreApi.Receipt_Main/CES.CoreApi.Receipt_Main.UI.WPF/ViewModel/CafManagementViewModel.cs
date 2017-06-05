@@ -38,7 +38,7 @@ namespace CES.CoreApi.Receipt_Main.UI.WPF.ViewModel
         {
             _cafApiService = new CafApiService();
 
-            DocumentTypeList = DocumentTypeHelper.LoadDocumenTypes();
+            DocumentTypeList = DocumentTypeHelper.GetDocumenTypes();
             DocumentTypeList.Insert(0, new Document_Type() { Code = "0", Description = "--Seleccione una Tipo --" });
             SelectedDocumentTypeValue = DocumentTypeList.FirstOrDefault();
 
@@ -63,18 +63,27 @@ namespace CES.CoreApi.Receipt_Main.UI.WPF.ViewModel
 
         }
         private void ShowDialogAction(object obj)
+
         {
-            var cafGridItem = obj as CafResultSelectableViewModel;
-            var recAgent = string.IsNullOrWhiteSpace(cafGridItem.Store) ? 0 : storeService.GetAllStores().Where(s => s.Name == cafGridItem.Store).FirstOrDefault().Id;
-            var docType = string.IsNullOrWhiteSpace(cafGridItem.Type) ? string.Empty : DocumentTypeList.Where(s => s.Description == cafGridItem.Type).FirstOrDefault().Code;
-            var cafObject = _cafApiService.SearchCafs(int.Parse(cafGridItem.Id), docType, int.Parse(cafGridItem.Start), int.Parse(cafGridItem.End), int.Parse(cafGridItem.Current), recAgent).FirstOrDefault();
+            var cafObject = new systblApp_CoreAPI_Caf();
+            if (obj != null)
+            {
+                var cafGridItem = obj as CafResultSelectableViewModel;
+                var recAgent = string.IsNullOrWhiteSpace(cafGridItem.Store) ? 0 : storeService.GetAllStores().Where(s => s.Name == cafGridItem.Store).FirstOrDefault().Id;
+                var docType = string.IsNullOrWhiteSpace(cafGridItem.Type) ? string.Empty : DocumentTypeList.Where(s => s.Description == cafGridItem.Type).FirstOrDefault().Code;
 
-    
-            var dialog = new CafForm(storeService, dialogService, cafObject)
-            {               
-            };
+                cafObject = _cafApiService.SearchCafs(int.Parse(cafGridItem.Id), docType, int.Parse(cafGridItem.Start), int.Parse(cafGridItem.End), int.Parse(cafGridItem.Current), recAgent).FirstOrDefault();
+            }
 
-            DialogHost.Show(dialog, "RootDialog");
+            var dialog = new CafForm(storeService, dialogService, cafObject);
+
+            DialogHost.Show(dialog, DialogCloseEvenHandler);
+        }
+
+        public void DialogCloseEvenHandler(object sender, DialogClosingEventArgs args)
+        {
+            if (!Equals(args.Parameter, true)) return;
+
         }
 
         public ICommand ClearCommand { get; }
@@ -165,17 +174,17 @@ namespace CES.CoreApi.Receipt_Main.UI.WPF.ViewModel
             FolioStartNumber = 0;
             FolioEndNumber = 0;
             FolioCurrentNumber = 0;
-            SelectedDocumentTypeValue = new Document_Type() { Code = "0", Description = "--Seleccione una Tipo --" };
-            SelectedStoreValue = new systblApp_TaxReceipt_Store() { Id = 0, Name = "--Seleccione una Tienda --" };           
+            SelectedDocumentTypeValue = new Document_Type() { Code = "0", Description = "--Seleccione Tipo Documento --" };
+            SelectedStoreValue = new systblApp_TaxReceipt_Store() { Id = 0, Name = "--Seleccione Tienda --" };
         }
 
         private void Delete(object obj)
         {
             var itemsToDelete = CafResults.Where(m => m.IsSelected);
 
-            if(itemsToDelete != null && itemsToDelete.Count() > 0)
+            if (itemsToDelete != null && itemsToDelete.Count() > 0)
             {
-               foreach(var item in itemsToDelete)
+                foreach (var item in itemsToDelete)
                 {
                     var cafService = new CafApiService();
 

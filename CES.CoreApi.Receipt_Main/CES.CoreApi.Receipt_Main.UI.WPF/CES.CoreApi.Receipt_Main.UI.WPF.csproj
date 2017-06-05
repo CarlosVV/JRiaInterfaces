@@ -167,9 +167,6 @@
     <Compile Include="View\CafForm.xaml.cs">
       <DependentUpon>CafForm.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\CafFormWindowDialog.xaml.cs">
-      <DependentUpon>CafFormWindowDialog.xaml</DependentUpon>
-    </Compile>
     <Compile Include="View\CafManagement.xaml.cs">
       <DependentUpon>CafManagement.xaml</DependentUpon>
     </Compile>
@@ -227,10 +224,6 @@
     <Compile Include="View\UserManagement.xaml.cs">
       <DependentUpon>UserManagement.xaml</DependentUpon>
     </Compile>
-    <Page Include="Domain\SampleMessageDialog.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
     <Page Include="View\ActivityDetail.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -244,10 +237,6 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\CafForm.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="View\CafFormWindowDialog.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -282,9 +271,6 @@
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="Domain\SampleMessageDialog.xaml.cs">
-      <DependentUpon>SampleMessageDialog.xaml</DependentUpon>
     </Compile>
     <Compile Include="ViewModel\AuthenticationViewModel.cs" />
     <Compile Include="ViewModel\IView.cs" />
