@@ -47,6 +47,11 @@
     <Compile Include="Contracts\Models\DocumentSearchResultItem.cs" />
     <Compile Include="Contracts\Models\ErrorModel.cs" />
     <Compile Include="Contracts\Models\ReturnInfo.cs" />
+    <Compile Include="Contracts\Models\TaxAddress.cs" />
+    <Compile Include="Contracts\Models\TaxDocument.cs" />
+    <Compile Include="Contracts\Models\TaxDocumentDetail.cs" />
+    <Compile Include="Contracts\Models\TaxDocumentReference.cs" />
+    <Compile Include="Contracts\Models\TaxEntity.cs" />
     <Compile Include="Contracts\ViewModels\ServiceMTGenerateComplianceRequestViewModel.cs" />
     <Compile Include="Contracts\ViewModels\ServiceMTGenerateOrderSendRequestViewModel.cs" />
     <Compile Include="Contracts\ViewModels\ServiceMTGeneratePayoutRequestViewModel.cs" />

@@ -213,7 +213,7 @@ namespace CES.CoreApi.Receipt_Main.UI.WPF.ViewModel
                         Id = $"{item.Id}",
                         Start = $"{item.FolioStartNumber}",
                         End = $"{item.FolioEndNumber}",
-                        Current = $"{FolioCurrentNumber}",
+                        Current = $"{item.FolioCurrentNumber}",
                         Date = $"{item.AuthorizationDate.ToShortDateString()}",
                         Type = DocumentTypeList.Where(m => m.Code == item.DocumentType).FirstOrDefault().Description,
                         Store = item.RecAgent == 0 ? string.Empty : StoreList.Where(m => m.Id == item.RecAgent).FirstOrDefault().Name,

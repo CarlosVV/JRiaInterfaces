@@ -1,6 +1,8 @@
 ﻿using AutoMapper;
 using CES.CoreApi.Receipt_Main.Service.Models;
 using CES.CoreApi.Receipt_Main.Domain.Core.Contracts.ViewModels;
+using CES.CoreApi.Receipt_Main.Domain.Core.Documents;
+using CES.CoreApi.Receipt_Main.Domain.Core.Contracts.Models;
 
 namespace CES.CoreApi.Receipt_Main.Service.App_Start
 {
@@ -46,6 +48,13 @@ namespace CES.CoreApi.Receipt_Main.Service.App_Start
 
             Mapper.CreateMap<ServiceTaxSIIGetDocumentBatchRequestViewModel, TaxSIIGetDocumentBatchRequest>();
             Mapper.CreateMap<TaxSIIGetDocumentBatchResponse, ServiceTaxSIIGetDocumentBatchResponseViewModel>();
+
+            //Map EF Entities to Response Classes
+            Mapper.CreateMap<systblApp_CoreAPI_Document, TaxDocument>();
+            Mapper.CreateMap<systblApp_CoreAPI_DocumentDetail, TaxDocumentDetail>();
+            Mapper.CreateMap<systblApp_CoreAPI_DocumentReference, TaxDocumentReference>();
+            Mapper.CreateMap<systblApp_CoreAPI_TaxAddress, TaxAddress>();
+            Mapper.CreateMap<systblApp_CoreAPI_TaxEntity, TaxEntity>();
         }
     }
 }

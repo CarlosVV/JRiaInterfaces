@@ -57,6 +57,16 @@ namespace CES.CoreApi.Shared.Persistence.Model
         TaxSearchDocumentResponse = 65,
         TaxGenerateReceiptResponse = 66,
         TaxSIIGetDocumentBatchResponse = 67,
+        TaxUpdateCAFRequest = 68,
+        TaxSearchCAFByTypeRequest = 69,
+        TaxDeleteCAFRequest = 70,
+        TaxUpdateFolioRequest = 71,
+        TaxCreateDocumentRequest = 72,
+        TaxSearchDocumentRequest = 73,
+        TaxGenerateReceiptRequest = 74,
+        TaxSIIGetDocumentRequest = 75,
+        TaxSIISendDocumentRequest = 76,
+        TaxSIIGetDocumentBatchRequest = 77,
     }
 }
 

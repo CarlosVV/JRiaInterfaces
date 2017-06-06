@@ -81,54 +81,7 @@ namespace CES.CoreApi.Receipt_Main.Service.Controllers
 
             return Content(HttpStatusCode.OK, response);
         }
-
-
-        //Search per Type, RNGD, RNGH
-        [HttpPost]
-        [Route("tax/caf/search")]
-        public IHttpActionResult PostSearchCAFByType(ServiceTaxSearchCAFByTypeRequestViewModel request)
-        {
-            #region Persistence
-            var client = new Client();
-            var persistenceID = client.GetPersistenceID();
-            #endregion
-
-            _logService.LogInfoObjectToJson("Request", request);
-            Logging.Log.Info("Generating request...");
-
-            var results = new ServiceTaxSearchCAFByTypeRequestViewModelValidator().Validate(request);
-
-            if (!results.IsValid)
-            {
-                return Content(HttpStatusCode.BadRequest, results);
-            }
-
-            var taxSearchCAFByTypeInternalRequest = AutoMapper.Mapper.Map<TaxSearchCAFByTypeRequest>(request);
-
-            taxSearchCAFByTypeInternalRequest.HeaderInfo = new HeaderInfo
-            {
-                ApplicationId = HeaderHelper.ApplicationId,
-                CesUserId = HeaderHelper.CesUserId,
-                CesAppObjectId = HeaderHelper.CesAppObjectId,
-                CesRequestTime = HeaderHelper.CesRequestTime,
-            };
-
-            Logging.Log.Info("Processing call...");
-            var serviceResponse = _cafservice.SearchCaf(taxSearchCAFByTypeInternalRequest);
-            Logging.Log.Info("Processed Successfully.");
-
-            Logging.Log.Info("Returning Response.");
-
-            var response = AutoMapper.Mapper.Map<ServiceTaxSearchCAFByTypeResponseViewModel>(serviceResponse);
-            response.PersistenceId = persistenceID;
-
-            #region Persistence
-            _persistenceHelper.CreatePersistence<ServiceTaxSearchCAFByTypeResponseViewModel>(response, persistenceID, 0, PersistenceEventType.TaxSearchCAFResponse);
-            #endregion
-
-            return Content(HttpStatusCode.OK, response);
-        }
-
+        
         //-	Update
         [HttpPut]
         [Route("tax/caf")]
@@ -176,6 +129,52 @@ namespace CES.CoreApi.Receipt_Main.Service.Controllers
             return Content(HttpStatusCode.OK, response);
         }
 
+        //Search per Type, RNGD, RNGH
+        [HttpPost]
+        [Route("tax/caf/search")]
+        public IHttpActionResult PostSearchCAFByType(ServiceTaxSearchCAFByTypeRequestViewModel request)
+        {
+            #region Persistence
+            var client = new Client();
+            var persistenceID = client.GetPersistenceID();
+            #endregion
+
+            _logService.LogInfoObjectToJson("Request", request);
+            Logging.Log.Info("Generating request...");
+
+            var results = new ServiceTaxSearchCAFByTypeRequestViewModelValidator().Validate(request);
+
+            if (!results.IsValid)
+            {
+                return Content(HttpStatusCode.BadRequest, results);
+            }
+
+            var taxSearchCAFByTypeInternalRequest = AutoMapper.Mapper.Map<TaxSearchCAFByTypeRequest>(request);
+
+            taxSearchCAFByTypeInternalRequest.HeaderInfo = new HeaderInfo
+            {
+                ApplicationId = HeaderHelper.ApplicationId,
+                CesUserId = HeaderHelper.CesUserId,
+                CesAppObjectId = HeaderHelper.CesAppObjectId,
+                CesRequestTime = HeaderHelper.CesRequestTime,
+            };
+
+            Logging.Log.Info("Processing call...");
+            var serviceResponse = _cafservice.SearchCaf(taxSearchCAFByTypeInternalRequest);
+            Logging.Log.Info("Processed Successfully.");
+
+            Logging.Log.Info("Returning Response.");
+
+            var response = AutoMapper.Mapper.Map<ServiceTaxSearchCAFByTypeResponseViewModel>(serviceResponse);
+            response.PersistenceId = persistenceID;
+
+            #region Persistence
+            _persistenceHelper.CreatePersistence<ServiceTaxSearchCAFByTypeResponseViewModel>(response, persistenceID, 0, PersistenceEventType.TaxSearchCAFResponse);
+            #endregion
+
+            return Content(HttpStatusCode.OK, response);
+        }
+        
         //Delete   
         //[HttpDelete]
         [HttpPost]

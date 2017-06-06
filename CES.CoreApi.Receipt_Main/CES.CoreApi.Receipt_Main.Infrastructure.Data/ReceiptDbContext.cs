@@ -37,7 +37,7 @@ namespace CES.CoreApi.Receipt_Main.Infrastructure.Data
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {          
             modelBuilder.Conventions.Remove<PluralizingTableNameConvention>();
-            //modelBuilder.Entity<User>().ToTable("User");
+
             modelBuilder.Entity<systblApp_CoreApi_Sequence>().ToTable("systblApp_CoreApi_Sequence");
             modelBuilder.Entity<systblApp_CoreAPI_Caf>().ToTable("systblApp_CoreAPI_Caf");
 

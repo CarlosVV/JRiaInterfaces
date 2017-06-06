@@ -70,21 +70,138 @@ namespace CES.CoreApi.Receipt_Main.Service.Utilities
 
             try
             {
-                if (request.Method.Method.Equals("Post")  && request.RequestUri.AbsoluteUri.ToLower().Contains("/receipt/tax/caf"))
+                if (request.Method.Method.Equals("POST")  && request.RequestUri.AbsoluteUri.ToLower().Contains("/receipt/tax/caf"))
                 {
+                    var req = JsonConvert.DeserializeObject<ServiceTaxCreateCAFRequestViewModel>(jsonContent);
 
-                    var serviceTaxCreateCAFRequestViewModel = JsonConvert.DeserializeObject<ServiceTaxCreateCAFRequestViewModel>(jsonContent);
-
-
-                    if (serviceTaxCreateCAFRequestViewModel != null)
+                    if (req != null)
                     {
-                        var persistence = _persistenceHelper.CreatePersistenceRequest<ServiceTaxCreateCAFRequestViewModel>(serviceTaxCreateCAFRequestViewModel, 0, PersistenceEventType.TaxCreateCAFRequest);
+                        var persistence = _persistenceHelper.CreatePersistenceRequest<ServiceTaxCreateCAFRequestViewModel>(req, 0, PersistenceEventType.TaxCreateCAFRequest);
 
                         persistenceID = persistence.PersistenceID;
                     }
-
-
                 }
+
+                if (request.Method.Method.Equals("POST") && request.RequestUri.AbsoluteUri.ToLower().Contains("/receipt/tax/caf"))
+                {
+                    var req = JsonConvert.DeserializeObject<ServiceTaxUpdateCAFRequestViewModel>(jsonContent);
+
+                    if (req != null)
+                    {
+                        var persistence = _persistenceHelper.CreatePersistenceRequest<ServiceTaxUpdateCAFRequestViewModel>(req, 0, PersistenceEventType.TaxUpdateCAFRequest);
+
+                        persistenceID = persistence.PersistenceID;
+                    }
+                }
+
+                if (request.Method.Method.Equals("POST") && request.RequestUri.AbsoluteUri.ToLower().Contains("/receipt/tax/caf/search"))
+                {
+                    var req = JsonConvert.DeserializeObject<ServiceTaxSearchCAFByTypeRequestViewModel>(jsonContent);
+
+                    if (req != null)
+                    {
+                        var persistence = _persistenceHelper.CreatePersistenceRequest<ServiceTaxSearchCAFByTypeRequestViewModel>(req, 0, PersistenceEventType.TaxSearchCAFByTypeRequest);
+
+                        persistenceID = persistence.PersistenceID;
+                    }
+                }
+
+                if (request.Method.Method.Equals("POST") && request.RequestUri.AbsoluteUri.ToLower().Contains("/receipt/tax/caf/delete"))
+                {
+                    var req = JsonConvert.DeserializeObject<ServiceTaxDeleteCAFRequestViewModel>(jsonContent);
+
+                    if (req != null)
+                    {
+                        var persistence = _persistenceHelper.CreatePersistenceRequest<ServiceTaxDeleteCAFRequestViewModel>(req, 0, PersistenceEventType.TaxDeleteCAFRequest);
+
+                        persistenceID = persistence.PersistenceID;
+                    }
+                }
+
+                if (request.Method.Method.Equals("PATCH") && request.RequestUri.AbsoluteUri.ToLower().Contains("/receipt/tax/caf/folio"))
+                {
+                    var req = JsonConvert.DeserializeObject<ServiceTaxUpdateFolioRequestViewModel>(jsonContent);
+
+                    if (req != null)
+                    {
+                        var persistence = _persistenceHelper.CreatePersistenceRequest<ServiceTaxUpdateFolioRequestViewModel>(req, 0, PersistenceEventType.TaxUpdateFolioRequest);
+
+                        persistenceID = persistence.PersistenceID;
+                    }
+                }
+
+                if (request.Method.Method.Equals("POST") && request.RequestUri.AbsoluteUri.ToLower().Contains("/receipt/tax/document"))
+                {
+                    var req = JsonConvert.DeserializeObject<ServiceTaxCreateDocumentRequestViewModel>(jsonContent);
+
+                    if (req != null)
+                    {
+                        var persistence = _persistenceHelper.CreatePersistenceRequest<ServiceTaxCreateDocumentRequestViewModel>(req, 0, PersistenceEventType.TaxCreateDocumentRequest);
+
+                        persistenceID = persistence.PersistenceID;
+                    }
+                }
+
+                if (request.Method.Method.Equals("POST") && request.RequestUri.AbsoluteUri.ToLower().Contains("/receipt/tax/document/search"))
+                {
+                    var req = JsonConvert.DeserializeObject<ServiceTaxSearchDocumentRequestViewModel>(jsonContent);
+
+                    if (req != null)
+                    {
+                        var persistence = _persistenceHelper.CreatePersistenceRequest<ServiceTaxSearchDocumentRequestViewModel>(req, 0, PersistenceEventType.TaxSearchDocumentRequest);
+
+                        persistenceID = persistence.PersistenceID;
+                    }
+                }
+
+                if (request.Method.Method.Equals("POST") && request.RequestUri.AbsoluteUri.ToLower().Contains("/receipt/tax/generate"))
+                {
+                    var req = JsonConvert.DeserializeObject<ServiceTaxGenerateReceiptRequestViewModel>(jsonContent);
+
+                    if (req != null)
+                    {
+                        var persistence = _persistenceHelper.CreatePersistenceRequest<ServiceTaxGenerateReceiptRequestViewModel>(req, 0, PersistenceEventType.TaxGenerateReceiptRequest);
+
+                        persistenceID = persistence.PersistenceID;
+                    }
+                }
+
+                if (request.Method.Method.Equals("POST") && request.RequestUri.AbsoluteUri.ToLower().Contains("/receipt/tax/sii/document"))
+                {
+                    var req = JsonConvert.DeserializeObject<ServiceTaxSIISendDocumentRequestViewModel>(jsonContent);
+
+                    if (req != null)
+                    {
+                        var persistence = _persistenceHelper.CreatePersistenceRequest<ServiceTaxSIISendDocumentRequestViewModel>(req, 0, PersistenceEventType.TaxSIISendDocumentRequest);
+
+                        persistenceID = persistence.PersistenceID;
+                    }
+                }
+
+                if (request.Method.Method.Equals("POST") && request.RequestUri.AbsoluteUri.ToLower().Contains("/receipt/tax/sii/document/get"))
+                {
+                    var req = JsonConvert.DeserializeObject<ServiceTaxSIIGetDocumentRequestViewModel>(jsonContent);
+
+                    if (req != null)
+                    {
+                        var persistence = _persistenceHelper.CreatePersistenceRequest<ServiceTaxSIIGetDocumentRequestViewModel>(req, 0, PersistenceEventType.TaxSIIGetDocumentRequest);
+
+                        persistenceID = persistence.PersistenceID;
+                    }
+                }
+
+                if (request.Method.Method.Equals("POST") && request.RequestUri.AbsoluteUri.ToLower().Contains("/receipt/tax/sii/documentbatch/get"))
+                {
+                    var req = JsonConvert.DeserializeObject<ServiceTaxSIIGetDocumentBatchRequestViewModel>(jsonContent);
+
+                    if (req != null)
+                    {
+                        var persistence = _persistenceHelper.CreatePersistenceRequest<ServiceTaxSIIGetDocumentBatchRequestViewModel>(req, 0, PersistenceEventType.TaxSIIGetDocumentBatchRequest);
+
+                        persistenceID = persistence.PersistenceID;
+                    }
+                }
+
 
                 request.Headers.Add("persistenceID", persistenceID.ToString());
 

@@ -56,14 +56,10 @@ namespace CES.CoreApi.Receipt_Main.UI.WPF.ViewModel
 
             OpenFileCommand = new RelayCommand(OpenFile);
             SaveCommand = new RelayCommand(Save);
-            ClearCommand = new RelayCommand(Clear);
-            CancelCommand = new RelayCommand(Cancel);
-
-            OkCommand = new RelayCommand(Ok);
-
             Disabled = false;
 
             this.cafObjectModel = cafObjectModel;
+
             if (cafObjectModel != null)
             {
                 ID = cafObjectModel.Id;
@@ -148,7 +144,7 @@ namespace CES.CoreApi.Receipt_Main.UI.WPF.ViewModel
                 var xmlobject = parser.GetDocumentObjectFromString(_xmlContent);
                 FolioStartNumber = xmlobject.CAF.DA.RNG.D;
                 FolioEndNumber = xmlobject.CAF.DA.RNG.H;
-                _selectedDocumentTypeValue = DocumentTypeList.Where(m => m.Code == xmlobject.CAF.DA.TD.ToString()).FirstOrDefault();
+                SelectedDocumentTypeValue = DocumentTypeList.Where(m => m.Code == xmlobject.CAF.DA.TD.ToString()).FirstOrDefault();
                 Disabled = false;
             }
         }
@@ -159,6 +155,12 @@ namespace CES.CoreApi.Receipt_Main.UI.WPF.ViewModel
             var storeid = 0;
             var doctype = "39";
 
+            if (FolioCurrentNumber < FolioStartNumber || FolioCurrentNumber > FolioEndNumber)
+            {
+                Status = "Folio Actual debe ser mayor o igual al folio inicial y menor o igual al folio final";
+                return;
+            }
+
             if (SelectedDocumentTypeValue != null)
             {
                 doctype = SelectedDocumentTypeValue.Code;
@@ -167,8 +169,7 @@ namespace CES.CoreApi.Receipt_Main.UI.WPF.ViewModel
             if (SelectedStoreValue != null)
             {
                 storeid = SelectedStoreValue.Id;
-            }
-
+            }           
 
             try
             {
@@ -196,11 +197,7 @@ namespace CES.CoreApi.Receipt_Main.UI.WPF.ViewModel
             FolioEndNumber = 0;
             FolioStartNumber = 0;
         }
-        private void Cancel(object obj)
-        {
-        }
-
-        public Document_Type SelectedDocumentTypeValue
+       public Document_Type SelectedDocumentTypeValue
         {
             get { return _selectedDocumentTypeValue; }
             set

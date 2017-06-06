@@ -63,17 +63,6 @@ namespace CES.CoreApi.Receipt_Main.UI.WPF
             MenuToggleButton.IsChecked = false;
         }
 
-        //private async void MenuPopupButton_OnClick(object sender, RoutedEventArgs e)
-        //{
-        //    //var user = _userservice.GetAllUsers().FirstOrDefault();
-        //    //var sampleMessageDialog = new SampleMessageDialog
-        //    //{
-        //    //    Message = { Text = $"{((ButtonBase)sender).Content} {user.Name}" }
-        //    //};
-
-        //    //await DialogHost.Show(sampleMessageDialog, "RootDialog");
-        //}
-
         private void Window_Unloaded(object sender, RoutedEventArgs e)
         {
             System.Windows.Application.Current.Shutdown();

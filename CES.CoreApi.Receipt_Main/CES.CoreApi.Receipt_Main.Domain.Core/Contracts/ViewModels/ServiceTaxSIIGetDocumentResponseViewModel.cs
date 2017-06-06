@@ -10,7 +10,7 @@ namespace CES.CoreApi.Receipt_Main.Domain.Core.Contracts.ViewModels
 {
     public class ServiceTaxSIIGetDocumentResponseViewModel
     {
-        public systblApp_CoreAPI_Document Document { get; set; }
+        public TaxDocument Document { get; set; }
         public DateTime TransferDate { get; set; }
         public ReturnInfo ReturnInfo { get; set; }
         public DateTime ResponseTime { get; set; }

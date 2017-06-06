@@ -56,7 +56,13 @@ namespace CES.CoreApi.Shared.Persistence.Model
         {
             try
             {
-                return JsonConvert.SerializeObject(ContentObject);
+                JsonSerializerSettings settings = new JsonSerializerSettings
+                {
+                    ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore,
+                    Formatting = Formatting.Indented
+                };
+
+                return JsonConvert.SerializeObject(ContentObject, settings);
             }
             catch (Exception ex)
             {

@@ -159,7 +159,7 @@ namespace CES.CoreApi.Receipt_Main.Service.Services
 
         internal object DeleteCAF(TaxDeleteCAFRequest request)
         {
-            var response = new TaxUpdateCafResponse();
+            var response = new TaxDeleteCAFResponse();
             try
             {
                 Logging.Log.Info("Deleting CAF in DB");

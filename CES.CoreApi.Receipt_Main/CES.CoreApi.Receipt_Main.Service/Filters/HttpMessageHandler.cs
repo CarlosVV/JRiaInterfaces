@@ -32,7 +32,6 @@ namespace CES.CoreApi.Receipt_Main.Service.Filters
 
             try
             {
-                //var ctx = request.Properties[HttpPropertyKeys.RequestContextKey] as System.Web.Http.Controllers.HttpRequestContext;
                 var client = new Client();
 
                 id = client.GetCorrelationId(request);
@@ -161,6 +160,7 @@ namespace CES.CoreApi.Receipt_Main.Service.Filters
             var taxSIIGetDocumentResponse = null as TaxSIIGetDocumentResponse;
             var taxUpdateCAFResponse = null as TaxUpdateCafResponse;
             var taxUpdateFolioResponse = null as TaxUpdateFolioResponse;
+            var taxSIIGetDocumentBatchResponse = null as TaxSIIGetDocumentBatchResponse;
 
             ValidationResult validationResult = null;
             ErrorResponse erroResponse = null;
@@ -169,6 +169,19 @@ namespace CES.CoreApi.Receipt_Main.Service.Filters
             {
                 validationResult = content as ValidationResult;
                 taxCreateCAFResponse = content as TaxCreateCafFResponse;
+
+                taxCreateDocumentResponse = content as TaxCreateDocumentResponse;
+                taxDeleteCAFResponse = content as TaxDeleteCAFResponse;
+                taxGenerateReceiptResponse = content as TaxGenerateReceiptResponse;
+                taxGetFolioResponse = content as TaxGetFolioResponse;
+                taxSearchCAFByTypeResponse = content as TaxSearchCAFByTypeResponse;
+                taxSearchDocumentResponse = content as TaxSearchDocumentResponse;
+                taxSIISendDocumentRequest = content as TaxSIISendDocumentRequest;
+                taxSIIGetDocumentResponse = content as TaxSIIGetDocumentResponse;
+                taxUpdateCAFResponse = content as TaxUpdateCafResponse;
+                taxUpdateFolioResponse = content as TaxUpdateFolioResponse;
+                taxSIIGetDocumentBatchResponse = content as TaxSIIGetDocumentBatchResponse;
+                
                 erroResponse = content as ErrorResponse;
             }
 
@@ -185,6 +198,36 @@ namespace CES.CoreApi.Receipt_Main.Service.Filters
                     if (taxCreateCAFResponse != null && taxCreateCAFResponse.ReturnInfo != null)
                         modelStateErrors = GetErrors(taxCreateCAFResponse.ReturnInfo);
 
+                    if (taxCreateDocumentResponse != null && taxCreateDocumentResponse.ReturnInfo != null)
+                        modelStateErrors = GetErrors(taxCreateDocumentResponse.ReturnInfo);
+
+                    if (taxDeleteCAFResponse != null && taxDeleteCAFResponse.ReturnInfo != null)
+                        modelStateErrors = GetErrors(taxDeleteCAFResponse.ReturnInfo);
+
+                    if (taxGenerateReceiptResponse != null && taxGenerateReceiptResponse.ReturnInfo != null)
+                        modelStateErrors = GetErrors(taxGenerateReceiptResponse.ReturnInfo);
+
+                    if (taxGetFolioResponse != null && taxGetFolioResponse.ReturnInfo != null)
+                        modelStateErrors = GetErrors(taxGetFolioResponse.ReturnInfo);
+
+                    if (taxSearchCAFByTypeResponse != null && taxSearchCAFByTypeResponse.ReturnInfo != null)
+                        modelStateErrors = GetErrors(taxSearchCAFByTypeResponse.ReturnInfo);
+
+                    if (taxSearchDocumentResponse != null && taxSearchDocumentResponse.ReturnInfo != null)
+                        modelStateErrors = GetErrors(taxSearchDocumentResponse.ReturnInfo);
+
+                    if (taxSIISendDocumentRequest != null && taxSIISendDocumentRequest.ReturnInfo != null)
+                        modelStateErrors = GetErrors(taxSIISendDocumentRequest.ReturnInfo);
+
+                    if (taxSIIGetDocumentResponse != null && taxSIIGetDocumentResponse.ReturnInfo != null)
+                        modelStateErrors = GetErrors(taxSIIGetDocumentResponse.ReturnInfo);
+
+                    if (taxUpdateFolioResponse != null && taxUpdateFolioResponse.ReturnInfo != null)
+                        modelStateErrors = GetErrors(taxUpdateFolioResponse.ReturnInfo);
+
+                    if (taxSIIGetDocumentBatchResponse != null && taxSIIGetDocumentBatchResponse.ReturnInfo != null)
+                        modelStateErrors = GetErrors(taxSIIGetDocumentBatchResponse.ReturnInfo);
+
                     if (erroResponse != null)
                         modelStateErrors = GetErrors(erroResponse);
 
@@ -192,8 +235,42 @@ namespace CES.CoreApi.Receipt_Main.Service.Filters
                 case System.Net.HttpStatusCode.InternalServerError:
 
                     message = $"An error occurred while processing your request";
+
                     if (taxCreateCAFResponse != null && taxCreateCAFResponse.ReturnInfo != null)
                         modelStateErrors = GetErrors(taxCreateCAFResponse.ReturnInfo);
+
+                    if (taxCreateDocumentResponse != null && taxCreateDocumentResponse.ReturnInfo != null)
+                        modelStateErrors = GetErrors(taxCreateDocumentResponse.ReturnInfo);
+
+                    if (taxDeleteCAFResponse != null && taxDeleteCAFResponse.ReturnInfo != null)
+                        modelStateErrors = GetErrors(taxDeleteCAFResponse.ReturnInfo);
+
+                    if (taxGenerateReceiptResponse != null && taxGenerateReceiptResponse.ReturnInfo != null)
+                        modelStateErrors = GetErrors(taxGenerateReceiptResponse.ReturnInfo);
+
+                    if (taxGetFolioResponse != null && taxGetFolioResponse.ReturnInfo != null)
+                        modelStateErrors = GetErrors(taxGetFolioResponse.ReturnInfo);
+
+                    if (taxSearchCAFByTypeResponse != null && taxSearchCAFByTypeResponse.ReturnInfo != null)
+                        modelStateErrors = GetErrors(taxSearchCAFByTypeResponse.ReturnInfo);
+
+                    if (taxSearchDocumentResponse != null && taxSearchDocumentResponse.ReturnInfo != null)
+                        modelStateErrors = GetErrors(taxSearchDocumentResponse.ReturnInfo);
+
+                    if (taxSIISendDocumentRequest != null && taxSIISendDocumentRequest.ReturnInfo != null)
+                        modelStateErrors = GetErrors(taxSIISendDocumentRequest.ReturnInfo);
+
+                    if (taxSIIGetDocumentResponse != null && taxSIIGetDocumentResponse.ReturnInfo != null)
+                        modelStateErrors = GetErrors(taxSIIGetDocumentResponse.ReturnInfo);
+
+                    if (taxUpdateCAFResponse != null && taxUpdateCAFResponse.ReturnInfo != null)
+                        modelStateErrors = GetErrors(taxUpdateCAFResponse.ReturnInfo);
+
+                    if (taxUpdateFolioResponse != null && taxUpdateFolioResponse.ReturnInfo != null)
+                        modelStateErrors = GetErrors(taxUpdateFolioResponse.ReturnInfo);
+
+                    if (taxSIIGetDocumentBatchResponse != null && taxSIIGetDocumentBatchResponse.ReturnInfo != null)
+                        modelStateErrors = GetErrors(taxSIIGetDocumentBatchResponse.ReturnInfo);
 
                     break;
 
@@ -204,8 +281,6 @@ namespace CES.CoreApi.Receipt_Main.Service.Filters
             _persistenceHelper.CreatePersistence<ErrorResponse>(errorResponse, persistenceID, PersistenceEventType.ReceiptGenerationError);
 
             newResponse = request.CreateResponse(response.StatusCode, errorResponse);
-
-
 
             foreach (var header in response.Headers) //Add back the response headers
             {
@@ -315,6 +390,4 @@ namespace CES.CoreApi.Receipt_Main.Service.Filters
         }
 
     }
-
-
 }

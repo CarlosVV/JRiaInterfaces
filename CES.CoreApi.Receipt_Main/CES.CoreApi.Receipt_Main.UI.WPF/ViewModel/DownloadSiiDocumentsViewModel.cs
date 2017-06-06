@@ -377,12 +377,10 @@ namespace CES.CoreApi.Receipt_Main.UI.WPF.ViewModel
         }
         private void SearchRanges(object parameter)
         {
-            DocumentsToDownload.Clear();
             _worker = new BackgroundWorker();
             _worker.WorkerReportsProgress = true;
             _worker.DoWork += worker_SearchDynamicRanges;
             _worker.ProgressChanged += workerSearchRanges_ProgressChanged;
-
             _worker.RunWorkerAsync();
         }
 
@@ -454,7 +452,7 @@ namespace CES.CoreApi.Receipt_Main.UI.WPF.ViewModel
         }
         private void CleanForm(object parameter)
         {
-            DocumentsToDownload.Clear();
+            ClearRanges();
             GridStatus = "Número de Registros: 0";
         }
         private void ShowDialogAction(object obj)
@@ -705,7 +703,8 @@ namespace CES.CoreApi.Receipt_Main.UI.WPF.ViewModel
             if (_currentProgress == 100)
             {
                 var index = 0;
-                DocumentsToDownload.Clear();
+
+                ClearRanges();
 
                 if (_intervalList != null)
                 {
@@ -725,15 +724,20 @@ namespace CES.CoreApi.Receipt_Main.UI.WPF.ViewModel
                    });
                 }
 
-                RetrieveRangesFromDB();
-
                 ViewSource.View.Refresh();
                 GridStatus = $"Número de Registros: {DocumentsToDownload.Count()}";
                 Trace.Write("Busqueda Finalizada");
                 Status = "Busqueda Finalizada";
             }
         }
-       
+
+        private void ClearRanges()
+        {
+            DocumentsToDownload.Clear();
+            RetrieveRangesFromDB();
+            ViewSource.View.Refresh();
+        }
+
         private List<Tuple<Tuple<int, int>, int>> CreateDifferenceList(int[] finalGapIds)
         {
             List<Tuple<Tuple<int, int>, int>> differenceList;

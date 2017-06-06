@@ -8,6 +8,7 @@ namespace CES.CoreApi.Receipt_Main.Service.Models
 {
     public class TaxDeleteCAFResponse
     {
+        public bool ProcessResult { get; set; }
         public DateTime TransferDate { get; set; }
         public ReturnInfo ReturnInfo { get; set; }
         public DateTime ResponseTime { get; set; }

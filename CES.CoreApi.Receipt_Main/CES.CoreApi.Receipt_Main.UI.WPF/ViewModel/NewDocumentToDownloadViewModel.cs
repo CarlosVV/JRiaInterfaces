@@ -19,6 +19,9 @@ namespace CES.CoreApi.Receipt_Main.UI.WPF.ViewModel
             RangeTypeList = new List<string>();
             RangeTypeList.Add("Permanente");
             RangeTypeList.Add("Temporal");
+
+            SelectedDocumentTypeValue = DocumentTypeList[0];
+            SelectedRangeTypeValue = RangeTypeList[0];
         }
 
         public string ID

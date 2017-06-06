@@ -75,7 +75,6 @@ namespace CES.CoreApi.Receipt_Main.Service.Services
             //TODO: Create PDF for Document Stored
             //CreatePDF(response.Document);
 
-
             response.ResponseTime = DateTime.Now;
             response.TransferDate = DateTime.Now;
             response.ResponseTimeUTC = DateTime.UtcNow;
@@ -83,16 +82,51 @@ namespace CES.CoreApi.Receipt_Main.Service.Services
             return response;
         }
 
-        //private void CreatePDF(Document document)
-        //{
-        //    throw new NotImplementedException();
-        //}
+        internal TaxSIIGetDocumentResponse SIIGetDocument(TaxSIIGetDocumentRequest request)
+        {
+            var _documentDownloader = new DocumentDownloader();
+            var _documentHelper = new DocumentHandlerService(_documentService, _taxEntityService, _taxAddressService, _sequenceService, _storeService);
+            var response = new TaxSIIGetDocumentResponse();
+            var docType = "39";
+            var folio = request.Folio;
+            var respuesta = string.Empty;
+            var _parserBoletas = new XmlDocumentParser<EnvioBOLETA>();
+            var indexchunk = 1;
+            var acumchunk = 0;
+            var document = new systblApp_CoreAPI_Document();
 
-        //private void PopulateDocumentModel(Document document)
-        //{
-        //    throw new NotImplementedException();
-        //}
+            try
+            {
+                if (!ExistsFolioInDB(folio) && _documentDownloader.RetrieveXML(int.Parse(docType), folio, out respuesta))
+                {
+                    var documentXmlObject = _parserBoletas.GetDocumentObjectFromString(respuesta);
 
+                    List<int> detailids = null;
+                    List<int> docids = null;
+                    _documentHelper.SaveDocument(folio, folio, ref indexchunk, ref acumchunk, documentXmlObject, ref detailids, ref docids);
+                }
+
+                var dbDocument = GetDocumentByFolio(folio);
+                var responseDocument = AutoMapper.Mapper.Map<TaxDocument>(dbDocument);
+                response.Document = responseDocument;
+                Logging.Log.Info("Returning Document");
+                response.ReturnInfo = new ReturnInfo { ErrorCode = 1, ErrorMessage = "Process Done", ResultProcess = true };
+
+                return response;
+            }
+            catch (Exception ex)
+            {
+                Logging.Log.Error(ex.ToString());
+                response.ReturnInfo = new ReturnInfo { ErrorCode = 2, ErrorMessage = ex.Message, ResultProcess = false };
+            }
+            finally
+            {
+                response.ResponseTime = DateTime.Now;
+                response.TransferDate = DateTime.Now;
+                response.ResponseTimeUTC = DateTime.UtcNow;
+            }
+
+            return response;        }
         internal TaxSIIGetDocumentBatchResponse CreateTaskSiiGetDocumentBatch(TaxSIIGetDocumentBatchRequest request)
         {
             var response = new TaxSIIGetDocumentBatchResponse();
@@ -139,38 +173,6 @@ namespace CES.CoreApi.Receipt_Main.Service.Services
 
             return response;
         }
-
-        internal TaxSIIGetDocumentResponse SIIGetDocument(TaxSIIGetDocumentRequest taxSIIGetDocumentInternalRequest)
-        {
-            var _documentDownloader = new DocumentDownloader();
-            var _documentHelper = new DocumentHandlerService(_documentService, _taxEntityService, _taxAddressService, _sequenceService, _storeService);
-            var response = new TaxSIIGetDocumentResponse();
-            var docType = "39";
-            var folio = taxSIIGetDocumentInternalRequest.Folio;
-            var respuesta = string.Empty;
-            var _parserBoletas = new XmlDocumentParser<EnvioBOLETA>();
-            var indexchunk = 1;
-            var acumchunk = 0;
-
-            if (_documentDownloader.RetrieveXML(int.Parse(docType), folio, out respuesta))
-            {
-                var documentXmlObject = _parserBoletas.GetDocumentObjectFromString(respuesta);
-
-                List<int> detailids = null;
-                List<int> docids = null;
-                _documentHelper.SaveDocument(folio, folio, ref indexchunk, ref acumchunk, documentXmlObject, ref detailids, ref docids);
-            }
-
-            response.Document = GetDocumentByFolio(folio);
-
-            response.ResponseTime = DateTime.Now;
-            response.TransferDate = DateTime.Now;
-            response.ResponseTimeUTC = DateTime.UtcNow;
-            response.ReturnInfo = new ReturnInfo { ErrorCode = 1, ErrorMessage = "Process Done", ResultProcess = true };
-
-            return response;
-        }
-
         private systblApp_CoreAPI_Document GetDocumentByFolio(int folio)
         {
             var _documentServiceToSearch = new DocumentService(new DocumentRepository(new ReceiptDbContext()));

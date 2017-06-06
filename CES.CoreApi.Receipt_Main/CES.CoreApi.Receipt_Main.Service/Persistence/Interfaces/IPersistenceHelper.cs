@@ -14,6 +14,6 @@ namespace CES.CoreApi.Shared.Persistence.Interfaces
         PersistenceEventModel CreatePersistenceRequest<T>(object request, long persistenceID, PersistenceEventType eventType);
         PersistenceEventModel CreatePersistence<T>(object objectToPerist, long persistenceID, int providerID, PersistenceEventType persistenceeventType);
         PersistenceEventModel CreatePersistence<T>(object objectToPerist, long persistenceID, PersistenceEventType persistenceeventType);
-        PersistenceModel SetOrderToPersistence(long orderID, long persistenceID);        
+        PersistenceModel SetOrderToPersistence(long orderID, long persistenceID);       
     }
 }
