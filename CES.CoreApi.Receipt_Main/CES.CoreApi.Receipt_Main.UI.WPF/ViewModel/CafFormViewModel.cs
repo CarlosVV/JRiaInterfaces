@@ -40,6 +40,8 @@ namespace CES.CoreApi.Receipt_Main.UI.WPF.ViewModel
         private string _status;
         private bool? dialogResult;
         private systblApp_CoreAPI_Caf cafObjectModel;
+        private DateTime _authorizationDate;
+
         public CafFormViewModel(IStoreService storeService, IDialogService dialogService, systblApp_CoreAPI_Caf cafObjectModel = null)
         {
             _cafApiService = new CafApiService(); 
@@ -71,6 +73,7 @@ namespace CES.CoreApi.Receipt_Main.UI.WPF.ViewModel
                 Disabled = cafObjectModel.fDisabled.HasValue  ? cafObjectModel.fDisabled.Value : false;
                 SelectedStoreValue = storeService.GetAllStores().Where(s => s.Id == cafObjectModel.RecAgent).FirstOrDefault();
                 SelectedDocumentTypeValue = DocumentTypeList.Where(m=> m.Code == cafObjectModel.DocumentType).FirstOrDefault();
+                AuthorizationDate = cafObjectModel.AuthorizationDate;
             }
 
         }
@@ -174,15 +177,25 @@ namespace CES.CoreApi.Receipt_Main.UI.WPF.ViewModel
 
             try
             {
+                systblApp_CoreAPI_Caf caf = null;
+
                 if(ID <= 0)
                 {
-                    var result = cafService.CreateCaf(XmlContent, doctype, FolioStartNumber, FolioEndNumber,  FolioCurrentNumber, storeid);
+                    caf = cafService.CreateCaf(XmlContent, doctype, FolioStartNumber, FolioEndNumber,  FolioCurrentNumber, storeid);
+                    if (caf != null)
+                    {
+                        this.ID = caf.Id;
+                        this.AuthorizationDate = caf.AuthorizationDate;
+                        this.SelectedStoreValue = StoreList.Where(s => s.Id == caf.RecAgent).FirstOrDefault();
+                        this.SelectedDocumentTypeValue = DocumentTypeList.Where(m => m.Code == caf.DocumentType).FirstOrDefault();
+                    }
                 }
                 else
                 {
-                    var result = cafService.UpdateCaf(ID, XmlContent, doctype, FolioStartNumber, FolioEndNumber, FolioCurrentNumber, storeid, Disabled);
+                    caf = cafService.UpdateCaf(ID, XmlContent, doctype, FolioStartNumber, FolioEndNumber, FolioCurrentNumber, storeid, Disabled);
+                  
                 }
-              
+
                 Status = "Grabación exitosa en Base de Datos";
             }
             catch (Exception ex)
@@ -264,6 +277,17 @@ namespace CES.CoreApi.Receipt_Main.UI.WPF.ViewModel
             set
             {
                 _disabled = value;
+                NotifyPropertyChanged();
+            }
+        }
+
+        public DateTime AuthorizationDate
+        {
+            get { return _authorizationDate; }
+            set
+            {
+                if (_authorizationDate == value) return;
+                _authorizationDate = value;
                 NotifyPropertyChanged();
             }
         }

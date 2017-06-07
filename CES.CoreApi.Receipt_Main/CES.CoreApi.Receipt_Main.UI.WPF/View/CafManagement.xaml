@@ -252,6 +252,11 @@
                                                                Header="Tienda"                                                        
                                                                EditingElementStyle="{StaticResource MaterialDesignDataGridTextColumnPopupEditingStyle}" 
                                                                />
+                            <materialDesign:MaterialDataGridTextColumn Binding="{Binding AuthorizationDate}"
+                                                               Header="Fecha"                                                        
+                                                               EditingElementStyle="{StaticResource MaterialDesignDataGridTextColumnPopupEditingStyle}" 
+                                                               />
+                            <DataGridCheckBoxColumn Header="Deshabilitado" Binding="{Binding Disabled}" IsReadOnly="True" />
                             <DataGridTemplateColumn>
                                 <DataGridTemplateColumn.CellTemplate>
                                     <DataTemplate>

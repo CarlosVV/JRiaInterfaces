@@ -19,11 +19,13 @@ namespace CES.CoreApi.Receipt_Main.UI.WPF.ViewModel
         {
             if(objectRange != null)
             {
-                _newDocumentToDownload = objectRange;
+                NewDocumentToDownload = objectRange;
+                NewDocumentToDownload.SelectedDocumentTypeValue = objectRange.DocumentTypeList.Where(m => m.Code == objectRange.DocType).FirstOrDefault();
+                NewDocumentToDownload.SelectedRangeTypeValue = objectRange.SelectedRangeTypeValue;
             }
             else
             {
-                _newDocumentToDownload = new NewDocumentToDownloadViewModel();
+                NewDocumentToDownload = new NewDocumentToDownloadViewModel();
             }
         }
 

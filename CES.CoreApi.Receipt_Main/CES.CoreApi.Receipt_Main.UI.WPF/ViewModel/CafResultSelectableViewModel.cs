@@ -1,11 +1,13 @@
-﻿using System.ComponentModel;
+﻿using Prism.Mvvm;
+using System;
+using System.ComponentModel;
 using System.Runtime.CompilerServices;
 
 
 namespace CES.CoreApi.Receipt_Main.UI.WPF.ViewModel
 {
 
-    public class CafResultSelectableViewModel : INotifyPropertyChanged
+    public class CafResultSelectableViewModel : BindableBase
     {
         private bool _isSelected;       
         private string _id;
@@ -16,6 +18,8 @@ namespace CES.CoreApi.Receipt_Main.UI.WPF.ViewModel
         private string _current;
         private string _store;
         private bool _isViewEditVisible;
+        private DateTime _authorizationDate;
+        private bool _disabled;
 
         public bool IsSelected
         {
@@ -24,7 +28,7 @@ namespace CES.CoreApi.Receipt_Main.UI.WPF.ViewModel
             {
                 if (_isSelected == value) return;
                 _isSelected = value;
-                NotifiyPropertyChanged();
+                SetProperty(ref _isSelected, value);
             }
         }        
 
@@ -35,7 +39,7 @@ namespace CES.CoreApi.Receipt_Main.UI.WPF.ViewModel
             {
                 if (_id == value) return;
                 _id = value;
-                NotifiyPropertyChanged();
+                SetProperty(ref _id, value);
             }
         }
 
@@ -46,7 +50,7 @@ namespace CES.CoreApi.Receipt_Main.UI.WPF.ViewModel
             {
                 if (_type == value) return;
                 _type = value;
-                NotifiyPropertyChanged();
+                SetProperty(ref _type, value);
             }
         }
         public string Store
@@ -56,7 +60,7 @@ namespace CES.CoreApi.Receipt_Main.UI.WPF.ViewModel
             {
                 if (_store == value) return;
                 _store = value;
-                NotifiyPropertyChanged();
+                SetProperty(ref _store, value);
             }
         }
 
@@ -67,7 +71,7 @@ namespace CES.CoreApi.Receipt_Main.UI.WPF.ViewModel
             {
                 if (_date == value) return;
                 _date = value;
-                NotifiyPropertyChanged();
+                SetProperty(ref _date, value);
             }
         }
         public string Start
@@ -77,7 +81,7 @@ namespace CES.CoreApi.Receipt_Main.UI.WPF.ViewModel
             {
                 if (_start == value) return;
                 _start = value;
-                NotifiyPropertyChanged();
+                SetProperty(ref _start, value);
             }
         }
 
@@ -88,7 +92,7 @@ namespace CES.CoreApi.Receipt_Main.UI.WPF.ViewModel
             {
                 if (_end == value) return;
                 _end = value;
-                NotifiyPropertyChanged();
+                SetProperty(ref _end, value);
             }
         }
 
@@ -99,10 +103,35 @@ namespace CES.CoreApi.Receipt_Main.UI.WPF.ViewModel
             {
                 if (_current == value) return;
                 _current = value;
-                NotifiyPropertyChanged();
+                SetProperty(ref _current, value);
+            }
+        }
+        public bool Disabled
+        {
+            get
+            {
+                return _disabled;
+            }
+
+            set
+            {
+                if (_disabled == value) return;
+                _disabled = value;
+                SetProperty(ref _disabled, value);
             }
         }
 
+        public DateTime AuthorizationDate
+        {
+            get { return _authorizationDate; }
+            set
+            {
+                if (_authorizationDate == value) return;
+                _authorizationDate = value;
+                SetProperty(ref _authorizationDate, value);
+            }
+        }
+        
         public bool IsViewEditVisible
         {
             get { return _isViewEditVisible; }
@@ -110,15 +139,8 @@ namespace CES.CoreApi.Receipt_Main.UI.WPF.ViewModel
             {
                 if (_isViewEditVisible == value) return;
                 _isViewEditVisible = value;
-                NotifiyPropertyChanged();
+                SetProperty(ref _isViewEditVisible, value);
             }
-        }
-
-        public event PropertyChangedEventHandler PropertyChanged;
-
-        protected virtual void NotifiyPropertyChanged([CallerMemberName] string propertyName = null)
-        {
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
-        }
+        }       
     }
 }

@@ -27,6 +27,9 @@ namespace CES.CoreApi.Receipt_Main.UI.WPF.ViewModel
     public class DownloadSiiDocumentsViewModel : INotifyPropertyChanged
     {
         private const string ID_NEW = "(Nuevo)";
+        private const string doc_type_bl = "39";
+        private const string range_type_perm = "Permanente";
+        private const string param_name_ranges = "Download_Ranges";
         private readonly DocumentDownloader _documentDownloader;
         private readonly XmlDocumentParser<EnvioBOLETA> _parserBoletas;
         private NewDocumentToDownloadViewModel _newDocumentToDownload;
@@ -282,14 +285,16 @@ namespace CES.CoreApi.Receipt_Main.UI.WPF.ViewModel
             this.NewDocumentToDownload.ID = ID_NEW;
             this.NewDocumentToDownload.Start = string.Empty;
             this.NewDocumentToDownload.End = string.Empty;
-            this.NewDocumentToDownload.DocType = string.Empty;
+            this.NewDocumentToDownload.DocType = doc_type_bl;
+            this.NewDocumentToDownload.SelectedDocumentTypeValue = this.NewDocumentToDownload.DocumentTypeList.FirstOrDefault();
+            this.NewDocumentToDownload.SelectedRangeTypeValue = range_type_perm;
         }
 
         private void UpdateRangesInDB()
         {
-            var rangesGrid = this.DocumentsToDownload.Where(m => m.RangeType == "Permanente");
+            var rangesGrid = this.DocumentsToDownload.Where(m => m.RangeType == range_type_perm);
             var newValue = JsonConvert.SerializeObject(rangesGrid);
-            var objRangeDb = parameterService.GetAllParameters().Where(m => m.Name == "Download_Ranges").FirstOrDefault();
+            var objRangeDb = parameterService.GetAllParameters().Where(m => m.Name == param_name_ranges).FirstOrDefault();
 
             if (objRangeDb != null)
             {
@@ -303,8 +308,8 @@ namespace CES.CoreApi.Receipt_Main.UI.WPF.ViewModel
                 var id = parameters.Count() == 0 ? 1 : parameters.Last().Id + 1;
                 var newObjDb = new systblApp_TaxReceipt_Parameter()
                 {
-                    Name = "Download_Ranges",
-                    Description = "Download_Ranges",
+                    Name = param_name_ranges,
+                    Description = param_name_ranges,
                     Value = newValue,
                     Id = id
                 };
@@ -317,12 +322,12 @@ namespace CES.CoreApi.Receipt_Main.UI.WPF.ViewModel
         {
             var rangesGrid = this.DocumentsToDownload.Where(m => m.IsViewEditVisible);
             var newValue = JsonConvert.SerializeObject(rangesGrid);
-            var objRangeDb = parameterService.GetAllParameters().Where(m => m.Name == "Download_Ranges").FirstOrDefault();
+            var objRangeDb = parameterService.GetAllParameters().Where(m => m.Name == param_name_ranges).FirstOrDefault();
 
             if (objRangeDb != null)
             {
                 var valRangeDb = objRangeDb.Value;
-                var ranges = JsonConvert.DeserializeObject<List<DocumentSearchToDownloadSelectableViewModel>>(valRangeDb); // as ObservableCollection<DocumentSearchToDownloadSelectableViewModel>;
+                var ranges = JsonConvert.DeserializeObject<List<DocumentSearchToDownloadSelectableViewModel>>(valRangeDb);
                 var idInit = DocumentsToDownload.Count == 0 ? 0 : int.Parse(DocumentsToDownload.Last().ID) + 1;
                 foreach (var r in ranges)
                 {
@@ -334,6 +339,7 @@ namespace CES.CoreApi.Receipt_Main.UI.WPF.ViewModel
                         Start = r.Start,
                         End = r.End,
                         NumberOfFolios = r.NumberOfFolios,
+                        RangeType = r.RangeType,
                         IsDynamic = false,
                         IsSelected = false,
                         IsViewEditVisible = true,

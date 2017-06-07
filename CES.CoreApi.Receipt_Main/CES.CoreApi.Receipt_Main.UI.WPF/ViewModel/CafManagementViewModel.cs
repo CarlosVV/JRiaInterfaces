@@ -16,6 +16,7 @@ using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Data;
 using System.Windows.Input;
 
 namespace CES.CoreApi.Receipt_Main.UI.WPF.ViewModel
@@ -24,7 +25,6 @@ namespace CES.CoreApi.Receipt_Main.UI.WPF.ViewModel
     {
         private Document_Type _selectedDocumentTypeValue;
         private systblApp_TaxReceipt_Store _selectedStoreValue;
-        private readonly ObservableCollection<CafResultSelectableViewModel> _cafResults;
         private CafApiService _cafApiService = null;
         private readonly IDialogService dialogService;
         private readonly IStoreService storeService;
@@ -53,7 +53,7 @@ namespace CES.CoreApi.Receipt_Main.UI.WPF.ViewModel
             ClearCommand = new RelayCommand(Clear);
             DeleteCommand = new RelayCommand(Delete);
 
-            _cafResults = new ObservableCollection<CafResultSelectableViewModel>();
+            CafResults = new ObservableCollection<CafResultSelectableViewModel>();
 
             SelectAllCheckboxColumnCommand = new RelayCommand(SelectAllCheckboxColumnCommandAction);
 
@@ -61,9 +61,11 @@ namespace CES.CoreApi.Receipt_Main.UI.WPF.ViewModel
 
             ShowDialogCommand = new RelayCommand(ShowDialogAction);
 
+            this.ViewSource = new CollectionViewSource();
+            ViewSource.Source = CafResults;
+
         }
         private void ShowDialogAction(object obj)
-
         {
             var cafObject = new systblApp_CoreAPI_Caf();
             if (obj != null)
@@ -84,14 +86,62 @@ namespace CES.CoreApi.Receipt_Main.UI.WPF.ViewModel
         {
             if (!Equals(args.Parameter, true)) return;
 
+            var objCafForm = args.Session.Content as CafForm;
+
+            if (objCafForm == null) return;
+
+            var objCafFormVieModel = objCafForm.DataContext as CafFormViewModel;
+
+            if (objCafFormVieModel == null) return;
+
+            var caf = new CafResultSelectableViewModel
+            {
+                Id = $"{objCafFormVieModel.ID}",
+                Start = $"{objCafFormVieModel.FolioStartNumber}",
+                End = $"{objCafFormVieModel.FolioEndNumber}",
+                Current = $"{objCafFormVieModel.FolioCurrentNumber}",
+                Date = $"{objCafFormVieModel.AuthorizationDate.ToShortDateString()}",
+                Type = objCafFormVieModel.SelectedDocumentTypeValue.Description,
+                Store = objCafFormVieModel.SelectedStoreValue != null && objCafFormVieModel.SelectedStoreValue.Id != 0 ?  $"{objCafFormVieModel.SelectedStoreValue.Name}" : string.Empty,
+                Disabled = objCafFormVieModel.Disabled,
+                AuthorizationDate = objCafFormVieModel.AuthorizationDate,
+                IsViewEditVisible = true
+            };
+
+            var lastIndex = -1;
+            var index = 0;
+
+            foreach (var it in CafResults)
+            {
+                if (it.Id == caf.Id)
+                {
+                    lastIndex = index;
+                    break;
+                }
+
+                index++;
+            }
+
+            if(lastIndex >= 0)
+            {
+                CafResults[lastIndex] = caf;
+            }
+            else
+            {
+                CafResults.Add(caf);
+            }
+
+            ViewSource.View.Refresh();
+
         }
 
         public ICommand ClearCommand { get; }
         public ICommand SearchCommand { get; }
         public ICommand DeleteCommand { get; }
         public RelayCommand SelectAllCheckboxColumnCommand { get; set; }
-
         public ICommand ShowDialogCommand { get; }
+
+        public CollectionViewSource ViewSource { get; set; }
         public int FolioCurrentNumber
         {
             get
@@ -164,10 +214,7 @@ namespace CES.CoreApi.Receipt_Main.UI.WPF.ViewModel
         }
         public IList<Document_Type> DocumentTypeList { get; }
         public IList<systblApp_TaxReceipt_Store> StoreList { get; }
-        public ObservableCollection<CafResultSelectableViewModel> CafResults
-        {
-            get { return _cafResults; }
-        }
+        public ObservableCollection<CafResultSelectableViewModel> CafResults { get; set; }
 
         private void Clear(object obj)
         {
@@ -192,6 +239,16 @@ namespace CES.CoreApi.Receipt_Main.UI.WPF.ViewModel
 
                     Status = "CAF Eliminados";
                 }
+
+                var itemsToPreserve = CafResults.Where(m => !m.IsSelected).ToList();
+                CafResults.Clear();
+
+                foreach (var item in itemsToPreserve)
+                {
+                    CafResults.Add(item);
+                }
+
+                ViewSource.View.Refresh();
             }
             else
             {
@@ -217,6 +274,8 @@ namespace CES.CoreApi.Receipt_Main.UI.WPF.ViewModel
                         Date = $"{item.AuthorizationDate.ToShortDateString()}",
                         Type = DocumentTypeList.Where(m => m.Code == item.DocumentType).FirstOrDefault().Description,
                         Store = item.RecAgent == 0 ? string.Empty : StoreList.Where(m => m.Id == item.RecAgent).FirstOrDefault().Name,
+                        Disabled = item.fDisabled.HasValue ? item.fDisabled.Value : false,
+                        AuthorizationDate = item.AuthorizationDate,
                         IsViewEditVisible = true
                     });
                 }
