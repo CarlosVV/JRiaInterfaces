@@ -15,6 +15,13 @@ namespace CES.CoreApi.Receipt_Main.UI.WPF.Helpers
 {
     public class CafApiService
     {
+        private const string application_type = "application/json";
+        private const string application_id = "1";
+        private const string application_object_id = "1";
+        private const string application_user_id = "1";
+        private const string _url_search = "/receipt/tax/caf/search";
+        private const string _url_caf_new_update = "receipt/tax/caf";
+        private const string _url_caf_delete = "receipt/tax/caf/delete";
         public static readonly string _url = AppSettings.ApiReceiptServiceUrl;
         public systblApp_CoreAPI_Caf CreateCaf(string cafcontent, string documentType, int folioStartNumber, int folioEndNumber, int folioCurrentNumber, int recAgent, bool disable = false)
         {
@@ -33,7 +40,7 @@ namespace CES.CoreApi.Receipt_Main.UI.WPF.Helpers
 
                 StringContent content = GetConfiguredContentCall(client, jsonstring);
 
-                var taskPost = client.PostAsync("receipt/tax/caf", content);
+                var taskPost = client.PostAsync(_url_caf_new_update, content);
                 taskPost.Wait();
                 var response = taskPost.Result;
                 if (response.IsSuccessStatusCode)
@@ -95,7 +102,7 @@ namespace CES.CoreApi.Receipt_Main.UI.WPF.Helpers
 
                 StringContent content = GetConfiguredContentCall(client, jsonstring);
 
-                var taskPost = client.PutAsync("receipt/tax/caf", content);
+                var taskPost = client.PutAsync(_url_caf_new_update, content);
                 taskPost.Wait();
                 var response = taskPost.Result;
 
@@ -105,7 +112,7 @@ namespace CES.CoreApi.Receipt_Main.UI.WPF.Helpers
                     taskresponse.Wait();
                     var data = taskresponse.Result;
 
-                    var responseObject = JsonConvert.DeserializeObject<ServiceTaxCreateCAFResponseViewModel>(data);
+                    var responseObject = JsonConvert.DeserializeObject<ServiceTaxUpdateCAFResponseViewModel>(data);
 
                     if (responseObject.ProcessResult)
                     {
@@ -149,7 +156,7 @@ namespace CES.CoreApi.Receipt_Main.UI.WPF.Helpers
 
                 StringContent content = GetConfiguredContentCall(client, jsonstring);
 
-                var taskPost = client.PostAsync("receipt/tax/caf/delete", content);
+                var taskPost = client.PostAsync(_url_caf_delete, content);
                 taskPost.Wait();
                 var response = taskPost.Result;
 
@@ -159,13 +166,10 @@ namespace CES.CoreApi.Receipt_Main.UI.WPF.Helpers
                     taskresponse.Wait();
                     var data = taskresponse.Result;
 
-                    var responseObject = JsonConvert.DeserializeObject<ServiceTaxCreateCAFResponseViewModel>(data);
+                    var responseObject = JsonConvert.DeserializeObject<ServiceTaxDeleteCAFResponseViewModel>(data);
 
-                    if (responseObject.ProcessResult)
-                    {
-                    }
-                    else
-                    {
+                    if (!responseObject.ProcessResult)
+                    {                    
                         throw new Exception($"{responseObject.ReturnInfo.ErrorMessage}");
                     }
 
@@ -189,7 +193,7 @@ namespace CES.CoreApi.Receipt_Main.UI.WPF.Helpers
 
                 StringContent content = GetConfiguredContentCall(client, jsonstring);
 
-                var taskPost = client.PostAsync("/receipt/tax/caf/search", content);
+                var taskPost = client.PostAsync(_url_search, content);
                 taskPost.Wait();
                 var response = taskPost.Result;
 
@@ -216,13 +220,13 @@ namespace CES.CoreApi.Receipt_Main.UI.WPF.Helpers
         }
         private StringContent GetConfiguredContentCall(HttpClient client, string jsonstring)
         {
+            StringContent content = new StringContent(jsonstring, Encoding.UTF8, application_type);
             client.BaseAddress = new Uri(_url);
             client.DefaultRequestHeaders.Accept.Clear();
-            client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
-            StringContent content = new StringContent(jsonstring, Encoding.UTF8, "application/json");
-            client.DefaultRequestHeaders.Add("ApplicationId", "1");
-            client.DefaultRequestHeaders.Add("ces-appObjectId", "1");
-            client.DefaultRequestHeaders.Add("ces-userId", "1");
+            client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue(application_type));            
+            client.DefaultRequestHeaders.Add("ApplicationId", application_id);
+            client.DefaultRequestHeaders.Add("ces-appObjectId", application_object_id);
+            client.DefaultRequestHeaders.Add("ces-userId", application_user_id);
             client.DefaultRequestHeaders.Add("ces-requestTime", DateTime.Now.ToShortDateString());
             return content;
         }

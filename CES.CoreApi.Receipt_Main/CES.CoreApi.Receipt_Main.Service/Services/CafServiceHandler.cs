@@ -110,7 +110,7 @@ namespace CES.CoreApi.Receipt_Main.Service.Services
             return response;
         }
 
-        internal object UpdateCAF(TaxUpdateCafRequest request)
+        internal TaxUpdateCafResponse UpdateCAF(TaxUpdateCafRequest request)
         {
             var response = new TaxUpdateCafResponse();
             try
@@ -157,7 +157,7 @@ namespace CES.CoreApi.Receipt_Main.Service.Services
             return response;
         }
 
-        internal object DeleteCAF(TaxDeleteCAFRequest request)
+        internal TaxDeleteCAFResponse DeleteCAF(TaxDeleteCAFRequest request)
         {
             var response = new TaxDeleteCAFResponse();
             try
@@ -181,7 +181,7 @@ namespace CES.CoreApi.Receipt_Main.Service.Services
             return response;
         }
 
-        internal object GetFolio(TaxGetFolioRequest request)
+        internal TaxGetFolioResponse GetFolio(TaxGetFolioRequest request)
         {
             var response = new TaxGetFolioResponse();
             try
@@ -224,7 +224,7 @@ namespace CES.CoreApi.Receipt_Main.Service.Services
             return response;
         }
 
-        internal object UpdateFolio(TaxUpdateFolioRequest request)
+        internal TaxUpdateFolioResponse UpdateFolio(TaxUpdateFolioRequest request)
         {
             var response = new TaxUpdateFolioResponse();
             try

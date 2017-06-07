@@ -708,6 +708,7 @@ namespace CES.CoreApi.Receipt_Main.UI.WPF.ViewModel
 
                 if (_intervalList != null)
                 {
+                    index = DocumentsToDownload.Count();
                     _intervalList.OrderBy(m => m.Item1).ToList().
                    ForEach(m =>
                    {
@@ -721,6 +722,7 @@ namespace CES.CoreApi.Receipt_Main.UI.WPF.ViewModel
                            IsViewEditVisible = false,
                            NumberOfFolios = m.Item2 - m.Item1 + 1
                        });
+                       index++;
                    });
                 }
 

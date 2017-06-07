@@ -215,7 +215,7 @@ namespace CES.CoreApi.Receipt_Main.Service.Controllers
             var response = AutoMapper.Mapper.Map<ServiceTaxDeleteCAFResponseViewModel>(serviceResponse);
             response.PersistenceId = persistenceID;
             #region Persistence
-            _persistenceHelper.CreatePersistence<ServiceTaxDeleteCAFRequestViewModel>(response, persistenceID, 0, PersistenceEventType.TaxDeleteCAFResponse);
+            _persistenceHelper.CreatePersistence<ServiceTaxDeleteCAFResponseViewModel>(response, persistenceID, 0, PersistenceEventType.TaxDeleteCAFResponse);
             #endregion
 
             return Content(HttpStatusCode.OK, response);

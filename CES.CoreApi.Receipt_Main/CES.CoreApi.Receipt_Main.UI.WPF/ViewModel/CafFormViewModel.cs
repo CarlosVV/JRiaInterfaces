@@ -56,6 +56,7 @@ namespace CES.CoreApi.Receipt_Main.UI.WPF.ViewModel
 
             OpenFileCommand = new RelayCommand(OpenFile);
             SaveCommand = new RelayCommand(Save);
+            ClearCommand = new RelayCommand(Clear);
             Disabled = false;
 
             this.cafObjectModel = cafObjectModel;
@@ -193,9 +194,13 @@ namespace CES.CoreApi.Receipt_Main.UI.WPF.ViewModel
         }
         private void Clear(object obj)
         {
-            FolioCurrentNumber = 0;
-            FolioEndNumber = 0;
             FolioStartNumber = 0;
+            FolioEndNumber = 0;
+            FolioCurrentNumber = 0;
+            SelectedDocumentTypeValue = new Document_Type() { Code = "0", Description = "--Seleccione Tipo Documento --" };
+            SelectedStoreValue = new systblApp_TaxReceipt_Store() { Id = 0, Name = "--Seleccione Tienda --" };
+            Disabled = false;
+            XmlContent = string.Empty;
         }
        public Document_Type SelectedDocumentTypeValue
         {
