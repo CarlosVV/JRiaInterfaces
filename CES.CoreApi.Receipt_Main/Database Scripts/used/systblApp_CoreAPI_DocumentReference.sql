@@ -21,14 +21,14 @@ IF NOT EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[sy
 BEGIN
 
 CREATE TABLE [dbo].[systblApp_CoreAPI_DocumentReference](
-	[Id] [int] NOT NULL,
-	[DocumentId] [int] NOT NULL,
-	[LineNumber] [int] NOT NULL,
-	[DocRefFolio] [nvarchar](10) NULL,
-	[DocRefType] [nvarchar](10) NULL,
-	[DocRefDate] [datetime] NULL,
-	[CodeRef] [nvarchar](10) NULL,
-	[ReasonRef] [nvarchar](100) NULL,
+	[fDocumentReferenceId] [int] NOT NULL,
+	[fDocumentId] [int] NOT NULL,
+	[fLineNumber] [int] NOT NULL,
+	[fDocRefFolio] [nvarchar](10) NULL,
+	[fDocRefType] [nvarchar](10) NULL,
+	[fDocRefDate] [datetime] NULL,
+	[fCodeRef] [nvarchar](10) NULL,
+	[fReasonRef] [nvarchar](100) NULL,
 	[fDisabled] [bit] NULL,
 	[fDelete] [bit] NULL,
 	[fChanged] [bit] NULL,
@@ -37,7 +37,7 @@ CREATE TABLE [dbo].[systblApp_CoreAPI_DocumentReference](
 	[fModifiedID] [int] NULL,
  CONSTRAINT [PK_systblApp_CoreAPI_DocumentReference] PRIMARY KEY CLUSTERED 
 (
-	[Id] ASC
+	[fDocumentReferenceId] ASC
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
 ) ON [PRIMARY]
 END
@@ -72,100 +72,100 @@ EXEC sys.sp_addextendedproperty
 GO
 
 --Column extended property
-IF NOT EXISTS (SELECT NULL FROM SYS.EXTENDED_PROPERTIES WHERE [major_id] = OBJECT_ID('systblApp_CoreAPI_DocumentReference') AND [name] = N'Id' AND [minor_id] = (SELECT [column_id] FROM SYS.COLUMNS WHERE [name] = 'Id' AND [object_id] = OBJECT_ID('systblApp_CoreAPI_DocumentReference')))
+IF NOT EXISTS (SELECT NULL FROM SYS.EXTENDED_PROPERTIES WHERE [major_id] = OBJECT_ID('systblApp_CoreAPI_DocumentReference') AND [name] = N'fDocumentReferenceId' AND [minor_id] = (SELECT [column_id] FROM SYS.COLUMNS WHERE [name] = 'fDocumentReferenceId' AND [object_id] = OBJECT_ID('systblApp_CoreAPI_DocumentReference')))
 EXEC sys.sp_addextendedproperty 
-@name=N'Id'
+@name=N'fDocumentReferenceId'
 , @value=N'systblApp_CoreAPI_DocumentReference Id Code'
 , @level0type=N'SCHEMA'
 , @level0name=N'dbo'
 , @level1type=N'TABLE'
 , @level1name=N'systblApp_CoreAPI_DocumentReference'
 , @level2type=N'COLUMN'
-, @level2name=N'Id'
+, @level2name=N'fDocumentReferenceId'
 GO
 
-IF NOT EXISTS (SELECT NULL FROM SYS.EXTENDED_PROPERTIES WHERE [major_id] = OBJECT_ID('systblApp_CoreAPI_DocumentReference') AND [name] = N'DocumentId' AND [minor_id] = (SELECT [column_id] FROM SYS.COLUMNS WHERE [name] = 'DocumentId' AND [object_id] = OBJECT_ID('systblApp_CoreAPI_DocumentReference')))
+IF NOT EXISTS (SELECT NULL FROM SYS.EXTENDED_PROPERTIES WHERE [major_id] = OBJECT_ID('systblApp_CoreAPI_DocumentReference') AND [name] = N'fDocumentId' AND [minor_id] = (SELECT [column_id] FROM SYS.COLUMNS WHERE [name] = 'fDocumentId' AND [object_id] = OBJECT_ID('systblApp_CoreAPI_DocumentReference')))
 EXEC sys.sp_addextendedproperty 
-@name=N'DocumentId'
+@name=N'fDocumentId'
 , @value=N'Document Id related with this reference document'
 , @level0type=N'SCHEMA'
 , @level0name=N'dbo'
 , @level1type=N'TABLE'
 , @level1name=N'systblApp_CoreAPI_DocumentReference'
 , @level2type=N'COLUMN'
-, @level2name=N'DocumentId'
+, @level2name=N'fDocumentId'
 GO
 
-IF NOT EXISTS (SELECT NULL FROM SYS.EXTENDED_PROPERTIES WHERE [major_id] = OBJECT_ID('systblApp_CoreAPI_DocumentReference') AND [name] = N'LineNumber' AND [minor_id] = (SELECT [column_id] FROM SYS.COLUMNS WHERE [name] = 'LineNumber' AND [object_id] = OBJECT_ID('systblApp_CoreAPI_DocumentReference')))
+IF NOT EXISTS (SELECT NULL FROM SYS.EXTENDED_PROPERTIES WHERE [major_id] = OBJECT_ID('systblApp_CoreAPI_DocumentReference') AND [name] = N'fLineNumber' AND [minor_id] = (SELECT [column_id] FROM SYS.COLUMNS WHERE [name] = 'fLineNumber' AND [object_id] = OBJECT_ID('systblApp_CoreAPI_DocumentReference')))
 EXEC sys.sp_addextendedproperty 
-@name=N'LineNumber'
+@name=N'fLineNumber'
 , @value=N'Document Reference Line Number'
 , @level0type=N'SCHEMA'
 , @level0name=N'dbo'
 , @level1type=N'TABLE'
 , @level1name=N'systblApp_CoreAPI_DocumentReference'
 , @level2type=N'COLUMN'
-, @level2name=N'LineNumber'
+, @level2name=N'fLineNumber'
 GO
 
-IF NOT EXISTS (SELECT NULL FROM SYS.EXTENDED_PROPERTIES WHERE [major_id] = OBJECT_ID('systblApp_CoreAPI_DocumentReference') AND [name] = N'DocRefFolio' AND [minor_id] = (SELECT [column_id] FROM SYS.COLUMNS WHERE [name] = 'DocRefFolio' AND [object_id] = OBJECT_ID('systblApp_CoreAPI_DocumentReference')))
+IF NOT EXISTS (SELECT NULL FROM SYS.EXTENDED_PROPERTIES WHERE [major_id] = OBJECT_ID('systblApp_CoreAPI_DocumentReference') AND [name] = N'fDocRefFolio' AND [minor_id] = (SELECT [column_id] FROM SYS.COLUMNS WHERE [name] = 'fDocRefFolio' AND [object_id] = OBJECT_ID('systblApp_CoreAPI_DocumentReference')))
 EXEC sys.sp_addextendedproperty 
-@name=N'DocRefFolio'
+@name=N'fDocRefFolio'
 , @value=N'Doc Ref Folio related with document referenced'
 , @level0type=N'SCHEMA'
 , @level0name=N'dbo'
 , @level1type=N'TABLE'
 , @level1name=N'systblApp_CoreAPI_DocumentReference'
 , @level2type=N'COLUMN'
-, @level2name=N'DocRefFolio'
+, @level2name=N'fDocRefFolio'
 GO
 
-IF NOT EXISTS (SELECT NULL FROM SYS.EXTENDED_PROPERTIES WHERE [major_id] = OBJECT_ID('systblApp_CoreAPI_DocumentReference') AND [name] = N'DocRefType' AND [minor_id] = (SELECT [column_id] FROM SYS.COLUMNS WHERE [name] = 'DocRefType' AND [object_id] = OBJECT_ID('systblApp_CoreAPI_DocumentReference')))
+IF NOT EXISTS (SELECT NULL FROM SYS.EXTENDED_PROPERTIES WHERE [major_id] = OBJECT_ID('systblApp_CoreAPI_DocumentReference') AND [name] = N'fDocRefType' AND [minor_id] = (SELECT [column_id] FROM SYS.COLUMNS WHERE [name] = 'fDocRefType' AND [object_id] = OBJECT_ID('systblApp_CoreAPI_DocumentReference')))
 EXEC sys.sp_addextendedproperty 
-@name=N'DocRefType'
+@name=N'fDocRefType'
 , @value=N'Document Reference Type'
 , @level0type=N'SCHEMA'
 , @level0name=N'dbo'
 , @level1type=N'TABLE'
 , @level1name=N'systblApp_CoreAPI_DocumentReference'
 , @level2type=N'COLUMN'
-, @level2name=N'DocRefType'
+, @level2name=N'fDocRefType'
 GO
 
-IF NOT EXISTS (SELECT NULL FROM SYS.EXTENDED_PROPERTIES WHERE [major_id] = OBJECT_ID('systblApp_CoreAPI_DocumentReference') AND [name] = N'DocRefDate' AND [minor_id] = (SELECT [column_id] FROM SYS.COLUMNS WHERE [name] = 'DocRefDate' AND [object_id] = OBJECT_ID('systblApp_CoreAPI_DocumentReference')))
+IF NOT EXISTS (SELECT NULL FROM SYS.EXTENDED_PROPERTIES WHERE [major_id] = OBJECT_ID('systblApp_CoreAPI_DocumentReference') AND [name] = N'fDocRefDate' AND [minor_id] = (SELECT [column_id] FROM SYS.COLUMNS WHERE [name] = 'fDocRefDate' AND [object_id] = OBJECT_ID('systblApp_CoreAPI_DocumentReference')))
 EXEC sys.sp_addextendedproperty 
-@name=N'DocRefDate'
+@name=N'fDocRefDate'
 , @value=N'Document Reference Date'
 , @level0type=N'SCHEMA'
 , @level0name=N'dbo'
 , @level1type=N'TABLE'
 , @level1name=N'systblApp_CoreAPI_DocumentReference'
 , @level2type=N'COLUMN'
-, @level2name=N'DocRefDate'
+, @level2name=N'fDocRefDate'
 GO
 
-IF NOT EXISTS (SELECT NULL FROM SYS.EXTENDED_PROPERTIES WHERE [major_id] = OBJECT_ID('systblApp_CoreAPI_DocumentReference') AND [name] = N'CodeRef' AND [minor_id] = (SELECT [column_id] FROM SYS.COLUMNS WHERE [name] = 'CodeRef' AND [object_id] = OBJECT_ID('systblApp_CoreAPI_DocumentReference')))
+IF NOT EXISTS (SELECT NULL FROM SYS.EXTENDED_PROPERTIES WHERE [major_id] = OBJECT_ID('systblApp_CoreAPI_DocumentReference') AND [name] = N'fCodeRef' AND [minor_id] = (SELECT [column_id] FROM SYS.COLUMNS WHERE [name] = 'fCodeRef' AND [object_id] = OBJECT_ID('systblApp_CoreAPI_DocumentReference')))
 EXEC sys.sp_addextendedproperty 
-@name=N'CodeRef'
+@name=N'fCodeRef'
 , @value=N'Document Code Reference'
 , @level0type=N'SCHEMA'
 , @level0name=N'dbo'
 , @level1type=N'TABLE'
 , @level1name=N'systblApp_CoreAPI_DocumentReference'
 , @level2type=N'COLUMN'
-, @level2name=N'CodeRef'
+, @level2name=N'fCodeRef'
 GO
 
-IF NOT EXISTS (SELECT NULL FROM SYS.EXTENDED_PROPERTIES WHERE [major_id] = OBJECT_ID('systblApp_CoreAPI_DocumentReference') AND [name] = N'ReasonRef' AND [minor_id] = (SELECT [column_id] FROM SYS.COLUMNS WHERE [name] = 'ReasonRef' AND [object_id] = OBJECT_ID('systblApp_CoreAPI_DocumentReference')))
+IF NOT EXISTS (SELECT NULL FROM SYS.EXTENDED_PROPERTIES WHERE [major_id] = OBJECT_ID('systblApp_CoreAPI_DocumentReference') AND [name] = N'fReasonRef' AND [minor_id] = (SELECT [column_id] FROM SYS.COLUMNS WHERE [name] = 'fReasonRef' AND [object_id] = OBJECT_ID('systblApp_CoreAPI_DocumentReference')))
 EXEC sys.sp_addextendedproperty 
-@name=N'Gender'
+@name=N'fReasonRef'
 , @value=N'Document Reference Reason '
 , @level0type=N'SCHEMA'
 , @level0name=N'dbo'
 , @level1type=N'TABLE'
 , @level1name=N'systblApp_CoreAPI_DocumentReference'
 , @level2type=N'COLUMN'
-, @level2name=N'ReasonRef'
+, @level2name=N'fReasonRef'
 GO
 
 IF NOT EXISTS (SELECT NULL FROM SYS.EXTENDED_PROPERTIES WHERE [major_id] = OBJECT_ID('systblApp_CoreAPI_DocumentReference') AND [name] = N'fDisabled' AND [minor_id] = (SELECT [column_id] FROM SYS.COLUMNS WHERE [name] = 'fDisabled' AND [object_id] = OBJECT_ID('systblApp_CoreAPI_DocumentReference')))
