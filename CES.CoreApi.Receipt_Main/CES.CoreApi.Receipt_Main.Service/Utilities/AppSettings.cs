@@ -29,5 +29,9 @@ namespace CES.CoreApi.Receipt_Main.Service.Utilities
         {
             get { return ConfigurationManager.AppSettings["EnableSelfSignedSSLCert"].ToBoolean(); }
         }
+        internal static string RedisConnectionString
+        {
+            get { return ConfigurationManager.AppSettings["redisConnection"]; }
+        }
     }
 }
