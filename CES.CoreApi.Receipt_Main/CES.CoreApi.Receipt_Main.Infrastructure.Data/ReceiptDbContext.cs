@@ -30,7 +30,7 @@ namespace CES.CoreApi.Receipt_Main.Infrastructure.Data
             }
         }
         public ReceiptDbContext()
-            : base("name=receipt")
+            : base("name=main")
         {
             ((IObjectContextAdapter)this).ObjectContext.CommandTimeout = CommandTimeout;
         }
