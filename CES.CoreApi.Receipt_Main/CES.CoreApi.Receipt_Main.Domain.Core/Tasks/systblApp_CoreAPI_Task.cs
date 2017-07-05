@@ -21,6 +21,7 @@ namespace CES.CoreApi.Receipt_Main.Domain.Core.Tasks
         [StringLength(120)]
         public string fMethod { get; set; }
 
+        [StringLength(8000)]
         public string fRequestObject { get; set; }
 
         public int? fThreadId { get; set; }

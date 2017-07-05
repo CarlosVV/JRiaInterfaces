@@ -24,8 +24,8 @@ namespace CES.CoreApi.Receipt_Main.Domain.Core.Documents
         [StringLength(50)]
         public string fState { get; set; }
 
-        [StringLength(20)]
-        public string fCountry { get; set; }
+        [StringLength(2)]
+        public string fCountryId { get; set; }
 
         public bool? fDisabled { get; set; }
 
