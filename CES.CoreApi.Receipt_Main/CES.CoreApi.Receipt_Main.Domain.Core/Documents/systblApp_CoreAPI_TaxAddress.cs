@@ -8,24 +8,24 @@ namespace CES.CoreApi.Receipt_Main.Domain.Core.Documents
     public partial class systblApp_CoreAPI_TaxAddress
     {
         [DatabaseGenerated(DatabaseGeneratedOption.None)]
-        public int Id { get; set; }
+        public int fTaxAddressId { get; set; }
 
-        public int? TaxEntityId { get; set; }
+        public int? fTaxEntityId { get; set; }
 
         [StringLength(150)]
-        public string Address { get; set; }
+        public string fAddress { get; set; }
 
         [StringLength(50)]
-        public string Comuna { get; set; }
+        public string fComuna { get; set; }
 
         [StringLength(50)]
-        public string City { get; set; }
+        public string fCity { get; set; }
 
         [StringLength(50)]
-        public string State { get; set; }
+        public string fState { get; set; }
 
-        [StringLength(2)]
-        public string CountryId { get; set; }
+        [StringLength(20)]
+        public string fCountry { get; set; }
 
         public bool? fDisabled { get; set; }
 

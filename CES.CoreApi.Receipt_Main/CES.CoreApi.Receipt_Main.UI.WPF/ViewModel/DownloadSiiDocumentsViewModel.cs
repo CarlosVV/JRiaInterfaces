@@ -661,13 +661,13 @@ namespace CES.CoreApi.Receipt_Main.UI.WPF.ViewModel
         private int GetNumberOfDocsInDb(int folioinicio, int foliofin)
         {
             var _documentServiceForSearch = new DocumentService(new DocumentRepository(new ReceiptDbContext()));
-            return _documentServiceForSearch.GetAllDocuments().Where(f => f.Folio >= folioinicio && f.Folio <= foliofin).Count();
+            return _documentServiceForSearch.GetAllDocuments().Where(f => f.fFolio >= folioinicio && f.fFolio <= foliofin).Count();
         }
 
         private bool ExistFolioInDb(int folio)
         {
             var _documentServiceForSearch = new DocumentService(new DocumentRepository(new ReceiptDbContext()));
-            return _documentServiceForSearch.GetAllDocuments().Where(f => f.Folio == folio).Any();
+            return _documentServiceForSearch.GetAllDocuments().Where(f => f.fFolio == folio).Any();
         }
 
         private void workerDownload_ProgressChanged(object sender, ProgressChangedEventArgs e)

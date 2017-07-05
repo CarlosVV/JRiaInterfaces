@@ -60,7 +60,7 @@ namespace CES.CoreApi.Receipt_Main.Application.Core.Document
             CreateTaxEntities(objBoleta, rutSender, rutReceiver, out idSender, out idReceiver, senderEntity, receiverEntity);
 
             //Save Document and Detail
-           
+
             CreateDocument(indexchunk, objBoleta, ref detailids, ref docids, senderEntity, receiverEntity);
 
             if (indexchunk >= Chunkfolio || folio == folioFinal)
@@ -94,17 +94,17 @@ namespace CES.CoreApi.Receipt_Main.Application.Core.Document
         {
             dbBoleta.DocumentDetails.Add(new systblApp_CoreAPI_DocumentDetail
             {
-                Id = id,
-                DocumentId = dbBoleta.Id,
+                fDocumentDetailId = id,
+                fDocumentId = dbBoleta.fDocumentId,
                 Document = dbBoleta,
-                LineNumber = objBoleta.SetDTE.DTE.Documento.Detalle.NroLinDet,
-                Description = objBoleta.SetDTE.DTE.Documento.Detalle.NmbItem,
-                QtyProd = objBoleta.SetDTE.DTE.Documento.Detalle.QtyItem,
-                Price = objBoleta.SetDTE.DTE.Documento.Detalle.PrcItem,
-                Amount = objBoleta.SetDTE.DTE.Documento.Detalle.MontoItem,
-                Code = string.Empty,
-                DocRefFolio = objBoleta.SetDTE.DTE.Documento.TED.DD.F.ToString(),
-                DocRefType = objBoleta.SetDTE.DTE.Documento.TED.DD.TD.ToString(),
+                fLineNumber = objBoleta.SetDTE.DTE.Documento.Detalle.NroLinDet,
+                fDescription = objBoleta.SetDTE.DTE.Documento.Detalle.NmbItem,
+                fItemCount = objBoleta.SetDTE.DTE.Documento.Detalle.QtyItem,
+                fPrice = objBoleta.SetDTE.DTE.Documento.Detalle.PrcItem,
+                fAmount = objBoleta.SetDTE.DTE.Documento.Detalle.MontoItem,
+                fCode = string.Empty,
+                fDocRefFolio = objBoleta.SetDTE.DTE.Documento.TED.DD.F.ToString(),
+                fDocRefType = objBoleta.SetDTE.DTE.Documento.TED.DD.TD.ToString(),
                 fChanged = null,
                 fDelete = false,
                 fDisabled = false,
@@ -123,29 +123,29 @@ namespace CES.CoreApi.Receipt_Main.Application.Core.Document
 
             return new systblApp_CoreAPI_Document
             {
-                Id = id,
-                DocumentType = objBoleta.SetDTE.DTE.Documento.TED.DD.TD.ToString(),
-                Folio = (int)objBoleta.SetDTE.DTE.Documento.TED.DD.F,
-                IssuedDate = objBoleta.SetDTE.DTE.Documento.TED.DD.FE,
-                PaymentDate = objBoleta.SetDTE.DTE.Documento.TED.DD.FE,
-                StoreName = storename,
-                OrderNo = GetOrderNo(objBoleta),
-                CashierName = GetCustomFieldFromDocument(objBoleta, "Cajero"),
-                CashRegisterNumber = GetCustomFieldFromDocument(objBoleta, "Caja"),
-                Amount = amount,
-                TaxAmount = tax,
-                TotalAmount = totalamount,
-                Description = objBoleta.SetDTE.DTE.Documento.Detalle.NmbItem,
+                fDocumentId = id,
+                fDocumentType = objBoleta.SetDTE.DTE.Documento.TED.DD.TD.ToString(),
+                fFolio = (int)objBoleta.SetDTE.DTE.Documento.TED.DD.F,
+                fIssuedDate = objBoleta.SetDTE.DTE.Documento.TED.DD.FE,
+                fPaymentDate = objBoleta.SetDTE.DTE.Documento.TED.DD.FE,
+                fStoreName = storename,
+                fOrderNo = GetOrderNo(objBoleta),
+                fCashierName = GetCustomFieldFromDocument(objBoleta, "Cajero"),
+                fCashRegisterNumber = GetCustomFieldFromDocument(objBoleta, "Caja"),
+                fAmount = amount,
+                fTaxAmount = tax,
+                fTotalAmount = totalamount,
+                fDescription = objBoleta.SetDTE.DTE.Documento.Detalle.NmbItem,
                 DocumentDetails = new List<systblApp_CoreAPI_DocumentDetail>(),
-                TimestampDocument = objBoleta.SetDTE.Caratula.TmstFirmaEnv,
-                TimestampSent = objBoleta.SetDTE.DTE.Documento.TmstFirma,
-                RecAgent = GetStoreId(storename),
-                DownloadedSII = true,
-                ExemptAmount = 0,
-                SentToSII = true,
-                PayAgent = 0,
-                ReceiverId = receiverEntity.Id,
-                SenderId = senderEntity.Id,
+                fTimestampDocument = objBoleta.SetDTE.Caratula.TmstFirmaEnv,
+                fTimestampSent = objBoleta.SetDTE.DTE.Documento.TmstFirma,
+                fRecAgent = GetStoreId(storename),
+                fDownloadedSII = true,
+                fExemptAmount = 0,
+                fSentToSII = true,
+                fPayAgent = 0,
+                fReceiverId = receiverEntity.fTaxEntityId,
+                fSenderId = senderEntity.fTaxEntityId,
                 fChanged = null,
                 fDelete = false,
                 fDisabled = false,
@@ -205,21 +205,21 @@ namespace CES.CoreApi.Receipt_Main.Application.Core.Document
             if (!TaxEntityExists(rutSender, out idSender))
             {
                 var newsenderEntity = SaveSenderEntity(objBoleta);
-                senderEntity.Id = newsenderEntity.Id;
+                senderEntity.fTaxEntityId = newsenderEntity.fTaxEntityId;
             }
             else
             {
-                senderEntity.Id = idSender.Value;
+                senderEntity.fTaxEntityId = idSender.Value;
             }
 
             if (!TaxEntityExists(rutReceiver, out idReceiver))
             {
                 var newreceiverEntity = SaveReceiverEntity(objBoleta);
-                receiverEntity.Id = newreceiverEntity.Id;
+                receiverEntity.fTaxEntityId = newreceiverEntity.fTaxEntityId;
             }
             else
             {
-                receiverEntity.Id = idReceiver.Value;
+                receiverEntity.fTaxEntityId = idReceiver.Value;
             }
         }
 
@@ -236,23 +236,23 @@ namespace CES.CoreApi.Receipt_Main.Application.Core.Document
         {
             return new systblApp_CoreAPI_TaxEntity()
             {
-                Id = GetNewTaxEntityId(),
-                RUT = objBoleta.SetDTE.DTE.Documento.Encabezado.Receptor.RUTRecep,
-                FullName = objBoleta.SetDTE.DTE.Documento.Encabezado.Receptor.RznSocRecep,
-                FirstName = objBoleta.SetDTE.DTE.Documento.Encabezado.Receptor.RznSocRecep,
-                MiddleName = string.Empty,
-                LastName1 = string.Empty,
-                LastName2 = string.Empty,
-                LineOfBusiness = string.Empty,
-                Nationality = "CL",
-                CellPhone = string.Empty,
-                CountryOfBirth = string.Empty,
-                DateOfBirth = null,
-                EconomicActivity = 0,
-                Email = string.Empty,
-                Occupation = string.Empty,
-                Phone = string.Empty,
-                Gender = string.Empty,
+                fTaxEntityId = GetNewTaxEntityId(),
+                fRUT = objBoleta.SetDTE.DTE.Documento.Encabezado.Receptor.RUTRecep,
+                fFullName = objBoleta.SetDTE.DTE.Documento.Encabezado.Receptor.RznSocRecep,
+                fFirstName = objBoleta.SetDTE.DTE.Documento.Encabezado.Receptor.RznSocRecep,
+                fMiddleName = string.Empty,
+                fLastName1 = string.Empty,
+                fLastName2 = string.Empty,
+                fLineOfBusiness = string.Empty,
+                fNationality = "CL",
+                fCellPhone = string.Empty,
+                fCountryOfBirth = string.Empty,
+                fDateOfBirth = null,
+                fEconomicActivity = 0,
+                fEmail = string.Empty,
+                fOccupation = string.Empty,
+                fPhone = string.Empty,
+                fGender = string.Empty,
                 fChanged = null,
                 fDelete = false,
                 fDisabled = false,
@@ -266,24 +266,24 @@ namespace CES.CoreApi.Receipt_Main.Application.Core.Document
         {
             return new systblApp_CoreAPI_TaxEntity()
             {
-                Id = GetNewTaxEntityId(),
-                RUT = objBoleta.SetDTE.DTE.Documento.Encabezado.Emisor.RUTEmisor,
-                FullName = objBoleta.SetDTE.DTE.Documento.Encabezado.Emisor.RznSocEmisor,
-                FirstName = objBoleta.SetDTE.DTE.Documento.Encabezado.Emisor.RznSocEmisor,
-                LineOfBusiness = objBoleta.SetDTE.DTE.Documento.Encabezado.Emisor.GiroEmisor,
+                fTaxEntityId = GetNewTaxEntityId(),
+                fRUT = objBoleta.SetDTE.DTE.Documento.Encabezado.Emisor.RUTEmisor,
+                fFullName = objBoleta.SetDTE.DTE.Documento.Encabezado.Emisor.RznSocEmisor,
+                fFirstName = objBoleta.SetDTE.DTE.Documento.Encabezado.Emisor.RznSocEmisor,
+                fLineOfBusiness = objBoleta.SetDTE.DTE.Documento.Encabezado.Emisor.GiroEmisor,
                 TaxAddresses = new List<systblApp_CoreAPI_TaxAddress>(),
-                Nationality = "CL",
-                CellPhone = string.Empty,
-                CountryOfBirth = string.Empty,
-                DateOfBirth = null,
-                EconomicActivity = 0,
-                Email = string.Empty,
-                LastName1 = string.Empty,
-                LastName2 = string.Empty,
-                MiddleName = string.Empty,
-                Occupation = string.Empty,
-                Gender = string.Empty,
-                Phone = string.Empty,
+                fNationality = "CL",
+                fCellPhone = string.Empty,
+                fCountryOfBirth = string.Empty,
+                fDateOfBirth = null,
+                fEconomicActivity = 0,
+                fEmail = string.Empty,
+                fLastName1 = string.Empty,
+                fLastName2 = string.Empty,
+                fMiddleName = string.Empty,
+                fOccupation = string.Empty,
+                fGender = string.Empty,
+                fPhone = string.Empty,
                 fChanged = null,
                 fDelete = false,
                 fDisabled = false,
@@ -304,12 +304,12 @@ namespace CES.CoreApi.Receipt_Main.Application.Core.Document
 
         private Tuple<int, int> GetNewId(string entityName, int quantity)
         {
-            _sequenceService = new SequenceService(new SequenceRepository(new ReceiptDbContext()));  ;//App.container.Get<ISequenceService>();
-            var entity = _sequenceService.GetAllSequences().Where(m => m.EntityName.Equals(entityName)).FirstOrDefault(); //db1.systblApp_CoreApi_Sequence.Find(entityName);
-            var start = entity.CurrentId == null ? entity.StartId : entity.CurrentId.Value + 1;
-            var nextId = entity.CurrentId == null ? quantity : entity.CurrentId.Value + quantity;
+            _sequenceService = new SequenceService(new SequenceRepository(new ReceiptDbContext())); ;//App.container.Get<ISequenceService>();
+            var entity = _sequenceService.GetAllSequences().Where(m => m.fEntityName.Equals(entityName)).FirstOrDefault(); //db1.systblApp_CoreApi_Sequence.Find(entityName);
+            var start = entity.fCurrentId == null ? entity.fStartId : entity.fCurrentId.Value + 1;
+            var nextId = entity.fCurrentId == null ? quantity : entity.fCurrentId.Value + quantity;
 
-            entity.CurrentId = nextId;
+            entity.fCurrentId = nextId;
             _sequenceService.UpdateSequence(entity);
             _sequenceService.SaveChanges();
 
@@ -330,12 +330,12 @@ namespace CES.CoreApi.Receipt_Main.Application.Core.Document
             senderEntity.TaxAddresses.Add(
                 new systblApp_CoreAPI_TaxAddress
                 {
-                    Id = GetNewTaxAddressId(),
-                    TaxEntityId = senderEntity.Id,
+                    fTaxAddressId = GetNewTaxAddressId(),
+                    fTaxEntityId = senderEntity.fTaxEntityId,
                     TaxEntity = senderEntity,
-                    Address = objBoleta.SetDTE.DTE.Documento.Encabezado.Emisor.DirOrigen,
-                    Comuna = objBoleta.SetDTE.DTE.Documento.Encabezado.Emisor.CmnaOrigen,
-                    City = objBoleta.SetDTE.DTE.Documento.Encabezado.Emisor.CiudadOrigen,
+                    fAddress = objBoleta.SetDTE.DTE.Documento.Encabezado.Emisor.DirOrigen,
+                    fComuna = objBoleta.SetDTE.DTE.Documento.Encabezado.Emisor.CmnaOrigen,
+                    fCity = objBoleta.SetDTE.DTE.Documento.Encabezado.Emisor.CiudadOrigen,
                     fChanged = null,
                     fDelete = false,
                     fDisabled = false,
@@ -353,18 +353,18 @@ namespace CES.CoreApi.Receipt_Main.Application.Core.Document
             systblApp_CoreAPI_TaxEntity entity;
             if (_TaxEntityCache.TryGetValue(rut, out entity))
             {
-                id = entity.Id;
+                id = entity.fTaxEntityId;
                 return true;
             }
 
 
-            entity = _taxEntityService.GetAllTaxEntitys().Where(m => m.RUT.Equals(rut)).FirstOrDefault();
+            entity = _taxEntityService.GetAllTaxEntitys().Where(m => m.fRUT.Equals(rut)).FirstOrDefault();
             id = null;
 
             if (entity != null)
             {
                 _TaxEntityCache.Add(rut, entity);
-                id = entity.Id;
+                id = entity.fTaxEntityId;
                 return true;
             }
 

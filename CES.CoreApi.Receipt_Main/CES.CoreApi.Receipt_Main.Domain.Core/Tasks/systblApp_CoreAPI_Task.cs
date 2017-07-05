@@ -14,26 +14,26 @@ namespace CES.CoreApi.Receipt_Main.Domain.Core.Tasks
         }
 
         [DatabaseGenerated(DatabaseGeneratedOption.None)]
-        public int Id { get; set; }
+        public int fTaskId { get; set; }
 
-        public int TaskType { get; set; }
+        public int fTaskType { get; set; }
 
         [StringLength(120)]
-        public string Method { get; set; }
+        public string fMethod { get; set; }
 
-        public string RequestObject { get; set; }
+        public string fRequestObject { get; set; }
 
-        public int? ThreadId { get; set; }
+        public int? fThreadId { get; set; }
 
-        public DateTime? StartDateTime { get; set; }
+        public DateTime? fStartDateTime { get; set; }
 
-        public DateTime? EndDateTime { get; set; }
+        public DateTime? fEndDateTime { get; set; }
 
-        public DateTime? LastExecutionDateTime { get; set; }
+        public DateTime? fLastExecutionDateTime { get; set; }
 
-        public int? CountExecution { get; set; }
+        public int? fCountExecution { get; set; }
 
-        public int? Status { get; set; }
+        public int? fStatus { get; set; }
 
         public bool? fDisabled { get; set; }
 

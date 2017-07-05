@@ -42,37 +42,37 @@ namespace CES.CoreApi.Receipt_Main.Infrastructure.Data
             modelBuilder.Entity<systblApp_CoreAPI_Caf>().ToTable("systblApp_CoreAPI_Caf");
 
             modelBuilder.Entity<systblApp_CoreAPI_Document>()
-                .Property(e => e.ExemptAmount)
+                .Property(e => e.fExemptAmount)
                 .HasPrecision(19, 4);
 
             modelBuilder.Entity<systblApp_CoreAPI_Document>()
-                .Property(e => e.Amount)
+                .Property(e => e.fAmount)
                 .HasPrecision(19, 4);
 
             modelBuilder.Entity<systblApp_CoreAPI_Document>()
-                .Property(e => e.TaxAmount)
+                .Property(e => e.fTaxAmount)
                 .HasPrecision(19, 4);
 
             modelBuilder.Entity<systblApp_CoreAPI_Document>()
-                .Property(e => e.TotalAmount)
+                .Property(e => e.fTotalAmount)
                 .HasPrecision(19, 4);
 
             modelBuilder.Entity<systblApp_CoreAPI_Document>()
                 .HasMany(e => e.DocumentDetails)
                 .WithRequired(e => e.Document)
-                .HasForeignKey(e => e.DocumentId)
+                .HasForeignKey(e => e.fDocumentId)
                 .WillCascadeOnDelete(false);
 
             modelBuilder.Entity<systblApp_CoreAPI_Document>()
                 .HasMany(e => e.DocumentReferences)
                 .WithRequired(e => e.Document)
-                .HasForeignKey(e => e.DocumentId)
+                .HasForeignKey(e => e.fDocumentId)
                 .WillCascadeOnDelete(false);
 
             modelBuilder.Entity<systblApp_CoreAPI_Document>()
                 .HasMany(e => e.TaskDetails)
                 .WithOptional(e => e.Document)
-                .HasForeignKey(e => e.TaskId);
+                .HasForeignKey(e => e.fTaskId);
 
             modelBuilder.Entity<systblApp_CoreAPI_Document>()
                 .HasMany(e => e.Activity)
@@ -80,34 +80,34 @@ namespace CES.CoreApi.Receipt_Main.Infrastructure.Data
                 .HasForeignKey(e => e.DocumentId);
 
             modelBuilder.Entity<systblApp_CoreAPI_DocumentDetail>()
-                .Property(e => e.Price)
+                .Property(e => e.fPrice)
                 .HasPrecision(19, 4);
 
             modelBuilder.Entity<systblApp_CoreAPI_DocumentDetail>()
-                .Property(e => e.Amount)
+                .Property(e => e.fAmount)
                 .HasPrecision(19, 4);
 
             modelBuilder.Entity<systblApp_CoreAPI_Task>()
                 .HasMany(e => e.TaskDetail)
                 .WithOptional(e => e.Task)
-                .HasForeignKey(e => e.TaskId);
+                .HasForeignKey(e => e.fTaskId);
 
             modelBuilder.Entity<systblApp_CoreAPI_TaxEntity>()
                 .HasMany(e => e.Senders)
                 .WithRequired(e => e.Sender)
-                .HasForeignKey(e => e.SenderId)
+                .HasForeignKey(e => e.fSenderId)
                 .WillCascadeOnDelete(false);
 
             modelBuilder.Entity<systblApp_CoreAPI_TaxEntity>()
                 .HasMany(e => e.Receivers)
                 .WithRequired(e => e.Receiver)
-                .HasForeignKey(e => e.ReceiverId)
+                .HasForeignKey(e => e.fReceiverId)
                 .WillCascadeOnDelete(false);
 
             modelBuilder.Entity<systblApp_CoreAPI_TaxEntity>()
                 .HasMany(e => e.TaxAddresses)
                 .WithOptional(e => e.TaxEntity)
-                .HasForeignKey(e => e.TaxEntityId);
+                .HasForeignKey(e => e.fTaxEntityId);
 
             modelBuilder.Entity<systblApp_TaxReceipt_Activity>()
                 .Property(e => e.OrderNo)

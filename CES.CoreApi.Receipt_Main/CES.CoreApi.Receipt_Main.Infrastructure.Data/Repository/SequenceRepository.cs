@@ -20,7 +20,7 @@ namespace CES.CoreApi.Receipt_Main.Infrastructure.Data.Repository
 
         public systblApp_CoreApi_Sequence find(string entityName)
         {
-            return this.Get(p => p.EntityName == entityName);
+            return this.Get(p => p.fEntityName == entityName);
         }
 
         public IEnumerable<systblApp_CoreApi_Sequence> find(Expression<Func<systblApp_CoreApi_Sequence, bool>> where)

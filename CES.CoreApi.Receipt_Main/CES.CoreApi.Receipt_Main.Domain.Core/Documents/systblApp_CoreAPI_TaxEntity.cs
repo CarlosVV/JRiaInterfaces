@@ -16,55 +16,56 @@ namespace CES.CoreApi.Receipt_Main.Domain.Core.Documents
         }
 
         [DatabaseGenerated(DatabaseGeneratedOption.None)]
-        public int Id { get; set; }
+        public int fTaxEntityId { get; set; }
 
         [Required]
         [StringLength(15)]
-        public string RUT { get; set; }
+        public string fRUT { get; set; }
 
         [Required]
         [StringLength(50)]
-        public string FirstName { get; set; }
+        public string fFirstName { get; set; }
 
         [StringLength(50)]
-        public string MiddleName { get; set; }
+        public string fMiddleName { get; set; }
 
         [StringLength(50)]
-        public string LastName1 { get; set; }
+        public string fLastName1 { get; set; }
 
         [StringLength(50)]
-        public string LastName2 { get; set; }
+        public string fLastName2 { get; set; }
 
         [StringLength(200)]
-        public string FullName { get; set; }
+        public string fFullName { get; set; }
 
         [StringLength(2)]
-        public string Gender { get; set; }
+        public string fGender { get; set; }
 
         [StringLength(200)]
-        public string Occupation { get; set; }
+        public string fOccupation { get; set; }
 
-        public DateTime? DateOfBirth { get; set; }
-
-        [StringLength(2)]
-        public string Nationality { get; set; }
+        [Column(TypeName = "Date")]
+        public DateTime? fDateOfBirth { get; set; }
 
         [StringLength(2)]
-        public string CountryOfBirth { get; set; }
+        public string fNationality { get; set; }
+
+        [StringLength(2)]
+        public string fCountryOfBirth { get; set; }
 
         [StringLength(30)]
-        public string Phone { get; set; }
+        public string fPhone { get; set; }
 
         [StringLength(30)]
-        public string CellPhone { get; set; }
+        public string fCellPhone { get; set; }
 
         [StringLength(100)]
-        public string Email { get; set; }
+        public string fEmail { get; set; }
 
         [StringLength(150)]
-        public string LineOfBusiness { get; set; }
+        public string fLineOfBusiness { get; set; }
 
-        public int? EconomicActivity { get; set; }
+        public int? fEconomicActivity { get; set; }
 
         public bool? fDisabled { get; set; }
 

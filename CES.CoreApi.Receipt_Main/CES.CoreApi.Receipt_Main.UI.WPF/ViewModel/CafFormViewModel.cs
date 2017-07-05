@@ -65,15 +65,15 @@ namespace CES.CoreApi.Receipt_Main.UI.WPF.ViewModel
 
             if (cafObjectModel != null)
             {
-                ID = cafObjectModel.Id;
-                FolioStartNumber = cafObjectModel.FolioStartNumber;
-                FolioEndNumber = cafObjectModel.FolioEndNumber;
-                FolioCurrentNumber = cafObjectModel.FolioCurrentNumber;
-                XmlContent = cafObjectModel.FileContent;
+                ID = cafObjectModel.fCafId;
+                FolioStartNumber = cafObjectModel.fFolioStartNumber;
+                FolioEndNumber = cafObjectModel.fFolioEndNumber;
+                FolioCurrentNumber = cafObjectModel.fFolioCurrentNumber;
+                XmlContent = cafObjectModel.fFileContent;
                 Disabled = cafObjectModel.fDisabled.HasValue  ? cafObjectModel.fDisabled.Value : false;
-                SelectedStoreValue = storeService.GetAllStores().Where(s => s.Id == cafObjectModel.RecAgent).FirstOrDefault();
-                SelectedDocumentTypeValue = DocumentTypeList.Where(m=> m.Code == cafObjectModel.DocumentType).FirstOrDefault();
-                AuthorizationDate = cafObjectModel.AuthorizationDate;
+                SelectedStoreValue = storeService.GetAllStores().Where(s => s.Id == cafObjectModel.fRecAgent).FirstOrDefault();
+                SelectedDocumentTypeValue = DocumentTypeList.Where(m=> m.Code == cafObjectModel.fDocumentType).FirstOrDefault();
+                AuthorizationDate = cafObjectModel.fAuthorizationDate;
             }
 
         }
@@ -184,10 +184,10 @@ namespace CES.CoreApi.Receipt_Main.UI.WPF.ViewModel
                     caf = cafService.CreateCaf(XmlContent, doctype, FolioStartNumber, FolioEndNumber,  FolioCurrentNumber, storeid);
                     if (caf != null)
                     {
-                        this.ID = caf.Id;
-                        this.AuthorizationDate = caf.AuthorizationDate;
-                        this.SelectedStoreValue = StoreList.Where(s => s.Id == caf.RecAgent).FirstOrDefault();
-                        this.SelectedDocumentTypeValue = DocumentTypeList.Where(m => m.Code == caf.DocumentType).FirstOrDefault();
+                        this.ID = caf.fCafId;
+                        this.AuthorizationDate = caf.fAuthorizationDate;
+                        this.SelectedStoreValue = StoreList.Where(s => s.Id == caf.fRecAgent).FirstOrDefault();
+                        this.SelectedDocumentTypeValue = DocumentTypeList.Where(m => m.Code == caf.fDocumentType).FirstOrDefault();
                     }
                 }
                 else
