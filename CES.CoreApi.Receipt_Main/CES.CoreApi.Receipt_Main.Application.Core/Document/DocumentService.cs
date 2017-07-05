@@ -23,8 +23,8 @@ namespace CES.CoreApi.Receipt_Main.Application.Core
 
         public List<int> GetAllDocumentsFoliosByType(string doctype, DateTime? startDate, DateTime? endDate)
         {
-            return repo.find(m => m.DocumentType.Equals(doctype) && (!startDate.HasValue || startDate.Value <= m.IssuedDate)
-            && (!endDate.HasValue || endDate.Value > m.IssuedDate)).Select(p => p.Folio).ToList();
+            return repo.find(m => m.fDocumentType.Equals(doctype) && (!startDate.HasValue || startDate.Value <= m.fIssuedDate)
+            && (!endDate.HasValue || endDate.Value > m.fIssuedDate)).Select(p => p.fFolio).ToList();
         }
 
         public void CreateDocument(systblApp_CoreAPI_Document objectEntry)

@@ -8,33 +8,34 @@ namespace CES.CoreApi.Receipt_Main.Domain.Core.Documents
    public partial class systblApp_CoreAPI_Caf
     {
         [DatabaseGenerated(DatabaseGeneratedOption.None)]
-        public int Id { get; set; }
+        public int fCafId { get; set; }
 
         [Required]
         [StringLength(10)]
-        public string CompanyRUT { get; set; }
+        public string fCompanyRUT { get; set; }
 
         [Required]
         [StringLength(50)]
-        public string CompanyLegalName { get; set; }
+        public string fCompanyLegalName { get; set; }
 
         [Required]
         [StringLength(10)]
-        public string DocumentType { get; set; }
+        public string fDocumentType { get; set; }
 
-        public int RecAgent { get; set; }
+        public int fRecAgent { get; set; }
 
-        public int FolioCurrentNumber { get; set; }
+        public int fFolioCurrentNumber { get; set; }
 
-        public int FolioStartNumber { get; set; }
+        public int fFolioStartNumber { get; set; }
 
-        public int FolioEndNumber { get; set; }
+        public int fFolioEndNumber { get; set; }
 
         [Column(TypeName = "date")]
-        public DateTime AuthorizationDate { get; set; }
+        public DateTime fAuthorizationDate { get; set; }
 
         [Required]
-        public string FileContent { get; set; }
+        [StringLength(8000)]
+        public string fFileContent { get; set; }
 
         public bool? fDisabled { get; set; }
 

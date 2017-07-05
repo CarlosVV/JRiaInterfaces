@@ -42,11 +42,11 @@ namespace CES.CoreApi.Receipt_Main.Service.Jobs
 
             var docType = "39";
 
-            var task = _taskService.GetAllTasks().Where(m => m.Id == taskId).FirstOrDefault();
+            var task = _taskService.GetAllTasks().Where(m => m.fTaskId == taskId).FirstOrDefault();
 
             if (task == null) return;
 
-            var parametersJson = task.RequestObject;
+            var parametersJson = task.fRequestObject;
 
             var parametersTask = JsonConvert.DeserializeObject<DownloadBatchTaskParameter>(parametersJson);
             var folioStart = parametersTask.FolioStart;
@@ -91,12 +91,12 @@ namespace CES.CoreApi.Receipt_Main.Service.Jobs
         private void UpdateTaskStatus(int taskId)
         {
             var taskService = new TaskService(new TaskRepository(new ReceiptDbContext()));
-            var task = taskService.GetAllTasks().Where(m => m.Id == taskId).FirstOrDefault();
-            task.CountExecution = task.CountExecution + 1;
+            var task = taskService.GetAllTasks().Where(m => m.fTaskId == taskId).FirstOrDefault();
+            task.fCountExecution = task.fCountExecution + 1;
 
-            task.ThreadId = System.Threading.Thread.CurrentThread.ManagedThreadId;
-            task.Status = 2;
-            task.LastExecutionDateTime = DateTime.Now;
+            task.fThreadId = System.Threading.Thread.CurrentThread.ManagedThreadId;
+            task.fStatus = 2;
+            task.fLastExecutionDateTime = DateTime.Now;
 
             taskService.UpdateTask(task);
             taskService.SaveChanges();
@@ -105,10 +105,10 @@ namespace CES.CoreApi.Receipt_Main.Service.Jobs
         private void UpdateTaskResult(int taskId)
         {
             var taskService = new TaskService(new TaskRepository(new ReceiptDbContext()));
-            var task = taskService.GetAllTasks().Where(m => m.Id == taskId).FirstOrDefault();
-            task.Status = 3;
+            var task = taskService.GetAllTasks().Where(m => m.fTaskId == taskId).FirstOrDefault();
+            task.fStatus = 3;
             task.fModified = DateTime.Now;
-            task.EndDateTime = DateTime.Now;
+            task.fEndDateTime = DateTime.Now;
             taskService.UpdateTask(task);
             taskService.SaveChanges();
         }
@@ -116,11 +116,11 @@ namespace CES.CoreApi.Receipt_Main.Service.Jobs
         private void UpdateTaskDetailResult(int taskDetailId, int folio)
         {
             var taskDetailService = new TaskDetailService(new TaskDetailRepository(new ReceiptDbContext()));
-            var taskDetail = taskDetailService.GetAllTaskDetails().Where(m => m.Id == taskDetailId).FirstOrDefault();
+            var taskDetail = taskDetailService.GetAllTaskDetails().Where(m => m.fTaskDetailId == taskDetailId).FirstOrDefault();
 
-            taskDetail.ResultObject = $"Folio {folio} descargado";
+            taskDetail.fResultObject = $"Folio {folio} descargado";
             taskDetail.fModified = DateTime.Now;
-            taskDetail.DocumentId = folio;
+            taskDetail.fDocumentId = folio;
             taskDetailService.UpdateTaskDetail(taskDetail);
             taskDetailService.SaveChanges();
         }
@@ -128,10 +128,10 @@ namespace CES.CoreApi.Receipt_Main.Service.Jobs
         private void UpdateTaskDetail(int taskDetailId, int folio)
         {
             var taskDetailService = new TaskDetailService(new TaskDetailRepository(new ReceiptDbContext()));
-            var taskDetail = taskDetailService.GetAllTaskDetails().Where(m => m.Id == taskDetailId).FirstOrDefault();
+            var taskDetail = taskDetailService.GetAllTaskDetails().Where(m => m.fTaskDetailId == taskDetailId).FirstOrDefault();
 
             taskDetail.fModified = DateTime.Now;
-            taskDetail.ResultObject = $"Folio {folio} existe en BD";
+            taskDetail.fResultObject = $"Folio {folio} existe en BD";
             taskDetailService.UpdateTaskDetail(taskDetail);
             taskDetailService.SaveChanges();
         }
@@ -142,21 +142,21 @@ namespace CES.CoreApi.Receipt_Main.Service.Jobs
             var taskIdDetailId = taskDetailService.GetAllTaskDetails().Count() + 1;
             var taskDetail = new Domain.Core.Tasks.systblApp_CoreAPI_TaskDetail
             {
-                Id = taskIdDetailId,
-                TaskId = taskId,
-                StateObject = $"Folio: {folio}",
+                fTaskDetailId = taskIdDetailId,
+                fTaskId = taskId,
+                fStateObject = $"Folio: {folio}",
 
             };
 
             taskDetailService.CreateTaskDetail(taskDetail);
             taskDetailService.SaveChanges();
-            return taskDetail.Id;
+            return taskDetail.fTaskDetailId;
         }
 
         private bool ExistsFolioInDB(int folio)
         {
             var _documentServiceToSearch = new DocumentService(new DocumentRepository(new ReceiptDbContext()));
-            return _documentServiceToSearch.GetAllDocuments().Any(m => m.Folio == folio);
+            return _documentServiceToSearch.GetAllDocuments().Any(m => m.fFolio == folio);
         }
     }
 }

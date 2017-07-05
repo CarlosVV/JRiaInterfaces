@@ -136,7 +136,7 @@ namespace CES.CoreApi.Receipt_Main.Service.Services
             var parameters = new DownloadBatchTaskParameter { FolioStart = request.FolioStart, FolioEnd = request.FolioEnd };
             var jsonParameters = JsonConvert.SerializeObject(parameters);
 
-            var task = taskService.GetAllTasks().Where(m => m.TaskType == 1 && m.Method == "Batch" && m.RequestObject == jsonParameters).FirstOrDefault();
+            var task = taskService.GetAllTasks().Where(m => m.fTaskType == 1 && m.fMethod == "Batch" && m.fRequestObject == jsonParameters).FirstOrDefault();
 
             if (task != null)
             {
@@ -147,13 +147,13 @@ namespace CES.CoreApi.Receipt_Main.Service.Services
                 var id = taskService.GetAllTasks().Count() + 1;
                 var newtask = new Domain.Core.Tasks.systblApp_CoreAPI_Task()
                 {
-                    Id = id,
-                    TaskType = 1,
-                    Status = 1,
-                    CountExecution = 0,
-                    StartDateTime = DateTime.Now,
-                    RequestObject = jsonParameters,
-                    Method = "Batch"
+                    fTaskId = id,
+                    fTaskType = 1,
+                    fStatus = 1,
+                    fCountExecution = 0,
+                    fStartDateTime = DateTime.Now,
+                    fRequestObject = jsonParameters,
+                    fMethod = "Batch"
                 };
 
                 taskService.CreateTask(newtask);
@@ -176,18 +176,18 @@ namespace CES.CoreApi.Receipt_Main.Service.Services
         private systblApp_CoreAPI_Document GetDocumentByFolio(int folio)
         {
             var _documentServiceToSearch = new DocumentService(new DocumentRepository(new ReceiptDbContext()));
-            return _documentServiceToSearch.GetAllDocuments().Where(m => m.Folio == folio).FirstOrDefault();
+            return _documentServiceToSearch.GetAllDocuments().Where(m => m.fFolio == folio).FirstOrDefault();
         }
         private bool ExistsFolioInDB(int folio)
         {
             var _documentServiceToSearch = new DocumentService(new DocumentRepository(new ReceiptDbContext()));
-            return _documentServiceToSearch.GetAllDocuments().Any(m => m.Folio == folio);
+            return _documentServiceToSearch.GetAllDocuments().Any(m => m.fFolio == folio);
         }
 
         private int CountFoliosInDb(int folioStart, int folioEnd)
         {
             var _documentServiceToSearch = new DocumentService(new DocumentRepository(new ReceiptDbContext()));
-            return _documentServiceToSearch.GetAllDocuments().Count(m => m.Folio >= folioStart && m.Folio <= folioEnd);
+            return _documentServiceToSearch.GetAllDocuments().Count(m => m.fFolio >= folioStart && m.fFolio <= folioEnd);
         }
     }
 }

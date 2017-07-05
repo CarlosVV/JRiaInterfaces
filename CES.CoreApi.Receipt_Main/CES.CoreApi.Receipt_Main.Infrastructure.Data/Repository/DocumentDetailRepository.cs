@@ -20,7 +20,7 @@ namespace CES.CoreApi.Receipt_Main.Infrastructure.Data.Repository
 
         public systblApp_CoreAPI_DocumentDetail find(string id)
         {
-            return this.Get(p => p.Id.ToString() == id);
+            return this.Get(p => p.fDocumentDetailId.ToString() == id);
         }
 
         public IEnumerable<systblApp_CoreAPI_DocumentDetail> find(Expression<Func<systblApp_CoreAPI_DocumentDetail, bool>> where)

@@ -8,25 +8,25 @@ namespace CES.CoreApi.Receipt_Main.Domain.Core.Documents
     public partial class systblApp_CoreAPI_DocumentReference
     {
         [DatabaseGenerated(DatabaseGeneratedOption.None)]
-        public int Id { get; set; }
+        public int fDocumentReferenceId { get; set; }
 
-        public int DocumentId { get; set; }
+        public int fDocumentId { get; set; }
 
-        public int LineNumber { get; set; }
-
-        [StringLength(10)]
-        public string DocRefFolio { get; set; }
+        public int fLineNumber { get; set; }
 
         [StringLength(10)]
-        public string DocRefType { get; set; }
-
-        public DateTime? DocRefDate { get; set; }
+        public string fDocRefFolio { get; set; }
 
         [StringLength(10)]
-        public string CodeRef { get; set; }
+        public string fDocRefType { get; set; }
+
+        public DateTime? fDocRefDate { get; set; }
+
+        [StringLength(10)]
+        public string fCodeRef { get; set; }
 
         [StringLength(100)]
-        public string ReasonRef { get; set; }
+        public string fReasonRef { get; set; }
 
         public bool? fDisabled { get; set; }
 

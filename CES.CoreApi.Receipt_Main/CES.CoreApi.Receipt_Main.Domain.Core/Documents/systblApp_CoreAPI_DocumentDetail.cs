@@ -8,31 +8,31 @@ namespace CES.CoreApi.Receipt_Main.Domain.Core.Documents
     public partial class systblApp_CoreAPI_DocumentDetail
     {
         [DatabaseGenerated(DatabaseGeneratedOption.None)]
-        public int Id { get; set; }
+        public int fDocumentDetailId { get; set; }
 
-        public int DocumentId { get; set; }
+        public int fDocumentId { get; set; }
 
-        public int LineNumber { get; set; }
+        public int fLineNumber { get; set; }
 
         [StringLength(50)]
-        public string DocRefFolio { get; set; }
+        public string fDocRefFolio { get; set; }
 
         [StringLength(10)]
-        public string DocRefType { get; set; }
+        public string fDocRefType { get; set; }
 
         [StringLength(250)]
-        public string Description { get; set; }
+        public string fDescription { get; set; }
 
-        public int? QtyProd { get; set; }
+        public int? fItemCount { get; set; }
 
         [StringLength(50)]
-        public string Code { get; set; }
+        public string fCode { get; set; }
 
         [Column(TypeName = "money")]
-        public decimal? Price { get; set; }
+        public decimal? fPrice { get; set; }
 
         [Column(TypeName = "money")]
-        public decimal? Amount { get; set; }
+        public decimal? fAmount { get; set; }
 
         public bool? fDisabled { get; set; }
 

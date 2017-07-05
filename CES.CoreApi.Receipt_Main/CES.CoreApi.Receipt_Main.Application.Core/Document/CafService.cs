@@ -23,7 +23,7 @@ namespace CES.CoreApi.Receipt_Main.Application.Core
 
         public void CreateCaf(systblApp_CoreAPI_Caf objectEntry)
         {
-            objectEntry.Id = GetNewId();
+            objectEntry.fCafId = GetNewId();
             this._repo.CreateCaf(objectEntry);
         }
         public void UpdateCaf(systblApp_CoreAPI_Caf objectEntry)
@@ -45,7 +45,7 @@ namespace CES.CoreApi.Receipt_Main.Application.Core
             var max = 0;
             if (query != null && query.Count() > 0)
             {
-                max = query.Max(p => p.Id);
+                max = query.Max(p => p.fCafId);
             }
             newid = max + 1;
             return newid;

@@ -20,7 +20,7 @@ namespace CES.CoreApi.Receipt_Main.Infrastructure.Data.Repository
 
         public systblApp_CoreAPI_Caf find(string id)
         {
-            return this.Get(p => p.Id.ToString() == id);
+            return this.Get(p => p.fCafId.ToString() == id);
         }
 
         public IEnumerable<systblApp_CoreAPI_Caf> find(Expression<Func<systblApp_CoreAPI_Caf, bool>> where)

@@ -18,7 +18,7 @@ namespace CES.CoreApi.Receipt_Main.Application.Core
         }
         public List<systblApp_CoreApi_Sequence> GetAllSequences()
         {
-            var results = repo.find(p => p.CurrentId == p.CurrentId).ToList();
+            var results = repo.find(p => p.fCurrentId == p.fCurrentId).ToList();
             return results;
         }     
 

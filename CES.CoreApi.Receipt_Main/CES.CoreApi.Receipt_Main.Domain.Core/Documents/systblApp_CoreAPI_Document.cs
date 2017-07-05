@@ -19,61 +19,61 @@ namespace CES.CoreApi.Receipt_Main.Domain.Core.Documents
         }
 
         [DatabaseGenerated(DatabaseGeneratedOption.None)]
-        public int Id { get; set; }
+        public int fDocumentId { get; set; }
 
         [Required]
         [StringLength(20)]
-        public string OrderNo { get; set; }
+        public string fOrderNo { get; set; }
 
         [Required]
         [StringLength(10)]
-        public string DocumentType { get; set; }
+        public string fDocumentType { get; set; }
 
-        public int Folio { get; set; }
+        public int fFolio { get; set; }
 
         [StringLength(255)]
-        public string Description { get; set; }
+        public string fDescription { get; set; }
 
         [StringLength(50)]
-        public string StoreName { get; set; }
+        public string fStoreName { get; set; }
 
         [StringLength(10)]
-        public string CashRegisterNumber { get; set; }
+        public string fCashRegisterNumber { get; set; }
 
         [StringLength(100)]
-        public string CashierName { get; set; }
+        public string fCashierName { get; set; }
 
-        public DateTime IssuedDate { get; set; }
-
-        [Column(TypeName = "money")]
-        public decimal? ExemptAmount { get; set; }
+        public DateTime fIssuedDate { get; set; }
 
         [Column(TypeName = "money")]
-        public decimal Amount { get; set; }
+        public decimal? fExemptAmount { get; set; }
 
         [Column(TypeName = "money")]
-        public decimal TaxAmount { get; set; }
+        public decimal fAmount { get; set; }
 
         [Column(TypeName = "money")]
-        public decimal TotalAmount { get; set; }
+        public decimal fTaxAmount { get; set; }
 
-        public int SenderId { get; set; }
+        [Column(TypeName = "money")]
+        public decimal fTotalAmount { get; set; }
 
-        public int ReceiverId { get; set; }
+        public int fSenderId { get; set; }
 
-        public bool? SentToSII { get; set; }
+        public int fReceiverId { get; set; }
 
-        public bool? DownloadedSII { get; set; }
+        public bool? fSentToSII { get; set; }
 
-        public DateTime PaymentDate { get; set; }
+        public bool? fDownloadedSII { get; set; }
 
-        public int RecAgent { get; set; }
+        public DateTime fPaymentDate { get; set; }
 
-        public int? PayAgent { get; set; }
+        public int fRecAgent { get; set; }
 
-        public DateTime TimestampDocument { get; set; }
+        public int? fPayAgent { get; set; }
 
-        public DateTime TimestampSent { get; set; }
+        public DateTime fTimestampDocument { get; set; }
+
+        public DateTime fTimestampSent { get; set; }
 
         public bool? fDisabled { get; set; }
 

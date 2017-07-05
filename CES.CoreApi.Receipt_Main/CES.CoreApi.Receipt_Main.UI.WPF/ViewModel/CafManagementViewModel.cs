@@ -267,15 +267,15 @@ namespace CES.CoreApi.Receipt_Main.UI.WPF.ViewModel
                 {
                     CafResults.Add(new CafResultSelectableViewModel
                     {
-                        Id = $"{item.Id}",
-                        Start = $"{item.FolioStartNumber}",
-                        End = $"{item.FolioEndNumber}",
-                        Current = $"{item.FolioCurrentNumber}",
-                        Date = $"{item.AuthorizationDate.ToShortDateString()}",
-                        Type = DocumentTypeList.Where(m => m.Code == item.DocumentType).FirstOrDefault().Description,
-                        Store = item.RecAgent == 0 ? string.Empty : StoreList.Where(m => m.Id == item.RecAgent).FirstOrDefault().Name,
+                        Id = $"{item.fCafId}",
+                        Start = $"{item.fFolioStartNumber}",
+                        End = $"{item.fFolioEndNumber}",
+                        Current = $"{item.fFolioCurrentNumber}",
+                        Date = $"{item.fAuthorizationDate.ToShortDateString()}",
+                        Type = DocumentTypeList.Where(m => m.Code == item.fDocumentType).FirstOrDefault().Description,
+                        Store = item.fRecAgent == 0 ? string.Empty : StoreList.Where(m => m.Id == item.fRecAgent).FirstOrDefault().Name,
                         Disabled = item.fDisabled.HasValue ? item.fDisabled.Value : false,
-                        AuthorizationDate = item.AuthorizationDate,
+                        AuthorizationDate = item.fAuthorizationDate,
                         IsViewEditVisible = true
                     });
                 }

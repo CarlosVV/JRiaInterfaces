@@ -20,7 +20,7 @@ namespace CES.CoreApi.Receipt_Main.Infrastructure.Data.Repository
 
         public systblApp_CoreAPI_TaxAddress find(string id)
         {
-            return this.Get(p => p.Id.ToString() == id);
+            return this.Get(p => p.fTaxAddressId.ToString() == id);
         }
 
         public IEnumerable<systblApp_CoreAPI_TaxAddress> find(Expression<Func<systblApp_CoreAPI_TaxAddress, bool>> where)
