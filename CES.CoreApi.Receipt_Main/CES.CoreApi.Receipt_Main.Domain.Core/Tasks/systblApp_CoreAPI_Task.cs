@@ -12,7 +12,7 @@ namespace CES.CoreApi.Receipt_Main.Domain.Core.Tasks
         {
             TaskDetail = new HashSet<systblApp_CoreAPI_TaskDetail>();
         }
-
+        [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.None)]
         public int fTaskId { get; set; }
 

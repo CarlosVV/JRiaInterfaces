@@ -51,7 +51,7 @@ namespace CES.CoreApi.Receipt_Main.UI.WPF.ViewModel
 
             var stores = storeService.GetAllStores();
             StoreList = stores.ToList();
-            StoreList.Insert(0, new systblApp_TaxReceipt_Store() { Id = 0, Name = "--Seleccione una Tienda --" });
+            StoreList.Insert(0, new systblApp_TaxReceipt_Store() { fStoreId = 0, fName = "--Seleccione una Tienda --" });
             SelectedStoreValue = StoreList.First();
 
             _dialogService = dialogService;
@@ -71,8 +71,8 @@ namespace CES.CoreApi.Receipt_Main.UI.WPF.ViewModel
                 FolioCurrentNumber = cafObjectModel.fFolioCurrentNumber;
                 XmlContent = cafObjectModel.fFileContent;
                 Disabled = cafObjectModel.fDisabled.HasValue  ? cafObjectModel.fDisabled.Value : false;
-                SelectedStoreValue = storeService.GetAllStores().Where(s => s.Id == cafObjectModel.fRecAgent).FirstOrDefault();
-                SelectedDocumentTypeValue = DocumentTypeList.Where(m=> m.Code == cafObjectModel.fDocumentType).FirstOrDefault();
+                SelectedStoreValue = storeService.GetAllStores().Where(s => s.fStoreId == cafObjectModel.fRecAgent).FirstOrDefault();
+                SelectedDocumentTypeValue = DocumentTypeList.Where(m=> m.Code == cafObjectModel.fDocumentType.ToString()).FirstOrDefault();
                 AuthorizationDate = cafObjectModel.fAuthorizationDate;
             }
 
@@ -172,7 +172,7 @@ namespace CES.CoreApi.Receipt_Main.UI.WPF.ViewModel
 
             if (SelectedStoreValue != null)
             {
-                storeid = SelectedStoreValue.Id;
+                storeid = SelectedStoreValue.fStoreId;
             }           
 
             try
@@ -186,8 +186,8 @@ namespace CES.CoreApi.Receipt_Main.UI.WPF.ViewModel
                     {
                         this.ID = caf.fCafId;
                         this.AuthorizationDate = caf.fAuthorizationDate;
-                        this.SelectedStoreValue = StoreList.Where(s => s.Id == caf.fRecAgent).FirstOrDefault();
-                        this.SelectedDocumentTypeValue = DocumentTypeList.Where(m => m.Code == caf.fDocumentType).FirstOrDefault();
+                        this.SelectedStoreValue = StoreList.Where(s => s.fStoreId == caf.fRecAgent).FirstOrDefault();
+                        this.SelectedDocumentTypeValue = DocumentTypeList.Where(m => m.Code == caf.fDocumentType.ToString()).FirstOrDefault();
                     }
                 }
                 else
@@ -211,7 +211,7 @@ namespace CES.CoreApi.Receipt_Main.UI.WPF.ViewModel
             FolioEndNumber = 0;
             FolioCurrentNumber = 0;
             SelectedDocumentTypeValue = new Document_Type() { Code = "0", Description = "--Seleccione Tipo Documento --" };
-            SelectedStoreValue = new systblApp_TaxReceipt_Store() { Id = 0, Name = "--Seleccione Tienda --" };
+            SelectedStoreValue = new systblApp_TaxReceipt_Store() { fStoreId = 0, fName = "--Seleccione Tienda --" };
             Disabled = false;
             XmlContent = string.Empty;
         }

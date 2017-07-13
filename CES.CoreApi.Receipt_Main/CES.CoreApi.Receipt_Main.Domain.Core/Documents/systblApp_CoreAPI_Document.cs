@@ -18,6 +18,7 @@ namespace CES.CoreApi.Receipt_Main.Domain.Core.Documents
             Activity = new HashSet<systblApp_TaxReceipt_Activity>();
         }
 
+        [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.None)]
         public int fDocumentId { get; set; }
 

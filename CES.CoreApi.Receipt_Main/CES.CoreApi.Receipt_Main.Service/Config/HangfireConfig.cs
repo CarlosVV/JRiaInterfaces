@@ -1,4 +1,5 @@
-﻿using CES.CoreApi.Receipt_Main.Service.Utilities;
+﻿using CES.CoreApi.Receipt_Main.Infrastructure.Core;
+using CES.CoreApi.Receipt_Main.Service.Utilities;
 using Hangfire;
 using Hangfire.Redis.StackExchange;
 using System;

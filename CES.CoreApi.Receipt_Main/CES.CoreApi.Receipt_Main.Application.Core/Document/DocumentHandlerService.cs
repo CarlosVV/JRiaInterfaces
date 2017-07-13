@@ -13,13 +13,13 @@ namespace CES.CoreApi.Receipt_Main.Application.Core.Document
 {
     public class DocumentHandlerService
     {
-        private int chunkfolio = 100;
-        private static readonly decimal _TaxRate = 0.19m;
+        private int chunkfolio = 100; //TODO: Should be in Parameters
+        private static readonly decimal _TaxRate = 0.19m;//TODO: Should be in Parameters
         private IDocumentService _documentService;
-        private readonly ITaxEntityService _taxEntityService;
-        private readonly ITaxAddressService _taxAddressService;
+        private ITaxEntityService _taxEntityService;
+        private ITaxAddressService _taxAddressService;
         private static ISequenceService _sequenceService;
-        private readonly IStoreService _storeService;
+        private IStoreService _storeService;
         private static Dictionary<string, systblApp_CoreAPI_TaxEntity> _TaxEntityCache;
         private static Dictionary<string, systblApp_TaxReceipt_Store> _StoreCache;
 
@@ -35,7 +35,19 @@ namespace CES.CoreApi.Receipt_Main.Application.Core.Document
                 chunkfolio = value;
             }
         }
+        public DocumentHandlerService(IDocumentService documentService, ITaxEntityService taxEntityService, ITaxAddressService taxAddressService, ISequenceService sequenceService, IStoreService storeService, int chunkfolio)
+        {
+            _documentService = documentService;
+            _taxEntityService = taxEntityService;
+            _taxAddressService = taxAddressService;
+            _sequenceService = sequenceService;
+            _storeService = storeService;
 
+            _TaxEntityCache = new Dictionary<string, systblApp_CoreAPI_TaxEntity>();
+            _StoreCache = new Dictionary<string, systblApp_TaxReceipt_Store>();
+
+            this.chunkfolio = chunkfolio;
+        }
         public DocumentHandlerService(IDocumentService documentService, ITaxEntityService taxEntityService, ITaxAddressService taxAddressService, ISequenceService sequenceService, IStoreService storeService)
         {
             _documentService = documentService;
@@ -60,7 +72,6 @@ namespace CES.CoreApi.Receipt_Main.Application.Core.Document
             CreateTaxEntities(objBoleta, rutSender, rutReceiver, out idSender, out idReceiver, senderEntity, receiverEntity);
 
             //Save Document and Detail
-
             CreateDocument(indexchunk, objBoleta, ref detailids, ref docids, senderEntity, receiverEntity);
 
             if (indexchunk >= Chunkfolio || folio == folioFinal)
@@ -159,14 +170,14 @@ namespace CES.CoreApi.Receipt_Main.Application.Core.Document
             systblApp_TaxReceipt_Store entity;
             if (_StoreCache.TryGetValue(storename, out entity))
             {
-                return entity.Id;
+                return entity.fStoreId;
             }
 
-            entity = _storeService.GetAllStores().Where(m => m.Name.Equals(storename)).FirstOrDefault();
+            entity = _storeService.GetAllStores().Where(m => m.fName.Equals(storename)).FirstOrDefault();
             if (entity != null)
             {
                 _StoreCache.Add(storename, entity);
-                return entity.Id;
+                return entity.fStoreId;
             }
 
             return 0;
@@ -225,10 +236,10 @@ namespace CES.CoreApi.Receipt_Main.Application.Core.Document
 
         private systblApp_CoreAPI_TaxEntity SaveReceiverEntity(EnvioBOLETA objBoleta)
         {
-
             var newreceiverEntity = MapReceiverEntity(objBoleta);
+            _taxEntityService = new TaxEntityService(new TaxEntityRepository(new ReceiptDbContext()));
             _taxEntityService.CreateTaxEntity(newreceiverEntity);
-
+            _taxEntityService.SaveChanges();
             return newreceiverEntity;
         }
 
@@ -304,22 +315,50 @@ namespace CES.CoreApi.Receipt_Main.Application.Core.Document
 
         private Tuple<int, int> GetNewId(string entityName, int quantity)
         {
-            _sequenceService = new SequenceService(new SequenceRepository(new ReceiptDbContext())); ;//App.container.Get<ISequenceService>();
-            var entity = _sequenceService.GetAllSequences().Where(m => m.fEntityName.Equals(entityName)).FirstOrDefault(); //db1.systblApp_CoreApi_Sequence.Find(entityName);
-            var start = entity.fCurrentId == null ? entity.fStartId : entity.fCurrentId.Value + 1;
-            var nextId = entity.fCurrentId == null ? quantity : entity.fCurrentId.Value + quantity;
+            var sequenceService = new SequenceService(new SequenceRepository(new ReceiptDbContext())); ;//App.container.Get<ISequenceService>();
+            var max = sequenceService.GetAllSequences().Count() != 0 ? sequenceService.GetAllSequences().Max(m => m.fSequenceId) : 0;
+            var entity = sequenceService.GetAllSequences().Where(m => m.fEntityName.Equals(entityName)).FirstOrDefault(); //db1.systblApp_CoreApi_Sequence.Find(entityName);
+            int? start = 1;
+            int nextId = 1;
+            if (entity == null)
+            {
+                try
+                {
+                    var sequenceService2 = new SequenceService(new SequenceRepository(new ReceiptDbContext()));
+                    var entity2 = new systblApp_CoreApi_Sequence
+                    {
+                        fSequenceId = max + 1,
+                        fEntityName = entityName,
+                        fStartId = 1,
+                        fCurrentId = null,
+                    };
+                    sequenceService2.CreateSequence(entity2);
+                    sequenceService2.SaveChanges();
+                }
+                catch(Exception ex)
+                {
+                    Console.WriteLine(ex.ToString());
+                }              
+            }
+            else
+            {
+                start = entity.fCurrentId == null ? entity.fStartId : entity.fCurrentId.Value + 1;
+                nextId = entity.fCurrentId == null ? quantity : entity.fCurrentId.Value + quantity;
+            }
 
-            entity.fCurrentId = nextId;
-            _sequenceService.UpdateSequence(entity);
-            _sequenceService.SaveChanges();
+            var sequenceService3 = new SequenceService(new SequenceRepository(new ReceiptDbContext()));
+            var entity3 = sequenceService.GetAllSequences().Where(m => m.fEntityName.Equals(entityName)).FirstOrDefault();
+            entity3.fCurrentId = nextId;
+            sequenceService3.UpdateSequence(entity3);
+            sequenceService3.SaveChanges();
 
             return Tuple.Create(start.Value, nextId);
-
         }
         private systblApp_CoreAPI_TaxEntity SaveSenderEntity(EnvioBOLETA objBoleta)
         {
             var newsenderEntity = MapSenderEntity(objBoleta);
             AddAddressToSenderEntity(objBoleta, newsenderEntity);
+            _taxEntityService = new TaxEntityService(new TaxEntityRepository(new ReceiptDbContext()));
             _taxEntityService.CreateTaxEntity(newsenderEntity);
             _taxEntityService.SaveChanges();
             return newsenderEntity;
@@ -357,7 +396,7 @@ namespace CES.CoreApi.Receipt_Main.Application.Core.Document
                 return true;
             }
 
-
+            _taxEntityService = new TaxEntityService(new TaxEntityRepository(new ReceiptDbContext()));
             entity = _taxEntityService.GetAllTaxEntitys().Where(m => m.fRUT.Equals(rut)).FirstOrDefault();
             id = null;
 

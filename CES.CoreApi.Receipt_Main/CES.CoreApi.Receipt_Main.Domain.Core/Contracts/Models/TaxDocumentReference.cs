@@ -8,20 +8,20 @@ namespace CES.CoreApi.Receipt_Main.Domain.Core.Contracts.Models
 {
     public class TaxDocumentReference
     {
-        public int Id { get; set; }
+        public int fTaxDocumentReferenceId { get; set; }
 
-        public int DocumentId { get; set; }
+        public int fDocumentId { get; set; }
 
-        public int LineNumber { get; set; }
+        public int fLineNumber { get; set; }
      
-        public string DocRefFolio { get; set; }
+        public string fDocRefFolio { get; set; }
    
-        public string DocRefType { get; set; }
+        public string fDocRefType { get; set; }
 
-        public DateTime? DocRefDate { get; set; }
+        public DateTime? fDocRefDate { get; set; }
       
-        public string CodeRef { get; set; }
+        public string fCodeRef { get; set; }
      
-        public string ReasonRef { get; set; }     
+        public string fReasonRef { get; set; }     
     }
 }

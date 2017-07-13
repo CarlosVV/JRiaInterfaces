@@ -37,8 +37,8 @@ namespace CES.CoreApi.Receipt_Main.Service.Jobs
             _sequenceService = new CES.CoreApi.Receipt_Main.Application.Core.SequenceService(new SequenceRepository(new ReceiptDbContext()));
             _storeService = new CES.CoreApi.Receipt_Main.Application.Core.StoreService(new StoreRepository(new ReceiptDbContext()));
 
-            var _documentDownloader = new DocumentDownloader();
-            var _documentHelper = new DocumentHandlerService(_documentService, _taxEntityService, _taxAddressService, _sequenceService, _storeService);
+            
+            
 
             var docType = "39";
 
@@ -51,6 +51,8 @@ namespace CES.CoreApi.Receipt_Main.Service.Jobs
             var parametersTask = JsonConvert.DeserializeObject<DownloadBatchTaskParameter>(parametersJson);
             var folioStart = parametersTask.FolioStart;
             var folioEnd = parametersTask.FolioEnd;
+            var _documentHelper = new DocumentHandlerService(_documentService, _taxEntityService, _taxAddressService, _sequenceService, _storeService, 1);
+            var _documentDownloader = new DocumentDownloader();
 
             UpdateTaskStatus(taskId);
 
@@ -66,7 +68,7 @@ namespace CES.CoreApi.Receipt_Main.Service.Jobs
 
                 if (ExistsFolioInDB(folio))
                 {
-                    UpdateTaskDetail(taskDetailId, folio);
+                    UpdateTaskDetailForExistingFolio(taskDetailId, folio);
 
                     continue;
                 }
@@ -75,17 +77,23 @@ namespace CES.CoreApi.Receipt_Main.Service.Jobs
                 {
                     var documentXmlObject = _parserBoletas.GetDocumentObjectFromString(respuesta);
 
-                    List<int> detailids = null;
-                    List<int> docids = null;
+                    var documentId = CreateDocument(_documentHelper, folio, ref indexchunk, ref acumchunk, documentXmlObject);
 
-                    _documentHelper.SaveDocument(folio, folio, ref indexchunk, ref acumchunk, documentXmlObject, ref detailids, ref docids);
-
-                    UpdateTaskDetailResult(taskDetailId, folio);
-
+                    UpdateTaskDetailResultForDocumentCreation(taskDetailId, folio, documentId);
                 }
             }
 
             UpdateTaskResult(taskId);
+        }
+
+        private int CreateDocument(DocumentHandlerService _documentHelper, int folio, ref int indexchunk, ref int acumchunk, EnvioBOLETA documentXmlObject)
+        {
+            List<int> detailids = null;
+            List<int> docids = null;
+
+            _documentHelper.SaveDocument(folio, folio, ref indexchunk, ref acumchunk, documentXmlObject, ref detailids, ref docids);
+            var documentId = GetDocumentId(folio);
+            return documentId;
         }
 
         private void UpdateTaskStatus(int taskId)
@@ -113,23 +121,23 @@ namespace CES.CoreApi.Receipt_Main.Service.Jobs
             taskService.SaveChanges();
         }
 
-        private void UpdateTaskDetailResult(int taskDetailId, int folio)
+        private void UpdateTaskDetailResultForDocumentCreation(int taskDetailId, int folio, int documentId)
         {
             var taskDetailService = new TaskDetailService(new TaskDetailRepository(new ReceiptDbContext()));
             var taskDetail = taskDetailService.GetAllTaskDetails().Where(m => m.fTaskDetailId == taskDetailId).FirstOrDefault();
 
-            taskDetail.fResultObject = $"Folio {folio} descargado";
+            taskDetail.fResultObject = $"Folio: {folio} descargado, DocumentId: {documentId} creado";
             taskDetail.fModified = DateTime.Now;
-            taskDetail.fDocumentId = folio;
+            taskDetail.fDocumentId = documentId;
             taskDetailService.UpdateTaskDetail(taskDetail);
             taskDetailService.SaveChanges();
         }
 
-        private void UpdateTaskDetail(int taskDetailId, int folio)
+        private void UpdateTaskDetailForExistingFolio(int taskDetailId, int folio)
         {
             var taskDetailService = new TaskDetailService(new TaskDetailRepository(new ReceiptDbContext()));
             var taskDetail = taskDetailService.GetAllTaskDetails().Where(m => m.fTaskDetailId == taskDetailId).FirstOrDefault();
-
+            taskDetail.fDocumentId = 0;
             taskDetail.fModified = DateTime.Now;
             taskDetail.fResultObject = $"Folio {folio} existe en BD";
             taskDetailService.UpdateTaskDetail(taskDetail);
@@ -157,6 +165,13 @@ namespace CES.CoreApi.Receipt_Main.Service.Jobs
         {
             var _documentServiceToSearch = new DocumentService(new DocumentRepository(new ReceiptDbContext()));
             return _documentServiceToSearch.GetAllDocuments().Any(m => m.fFolio == folio);
+        }
+
+        private int GetDocumentId(int folio)
+        {
+            var _documentServiceToSearch = new DocumentService(new DocumentRepository(new ReceiptDbContext()));
+            var obj = _documentServiceToSearch.GetAllDocuments().FirstOrDefault(m => m.fFolio == folio);
+            return obj != null ? obj.fDocumentId : 0;
         }
     }
 }

@@ -14,7 +14,7 @@ namespace CES.CoreApi.Receipt_Main.Domain.Core.Documents
             Receivers = new HashSet<systblApp_CoreAPI_Document>();
             TaxAddresses = new HashSet<systblApp_CoreAPI_TaxAddress>();
         }
-
+        [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.None)]
         public int fTaxEntityId { get; set; }
 

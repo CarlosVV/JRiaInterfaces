@@ -329,7 +329,6 @@
     <Compile Include="Services\CafServiceHandler.cs" />
     <Compile Include="Services\DocumentServiceHandler.cs" />
     <Compile Include="Services\MTService.cs" />
-    <Compile Include="Utilities\AppSettings.cs" />
     <Compile Include="Utilities\Client.cs" />
     <Compile Include="Utilities\CodeErrorManager.cs" />
     <Compile Include="Utilities\Enumerations.cs" />
@@ -374,6 +373,9 @@
     <Content Include="Areas\HelpPage\Views\Help\DisplayTemplates\CollectionModelDescription.cshtml" />
     <Content Include="Areas\HelpPage\Views\Help\DisplayTemplates\ApiGroup.cshtml" />
     <Content Include="Areas\HelpPage\Views\Help\Api.cshtml" />
+    <Content Include="LocalStorage\Stores.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

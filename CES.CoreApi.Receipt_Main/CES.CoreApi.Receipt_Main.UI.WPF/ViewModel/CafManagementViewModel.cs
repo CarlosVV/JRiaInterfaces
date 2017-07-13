@@ -46,7 +46,7 @@ namespace CES.CoreApi.Receipt_Main.UI.WPF.ViewModel
 
             var stores = storeService.GetAllStores();
             StoreList = stores.ToList();
-            StoreList.Insert(0, new systblApp_TaxReceipt_Store() { Id = 0, Name = "--Seleccione una Tienda --" });
+            StoreList.Insert(0, new systblApp_TaxReceipt_Store() { fStoreId = 0, fName = "--Seleccione una Tienda --" });
             SelectedStoreValue = StoreList.First();
 
             SearchCommand = new RelayCommand(Search);
@@ -71,7 +71,7 @@ namespace CES.CoreApi.Receipt_Main.UI.WPF.ViewModel
             if (obj != null)
             {
                 var cafGridItem = obj as CafResultSelectableViewModel;
-                var recAgent = string.IsNullOrWhiteSpace(cafGridItem.Store) ? 0 : storeService.GetAllStores().Where(s => s.Name == cafGridItem.Store).FirstOrDefault().Id;
+                var recAgent = string.IsNullOrWhiteSpace(cafGridItem.Store) ? 0 : storeService.GetAllStores().Where(s => s.fName == cafGridItem.Store).FirstOrDefault().fStoreId;
                 var docType = string.IsNullOrWhiteSpace(cafGridItem.Type) ? string.Empty : DocumentTypeList.Where(s => s.Description == cafGridItem.Type).FirstOrDefault().Code;
 
                 cafObject = _cafApiService.SearchCafs(int.Parse(cafGridItem.Id), docType, int.Parse(cafGridItem.Start), int.Parse(cafGridItem.End), int.Parse(cafGridItem.Current), recAgent).FirstOrDefault();
@@ -102,7 +102,7 @@ namespace CES.CoreApi.Receipt_Main.UI.WPF.ViewModel
                 Current = $"{objCafFormVieModel.FolioCurrentNumber}",
                 Date = $"{objCafFormVieModel.AuthorizationDate.ToShortDateString()}",
                 Type = objCafFormVieModel.SelectedDocumentTypeValue.Description,
-                Store = objCafFormVieModel.SelectedStoreValue != null && objCafFormVieModel.SelectedStoreValue.Id != 0 ?  $"{objCafFormVieModel.SelectedStoreValue.Name}" : string.Empty,
+                Store = objCafFormVieModel.SelectedStoreValue != null && objCafFormVieModel.SelectedStoreValue.fStoreId != 0 ?  $"{objCafFormVieModel.SelectedStoreValue.fName}" : string.Empty,
                 Disabled = objCafFormVieModel.Disabled,
                 AuthorizationDate = objCafFormVieModel.AuthorizationDate,
                 IsViewEditVisible = true
@@ -222,7 +222,7 @@ namespace CES.CoreApi.Receipt_Main.UI.WPF.ViewModel
             FolioEndNumber = 0;
             FolioCurrentNumber = 0;
             SelectedDocumentTypeValue = new Document_Type() { Code = "0", Description = "--Seleccione Tipo Documento --" };
-            SelectedStoreValue = new systblApp_TaxReceipt_Store() { Id = 0, Name = "--Seleccione Tienda --" };
+            SelectedStoreValue = new systblApp_TaxReceipt_Store() { fStoreId = 0, fName = "--Seleccione Tienda --" };
         }
 
         private void Delete(object obj)
@@ -261,7 +261,7 @@ namespace CES.CoreApi.Receipt_Main.UI.WPF.ViewModel
             var cafService = new CafApiService();
             try
             {
-                var results = cafService.SearchCafs(0, SelectedDocumentTypeValue.Code, FolioStartNumber, FolioEndNumber, FolioCurrentNumber, SelectedStoreValue.Id);
+                var results = cafService.SearchCafs(0, SelectedDocumentTypeValue.Code, FolioStartNumber, FolioEndNumber, FolioCurrentNumber, SelectedStoreValue.fStoreId);
                 CafResults.Clear();
                 foreach (var item in results)
                 {
@@ -272,8 +272,8 @@ namespace CES.CoreApi.Receipt_Main.UI.WPF.ViewModel
                         End = $"{item.fFolioEndNumber}",
                         Current = $"{item.fFolioCurrentNumber}",
                         Date = $"{item.fAuthorizationDate.ToShortDateString()}",
-                        Type = DocumentTypeList.Where(m => m.Code == item.fDocumentType).FirstOrDefault().Description,
-                        Store = item.fRecAgent == 0 ? string.Empty : StoreList.Where(m => m.Id == item.fRecAgent).FirstOrDefault().Name,
+                        Type = DocumentTypeList.Where(m => m.Code == item.fDocumentType.ToString()).FirstOrDefault().Description,
+                        Store = item.fRecAgent == 0 ? string.Empty : StoreList.Where(m => m.fStoreId == item.fRecAgent).FirstOrDefault().fName,
                         Disabled = item.fDisabled.HasValue ? item.fDisabled.Value : false,
                         AuthorizationDate = item.fAuthorizationDate,
                         IsViewEditVisible = true

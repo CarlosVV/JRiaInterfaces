@@ -8,6 +8,7 @@ namespace CES.CoreApi.Receipt_Main.Domain.Core.Tasks
 {
     public partial class systblApp_CoreAPI_TaskDetail
     {
+        [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.None)]
         public int fTaskDetailId { get; set; }
 
@@ -17,7 +18,7 @@ namespace CES.CoreApi.Receipt_Main.Domain.Core.Tasks
 
         public string fResultObject { get; set; }
 
-        public int? fDocumentId { get; set; }
+        public int fDocumentId { get; set; }
 
         public bool? fDisabled { get; set; }
 

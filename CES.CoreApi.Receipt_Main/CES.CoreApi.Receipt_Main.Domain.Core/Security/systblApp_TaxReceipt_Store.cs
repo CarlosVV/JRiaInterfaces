@@ -14,24 +14,24 @@ namespace CES.CoreApi.Receipt_Main.Domain.Core.Security
             Printer = new HashSet<systblApp_TaxReceipt_Printer>();
             Users = new HashSet<systblApp_TaxReceipt_User>();
         }
-
+        [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.None)]
-        public int Id { get; set; }
+        public int fStoreId { get; set; }
 
         [StringLength(80)]
-        public string Name { get; set; }
+        public string fName { get; set; }
 
         [StringLength(80)]
-        public string Location { get; set; }
+        public string fLocation { get; set; }
 
         [StringLength(20)]
-        public string SiiCode { get; set; }
+        public string fSiiCode { get; set; }
 
         [StringLength(50)]
-        public string PhoneNumber1 { get; set; }
+        public string fPhoneNumber1 { get; set; }
 
         [StringLength(50)]
-        public string PhoneNumber2 { get; set; }
+        public string fPhoneNumber2 { get; set; }
 
         public bool? fDisabled { get; set; }
 

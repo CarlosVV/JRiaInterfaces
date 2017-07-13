@@ -7,6 +7,7 @@ namespace CES.CoreApi.Receipt_Main.Domain.Core.Documents
 { 
    public partial class systblApp_CoreAPI_Caf
     {
+        [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.None)]
         public int fCafId { get; set; }
 
@@ -18,10 +19,11 @@ namespace CES.CoreApi.Receipt_Main.Domain.Core.Documents
         [StringLength(50)]
         public string fCompanyLegalName { get; set; }
 
-        [Required]
-        [StringLength(10)]
-        public string fDocumentType { get; set; }
+        //TODO: Modify to [StringLength(10)] public string fDocumentType { get; set; }
+        [Required]        
+        public int fDocumentType { get; set; }
 
+        [NotMapped]
         public int fRecAgent { get; set; }
 
         public int fFolioCurrentNumber { get; set; }

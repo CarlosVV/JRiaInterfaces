@@ -85,7 +85,7 @@ namespace CES.CoreApi.Receipt_Main.Service.Services
         internal TaxSIIGetDocumentResponse SIIGetDocument(TaxSIIGetDocumentRequest request)
         {
             var _documentDownloader = new DocumentDownloader();
-            var _documentHelper = new DocumentHandlerService(_documentService, _taxEntityService, _taxAddressService, _sequenceService, _storeService);
+            var _documentHelper = new DocumentHandlerService(_documentService, _taxEntityService, _taxAddressService, _sequenceService, _storeService, 1);
             var response = new TaxSIIGetDocumentResponse();
             var docType = "39";
             var folio = request.Folio;

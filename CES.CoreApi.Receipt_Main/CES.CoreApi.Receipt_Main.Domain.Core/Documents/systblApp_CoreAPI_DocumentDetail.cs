@@ -7,6 +7,7 @@ namespace CES.CoreApi.Receipt_Main.Domain.Core.Documents
 {
     public partial class systblApp_CoreAPI_DocumentDetail
     {
+        [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.None)]
         public int fDocumentDetailId { get; set; }
 

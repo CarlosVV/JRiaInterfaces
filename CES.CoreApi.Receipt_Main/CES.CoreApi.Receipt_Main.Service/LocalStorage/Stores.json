@@ -1,0 +1,47 @@
+﻿[
+  {
+    "fStoreId": 33011611,
+    "fName": "Bandera 523 Local A",  
+    "fSiiCode": "78642700",
+    "fLocation":  "Santiago"
+  },
+  {
+    "fStoreId": 35011811,
+    "fName": "Baquedano 482 Local 7",
+    "fSiiCode": "79024801",
+    "fLocation": "Antofagasta"
+  },
+  {
+    "fStoreId": 36738611,
+    "fName": "Catedral 1021 Local 1",
+    "fSiiCode": "79219787",
+    "fLocation": "Santiago"
+  },  
+  {
+    "fStoreId": 41906111,
+    "fName": "Baquedano 482 Local 41",  
+    "fSiiCode": "79690702",
+    "fLocation":  "Antofagasta"
+  },  
+  {
+    "fStoreId": 47422911,
+    "fName": "Sotomayor 2064 Local A",  
+    "fSiiCode": "80158096",
+    "fLocation":  "Calama"
+  },  
+  {
+    "fStoreId": 49044011,
+    "fName": "Serrano 402",  
+    "fSiiCode": "80328786",
+    "fLocation":  "Iquique"
+  }
+]
+
+//RecAgentID	Tienda	CodigoSII	Ciudad
+//33011611	Bandera 523 Local A                               	78642700	Santiago
+//35011811	Baquedano 482 Local 7                             	79024801	Antofagasta
+//36738611	Catedral 1021 Local 1                             	79219787	Santiago
+//41906111	Baquedano 482 Local 41                            	79690702	Antofagasta
+//47422911	Sotomayor 2064 Local A                            	80158096	Calama
+//49044011	Serrano 402                                       	80328786	Iquique
+

@@ -93,7 +93,7 @@ namespace CES.CoreApi.Receipt_Main.Service.Services
             var response = new TaxSearchCAFByTypeResponse();
             var results = from item in  _cafdomain.GetAllCafs() where
                           (request.Id == 0 || request.Id == item.fCafId) &&
-                          (string.IsNullOrWhiteSpace(request.DocumentType) || request.DocumentType == "0" || request.DocumentType == item.fDocumentType) &&
+                          (string.IsNullOrWhiteSpace(request.DocumentType) || request.DocumentType == "0" || request.DocumentType == item.fDocumentType.ToString()) &&
                           (!request.FolioStartNumber.HasValue  || request.FolioStartNumber.Value == 0 || request.FolioStartNumber.Value == item.fFolioStartNumber) &&
                           (!request.FolioEndNumber.HasValue || request.FolioEndNumber.Value == 0 || request.FolioEndNumber.Value == item.fFolioEndNumber) &&
                           (!request.FolioCurrentNumber.HasValue || request.FolioCurrentNumber.Value == 0 || request.FolioCurrentNumber.Value == item.fFolioCurrentNumber) &&
@@ -190,7 +190,7 @@ namespace CES.CoreApi.Receipt_Main.Service.Services
 
                 var result = _cafdomain.GetAllCafs().Where(m =>
                        request.Id == m.fCafId &&
-                       request.DocumentType == m.fDocumentType &&
+                       request.DocumentType == m.fDocumentType.ToString() &&
                        request.FolioCurrentNumber == m.fFolioCurrentNumber
                 );
 
@@ -240,7 +240,7 @@ namespace CES.CoreApi.Receipt_Main.Service.Services
                     return response;
                 }
 
-                var results = _cafdomain.GetAllCafs().Where(m => m.fCafId == request.Id && m.fDocumentType == request.DocumentType && m.fFolioCurrentNumber == folioCurrentNumber); //m. request.DocumentType, folioCurrentNumber, null, null);
+                var results = _cafdomain.GetAllCafs().Where(m => m.fCafId == request.Id && m.fDocumentType.ToString() == request.DocumentType && m.fFolioCurrentNumber == folioCurrentNumber); //m. request.DocumentType, folioCurrentNumber, null, null);
 
                 if (results == null && results.Count() == 0)
                 {
@@ -298,7 +298,7 @@ namespace CES.CoreApi.Receipt_Main.Service.Services
                 fCompanyRUT = objCAF.CAF.DA.RE,
                 fCompanyLegalName = objCAF.CAF.DA.RS,
                 fAuthorizationDate = objCAF.CAF.DA.FA,
-                fDocumentType = objCAF.CAF.DA.TD.ToString(),
+                fDocumentType = objCAF.CAF.DA.TD,
                 fFolioStartNumber = foliostartnumber == null ? objCAF.CAF.DA.RNG.D : foliostartnumber.Value,
                 fFolioEndNumber = folioendnumber == null ? objCAF.CAF.DA.RNG.H : folioendnumber.Value,
                 fFolioCurrentNumber = foliocurrentnumber == null ? 0 : foliocurrentnumber.Value,

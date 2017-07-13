@@ -20,7 +20,7 @@ namespace CES.CoreApi.Receipt_Main.Infrastructure.Data.Repository
 
         public systblApp_TaxReceipt_Store find(string id)
         {
-            return this.Get(p => p.Id.ToString() == id);
+            return this.Get(p => p.fStoreId.ToString() == id);
         }
 
         public IEnumerable<systblApp_TaxReceipt_Store> find(Expression<Func<systblApp_TaxReceipt_Store, bool>> where)
