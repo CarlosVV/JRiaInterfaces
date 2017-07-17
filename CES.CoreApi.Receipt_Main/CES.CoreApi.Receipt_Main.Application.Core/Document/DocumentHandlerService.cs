@@ -334,6 +334,9 @@ namespace CES.CoreApi.Receipt_Main.Application.Core.Document
                     };
                     sequenceService2.CreateSequence(entity2);
                     sequenceService2.SaveChanges();
+
+                    start = 1;
+                    nextId = quantity;
                 }
                 catch(Exception ex)
                 {

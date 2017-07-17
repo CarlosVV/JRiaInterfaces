@@ -593,10 +593,7 @@ namespace CES.CoreApi.Receipt_Main.UI.WPF.ViewModel
                                 {
                                     var documentXmlObject = _parserBoletas.GetDocumentObjectFromString(respuesta);
 
-
-
                                     _documentHelper.SaveDocument(folio, foliofin, ref indexchunk, ref acumchunk, documentXmlObject, ref detailids, ref docids);
-
 
                                     DocumentsToDownload[indexRange].Pending = DocumentsToDownload[indexRange].Pending - 1;
                                     DocumentsToDownload[indexRange].Processed = DocumentsToDownload[indexRange].Processed + 1;
