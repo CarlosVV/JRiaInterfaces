@@ -23,14 +23,8 @@ namespace CES.CoreApi.Shared.Persistence.Data
         private const string UpdatePersistenceData = "coreApi_sp_PersistenceUpdate";
         private PersistenceSqlMapper SqlMapper = DatabaseName.CreatePersistenceSqlMapper();
 
-        //private readonly IMapper _mapper;
-        public PersistenceRepository()
-        {
-            //var cfg = new MapperConfigurationExpression();
-            //cfg.AddProfile<PersistenceMapperProfile>();
-
-            //var mapperConfig = new MapperConfiguration(cfg);
-            //_mapper = new Mapper(mapperConfig);       
+        public PersistenceRepository()        {
+             
         }
         #endregion
 
@@ -51,7 +45,6 @@ namespace CES.CoreApi.Shared.Persistence.Data
                 {
                     if(reader.Read())
                     {
-                        //PersistenceInfo = _mapper.Map<IDataReader, PersistenceModel>(reader);
                         PersistenceInfo = Mapper.Map<IDataReader, PersistenceModel>(reader);
                     }
 
@@ -62,7 +55,6 @@ namespace CES.CoreApi.Shared.Persistence.Data
                         PersistenceEventList = new List<PersistenceEventModel>();
                         while (reader.Read())
                         {
-                            //PersistenceEventList.Add(_mapper.Map<IDataReader, PersistenceEventModel>(reader));
                             PersistenceEventList.Add(Mapper.Map<IDataReader, PersistenceEventModel>(reader));
                         }
                     }
@@ -72,7 +64,6 @@ namespace CES.CoreApi.Shared.Persistence.Data
                         RequesterInfoList = new List<RequesterInfoModel>();
                         while (reader.Read())
                         {
-                            //RequesterInfoList.Add(_mapper.Map<IDataReader, RequesterInfoModel>(reader));
                             RequesterInfoList.Add(Mapper.Map<IDataReader, RequesterInfoModel>(reader));
                         }
                     }

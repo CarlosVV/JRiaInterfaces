@@ -46,9 +46,11 @@ namespace CES.CoreApi.Receipt_Main.UI.WPF
             Bind<IStoreService>().To<StoreService>();
             Bind<IStoreRepository>().To<StoreRepository>();
 
-            //SimpleIoc.Default.Register<IDialogService>(() => new DialogService());
-            Bind<IDialogService>().To<DialogService>();          
+            Bind<IDialogService>().To<DialogService>();
 
+            //Bind<ICafService>().To<CafService>();
+            //Bind<ICafRepository>().To<CafRepository>();
+            //Bind<DbContext>().To<ReceiptDbContext>();
         }
     }
 }

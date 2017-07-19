@@ -5,7 +5,7 @@ using System.Web;
 
 namespace CES.CoreApi.Receipt_Main.Service.Models
 {
-    public class TaxSearchDocumentRequest
+    public class TaxSearchDocumentRequest : BaseRequestModel
     {
         public string DocumentId { get; set; }
         public string DocumentNumber { get; set; }
@@ -24,7 +24,6 @@ namespace CES.CoreApi.Receipt_Main.Service.Models
         public string DocumentTellerNumber { get; set; }
         public string DocumentTellerName { get; set; }
         public DateTime? DocumentIssued { get; set; }
-        public decimal? DocumentTotalAmount { get; set; }
-        public HeaderInfo HeaderInfo { get; internal set; }
+        public decimal? DocumentTotalAmount { get; set; }       
     }
 }

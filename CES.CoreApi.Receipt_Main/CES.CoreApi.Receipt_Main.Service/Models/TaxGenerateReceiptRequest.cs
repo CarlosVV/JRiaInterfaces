@@ -5,10 +5,9 @@ using System.Web;
 
 namespace CES.CoreApi.Receipt_Main.Service.Models
 {
-    public class TaxGenerateReceiptRequest
+    public class TaxGenerateReceiptRequest : BaseRequestModel
     {
         public string OrderNumber { get; set; }
         public int Folio { get; set; }
-        public HeaderInfo HeaderInfo { get; internal set; }
     }
 }

@@ -5,9 +5,8 @@ using System.Web;
 
 namespace CES.CoreApi.Receipt_Main.Service.Models
 {
-    public class TaxSIIGetDocumentRequest
+    public class TaxSIIGetDocumentRequest : BaseRequestModel
     {
-        public int Folio { get; set; }
-        public HeaderInfo HeaderInfo { get; internal set; }
+        public int Folio { get; set; }     
     }
 }

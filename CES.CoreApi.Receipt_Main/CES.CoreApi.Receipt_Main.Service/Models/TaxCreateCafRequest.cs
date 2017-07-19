@@ -5,7 +5,7 @@ using System.Web;
 
 namespace CES.CoreApi.Receipt_Main.Service.Models
 {
-    public class TaxCreateCafRequest
+    public class TaxCreateCafRequest : BaseRequestModel
     {
         public string DocumentType { get; set; }
         public int? RecAgent { get; set; }
@@ -13,6 +13,5 @@ namespace CES.CoreApi.Receipt_Main.Service.Models
         public int? FolioEndNumber { get; set; }
         public int? FolioCurrentNumber { get; set; }
         public string CAFContent { get; set; }
-        public HeaderInfo HeaderInfo { get; internal set; }
     }
 }

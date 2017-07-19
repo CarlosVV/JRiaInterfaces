@@ -6,7 +6,7 @@ using System.Web;
 
 namespace CES.CoreApi.Receipt_Main.Service.Models
 {
-    public class TaxSIISendDocumentRequest
+    public class TaxSIISendDocumentRequest : BaseRequestModel
     {
         public ReturnInfo ReturnInfo { get; internal set; }
     }

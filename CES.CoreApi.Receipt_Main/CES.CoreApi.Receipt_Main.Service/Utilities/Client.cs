@@ -21,7 +21,7 @@ namespace CES.CoreApi.Receipt_Main.Service.Utilities
     /// Client  Identity: Don't change it.
     /// To get applicationID, application session and other info from header 
     /// </summary>
-    public class Client
+    public class Client : IClient
     {
         private readonly IPersistenceHelper _persistenceHelper;
         private readonly LogService _logService;

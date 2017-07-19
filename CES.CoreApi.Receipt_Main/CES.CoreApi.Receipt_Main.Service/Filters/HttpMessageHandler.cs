@@ -1,4 +1,5 @@
 ﻿using CES.CoreApi.Receipt_Main.Domain.Core.Contracts.Models;
+using CES.CoreApi.Receipt_Main.Infrastructure.Core;
 using CES.CoreApi.Receipt_Main.Service.Filters.Responses;
 using CES.CoreApi.Receipt_Main.Service.Models;
 using CES.CoreApi.Receipt_Main.Service.Services;
@@ -22,8 +23,10 @@ namespace CES.CoreApi.Receipt_Main.Service.Filters
     public class HttpMessageHandler : DelegatingHandler
     {
         private long persistenceID = 0;
-        private readonly IPersistenceHelper _persistenceHelper = new PersistenceHelper(new PersistenceRepository());
+        private IPersistenceHelper _persistenceHelper = PersistenceHelperFactory.GetPersistenceHelper();
         private LogService _logService = new LogService();
+        private IErrorManager _errorManager = new ErrorManager();
+        private ApiResponse _apiResponse = null;
         protected override async Task<HttpResponseMessage> SendAsync(HttpRequestMessage request, CancellationToken cancellationToken)
         {
             var id = new Guid().ToString();
@@ -32,34 +35,18 @@ namespace CES.CoreApi.Receipt_Main.Service.Filters
 
             try
             {
-                var client = new Client();
+                IClient client = ClientFactory.GetClient();
 
                 id = client.GetCorrelationId(request);
+
                 Logging.Log.Id = id.ToString();
                 Logging.Log.Info("------Start Calling-----");
 
                 persistenceID = client.GetPersistenceID(out isValid, out errorResponse);
 
-                var errors = new List<Error>();
-                if (string.IsNullOrWhiteSpace(client.ApplicationId))
-                {
-                    errors.Add(new Error { Message = "Header Error: ApplicationId not sent", Property = "400" });
-                }
+                _apiResponse = new ApiResponse(_persistenceHelper, persistenceID);
 
-                if (string.IsNullOrWhiteSpace(client.CesAppObjectId))
-                {
-                    errors.Add(new Error { Message = "Header Error: ces-appObjectId not sent", Property = "400" });
-                }
-
-                if (string.IsNullOrWhiteSpace(client.CesUserId))
-                {
-                    errors.Add(new Error { Message = "Header Error: ces-userId not sent", Property = "400" });
-                }
-
-                if (string.IsNullOrWhiteSpace(client.CesRequestTime))
-                {
-                    errors.Add(new Error { Message = "Header Error: ces-requestTime not sent", Property = "400" });
-                }
+                var errors = _errorManager.ValidateHeaders(client);
 
                 if (errors.Count > 0)
                 {
@@ -76,12 +63,9 @@ namespace CES.CoreApi.Receipt_Main.Service.Filters
                     return request.CreateResponse(System.Net.HttpStatusCode.InternalServerError, errorResponse);
                 }
 
-                HeaderHelper.ApplicationId = client.ApplicationId;
-                HeaderHelper.CesAppObjectId = client.CesAppObjectId;
-                HeaderHelper.CesUserId = client.CesUserId;
-                HeaderHelper.CesRequestTime = client.CesRequestTime;
+                AssignHeaderValues(client);
 
-                if (isValid)
+                if (isValid && request.Content != null)
                 {
                     if (request.Content != null)
                     {
@@ -115,7 +99,7 @@ namespace CES.CoreApi.Receipt_Main.Service.Filters
                         }
                         if (!response.IsSuccessStatusCode)
                         {
-                            response = BuildApiResponse(request, response);
+                            response = _apiResponse.BuildApiResponse(request, response);
                         }
 
                         Logging.Log.Info("------End Calling----" + Environment.NewLine);
@@ -143,234 +127,12 @@ namespace CES.CoreApi.Receipt_Main.Service.Filters
             }
         }
 
-
-        private HttpResponseMessage BuildApiResponse(HttpRequestMessage request, HttpResponseMessage response)
+        private static void AssignHeaderValues(IClient client)
         {
-
-            object content;
-            List<Error> modelStateErrors = new List<Error>();
-            var taxCreateCAFResponse = null as TaxCreateCafFResponse;
-            var taxCreateDocumentResponse = null as TaxCreateDocumentResponse;
-            var taxDeleteCAFResponse = null as TaxDeleteCAFResponse;
-            var taxGenerateReceiptResponse = null as TaxGenerateReceiptResponse;
-            var taxGetFolioResponse = null as TaxGetFolioResponse;
-            var taxSearchCAFByTypeResponse = null as TaxSearchCAFByTypeResponse;
-            var taxSearchDocumentResponse = null as TaxSearchDocumentResponse;
-            var taxSIISendDocumentRequest = null as TaxSIISendDocumentRequest;
-            var taxSIIGetDocumentResponse = null as TaxSIIGetDocumentResponse;
-            var taxUpdateCAFResponse = null as TaxUpdateCafResponse;
-            var taxUpdateFolioResponse = null as TaxUpdateFolioResponse;
-            var taxSIIGetDocumentBatchResponse = null as TaxSIIGetDocumentBatchResponse;
-
-            ValidationResult validationResult = null;
-            ErrorResponse erroResponse = null;
-
-            if (response.TryGetContentValue(out content) && !response.IsSuccessStatusCode)
-            {
-                validationResult = content as ValidationResult;
-                taxCreateCAFResponse = content as TaxCreateCafFResponse;
-
-                taxCreateDocumentResponse = content as TaxCreateDocumentResponse;
-                taxDeleteCAFResponse = content as TaxDeleteCAFResponse;
-                taxGenerateReceiptResponse = content as TaxGenerateReceiptResponse;
-                taxGetFolioResponse = content as TaxGetFolioResponse;
-                taxSearchCAFByTypeResponse = content as TaxSearchCAFByTypeResponse;
-                taxSearchDocumentResponse = content as TaxSearchDocumentResponse;
-                taxSIISendDocumentRequest = content as TaxSIISendDocumentRequest;
-                taxSIIGetDocumentResponse = content as TaxSIIGetDocumentResponse;
-                taxUpdateCAFResponse = content as TaxUpdateCafResponse;
-                taxUpdateFolioResponse = content as TaxUpdateFolioResponse;
-                taxSIIGetDocumentBatchResponse = content as TaxSIIGetDocumentBatchResponse;
-                
-                erroResponse = content as ErrorResponse;
-            }
-
-            HttpResponseMessage newResponse = null;
-
-            var message = string.Empty;
-            switch (response.StatusCode)
-            {
-                case System.Net.HttpStatusCode.BadRequest:
-                    message = "Invalid request or required fields were not provided";
-                    if (validationResult != null)
-                        modelStateErrors = GetErrors(validationResult);
-
-                    if (taxCreateCAFResponse != null && taxCreateCAFResponse.ReturnInfo != null)
-                        modelStateErrors = GetErrors(taxCreateCAFResponse.ReturnInfo);
-
-                    if (taxCreateDocumentResponse != null && taxCreateDocumentResponse.ReturnInfo != null)
-                        modelStateErrors = GetErrors(taxCreateDocumentResponse.ReturnInfo);
-
-                    if (taxDeleteCAFResponse != null && taxDeleteCAFResponse.ReturnInfo != null)
-                        modelStateErrors = GetErrors(taxDeleteCAFResponse.ReturnInfo);
-
-                    if (taxGenerateReceiptResponse != null && taxGenerateReceiptResponse.ReturnInfo != null)
-                        modelStateErrors = GetErrors(taxGenerateReceiptResponse.ReturnInfo);
-
-                    if (taxGetFolioResponse != null && taxGetFolioResponse.ReturnInfo != null)
-                        modelStateErrors = GetErrors(taxGetFolioResponse.ReturnInfo);
-
-                    if (taxSearchCAFByTypeResponse != null && taxSearchCAFByTypeResponse.ReturnInfo != null)
-                        modelStateErrors = GetErrors(taxSearchCAFByTypeResponse.ReturnInfo);
-
-                    if (taxSearchDocumentResponse != null && taxSearchDocumentResponse.ReturnInfo != null)
-                        modelStateErrors = GetErrors(taxSearchDocumentResponse.ReturnInfo);
-
-                    if (taxSIISendDocumentRequest != null && taxSIISendDocumentRequest.ReturnInfo != null)
-                        modelStateErrors = GetErrors(taxSIISendDocumentRequest.ReturnInfo);
-
-                    if (taxSIIGetDocumentResponse != null && taxSIIGetDocumentResponse.ReturnInfo != null)
-                        modelStateErrors = GetErrors(taxSIIGetDocumentResponse.ReturnInfo);
-
-                    if (taxUpdateFolioResponse != null && taxUpdateFolioResponse.ReturnInfo != null)
-                        modelStateErrors = GetErrors(taxUpdateFolioResponse.ReturnInfo);
-
-                    if (taxSIIGetDocumentBatchResponse != null && taxSIIGetDocumentBatchResponse.ReturnInfo != null)
-                        modelStateErrors = GetErrors(taxSIIGetDocumentBatchResponse.ReturnInfo);
-
-                    if (erroResponse != null)
-                        modelStateErrors = GetErrors(erroResponse);
-
-                    break;
-                case System.Net.HttpStatusCode.InternalServerError:
-
-                    message = $"An error occurred while processing your request";
-
-                    if (taxCreateCAFResponse != null && taxCreateCAFResponse.ReturnInfo != null)
-                        modelStateErrors = GetErrors(taxCreateCAFResponse.ReturnInfo);
-
-                    if (taxCreateDocumentResponse != null && taxCreateDocumentResponse.ReturnInfo != null)
-                        modelStateErrors = GetErrors(taxCreateDocumentResponse.ReturnInfo);
-
-                    if (taxDeleteCAFResponse != null && taxDeleteCAFResponse.ReturnInfo != null)
-                        modelStateErrors = GetErrors(taxDeleteCAFResponse.ReturnInfo);
-
-                    if (taxGenerateReceiptResponse != null && taxGenerateReceiptResponse.ReturnInfo != null)
-                        modelStateErrors = GetErrors(taxGenerateReceiptResponse.ReturnInfo);
-
-                    if (taxGetFolioResponse != null && taxGetFolioResponse.ReturnInfo != null)
-                        modelStateErrors = GetErrors(taxGetFolioResponse.ReturnInfo);
-
-                    if (taxSearchCAFByTypeResponse != null && taxSearchCAFByTypeResponse.ReturnInfo != null)
-                        modelStateErrors = GetErrors(taxSearchCAFByTypeResponse.ReturnInfo);
-
-                    if (taxSearchDocumentResponse != null && taxSearchDocumentResponse.ReturnInfo != null)
-                        modelStateErrors = GetErrors(taxSearchDocumentResponse.ReturnInfo);
-
-                    if (taxSIISendDocumentRequest != null && taxSIISendDocumentRequest.ReturnInfo != null)
-                        modelStateErrors = GetErrors(taxSIISendDocumentRequest.ReturnInfo);
-
-                    if (taxSIIGetDocumentResponse != null && taxSIIGetDocumentResponse.ReturnInfo != null)
-                        modelStateErrors = GetErrors(taxSIIGetDocumentResponse.ReturnInfo);
-
-                    if (taxUpdateCAFResponse != null && taxUpdateCAFResponse.ReturnInfo != null)
-                        modelStateErrors = GetErrors(taxUpdateCAFResponse.ReturnInfo);
-
-                    if (taxUpdateFolioResponse != null && taxUpdateFolioResponse.ReturnInfo != null)
-                        modelStateErrors = GetErrors(taxUpdateFolioResponse.ReturnInfo);
-
-                    if (taxSIIGetDocumentBatchResponse != null && taxSIIGetDocumentBatchResponse.ReturnInfo != null)
-                        modelStateErrors = GetErrors(taxSIIGetDocumentBatchResponse.ReturnInfo);
-
-                    break;
-
-            }
-
-            var errorResponse = new ErrorResponse(message, (int)response.StatusCode, modelStateErrors, request.GetCorrelationId(), persistenceID);
-
-            _persistenceHelper.CreatePersistence<ErrorResponse>(errorResponse, persistenceID, PersistenceEventType.ReceiptGenerationError);
-
-            newResponse = request.CreateResponse(response.StatusCode, errorResponse);
-
-            foreach (var header in response.Headers) //Add back the response headers
-            {
-                newResponse.Headers.Add(header.Key, header.Value);
-            }
-
-            return newResponse;
-        }
-
-        private List<Error> GetErrors(ValidationResult validationResult)
-        {
-            List<Error> modelStateErrors = new List<Error>();
-            if (validationResult != null)
-            {
-
-                if (validationResult.Errors != null)
-                {
-                    var code = 0;
-                    foreach (var item in validationResult.Errors)
-                    {
-                        int.TryParse(item.ErrorCode, out code);
-                        modelStateErrors.Add(new Error
-                        {
-                            Code = code,
-                            Property = item.PropertyName,
-                            Message = item.ErrorMessage,
-                        });
-                    }
-                }
-
-            }
-
-            return modelStateErrors;
-        }
-
-        private List<Error> GetErrors(ReturnInfo returnInfo)
-        {
-
-            List<Error> modelStateErrors = new List<Error>();
-            if (returnInfo != null)
-            {
-
-                if (returnInfo.Errors != null && returnInfo.Errors.Any())
-                {
-                    foreach (var error in returnInfo.Errors)
-                    {
-
-                        modelStateErrors.Add(new Error
-                        {
-                            Code = error.Code,
-                            Property = error.Property,
-                            Message = error.Message
-                        });
-                    }
-
-                    return modelStateErrors;
-                }
-
-                modelStateErrors.Add(new Error
-                {
-                    Code = returnInfo.ErrorCode,
-                    Property = string.Empty,
-                    Message = returnInfo.ErrorMessage
-                });
-            }
-
-            return modelStateErrors;
-        }
-
-        private List<Error> GetErrors(ErrorResponse errorResponse)
-        {
-            List<Error> modelStateErrors = new List<Error>();
-            if (errorResponse != null)
-            {
-
-                if (errorResponse.Errors != null)
-                {
-                    foreach (var item in errorResponse.Errors)
-                    {
-                        modelStateErrors.Add(new Error
-                        {
-                            Property = item.Property,
-                            Message = $"{item.Message}",
-                        });
-                    }
-                }
-
-            }
-
-            return modelStateErrors;
+            HeaderHelper.ApplicationId = client.ApplicationId;
+            HeaderHelper.CesAppObjectId = client.CesAppObjectId;
+            HeaderHelper.CesUserId = client.CesUserId;
+            HeaderHelper.CesRequestTime = client.CesRequestTime;
         }
 
         private static string FormatStringToJson(string responseString)
@@ -386,8 +148,6 @@ namespace CES.CoreApi.Receipt_Main.Service.Filters
                 Logging.Log.Error($"Error parsing response: {ex.Message}", ex);
                 return responseString;
             }
-
         }
-
     }
 }

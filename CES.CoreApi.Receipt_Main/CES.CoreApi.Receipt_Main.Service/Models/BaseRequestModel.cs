@@ -9,5 +9,10 @@ namespace CES.CoreApi.Receipt_Main.Service.Models
     {
         public HeaderInfo HeaderInfo { get; set; }
         public long PersistenceID { get; internal set; }
+
+        public BaseRequestModel()
+        {
+            HeaderInfo = new HeaderInfo();
+        }
     }
 }

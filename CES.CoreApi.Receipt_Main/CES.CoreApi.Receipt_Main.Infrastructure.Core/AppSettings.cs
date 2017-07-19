@@ -44,7 +44,7 @@ namespace CES.CoreApi.Receipt_Main.Infrastructure.Core
             get {return $"{HostingEnvironment.ApplicationPhysicalPath}\\bin";}
         }
 
-        public static bool IsWindowsDesktopApplication
+        public static bool IsStandAloneApplication
         {
             get { return System.Diagnostics.Process.GetCurrentProcess().ProcessName.Contains("CES.CoreApi.Receipt_Main.UI.WPF"); }
         }

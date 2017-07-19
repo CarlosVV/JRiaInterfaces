@@ -29,7 +29,7 @@ namespace CES.CoreApi.Receipt_Main.Application.Core
             Logging.Log.Info($"Get All Stores from Cache. Key: {key}");
             IEnumerable<systblApp_TaxReceipt_Store> data = null;
 
-            if (AppSettings.IsWindowsDesktopApplication)
+            if (AppSettings.IsStandAloneApplication)
             {
                 data = repo.find(c => !c.fDisabled.Value && !c.fDelete.Value);
                 return data.ToList();

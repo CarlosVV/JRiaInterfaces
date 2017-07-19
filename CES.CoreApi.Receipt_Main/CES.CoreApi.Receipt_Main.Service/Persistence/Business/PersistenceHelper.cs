@@ -41,7 +41,6 @@ namespace CES.CoreApi.Shared.Persistence.Business
 
             if (objectToPersist is IRequest && objectToPersist.RequesterInfo != null)
             {                
-                //persistenceEvent.RequesterInfo  = _mapper.Map<RequesterInfoModel>(objectToPersist.RequesterInfo);
                 persistenceEvent.RequesterInfo = Mapper.Map<RequesterInfoModel>(objectToPersist.RequesterInfo);
                 persistenceEvent.SaveRequestInfo = true;        
             }

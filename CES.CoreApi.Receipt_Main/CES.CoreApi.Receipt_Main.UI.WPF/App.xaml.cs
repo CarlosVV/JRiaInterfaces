@@ -12,21 +12,24 @@ using CES.CoreApi.Receipt_Main.UI.WPF.ViewModel;
 using CES.CoreApi.Receipt_Main.UI.WPF.View;
 using CES.CoreApi.Receipt_Main.UI.WPF.Config;
 using CES.CoreApi.Receipt_Main.Infrastructure.Core.Security;
+using Microsoft.Owin.Hosting;
 
 namespace CES.CoreApi.Receipt_Main.UI.WPF
 {
     public partial class App : System.Windows.Application
     {
-        public static IKernel container;
+        public static IKernel container;       
 
         protected override void OnStartup(StartupEventArgs e)
         {
+            AppDomain.CurrentDomain.SetData("DataDirectory", AppSettings.DbPath);
+            string baseAddress = AppSettings.ApiReceiptServiceUrl;
+            WebApp.Start<Startup>(url: baseAddress);
+
             var customPrincipal = new CustomPrincipal();
             AppDomain.CurrentDomain.SetThreadPrincipal(customPrincipal);
             ConfigureDependencies();
-            ComposeObjects();
-
-            AppDomain.CurrentDomain.SetData("DataDirectory", AppSettings.DbPath);
+            ComposeObjects();           
 
             base.OnStartup(e);
 

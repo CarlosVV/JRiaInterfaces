@@ -5,9 +5,8 @@ using System.Web;
 
 namespace CES.CoreApi.Receipt_Main.Service.Models
 {
-    public class TaxDeleteCAFRequest
+    public class TaxDeleteCAFRequest : BaseRequestModel
     {
-        public HeaderInfo HeaderInfo { get; internal set; }
         public int Id { get; set; }
     }
 }

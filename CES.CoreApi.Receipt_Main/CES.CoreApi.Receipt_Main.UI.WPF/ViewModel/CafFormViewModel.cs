@@ -1,26 +1,19 @@
-﻿using CES.CoreApi.Receipt_Main.Domain.Core.Security;
-using CES.CoreApi.Receipt_Main.Infrastructure.Core;
+﻿using CES.CoreApi.Receipt_Main.Application.Core;
 using CES.CoreApi.Receipt_Main.Domain.Core.Documents;
+using CES.CoreApi.Receipt_Main.Domain.Core.Security;
 using CES.CoreApi.Receipt_Main.Domain.Core.Services;
+using CES.CoreApi.Receipt_Main.Infrastructure.Core;
 using CES.CoreApi.Receipt_Main.UI.WPF.Helpers;
-using CES.CoreApi.Receipt_Main.UI.WPF.Model;
 using MvvmDialogs;
 using MvvmDialogs.FrameworkDialogs.OpenFile;
 using System;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Reflection;
-using System.Runtime.CompilerServices;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Input;
 using IOPath = System.IO.Path;
-using CES.CoreApi.Receipt_Main.Application.Core;
-using System.Windows.Controls;
-using CES.CoreApi.Receipt_Main.UI.WPF.View;
 
 namespace CES.CoreApi.Receipt_Main.UI.WPF.ViewModel
 {
