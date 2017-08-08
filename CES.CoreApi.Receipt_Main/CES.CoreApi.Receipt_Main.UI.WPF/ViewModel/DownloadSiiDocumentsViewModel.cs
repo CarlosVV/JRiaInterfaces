@@ -30,6 +30,7 @@ namespace CES.CoreApi.Receipt_Main.UI.WPF.ViewModel
         private const string doc_type_bl = "39";
         private const string range_type_perm = "Permanente";
         private const string param_name_ranges = "Download_Ranges";
+        private const int _maximum_quantity_of_document_errors = 50;
         private readonly DocumentDownloader _documentDownloader;
         private readonly XmlDocumentParser<EnvioBOLETA> _parserBoletas;
         private NewDocumentToDownloadViewModel _newDocumentToDownload;
@@ -593,7 +594,7 @@ namespace CES.CoreApi.Receipt_Main.UI.WPF.ViewModel
                                 {
                                     var documentXmlObject = _parserBoletas.GetDocumentObjectFromString(respuesta);
 
-                                    _documentHelper.SaveDocument(folio, foliofin, ref indexchunk, ref acumchunk, documentXmlObject, ref detailids, ref docids);
+                                    _documentHelper.SaveDocument(folio, foliofin, ref indexchunk, ref acumchunk, respuesta, documentXmlObject, ref detailids, ref docids);
 
                                     DocumentsToDownload[indexRange].Pending = DocumentsToDownload[indexRange].Pending - 1;
                                     DocumentsToDownload[indexRange].Processed = DocumentsToDownload[indexRange].Processed + 1;
@@ -606,7 +607,7 @@ namespace CES.CoreApi.Receipt_Main.UI.WPF.ViewModel
                                 {
                                     notFoundDocumentsFollowedQty++;
 
-                                    if (notFoundDocumentsFollowedQty == 50)
+                                    if (notFoundDocumentsFollowedQty == _maximum_quantity_of_document_errors)
                                     {
                                         DocumentsToDownload[indexRange].DownloadStatus = "Descarga cancelada al no encontrar 50 documentos seguidos";
                                         DocumentsToDownload[indexRange].Pending = DocumentsToDownload[indexRange].Pending - 1;

@@ -298,7 +298,7 @@ namespace CES.CoreApi.Receipt_Main.Service.Services
                 fCompanyRUT = objCAF.CAF.DA.RE,
                 fCompanyLegalName = objCAF.CAF.DA.RS,
                 fAuthorizationDate = objCAF.CAF.DA.FA,
-                fDocumentType = objCAF.CAF.DA.TD,
+                fDocumentType = $"{objCAF.CAF.DA.TD}",
                 fFolioStartNumber = foliostartnumber == null ? objCAF.CAF.DA.RNG.D : foliostartnumber.Value,
                 fFolioEndNumber = folioendnumber == null ? objCAF.CAF.DA.RNG.H : folioendnumber.Value,
                 fFolioCurrentNumber = foliocurrentnumber == null ? 0 : foliocurrentnumber.Value,

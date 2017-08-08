@@ -5,6 +5,8 @@ using CES.CoreApi.Receipt_Main.Infrastructure.Data;
 using CES.CoreApi.Receipt_Main.Infrastructure.Data.Repository;
 using System;
 using System.Collections.Generic;
+using System.IO;
+using System.IO.Compression;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -59,7 +61,7 @@ namespace CES.CoreApi.Receipt_Main.Application.Core.Document
             _TaxEntityCache = new Dictionary<string, systblApp_CoreAPI_TaxEntity>();
             _StoreCache = new Dictionary<string, systblApp_TaxReceipt_Store>();
         }
-        public void SaveDocument(int folio, int folioFinal, ref int indexchunk, ref int acumchunk, EnvioBOLETA objBoleta, ref List<int> detailids, ref List<int> docids)
+        public void SaveDocument(int folio, int folioFinal, ref int indexchunk, ref int acumchunk, string xmlContent, EnvioBOLETA objBoleta, ref List<int> detailids, ref List<int> docids)
         {
             var rutSender = objBoleta.SetDTE.DTE.Documento.Encabezado.Emisor.RUTEmisor;
             var rutReceiver = objBoleta.SetDTE.DTE.Documento.Encabezado.Receptor.RUTRecep;
@@ -72,7 +74,7 @@ namespace CES.CoreApi.Receipt_Main.Application.Core.Document
             CreateTaxEntities(objBoleta, rutSender, rutReceiver, out idSender, out idReceiver, senderEntity, receiverEntity);
 
             //Save Document and Detail
-            CreateDocument(indexchunk, objBoleta, ref detailids, ref docids, senderEntity, receiverEntity);
+            CreateDocument(indexchunk, xmlContent, objBoleta, ref detailids, ref docids, senderEntity, receiverEntity);
 
             if (indexchunk >= Chunkfolio || folio == folioFinal)
             {
@@ -83,7 +85,7 @@ namespace CES.CoreApi.Receipt_Main.Application.Core.Document
                 detailids = null;
             }
         }
-        private void CreateDocument(int indexchunk, EnvioBOLETA objBoleta, ref List<int> detailids, ref List<int> docids, systblApp_CoreAPI_TaxEntity senderEntity, systblApp_CoreAPI_TaxEntity receiverEntity)
+        private void CreateDocument(int indexchunk, string xmlContent, EnvioBOLETA objBoleta, ref List<int> detailids, ref List<int> docids, systblApp_CoreAPI_TaxEntity senderEntity, systblApp_CoreAPI_TaxEntity receiverEntity)
         {
             if (detailids == null)
             {
@@ -95,7 +97,7 @@ namespace CES.CoreApi.Receipt_Main.Application.Core.Document
                 docids = ReserveNewIds("systblApp_CoreAPI_Document", Chunkfolio);
             }
 
-            var dbBoleta = MapDocumentFromXmlObject(docids[indexchunk - 1], objBoleta, senderEntity, receiverEntity);
+            var dbBoleta = MapDocumentFromXmlObject(docids[indexchunk - 1], xmlContent, objBoleta, senderEntity, receiverEntity);
 
             AddDocumentDetailFromXmlObject(detailids[indexchunk - 1], objBoleta, dbBoleta);
 
@@ -125,7 +127,7 @@ namespace CES.CoreApi.Receipt_Main.Application.Core.Document
             });
 
         }
-        private systblApp_CoreAPI_Document MapDocumentFromXmlObject(int id, EnvioBOLETA objBoleta, systblApp_CoreAPI_TaxEntity senderEntity, systblApp_CoreAPI_TaxEntity receiverEntity)
+        private systblApp_CoreAPI_Document MapDocumentFromXmlObject(int id, string xmlContent, EnvioBOLETA objBoleta, systblApp_CoreAPI_TaxEntity senderEntity, systblApp_CoreAPI_TaxEntity receiverEntity)
         {
             var totalamount = objBoleta.SetDTE.DTE.Documento.Encabezado.Totales.MntTotal;
             var amount = Math.Floor(objBoleta.SetDTE.DTE.Documento.Encabezado.Totales.MntTotal / (1 + _TaxRate));
@@ -163,6 +165,7 @@ namespace CES.CoreApi.Receipt_Main.Application.Core.Document
                 fModified = null,
                 fModifiedID = 69,
                 fTime = DateTime.Now,
+                fXmlDocumentContent = xmlContent
             };
         }
         public int GetStoreId(string storename)
@@ -338,10 +341,10 @@ namespace CES.CoreApi.Receipt_Main.Application.Core.Document
                     start = 1;
                     nextId = quantity;
                 }
-                catch(Exception ex)
+                catch (Exception ex)
                 {
                     Console.WriteLine(ex.ToString());
-                }              
+                }
             }
             else
             {
@@ -414,5 +417,63 @@ namespace CES.CoreApi.Receipt_Main.Application.Core.Document
 
         }
 
+        private string ReduceXmlContent(string xmlContent)
+        {
+            var compressed = Zip(xmlContent);
+            var outstring = Convert.ToBase64String(compressed);
+            return outstring;
+        }
+
+        private string UnReduceXmlContent(string compressed)
+        {
+            var bytes = Convert.FromBase64String(compressed);
+            var result = Unzip(bytes);
+            
+            return result;
+        }
+
+        public static void CopyTo(Stream src, Stream dest)
+        {
+            byte[] bytes = new byte[4096];
+
+            int cnt;
+
+            while ((cnt = src.Read(bytes, 0, bytes.Length)) != 0)
+            {
+                dest.Write(bytes, 0, cnt);
+            }
+        }
+
+        public static byte[] Zip(string str)
+        {
+            var bytes = Encoding.UTF8.GetBytes(str);
+
+            using (var msi = new MemoryStream(bytes))
+            using (var mso = new MemoryStream())
+            {
+                using (var gs = new GZipStream(mso, CompressionMode.Compress))
+                {
+                    //msi.CopyTo(gs);
+                    CopyTo(msi, gs);
+                }
+
+                return mso.ToArray();
+            }
+        }
+
+        public static string Unzip(byte[] bytes)
+        {
+            using (var msi = new MemoryStream(bytes))
+            using (var mso = new MemoryStream())
+            {
+                using (var gs = new GZipStream(msi, CompressionMode.Decompress))
+                {
+                    //gs.CopyTo(mso);
+                    CopyTo(gs, mso);
+                }
+
+                return Encoding.UTF8.GetString(mso.ToArray());
+            }
+        }
     }
 }

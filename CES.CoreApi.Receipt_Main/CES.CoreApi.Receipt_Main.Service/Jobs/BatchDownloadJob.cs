@@ -16,6 +16,7 @@ namespace CES.CoreApi.Receipt_Main.Service.Jobs
 {
     public class BatchDownloadJob
     {
+        private const int _maximum_quantity_of_document_errors = 50;
         private IDocumentService _documentService;
         private ITaxEntityService _taxEntityService;
         private ITaxAddressService _taxAddressService;
@@ -37,9 +38,6 @@ namespace CES.CoreApi.Receipt_Main.Service.Jobs
             _sequenceService = new CES.CoreApi.Receipt_Main.Application.Core.SequenceService(new SequenceRepository(new ReceiptDbContext()));
             _storeService = new CES.CoreApi.Receipt_Main.Application.Core.StoreService(new StoreRepository(new ReceiptDbContext()));
 
-            
-            
-
             var docType = "39";
 
             var task = _taskService.GetAllTasks().Where(m => m.fTaskId == taskId).FirstOrDefault();
@@ -53,6 +51,7 @@ namespace CES.CoreApi.Receipt_Main.Service.Jobs
             var folioEnd = parametersTask.FolioEnd;
             var _documentHelper = new DocumentHandlerService(_documentService, _taxEntityService, _taxAddressService, _sequenceService, _storeService, 1);
             var _documentDownloader = new DocumentDownloader();
+            var notFoundDocumentsFollowedQty = 0;
 
             UpdateTaskStatus(taskId);
 
@@ -77,21 +76,31 @@ namespace CES.CoreApi.Receipt_Main.Service.Jobs
                 {
                     var documentXmlObject = _parserBoletas.GetDocumentObjectFromString(respuesta);
 
-                    var documentId = CreateDocument(_documentHelper, folio, ref indexchunk, ref acumchunk, documentXmlObject);
+                    var documentId = CreateDocument(respuesta, _documentHelper, folio, ref indexchunk, ref acumchunk, documentXmlObject);
 
                     UpdateTaskDetailResultForDocumentCreation(taskDetailId, folio, documentId);
+                }
+                else
+                {
+                    notFoundDocumentsFollowedQty++;
+
+                    if (notFoundDocumentsFollowedQty == _maximum_quantity_of_document_errors)
+                    {
+                        UpdateTaskDetailForNotFoundDocument(taskDetailId, folio);
+                        break;
+                    }
                 }
             }
 
             UpdateTaskResult(taskId);
         }
 
-        private int CreateDocument(DocumentHandlerService _documentHelper, int folio, ref int indexchunk, ref int acumchunk, EnvioBOLETA documentXmlObject)
+        private int CreateDocument(string xmlDocument, DocumentHandlerService _documentHelper, int folio, ref int indexchunk, ref int acumchunk, EnvioBOLETA documentXmlObject)
         {
             List<int> detailids = null;
             List<int> docids = null;
 
-            _documentHelper.SaveDocument(folio, folio, ref indexchunk, ref acumchunk, documentXmlObject, ref detailids, ref docids);
+            _documentHelper.SaveDocument(folio, folio, ref indexchunk, ref acumchunk, xmlDocument, documentXmlObject, ref detailids, ref docids);
             var documentId = GetDocumentId(folio);
             return documentId;
         }
@@ -140,6 +149,17 @@ namespace CES.CoreApi.Receipt_Main.Service.Jobs
             taskDetail.fDocumentId = 0;
             taskDetail.fModified = DateTime.Now;
             taskDetail.fResultObject = $"Folio {folio} existe en BD";
+            taskDetailService.UpdateTaskDetail(taskDetail);
+            taskDetailService.SaveChanges();
+        }
+
+        private void UpdateTaskDetailForNotFoundDocument(int taskDetailId, int folio)
+        {
+            var taskDetailService = new TaskDetailService(new TaskDetailRepository(new ReceiptDbContext()));
+            var taskDetail = taskDetailService.GetAllTaskDetails().Where(m => m.fTaskDetailId == taskDetailId).FirstOrDefault();
+            taskDetail.fDocumentId = 0;
+            taskDetail.fModified = DateTime.Now;
+            taskDetail.fResultObject = $"Folio {folio} cannot be downloaded. Maximum quantity of attempts reached: {_maximum_quantity_of_document_errors}";
             taskDetailService.UpdateTaskDetail(taskDetail);
             taskDetailService.SaveChanges();
         }

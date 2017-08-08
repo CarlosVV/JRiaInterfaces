@@ -35,13 +35,13 @@ namespace CES.CoreApi.Receipt_Main.Domain.Core.Documents
         [StringLength(255)]
         public string fDescription { get; set; }
 
-        [StringLength(50)]
+        //[StringLength(50)]
         public string fStoreName { get; set; }
 
         [StringLength(10)]
         public string fCashRegisterNumber { get; set; }
 
-        [StringLength(100)]
+        //[StringLength(100)]
         public string fCashierName { get; set; }
 
         public DateTime fIssuedDate { get; set; }
@@ -103,5 +103,8 @@ namespace CES.CoreApi.Receipt_Main.Domain.Core.Documents
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<systblApp_TaxReceipt_Activity> Activity { get; set; }
+
+        //[StringLength(4000)]
+        public string fXmlDocumentContent { get; set; }
     }
 }

@@ -1,7 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data.Entity;
+using System.Data.Entity.Infrastructure;
 using System.Data.Entity.Validation;
+using System.Data.SqlClient;
+using System.Diagnostics;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Text;
@@ -61,21 +64,80 @@ namespace CES.CoreApi.Receipt_Main.Infrastructure.Data.Repository
             {
                 await _dbContext.SaveChangesAsync();
             }
-            catch (DbEntityValidationException e)
+            catch (DbEntityValidationException dbv)
             {
-                foreach (var eve in e.EntityValidationErrors)
+                var exception = HandleDbEntityValidationException(dbv);
+                Trace.Write(exception);
+                throw;
+            }
+            catch (DbUpdateException dbu)
+            {
+                var exception = HandleDbUpdateException(dbu);
+                Trace.Write(exception);
+                throw;
+            }   
+        }
+
+        private Exception HandleDbEntityValidationException(DbEntityValidationException dbv)
+        {
+            var builder = new StringBuilder("A DbEntityValidationException was caught while saving changes. ");
+            try
+            {
+                foreach (var eve in dbv.EntityValidationErrors)
                 {
-                    Console.WriteLine("Entity of type \"{0}\" in state \"{1}\" has the following validation errors:",
+                    builder.AppendFormat("Entity of type \"{0}\" in state \"{1}\" has the following validation errors:",
                         eve.Entry.Entity.GetType().Name, eve.Entry.State);
                     foreach (var ve in eve.ValidationErrors)
                     {
-                        Console.WriteLine("- Property: \"{0}\", Error: \"{1}\"",
+                        builder.AppendFormat("- Property: \"{0}\", Error: \"{1}\"",
                             ve.PropertyName, ve.ErrorMessage);
                     }
                 }
 
-                throw;
-            }            
+            }
+            catch (Exception e)
+            {
+                builder.Append("Error parsing DbEntityValidationException: " + e.ToString());
+            }
+
+            string message = builder.ToString();
+            return new Exception(message, dbv);
+        }
+
+        private Exception HandleDbUpdateException(DbUpdateException dbu)
+        {
+            var builder = new StringBuilder("A DbUpdateException was caught while saving changes. ");
+            var sex = dbu.InnerException as SqlException;
+            
+            try
+            {
+                if(sex != null)
+                {
+                    builder.Append($"{sex.Message}");
+                    foreach (SqlError err in sex.Errors)
+                    {
+                        switch (err.Number)
+                        {
+                            case 208:
+                                break;
+                            default:
+                                break;
+                        }
+                    }
+                }
+
+                foreach (var result in dbu.Entries)
+                {
+                    builder.AppendFormat("Type: {0} was part of the problem. ", result.Entity.GetType().Name);
+                }
+            }
+            catch (Exception e)
+            {
+                builder.Append("Error parsing DbUpdateException: " + e.ToString());
+            }
+
+            string message = builder.ToString();
+            return new Exception(message, dbu);
         }
 
         public void Dispose()

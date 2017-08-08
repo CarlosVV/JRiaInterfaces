@@ -253,6 +253,7 @@
     <Compile Include="ViewModel\NewDocumentToDownloadViewModel.cs" />
     <Compile Include="ViewModel\ParametersViewModel.cs" />
     <Compile Include="ViewModel\PrintersViewModel.cs" />
+    <Compile Include="ViewModel\StaffAssignmentViewModel.cs" />
     <Compile Include="ViewModel\SearchDocumentosViewModel.cs" />
     <Compile Include="ViewModel\SendToEISViewModel.cs" />
     <Compile Include="ViewModel\ServicesViewModel.cs" />
@@ -312,6 +313,9 @@
     </Compile>
     <Compile Include="View\SiiVatConciliation.xaml.cs">
       <DependentUpon>SiiVatConciliation.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\StaffAssignment.xaml.cs">
+      <DependentUpon>StaffAssignment.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\StoreForm.xaml.cs">
       <DependentUpon>StoreForm.xaml</DependentUpon>
@@ -409,6 +413,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\SiiVatConciliation.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\StaffAssignment.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

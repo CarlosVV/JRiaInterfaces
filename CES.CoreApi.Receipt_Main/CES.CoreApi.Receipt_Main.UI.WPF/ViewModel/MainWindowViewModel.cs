@@ -16,7 +16,7 @@ namespace CES.CoreApi.Receipt_Main.UI.WPF.ViewModel
         {
             MenuElements = new[]
             {
-                new MenuElement {Label = "Acciones", MenuStyleType = "Header1", Content = new DownloadSiiDocuments(documentService, taxEntityService, taxAddressService, sequenceService, storeService)},
+                new MenuElement {Label = "Acciones", MenuStyleType = "Header1", Content = new StaffAssignment()},
                 new MenuElement {Label = "Buscar Documentos", Content = new SearchDocuments(), MenuStyleType = "Item1"},
                 new MenuElement {Label = "Enviar a SII", Content = new SendToEIS(), MenuStyleType = "Item1"},
                 new MenuElement {Label = "Cargar Caf", Content = new CafManagement(storeService, dialogService), MenuStyleType = "Item1"},

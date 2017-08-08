@@ -89,7 +89,7 @@ namespace CES.CoreApi.Receipt_Main.Service.Services
             var response = new TaxSIIGetDocumentResponse();
             var docType = "39";
             var folio = request.Folio;
-            var respuesta = string.Empty;
+            var xmlContent = string.Empty;
             var _parserBoletas = new XmlDocumentParser<EnvioBOLETA>();
             var indexchunk = 1;
             var acumchunk = 0;
@@ -97,13 +97,13 @@ namespace CES.CoreApi.Receipt_Main.Service.Services
 
             try
             {
-                if (!ExistsFolioInDB(folio) && _documentDownloader.RetrieveXML(int.Parse(docType), folio, out respuesta))
+                if (!ExistsFolioInDB(folio) && _documentDownloader.RetrieveXML(int.Parse(docType), folio, out xmlContent))
                 {
-                    var documentXmlObject = _parserBoletas.GetDocumentObjectFromString(respuesta);
+                    var documentXmlObject = _parserBoletas.GetDocumentObjectFromString(xmlContent);
 
                     List<int> detailids = null;
                     List<int> docids = null;
-                    _documentHelper.SaveDocument(folio, folio, ref indexchunk, ref acumchunk, documentXmlObject, ref detailids, ref docids);
+                    _documentHelper.SaveDocument(folio, folio, ref indexchunk, ref acumchunk, xmlContent, documentXmlObject, ref detailids, ref docids);
                 }
 
                 var dbDocument = GetDocumentByFolio(folio);
