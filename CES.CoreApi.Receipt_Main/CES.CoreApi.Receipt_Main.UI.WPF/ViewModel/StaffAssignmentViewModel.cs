@@ -1,11 +1,14 @@
-﻿using Prism.Mvvm;
+﻿using CES.CoreApi.Receipt_Main.UI.WPF.Model;
+using Prism.Mvvm;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 using System.Windows.Data;
+using System.Windows.Input;
 
 namespace CES.CoreApi.Receipt_Main.UI.WPF.ViewModel
 {
@@ -13,48 +16,300 @@ namespace CES.CoreApi.Receipt_Main.UI.WPF.ViewModel
     {
         public ObservableCollection<Semana> GridSemana { get; set; }
         public CollectionViewSource ViewSource { get; set; }
+        public ObservableCollection<Employee> EmployeeList { get; set; }
+        
         public StaffAssignmentViewModel()
         {
             GridSemana = new ObservableCollection<Semana>();
             GridSemana.Add(new Semana() { NroSemana = "1",
                 Lunes = new Semana.DiaSemana {
                     ReferenceDate = DateTime.Now,
-                    Turnos = new ObservableCollection<Semana.DiaSemana.TurnoAsignado>() { new Semana.DiaSemana.TurnoAsignado {Turno="T1", P1="J. P.", P2 = "J. X.", P3 = "J. X.", P4 = "J. X.", P5 = "J. X." }, } },
+                    Turnos = new ObservableCollection<Semana.DiaSemana.TurnoAsignado>() {
+                        new Semana.DiaSemana.TurnoAsignado {Turno="T1", P1="J. P.", P2 = "J. X.", P3 = "J. X.", P4 = "J. X.", P5 = "J. X." },
+                        new Semana.DiaSemana.TurnoAsignado {Turno="T2", P1="J. P.", P2 = "J. X.", P3 = "J. X.", P4 = "J. X.", P5 = "J. X." },
+                        new Semana.DiaSemana.TurnoAsignado {Turno="T3", P1="J. P.", P2 = "J. X.", P3 = "J. X.", P4 = "J. X.", P5 = "J. X." },}
+                },
                 Martes = new Semana.DiaSemana
                 {
                     ReferenceDate = DateTime.Now,
-                    Turnos = new ObservableCollection<Semana.DiaSemana.TurnoAsignado>() { new Semana.DiaSemana.TurnoAsignado { Turno = "T1", P1 = "J. P.", P2 = "J. X.", P3 = "J. X.", P4 = "J. X.", P5 = "J. X." }, }
+                    Turnos = new ObservableCollection<Semana.DiaSemana.TurnoAsignado>() {
+                        new Semana.DiaSemana.TurnoAsignado {Turno="T1", P1="J. P.", P2 = "J. X.", P3 = "J. X.", P4 = "J. X.", P5 = "J. X." },
+                        new Semana.DiaSemana.TurnoAsignado {Turno="T2", P1="J. P.", P2 = "J. X.", P3 = "J. X.", P4 = "J. X.", P5 = "J. X." },
+                        new Semana.DiaSemana.TurnoAsignado {Turno="T3", P1="J. P.", P2 = "J. X.", P3 = "J. X.", P4 = "J. X.", P5 = "J. X." },}
                 },
                 Miercoles = new Semana.DiaSemana
                 {
                     ReferenceDate = DateTime.Now,
-                    Turnos = new ObservableCollection<Semana.DiaSemana.TurnoAsignado>() { new Semana.DiaSemana.TurnoAsignado { Turno = "T1", P1 = "J. P.", P2 = "J. X.", P3 = "J. X.", P4 = "J. X.", P5 = "J. X." }, }
+                    Turnos = new ObservableCollection<Semana.DiaSemana.TurnoAsignado>() {
+                        new Semana.DiaSemana.TurnoAsignado {Turno="T1", P1="J. P.", P2 = "J. X.", P3 = "J. X.", P4 = "J. X.", P5 = "J. X." },
+                        new Semana.DiaSemana.TurnoAsignado {Turno="T2", P1="J. P.", P2 = "J. X.", P3 = "J. X.", P4 = "J. X.", P5 = "J. X." },
+                        new Semana.DiaSemana.TurnoAsignado {Turno="T3", P1="J. P.", P2 = "J. X.", P3 = "J. X.", P4 = "J. X.", P5 = "J. X." },}
                 },
                 Jueves = new Semana.DiaSemana
                 {
                     ReferenceDate = DateTime.Now,
-                    Turnos = new ObservableCollection<Semana.DiaSemana.TurnoAsignado>() { new Semana.DiaSemana.TurnoAsignado { Turno = "T1", P1 = "J. P.", P2 = "J. X.", P3 = "J. X.", P4 = "J. X.", P5 = "J. X." }, }
+                    Turnos = new ObservableCollection<Semana.DiaSemana.TurnoAsignado>() {
+                        new Semana.DiaSemana.TurnoAsignado {Turno="T1", P1="J. P.", P2 = "J. X.", P3 = "J. X.", P4 = "J. X.", P5 = "J. X." },
+                        new Semana.DiaSemana.TurnoAsignado {Turno="T2", P1="J. P.", P2 = "J. X.", P3 = "J. X.", P4 = "J. X.", P5 = "J. X." },
+                        new Semana.DiaSemana.TurnoAsignado {Turno="T3", P1="J. P.", P2 = "J. X.", P3 = "J. X.", P4 = "J. X.", P5 = "J. X." },}
                 },
                 Viernes = new Semana.DiaSemana
                 {
                     ReferenceDate = DateTime.Now,
-                    Turnos = new ObservableCollection<Semana.DiaSemana.TurnoAsignado>() { new Semana.DiaSemana.TurnoAsignado { Turno = "T1", P1 = "J. P.", P2 = "J. X.", P3 = "J. X.", P4 = "J. X.", P5 = "J. X." }, }
+                    Turnos = new ObservableCollection<Semana.DiaSemana.TurnoAsignado>() {
+                        new Semana.DiaSemana.TurnoAsignado {Turno="T1", P1="J. P.", P2 = "J. X.", P3 = "J. X.", P4 = "J. X.", P5 = "J. X." },
+                        new Semana.DiaSemana.TurnoAsignado {Turno="T2", P1="J. P.", P2 = "J. X.", P3 = "J. X.", P4 = "J. X.", P5 = "J. X." },
+                        new Semana.DiaSemana.TurnoAsignado {Turno="T3", P1="J. P.", P2 = "J. X.", P3 = "J. X.", P4 = "J. X.", P5 = "J. X." },}
                 },
                 Sabado = new Semana.DiaSemana
                 {
                     ReferenceDate = DateTime.Now,
-                    Turnos = new ObservableCollection<Semana.DiaSemana.TurnoAsignado>() { new Semana.DiaSemana.TurnoAsignado { Turno = "T1", P1 = "J. P.", P2 = "J. X.", P3 = "J. X.", P4 = "J. X.", P5 = "J. X." }, }
+                    Turnos = new ObservableCollection<Semana.DiaSemana.TurnoAsignado>() {
+                        new Semana.DiaSemana.TurnoAsignado {Turno="T1", P1="J. P.", P2 = "J. X.", P3 = "J. X.", P4 = "J. X.", P5 = "J. X." },
+                        new Semana.DiaSemana.TurnoAsignado {Turno="T2", P1="J. P.", P2 = "J. X.", P3 = "J. X.", P4 = "J. X.", P5 = "J. X." },
+                        new Semana.DiaSemana.TurnoAsignado {Turno="T3", P1="J. P.", P2 = "J. X.", P3 = "J. X.", P4 = "J. X.", P5 = "J. X." },}
                 },
                 Domingo = new Semana.DiaSemana
                 {
                     ReferenceDate = DateTime.Now,
-                    Turnos = new ObservableCollection<Semana.DiaSemana.TurnoAsignado>() { new Semana.DiaSemana.TurnoAsignado { Turno = "T1", P1 = "J. P.", P2 = "J. X.", P3 = "J. X.", P4 = "J. X.", P5 = "J. X." }, }
-                }
+                    Turnos = new ObservableCollection<Semana.DiaSemana.TurnoAsignado>() {
+                        new Semana.DiaSemana.TurnoAsignado {Turno="T1", P1="J. P.", P2 = "J. X.", P3 = "J. X.", P4 = "J. X.", P5 = "J. X." },
+                        new Semana.DiaSemana.TurnoAsignado {Turno="T2", P1="J. P.", P2 = "J. X.", P3 = "J. X.", P4 = "J. X.", P5 = "J. X." },
+                        new Semana.DiaSemana.TurnoAsignado {Turno="T3", P1="J. P.", P2 = "J. X.", P3 = "J. X.", P4 = "J. X.", P5 = "J. X." },}
+                },
             });
-            GridSemana.Add(new Semana() { NroSemana = "2" });
-            GridSemana.Add(new Semana() { NroSemana = "3" });
-            GridSemana.Add(new Semana() { NroSemana = "4" });
-            GridSemana.Add(new Semana() { NroSemana = "5" });
+            GridSemana.Add(new Semana() { NroSemana = "2",
+                Lunes = new Semana.DiaSemana
+                {
+                    ReferenceDate = DateTime.Now,
+                    Turnos = new ObservableCollection<Semana.DiaSemana.TurnoAsignado>() {
+                        new Semana.DiaSemana.TurnoAsignado {Turno="T1", P1="J. P.", P2 = "J. X.", P3 = "J. X.", P4 = "J. X.", P5 = "J. X." },
+                        new Semana.DiaSemana.TurnoAsignado {Turno="T2", P1="J. P.", P2 = "J. X.", P3 = "J. X.", P4 = "J. X.", P5 = "J. X." },
+                        new Semana.DiaSemana.TurnoAsignado {Turno="T3", P1="J. P.", P2 = "J. X.", P3 = "J. X.", P4 = "J. X.", P5 = "J. X." },}
+                },
+                Martes = new Semana.DiaSemana
+                {
+                    ReferenceDate = DateTime.Now,
+                    Turnos = new ObservableCollection<Semana.DiaSemana.TurnoAsignado>() {
+                        new Semana.DiaSemana.TurnoAsignado {Turno="T1", P1="J. P.", P2 = "J. X.", P3 = "J. X.", P4 = "J. X.", P5 = "J. X." },
+                        new Semana.DiaSemana.TurnoAsignado {Turno="T2", P1="J. P.", P2 = "J. X.", P3 = "J. X.", P4 = "J. X.", P5 = "J. X." },
+                        new Semana.DiaSemana.TurnoAsignado {Turno="T3", P1="J. P.", P2 = "J. X.", P3 = "J. X.", P4 = "J. X.", P5 = "J. X." },}
+                },
+                Miercoles = new Semana.DiaSemana
+                {
+                    ReferenceDate = DateTime.Now,
+                    Turnos = new ObservableCollection<Semana.DiaSemana.TurnoAsignado>() {
+                        new Semana.DiaSemana.TurnoAsignado {Turno="T1", P1="J. P.", P2 = "J. X.", P3 = "J. X.", P4 = "J. X.", P5 = "J. X." },
+                        new Semana.DiaSemana.TurnoAsignado {Turno="T2", P1="J. P.", P2 = "J. X.", P3 = "J. X.", P4 = "J. X.", P5 = "J. X." },
+                        new Semana.DiaSemana.TurnoAsignado {Turno="T3", P1="J. P.", P2 = "J. X.", P3 = "J. X.", P4 = "J. X.", P5 = "J. X." },}
+                },
+                Jueves = new Semana.DiaSemana
+                {
+                    ReferenceDate = DateTime.Now,
+                    Turnos = new ObservableCollection<Semana.DiaSemana.TurnoAsignado>() {
+                        new Semana.DiaSemana.TurnoAsignado {Turno="T1", P1="J. P.", P2 = "J. X.", P3 = "J. X.", P4 = "J. X.", P5 = "J. X." },
+                        new Semana.DiaSemana.TurnoAsignado {Turno="T2", P1="J. P.", P2 = "J. X.", P3 = "J. X.", P4 = "J. X.", P5 = "J. X." },
+                        new Semana.DiaSemana.TurnoAsignado {Turno="T3", P1="J. P.", P2 = "J. X.", P3 = "J. X.", P4 = "J. X.", P5 = "J. X." },}
+                },
+                Viernes = new Semana.DiaSemana
+                {
+                    ReferenceDate = DateTime.Now,
+                    Turnos = new ObservableCollection<Semana.DiaSemana.TurnoAsignado>() {
+                        new Semana.DiaSemana.TurnoAsignado {Turno="T1", P1="J. P.", P2 = "J. X.", P3 = "J. X.", P4 = "J. X.", P5 = "J. X." },
+                        new Semana.DiaSemana.TurnoAsignado {Turno="T2", P1="J. P.", P2 = "J. X.", P3 = "J. X.", P4 = "J. X.", P5 = "J. X." },
+                        new Semana.DiaSemana.TurnoAsignado {Turno="T3", P1="J. P.", P2 = "J. X.", P3 = "J. X.", P4 = "J. X.", P5 = "J. X." },}
+                },
+                Sabado = new Semana.DiaSemana
+                {
+                    ReferenceDate = DateTime.Now,
+                    Turnos = new ObservableCollection<Semana.DiaSemana.TurnoAsignado>() {
+                        new Semana.DiaSemana.TurnoAsignado {Turno="T1", P1="J. P.", P2 = "J. X.", P3 = "J. X.", P4 = "J. X.", P5 = "J. X." },
+                        new Semana.DiaSemana.TurnoAsignado {Turno="T2", P1="J. P.", P2 = "J. X.", P3 = "J. X.", P4 = "J. X.", P5 = "J. X." },
+                        new Semana.DiaSemana.TurnoAsignado {Turno="T3", P1="J. P.", P2 = "J. X.", P3 = "J. X.", P4 = "J. X.", P5 = "J. X." },}
+                },
+                Domingo = new Semana.DiaSemana
+                {
+                    ReferenceDate = DateTime.Now,
+                    Turnos = new ObservableCollection<Semana.DiaSemana.TurnoAsignado>() {
+                        new Semana.DiaSemana.TurnoAsignado {Turno="T1", P1="J. P.", P2 = "J. X.", P3 = "J. X.", P4 = "J. X.", P5 = "J. X." },
+                        new Semana.DiaSemana.TurnoAsignado {Turno="T2", P1="J. P.", P2 = "J. X.", P3 = "J. X.", P4 = "J. X.", P5 = "J. X." },
+                        new Semana.DiaSemana.TurnoAsignado {Turno="T3", P1="J. P.", P2 = "J. X.", P3 = "J. X.", P4 = "J. X.", P5 = "J. X." },}
+                },
+            });
+            GridSemana.Add(new Semana() { NroSemana = "3",
+                Lunes = new Semana.DiaSemana
+                {
+                    ReferenceDate = DateTime.Now,
+                    Turnos = new ObservableCollection<Semana.DiaSemana.TurnoAsignado>() {
+                        new Semana.DiaSemana.TurnoAsignado {Turno="T1", P1="J. P.", P2 = "J. X.", P3 = "J. X.", P4 = "J. X.", P5 = "J. X." },
+                        new Semana.DiaSemana.TurnoAsignado {Turno="T2", P1="J. P.", P2 = "J. X.", P3 = "J. X.", P4 = "J. X.", P5 = "J. X." },
+                        new Semana.DiaSemana.TurnoAsignado {Turno="T3", P1="J. P.", P2 = "J. X.", P3 = "J. X.", P4 = "J. X.", P5 = "J. X." },}
+                },
+                Martes = new Semana.DiaSemana
+                {
+                    ReferenceDate = DateTime.Now,
+                    Turnos = new ObservableCollection<Semana.DiaSemana.TurnoAsignado>() {
+                        new Semana.DiaSemana.TurnoAsignado {Turno="T1", P1="J. P.", P2 = "J. X.", P3 = "J. X.", P4 = "J. X.", P5 = "J. X." },
+                        new Semana.DiaSemana.TurnoAsignado {Turno="T2", P1="J. P.", P2 = "J. X.", P3 = "J. X.", P4 = "J. X.", P5 = "J. X." },
+                        new Semana.DiaSemana.TurnoAsignado {Turno="T3", P1="J. P.", P2 = "J. X.", P3 = "J. X.", P4 = "J. X.", P5 = "J. X." },}
+                },
+                Miercoles = new Semana.DiaSemana
+                {
+                    ReferenceDate = DateTime.Now,
+                    Turnos = new ObservableCollection<Semana.DiaSemana.TurnoAsignado>() {
+                        new Semana.DiaSemana.TurnoAsignado {Turno="T1", P1="J. P.", P2 = "J. X.", P3 = "J. X.", P4 = "J. X.", P5 = "J. X." },
+                        new Semana.DiaSemana.TurnoAsignado {Turno="T2", P1="J. P.", P2 = "J. X.", P3 = "J. X.", P4 = "J. X.", P5 = "J. X." },
+                        new Semana.DiaSemana.TurnoAsignado {Turno="T3", P1="J. P.", P2 = "J. X.", P3 = "J. X.", P4 = "J. X.", P5 = "J. X." },}
+                },
+                Jueves = new Semana.DiaSemana
+                {
+                    ReferenceDate = DateTime.Now,
+                    Turnos = new ObservableCollection<Semana.DiaSemana.TurnoAsignado>() {
+                        new Semana.DiaSemana.TurnoAsignado {Turno="T1", P1="J. P.", P2 = "J. X.", P3 = "J. X.", P4 = "J. X.", P5 = "J. X." },
+                        new Semana.DiaSemana.TurnoAsignado {Turno="T2", P1="J. P.", P2 = "J. X.", P3 = "J. X.", P4 = "J. X.", P5 = "J. X." },
+                        new Semana.DiaSemana.TurnoAsignado {Turno="T3", P1="J. P.", P2 = "J. X.", P3 = "J. X.", P4 = "J. X.", P5 = "J. X." },}
+                },
+                Viernes = new Semana.DiaSemana
+                {
+                    ReferenceDate = DateTime.Now,
+                    Turnos = new ObservableCollection<Semana.DiaSemana.TurnoAsignado>() {
+                        new Semana.DiaSemana.TurnoAsignado {Turno="T1", P1="J. P.", P2 = "J. X.", P3 = "J. X.", P4 = "J. X.", P5 = "J. X." },
+                        new Semana.DiaSemana.TurnoAsignado {Turno="T2", P1="J. P.", P2 = "J. X.", P3 = "J. X.", P4 = "J. X.", P5 = "J. X." },
+                        new Semana.DiaSemana.TurnoAsignado {Turno="T3", P1="J. P.", P2 = "J. X.", P3 = "J. X.", P4 = "J. X.", P5 = "J. X." },}
+                },
+                Sabado = new Semana.DiaSemana
+                {
+                    ReferenceDate = DateTime.Now,
+                    Turnos = new ObservableCollection<Semana.DiaSemana.TurnoAsignado>() {
+                        new Semana.DiaSemana.TurnoAsignado {Turno="T1", P1="J. P.", P2 = "J. X.", P3 = "J. X.", P4 = "J. X.", P5 = "J. X." },
+                        new Semana.DiaSemana.TurnoAsignado {Turno="T2", P1="J. P.", P2 = "J. X.", P3 = "J. X.", P4 = "J. X.", P5 = "J. X." },
+                        new Semana.DiaSemana.TurnoAsignado {Turno="T3", P1="J. P.", P2 = "J. X.", P3 = "J. X.", P4 = "J. X.", P5 = "J. X." },}
+                },
+                Domingo = new Semana.DiaSemana
+                {
+                    ReferenceDate = DateTime.Now,
+                    Turnos = new ObservableCollection<Semana.DiaSemana.TurnoAsignado>() {
+                        new Semana.DiaSemana.TurnoAsignado {Turno="T1", P1="J. P.", P2 = "J. X.", P3 = "J. X.", P4 = "J. X.", P5 = "J. X." },
+                        new Semana.DiaSemana.TurnoAsignado {Turno="T2", P1="J. P.", P2 = "J. X.", P3 = "J. X.", P4 = "J. X.", P5 = "J. X." },
+                        new Semana.DiaSemana.TurnoAsignado {Turno="T3", P1="J. P.", P2 = "J. X.", P3 = "J. X.", P4 = "J. X.", P5 = "J. X." },}
+                },
+            });
+            GridSemana.Add(new Semana() { NroSemana = "4",
+                Lunes = new Semana.DiaSemana
+                {
+                    ReferenceDate = DateTime.Now,
+                    Turnos = new ObservableCollection<Semana.DiaSemana.TurnoAsignado>() {
+                        new Semana.DiaSemana.TurnoAsignado {Turno="T1", P1="J. P.", P2 = "J. X.", P3 = "J. X.", P4 = "J. X.", P5 = "J. X." },
+                        new Semana.DiaSemana.TurnoAsignado {Turno="T2", P1="J. P.", P2 = "J. X.", P3 = "J. X.", P4 = "J. X.", P5 = "J. X." },
+                        new Semana.DiaSemana.TurnoAsignado {Turno="T3", P1="J. P.", P2 = "J. X.", P3 = "J. X.", P4 = "J. X.", P5 = "J. X." },}
+                },
+                Martes = new Semana.DiaSemana
+                {
+                    ReferenceDate = DateTime.Now,
+                    Turnos = new ObservableCollection<Semana.DiaSemana.TurnoAsignado>() {
+                        new Semana.DiaSemana.TurnoAsignado {Turno="T1", P1="J. P.", P2 = "J. X.", P3 = "J. X.", P4 = "J. X.", P5 = "J. X." },
+                        new Semana.DiaSemana.TurnoAsignado {Turno="T2", P1="J. P.", P2 = "J. X.", P3 = "J. X.", P4 = "J. X.", P5 = "J. X." },
+                        new Semana.DiaSemana.TurnoAsignado {Turno="T3", P1="J. P.", P2 = "J. X.", P3 = "J. X.", P4 = "J. X.", P5 = "J. X." },}
+                },
+                Miercoles = new Semana.DiaSemana
+                {
+                    ReferenceDate = DateTime.Now,
+                    Turnos = new ObservableCollection<Semana.DiaSemana.TurnoAsignado>() {
+                        new Semana.DiaSemana.TurnoAsignado {Turno="T1", P1="J. P.", P2 = "J. X.", P3 = "J. X.", P4 = "J. X.", P5 = "J. X." },
+                        new Semana.DiaSemana.TurnoAsignado {Turno="T2", P1="J. P.", P2 = "J. X.", P3 = "J. X.", P4 = "J. X.", P5 = "J. X." },
+                        new Semana.DiaSemana.TurnoAsignado {Turno="T3", P1="J. P.", P2 = "J. X.", P3 = "J. X.", P4 = "J. X.", P5 = "J. X." },}
+                },
+                Jueves = new Semana.DiaSemana
+                {
+                    ReferenceDate = DateTime.Now,
+                    Turnos = new ObservableCollection<Semana.DiaSemana.TurnoAsignado>() {
+                        new Semana.DiaSemana.TurnoAsignado {Turno="T1", P1="J. P.", P2 = "J. X.", P3 = "J. X.", P4 = "J. X.", P5 = "J. X." },
+                        new Semana.DiaSemana.TurnoAsignado {Turno="T2", P1="J. P.", P2 = "J. X.", P3 = "J. X.", P4 = "J. X.", P5 = "J. X." },
+                        new Semana.DiaSemana.TurnoAsignado {Turno="T3", P1="J. P.", P2 = "J. X.", P3 = "J. X.", P4 = "J. X.", P5 = "J. X." },}
+                },
+                Viernes = new Semana.DiaSemana
+                {
+                    ReferenceDate = DateTime.Now,
+                    Turnos = new ObservableCollection<Semana.DiaSemana.TurnoAsignado>() {
+                        new Semana.DiaSemana.TurnoAsignado {Turno="T1", P1="J. P.", P2 = "J. X.", P3 = "J. X.", P4 = "J. X.", P5 = "J. X." },
+                        new Semana.DiaSemana.TurnoAsignado {Turno="T2", P1="J. P.", P2 = "J. X.", P3 = "J. X.", P4 = "J. X.", P5 = "J. X." },
+                        new Semana.DiaSemana.TurnoAsignado {Turno="T3", P1="J. P.", P2 = "J. X.", P3 = "J. X.", P4 = "J. X.", P5 = "J. X." },}
+                },
+                Sabado = new Semana.DiaSemana
+                {
+                    ReferenceDate = DateTime.Now,
+                    Turnos = new ObservableCollection<Semana.DiaSemana.TurnoAsignado>() {
+                        new Semana.DiaSemana.TurnoAsignado {Turno="T1", P1="J. P.", P2 = "J. X.", P3 = "J. X.", P4 = "J. X.", P5 = "J. X." },
+                        new Semana.DiaSemana.TurnoAsignado {Turno="T2", P1="J. P.", P2 = "J. X.", P3 = "J. X.", P4 = "J. X.", P5 = "J. X." },
+                        new Semana.DiaSemana.TurnoAsignado {Turno="T3", P1="J. P.", P2 = "J. X.", P3 = "J. X.", P4 = "J. X.", P5 = "J. X." },}
+                },
+                Domingo = new Semana.DiaSemana
+                {
+                    ReferenceDate = DateTime.Now,
+                    Turnos = new ObservableCollection<Semana.DiaSemana.TurnoAsignado>() {
+                        new Semana.DiaSemana.TurnoAsignado {Turno="T1", P1="J. P.", P2 = "J. X.", P3 = "J. X.", P4 = "J. X.", P5 = "J. X." },
+                        new Semana.DiaSemana.TurnoAsignado {Turno="T2", P1="J. P.", P2 = "J. X.", P3 = "J. X.", P4 = "J. X.", P5 = "J. X." },
+                        new Semana.DiaSemana.TurnoAsignado {Turno="T3", P1="J. P.", P2 = "J. X.", P3 = "J. X.", P4 = "J. X.", P5 = "J. X." },}
+                },
+            });
+            GridSemana.Add(new Semana() { NroSemana = "5",
+                Lunes = new Semana.DiaSemana
+                {
+                    ReferenceDate = DateTime.Now,
+                    Turnos = new ObservableCollection<Semana.DiaSemana.TurnoAsignado>() {
+                        new Semana.DiaSemana.TurnoAsignado {Turno="T1", P1="J. P.", P2 = "J. X.", P3 = "J. X.", P4 = "J. X.", P5 = "J. X." },
+                        new Semana.DiaSemana.TurnoAsignado {Turno="T2", P1="J. P.", P2 = "J. X.", P3 = "J. X.", P4 = "J. X.", P5 = "J. X." },
+                        new Semana.DiaSemana.TurnoAsignado {Turno="T3", P1="J. P.", P2 = "J. X.", P3 = "J. X.", P4 = "J. X.", P5 = "J. X." },}
+                },
+                Martes = new Semana.DiaSemana
+                {
+                    ReferenceDate = DateTime.Now,
+                    Turnos = new ObservableCollection<Semana.DiaSemana.TurnoAsignado>() {
+                        new Semana.DiaSemana.TurnoAsignado {Turno="T1", P1="J. P.", P2 = "J. X.", P3 = "J. X.", P4 = "J. X.", P5 = "J. X." },
+                        new Semana.DiaSemana.TurnoAsignado {Turno="T2", P1="J. P.", P2 = "J. X.", P3 = "J. X.", P4 = "J. X.", P5 = "J. X." },
+                        new Semana.DiaSemana.TurnoAsignado {Turno="T3", P1="J. P.", P2 = "J. X.", P3 = "J. X.", P4 = "J. X.", P5 = "J. X." },}
+                },
+                Miercoles = new Semana.DiaSemana
+                {
+                    ReferenceDate = DateTime.Now,
+                    Turnos = new ObservableCollection<Semana.DiaSemana.TurnoAsignado>() {
+                        new Semana.DiaSemana.TurnoAsignado {Turno="T1", P1="J. P.", P2 = "J. X.", P3 = "J. X.", P4 = "J. X.", P5 = "J. X." },
+                        new Semana.DiaSemana.TurnoAsignado {Turno="T2", P1="J. P.", P2 = "J. X.", P3 = "J. X.", P4 = "J. X.", P5 = "J. X." },
+                        new Semana.DiaSemana.TurnoAsignado {Turno="T3", P1="J. P.", P2 = "J. X.", P3 = "J. X.", P4 = "J. X.", P5 = "J. X." },}
+                },
+                Jueves = new Semana.DiaSemana
+                {
+                    ReferenceDate = DateTime.Now,
+                    Turnos = new ObservableCollection<Semana.DiaSemana.TurnoAsignado>() {
+                        new Semana.DiaSemana.TurnoAsignado {Turno="T1", P1="J. P.", P2 = "J. X.", P3 = "J. X.", P4 = "J. X.", P5 = "J. X." },
+                        new Semana.DiaSemana.TurnoAsignado {Turno="T2", P1="J. P.", P2 = "J. X.", P3 = "J. X.", P4 = "J. X.", P5 = "J. X." },
+                        new Semana.DiaSemana.TurnoAsignado {Turno="T3", P1="J. P.", P2 = "J. X.", P3 = "J. X.", P4 = "J. X.", P5 = "J. X." },}
+                },
+                Viernes = new Semana.DiaSemana
+                {
+                    ReferenceDate = DateTime.Now,
+                    Turnos = new ObservableCollection<Semana.DiaSemana.TurnoAsignado>() {
+                        new Semana.DiaSemana.TurnoAsignado {Turno="T1", P1="J. P.", P2 = "J. X.", P3 = "J. X.", P4 = "J. X.", P5 = "J. X." },
+                        new Semana.DiaSemana.TurnoAsignado {Turno="T2", P1="J. P.", P2 = "J. X.", P3 = "J. X.", P4 = "J. X.", P5 = "J. X." },
+                        new Semana.DiaSemana.TurnoAsignado {Turno="T3", P1="J. P.", P2 = "J. X.", P3 = "J. X.", P4 = "J. X.", P5 = "J. X." },}
+                },
+                Sabado = new Semana.DiaSemana
+                {
+                    ReferenceDate = DateTime.Now,
+                    Turnos = new ObservableCollection<Semana.DiaSemana.TurnoAsignado>() {
+                        new Semana.DiaSemana.TurnoAsignado {Turno="T1", P1="J. P.", P2 = "J. X.", P3 = "J. X.", P4 = "J. X.", P5 = "J. X." },
+                        new Semana.DiaSemana.TurnoAsignado {Turno="T2", P1="J. P.", P2 = "J. X.", P3 = "J. X.", P4 = "J. X.", P5 = "J. X." },
+                        new Semana.DiaSemana.TurnoAsignado {Turno="T3", P1="J. P.", P2 = "J. X.", P3 = "J. X.", P4 = "J. X.", P5 = "J. X." },}
+                },
+                Domingo = new Semana.DiaSemana
+                {
+                    ReferenceDate = DateTime.Now,
+                    Turnos = new ObservableCollection<Semana.DiaSemana.TurnoAsignado>() {
+                        new Semana.DiaSemana.TurnoAsignado {Turno="T1", P1="J. P.", P2 = "J. X.", P3 = "J. X.", P4 = "J. X.", P5 = "J. X." },
+                        new Semana.DiaSemana.TurnoAsignado {Turno="T2", P1="J. P.", P2 = "J. X.", P3 = "J. X.", P4 = "J. X.", P5 = "J. X." },
+                        new Semana.DiaSemana.TurnoAsignado {Turno="T3", P1="J. P.", P2 = "J. X.", P3 = "J. X.", P4 = "J. X.", P5 = "J. X." },}
+                },
+            });
 
             this.ViewSource = new CollectionViewSource();
             ViewSource.Source = GridSemana;
@@ -155,6 +410,7 @@ namespace CES.CoreApi.Receipt_Main.UI.WPF.ViewModel
             public class DiaSemana : BindableBase
             {
                 private DateTime _referenceDate;
+                private ObservableCollection<TurnoAsignado> _turnos;
 
                 public DateTime ReferenceDate
                 {
@@ -166,7 +422,16 @@ namespace CES.CoreApi.Receipt_Main.UI.WPF.ViewModel
                         SetProperty(ref _referenceDate, value);
                     }
                 }
-                public ObservableCollection<TurnoAsignado> Turnos;
+                public ObservableCollection<TurnoAsignado> Turnos
+                {
+                    get { return _turnos; }
+                    set
+                    {
+                        if (_turnos == value) return;
+                        _turnos = value;
+                        SetProperty(ref _turnos, value);
+                    }
+                }
 
                 public class TurnoAsignado : BindableBase
                 {

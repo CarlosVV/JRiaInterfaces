@@ -229,11 +229,15 @@
     <Compile Include="Config\AppSettings.cs" />
     <Compile Include="Helpers\CafApiService.cs" />
     <Compile Include="Helpers\RelayCommand.cs" />
+    <Compile Include="Model\DataGridDragDropEventArgs.cs" />
+    <Compile Include="Model\Employee.cs" />
     <Compile Include="Model\IOService.cs" />
     <Compile Include="Model\MenuElement.cs" />
+    <Compile Include="Model\MockRecord.cs" />
     <Compile Include="Model\NotEmptyValidationRule.cs" />
     <Compile Include="Model\NotifyPropertyChangedExtension.cs" />
     <Compile Include="Model\SubMenuItem.cs" />
+    <Compile Include="Model\UIHelpers.cs" />
     <Compile Include="Model\User.cs" />
     <Compile Include="MyModule.cs" />
     <Compile Include="Startup.cs" />
@@ -506,6 +510,9 @@
       <Project>{55BF8FE7-E012-4DC0-A90A-458F992610E5}</Project>
       <Name>CES.CoreApi.Receipt_Main.Service</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="DragInsert.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="..\packages\AutoMapper.3.3.1\tools\AutoMapper.targets" Condition="Exists('..\packages\AutoMapper.3.3.1\tools\AutoMapper.targets')" />
