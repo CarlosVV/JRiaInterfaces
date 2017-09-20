@@ -4,6 +4,7 @@ using System.Configuration;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Xml;
 
 namespace CES.CoreApi.Receipt_Main.Infrastructure.Core
 {
@@ -28,8 +29,18 @@ namespace CES.CoreApi.Receipt_Main.Infrastructure.Core
             if (resultado.ResultadoServicio.Estado == DTEBoxCliente.EstadoResultado.Ok)
             {
                 //Usar los datos que viene en el resultado de la llamada
-                string xml = resultado.Datos;
-                //Código de usuario a partir de aquí
+                var xml = resultado.Datos;
+
+                // Validar si Documento viene con Signature Adicional
+                var xmlDoc = new XmlDocument();
+                xmlDoc.LoadXml(xml);
+                var signatureNodes = xmlDoc.GetElementsByTagName("Signature");
+                if(signatureNodes.Count == 2)
+                {
+                    signatureNodes[1].ParentNode.RemoveChild(signatureNodes[1]);
+                    xml = xmlDoc.OuterXml;
+                }               
+
                 respuesta = xml;
                 return true;
             }
