@@ -3,15 +3,23 @@
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity" 
+             xmlns:ei="http://schemas.microsoft.com/expression/2010/interactions"  
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:CES.CoreApi.Receipt_Main.UI.WPF.View"
-             mc:Ignorable="d" 
              xmlns:model1="clr-namespace:CES.CoreApi.Receipt_Main.UI.WPF.ViewModel"
-             d:DataContext="{d:DesignInstance model1:StaffAssignmentViewModel, d:IsDesignTimeCreatable=False}"
+             xmlns:Ria="clr-namespace:CES.CoreApi.Receipt_Main.UI.WPF.Controls.Calendar"
+             mc:Ignorable="d"   
+            
+             Foreground="White"       
              d:DesignHeight="800" d:DesignWidth="1400">
-    <Grid       x:Name="layoutRoot"
-                MouseLeftButtonUp="OnMouseLeftButtonUp"
-                MouseMove="OnMouseMove">
+    <UserControl.Background>
+        <RadialGradientBrush>
+            <GradientStop Color="#FF313131" Offset="0"/>
+            <GradientStop Color="#FF181818" Offset="1"/>
+        </RadialGradientBrush>
+    </UserControl.Background>
+    <Grid       x:Name="layoutRoot">
         <ScrollViewer  VerticalScrollBarVisibility="Auto" Height="Auto">
             <StackPanel>
                 <!-- Título-->
@@ -23,21 +31,7 @@
                         <ColumnDefinition Width="120" />
                         <ColumnDefinition Width="120" />
                     </Grid.ColumnDefinitions>
-                    <!-- Tienda-->
-                    <TextBlock Grid.Column="0">Tienda</TextBlock>
-                    <ComboBox Grid.Column="1">
-                        <ComboBoxItem>CL1 CATEDRAL</ComboBoxItem>
-                        <ComboBoxItem>CL7 BANDERA</ComboBoxItem>
-                    </ComboBox>
-                    <!-- Tipo de Periodo-->
-                    <TextBlock Grid.Column="2">Mes</TextBlock>
-                    <ComboBox Grid.Column="3">
-                        <ComboBoxItem>Mensual</ComboBoxItem>
-                        <ComboBoxItem>Semanal</ComboBoxItem>
-                    </ComboBox>
-                    <!-- Fecha -->
-                    <TextBlock Grid.Column="4">Fecha</TextBlock>
-                    <TextBlock Grid.Column="5">Marzo</TextBlock>
+                  
                 </Grid>
 
                 <TextBlock FontWeight="Bold" HorizontalAlignment="Center" FontSize="12">Asignaciones</TextBlock>
@@ -47,131 +41,19 @@
                         <ColumnDefinition Width="5" />
                         <ColumnDefinition Width="230" />
                     </Grid.ColumnDefinitions>
-                    <DataGrid x:Name="dataGrid"  AutoGenerateColumns="False" ItemsSource="{Binding GridSemana}" CanUserAddRows="False">
-                        <DataGrid.Columns>
-                            <DataGridTextColumn Header="Sem." Binding="{Binding NroSemana}"></DataGridTextColumn>
-                            <DataGridTemplateColumn Header="LUNES" CanUserResize="False">
-                                <DataGridTemplateColumn.CellTemplate>
-                                    <DataTemplate>
-                                        <Grid>
-                                            <DataGrid AutoGenerateColumns="False" ItemsSource="{Binding Lunes.Turnos}" CanUserAddRows="False">
-                                                <DataGrid.Columns>
-                                                    <DataGridTextColumn Header="T" Binding="{Binding Turno}"></DataGridTextColumn>
-                                                    <DataGridTextColumn Header="P1" Binding="{Binding P1}"></DataGridTextColumn>
-                                                    <DataGridTextColumn Header="P2" Binding="{Binding P2}"></DataGridTextColumn>
-                                                    <DataGridTextColumn Header="P3" Binding="{Binding P3}"></DataGridTextColumn>
-                                                </DataGrid.Columns>
-                                            </DataGrid>
-                                        </Grid>
-                                    </DataTemplate>
-                                </DataGridTemplateColumn.CellTemplate>
-                            </DataGridTemplateColumn>
-                            <DataGridTemplateColumn Header="MARTES" CanUserResize="False">
-                                <DataGridTemplateColumn.CellTemplate>
-                                    <DataTemplate>
-                                        <Grid>
-                                            <DataGrid AutoGenerateColumns="False" ItemsSource="{Binding Lunes.Turnos}" CanUserAddRows="False">
-                                                <DataGrid.Columns>
-                                                    <DataGridTextColumn Header="T" Binding="{Binding Turno}"></DataGridTextColumn>
-                                                    <DataGridTextColumn Header="P1" Binding="{Binding P1}"></DataGridTextColumn>
-                                                    <DataGridTextColumn Header="P2" Binding="{Binding P2}"></DataGridTextColumn>
-                                                    <DataGridTextColumn Header="P3" Binding="{Binding P3}"></DataGridTextColumn>
-                                                </DataGrid.Columns>
-                                            </DataGrid>
-                                        </Grid>
-                                    </DataTemplate>
-                                </DataGridTemplateColumn.CellTemplate>
-                            </DataGridTemplateColumn>
-                            <DataGridTemplateColumn Header="MIERCOLES" CanUserResize="False">
-                                <DataGridTemplateColumn.CellTemplate>
-                                    <DataTemplate>
-                                        <Grid>
-                                            <DataGrid AutoGenerateColumns="False" ItemsSource="{Binding Lunes.Turnos}" CanUserAddRows="False">
-                                                <DataGrid.Columns>
-                                                    <DataGridTextColumn Header="T" Binding="{Binding Turno}"></DataGridTextColumn>
-                                                    <DataGridTextColumn Header="P1" Binding="{Binding P1}"></DataGridTextColumn>
-                                                    <DataGridTextColumn Header="P2" Binding="{Binding P2}"></DataGridTextColumn>
-                                                    <DataGridTextColumn Header="P3" Binding="{Binding P3}"></DataGridTextColumn>
-                                                </DataGrid.Columns>
-                                            </DataGrid>
-                                        </Grid>
-                                    </DataTemplate>
-                                </DataGridTemplateColumn.CellTemplate>
-                            </DataGridTemplateColumn>
-                            <DataGridTemplateColumn Header="JUEVES" CanUserResize="False">
-                                <DataGridTemplateColumn.CellTemplate>
-                                    <DataTemplate>
-                                        <Grid>
-                                            <DataGrid AutoGenerateColumns="False" ItemsSource="{Binding Lunes.Turnos}" CanUserAddRows="False">
-                                                <DataGrid.Columns>
-                                                    <DataGridTextColumn Header="T" Binding="{Binding Turno}"></DataGridTextColumn>
-                                                    <DataGridTextColumn Header="P1" Binding="{Binding P1}"></DataGridTextColumn>
-                                                    <DataGridTextColumn Header="P2" Binding="{Binding P2}"></DataGridTextColumn>
-                                                    <DataGridTextColumn Header="P3" Binding="{Binding P3}"></DataGridTextColumn>
-                                                </DataGrid.Columns>
-                                            </DataGrid>
-                                        </Grid>
-                                    </DataTemplate>
-                                </DataGridTemplateColumn.CellTemplate>
-                            </DataGridTemplateColumn>
-                            <DataGridTemplateColumn Header="VIERNES" CanUserResize="False">
-                                <DataGridTemplateColumn.CellTemplate>
-                                    <DataTemplate>
-                                        <Grid>
-                                            <DataGrid AutoGenerateColumns="False" ItemsSource="{Binding Lunes.Turnos}" CanUserAddRows="False">
-                                                <DataGrid.Columns>
-                                                    <DataGridTextColumn Header="T" Binding="{Binding Turno}"></DataGridTextColumn>
-                                                    <DataGridTextColumn Header="P1" Binding="{Binding P1}"></DataGridTextColumn>
-                                                    <DataGridTextColumn Header="P2" Binding="{Binding P2}"></DataGridTextColumn>
-                                                    <DataGridTextColumn Header="P3" Binding="{Binding P3}"></DataGridTextColumn>
-                                                </DataGrid.Columns>
-                                            </DataGrid>
-                                        </Grid>
-                                    </DataTemplate>
-                                </DataGridTemplateColumn.CellTemplate>
-                            </DataGridTemplateColumn>
-                            <DataGridTemplateColumn Header="SABADO" CanUserResize="False">
-                                <DataGridTemplateColumn.CellTemplate>
-                                    <DataTemplate>
-                                        <Grid>
-                                            <DataGrid AutoGenerateColumns="False" ItemsSource="{Binding Lunes.Turnos}" CanUserAddRows="False">
-                                                <DataGrid.Columns>
-                                                    <DataGridTextColumn Header="T" Binding="{Binding Turno}"></DataGridTextColumn>
-                                                    <DataGridTextColumn Header="P1" Binding="{Binding P1}"></DataGridTextColumn>
-                                                    <DataGridTextColumn Header="P2" Binding="{Binding P2}"></DataGridTextColumn>
-                                                    <DataGridTextColumn Header="P3" Binding="{Binding P3}"></DataGridTextColumn>
-                                                </DataGrid.Columns>
-                                            </DataGrid>
-                                        </Grid>
-                                    </DataTemplate>
-                                </DataGridTemplateColumn.CellTemplate>
-                            </DataGridTemplateColumn>
-                            <DataGridTemplateColumn Header="DOMINGO" CanUserResize="False">
-                                <DataGridTemplateColumn.CellTemplate>
-                                    <DataTemplate>
-                                        <Grid>
-                                            <DataGrid AutoGenerateColumns="False" ItemsSource="{Binding Lunes.Turnos}" CanUserAddRows="False">
-                                                <DataGrid.Columns>
-                                                    <DataGridTextColumn Header="T" Binding="{Binding Turno}"></DataGridTextColumn>
-                                                    <DataGridTextColumn Header="P1" Binding="{Binding P1}"></DataGridTextColumn>
-                                                    <DataGridTextColumn Header="P2" Binding="{Binding P2}"></DataGridTextColumn>
-                                                    <DataGridTextColumn Header="P3" Binding="{Binding P3}"></DataGridTextColumn>
-                                                </DataGrid.Columns>
-                                            </DataGrid>
-                                        </Grid>
-                                    </DataTemplate>
-                                </DataGridTemplateColumn.CellTemplate>
-                            </DataGridTemplateColumn>
-                        </DataGrid.Columns>
-                    </DataGrid>
+                    <Grid Grid.Column="0"   >
+                        <ComboBox x:Name="cboMonth" HorizontalAlignment="Left" Height="34" Margin="8,8,0,0" VerticalAlignment="Top" Width="152" FontSize="18.667" Background="White" Foreground="Black"/>
+                        <ComboBox x:Name="cboYear" Height="34" Margin="164,8,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Width="87" FontSize="18.667" Background="White" Foreground="Black"/>
+                        <Ria:Calendar x:Name="RiaCalendar" DayChanged="Calendar_DayChanged"  AllowDrop="True"  Drop ="Calendar_Drop" Margin="0,46,0,0"  />
+                    </Grid>
                     <GridSplitter Grid.Column="1" Width="5" HorizontalAlignment="Stretch" />
                     <StackPanel Grid.Column="2">
                         <TextBlock FontWeight="Bold">Empleados</TextBlock>
-                        <ListBox>
+                        <ListBox PreviewMouseLeftButtonDown="ListBox_PreviewMouseLeftButtonDown" Background="White">
+                            <ListBoxItem>Jp1</ListBoxItem>
                             <ListBoxItem>Jp2</ListBoxItem>
-                            <ListBoxItem>Jp2</ListBoxItem>
-                            <ListBoxItem>Jp2</ListBoxItem>
-                            <ListBoxItem>Jp2</ListBoxItem>
+                            <ListBoxItem>Jp3</ListBoxItem>
+                            <ListBoxItem>Jp4</ListBoxItem>
                         </ListBox>
 
                         <Popup

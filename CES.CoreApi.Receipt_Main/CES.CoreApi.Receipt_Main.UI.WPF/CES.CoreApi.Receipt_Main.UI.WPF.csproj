@@ -227,6 +227,11 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="Config\AppSettings.cs" />
+    <Compile Include="Controls\Calendar\Calendar.cs" />
+    <Compile Include="Controls\Calendar\Converters\DateConverter.cs" />
+    <Compile Include="Controls\Calendar\Converters\DayBorderColorConverter.cs" />
+    <Compile Include="Controls\Calendar\Day.cs" />
+    <Compile Include="Controls\Calendar\DayChangedEventArgs.cs" />
     <Compile Include="Helpers\CafApiService.cs" />
     <Compile Include="Helpers\RelayCommand.cs" />
     <Compile Include="Model\DataGridDragDropEventArgs.cs" />
@@ -342,6 +347,10 @@
     <Compile Include="View\UserManagement.xaml.cs">
       <DependentUpon>UserManagement.xaml</DependentUpon>
     </Compile>
+    <Page Include="Themes\Generic.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="View\ActivityDetail.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>

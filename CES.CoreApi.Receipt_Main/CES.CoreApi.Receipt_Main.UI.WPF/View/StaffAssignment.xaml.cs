@@ -1,5 +1,7 @@
-﻿using CES.CoreApi.Receipt_Main.UI.WPF.Model;
+﻿using CES.CoreApi.Receipt_Main.UI.WPF.Controls.Calendar;
+using CES.CoreApi.Receipt_Main.UI.WPF.Model;
 using CES.CoreApi.Receipt_Main.UI.WPF.ViewModel;
+using CES.CoreApi.Receipt_Main.UI.WPF.View;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -15,6 +17,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using System.Collections;
 
 namespace CES.CoreApi.Receipt_Main.UI.WPF.View
 {
@@ -23,6 +26,7 @@ namespace CES.CoreApi.Receipt_Main.UI.WPF.View
     /// </summary>
     public partial class StaffAssignment : UserControl
     {
+        ListBox dragSource = null;
         public static readonly DependencyProperty DraggedItemProperty =
            DependencyProperty.Register("DraggedItem", typeof(Employee), typeof(MainWindow));
         public Employee DraggedItem
@@ -34,80 +38,123 @@ namespace CES.CoreApi.Receipt_Main.UI.WPF.View
         public StaffAssignment()
         {
             InitializeComponent();
+           
+            List<string> months = new List<string> { "January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December" };
+            cboMonth.ItemsSource = months;
+
+            for (int i = -50; i < 50; i++)
+            {
+                cboYear.Items.Add(DateTime.Today.AddYears(i).Year);
+            }
+
+            cboMonth.SelectedItem = months.FirstOrDefault(w => w == DateTime.Today.ToString("MMMM"));
+            cboYear.SelectedItem = DateTime.Today.Year;
+
+            cboMonth.SelectionChanged += (o, e) => RefreshCalendar();
+            cboYear.SelectionChanged += (o, e) => RefreshCalendar();
 
             DataContext = new StaffAssignmentViewModel();
         }
-        public bool IsEditing { get; set; }
-        public bool IsDragging { get; set; }
-        private void OnMouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+
+        private void RefreshCalendar()
         {
-            if (IsEditing) return;
+            if (cboYear.SelectedItem == null) return;
+            if (cboMonth.SelectedItem == null) return;
 
-            //var row = UIHelpers.TryFindFromPoint<DataGridRow>((UIElement)sender, e.GetPosition(shareGrid));
-            //if (row == null || row.IsEditing) return;
+            int year = (int)cboYear.SelectedItem;
 
-            //set flag that indicates we're capturing mouse movements
-            IsDragging = true;
-            //DraggedItem = (Employee)row.Item;
+            int month = cboMonth.SelectedIndex + 1;
+
+            DateTime targetDate = new DateTime(year, month, 1);
+
+            RiaCalendar.BuildCalendar(targetDate);
         }
 
-        private void OnMouseLeftButtonUp(object sender, MouseButtonEventArgs e)
+        private void Calendar_DayChanged(object sender, DayChangedEventArgs e)
         {
-            if (!IsDragging || IsEditing)
+            //save the text edits to persistant storage
+        }
+
+        private void ListBox_PreviewMouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        {
+            var parent = (ListBox)sender;
+            dragSource = parent;
+            object data = GetDataFromListBox(dragSource, e.GetPosition(parent));
+
+            if (data != null)
             {
-                return;
+                DragDrop.DoDragDrop(parent, data, DragDropEffects.Move);
+            }
+        }
+
+        private void Calendar_Drop(object sender, DragEventArgs e)
+        {
+            var parent = (Controls.Calendar.Calendar)sender;
+            object data = e.Data.GetData(typeof(string));
+            //((IList)dragSource.ItemsSource).Remove(data);
+            //e.poi
+            //parent.da .Items.Add(data);
+            object data2 = GetDataFromCalendar(parent, e.GetPosition(parent));
+        }
+        private static object GetDataFromCalendar(Controls.Calendar.Calendar source, Point point)
+        {
+            UIElement element = source.InputHitTest(point) as UIElement;
+            if (element != null)
+            {
+                object data = DependencyProperty.UnsetValue;
+                while (data == DependencyProperty.UnsetValue)
+                {
+                    //data = source.ItemContainerGenerator.ItemFromContainer(element);
+
+                    //if (data == DependencyProperty.UnsetValue)
+                    //{
+                    //    element = VisualTreeHelper.GetParent(element) as UIElement;
+                    //}
+
+                    if (element == source)
+                    {
+                        return null;
+                    }
+                }
+
+                if (data != DependencyProperty.UnsetValue)
+                {
+                    return data;
+                }
             }
 
-            //get the target item
-            var targetItem = (Employee)dataGrid.SelectedItem;
-
-            if (targetItem == null || !ReferenceEquals(DraggedItem, targetItem))
+            return null;
+        }
+        #region GetDataFromListBox(ListBox,Point)
+        private static object GetDataFromListBox(ListBox source, Point point)
+        {
+            UIElement element = source.InputHitTest(point) as UIElement;
+            if (element != null)
             {
-                //remove the source from the list
-                //ShareList.Remove(DraggedItem);
+                object data = DependencyProperty.UnsetValue;
+                while (data == DependencyProperty.UnsetValue)
+                {
+                    data = source.ItemContainerGenerator.ItemFromContainer(element);
 
-                //get target index
-                //var targetIndex = ShareList.IndexOf(targetItem);
+                    if (data == DependencyProperty.UnsetValue)
+                    {
+                        element = VisualTreeHelper.GetParent(element) as UIElement;
+                    }
 
-                //move source at the target's location
-                //ShareList.Insert(targetIndex, DraggedItem);
+                    if (element == source)
+                    {
+                        return null;
+                    }
+                }
 
-                //select the dropped item
-                //shareGrid.SelectedItem = DraggedItem;
+                if (data != DependencyProperty.UnsetValue)
+                {
+                    return data;
+                }
             }
 
-            //reset
-            ResetDragDrop();
+            return null;
         }
-
-        private void ResetDragDrop()
-        {
-            IsDragging = false;
-            popup1.IsOpen = false;
-            //shareGrid.IsReadOnly = false;
-        }
-
-        private void OnMouseMove(object sender, MouseEventArgs e)
-        {
-            if (!IsDragging || e.LeftButton != MouseButtonState.Pressed) return;
-
-            //display the popup if it hasn't been opened yet
-            if (!popup1.IsOpen)
-            {
-                //switch to read-only mode
-                //shareGrid.IsReadOnly = true;
-
-                //make sure the popup is visible
-                popup1.IsOpen = true;
-            }
-
-            Size popupSize = new Size(popup1.ActualWidth, popup1.ActualHeight);
-            popup1.PlacementRectangle = new Rect(e.GetPosition(this), popupSize);
-
-            //make sure the row under the grid is being selected
-            //Point position = e.GetPosition(shareGrid);
-            //var row = UIHelpers.TryFindFromPoint<DataGridRow>(shareGrid, position);
-            //if (row != null) shareGrid.SelectedItem = row.Item;
-        }
+        #endregion
     }
 }
