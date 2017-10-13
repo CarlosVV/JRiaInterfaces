@@ -117,6 +117,11 @@ public class FXGlobalPaying {
                 break;
             case StatesCities:
                 request = StatesCities.parseInputArgsToRequest(args);
+                if ("*".equals(((GetStatesCitiesRequestEntity)request).getCountryCode()) && 
+                        "*".equals(((GetStatesCitiesRequestEntity)request).getStateName()))
+                {
+                    
+                }
                 StatesCities.callSoapWebService(soapEndpointUrl, soapAction, (GetStatesCitiesRequestEntity) request);
                 break;
             case Commissions:
