@@ -28,6 +28,7 @@ import javax.xml.soap.SOAPPart;
  */
 public class Commissions {
 
+    private static final String soapAction = "CES.Services.FXGlobal/IRiaAsPayer/GetCommissions";
     private static final boolean isDebug = false;
 
     public static GetCommissionsRequestEntity parseInputArgsToRequest(String[] args) {
@@ -126,7 +127,7 @@ public class Commissions {
         requestType.addTextNode(request.getRequestType());
     }
 
-    public static void callSoapWebService(String soapEndpointUrl, String soapAction,
+    public static void callSoapWebService(String soapEndpointUrl, 
             GetCommissionsRequestEntity request) {
         try {
             // Create SOAP Connection
@@ -142,7 +143,7 @@ public class Commissions {
                 soapResponse.writeTo(System.out);
                 System.out.println();
             }
-            
+
             // Return parsed Response
             parseAndReturnResponse(soapResponse);
 
@@ -165,7 +166,7 @@ public class Commissions {
                 SOAPBodyElement bodyElement = (SOAPBodyElement) it.next();
                 Iterator it2 = bodyElement.getChildElements();
                 while (it2.hasNext()) {
-                    SOAPElement element2 = (SOAPElement) it2.next();                    
+                    SOAPElement element2 = (SOAPElement) it2.next();
                     Iterator it3 = element2.getChildElements();
                     while (it3.hasNext()) {
                         SOAPElement element3 = (SOAPElement) it3.next();

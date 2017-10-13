@@ -26,6 +26,7 @@ import javax.xml.soap.SOAPPart;
  */
 public class Currencies {
 
+    private static final String soapAction = "CES.Services.FXGlobal/IRiaAsPayer/GetCurrencies";
     private static final boolean isDebug = false;
 
     public static GetCurrenciesRequestEntity parseInputArgsToRequest(String[] args) {
@@ -124,7 +125,7 @@ public class Currencies {
         requestType.addTextNode(request.getRequestType());
     }
 
-    public static void callSoapWebService(String soapEndpointUrl, String soapAction,
+    public static void callSoapWebService(String soapEndpointUrl, 
             GetCurrenciesRequestEntity request) {
         try {
             // Create SOAP Connection
@@ -134,14 +135,13 @@ public class Currencies {
             // Send SOAP Message to SOAP Server
             SOAPMessage soapResponse = soapConnection.call(createSOAPRequest(soapAction, request), soapEndpointUrl);
 
-
             if (isDebug) {
                 // Print the SOAP Response
                 System.out.println("Response SOAP Message:");
                 soapResponse.writeTo(System.out);
                 System.out.println();
             }
-            
+
             // Return parsed Response
             parseAndReturnResponse(soapResponse);
 
@@ -165,7 +165,7 @@ public class Currencies {
                 SOAPBodyElement bodyElement = (SOAPBodyElement) it.next();
                 Iterator it2 = bodyElement.getChildElements();
                 while (it2.hasNext()) {
-                    SOAPElement element2 = (SOAPElement) it2.next();                    
+                    SOAPElement element2 = (SOAPElement) it2.next();
                     Iterator it3 = element2.getChildElements();
                     while (it3.hasNext()) {
                         SOAPElement element3 = (SOAPElement) it3.next();

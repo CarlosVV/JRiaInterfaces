@@ -5,10 +5,18 @@
  */
 package fx.globalpaying.entities;
 
+import java.util.List;
+
 /**
  *
  * @author cvalderrama
  */
 public class GetLocsCurrsRatesRequestEntity extends BaseRequestEntity {
-    
+    private List<LocsCurrRatesRequestElementEntity> requests;
+    public List<LocsCurrRatesRequestElementEntity> getRequests(){
+        return requests;
+    }
+    public void setRequests(List<LocsCurrRatesRequestElementEntity> requests){
+        this.requests = requests;
+    }
 }

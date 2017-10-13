@@ -29,6 +29,7 @@ import javax.xml.soap.SOAPPart;
  */
 public class EnumerationValues {
 
+    private static final String soapAction = "CES.Services.FXGlobal/IRiaAsPayer/GetEnumerationValues";
     private static final boolean isDebug = false;
 
     public static GetEnumerationValuesRequestEntity parseInputArgsToRequest(String[] args) {
@@ -149,7 +150,7 @@ public class EnumerationValues {
         requestElement.addAttribute(new QName("", "CountryFrom"), request.getCountryFrom());
     }
 
-    public static void callSoapWebService(String soapEndpointUrl, String soapAction,
+    public static void callSoapWebService(String soapEndpointUrl,
             GetEnumerationValuesRequestEntity request) {
         try {
             // Create SOAP Connection
@@ -168,7 +169,7 @@ public class EnumerationValues {
 
             // Return parsed Response
             parseAndReturnResponse(soapResponse);
-            
+
             soapConnection.close();
         } catch (Exception e) {
             System.err.println("\nError occurred while sending SOAP Request to Server!\nMake sure you have the correct endpoint URL and SOAPAction!\n");
@@ -188,7 +189,7 @@ public class EnumerationValues {
                 SOAPBodyElement bodyElement = (SOAPBodyElement) it.next();
                 Iterator it2 = bodyElement.getChildElements();
                 while (it2.hasNext()) {
-                    SOAPElement element2 = (SOAPElement) it2.next();                    
+                    SOAPElement element2 = (SOAPElement) it2.next();
                     Iterator it3 = element2.getChildElements();
                     while (it3.hasNext()) {
                         SOAPElement element3 = (SOAPElement) it3.next();

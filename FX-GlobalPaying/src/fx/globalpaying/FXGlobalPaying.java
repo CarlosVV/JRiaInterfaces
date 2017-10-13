@@ -9,18 +9,21 @@ import fx.globalpaying.entities.GetCommissionsRequestEntity;
 import fx.globalpaying.interfaces.CountriesStates;
 import fx.globalpaying.interfaces.Currencies;
 import fx.globalpaying.entities.GetCountriesStatesRequestEntity;
+import fx.globalpaying.entities.GetCountriesStatesResponseEntity;
 import fx.globalpaying.entities.GetCurrenciesRequestEntity;
 import fx.globalpaying.entities.GetEnumerationValuesRequestEntity;
 import fx.globalpaying.entities.GetLocsCurrsRatesRequestEntity;
 import fx.globalpaying.entities.GetOrderStatusNoticesRequestEntity;
 import fx.globalpaying.entities.GetRequirementsRequestEntity;
 import fx.globalpaying.entities.GetStatesCitiesRequestEntity;
+import fx.globalpaying.entities.GetStatesCitiesResponseEntity;
 import fx.globalpaying.interfaces.Commissions;
 import fx.globalpaying.interfaces.EnumerationValues;
 import fx.globalpaying.interfaces.LocsCurrsRates;
 import fx.globalpaying.interfaces.OrderStatusNotices;
 import fx.globalpaying.interfaces.Requirements;
 import fx.globalpaying.interfaces.StatesCities;
+import java.util.List;
 
 /**
  *
@@ -42,7 +45,6 @@ public class FXGlobalPaying {
     static boolean isDebug = false;
     static String soapEndpointUrl = "http://stagingfxglobalwebsvcnocert.riaenvia.net:9771/FXGlobalPaying.svc/Binding_Basic_NoCert";
     static String soapActionPrefix = "CES.Services.FXGlobal/IRiaAsPayer/";
-    static String soapAction = "CES.Services.FXGlobal/IRiaAsPayer/GetCurrencies";
 
     /**
      * @param args the command line arguments
@@ -84,7 +86,6 @@ public class FXGlobalPaying {
         if ("General".equals(requestType)) {
             for (RequestTypeEnum requestTypeEnum : RequestTypeEnum.values()) {
                 String requestTypeItem = args[3] = requestTypeEnum.name();
-                soapAction = soapActionPrefix + "Get" + requestTypeItem;
                 ExecuteWebMethod(RequestTypeEnum.valueOf(requestTypeItem), args);
             }
         } else {
@@ -93,58 +94,79 @@ public class FXGlobalPaying {
                 // Invalid Request Type, exit Program
                 return;
             }
-            String requesTypeAction = requestType;
-            if ("OrderStatusNotifications".equals(requestType)) {
-                requesTypeAction = "OrderStatusNotices";
-            }
 
-            soapAction = soapActionPrefix + "Get" + requesTypeAction;
             ExecuteWebMethod(RequestTypeEnum.valueOf(requestType), args);
         }
     }
 
-    public static void ExecuteWebMethod(RequestTypeEnum requestType, String[] args) {
+    public static Object ExecuteWebMethod(RequestTypeEnum requestType, String[] args) {
+        return ExecuteWebMethod(requestType, args, true);
+    }
+
+    public static Object ExecuteWebMethod(RequestTypeEnum requestType, String[] args, boolean generateToStdOut) {
         Object request;
+        Object response;
+
+        response = null;
 
         switch (requestType) {
             case Currencies:
                 request = Currencies.parseInputArgsToRequest(args);
-                Currencies.callSoapWebService(soapEndpointUrl, soapAction, (GetCurrenciesRequestEntity) request);
+                Currencies.callSoapWebService(soapEndpointUrl, (GetCurrenciesRequestEntity) request);
                 break;
             case CountriesStates:
                 request = CountriesStates.parseInputArgsToRequest(args);
-                CountriesStates.callSoapWebService(soapEndpointUrl, soapAction, (GetCountriesStatesRequestEntity) request);
+                CountriesStates.callSoapWebService(soapEndpointUrl, (GetCountriesStatesRequestEntity) request, generateToStdOut);
+                response = CountriesStates.getStatesList();
                 break;
             case StatesCities:
                 request = StatesCities.parseInputArgsToRequest(args);
-                if ("*".equals(((GetStatesCitiesRequestEntity)request).getCountryCode()) && 
-                        "*".equals(((GetStatesCitiesRequestEntity)request).getStateName()))
-                {
-                    
+                if ("*".equals(((GetStatesCitiesRequestEntity) request).getCountryCode())) {
+                    List<GetCountriesStatesResponseEntity> countriesStatesResponse = (List<GetCountriesStatesResponseEntity>) ExecuteWebMethod(RequestTypeEnum.CountriesStates, args, false);
+
+                    for (GetCountriesStatesResponseEntity countryState : countriesStatesResponse) {
+                        ((GetStatesCitiesRequestEntity) request).setCountryCode(countryState.getCtryCode());
+                        //((GetStatesCitiesRequestEntity) request).setStateName(countryState.getCtryCode());
+                        //List<GetStatesCitiesResponseEntity> cities = (List<GetStatesCitiesResponseEntity>) ExecuteWebMethod(RequestTypeEnum.StatesCities, args, false);
+                        StatesCities.callSoapWebService(soapEndpointUrl, (GetStatesCitiesRequestEntity) request, false);
+                        List<GetStatesCitiesResponseEntity> cities = (List<GetStatesCitiesResponseEntity>) StatesCities.getCitiesList();
+                        for (GetStatesCitiesResponseEntity item : cities) {
+                            System.out.println(item.getCtryCode() + "|"
+                                    + item.getCtryName() + "|"
+                                    + item.getStateCode() + "|"
+                                    + item.getStateName() + "|"
+                                    + item.getCityName() + "|");
+                        }
+                    }
+                } else {
+                    StatesCities.callSoapWebService(soapEndpointUrl, (GetStatesCitiesRequestEntity) request);
+                    response = StatesCities.getCitiesList();
                 }
-                StatesCities.callSoapWebService(soapEndpointUrl, soapAction, (GetStatesCitiesRequestEntity) request);
+
                 break;
             case Commissions:
                 request = Commissions.parseInputArgsToRequest(args);
-                Commissions.callSoapWebService(soapEndpointUrl, soapAction, (GetCommissionsRequestEntity) request);
+                Commissions.callSoapWebService(soapEndpointUrl, (GetCommissionsRequestEntity) request);
+
                 break;
             case OrderStatusNotifications:
                 request = OrderStatusNotices.parseInputArgsToRequest(args);
-                OrderStatusNotices.callSoapWebService(soapEndpointUrl, soapAction, (GetOrderStatusNoticesRequestEntity) request);
+                OrderStatusNotices.callSoapWebService(soapEndpointUrl, (GetOrderStatusNoticesRequestEntity) request);
                 break;
             case EnumerationValues:
                 request = EnumerationValues.parseInputArgsToRequest(args);
-                EnumerationValues.callSoapWebService(soapEndpointUrl, soapAction, (GetEnumerationValuesRequestEntity) request);
+                EnumerationValues.callSoapWebService(soapEndpointUrl, (GetEnumerationValuesRequestEntity) request);
                 break;
             case Requirements:
                 request = Requirements.parseInputArgsToRequest(args);
-                Requirements.callSoapWebService(soapEndpointUrl, soapAction, (GetRequirementsRequestEntity) request);
+                Requirements.callSoapWebService(soapEndpointUrl, (GetRequirementsRequestEntity) request);
                 break;
             case LocsCurrsRates:
                 request = LocsCurrsRates.parseInputArgsToRequest(args);
-                LocsCurrsRates.callSoapWebService(soapEndpointUrl, soapAction, (GetLocsCurrsRatesRequestEntity) request);
+                LocsCurrsRates.callSoapWebService(soapEndpointUrl, (GetLocsCurrsRatesRequestEntity) request);
                 break;
         }
+        return response;
     }
 
     private static boolean ExistsRequestType(String requesTypeName) {

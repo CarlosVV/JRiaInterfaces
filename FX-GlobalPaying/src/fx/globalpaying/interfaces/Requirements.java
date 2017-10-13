@@ -5,7 +5,6 @@
  */
 package fx.globalpaying.interfaces;
 
-
 import fx.globalpaying.entities.GetRequirementsRequestEntity;
 import fx.globalpaying.entities.HeaderEntity;
 import java.util.ArrayList;
@@ -28,6 +27,9 @@ import javax.xml.soap.SOAPPart;
  * @author cvalderrama
  */
 public class Requirements {
+
+    private static List<String> requirementsList = new ArrayList<String>();
+    private static final String soapAction = "CES.Services.FXGlobal/IRiaAsPayer/GetRequirements";
     private static final boolean isDebug = false;
 
     public static GetRequirementsRequestEntity parseInputArgsToRequest(String[] args) {
@@ -126,7 +128,7 @@ public class Requirements {
         requestType.addTextNode(request.getRequestType());
     }
 
-    public static void callSoapWebService(String soapEndpointUrl, String soapAction,
+    public static void callSoapWebService(String soapEndpointUrl,
             GetRequirementsRequestEntity request) {
         try {
             // Create SOAP Connection
@@ -142,7 +144,7 @@ public class Requirements {
                 soapResponse.writeTo(System.out);
                 System.out.println();
             }
-            
+
             // Return parsed Response
             parseAndReturnResponse(soapResponse);
 
@@ -155,8 +157,6 @@ public class Requirements {
 
     private static void parseAndReturnResponse(SOAPMessage soapResponse) {
         try {
-            List<String> countriesList = new ArrayList<String>();
-            List<String> statesList = new ArrayList<String>();
             SOAPPart sp = soapResponse.getSOAPPart();
             SOAPEnvelope se = sp.getEnvelope();
             SOAPBody sb = se.getBody();
@@ -166,7 +166,7 @@ public class Requirements {
                 SOAPBodyElement bodyElement = (SOAPBodyElement) it.next();
                 Iterator it2 = bodyElement.getChildElements();
                 while (it2.hasNext()) {
-                    SOAPElement element2 = (SOAPElement) it2.next();                    
+                    SOAPElement element2 = (SOAPElement) it2.next();
                     Iterator it3 = element2.getChildElements();
                     while (it3.hasNext()) {
                         SOAPElement element3 = (SOAPElement) it3.next();
@@ -179,17 +179,29 @@ public class Requirements {
                                     SOAPElement element5 = (SOAPElement) it5.next();
                                     Iterator it6 = element5.getChildElements();
                                     while (it6.hasNext()) {
-                                        SOAPElement element7 = (SOAPElement) it6.next();
-                                        String ctryCode = element7.getAttribute("CtryCode");
-                                        String ctryName = element7.getAttribute("CtryName");
-                                        countriesList.add(ctryCode + "|" + ctryName + "|");
+                                        SOAPElement element6 = (SOAPElement) it6.next();
+                                        //String ctryCode = element7.getAttribute("CtryCode");
+                                        //String ctryName = element7.getAttribute("CtryName");
+                                        //countriesList.add(ctryCode + "|" + ctryName + "|");
 
-                                        Iterator it7 = element7.getChildElements();
+                                        Iterator it7 = element6.getChildElements();
                                         while (it7.hasNext()) {
-                                            SOAPElement element8 = (SOAPElement) it7.next();
-                                            String stateCode = element8.getAttribute("StateCode");
-                                            String stateName = element8.getAttribute("StateName");
-                                            statesList.add(ctryCode + "|" + ctryName + "|" + stateCode + "|" + stateName + "|");
+                                            SOAPElement element7 = (SOAPElement) it7.next();
+                                            String id = element7.getAttribute("ID");
+                                            String desc = element7.getAttribute("Desc");
+                                            Iterator it8 = element7.getChildElements();
+                                            //statesList.add(ctryCode + "|" + ctryName + "|" + stateCode + "|" + stateName + "|");
+                                            while (it8.hasNext()) {
+                                                SOAPElement element8 = (SOAPElement) it8.next();
+                                                Iterator it9 = element8.getChildElements();
+                                                while (it9.hasNext()) {
+                                                    SOAPElement element9 = (SOAPElement) it9.next();
+                                                    String fieldName = element9.getAttribute("FieldName");
+                                                    String minLength = element9.getAttribute("MinLength");
+                                                    String maxLength = element9.getAttribute("MaxLength");
+                                                    requirementsList.add(id + "|" + desc + "|" + fieldName + "|" + minLength + "|" + maxLength + "|");
+                                                }
+                                            }
                                         }
                                     }
                                 }
@@ -199,7 +211,7 @@ public class Requirements {
                 }
             }
 
-            for (String item : statesList) {
+            for (String item : requirementsList) {
                 System.out.println(item);
             }
 

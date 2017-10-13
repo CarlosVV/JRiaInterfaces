@@ -5,12 +5,13 @@
  */
 package fx.globalpaying.interfaces;
 
-
 import fx.globalpaying.entities.GetLocsCurrsRatesRequestEntity;
 import fx.globalpaying.entities.HeaderEntity;
+import fx.globalpaying.entities.LocsCurrRatesRequestElementEntity;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
+import java.util.regex.Pattern;
 import javax.xml.soap.MessageFactory;
 import javax.xml.soap.MimeHeaders;
 import javax.xml.soap.SOAPBody;
@@ -28,6 +29,8 @@ import javax.xml.soap.SOAPPart;
  * @author cvalderrama
  */
 public class LocsCurrsRates {
+
+    private static final String soapAction = "CES.Services.FXGlobal/IRiaAsPayer/GetLocsCurrsRates";
     private static final boolean isDebug = false;
 
     public static GetLocsCurrsRatesRequestEntity parseInputArgsToRequest(String[] args) {
@@ -46,9 +49,77 @@ public class LocsCurrsRates {
         request.getHeader().setUserID(header[6]);
         request.getHeader().setTerminalID(header[7]);
         request.getHeader().setLanguageCultureCode(header[8]);
-        request.setRequestType(args[3]);
+
+        String requesType = "";
+        String countryCode = "";
+        String stateName = "";
+        String cityName = "";
+
+        if (args[3] != null) {
+            String[] requestArray = args[3].split(";");
+            if (requestArray.length >= 3) {
+                requesType = requestArray[0];
+                String x = args[3];
+                x = x.replace(requesType + ";", "");
+
+                String[] y = x.split(Pattern.quote("|"));
+
+                request.setRequests(new ArrayList<LocsCurrRatesRequestElementEntity>());
+
+                for (String z : y) {
+                    String[] p = z.split(";");
+                    LocsCurrRatesRequestElementEntity w = new LocsCurrRatesRequestElementEntity();
+                    countryCode = p[0];
+                    stateName = p[1];
+                    cityName = p[2];
+
+                    if("-".equals(stateName)){
+                        stateName = "";
+                    }
+                    
+                    if("-".equals(cityName)){
+                        cityName = "";
+                    }
+                    
+                    w.setCtryCode(countryCode);
+                    w.setStateName(stateName);
+                    w.setCityName(cityName);
+                    
+                    request.getRequests().add(w);
+                }
+            }
+        }
+
+        request.setRequestType(requesType);
 
         return request;
+    }
+
+    public static void callSoapWebService(String soapEndpointUrl,
+            GetLocsCurrsRatesRequestEntity request) {
+        try {
+            // Create SOAP Connection
+            SOAPConnectionFactory soapConnectionFactory = SOAPConnectionFactory.newInstance();
+            SOAPConnection soapConnection = soapConnectionFactory.createConnection();
+
+            // Send SOAP Message to SOAP Server
+            SOAPMessage soapResponse = soapConnection.call(createSOAPRequest(soapAction, request), soapEndpointUrl);
+
+            if (isDebug) {
+                // Print the SOAP Response
+                System.out.println("Response SOAP Message:");
+                soapResponse.writeTo(System.out);
+                System.out.println();
+            }
+
+            // Return parsed Response
+            parseAndReturnResponse(soapResponse);
+
+            soapConnection.close();
+        } catch (Exception e) {
+            System.err.println("\nError occurred while sending SOAP Request to Server!\nMake sure you have the correct endpoint URL and SOAPAction!\n");
+            e.printStackTrace();
+        }
     }
 
     private static void createSoapEnvelope(SOAPMessage soapMessage,
@@ -66,7 +137,7 @@ public class LocsCurrsRates {
         SOAPBody soapBody = envelope.getBody();
 
         // <ces:GetCurrencies>
-        SOAPElement getCurrenciesElem = soapBody.addChildElement("GetCountriesStates", cesNamespace);
+        SOAPElement getCurrenciesElem = soapBody.addChildElement("GetLocsCurrsRates", cesNamespace);
 
         // <ces:xmlDoc>
         SOAPElement xmlDoc = getCurrenciesElem.addChildElement("xmlDoc", cesNamespace);
@@ -124,33 +195,8 @@ public class LocsCurrsRates {
         // <RequestType>CountriesStates</RequestType>
         SOAPElement requestType = root.addChildElement("RequestType");
         requestType.addTextNode(request.getRequestType());
-    }
-
-    public static void callSoapWebService(String soapEndpointUrl, String soapAction,
-            GetLocsCurrsRatesRequestEntity request) {
-        try {
-            // Create SOAP Connection
-            SOAPConnectionFactory soapConnectionFactory = SOAPConnectionFactory.newInstance();
-            SOAPConnection soapConnection = soapConnectionFactory.createConnection();
-
-            // Send SOAP Message to SOAP Server
-            SOAPMessage soapResponse = soapConnection.call(createSOAPRequest(soapAction, request), soapEndpointUrl);
-
-            if (isDebug) {
-                // Print the SOAP Response
-                System.out.println("Response SOAP Message:");
-                soapResponse.writeTo(System.out);
-                System.out.println();
-            }
-            
-            // Return parsed Response
-            parseAndReturnResponse(soapResponse);
-
-            soapConnection.close();
-        } catch (Exception e) {
-            System.err.println("\nError occurred while sending SOAP Request to Server!\nMake sure you have the correct endpoint URL and SOAPAction!\n");
-            e.printStackTrace();
-        }
+        
+        
     }
 
     private static void parseAndReturnResponse(SOAPMessage soapResponse) {
@@ -166,7 +212,7 @@ public class LocsCurrsRates {
                 SOAPBodyElement bodyElement = (SOAPBodyElement) it.next();
                 Iterator it2 = bodyElement.getChildElements();
                 while (it2.hasNext()) {
-                    SOAPElement element2 = (SOAPElement) it2.next();                    
+                    SOAPElement element2 = (SOAPElement) it2.next();
                     Iterator it3 = element2.getChildElements();
                     while (it3.hasNext()) {
                         SOAPElement element3 = (SOAPElement) it3.next();

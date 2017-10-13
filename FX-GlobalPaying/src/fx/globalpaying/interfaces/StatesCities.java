@@ -6,6 +6,7 @@
 package fx.globalpaying.interfaces;
 
 import fx.globalpaying.entities.GetStatesCitiesRequestEntity;
+import fx.globalpaying.entities.GetStatesCitiesResponseEntity;
 import fx.globalpaying.entities.HeaderEntity;
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -29,7 +30,24 @@ import javax.xml.soap.SOAPPart;
  */
 public class StatesCities {
 
-    private static final boolean isDebug = true;
+    private static final String soapAction = "CES.Services.FXGlobal/IRiaAsPayer/GetStatesCities";
+    private static boolean generateToStdOut = true;
+    private static final boolean isDebug = false;
+    private static List<String> countriesList = new ArrayList<String>();
+    private static List<String> statesList = new ArrayList<String>();
+    private static List<GetStatesCitiesResponseEntity> citiesList = new ArrayList<GetStatesCitiesResponseEntity>();
+
+    public static List<String> getCountriesList() {
+        return countriesList;
+    }
+
+    public static List<String> getStatesList() {
+        return statesList;
+    }
+
+    public static List<GetStatesCitiesResponseEntity> getCitiesList() {
+        return citiesList;
+    }
 
     public static GetStatesCitiesRequestEntity parseInputArgsToRequest(String[] args) {
         GetStatesCitiesRequestEntity request = new GetStatesCitiesRequestEntity();
@@ -58,7 +76,7 @@ public class StatesCities {
                 requesType = requestArray[0];
                 countryCode = requestArray[1];
                 stateName = requestArray[2];
-                if("*".equals(stateName)){
+                if ("*".equals(stateName)) {
                     stateName = "";
                 }
             }
@@ -69,6 +87,39 @@ public class StatesCities {
         request.setStateName(stateName);
 
         return request;
+    }
+
+    public static void callSoapWebService(String soapEndpointUrl, 
+            GetStatesCitiesRequestEntity request) {
+        callSoapWebService(soapEndpointUrl, request, true);
+    }
+
+    public static void callSoapWebService(String soapEndpointUrl, 
+            GetStatesCitiesRequestEntity request, boolean generateToStdOutPrint) {
+        try {
+            generateToStdOut = generateToStdOutPrint;
+            // Create SOAP Connection
+            SOAPConnectionFactory soapConnectionFactory = SOAPConnectionFactory.newInstance();
+            SOAPConnection soapConnection = soapConnectionFactory.createConnection();
+
+            // Send SOAP Message to SOAP Server
+            SOAPMessage soapResponse = soapConnection.call(createSOAPRequest(soapAction, request), soapEndpointUrl);
+
+            // Return parsed Response
+            parseAndReturnResponse(soapResponse);
+
+            if (isDebug) {
+                // Print the SOAP Response
+                System.out.println("Response SOAP Message:");
+                soapResponse.writeTo(System.out);
+                System.out.println();
+            }
+
+            soapConnection.close();
+        } catch (Exception e) {
+            System.err.println("\nError occurred while sending SOAP Request to Server!\nMake sure you have the correct endpoint URL and SOAPAction!\n");
+            e.printStackTrace();
+        }
     }
 
     private static void createSoapEnvelope(SOAPMessage soapMessage,
@@ -154,38 +205,8 @@ public class StatesCities {
 
     }
 
-    public static void callSoapWebService(String soapEndpointUrl, String soapAction,
-            GetStatesCitiesRequestEntity request) {
-        try {
-            // Create SOAP Connection
-            SOAPConnectionFactory soapConnectionFactory = SOAPConnectionFactory.newInstance();
-            SOAPConnection soapConnection = soapConnectionFactory.createConnection();
-
-            // Send SOAP Message to SOAP Server
-            SOAPMessage soapResponse = soapConnection.call(createSOAPRequest(soapAction, request), soapEndpointUrl);
-
-            // Return parsed Response
-            parseAndReturnResponse(soapResponse);
-
-            if (isDebug) {
-                // Print the SOAP Response
-                System.out.println("Response SOAP Message:");
-                soapResponse.writeTo(System.out);
-                System.out.println();
-            }
-
-            soapConnection.close();
-        } catch (Exception e) {
-            System.err.println("\nError occurred while sending SOAP Request to Server!\nMake sure you have the correct endpoint URL and SOAPAction!\n");
-            e.printStackTrace();
-        }
-    }
-
     private static void parseAndReturnResponse(SOAPMessage soapResponse) {
         try {
-            List<String> countriesList = new ArrayList<String>();
-            List<String> statesList = new ArrayList<String>();
-            List<String> citiesList = new ArrayList<String>();
             SOAPPart sp = soapResponse.getSOAPPart();
             SOAPEnvelope se = sp.getEnvelope();
             SOAPBody sb = se.getBody();
@@ -225,7 +246,13 @@ public class StatesCities {
                                                 while (it9.hasNext()) {
                                                     SOAPElement cityElement = (SOAPElement) it9.next();
                                                     String cityName = cityElement.getAttribute("CityName").trim();
-                                                    citiesList.add(ctryCode + "|" + ctryName + "|" + stateCode + "|" + stateName + "|" + cityName + "|");
+                                                    GetStatesCitiesResponseEntity response = new GetStatesCitiesResponseEntity();
+                                                    response.setCtryCode(ctryCode);
+                                                    response.setCtryName(ctryName);
+                                                    response.setStateCode(stateCode);
+                                                    response.setStateName(stateName);
+                                                    response.setCityName(cityName);
+                                                    citiesList.add(response);
                                                 }
                                             }
 
@@ -239,8 +266,14 @@ public class StatesCities {
                 }
             }
 
-            for (String item : citiesList) {
-                System.out.println(item);
+            if (generateToStdOut) {
+                for (GetStatesCitiesResponseEntity item : citiesList) {
+                    System.out.println(item.getCtryCode() + "|"
+                            + item.getCtryName() + "|"
+                            + item.getStateCode() + "|"
+                            + item.getStateName() + "|"
+                            + item.getCityName() + "|");
+                }
             }
 
         } catch (Exception e) {

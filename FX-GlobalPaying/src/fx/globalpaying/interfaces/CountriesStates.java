@@ -6,6 +6,7 @@
 package fx.globalpaying.interfaces;
 
 import fx.globalpaying.entities.GetCountriesStatesRequestEntity;
+import fx.globalpaying.entities.GetCountriesStatesResponseEntity;
 import fx.globalpaying.entities.HeaderEntity;
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -28,7 +29,19 @@ import javax.xml.soap.SOAPPart;
  */
 public class CountriesStates {
 
+    private static final String soapAction = "CES.Services.FXGlobal/IRiaAsPayer/GetCountriesStates";
     private static final boolean isDebug = false;
+    private static boolean generateToStdOut = true;
+    private static List<String> countriesList = new ArrayList<String>();
+    private static List<GetCountriesStatesResponseEntity> statesList = new ArrayList<GetCountriesStatesResponseEntity>();
+
+    public static List<String> getCountriesList() {
+        return countriesList;
+    }
+
+    public static List<GetCountriesStatesResponseEntity> getStatesList() {
+        return statesList;
+    }
 
     public static GetCountriesStatesRequestEntity parseInputArgsToRequest(String[] args) {
         GetCountriesStatesRequestEntity request = new GetCountriesStatesRequestEntity();
@@ -46,14 +59,20 @@ public class CountriesStates {
         request.getHeader().setUserID(header[6]);
         request.getHeader().setTerminalID(header[7]);
         request.getHeader().setLanguageCultureCode(header[8]);
-        request.setRequestType(args[3]);
+        request.setRequestType("CountriesStates");
 
         return request;
     }
-    
-    public static void callSoapWebService(String soapEndpointUrl, String soapAction,
+
+    public static void callSoapWebService(String soapEndpointUrl, 
             GetCountriesStatesRequestEntity request) {
+        callSoapWebService(soapEndpointUrl, request, true);
+    }
+
+    public static void callSoapWebService(String soapEndpointUrl, 
+            GetCountriesStatesRequestEntity request, boolean generateToStdOutPrint) {
         try {
+            generateToStdOut = generateToStdOutPrint;
             // Create SOAP Connection
             SOAPConnectionFactory soapConnectionFactory = SOAPConnectionFactory.newInstance();
             SOAPConnection soapConnection = soapConnectionFactory.createConnection();
@@ -67,7 +86,7 @@ public class CountriesStates {
                 soapResponse.writeTo(System.out);
                 System.out.println();
             }
-            
+
             // Return parsed Response
             parseAndReturnResponse(soapResponse);
 
@@ -77,7 +96,7 @@ public class CountriesStates {
             e.printStackTrace();
         }
     }
-    
+
     private static void createSoapEnvelope(SOAPMessage soapMessage,
             GetCountriesStatesRequestEntity request) throws SOAPException {
         SOAPPart soapPart = soapMessage.getSOAPPart();
@@ -155,8 +174,7 @@ public class CountriesStates {
 
     private static void parseAndReturnResponse(SOAPMessage soapResponse) {
         try {
-            List<String> countriesList = new ArrayList<String>();
-            List<String> statesList = new ArrayList<String>();
+
             SOAPPart sp = soapResponse.getSOAPPart();
             SOAPEnvelope se = sp.getEnvelope();
             SOAPBody sb = se.getBody();
@@ -166,7 +184,7 @@ public class CountriesStates {
                 SOAPBodyElement bodyElement = (SOAPBodyElement) it.next();
                 Iterator it2 = bodyElement.getChildElements();
                 while (it2.hasNext()) {
-                    SOAPElement element2 = (SOAPElement) it2.next();                    
+                    SOAPElement element2 = (SOAPElement) it2.next();
                     Iterator it3 = element2.getChildElements();
                     while (it3.hasNext()) {
                         SOAPElement element3 = (SOAPElement) it3.next();
@@ -189,7 +207,12 @@ public class CountriesStates {
                                             SOAPElement element8 = (SOAPElement) it7.next();
                                             String stateCode = element8.getAttribute("StateCode");
                                             String stateName = element8.getAttribute("StateName");
-                                            statesList.add(ctryCode + "|" + ctryName + "|" + stateCode + "|" + stateName + "|");
+                                            GetCountriesStatesResponseEntity response = new GetCountriesStatesResponseEntity();
+                                            response.setCtryCode(ctryCode);
+                                            response.setCtryName(ctryName);
+                                            response.setStateCode(stateCode);
+                                            response.setStateName(stateName);
+                                            statesList.add(response);
                                         }
                                     }
                                 }
@@ -199,8 +222,11 @@ public class CountriesStates {
                 }
             }
 
-            for (String item : statesList) {
-                System.out.println(item);
+            if (generateToStdOut) {
+                for (GetCountriesStatesResponseEntity item : statesList) {
+                    System.out.println(item.getCtryCode() + "|" + item.getCtryName()
+                            + "|" + item.getStateCode() + "|" + item.getStateName() + "|");
+                }
             }
 
         } catch (Exception e) {
@@ -229,5 +255,5 @@ public class CountriesStates {
         }
 
         return soapMessage;
-    }    
+    }
 }
