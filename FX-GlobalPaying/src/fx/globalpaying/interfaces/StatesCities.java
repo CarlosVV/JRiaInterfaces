@@ -89,12 +89,12 @@ public class StatesCities {
         return request;
     }
 
-    public static void callSoapWebService(String soapEndpointUrl, 
+    public static void callSoapWebService(String soapEndpointUrl,
             GetStatesCitiesRequestEntity request) {
         callSoapWebService(soapEndpointUrl, request, true);
     }
 
-    public static void callSoapWebService(String soapEndpointUrl, 
+    public static void callSoapWebService(String soapEndpointUrl,
             GetStatesCitiesRequestEntity request, boolean generateToStdOutPrint) {
         try {
             generateToStdOut = generateToStdOutPrint;
@@ -207,6 +207,9 @@ public class StatesCities {
 
     private static void parseAndReturnResponse(SOAPMessage soapResponse) {
         try {
+            countriesList = new ArrayList<String>();
+            statesList = new ArrayList<String>();
+            citiesList = new ArrayList<GetStatesCitiesResponseEntity>();
             SOAPPart sp = soapResponse.getSOAPPart();
             SOAPEnvelope se = sp.getEnvelope();
             SOAPBody sb = se.getBody();

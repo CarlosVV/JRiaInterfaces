@@ -5,10 +5,13 @@
  */
 package fx.globalpaying.interfaces;
 
+import fx.globalpaying.entities.CountryEntity;
 import fx.globalpaying.entities.GetCountriesStatesRequestEntity;
 import fx.globalpaying.entities.GetCountriesStatesResponseEntity;
 import fx.globalpaying.entities.HeaderEntity;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Hashtable;
 import java.util.Iterator;
 import java.util.List;
 import javax.xml.soap.MessageFactory;
@@ -32,10 +35,10 @@ public class CountriesStates {
     private static final String soapAction = "CES.Services.FXGlobal/IRiaAsPayer/GetCountriesStates";
     private static final boolean isDebug = false;
     private static boolean generateToStdOut = true;
-    private static List<String> countriesList = new ArrayList<String>();
+    private static HashMap<String, String> countriesList = new HashMap<String, String>();
     private static List<GetCountriesStatesResponseEntity> statesList = new ArrayList<GetCountriesStatesResponseEntity>();
 
-    public static List<String> getCountriesList() {
+    public static HashMap<String, String> getCountriesList() {
         return countriesList;
     }
 
@@ -64,12 +67,12 @@ public class CountriesStates {
         return request;
     }
 
-    public static void callSoapWebService(String soapEndpointUrl, 
+    public static void callSoapWebService(String soapEndpointUrl,
             GetCountriesStatesRequestEntity request) {
         callSoapWebService(soapEndpointUrl, request, true);
     }
 
-    public static void callSoapWebService(String soapEndpointUrl, 
+    public static void callSoapWebService(String soapEndpointUrl,
             GetCountriesStatesRequestEntity request, boolean generateToStdOutPrint) {
         try {
             generateToStdOut = generateToStdOutPrint;
@@ -174,7 +177,8 @@ public class CountriesStates {
 
     private static void parseAndReturnResponse(SOAPMessage soapResponse) {
         try {
-
+            countriesList = new HashMap<String, String>();
+            statesList = new ArrayList<GetCountriesStatesResponseEntity>();
             SOAPPart sp = soapResponse.getSOAPPart();
             SOAPEnvelope se = sp.getEnvelope();
             SOAPBody sb = se.getBody();
@@ -200,8 +204,9 @@ public class CountriesStates {
                                         SOAPElement element7 = (SOAPElement) it6.next();
                                         String ctryCode = element7.getAttribute("CtryCode");
                                         String ctryName = element7.getAttribute("CtryName");
-                                        countriesList.add(ctryCode + "|" + ctryName + "|");
-
+                                        if (!countriesList.containsKey(ctryCode)) {
+                                            countriesList.put(ctryCode, ctryName);
+                                        }
                                         Iterator it7 = element7.getChildElements();
                                         while (it7.hasNext()) {
                                             SOAPElement element8 = (SOAPElement) it7.next();

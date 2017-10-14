@@ -12,6 +12,7 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 import java.util.regex.Pattern;
+import javax.xml.namespace.QName;
 import javax.xml.soap.MessageFactory;
 import javax.xml.soap.MimeHeaders;
 import javax.xml.soap.SOAPBody;
@@ -31,7 +32,7 @@ import javax.xml.soap.SOAPPart;
 public class LocsCurrsRates {
 
     private static final String soapAction = "CES.Services.FXGlobal/IRiaAsPayer/GetLocsCurrsRates";
-    private static final boolean isDebug = false;
+    private static final boolean isDebug = true;
 
     public static GetLocsCurrsRatesRequestEntity parseInputArgsToRequest(String[] args) {
         GetLocsCurrsRatesRequestEntity request = new GetLocsCurrsRatesRequestEntity();
@@ -73,18 +74,18 @@ public class LocsCurrsRates {
                     stateName = p[1];
                     cityName = p[2];
 
-                    if("-".equals(stateName)){
+                    if ("-".equals(stateName)) {
                         stateName = "";
                     }
-                    
-                    if("-".equals(cityName)){
+
+                    if ("-".equals(cityName)) {
                         cityName = "";
                     }
-                    
+
                     w.setCtryCode(countryCode);
                     w.setStateName(stateName);
                     w.setCityName(cityName);
-                    
+
                     request.getRequests().add(w);
                 }
             }
@@ -195,8 +196,15 @@ public class LocsCurrsRates {
         // <RequestType>CountriesStates</RequestType>
         SOAPElement requestType = root.addChildElement("RequestType");
         requestType.addTextNode(request.getRequestType());
-        
-        
+
+        SOAPElement requestsElement = root.addChildElement("Requests");
+        for (LocsCurrRatesRequestElementEntity lcr : request.getRequests()) {
+            SOAPElement requestsItem = requestsElement.addChildElement("Request");
+            requestsItem.addAttribute(new QName("", "CountryCode"), request.getCountryCode());
+            requestsItem.addAttribute(new QName("", "CountryCode"), request.getCountryCode());
+            requestsItem.addAttribute(new QName("", "CountryCode"), request.getCountryCode());
+        }
+
     }
 
     private static void parseAndReturnResponse(SOAPMessage soapResponse) {
