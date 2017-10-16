@@ -7,8 +7,6 @@ package fx.globalpaying.interfaces;
 
 import fx.globalpaying.entities.GetOrderStatusNoticesRequestEntity;
 import fx.globalpaying.entities.HeaderEntity;
-import java.io.File;
-import java.io.FileInputStream;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
@@ -158,21 +156,7 @@ public class OrderStatusNotices {
 
     private static void parseAndReturnResponse(SOAPMessage soapResponse) {
         try {
-            List<String> notificationsList = new ArrayList<String>();
-
-            // Test Service sin ir al servicio
-            /*
-            File file = new File("C:\\Users\\cvalderrama\\orderstatusnotices.soap");
-            FileInputStream fis = new FileInputStream(file);
-            byte[] data = new byte[(int) file.length()];
-            fis.read(data);
-            fis.close();
-            String textContent = new String(data, "UTF-8");
-        
-            soapResponse.getSOAPPart().setTextContent(textContent);
-            soapResponse.saveChanges();
-            //Fin
-             */
+            List<String> notificationsList = new ArrayList<String>();          
             SOAPPart sp = soapResponse.getSOAPPart();
             SOAPEnvelope se = sp.getEnvelope();
             SOAPBody sb = se.getBody();

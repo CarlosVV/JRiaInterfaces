@@ -180,17 +180,12 @@ public class Requirements {
                                     Iterator it6 = element5.getChildElements();
                                     while (it6.hasNext()) {
                                         SOAPElement element6 = (SOAPElement) it6.next();
-                                        //String ctryCode = element7.getAttribute("CtryCode");
-                                        //String ctryName = element7.getAttribute("CtryName");
-                                        //countriesList.add(ctryCode + "|" + ctryName + "|");
-
                                         Iterator it7 = element6.getChildElements();
                                         while (it7.hasNext()) {
                                             SOAPElement element7 = (SOAPElement) it7.next();
                                             String id = element7.getAttribute("ID");
                                             String desc = element7.getAttribute("Desc");
                                             Iterator it8 = element7.getChildElements();
-                                            //statesList.add(ctryCode + "|" + ctryName + "|" + stateCode + "|" + stateName + "|");
                                             while (it8.hasNext()) {
                                                 SOAPElement element8 = (SOAPElement) it8.next();
                                                 Iterator it9 = element8.getChildElements();

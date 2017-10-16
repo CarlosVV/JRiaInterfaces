@@ -32,7 +32,7 @@ import javax.xml.soap.SOAPPart;
 public class LocsCurrsRates {
 
     private static final String soapAction = "CES.Services.FXGlobal/IRiaAsPayer/GetLocsCurrsRates";
-    private static final boolean isDebug = true;
+    private static final boolean isDebug = false;
 
     public static GetLocsCurrsRatesRequestEntity parseInputArgsToRequest(String[] args) {
         GetLocsCurrsRatesRequestEntity request = new GetLocsCurrsRatesRequestEntity();
@@ -200,23 +200,21 @@ public class LocsCurrsRates {
         SOAPElement requestsElement = root.addChildElement("Requests");
         for (LocsCurrRatesRequestElementEntity lcr : request.getRequests()) {
             SOAPElement requestsItem = requestsElement.addChildElement("Request");
-            requestsItem.addAttribute(new QName("", "CountryCode"), request.getCountryCode());
-            requestsItem.addAttribute(new QName("", "CountryCode"), request.getCountryCode());
-            requestsItem.addAttribute(new QName("", "CountryCode"), request.getCountryCode());
+            requestsItem.addAttribute(new QName("", "CountryCode"), lcr.getCtryCode());
+            requestsItem.addAttribute(new QName("", "StateName"), lcr.getStateName());
+            requestsItem.addAttribute(new QName("", "CityName"), lcr.getCityName());
         }
 
     }
 
     private static void parseAndReturnResponse(SOAPMessage soapResponse) {
         try {
-            List<String> countriesList = new ArrayList<String>();
-            List<String> statesList = new ArrayList<String>();
+            List<String> locsCurrRates = new ArrayList<String>();
             SOAPPart sp = soapResponse.getSOAPPart();
             SOAPEnvelope se = sp.getEnvelope();
             SOAPBody sb = se.getBody();
             Iterator it = sb.getChildElements();
             while (it.hasNext()) {
-                // GetCurrenciesResponse
                 SOAPBodyElement bodyElement = (SOAPBodyElement) it.next();
                 Iterator it2 = bodyElement.getChildElements();
                 while (it2.hasNext()) {
@@ -234,16 +232,146 @@ public class LocsCurrsRates {
                                     Iterator it6 = element5.getChildElements();
                                     while (it6.hasNext()) {
                                         SOAPElement element7 = (SOAPElement) it6.next();
-                                        String ctryCode = element7.getAttribute("CtryCode");
-                                        String ctryName = element7.getAttribute("CtryName");
-                                        countriesList.add(ctryCode + "|" + ctryName + "|");
-
                                         Iterator it7 = element7.getChildElements();
                                         while (it7.hasNext()) {
                                             SOAPElement element8 = (SOAPElement) it7.next();
-                                            String stateCode = element8.getAttribute("StateCode");
-                                            String stateName = element8.getAttribute("StateName");
-                                            statesList.add(ctryCode + "|" + ctryName + "|" + stateCode + "|" + stateName + "|");
+                                            String correspNo = element8.getAttribute("CorrespNo");
+                                            String correspID = element8.getAttribute("CorrespID");
+                                            String correspName = element8.getAttribute("CorrespName");
+                                            Iterator it8 = element8.getChildElements();
+                                            while (it8.hasNext()) {
+                                                SOAPElement element9 = (SOAPElement) it8.next();
+                                                Iterator it9 = element9.getChildElements();
+                                                while (it9.hasNext()) {
+                                                    SOAPElement element10 = (SOAPElement) it9.next();
+                                                    Iterator it10 = element10.getChildElements();
+                                                    String LocID = "";
+                                                    String LocBranchNo = "";
+                                                    String LocName = "";
+                                                    String LocAddress1 = "";
+                                                    String LocAddress2 = "";
+                                                    String LocCity = "";
+                                                    String LocState = "";
+                                                    String LocPostalCode = "";
+                                                    String LocCountry = "";
+                                                    String LocTelNo = "";
+                                                    String LocFaxNo = "";
+                                                    String LocEmail = "";
+                                                    String Directions = "";
+                                                    String Notes = "";
+                                                    List<String> curr = new ArrayList<String>();
+                                                    while (it10.hasNext()) {
+                                                        SOAPElement element11 = (SOAPElement) it10.next();
+                                                        Iterator it11 = element11.getChildElements();
+                                                        if ("LocID".equals(element11.getElementName().getLocalName())) {
+                                                            LocID = element11.getTextContent();
+                                                        }
+                                                        if ("LocBranchNo".equals(element11.getElementName().getLocalName())) {
+                                                            LocBranchNo = element11.getTextContent();
+                                                        }
+                                                        if ("LocAddress1".equals(element11.getElementName().getLocalName())) {
+                                                            LocAddress1 = element11.getTextContent();
+                                                        }
+                                                        if ("LocCity".equals(element11.getElementName().getLocalName())) {
+                                                            LocCity = element11.getTextContent();
+                                                        }
+                                                        if ("LocAddress2".equals(element11.getElementName().getLocalName())) {
+                                                            LocAddress2 = element11.getTextContent();
+                                                        }
+
+                                                        if ("LocName".equals(element11.getElementName().getLocalName())) {
+                                                            LocName = element11.getTextContent();
+                                                        }
+                                                        if ("LocState".equals(element11.getElementName().getLocalName())) {
+                                                            LocState = element11.getTextContent();
+                                                        }
+                                                        if ("LocPostalCode".equals(element11.getElementName().getLocalName())) {
+                                                            LocPostalCode = element11.getTextContent();
+                                                        }
+                                                        if ("LocCountry".equals(element11.getElementName().getLocalName())) {
+                                                            LocCountry = element11.getTextContent();
+                                                        }
+                                                        if ("LocTelNo".equals(element11.getElementName().getLocalName())) {
+                                                            LocTelNo = element11.getTextContent();
+                                                        }
+                                                        if ("LocFaxNo".equals(element11.getElementName().getLocalName())) {
+                                                            LocFaxNo = element11.getTextContent();
+                                                        }
+                                                        if ("LocEmail".equals(element11.getElementName().getLocalName())) {
+                                                            LocEmail = element11.getTextContent();
+                                                        }
+                                                        if ("Directions".equals(element11.getElementName().getLocalName())) {
+                                                            Directions = element11.getTextContent();
+                                                        }
+                                                        if ("Notes".equals(element11.getElementName().getLocalName())) {
+                                                            Notes = element11.getTextContent();
+                                                        }
+
+                                                        if ("Currencies".equals(element11.getElementName().getLocalName())) {
+                                                            List<String> deliveryMethods = new ArrayList<String>();
+                                                            List<String> rates = new ArrayList<String>();
+
+                                                            while (it11.hasNext()) {
+                                                                SOAPElement element12 = (SOAPElement) it11.next();
+                                                                String Currency = element12.getAttribute("Currency");
+                                                                String OrderMin = element12.getAttribute("OrderMin");
+                                                                String OrderMax = element12.getAttribute("OrderMax");
+                                                                String DailyMax = element12.getAttribute("DailyMax");
+                                                                Iterator it13 = element12.getChildElements();
+                                                                while (it13.hasNext()) {
+                                                                    SOAPElement element13 = (SOAPElement) it13.next();
+                                                                    Iterator it14 = element13.getChildElements();
+                                                                    if ("DeliveryMethods".equals(element13.getElementName().getLocalName())) {
+                                                                        while (it14.hasNext()) {
+                                                                            SOAPElement element14 = (SOAPElement) it14.next();
+                                                                            String Method = element14.getAttribute("Method");
+                                                                            String MethodDesc = element14.getAttribute("MethodDesc");
+                                                                            deliveryMethods.add(Method + "|" + MethodDesc + "|");
+                                                                        }
+                                                                    }
+
+                                                                    if ("Rates".equals(element13.getElementName().getLocalName())) {
+                                                                        while (it14.hasNext()) {
+                                                                            SOAPElement element15 = (SOAPElement) it14.next();
+                                                                            String CountryTo = element15.getAttribute("CountryTo");
+                                                                            String CurrFrom = element15.getAttribute("CurrFrom");
+                                                                            String TodaysRate = element15.getAttribute("TodaysRate");
+                                                                            rates.add(CountryTo + "|" + CurrFrom + "|" + TodaysRate + "|");
+                                                                        }
+                                                                    }
+                                                                }
+                                                                for (String r : rates) {
+                                                                    for (String d : deliveryMethods) {
+                                                                        curr.add(
+                                                                                Currency + "|"
+                                                                                + OrderMin + "|"
+                                                                                + OrderMax + "|" + DailyMax + "|" + r + "|" + d + "|");
+                                                                    }
+                                                                }
+                                                            }
+                                                        }
+                                                    }
+                                                    for (String c : curr) {
+                                                        locsCurrRates.add(correspNo + "|" + correspID + "|" + correspName + "|"
+                                                                + LocID + "|"
+                                                                + LocBranchNo + "|"
+                                                                + LocName + "|"
+                                                                + LocAddress1 + "|"
+                                                                + LocAddress2 + "|"
+                                                                + LocCity + "|"
+                                                                + LocState + "|"
+                                                                + LocPostalCode + "|"
+                                                                + LocCountry + "|"
+                                                                + LocTelNo + "|"
+                                                                + LocFaxNo + "|"
+                                                                + LocEmail + "|"
+                                                                + Directions + "|"
+                                                                + Notes + "|" + c + "|");
+
+                                                    }
+                                                }
+                                            }
+
                                         }
                                     }
                                 }
@@ -253,7 +381,7 @@ public class LocsCurrsRates {
                 }
             }
 
-            for (String item : statesList) {
+            for (String item : locsCurrRates) {
                 System.out.println(item);
             }
 

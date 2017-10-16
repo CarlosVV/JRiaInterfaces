@@ -5,13 +5,11 @@
  */
 package fx.globalpaying.interfaces;
 
-import fx.globalpaying.entities.CountryEntity;
 import fx.globalpaying.entities.GetCountriesStatesRequestEntity;
 import fx.globalpaying.entities.GetCountriesStatesResponseEntity;
 import fx.globalpaying.entities.HeaderEntity;
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.Hashtable;
 import java.util.Iterator;
 import java.util.List;
 import javax.xml.soap.MessageFactory;
