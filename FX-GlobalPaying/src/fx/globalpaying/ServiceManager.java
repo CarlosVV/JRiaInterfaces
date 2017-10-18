@@ -6,7 +6,6 @@
 package fx.globalpaying;
 
 import static fx.globalpaying.FXGlobalPaying.soapEndpointUrl;
-import fx.globalpaying.entities.CountryEntity;
 import fx.globalpaying.entities.GetCommissionsRequestEntity;
 import fx.globalpaying.entities.GetCountriesStatesRequestEntity;
 import fx.globalpaying.entities.GetCurrenciesRequestEntity;
@@ -27,9 +26,7 @@ import fx.globalpaying.interfaces.StatesCities;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
-import java.util.Enumeration;
 import java.util.HashMap;
-import java.util.Hashtable;
 import java.util.List;
 import java.util.Map;
 
@@ -47,7 +44,9 @@ public class ServiceManager {
         OrderStatusNotifications,
         EnumerationValues,
         Requirements,
-        LocsCurrsRates
+        LocsCurrsRates,
+        OrderCommission,
+        OrdersValidated
     }
 
     public static Object ExecuteWebMethod(RequestTypeEnum requestType, String[] args) {
@@ -122,6 +121,14 @@ public class ServiceManager {
             case LocsCurrsRates:
                 request = LocsCurrsRates.parseInputArgsToRequest(args);
                 LocsCurrsRates.callSoapWebService(soapEndpointUrl, (GetLocsCurrsRatesRequestEntity) request);
+                break;
+            case OrderCommission:
+                //request = OrderCommission.parseInputArgsToRequest(args);
+                //OrderCommission.callSoapWebService(soapEndpointUrl, (GetLocsCurrsRatesRequestEntity) request);
+                break;
+            case OrdersValidated:
+                //request = OrdersValidated.parseInputArgsToRequest(args);
+                //OrdersValidated.callSoapWebService(soapEndpointUrl, (GetLocsCurrsRatesRequestEntity) request);
                 break;
         }
         return response;
