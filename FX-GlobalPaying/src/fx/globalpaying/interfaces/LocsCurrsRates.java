@@ -278,7 +278,6 @@ public class LocsCurrsRates {
                                                         if ("LocAddress2".equals(element11.getElementName().getLocalName())) {
                                                             LocAddress2 = element11.getTextContent();
                                                         }
-
                                                         if ("LocName".equals(element11.getElementName().getLocalName())) {
                                                             LocName = element11.getTextContent();
                                                         }
@@ -306,7 +305,6 @@ public class LocsCurrsRates {
                                                         if ("Notes".equals(element11.getElementName().getLocalName())) {
                                                             Notes = element11.getTextContent();
                                                         }
-
                                                         if ("Currencies".equals(element11.getElementName().getLocalName())) {
                                                             List<String> deliveryMethods = new ArrayList<String>();
                                                             List<String> rates = new ArrayList<String>();
@@ -318,6 +316,8 @@ public class LocsCurrsRates {
                                                                 String OrderMax = element12.getAttribute("OrderMax");
                                                                 String DailyMax = element12.getAttribute("DailyMax");
                                                                 Iterator it13 = element12.getChildElements();
+                                                                deliveryMethods = new ArrayList<String>();
+                                                                rates = new ArrayList<String>();
                                                                 while (it13.hasNext()) {
                                                                     SOAPElement element13 = (SOAPElement) it13.next();
                                                                     Iterator it14 = element13.getChildElements();
