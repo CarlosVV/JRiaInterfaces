@@ -53,6 +53,15 @@ public class FXGlobalPaying {
             System.out.println("Error: argumentos inválidos o faltantes");
             return;
         }
+        /*
+        String s = "DateDesired=\"20171017\" CountryFrom=\"CL\" CountryTo=\"CO\" PayingCorrespID=\"4130111\" PayingCorrespLocID=\"836212\" PaymentCurrency=\"CLP\" PaymentAmount=\"100000\" BeneficiaryCurrency=\"COP\" BeneficiaryAmount=\"465020\" DeliveryMethod=\"1\"";
+        
+        String[] u = s.split(" ");
+        for(String a : u)
+        {
+            String[] r = a.split("=");
+            System.out.println(r[0]);
+        }
 
         String x = "<Order>"
                 + "<OrderNo>681024</OrderNo>"
@@ -142,7 +151,8 @@ public class FXGlobalPaying {
                 System.out.println(element.getNodeName());
             }
         } catch (Exception ex) {
-        }
+        }*/
+        
         if (args.length > 5 && "-url".equals(args[args.length - 2])) {
             soapEndpointUrl = args[args.length - 1];
         }

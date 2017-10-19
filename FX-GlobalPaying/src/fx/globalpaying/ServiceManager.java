@@ -11,16 +11,20 @@ import fx.globalpaying.entities.GetCountriesStatesRequestEntity;
 import fx.globalpaying.entities.GetCurrenciesRequestEntity;
 import fx.globalpaying.entities.GetEnumerationValuesRequestEntity;
 import fx.globalpaying.entities.GetLocsCurrsRatesRequestEntity;
+import fx.globalpaying.entities.GetOrderCommissionRequestEntity;
 import fx.globalpaying.entities.GetOrderStatusNoticesRequestEntity;
+import fx.globalpaying.entities.GetOrdersValidatedRequestEntity;
 import fx.globalpaying.entities.GetRequirementsRequestEntity;
 import fx.globalpaying.entities.GetStatesCitiesRequestEntity;
 import fx.globalpaying.entities.GetStatesCitiesResponseEntity;
 import fx.globalpaying.interfaces.Commissions;
+import fx.globalpaying.interfaces.OrderCommission;
 import fx.globalpaying.interfaces.CountriesStates;
 import fx.globalpaying.interfaces.Currencies;
 import fx.globalpaying.interfaces.EnumerationValues;
 import fx.globalpaying.interfaces.LocsCurrsRates;
 import fx.globalpaying.interfaces.OrderStatusNotices;
+import fx.globalpaying.interfaces.OrdersValidated;
 import fx.globalpaying.interfaces.Requirements;
 import fx.globalpaying.interfaces.StatesCities;
 import java.util.ArrayList;
@@ -123,12 +127,12 @@ public class ServiceManager {
                 LocsCurrsRates.callSoapWebService(soapEndpointUrl, (GetLocsCurrsRatesRequestEntity) request);
                 break;
             case OrderCommission:
-                //request = OrderCommission.parseInputArgsToRequest(args);
-                //OrderCommission.callSoapWebService(soapEndpointUrl, (GetLocsCurrsRatesRequestEntity) request);
+                request = OrderCommission.parseInputArgsToRequest(args);
+                OrderCommission.callSoapWebService(soapEndpointUrl, (GetOrderCommissionRequestEntity) request);
                 break;
             case OrdersValidated:
-                //request = OrdersValidated.parseInputArgsToRequest(args);
-                //OrdersValidated.callSoapWebService(soapEndpointUrl, (GetLocsCurrsRatesRequestEntity) request);
+                request = OrdersValidated.parseInputArgsToRequest(args);
+                OrdersValidated.callSoapWebService(soapEndpointUrl, (GetOrdersValidatedRequestEntity) request, true);
                 break;
         }
         return response;

@@ -5,7 +5,7 @@
  */
 package fx.globalpaying.interfaces;
 
-import fx.globalpaying.entities.GetStatesCitiesRequestEntity;
+import fx.globalpaying.entities.GetOrdersValidatedRequestEntity;
 import fx.globalpaying.entities.GetStatesCitiesResponseEntity;
 import fx.globalpaying.entities.HeaderEntity;
 import java.util.ArrayList;
@@ -48,8 +48,8 @@ public class OrdersValidated {
         return citiesList;
     }
 
-    public static GetStatesCitiesRequestEntity parseInputArgsToRequest(String[] args) {
-        GetStatesCitiesRequestEntity request = new GetStatesCitiesRequestEntity();
+    public static GetOrdersValidatedRequestEntity parseInputArgsToRequest(String[] args) {
+        GetOrdersValidatedRequestEntity request = new GetOrdersValidatedRequestEntity();
         String[] header = args[2].split(";");
 
         request.setCorrespID(args[0]);
@@ -81,20 +81,21 @@ public class OrdersValidated {
             }
         }
 
+        /*
         request.setRequestType(requesType);
         request.setCountryCode(countryCode);
         request.setStateName(stateName);
-
+*/
         return request;
     }
 
     public static void callSoapWebService(String soapEndpointUrl,
-            GetStatesCitiesRequestEntity request) {
+            GetOrdersValidatedRequestEntity request) {
         callSoapWebService(soapEndpointUrl, request, true);
     }
 
     public static void callSoapWebService(String soapEndpointUrl,
-            GetStatesCitiesRequestEntity request, boolean generateToStdOutPrint) {
+            GetOrdersValidatedRequestEntity request, boolean generateToStdOutPrint) {
         try {
             generateToStdOut = generateToStdOutPrint;
             // Create SOAP Connection
@@ -122,7 +123,7 @@ public class OrdersValidated {
     }
 
     private static void createSoapEnvelope(SOAPMessage soapMessage,
-            GetStatesCitiesRequestEntity request) throws SOAPException {
+            GetOrdersValidatedRequestEntity request) throws SOAPException {
         SOAPPart soapPart = soapMessage.getSOAPPart();
 
         String cesNamespace = "ces";
@@ -198,9 +199,9 @@ public class OrdersValidated {
         //  <Request CountryCode="CO" StateName="ANT" ></Request>
         SOAPElement requestElement = root.addChildElement("Request");
 
-        requestElement.addAttribute(new QName("", "CountryCode"), request.getCountryCode());
+        //requestElement.addAttribute(new QName("", "CountryCode"), request.getCountryCode());
 
-        requestElement.addAttribute(new QName("", "StateName"), request.getStateName());
+        //requestElement.addAttribute(new QName("", "StateName"), request.getStateName());
 
     }
 
@@ -285,7 +286,7 @@ public class OrdersValidated {
     }
 
     private static SOAPMessage createSOAPRequest(String soapAction,
-            GetStatesCitiesRequestEntity request) throws Exception {
+            GetOrdersValidatedRequestEntity request) throws Exception {
         MessageFactory messageFactory = MessageFactory.newInstance();
         SOAPMessage soapMessage = messageFactory.createMessage();
 

@@ -5,12 +5,9 @@
  */
 package fx.globalpaying.interfaces;
 
-import fx.globalpaying.entities.GetStatesCitiesRequestEntity;
-import fx.globalpaying.entities.GetStatesCitiesResponseEntity;
+import fx.globalpaying.entities.GetOrderCommissionRequestEntity;
 import fx.globalpaying.entities.HeaderEntity;
-import java.util.ArrayList;
 import java.util.Iterator;
-import java.util.List;
 import javax.xml.namespace.QName;
 import javax.xml.soap.MessageFactory;
 import javax.xml.soap.MimeHeaders;
@@ -34,26 +31,16 @@ public class OrderCommission {
     private static final String ROOT = "Root";
     private static final String ORDER_COMMISSION = "GetOrderCommission";
     private static final String SOAP_ACTION = "CES.Services.FXGlobal/IRiaAsPayer/GetOrderCommission";
-    private static boolean generateToStdOut = true;
+    private static boolean generateToStdOut = false;
     private static final boolean IS_DEBUG = false;
-    private static List<String> countriesList = new ArrayList<String>();
-    private static List<String> statesList = new ArrayList<String>();
-    private static List<GetStatesCitiesResponseEntity> citiesList = new ArrayList<GetStatesCitiesResponseEntity>();
+    private static String orderCommission;
 
-    public static List<String> getCountriesList() {
-        return countriesList;
+    public static String getOrderCommission() {
+        return orderCommission;
     }
 
-    public static List<String> getStatesList() {
-        return statesList;
-    }
-
-    public static List<GetStatesCitiesResponseEntity> getCitiesList() {
-        return citiesList;
-    }
-
-    public static GetStatesCitiesRequestEntity parseInputArgsToRequest(String[] args) {
-        GetStatesCitiesRequestEntity request = new GetStatesCitiesRequestEntity();
+    public static GetOrderCommissionRequestEntity parseInputArgsToRequest(String[] args) {
+        GetOrderCommissionRequestEntity request = new GetOrderCommissionRequestEntity();
         String[] header = args[2].split(";");
 
         request.setCorrespID(args[0]);
@@ -69,36 +56,63 @@ public class OrderCommission {
         request.getHeader().setTerminalID(header[7]);
         request.getHeader().setLanguageCultureCode(header[8]);
 
-        String requesType = "";
-        String countryCode = "";
-        String stateName = "";
-
         if (args[3] != null) {
-            String[] requestArray = args[3].split(";");
-            if (requestArray.length >= 3) {
-                requesType = requestArray[0];
-                countryCode = requestArray[1];
-                stateName = requestArray[2];
-                if ("*".equals(stateName)) {
-                    stateName = "";
+            String[] requestArray = args[3].split(";", -1);
+            if (requestArray.length >= 11) {
+                request.setRequestType("OrderCommission");
+                if (!"-".equals(requestArray[1])) {
+                    request.setDateDesired(requestArray[1]);
+                }
+
+                if (!"-".equals(requestArray[2])) {
+                    request.setCountryFrom(requestArray[2]);
+
+                }
+
+                if (!"-".equals(requestArray[3])) {
+                    request.setCountryTo(requestArray[3]);
+
+                }
+                if (!"-".equals(requestArray[4])) {
+                    request.setPayingCorrespID(requestArray[4]);
+
+                }
+                if (!"-".equals(requestArray[5])) {
+                    request.setPayingCorrespLocID(requestArray[5]);
+
+                }
+                if (!"-".equals(requestArray[6])) {
+                    request.setPaymentCurrency(requestArray[6]);
+
+                }
+                if (!"-".equals(requestArray[7])) {
+                    request.setPaymentAmount(requestArray[7]);
+
+                }
+                if (!"-".equals(requestArray[8])) {
+                    request.setBeneficiaryCurrency(requestArray[8]);
+
+                }
+                if (!"-".equals(requestArray[9])) {
+                    request.setBeneficiaryAmount(requestArray[9]);
+
+                }
+                if (!"-".equals(requestArray[10])) {
+                    request.setDeliveryMethod(requestArray[10]);
                 }
             }
         }
-
-        request.setRequestType(requesType);
-        request.setCountryCode(countryCode);
-        request.setStateName(stateName);
 
         return request;
     }
 
     public static void callSoapWebService(String soapEndpointUrl,
-            GetStatesCitiesRequestEntity request) {
+            GetOrderCommissionRequestEntity request) {
         callSoapWebService(soapEndpointUrl, request, true);
     }
 
     public static void callSoapWebService(String soapEndpointUrl,
-            GetStatesCitiesRequestEntity request, boolean generateToStdOutPrint) {
+            GetOrderCommissionRequestEntity request, boolean generateToStdOutPrint) {
         try {
             generateToStdOut = generateToStdOutPrint;
             // Create SOAP Connection
@@ -126,7 +140,7 @@ public class OrderCommission {
     }
 
     private static void createSoapEnvelope(SOAPMessage soapMessage,
-            GetStatesCitiesRequestEntity request) throws SOAPException {
+            GetOrderCommissionRequestEntity request) throws SOAPException {
         SOAPPart soapPart = soapMessage.getSOAPPart();
 
         String cesNamespace = "ces";
@@ -202,17 +216,22 @@ public class OrderCommission {
         //  <Request CountryCode="CO" StateName="ANT" ></Request>
         SOAPElement requestElement = root.addChildElement("Request");
 
-        requestElement.addAttribute(new QName("", "CountryCode"), request.getCountryCode());
-
-        requestElement.addAttribute(new QName("", "StateName"), request.getStateName());
-
+        requestElement.addAttribute(new QName("", "DateDesired"), request.getDateDesired());
+        requestElement.addAttribute(new QName("", "CountryFrom"), request.getCountryFrom());
+        requestElement.addAttribute(new QName("", "CountryTo"), request.getCountryTo());
+        requestElement.addAttribute(new QName("", "PayingCorrespID"), request.getPayingCorrespID());
+        requestElement.addAttribute(new QName("", "PayingCorrespLocID"), request.getPayingCorrespLocID());
+        requestElement.addAttribute(new QName("", "PaymentCurrency"), request.getPaymentCurrency());
+        requestElement.addAttribute(new QName("", "PaymentAmount"), request.getPaymentAmount());
+        requestElement.addAttribute(new QName("", "BeneficiaryCurrency"), request.getBeneficiaryCurrency());
+        requestElement.addAttribute(new QName("", "BeneficiaryAmount"), request.getBeneficiaryAmount());
+        requestElement.addAttribute(new QName("", "DeliveryMethod"), request.getDeliveryMethod());
     }
 
     private static void parseAndReturnResponse(SOAPMessage soapResponse) {
         try {
-            countriesList = new ArrayList<String>();
-            statesList = new ArrayList<String>();
-            citiesList = new ArrayList<GetStatesCitiesResponseEntity>();
+            orderCommission = "";
+
             SOAPPart sp = soapResponse.getSOAPPart();
             SOAPEnvelope se = sp.getEnvelope();
             SOAPBody sb = se.getBody();
@@ -237,33 +256,20 @@ public class OrderCommission {
                                     while (it6.hasNext()) {
                                         SOAPElement element6 = (SOAPElement) it6.next();
                                         Iterator it7 = element6.getChildElements();
+                                        String CommissionCurrency = "";
+                                        String CommissionAmount = "";
+                                        orderCommission = "";
                                         while (it7.hasNext()) {
                                             SOAPElement element7 = (SOAPElement) it7.next();
-                                            String ctryCode = element7.getAttribute("CtryCode").trim();
-                                            String ctryName = element7.getAttribute("CtryName").trim();
-                                            countriesList.add(ctryCode + "|" + ctryName + "|");
-                                            Iterator it8 = element7.getChildElements();
-                                            while (it8.hasNext()) {
-                                                SOAPElement element8 = (SOAPElement) it8.next();
-                                                String stateCode = element8.getAttribute("StateCode");
-                                                String stateName = element8.getAttribute("StateName");
-                                                statesList.add(ctryCode + "|" + ctryName + "|" + stateCode + "|" + stateName + "|");
-                                                Iterator it9 = element8.getChildElements();
-                                                while (it9.hasNext()) {
-                                                    SOAPElement cityElement = (SOAPElement) it9.next();
-                                                    String cityName = cityElement.getAttribute("CityName").trim();
-                                                    GetStatesCitiesResponseEntity response = new GetStatesCitiesResponseEntity();
-                                                    response.setCtryCode(ctryCode);
-                                                    response.setCtryName(ctryName);
-                                                    response.setStateCode(stateCode);
-                                                    response.setStateName(stateName);
-                                                    response.setCityName(cityName);
-                                                    citiesList.add(response);
-                                                }
+                                            if ("CommissionCurrency".equals(element7.getElementName().getLocalName())) {
+                                                CommissionCurrency = element7.getTextContent();
+                                            }
+                                            if ("CommissionAmount".equals(element7.getElementName().getLocalName())) {
+                                                CommissionAmount = element7.getTextContent();
                                             }
 
                                         }
-
+                                        orderCommission = CommissionCurrency + "|" + CommissionAmount + "|";
                                     }
                                 }
                             }
@@ -273,13 +279,7 @@ public class OrderCommission {
             }
 
             if (generateToStdOut) {
-                for (GetStatesCitiesResponseEntity item : citiesList) {
-                    System.out.println(item.getCtryCode() + "|"
-                            + item.getCtryName() + "|"
-                            + item.getStateCode() + "|"
-                            + item.getStateName() + "|"
-                            + item.getCityName() + "|");
-                }
+                System.out.println(orderCommission);
             }
 
         } catch (Exception e) {
@@ -289,7 +289,7 @@ public class OrderCommission {
     }
 
     private static SOAPMessage createSOAPRequest(String soapAction,
-            GetStatesCitiesRequestEntity request) throws Exception {
+            GetOrderCommissionRequestEntity request) throws Exception {
         MessageFactory messageFactory = MessageFactory.newInstance();
         SOAPMessage soapMessage = messageFactory.createMessage();
 

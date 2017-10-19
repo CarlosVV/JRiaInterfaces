@@ -9,7 +9,7 @@ package fx.globalpaying.entities;
  *
  * @author cvalderrama
  */
-public class GetOrdersValidatedRequestEntity {
+public class GetOrdersValidatedRequestEntity extends BaseRequestEntity {
 
     private String orderNo;
     private String payingCorrespSeqID;
