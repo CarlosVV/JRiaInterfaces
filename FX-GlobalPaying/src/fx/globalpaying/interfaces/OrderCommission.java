@@ -231,7 +231,8 @@ public class OrderCommission {
     private static void parseAndReturnResponse(SOAPMessage soapResponse) {
         try {
             orderCommission = "";
-
+            String WarningMsg = "";
+            String ErrorMsg = "";
             SOAPPart sp = soapResponse.getSOAPPart();
             SOAPEnvelope se = sp.getEnvelope();
             SOAPBody sb = se.getBody();
@@ -273,12 +274,35 @@ public class OrderCommission {
                                     }
                                 }
                             }
+                            //Warning and errors
+                            if ("RequestWarnings".equals(element4.getElementName().getLocalName())) {
+                                Iterator it5 = element4.getChildElements();
+                                while (it5.hasNext()) {
+                                    SOAPElement element5 = (SOAPElement) it5.next();
+                                    WarningMsg = element5.getAttribute("WarningMsg") + "|";
+                                }
+                            }
+
+                            if ("RequestErrors".equals(element4.getElementName().getLocalName())) {
+                                Iterator it5 = element4.getChildElements();
+                                while (it5.hasNext()) {
+                                    SOAPElement element5 = (SOAPElement) it5.next();
+                                    ErrorMsg = element5.getAttribute("ErrorMsg");
+                                }
+                            }
                         }
                     }
                 }
             }
 
             if (generateToStdOut) {
+                if (WarningMsg.length() == 0 && ErrorMsg.length() == 0 && !orderCommission.isEmpty()) {
+                    System.out.println("00|OK");
+                }
+
+                if (WarningMsg.length() > 0 || ErrorMsg.length() > 0 || orderCommission.isEmpty()) {
+                    System.out.println("99|" + WarningMsg + ErrorMsg);
+                }
                 System.out.println(orderCommission);
             }
 

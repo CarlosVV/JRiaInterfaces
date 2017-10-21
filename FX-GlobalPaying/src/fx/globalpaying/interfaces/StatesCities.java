@@ -207,6 +207,8 @@ public class StatesCities {
 
     private static void parseAndReturnResponse(SOAPMessage soapResponse) {
         try {
+            String WarningMsg = "";
+            String ErrorMsg = "";
             countriesList = new ArrayList<String>();
             statesList = new ArrayList<String>();
             citiesList = new ArrayList<GetStatesCitiesResponseEntity>();
@@ -264,12 +266,35 @@ public class StatesCities {
                                     }
                                 }
                             }
+                            //Warning and errors
+                            if ("RequestWarnings".equals(element4.getElementName().getLocalName())) {
+                                Iterator it5 = element4.getChildElements();
+                                while (it5.hasNext()) {
+                                    SOAPElement element5 = (SOAPElement) it5.next();
+                                    WarningMsg = element5.getAttribute("WarningMsg") + "|";
+                                }
+                            }
+
+                            if ("RequestErrors".equals(element4.getElementName().getLocalName())) {
+                                Iterator it5 = element4.getChildElements();
+                                while (it5.hasNext()) {
+                                    SOAPElement element5 = (SOAPElement) it5.next();
+                                    ErrorMsg = element5.getAttribute("ErrorMsg");
+                                }
+                            }
                         }
                     }
                 }
             }
 
             if (generateToStdOut) {
+                if (WarningMsg.length() == 0 && ErrorMsg.length() == 0 && !citiesList.isEmpty()) {
+                    System.out.println("00|OK");
+                }
+
+                if (WarningMsg.length() > 0 || ErrorMsg.length() > 0 || citiesList.isEmpty()) {
+                    System.out.println("99|" + WarningMsg + ErrorMsg);
+                }
                 for (GetStatesCitiesResponseEntity item : citiesList) {
                     System.out.println(item.getCtryCode() + "|"
                             + item.getCtryName() + "|"

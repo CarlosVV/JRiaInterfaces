@@ -87,21 +87,33 @@ public class ServiceManager {
                         }
                     });
 
+                    List<String> results = new ArrayList<String>();
                     for (Map.Entry<String, String> country : sortedCountries) {
                         ((GetStatesCitiesRequestEntity) request).setCountryCode(country.getKey());
                         StatesCities.callSoapWebService(soapEndpointUrl, (GetStatesCitiesRequestEntity) request, false);
                         List<GetStatesCitiesResponseEntity> cities = (List<GetStatesCitiesResponseEntity>) StatesCities.getCitiesList();
+
                         for (GetStatesCitiesResponseEntity item : cities) {
-                            System.out.println(
-                                    item.getCtryCode() + "|"
+                            results.add(item.getCtryCode() + "|"
                                     + item.getCtryName() + "|"
                                     + item.getStateCode() + "|"
                                     + item.getStateName() + "|"
                                     + item.getCityName() + "|");
+
                         }
                     }
+                    
+                    if (results.isEmpty()) {
+                        System.out.println("99|No Results");
+                    } else {
+                        System.out.println("00|OK");
+                    }
+                    
+                    for (String r : results) {
+                        System.out.println(r);
+                    }
                 } else {
-                    StatesCities.callSoapWebService(soapEndpointUrl, (GetStatesCitiesRequestEntity) request);
+                    StatesCities.callSoapWebService(soapEndpointUrl, (GetStatesCitiesRequestEntity) request, true);
                     response = StatesCities.getCitiesList();
                 }
                 break;

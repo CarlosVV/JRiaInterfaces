@@ -175,6 +175,8 @@ public class CountriesStates {
 
     private static void parseAndReturnResponse(SOAPMessage soapResponse) {
         try {
+            String WarningMsg = "";
+            String ErrorMsg = "";
             countriesList = new HashMap<String, String>();
             statesList = new ArrayList<GetCountriesStatesResponseEntity>();
             SOAPPart sp = soapResponse.getSOAPPart();
@@ -220,12 +222,35 @@ public class CountriesStates {
                                     }
                                 }
                             }
+                            //Warning and errors
+                            if ("RequestWarnings".equals(element4.getElementName().getLocalName())) {
+                                Iterator it5 = element4.getChildElements();
+                                while (it5.hasNext()) {
+                                    SOAPElement element5 = (SOAPElement) it5.next();
+                                    WarningMsg = element5.getAttribute("WarningMsg") + "|";
+                                }
+                            }
+
+                            if ("RequestErrors".equals(element4.getElementName().getLocalName())) {
+                                Iterator it5 = element4.getChildElements();
+                                while (it5.hasNext()) {
+                                    SOAPElement element5 = (SOAPElement) it5.next();
+                                    ErrorMsg = element5.getAttribute("ErrorMsg");
+                                }
+                            }
                         }
                     }
                 }
             }
 
             if (generateToStdOut) {
+                if (WarningMsg.length() == 0 && ErrorMsg.length() == 0 && !statesList.isEmpty()) {
+                    System.out.println("00|OK");
+                }
+
+                if (WarningMsg.length() > 0 || ErrorMsg.length() > 0 || statesList.isEmpty()) {
+                    System.out.println("99|" + WarningMsg + ErrorMsg);
+                }
                 for (GetCountriesStatesResponseEntity item : statesList) {
                     System.out.println(item.getCtryCode() + "|" + item.getCtryName()
                             + "|" + item.getStateCode() + "|" + item.getStateName() + "|");
@@ -233,7 +258,7 @@ public class CountriesStates {
             }
 
         } catch (Exception e) {
-            System.err.println("\nError occurred while sending SOAP Request to Server!\nMake sure you have the correct endpoint URL and SOAPAction!\n");
+            System.err.println("99|Error occurred while sending SOAP Request to Server!\nMake sure you have the correct endpoint URL and SOAPAction!\n");
             e.printStackTrace();
         }
     }

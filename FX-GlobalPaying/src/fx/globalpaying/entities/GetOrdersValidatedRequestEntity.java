@@ -30,6 +30,8 @@ public class GetOrdersValidatedRequestEntity extends BaseRequestEntity {
     private String paymentAmount;
     private String commissionCurrency;
     private String commissionAmount;
+    private String custChargeCurrency;
+    private String custChargeAmount;
     private String benID;
     private String beneFirstName;
     private String beneLastName;
@@ -66,6 +68,7 @@ public class GetOrdersValidatedRequestEntity extends BaseRequestEntity {
     private String custDateBirth;
     private String custOccupation;
     private String custSourceFunds;
+    private String custBeneRelationship;
     private String transferReason;
     private String providerID;
     private String bankID;
@@ -235,6 +238,22 @@ public class GetOrdersValidatedRequestEntity extends BaseRequestEntity {
 
     public void setCommissionAmount(String commissionAmount) {
         this.commissionAmount = commissionAmount;
+    }
+
+    public String getCustChargeCurrency() {
+        return custChargeCurrency;
+    }
+
+    public void setCustChargeCurrency(String custChargeCurrency) {
+        this.custChargeCurrency = custChargeCurrency;
+    }
+
+    public String getCustChargeAmount() {
+        return custChargeAmount;
+    }
+
+    public void setCustChargeAmount(String custChargeAmount) {
+        this.custChargeAmount = custChargeAmount;
     }
 
     public String getBenID() {
@@ -523,6 +542,14 @@ public class GetOrdersValidatedRequestEntity extends BaseRequestEntity {
 
     public void setCustSourceFunds(String custSourceFunds) {
         this.custSourceFunds = custSourceFunds;
+    }
+
+    public String getCustBeneRelationship() {
+        return custBeneRelationship;
+    }
+
+    public void setCustBeneRelationship(String custBeneRelationship) {
+        this.custBeneRelationship = custBeneRelationship;
     }
 
     public String getTransferReason() {

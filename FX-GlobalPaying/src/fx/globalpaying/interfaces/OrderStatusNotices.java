@@ -127,7 +127,7 @@ public class OrderStatusNotices {
         requestType.addTextNode(request.getRequestType());
     }
 
-    public static void callSoapWebService(String soapEndpointUrl, 
+    public static void callSoapWebService(String soapEndpointUrl,
             GetOrderStatusNoticesRequestEntity request) {
         try {
             // Create SOAP Connection
@@ -156,7 +156,9 @@ public class OrderStatusNotices {
 
     private static void parseAndReturnResponse(SOAPMessage soapResponse) {
         try {
-            List<String> notificationsList = new ArrayList<String>();          
+            String WarningMsg = "";
+            String ErrorMsg = "";
+            List<String> notificationsList = new ArrayList<String>();
             SOAPPart sp = soapResponse.getSOAPPart();
             SOAPEnvelope se = sp.getEnvelope();
             SOAPBody sb = se.getBody();
@@ -186,11 +188,34 @@ public class OrderStatusNotices {
                                     notificationsList.add(orderStatusChangeNotification);
                                 }
                             }
+                            //Warning and errors
+                            if ("RequestWarnings".equals(element4.getElementName().getLocalName())) {
+                                Iterator it5 = element4.getChildElements();
+                                while (it5.hasNext()) {
+                                    SOAPElement element5 = (SOAPElement) it5.next();
+                                    WarningMsg = element5.getAttribute("WarningMsg") + "|";
+                                }
+                            }
+
+                            if ("RequestErrors".equals(element4.getElementName().getLocalName())) {
+                                Iterator it5 = element4.getChildElements();
+                                while (it5.hasNext()) {
+                                    SOAPElement element5 = (SOAPElement) it5.next();
+                                    ErrorMsg = element5.getAttribute("ErrorMsg");
+                                }
+                            }
                         }
                     }
                 }
             }
 
+            if (WarningMsg.length() == 0 && ErrorMsg.length() == 0 && !notificationsList.isEmpty()) {
+                System.out.println("00|OK");
+            }
+
+            if (WarningMsg.length() > 0 || ErrorMsg.length() > 0 || notificationsList.isEmpty()) {
+                System.out.println("99|" + WarningMsg + ErrorMsg);
+            }
             for (String item : notificationsList) {
                 System.out.println(item);
             }
