@@ -227,11 +227,15 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="Config\AppSettings.cs" />
-    <Compile Include="Controls\Calendar\Calendar.cs" />
-    <Compile Include="Controls\Calendar\Converters\DateConverter.cs" />
-    <Compile Include="Controls\Calendar\Converters\DayBorderColorConverter.cs" />
-    <Compile Include="Controls\Calendar\Day.cs" />
-    <Compile Include="Controls\Calendar\DayChangedEventArgs.cs" />
+    <Compile Include="Controls\Schedule\Assignment.cs" />
+    <Compile Include="Controls\Schedule\ScheduleControl.cs" />
+    <Compile Include="Controls\Schedule\ScheduleConfiguration.cs" />
+    <Compile Include="Controls\Schedule\Converters\DateConverter.cs" />
+    <Compile Include="Controls\Schedule\Converters\DayBorderColorConverter.cs" />
+    <Compile Include="Controls\Schedule\Day.cs" />
+    <Compile Include="Controls\Schedule\DayChangedEventArgs.cs" />
+    <Compile Include="Controls\Schedule\Spot.cs" />
+    <Compile Include="Controls\Schedule\Shift.cs" />
     <Compile Include="Helpers\CafApiService.cs" />
     <Compile Include="Helpers\RelayCommand.cs" />
     <Compile Include="Model\DataGridDragDropEventArgs.cs" />

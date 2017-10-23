@@ -8,15 +8,15 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:CES.CoreApi.Receipt_Main.UI.WPF.View"
              xmlns:model1="clr-namespace:CES.CoreApi.Receipt_Main.UI.WPF.ViewModel"
-             xmlns:Ria="clr-namespace:CES.CoreApi.Receipt_Main.UI.WPF.Controls.Calendar"
+             xmlns:Ria="clr-namespace:CES.CoreApi.Receipt_Main.UI.WPF.Controls.Schedule"
              mc:Ignorable="d"   
             
              Foreground="White"       
              d:DesignHeight="800" d:DesignWidth="1400">
     <UserControl.Background>
         <RadialGradientBrush>
-            <GradientStop Color="#FF313131" Offset="0"/>
-            <GradientStop Color="#FF181818" Offset="1"/>
+            <GradientStop Color="White" Offset="0"/>
+            <GradientStop Color="WhiteSmoke" Offset="1"/>
         </RadialGradientBrush>
     </UserControl.Background>
     <Grid       x:Name="layoutRoot">
@@ -41,14 +41,28 @@
                         <ColumnDefinition Width="5" />
                         <ColumnDefinition Width="230" />
                     </Grid.ColumnDefinitions>
-                    <Grid Grid.Column="0"   >
+                    <Grid Grid.Column="0" >
                         <ComboBox x:Name="cboMonth" HorizontalAlignment="Left" Height="34" Margin="8,8,0,0" VerticalAlignment="Top" Width="152" FontSize="18.667" Background="White" Foreground="Black"/>
                         <ComboBox x:Name="cboYear" Height="34" Margin="164,8,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Width="87" FontSize="18.667" Background="White" Foreground="Black"/>
-                        <Ria:Calendar x:Name="RiaCalendar" DayChanged="Calendar_DayChanged"  AllowDrop="True"  Drop ="Calendar_Drop" Margin="0,46,0,0"  />
+                        <Ria:ScheduleControl x:Name="RiaCalendar" DayChanged="Calendar_DayChanged"  AllowDrop="True"  Drop ="Calendar_Drop" Margin="0,46,0,0"  />
                     </Grid>
                     <GridSplitter Grid.Column="1" Width="5" HorizontalAlignment="Stretch" />
                     <StackPanel Grid.Column="2">
-                        <TextBlock FontWeight="Bold">Empleados</TextBlock>
+                        <TextBlock FontWeight="Bold" Foreground="Black">Configuraciones</TextBlock>
+                        <ListBox PreviewMouseLeftButtonDown="ListBox_PreviewMouseLeftButtonDown" Background="White" ItemsSource="{Binding Configurations}">
+                            <ListBox.ItemTemplate>
+                                <DataTemplate>
+                                    <Grid Margin="0,2">
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="*" />
+                                            <ColumnDefinition Width="100" />
+                                        </Grid.ColumnDefinitions>
+                                        <TextBlock Text="{Binding Name}" />                                      
+                                    </Grid>
+                                </DataTemplate>
+                            </ListBox.ItemTemplate>
+                        </ListBox>
+                        <TextBlock FontWeight="Bold" Foreground="Black">Empleados</TextBlock>
                         <ListBox PreviewMouseLeftButtonDown="ListBox_PreviewMouseLeftButtonDown" Background="White">
                             <ListBoxItem>Jp1</ListBoxItem>
                             <ListBoxItem>Jp2</ListBoxItem>
@@ -84,7 +98,7 @@
                             </Border>
                         </Popup>
                         <TextBlock FontWeight="Bold">Propiedades</TextBlock>
-                        <DataGrid xmlns:local="clr-namespace:CES.CoreApi.Receipt_Main.UI.WPF.Model">
+                        <DataGrid xmlns:local="clr-namespace:CES.CoreApi.Receipt_Main.UI.WPF.Model" AllowDrop="True">
                             <DataGrid.Columns>
                                 <DataGridTextColumn Header="Nombre" Binding="{Binding PropertyName}"></DataGridTextColumn>
                                 <DataGridTextColumn Header="Valor" Binding="{Binding PropertyValue}"></DataGridTextColumn>

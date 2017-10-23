@@ -1,5 +1,4 @@
-﻿using CES.CoreApi.Receipt_Main.UI.WPF.Controls.Calendar;
-using CES.CoreApi.Receipt_Main.UI.WPF.Model;
+﻿using CES.CoreApi.Receipt_Main.UI.WPF.Model;
 using CES.CoreApi.Receipt_Main.UI.WPF.ViewModel;
 using CES.CoreApi.Receipt_Main.UI.WPF.View;
 using System;
@@ -18,6 +17,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using System.Collections;
+using CES.CoreApi.Receipt_Main.UI.WPF.Controls.Schedule;
 
 namespace CES.CoreApi.Receipt_Main.UI.WPF.View
 {
@@ -27,19 +27,12 @@ namespace CES.CoreApi.Receipt_Main.UI.WPF.View
     public partial class StaffAssignment : UserControl
     {
         ListBox dragSource = null;
-        public static readonly DependencyProperty DraggedItemProperty =
-           DependencyProperty.Register("DraggedItem", typeof(Employee), typeof(MainWindow));
-        public Employee DraggedItem
-        {
-            get { return (Employee)GetValue(DraggedItemProperty); }
-            set { SetValue(DraggedItemProperty, value); }
-        }
 
         public StaffAssignment()
         {
             InitializeComponent();
-           
-            List<string> months = new List<string> { "January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December" };
+
+            List<string> months = new List<string> { "Enero", "Febrero", "Marzp", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Setiembre", "Octubre", "Noviembre", "Diciembre" };
             cboMonth.ItemsSource = months;
 
             for (int i = -50; i < 50; i++)
@@ -47,7 +40,7 @@ namespace CES.CoreApi.Receipt_Main.UI.WPF.View
                 cboYear.Items.Add(DateTime.Today.AddYears(i).Year);
             }
 
-            cboMonth.SelectedItem = months.FirstOrDefault(w => w == DateTime.Today.ToString("MMMM"));
+            cboMonth.SelectedItem = months[DateTime.Today.Month - 1];
             cboYear.SelectedItem = DateTime.Today.Year;
 
             cboMonth.SelectionChanged += (o, e) => RefreshCalendar();
@@ -73,6 +66,7 @@ namespace CES.CoreApi.Receipt_Main.UI.WPF.View
         private void Calendar_DayChanged(object sender, DayChangedEventArgs e)
         {
             //save the text edits to persistant storage
+            Console.WriteLine("Actualizando Empleado " + e.Day.Notes);
         }
 
         private void ListBox_PreviewMouseLeftButtonDown(object sender, MouseButtonEventArgs e)
@@ -89,41 +83,100 @@ namespace CES.CoreApi.Receipt_Main.UI.WPF.View
 
         private void Calendar_Drop(object sender, DragEventArgs e)
         {
-            var parent = (Controls.Calendar.Calendar)sender;
-            object data = e.Data.GetData(typeof(string));
-            //((IList)dragSource.ItemsSource).Remove(data);
-            //e.poi
-            //parent.da .Items.Add(data);
-            object data2 = GetDataFromCalendar(parent, e.GetPosition(parent));
-        }
-        private static object GetDataFromCalendar(Controls.Calendar.Calendar source, Point point)
-        {
-            UIElement element = source.InputHitTest(point) as UIElement;
-            if (element != null)
+            var parent = (ScheduleControl)sender;
+            var sourceConfiguracion = e.Data.GetData("CES.CoreApi.Receipt_Main.UI.WPF.Controls.Schedule.ScheduleConfiguration") as ScheduleConfiguration;
+            var sourcePersona = e.Data.GetData("System.Windows.Controls.ListBoxItem") as ListBoxItem;
+            var cuadroDia = (ArrayList)GetDataFromCalendar(parent, e.GetPosition(parent));
+
+            if (cuadroDia == null) return;
+
+            if (sourceConfiguracion != null)
             {
-                object data = DependencyProperty.UnsetValue;
-                while (data == DependencyProperty.UnsetValue)
+                var configuracionName = sourceConfiguracion.Name;
+                var listViewAsignaciones = ((ListView)(cuadroDia[3]));
+
+                var asignaciones = new ObservableCollection<Assignment>();
+
+                var shifts = sourceConfiguracion.Shifts;
+                var spots = sourceConfiguracion.Spots;
+
+                var panel = (StackPanel)cuadroDia[0];
+                var day = (Day)panel.DataContext;
+                day.Configuration = sourceConfiguracion;
+                
+                foreach (var sh in shifts)
                 {
-                    //data = source.ItemContainerGenerator.ItemFromContainer(element);
-
-                    //if (data == DependencyProperty.UnsetValue)
-                    //{
-                    //    element = VisualTreeHelper.GetParent(element) as UIElement;
-                    //}
-
-                    if (element == source)
+                    foreach (var sp in spots)
                     {
-                        return null;
+                        asignaciones.Add(new Assignment { Shift = sh, Spot = sp });
                     }
                 }
 
-                if (data != DependencyProperty.UnsetValue)
+                day.Assignments = asignaciones;
+
+                var i = 0;
+                var grid = new GridView();//((GridView)listViewAsignaciones.FindName("GridViewControl"));
+                var column = new GridViewColumn();
+                column.Header = "Turno";
+                column.DisplayMemberBinding = new Binding($"[{i}]");
+                grid.Columns.Add(column);
+                
+                foreach (var sp in spots)
                 {
-                    return data;
+                    i++;
+                    column = new GridViewColumn();
+                    column.Header = sp.Name;
+                    column.DisplayMemberBinding = new Binding($"[{i}]");
+                    grid.Columns.Add(column);
                 }
+
+                var list = new List<string[]>();
+                foreach(var r in shifts)
+                {
+                    string[] row = new string[spots.Count + 1];
+                    row[0] = r.Name;
+                    i = 1;                   
+                    foreach(var c in spots)
+                    {
+                        row[i] = "";
+                        i++;
+                    }
+                    list.Add(row);
+                }
+
+                
+                listViewAsignaciones.View = grid;
+                listViewAsignaciones.ItemsSource = list;
+                //listViewAsignaciones.UpdateLayout();
             }
 
-            return null;
+            if (sourcePersona != null)
+            {
+                var person = sourcePersona.Name;
+                ((ListBox)(cuadroDia[2])).Items.Add(new Assignment { Person = person });
+            }
+            
+            //((TextBox)(data2[1])).Text = ((TextBox)(data2[1])).Text  + person + ",";           
+
+        }
+        private static object GetDataFromCalendar(ScheduleControl source, Point point)
+        {
+            UIElement element = source.InputHitTest(point) as UIElement;
+            var border = element as Border;
+
+            if (border == null) return null;
+
+            var child = border.Child;
+            var dockpanel = child as DockPanel;
+
+            if (dockpanel == null) return null;
+
+            var children = dockpanel.Children as UIElementCollection;
+            var stackpanel = children[0] as StackPanel;
+            var textbox = children[1] as TextBox;
+            var list = children[2] as ListBox;
+            var listView = children[3] as ListView;
+            return new ArrayList { stackpanel, textbox, list, listView };
         }
         #region GetDataFromListBox(ListBox,Point)
         private static object GetDataFromListBox(ListBox source, Point point)
