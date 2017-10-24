@@ -32,11 +32,11 @@ namespace CES.CoreApi.Receipt_Main.Service.Jobs
         {
             _taskService = new TaskService(new TaskRepository(new ReceiptDbContext()));
             _taskDetailService = new TaskDetailService(new TaskDetailRepository(new ReceiptDbContext()));
-            _documentService = new CES.CoreApi.Receipt_Main.Application.Core.DocumentService(new DocumentRepository(new ReceiptDbContext()));
-            _taxEntityService = new CES.CoreApi.Receipt_Main.Application.Core.TaxEntityService(new TaxEntityRepository(new ReceiptDbContext()));
-            _taxAddressService = new CES.CoreApi.Receipt_Main.Application.Core.TaxAddressService(new TaxAddressRepository(new ReceiptDbContext()));
-            _sequenceService = new CES.CoreApi.Receipt_Main.Application.Core.SequenceService(new SequenceRepository(new ReceiptDbContext()));
-            _storeService = new CES.CoreApi.Receipt_Main.Application.Core.StoreService(new StoreRepository(new ReceiptDbContext()));
+            _documentService = new DocumentService(new DocumentRepository(new ReceiptDbContext()));
+            _taxEntityService = new TaxEntityService(new TaxEntityRepository(new ReceiptDbContext()));
+            _taxAddressService = new TaxAddressService(new TaxAddressRepository(new ReceiptDbContext()));
+            _sequenceService = new SequenceService(new SequenceRepository(new ReceiptDbContext()));
+            _storeService = new StoreService(new StoreRepository(new ReceiptDbContext()));
 
             var docType = "39";
 
@@ -102,6 +102,7 @@ namespace CES.CoreApi.Receipt_Main.Service.Jobs
 
             _documentHelper.SaveDocument(folio, folio, ref indexchunk, ref acumchunk, xmlDocument, documentXmlObject, ref detailids, ref docids);
             var documentId = GetDocumentId(folio);
+
             return documentId;
         }
 
@@ -109,6 +110,9 @@ namespace CES.CoreApi.Receipt_Main.Service.Jobs
         {
             var taskService = new TaskService(new TaskRepository(new ReceiptDbContext()));
             var task = taskService.GetAllTasks().Where(m => m.fTaskId == taskId).FirstOrDefault();
+
+            if (task == null) return;
+
             task.fCountExecution = task.fCountExecution + 1;
 
             task.fThreadId = System.Threading.Thread.CurrentThread.ManagedThreadId;
@@ -123,6 +127,9 @@ namespace CES.CoreApi.Receipt_Main.Service.Jobs
         {
             var taskService = new TaskService(new TaskRepository(new ReceiptDbContext()));
             var task = taskService.GetAllTasks().Where(m => m.fTaskId == taskId).FirstOrDefault();
+
+            if (task == null) return;
+
             task.fStatus = 3;
             task.fModified = DateTime.Now;
             task.fEndDateTime = DateTime.Now;
@@ -135,6 +142,8 @@ namespace CES.CoreApi.Receipt_Main.Service.Jobs
             var taskDetailService = new TaskDetailService(new TaskDetailRepository(new ReceiptDbContext()));
             var taskDetail = taskDetailService.GetAllTaskDetails().Where(m => m.fTaskDetailId == taskDetailId).FirstOrDefault();
 
+            if (taskDetail == null) return;
+
             taskDetail.fResultObject = $"Folio: {folio} descargado, DocumentId: {documentId} creado";
             taskDetail.fModified = DateTime.Now;
             taskDetail.fDocumentId = documentId;
@@ -146,6 +155,9 @@ namespace CES.CoreApi.Receipt_Main.Service.Jobs
         {
             var taskDetailService = new TaskDetailService(new TaskDetailRepository(new ReceiptDbContext()));
             var taskDetail = taskDetailService.GetAllTaskDetails().Where(m => m.fTaskDetailId == taskDetailId).FirstOrDefault();
+
+            if (taskDetail == null) return;
+
             taskDetail.fDocumentId = 0;
             taskDetail.fModified = DateTime.Now;
             taskDetail.fResultObject = $"Folio {folio} existe en BD";
@@ -157,6 +169,9 @@ namespace CES.CoreApi.Receipt_Main.Service.Jobs
         {
             var taskDetailService = new TaskDetailService(new TaskDetailRepository(new ReceiptDbContext()));
             var taskDetail = taskDetailService.GetAllTaskDetails().Where(m => m.fTaskDetailId == taskDetailId).FirstOrDefault();
+
+            if (taskDetail == null) return;
+
             taskDetail.fDocumentId = 0;
             taskDetail.fModified = DateTime.Now;
             taskDetail.fResultObject = $"Folio {folio} cannot be downloaded. Maximum quantity of attempts reached: {_maximum_quantity_of_document_errors}";
