@@ -13,8 +13,10 @@ GO
 
 :Revision History:
 	2017-10-24	CV	Created
+	2017-10-25	CV	Modified column names
 
 */
+--DROP TABLE systblApp_CoreAPI_Vat
 IF NOT EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[systblApp_CoreAPI_Vat]') AND type in (N'U'))
 BEGIN
 CREATE TABLE [dbo].[systblApp_CoreAPI_Vat](
@@ -22,11 +24,11 @@ CREATE TABLE [dbo].[systblApp_CoreAPI_Vat](
 	[fDate] [date] NULL,
 	[fAccountTotalAmountVat] [money] NULL,
 	[fAccountTotalVoidAmountVat] [money] NULL,
-	[fAccountStoreTotalAmounVat] [money] NULL,
+	[fAccountResultTotalAmounVat] [money] NULL,
 	[fSiiTotalAmountVat] [money] NULL,
 	[fSiiTotalAmountVatNotInSii] [money] NULL,
 	[fSiiTotalAmountSiiNotInVat] [money] NULL,
-	[fSiiTotalVoidAmountVat] [money] NULL,
+	[fSiiTotalVoidCurrentMonthAmountVat] [money] NULL,
 	[fSiiTotalOtherMonthsVat] [money] NULL,
 	[fSiiStoreTotalAmountCalculatedVat] [money] NULL,
 	[fTotalDifferenceAmount] [money] NULL,
@@ -111,16 +113,16 @@ EXEC sys.sp_addextendedproperty
 , @level2type=N'COLUMN'
 , @level2name=N'fAccountTotalVoidAmountVat'
 GO
-IF NOT EXISTS (SELECT NULL FROM SYS.EXTENDED_PROPERTIES WHERE [major_id] = OBJECT_ID('systblApp_CoreAPI_Vat') AND [name] = N'fAccountStoreTotalAmounVat' AND [minor_id] = (SELECT [column_id] FROM SYS.COLUMNS WHERE [name] = 'fAccountStoreTotalAmounVat' AND [object_id] = OBJECT_ID('systblApp_CoreAPI_Vat')))
+IF NOT EXISTS (SELECT NULL FROM SYS.EXTENDED_PROPERTIES WHERE [major_id] = OBJECT_ID('systblApp_CoreAPI_Vat') AND [name] = N'fAccountResultTotalAmounVat' AND [minor_id] = (SELECT [column_id] FROM SYS.COLUMNS WHERE [name] = 'fAccountResultTotalAmounVat' AND [object_id] = OBJECT_ID('systblApp_CoreAPI_Vat')))
 EXEC sys.sp_addextendedproperty
-  @name=N'fAccountStoreTotalAmounVat'
+  @name=N'fAccountResultTotalAmounVat'
 , @value=N'Accounting Total Amount Vat from Stores' 
 , @level0type=N'SCHEMA'
 , @level0name=N'dbo'
 , @level1type=N'TABLE'
 , @level1name=N'systblApp_CoreAPI_Vat'
 , @level2type=N'COLUMN'
-, @level2name=N'fAccountStoreTotalAmounVat'
+, @level2name=N'fAccountResultTotalAmounVat'
 GO
 IF NOT EXISTS (SELECT NULL FROM SYS.EXTENDED_PROPERTIES WHERE [major_id] = OBJECT_ID('systblApp_CoreAPI_Vat') AND [name] = N'fSiiTotalAmountVat' AND [minor_id] = (SELECT [column_id] FROM SYS.COLUMNS WHERE [name] = 'fSiiTotalAmountVat' AND [object_id] = OBJECT_ID('systblApp_CoreAPI_Vat')))
 EXEC sys.sp_addextendedproperty
@@ -155,16 +157,16 @@ EXEC sys.sp_addextendedproperty
 , @level2type=N'COLUMN'
 , @level2name=N'fSiiTotalAmountSiiNotInVat'
 GO
-IF NOT EXISTS (SELECT NULL FROM SYS.EXTENDED_PROPERTIES WHERE [major_id] = OBJECT_ID('systblApp_CoreAPI_Vat') AND [name] = N'fSiiTotalVoidAmountVat' AND [minor_id] = (SELECT [column_id] FROM SYS.COLUMNS WHERE [name] = 'fSiiTotalVoidAmountVat' AND [object_id] = OBJECT_ID('systblApp_CoreAPI_Vat')))
+IF NOT EXISTS (SELECT NULL FROM SYS.EXTENDED_PROPERTIES WHERE [major_id] = OBJECT_ID('systblApp_CoreAPI_Vat') AND [name] = N'fSiiTotalVoidCurrentMonthAmountVat' AND [minor_id] = (SELECT [column_id] FROM SYS.COLUMNS WHERE [name] = 'fSiiTotalVoidCurrentMonthAmountVat' AND [object_id] = OBJECT_ID('systblApp_CoreAPI_Vat')))
 EXEC sys.sp_addextendedproperty
-  @name=N'fSiiTotalVoidAmountVat'
+  @name=N'fSiiTotalVoidCurrentMonthAmountVat'
 , @value=N'Total void amount in the month' 
 , @level0type=N'SCHEMA'
 , @level0name=N'dbo'
 , @level1type=N'TABLE'
 , @level1name=N'systblApp_CoreAPI_Vat'
 , @level2type=N'COLUMN'
-, @level2name=N'fSiiTotalVoidAmountVat'
+, @level2name=N'fSiiTotalVoidCurrentMonthAmountVat'
 GO
 IF NOT EXISTS (SELECT NULL FROM SYS.EXTENDED_PROPERTIES WHERE [major_id] = OBJECT_ID('systblApp_CoreAPI_Vat') AND [name] = N'fSiiTotalOtherMonthsVat' AND [minor_id] = (SELECT [column_id] FROM SYS.COLUMNS WHERE [name] = 'fSiiTotalOtherMonthsVat' AND [object_id] = OBJECT_ID('systblApp_CoreAPI_Vat')))
 EXEC sys.sp_addextendedproperty
