@@ -9,6 +9,7 @@ import fx.globalpaying.entities.GetLocsCurrsRatesRequestEntity;
 import fx.globalpaying.entities.HeaderEntity;
 import fx.globalpaying.entities.LocsCurrRatesRequestElementEntity;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
 import java.util.regex.Pattern;
@@ -31,8 +32,14 @@ import javax.xml.soap.SOAPPart;
  */
 public class LocsCurrsRates {
 
+    private static String WarningMsg = "";
+    private static String ErrorMsg = "";
+    private static List<String> locsCurrRates = new ArrayList<String>();
     private static final String soapAction = "CES.Services.FXGlobal/IRiaAsPayer/GetLocsCurrsRates";
     private static final boolean isDebug = false;
+    private static long t1 = 0;
+    private static long t2 = 0;
+    private static long t3 = 0;
 
     public static GetLocsCurrsRatesRequestEntity parseInputArgsToRequest(String[] args) {
         GetLocsCurrsRatesRequestEntity request = new GetLocsCurrsRatesRequestEntity();
@@ -84,6 +91,7 @@ public class LocsCurrsRates {
 
                     w.setCtryCode(countryCode);
                     w.setStateName(stateName);
+                    w.setStateCode(stateName);
                     w.setCityName(cityName);
 
                     request.getRequests().add(w);
@@ -103,8 +111,13 @@ public class LocsCurrsRates {
             SOAPConnectionFactory soapConnectionFactory = SOAPConnectionFactory.newInstance();
             SOAPConnection soapConnection = soapConnectionFactory.createConnection();
 
+            Date d1 = new Date();
             // Send SOAP Message to SOAP Server
             SOAPMessage soapResponse = soapConnection.call(createSOAPRequest(soapAction, request), soapEndpointUrl);
+            Date d2 = new Date();
+
+            long diff = d2.getTime() - d1.getTime();
+            t1 = diff / 1000;
 
             if (isDebug) {
                 // Print the SOAP Response
@@ -113,9 +126,29 @@ public class LocsCurrsRates {
                 System.out.println();
             }
 
+            d1 = new Date();
             // Return parsed Response
             parseAndReturnResponse(soapResponse);
+            d2 = new Date();
+            diff = d2.getTime() - d1.getTime();
+            t2 = diff / 1000;
 
+            d1 = new Date();
+            if (WarningMsg.length() == 0 && ErrorMsg.length() == 0 && !locsCurrRates.isEmpty()) {
+                System.out.println("00|OK|t1=" + t1 + "|t2=" + t2 + "|");
+            }
+
+            if (WarningMsg.length() > 0 || ErrorMsg.length() > 0 || locsCurrRates.isEmpty()) {
+                System.out.println("99|" + WarningMsg + ErrorMsg);
+            }
+
+            for (String item : locsCurrRates) {
+                System.out.println(item);
+            }
+
+            d2 = new Date();
+            t3 = diff / 1000;
+            System.out.println("EOF|t3=" + t3);
             soapConnection.close();
         } catch (Exception e) {
             System.err.println("\nError occurred while sending SOAP Request to Server!\nMake sure you have the correct endpoint URL and SOAPAction!\n");
@@ -209,9 +242,10 @@ public class LocsCurrsRates {
 
     private static void parseAndReturnResponse(SOAPMessage soapResponse) {
         try {
-            String WarningMsg = "";
-            String ErrorMsg = "";
-            List<String> locsCurrRates = new ArrayList<String>();
+            WarningMsg = "";
+            ErrorMsg = "";
+            locsCurrRates = new ArrayList<String>();
+
             SOAPPart sp = soapResponse.getSOAPPart();
             SOAPEnvelope se = sp.getEnvelope();
             SOAPBody sb = se.getBody();
@@ -398,20 +432,9 @@ public class LocsCurrsRates {
                     }
                 }
             }
-            if (WarningMsg.length() == 0 && ErrorMsg.length() == 0 && !locsCurrRates.isEmpty()) {
-                System.out.println("00|OK");
-            }
-            
-            if (WarningMsg.length() > 0 || ErrorMsg.length() > 0 || locsCurrRates.isEmpty()) {
-                System.out.println("99|" + WarningMsg + ErrorMsg);
-            }
-            
-            for (String item : locsCurrRates) {
-                System.out.println(item);
-            }
 
         } catch (Exception e) {
-            System.err.println("\nError occurred while sending SOAP Request to Server!\nMake sure you have the correct endpoint URL and SOAPAction!\n");
+            System.err.println("99|Error occurred while sending SOAP Request to Server!\nMake sure you have the correct endpoint URL and SOAPAction!\n");
             e.printStackTrace();
         }
     }

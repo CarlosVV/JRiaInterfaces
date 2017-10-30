@@ -102,13 +102,13 @@ public class ServiceManager {
 
                         }
                     }
-                    
+
                     if (results.isEmpty()) {
                         System.out.println("99|No Results");
                     } else {
                         System.out.println("00|OK");
                     }
-                    
+
                     for (String r : results) {
                         System.out.println(r);
                     }
@@ -136,6 +136,40 @@ public class ServiceManager {
                 break;
             case LocsCurrsRates:
                 request = LocsCurrsRates.parseInputArgsToRequest(args);
+                String country = ((GetLocsCurrsRatesRequestEntity) request).getRequests().get(0).getCtryCode();
+                String state = ((GetLocsCurrsRatesRequestEntity) request).getRequests().get(0).getStateCode();
+                String city = ((GetLocsCurrsRatesRequestEntity) request).getRequests().get(0).getCityName();
+                // "[a-zA-Z]+\\.?"  "\\w+\\.?"
+                String valid_pattern = "[a-zA-ZñÑáéíóúÁÉÍÓÚ\\-\\s\\.]+";
+                String invalid_pattern = "[^a-zA-ZñÑáéíóúÁÉÍÓÚ\\-\\s\\.]+";
+                //String pattern = "\\w+\\-\\s\\.+";
+                //System.out.println(city);
+                if (!city.matches(valid_pattern)) {
+                    String searchCityName = city.replaceAll(invalid_pattern, ".");
+                    //System.out.println(searchCityName);
+                    GetStatesCitiesRequestEntity requestCities = new GetStatesCitiesRequestEntity();
+                    requestCities.setCorrespID(((GetLocsCurrsRatesRequestEntity) request).getCorrespID());
+                    requestCities.setLayoutVersion(((GetLocsCurrsRatesRequestEntity) request).getLayoutVersion());
+                    requestCities.setHeader(((GetLocsCurrsRatesRequestEntity) request).getHeader());
+                    requestCities.setCountryCode(country);
+                    requestCities.setStateName(state);
+                    requestCities.setRequestType("StatesCities");
+                    StatesCities.callSoapWebService(soapEndpointUrl, requestCities, false);
+                    List<GetStatesCitiesResponseEntity> cities = StatesCities.getCitiesList();
+
+                    String hitCity = "";
+                    for (GetStatesCitiesResponseEntity item : cities) {
+                        String cityItem = item.getCityName();
+                        if (cityItem.matches(searchCityName)) {
+                            hitCity = item.getCityName();
+                            break;
+                        }
+                    }
+                    //System.out.println(hitCity);
+                    city = hitCity;
+                }
+                
+                ((GetLocsCurrsRatesRequestEntity) request).getRequests().get(0).setCityName(city);
                 LocsCurrsRates.callSoapWebService(soapEndpointUrl, (GetLocsCurrsRatesRequestEntity) request);
                 break;
             case OrderCommission:
@@ -160,4 +194,5 @@ public class ServiceManager {
         }
         return isValidRequestType;
     }
+
 }

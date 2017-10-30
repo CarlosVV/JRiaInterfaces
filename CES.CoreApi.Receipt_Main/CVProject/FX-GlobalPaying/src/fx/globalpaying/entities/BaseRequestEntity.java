@@ -10,7 +10,7 @@ package fx.globalpaying.entities;
  * @author cvalderrama
  */
 public class BaseRequestEntity {
-    private String correspID;
+   private String correspID;
    private String layoutVersion;
    private HeaderEntity header;
    private String requestType;
