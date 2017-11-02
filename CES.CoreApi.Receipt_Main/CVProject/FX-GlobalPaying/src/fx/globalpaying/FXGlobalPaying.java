@@ -6,7 +6,9 @@
 package fx.globalpaying;
 
 import fx.globalpaying.ServiceManager.RequestTypeEnum;
+import static fx.globalpaying.Utils.stripAccents;
 import java.io.StringReader;
+import java.text.Normalizer;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import org.w3c.dom.Document;
@@ -27,33 +29,17 @@ public class FXGlobalPaying {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        /*
-        Se espera lo siguiente:
-        java -jar FX-GlobalPaying.jar "59470211" "2.0" "50e07864-104f-4f68-adb6-d5d7af615ffb;20170912135959;0;0;Main Branch;CL;3648587;16;es-ES" "Currencies" -url "http://stagingfxglobalwebsvcnocert.riaenvia.net:9771/FXGlobalPaying.svc/Binding_Basic_NoCert" 
         
-        Los parámetros de entrada se obtienen de la siguiente manera:
-        
-        args[0] -> CorrespID
-        args[1] -> LayoutVersion
-        args[2] -> Header
-            Header[0] -> CallID
-            Header[1] -> CallDateTimeLocal
-            Header[2] -> CorrespLocNo
-            Header[3] -> CorrespLocNo
-            Header[4] -> CorrespLocName
-            Header[5] -> CorrespLocCountry
-            Header[6] -> UserID
-            Header[7] -> TerminalID
-            Header[8] -> LanguageCultureCode
-        args[3] -> RequestType
-        args[4] -> -url
-        args[5] -> url
-         */
+        // String s = "canción de niños, católicos, vía láctea, cúneo, épsilon";
+        //String s = "";
+        //String s1 =  stripAccents(s);
+        // System.out.println(s1);       
+       
         if (args.length < 4 || (args.length > 3 && (args[2] == null || args[2].split(";").length < 9))) {
             System.out.println("Error: argumentos inválidos o faltantes");
             return;
         }
-        
+
         if (args.length > 5 && "-url".equals(args[args.length - 2])) {
             soapEndpointUrl = args[args.length - 1];
         }
@@ -67,5 +53,5 @@ public class FXGlobalPaying {
         }
         Object response;
         response = ServiceManager.ExecuteWebMethod(RequestTypeEnum.valueOf(requestType), args);
-    }
+    }   
 }

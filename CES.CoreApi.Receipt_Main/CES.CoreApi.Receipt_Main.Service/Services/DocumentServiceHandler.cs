@@ -44,8 +44,11 @@ namespace CES.CoreApi.Receipt_Main.Service.Services
         }
         internal TaxCreateDocumentResponse CreateDocument(TaxCreateDocumentRequest request)
         {
+            var response = new TaxCreateDocumentResponse();
 
-            throw new NotImplementedException();
+            // Get Available Folio 
+
+            return response;
         }
 
         internal object SearchDocument(TaxSearchDocumentRequest r)

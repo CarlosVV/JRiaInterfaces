@@ -5,6 +5,7 @@
  */
 package fx.globalpaying.interfaces;
 
+import static fx.globalpaying.Utils.stripAccents;
 import fx.globalpaying.entities.GetLocsCurrsRatesRequestEntity;
 import fx.globalpaying.entities.HeaderEntity;
 import fx.globalpaying.entities.LocsCurrRatesRequestElementEntity;
@@ -305,17 +306,17 @@ public class LocsCurrsRates {
                                                         if ("LocBranchNo".equals(element11.getElementName().getLocalName())) {
                                                             LocBranchNo = element11.getTextContent();
                                                         }
-                                                        if ("LocAddress1".equals(element11.getElementName().getLocalName())) {
-                                                            LocAddress1 = element11.getTextContent();
+                                                        if ("LocName".equals(element11.getElementName().getLocalName())) {
+                                                            LocName = stripAccents(element11.getTextContent()).replace("\r\n", " ").replace("\n", " ");
                                                         }
-                                                        if ("LocCity".equals(element11.getElementName().getLocalName())) {
-                                                            LocCity = element11.getTextContent();
+                                                        if ("LocAddress1".equals(element11.getElementName().getLocalName())) {
+                                                            LocAddress1 = stripAccents(element11.getTextContent()).replace("\r\n", " ").replace("\n", " ");
                                                         }
                                                         if ("LocAddress2".equals(element11.getElementName().getLocalName())) {
-                                                            LocAddress2 = element11.getTextContent();
+                                                            LocAddress2 = stripAccents(element11.getTextContent()).replace("\r\n", " ").replace("\n", " ");
                                                         }
-                                                        if ("LocName".equals(element11.getElementName().getLocalName())) {
-                                                            LocName = element11.getTextContent();
+                                                        if ("LocCity".equals(element11.getElementName().getLocalName())) {
+                                                            LocCity = stripAccents(element11.getTextContent()).replace("\r\n", " ").replace("\n", " ");
                                                         }
                                                         if ("LocState".equals(element11.getElementName().getLocalName())) {
                                                             LocState = element11.getTextContent();
@@ -336,10 +337,10 @@ public class LocsCurrsRates {
                                                             LocEmail = element11.getTextContent();
                                                         }
                                                         if ("Directions".equals(element11.getElementName().getLocalName())) {
-                                                            Directions = element11.getTextContent();
+                                                            Directions = stripAccents(element11.getTextContent()).replace("\r\n", " ").replace("\n", " ");
                                                         }
                                                         if ("Notes".equals(element11.getElementName().getLocalName())) {
-                                                            Notes = element11.getTextContent();
+                                                            Notes = stripAccents(element11.getTextContent()).replace("\r\n", " ").replace("\n", " ");
                                                         }
                                                         if ("Currencies".equals(element11.getElementName().getLocalName())) {
                                                             List<String> deliveryMethods = new ArrayList<String>();
