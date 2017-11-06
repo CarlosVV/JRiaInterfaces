@@ -176,17 +176,30 @@ public class Requirements {
                         while (it4.hasNext()) {
                             SOAPElement element4 = (SOAPElement) it4.next();
                             if ("RequestResponses".equals(element4.getElementName().getLocalName())) {
+
                                 Iterator it5 = element4.getChildElements();
                                 while (it5.hasNext()) {
+
                                     SOAPElement element5 = (SOAPElement) it5.next();
+                                    String deliveryMethod = element5.getAttribute("MethodName").trim();
                                     Iterator it6 = element5.getChildElements();
                                     while (it6.hasNext()) {
                                         SOAPElement element6 = (SOAPElement) it6.next();
                                         Iterator it7 = element6.getChildElements();
                                         while (it7.hasNext()) {
                                             SOAPElement element7 = (SOAPElement) it7.next();
-                                            String id = element7.getAttribute("ID");
-                                            String desc = element7.getAttribute("Desc");
+                                            String id = element7.getAttribute("ID").trim();
+                                            String desc = element7.getAttribute("Desc").trim();
+                                            String CtryFrom = element7.getAttribute("CtryFrom").trim();
+                                            String CtryTo = element7.getAttribute("CtryTo").trim();
+                                            String StateFrom = element7.getAttribute("StateFrom").trim();
+                                            String StateTo = element7.getAttribute("StateTo").trim();
+                                            String CurrFrom = element7.getAttribute("CurrFrom").trim();
+                                            String CurrTo = element7.getAttribute("CurrTo").trim();
+                                            String CorrespID = element7.getAttribute("CorrespID").trim();
+                                            String CorrespName = element7.getAttribute("CorrespName").trim();
+                                            String DateBeg = element7.getAttribute("DateBeg").trim();
+                                            String DateEnd = element7.getAttribute("DateEnd").trim();
                                             Iterator it8 = element7.getChildElements();
                                             while (it8.hasNext()) {
                                                 SOAPElement element8 = (SOAPElement) it8.next();
@@ -196,7 +209,10 @@ public class Requirements {
                                                     String fieldName = element9.getAttribute("FieldName");
                                                     String minLength = element9.getAttribute("MinLength");
                                                     String maxLength = element9.getAttribute("MaxLength");
-                                                    requirementsList.add(id + "|" + desc + "|" + fieldName + "|" + minLength + "|" + maxLength + "|");
+                                                    requirementsList.add(deliveryMethod + "|" + id + "|" + desc + "|"
+                                                            + CtryFrom + "|" + CtryTo + "|" + StateFrom + "|" + StateTo + "|" + CurrFrom + "|" + CurrTo + "|"
+                                                            + CorrespID + "|" + CorrespName + "|" + DateBeg + "|" + DateEnd + "|" 
+                                                            + fieldName + "|" + minLength + "|" + maxLength + "|");
                                                 }
                                             }
                                         }

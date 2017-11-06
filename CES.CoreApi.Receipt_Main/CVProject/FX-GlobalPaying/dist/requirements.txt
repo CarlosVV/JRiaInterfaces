@@ -1,0 +1,300 @@
+00|OK
+All|100011|Basic Requirement for MT|||||||||20150101_000000|20200202_000000|BeneCity|1|100|
+All|100011|Basic Requirement for MT|||||||||20150101_000000|20200202_000000|CustAddress|1|255|
+All|100011|Basic Requirement for MT|||||||||20150101_000000|20200202_000000|BeneFirstName|1|50|
+All|100011|Basic Requirement for MT|||||||||20150101_000000|20200202_000000|BeneLastName|1|50|
+All|100011|Basic Requirement for MT|||||||||20150101_000000|20200202_000000|CustFirstName|1|50|
+All|100011|Basic Requirement for MT|||||||||20150101_000000|20200202_000000|CustLastName|1|50|
+All|100011|Basic Requirement for MT|||||||||20150101_000000|20200202_000000|BeneCountry|1|50|
+All|100011|Basic Requirement for MT|||||||||20150101_000000|20200202_000000|BeneState|1|50|
+All|100011|Basic Requirement for MT|||||||||20150101_000000|20200202_000000|CustCity|1|50|
+All|100011|Basic Requirement for MT|||||||||20150101_000000|20200202_000000|CustCountry|1|50|
+All|100011|Basic Requirement for MT|||||||||20150101_000000|20200202_000000|CustState|1|50|
+All|100011|Basic Requirement for MT|||||||||20150101_000000|20200202_000000|CustPhoneNo|7|15|
+All|104111|MT to Arizona $1,000-$2,999.99||US||AZ|||||||CustTaxID|9|9|
+All|106611|MT to Australia||AU|||||||||BeneZipCode|4|4|
+All|106711|MT to Canada $1,000-$2999.99||CA|||||||||BeneAddress|1|255|
+All|106811|MT to Canada $3,000-$7,999.99||CA|||||||||BeneAddress|1|255|
+All|106911|MT to Puerto Rico $3,000-$7,999.99||PR||||USD|||||BeneAddress|1|255|
+All|107111|MT to Canada >=$8K||CA|||||||||BeneAddress|1|255|
+All|108011|MT to UK||UK|||||||||CustSourceFunds|1|23|
+All|108111|MT to Switzerland||CH|||||||||CustBeneRelationship|1|50|
+All|108111|MT to Switzerland||CH|||||||||TransferReason|2|30|
+All|108111|MT to Switzerland||CH|||||||||CustSourceFunds|2|50|
+All|108511|Geralin||UY|||||14309|Geralin S.A.|||TransferReason|1|50|
+All|113411|MT to Pakistan||PK||||PKR|||||CustAddress|1|50|
+All|113411|MT to Pakistan||PK||||PKR|||||CustCity|1|50|
+All|113411|MT to Pakistan||PK||||PKR|||||CustCountry|1|50|
+All|113411|MT to Pakistan||PK||||PKR|||||CustState|1|50|
+All|114311|BenTel No for SENEGAL||SN|||||||||BenePhoneNo|1|20|
+All|114311|BenTel No for SENEGAL||SN|||||||||BeneCity|1|50|
+All|114511|BenTel No for NIGERIA||NG|||||||||BeneAnswer|1|20|
+All|114511|BenTel No for NIGERIA||NG|||||||||BeneQuestion|1|20|
+All|114511|BenTel No for NIGERIA||NG|||||||||BenePhoneNo|11|14|
+All|115211|BenTel No for CONGO DRC||CD|||||||||BenePhoneNo|10|10|
+All|116411|Perucourier-Jet Peru-Jet Argentina|||||||1080511|Perucourier-Jet Peru-Jet Argentina|||CustPhoneNo|1|20|
+All|116411|Perucourier-Jet Peru-Jet Argentina|||||||1080511|Perucourier-Jet Peru-Jet Argentina|||BenePhoneNo|1|20|
+All|116411|Perucourier-Jet Peru-Jet Argentina|||||||1080511|Perucourier-Jet Peru-Jet Argentina|||BeneFirstName|1|50|
+All|116411|Perucourier-Jet Peru-Jet Argentina|||||||1080511|Perucourier-Jet Peru-Jet Argentina|||BeneLastName|1|50|
+All|116411|Perucourier-Jet Peru-Jet Argentina|||||||1080511|Perucourier-Jet Peru-Jet Argentina|||CustFirstName|1|50|
+All|116411|Perucourier-Jet Peru-Jet Argentina|||||||1080511|Perucourier-Jet Peru-Jet Argentina|||CustLastName|1|50|
+All|116411|Perucourier-Jet Peru-Jet Argentina|||||||1080511|Perucourier-Jet Peru-Jet Argentina|||BeneCity|1|50|
+All|116411|Perucourier-Jet Peru-Jet Argentina|||||||1080511|Perucourier-Jet Peru-Jet Argentina|||BeneCountry|1|50|
+All|116411|Perucourier-Jet Peru-Jet Argentina|||||||1080511|Perucourier-Jet Peru-Jet Argentina|||BeneState|1|50|
+All|118111|Benef. Tel Req'd Bosnia||BA|||||17412311|MC Sweden Ab|||BenePhoneNo|1|20|
+All|129111|Requires Beneficiary's Phone number|||||||5924811|Argenper S.A.|||BenePhoneNo|1|15|
+All|130011|MT Blacklist Customer Banco Cuscatlan|||||||1021511|Banco Cuscatlan El Salvador, S.A|||CustDateBirth|1|10|
+All|130011|MT Blacklist Customer Banco Cuscatlan|||||||1021511|Banco Cuscatlan El Salvador, S.A|||CustCountryOfBirth|1|50|
+All|130011|MT Blacklist Customer Banco Cuscatlan|||||||1021511|Banco Cuscatlan El Salvador, S.A|||CustNationality|1|50|
+All|130111|MT Blacklist Customer Banco Uno (Reciba Networks)|||||||610712|Banco Uno (Reciba Networks)|||CustDateBirth|1|10|
+All|130111|MT Blacklist Customer Banco Uno (Reciba Networks)|||||||610712|Banco Uno (Reciba Networks)|||CustCountryOfBirth|1|50|
+All|130111|MT Blacklist Customer Banco Uno (Reciba Networks)|||||||610712|Banco Uno (Reciba Networks)|||CustNationality|1|50|
+All|134811|Sender's Zip Code|||||||1065811|BANCOMER (BTS)|||CustZipCode|1|10|
+All|134911|Sender ID Requirement||IN|||||16215911|Xpress Money Services Limited|||CustID1Type|1|20|
+All|134911|Sender ID Requirement||IN|||||16215911|Xpress Money Services Limited|||CustID1No|1|50|
+All|136211|Dirham Requirements||MA||||MAD|7304611|Dirham Express - BMCE|||CustPhoneNo|1|12|
+All|136211|Dirham Requirements||MA||||MAD|7304611|Dirham Express - BMCE|||CustZipCode|1|15|
+All|136211|Dirham Requirements||MA||||MAD|7304611|Dirham Express - BMCE|||CustCity|1|20|
+All|136211|Dirham Requirements||MA||||MAD|7304611|Dirham Express - BMCE|||CustID1Type|1|20|
+All|136211|Dirham Requirements||MA||||MAD|7304611|Dirham Express - BMCE|||CustState|1|20|
+All|136211|Dirham Requirements||MA||||MAD|7304611|Dirham Express - BMCE|||CustAddress|1|50|
+All|136211|Dirham Requirements||MA||||MAD|7304611|Dirham Express - BMCE|||CustCountry|1|50|
+All|136211|Dirham Requirements||MA||||MAD|7304611|Dirham Express - BMCE|||CustID1No|1|50|
+All|138011|Chile Fields Requirements|CL||||||||||CustState|1|20|
+All|138011|Chile Fields Requirements|CL||||||||||CustAddress|1|255|
+All|138011|Chile Fields Requirements|CL||||||||||CustFirstName|1|50|
+All|138011|Chile Fields Requirements|CL||||||||||CustLastName|1|50|
+All|138011|Chile Fields Requirements|CL||||||||||CustCity|1|50|
+All|138011|Chile Fields Requirements|CL||||||||||CustCountry|1|50|
+All|138011|Chile Fields Requirements|CL||||||||||CustID1No|1|50|
+All|138011|Chile Fields Requirements|CL||||||||||CustID1Type|1|50|
+All|138011|Chile Fields Requirements|CL||||||||||CustOccupation|1|50|
+All|138011|Chile Fields Requirements|CL||||||||||CustNationality|2|2|
+All|138011|Chile Fields Requirements|CL||||||||||CustCountryOfBirth|2|20|
+All|138211|Requirements||RO|||||18328511|CEC Bank/Transfer Rapid|||CustDateBirth|1|20|
+All|138211|Requirements||RO|||||18328511|CEC Bank/Transfer Rapid|||CustID1No|1|50|
+All|138211|Requirements||RO|||||18328511|CEC Bank/Transfer Rapid|||CustID1Type|1|50|
+All|144611|Mandatory Beneficiary's Phone Number||UK||||GBP|||||BenePhoneNo|1|15|
+All|144811|Requirement||MX|||||1669511|CIBanco SA.|||BeneCity|1|50|
+All|144811|Requirement||MX|||||1669511|CIBanco SA.|||BeneState|1|50|
+All|144811|Requirement||MX|||||1669511|CIBanco SA.|||TransferReason|1|50|
+All|144911|Benef Address Mandatory||MX|||||17811611|Chedraui|||BeneAddress|1|50|
+All|144911|Benef Address Mandatory||MX|||||17811611|Chedraui|||BeneCity|1|50|
+All|144911|Benef Address Mandatory||MX|||||17811611|Chedraui|||BeneState|1|50|
+All|145011|Benef Address Mandatory||MX|||||17812711|Caja Libertad|||BeneAddress|1|50|
+All|145011|Benef Address Mandatory||MX|||||17812711|Caja Libertad|||BeneCity|1|50|
+All|145011|Benef Address Mandatory||MX|||||17812711|Caja Libertad|||BeneState|1|50|
+All|145811|Peru Express 1K||||||USD|290212|Peru Express S.A.|||CustID1No|1|50|
+All|145811|Peru Express 1K||||||USD|290212|Peru Express S.A.|||CustID1Type|1|50|
+All|145811|Peru Express 1K||||||USD|290212|Peru Express S.A.|||CustOccupation|1|50|
+All|147911|Beneficiary Phone Number Mandatory||PE|||||290212|Peru Express S.A.|||BenePhoneNo|1|14|
+All|148511|MT Blacklist Customer Farmacia Guadalajara||MX|||||16429511|Farmacia Guadalajara|||CustDateBirth|1|10|
+All|148511|MT Blacklist Customer Farmacia Guadalajara||MX|||||16429511|Farmacia Guadalajara|||CustCountryOfBirth|1|50|
+All|148511|MT Blacklist Customer Farmacia Guadalajara||MX|||||16429511|Farmacia Guadalajara|||CustID1No|1|50|
+All|148511|MT Blacklist Customer Farmacia Guadalajara||MX|||||16429511|Farmacia Guadalajara|||CustID1Type|1|50|
+All|148511|MT Blacklist Customer Farmacia Guadalajara||MX|||||16429511|Farmacia Guadalajara|||CustOccupation|1|50|
+All|148611|MT Blacklist Customer Banamex|||||||736112|BANAMEX|||CustDateBirth|1|10|
+All|148611|MT Blacklist Customer Banamex|||||||736112|BANAMEX|||CustCountryOfBirth|1|50|
+All|148611|MT Blacklist Customer Banamex|||||||736112|BANAMEX|||CustID1No|1|50|
+All|148611|MT Blacklist Customer Banamex|||||||736112|BANAMEX|||CustID1Type|1|50|
+All|148611|MT Blacklist Customer Banamex|||||||736112|BANAMEX|||CustOccupation|1|50|
+All|148711|MT Blacklist Beneficiary Farmacia Guadalajara|||||||16429511|Farmacia Guadalajara|||CustDateBirth|1|10|
+All|148711|MT Blacklist Beneficiary Farmacia Guadalajara|||||||16429511|Farmacia Guadalajara|||CustCountryOfBirth|1|50|
+All|148711|MT Blacklist Beneficiary Farmacia Guadalajara|||||||16429511|Farmacia Guadalajara|||CustID1No|1|50|
+All|148711|MT Blacklist Beneficiary Farmacia Guadalajara|||||||16429511|Farmacia Guadalajara|||CustID1Type|1|50|
+All|148711|MT Blacklist Beneficiary Farmacia Guadalajara|||||||16429511|Farmacia Guadalajara|||CustOccupation|1|50|
+All|148811|MT Blacklist Beneficiary Banamex|||||||736112|BANAMEX|||CustDateBirth|1|10|
+All|148811|MT Blacklist Beneficiary Banamex|||||||736112|BANAMEX|||CustCountryOfBirth|1|50|
+All|148811|MT Blacklist Beneficiary Banamex|||||||736112|BANAMEX|||CustID1No|1|50|
+All|148811|MT Blacklist Beneficiary Banamex|||||||736112|BANAMEX|||CustID1Type|1|50|
+All|148811|MT Blacklist Beneficiary Banamex|||||||736112|BANAMEX|||CustOccupation|1|50|
+All|149511|Customer City and telephone number|||||||12394611|Banco Ganadero|||CustPhoneNo|1|20|
+All|230022|Address Requirement||ES|||||26178311|Freddy Ledezma Sejas|||BeneAddress|1|250|
+All|238955|Transfer Reason - India||IN|||||||||TransferReason|1|100|
+All|238955|Transfer Reason - India||IN|||||||||CustBeneRelationship|1|1000|
+All|240755|Ben ID Required for Intra-Chile Transactions||CL|||||||||BeneIDType|1|20|
+All|240755|Ben ID Required for Intra-Chile Transactions||CL|||||||||BeneIDNo|1|50|
+All|240955|IME Myanmar Reqs||MM|||||36783911|IME Malaysia|||BeneIDNo|1|50|
+All|240955|IME Myanmar Reqs||MM|||||36783911|IME Malaysia|||BeneIDType|1|50|
+All|244555|AML Threshold 2|||||||||||BeneCountry|1|50|
+All|251855|MT to Sweden||SE|||||||||CustSourceFunds|1|20|
+All|253655|Watchlist MT - Customer|||||||||20160801_000000|29991231_000000|CustDateBirth|1|20|
+All|253655|Watchlist MT - Customer|||||||||20160801_000000|29991231_000000|CustCountryOfBirth|1|50|
+All|253655|Watchlist MT - Customer|||||||||20160801_000000|29991231_000000|CustNationality|1|50|
+All|253755|Watchlist MT - Recipient|||||||||20160801_000000|29991231_000000||1|20|
+All|253755|Watchlist MT - Recipient|||||||||20160801_000000|29991231_000000||1|50|
+All|253755|Watchlist MT - Recipient|||||||||20160801_000000|29991231_000000|BeneNationality|1|50|
+All|253955|Watchlist MT - On Behalf Of|||||||||20160801_000000|29991231_000000|CustDateBirth|1|20|
+All|253955|Watchlist MT - On Behalf Of|||||||||20160801_000000|29991231_000000|CustCountryOfBirth|1|50|
+All|253955|Watchlist MT - On Behalf Of|||||||||20160801_000000|29991231_000000|CustNationality|1|50|
+All|255755|MT Requirements to Kuwait||KW|||||||||TransferReason|1|50|
+All|265655|MT US to Ukraine>$500||UA|||USD||||||CustBeneRelationship|1|50|
+All|265655|MT US to Ukraine>$500||UA|||USD||||||TransferReason|1|50|
+All|272355|Digital-Benef phone # required||US|||||||||BenePhoneNo|10|10|
+ATM PickUp|257655|MT to Romania||RO|||||20488011|Euronet Romania SRL|||BeneIDType|1|50|
+ATM PickUp|257655|MT to Romania||RO|||||20488011|Euronet Romania SRL|||BeneIDNo|13|13|
+ATM PickUp|257655|MT to Romania||RO|||||20488011|Euronet Romania SRL|||BeneCellNo|9|9|
+Cash Pick-Up|105711|More Money Xfer VE office pu Req||VE||||VEF|4152011|More Money Transfers|||BenePhoneNo|9|11|
+Cash Pick-Up|116911|Office Pick Up requirements-Benef. Information||CD||||USD|5603014|ZIFA-FT SPRL|||BenePhoneNo|1|20|
+Cash Pick-Up|116911|Office Pick Up requirements-Benef. Information||CD||||USD|5603014|ZIFA-FT SPRL|||BeneAddress|1|50|
+Cash Pick-Up|117911|PKO Benef full name & address||PL|||||14909|Bank PKO BP|||BeneFirstName|1|20|
+Cash Pick-Up|117911|PKO Benef full name & address||PL|||||14909|Bank PKO BP|||BeneLastName|1|20|
+Cash Pick-Up|117911|PKO Benef full name & address||PL|||||14909|Bank PKO BP|||BeneCity|1|30|
+Cash Pick-Up|117911|PKO Benef full name & address||PL|||||14909|Bank PKO BP|||BeneCountry|1|50|
+Cash Pick-Up|117911|PKO Benef full name & address||PL|||||14909|Bank PKO BP|||BeneState|1|50|
+Cash Pick-Up|117911|PKO Benef full name & address||PL|||||14909|Bank PKO BP|||BeneAddress|10|50|
+Cash Pick-Up|119211|Beneficiary ID req Office P/U||BR||||BRL|19418311|Banco Itau|||BeneIDNo|11|14|
+Cash Pick-Up|120611|Beneficiary Address & Phone Number Mandatory||AM|||||20036311|Armeconombank OSJC Depi-Tun|||BeneAddress|1|50|
+Cash Pick-Up|120611|Beneficiary Address & Phone Number Mandatory||AM|||||20036311|Armeconombank OSJC Depi-Tun|||BeneCity|1|50|
+Cash Pick-Up|120611|Beneficiary Address & Phone Number Mandatory||AM|||||20036311|Armeconombank OSJC Depi-Tun|||BeneCountry|1|50|
+Cash Pick-Up|120611|Beneficiary Address & Phone Number Mandatory||AM|||||20036311|Armeconombank OSJC Depi-Tun|||BeneState|1|50|
+Cash Pick-Up|120611|Beneficiary Address & Phone Number Mandatory||AM|||||20036311|Armeconombank OSJC Depi-Tun|||BenePhoneNo|1|50|
+Cash Pick-Up|125011|Guinazu Transfer Ltda.||CL|||||18602511|Guinazu Transfer Ltda.|||BeneFirstName|1|50|
+Cash Pick-Up|125011|Guinazu Transfer Ltda.||CL|||||18602511|Guinazu Transfer Ltda.|||BeneLastName|1|50|
+Cash Pick-Up|125011|Guinazu Transfer Ltda.||CL|||||18602511|Guinazu Transfer Ltda.|||CustID1No|1|50|
+Cash Pick-Up|127811|Unistream requires sender's complete address||RU|||||2993914|Unistream/Uniastrum|||CustAddress|1|50|
+Cash Pick-Up|127811|Unistream requires sender's complete address||RU|||||2993914|Unistream/Uniastrum|||CustCity|1|50|
+Cash Pick-Up|127811|Unistream requires sender's complete address||RU|||||2993914|Unistream/Uniastrum|||CustCountry|1|50|
+Cash Pick-Up|127811|Unistream requires sender's complete address||RU|||||2993914|Unistream/Uniastrum|||CustState|1|50|
+Cash Pick-Up|128911|Office Pick Up||JM||||JMD|19988411|Victoria Mutual Money Transfer (VTMS)|||BeneCity|1|100|
+Cash Pick-Up|128911|Office Pick Up||JM||||JMD|19988411|Victoria Mutual Money Transfer (VTMS)|||BeneState|1|50|
+Cash Pick-Up|131511|Mlhuillier  Requirements||PH|||||17776111|Mlhuillier|||BeneCity|1|20|
+Cash Pick-Up|131511|Mlhuillier  Requirements||PH|||||17776111|Mlhuillier|||BeneState|1|20|
+Cash Pick-Up|132911|Sender ID requirement|||||||19268311|Money Cash Worldwide SA|||CustID1No|1|20|
+Cash Pick-Up|132911|Sender ID requirement|||||||19268311|Money Cash Worldwide SA|||CustID1Type|1|40|
+Cash Pick-Up|133311|Beneficiary requirements||BG|||||6105414|Novabanka|||BeneAddress|1|100|
+Cash Pick-Up|133311|Beneficiary requirements||BG|||||6105414|Novabanka|||BenePhoneNo|1|15|
+Cash Pick-Up|133311|Beneficiary requirements||BG|||||6105414|Novabanka|||BeneCity|1|50|
+Cash Pick-Up|133311|Beneficiary requirements||BG|||||6105414|Novabanka|||BeneState|1|50|
+Cash Pick-Up|133311|Beneficiary requirements||BG|||||6105414|Novabanka|||BeneFirstName|2|15|
+Cash Pick-Up|133311|Beneficiary requirements||BG|||||6105414|Novabanka|||BeneLastName|2|15|
+Cash Pick-Up|133311|Beneficiary requirements||BG|||||6105414|Novabanka|||BeneLastName2|2|15|
+Cash Pick-Up|133311|Beneficiary requirements||BG|||||6105414|Novabanka|||BeneZipCode|4|6|
+Cash Pick-Up|134711|Requirements||RU||||EUR|17864211|NKO AO Leader|||BeneFirstName|3|15|
+Cash Pick-Up|134711|Requirements||RU||||EUR|17864211|NKO AO Leader|||BeneLastName|3|15|
+Cash Pick-Up|136411|Beneficiary requirements||SI||||EUR|6105414|Novabanka|||BeneCity|1|50|
+Cash Pick-Up|136411|Beneficiary requirements||SI||||EUR|6105414|Novabanka|||BeneState|1|50|
+Cash Pick-Up|136411|Beneficiary requirements||SI||||EUR|6105414|Novabanka|||BeneFirstName|2|15|
+Cash Pick-Up|136411|Beneficiary requirements||SI||||EUR|6105414|Novabanka|||BeneLastName|2|20|
+Cash Pick-Up|136411|Beneficiary requirements||SI||||EUR|6105414|Novabanka|||BeneZipCode|4|4|
+Cash Pick-Up|136411|Beneficiary requirements||SI||||EUR|6105414|Novabanka|||BenePhoneNo|5|15|
+Cash Pick-Up|136411|Beneficiary requirements||SI||||EUR|6105414|Novabanka|||BeneAddress|5|50|
+Cash Pick-Up|136711|Office Pick Up requirement||NG||||NGN|||||BeneAddress|1|200|
+Cash Pick-Up|136711|Office Pick Up requirement||NG||||NGN|||||BeneCity|1|80|
+Cash Pick-Up|136711|Office Pick Up requirement||NG||||NGN|||||BeneState|1|80|
+Cash Pick-Up|137111|Requirement for office pick up||KE||||KES|6754814|Kenya Commercial Bank|||BenePhoneNo|1|20|
+Cash Pick-Up|137711|Requirements for Turkey||TR||||EUR|6230714|Caspian MT (Zaminbank)|||BeneLastName|2|20|
+Cash Pick-Up|137711|Requirements for Turkey||TR||||EUR|6230714|Caspian MT (Zaminbank)|||BeneCity|2|20|
+Cash Pick-Up|137711|Requirements for Turkey||TR||||EUR|6230714|Caspian MT (Zaminbank)|||BeneState|2|20|
+Cash Pick-Up|137711|Requirements for Turkey||TR||||EUR|6230714|Caspian MT (Zaminbank)|||BenePhoneNo|5|14|
+Cash Pick-Up|137811|Requirements for Turkey||TR||||USD|6230714|Caspian MT (Zaminbank)|||BeneCity|2|20|
+Cash Pick-Up|137811|Requirements for Turkey||TR||||USD|6230714|Caspian MT (Zaminbank)|||BeneCountry|2|20|
+Cash Pick-Up|137811|Requirements for Turkey||TR||||USD|6230714|Caspian MT (Zaminbank)|||BeneState|2|20|
+Cash Pick-Up|139211|Requirement for beneifciary phone number.||CM|||||577114|Fiffa|||BenePhoneNo|1|15|
+Cash Pick-Up|139511|Bancoppel - Customer Zip code||MX||||MXN|22302311|BanCoppel S.A. (BTS)|||CustZipCode|1|10|
+Cash Pick-Up|139611|Telecom - Customer Zip code||MX||||MXN|19384511|Telecom (BTS)|||CustZipCode|1|10|
+Cash Pick-Up|140511|Benef Telephone number||EC||||USD|1805211|Banco Bolivariano (Ecuagiros)|||BenePhoneNo|9|10|
+Cash Pick-Up|141111|Beneficiary requirements||PT||||EUR|6105414|Novabanka|||BeneZipCode|1|10|
+Cash Pick-Up|141111|Beneficiary requirements||PT||||EUR|6105414|Novabanka|||BeneState|1|20|
+Cash Pick-Up|141111|Beneficiary requirements||PT||||EUR|6105414|Novabanka|||BeneAddress|1|50|
+Cash Pick-Up|141111|Beneficiary requirements||PT||||EUR|6105414|Novabanka|||BeneCity|1|50|
+Cash Pick-Up|141111|Beneficiary requirements||PT||||EUR|6105414|Novabanka|||BeneFirstName|2|50|
+Cash Pick-Up|141111|Beneficiary requirements||PT||||EUR|6105414|Novabanka|||BeneLastName|2|50|
+Cash Pick-Up|141111|Beneficiary requirements||PT||||EUR|6105414|Novabanka|||BenePhoneNo|5|15|
+Cash Pick-Up|141211|Beneficiary requirements||RO||||EUR|6105414|Novabanka|||BeneZipCode|1|10|
+Cash Pick-Up|141211|Beneficiary requirements||RO||||EUR|6105414|Novabanka|||BenePhoneNo|1|20|
+Cash Pick-Up|141211|Beneficiary requirements||RO||||EUR|6105414|Novabanka|||BeneFirstName|1|50|
+Cash Pick-Up|141211|Beneficiary requirements||RO||||EUR|6105414|Novabanka|||BeneLastName|1|50|
+Cash Pick-Up|141211|Beneficiary requirements||RO||||EUR|6105414|Novabanka|||BeneAddress|1|50|
+Cash Pick-Up|141211|Beneficiary requirements||RO||||EUR|6105414|Novabanka|||BeneCity|1|50|
+Cash Pick-Up|141211|Beneficiary requirements||RO||||EUR|6105414|Novabanka|||BeneCountry|1|50|
+Cash Pick-Up|141211|Beneficiary requirements||RO||||EUR|6105414|Novabanka|||BeneState|1|50|
+Cash Pick-Up|141311|Beneficiary requirements||BA|||||6105414|Novabanka|||BeneZipCode|1|10|
+Cash Pick-Up|141311|Beneficiary requirements||BA|||||6105414|Novabanka|||BenePhoneNo|1|15|
+Cash Pick-Up|141311|Beneficiary requirements||BA|||||6105414|Novabanka|||BeneCity|1|20|
+Cash Pick-Up|141311|Beneficiary requirements||BA|||||6105414|Novabanka|||BeneCountry|1|20|
+Cash Pick-Up|141311|Beneficiary requirements||BA|||||6105414|Novabanka|||BeneState|1|20|
+Cash Pick-Up|141311|Beneficiary requirements||BA|||||6105414|Novabanka|||BeneFirstName|1|50|
+Cash Pick-Up|141311|Beneficiary requirements||BA|||||6105414|Novabanka|||BeneAddress|1|50|
+Cash Pick-Up|141411|Beneficiary requirements||HR||||EUR|6105414|Novabanka|||BenePhoneNo|1|15|
+Cash Pick-Up|141411|Beneficiary requirements||HR||||EUR|6105414|Novabanka|||BeneCity|1|20|
+Cash Pick-Up|141411|Beneficiary requirements||HR||||EUR|6105414|Novabanka|||BeneCountry|1|20|
+Cash Pick-Up|141411|Beneficiary requirements||HR||||EUR|6105414|Novabanka|||BeneState|1|20|
+Cash Pick-Up|141411|Beneficiary requirements||HR||||EUR|6105414|Novabanka|||BeneFirstName|1|50|
+Cash Pick-Up|141411|Beneficiary requirements||HR||||EUR|6105414|Novabanka|||BeneLastName|1|50|
+Cash Pick-Up|141411|Beneficiary requirements||HR||||EUR|6105414|Novabanka|||BeneAddress|1|50|
+Cash Pick-Up|141411|Beneficiary requirements||HR||||EUR|6105414|Novabanka|||BeneZipCode|4|6|
+Cash Pick-Up|141611|BNC office pick up||CR|||||451812|Banco Nacional De Costa Rica-Teledolar|||BenePhoneNo|6|20|
+Cash Pick-Up|141911|Office Pick Up requirement||EC|||||1030311|Delgado Travel Cia, Ltda.|||BenePhoneNo|9|10|
+Cash Pick-Up|142711|Beneficiary requirements|||||||6105414|Novabanka|||BenePhoneNo|1|15|
+Cash Pick-Up|142711|Beneficiary requirements|||||||6105414|Novabanka|||BeneCity|1|20|
+Cash Pick-Up|142711|Beneficiary requirements|||||||6105414|Novabanka|||BeneState|1|20|
+Cash Pick-Up|142711|Beneficiary requirements|||||||6105414|Novabanka|||BeneFirstName|1|50|
+Cash Pick-Up|142711|Beneficiary requirements|||||||6105414|Novabanka|||BeneLastName|1|50|
+Cash Pick-Up|142711|Beneficiary requirements|||||||6105414|Novabanka|||BeneAddress|1|50|
+Cash Pick-Up|142711|Beneficiary requirements|||||||6105414|Novabanka|||BeneZipCode|1|7|
+Cash Pick-Up|143211|Mi Rumbo - Benef requirements||MX|||||18869711|Mi Rumbo|||BeneCity|1|50|
+Cash Pick-Up|143211|Mi Rumbo - Benef requirements||MX|||||18869711|Mi Rumbo|||CustZipCode|1|8|
+Cash Pick-Up|143211|Mi Rumbo - Benef requirements||MX|||||18869711|Mi Rumbo|||BeneFirstName|1|80|
+Cash Pick-Up|143211|Mi Rumbo - Benef requirements||MX|||||18869711|Mi Rumbo|||BeneLastName|1|80|
+Cash Pick-Up|143211|Mi Rumbo - Benef requirements||MX|||||18869711|Mi Rumbo|||BenePhoneNo|4|15|
+Cash Pick-Up|143211|Mi Rumbo - Benef requirements||MX|||||18869711|Mi Rumbo|||BeneAddress|5|80|
+Cash Pick-Up|146111|Mandatory Beneficiary's Phone Number||UK||||GBP|||||BenePhoneNo|1|15|
+Cash Pick-Up|148011|Beneficiary's complete address||||||MXN|27735811|Montemex|||BeneAddress|1|50|
+Cash Pick-Up|148011|Beneficiary's complete address||||||MXN|27735811|Montemex|||BeneCity|1|50|
+Cash Pick-Up|148011|Beneficiary's complete address||||||MXN|27735811|Montemex|||BeneState|1|50|
+Cash Pick-Up|148111|Beneficiary's complete address||||||MXN|27735911|Farmapronto|||BeneAddress|1|50|
+Cash Pick-Up|148111|Beneficiary's complete address||||||MXN|27735911|Farmapronto|||BeneCity|1|50|
+Cash Pick-Up|148111|Beneficiary's complete address||||||MXN|27735911|Farmapronto|||BeneState|1|50|
+Cash Pick-Up|148311|Beneficiary's Phone Number Requiered||BO|||||16963111|Banco Bisa|||BenePhoneNo|1|20|
+Cash Pick-Up|149611|Beneficiary requirements||LT||||LTL|6105414|Novabanka|||BeneCountry|1|15|
+Cash Pick-Up|149611|Beneficiary requirements||LT||||LTL|6105414|Novabanka|||BeneCity|1|20|
+Cash Pick-Up|149611|Beneficiary requirements||LT||||LTL|6105414|Novabanka|||BeneState|1|20|
+Cash Pick-Up|149611|Beneficiary requirements||LT||||LTL|6105414|Novabanka|||BeneZipCode|1|5|
+Cash Pick-Up|149611|Beneficiary requirements||LT||||LTL|6105414|Novabanka|||BeneLastName|2|20|
+Cash Pick-Up|178011|India Post|||||||36608811|India Post (Instant Cash Fze)|||BeneIDType|1|15|
+Cash Pick-Up|178011|India Post|||||||36608811|India Post (Instant Cash Fze)|||CustCountryOfBirth|1|15|
+Cash Pick-Up|178011|India Post|||||||36608811|India Post (Instant Cash Fze)|||CustNationality|1|15|
+Cash Pick-Up|178011|India Post|||||||36608811|India Post (Instant Cash Fze)|||CustID1Type|1|15|
+Cash Pick-Up|178011|India Post|||||||36608811|India Post (Instant Cash Fze)|||BeneIDNo|1|20|
+Cash Pick-Up|178011|India Post|||||||36608811|India Post (Instant Cash Fze)|||BeneAddress|1|50|
+Cash Pick-Up|179011|Corporaciones Austro Requirements||EC||||USD|4270211|Corporaciones Unidas Del Austro|||BeneAddress|1|50|
+Cash Pick-Up|186611|Kotak - Transfer Reason||IN||||INR|35244411|Kotak Mahindra Bank LTD|||TransferReason|1|20|
+Cash Pick-Up|227422|Requirements||IN|||||7575014|Ezremit Ltd (Bahrain Finance Company Ltd)|||BeneIDNo|1|50|
+Cash Pick-Up|227422|Requirements||IN|||||7575014|Ezremit Ltd (Bahrain Finance Company Ltd)|||BeneIDType|1|50|
+Cash Pick-Up|227422|Requirements||IN|||||7575014|Ezremit Ltd (Bahrain Finance Company Ltd)|||CustID1No|1|50|
+Cash Pick-Up|227422|Requirements||IN|||||7575014|Ezremit Ltd (Bahrain Finance Company Ltd)|||CustID1Type|1|50|
+Cash Pick-Up|231422|Instant Cash Fze||IN|||||7991614|Instant Cash Fze|||BeneCountry|1|20|
+Cash Pick-Up|231422|Instant Cash Fze||IN|||||7991614|Instant Cash Fze|||CustID1No|1|20|
+Cash Pick-Up|231422|Instant Cash Fze||IN|||||7991614|Instant Cash Fze|||CustID1Type|1|20|
+Cash Pick-Up|231422|Instant Cash Fze||IN|||||7991614|Instant Cash Fze|||TransferReason|1|20|
+Cash Pick-Up|231422|Instant Cash Fze||IN|||||7991614|Instant Cash Fze|||CustNationality|1|30|
+Cash Pick-Up|231422|Instant Cash Fze||IN|||||7991614|Instant Cash Fze|||BenePhoneNo|7|13|
+Cash Pick-Up|240055|PT BANK Niaga-Cash Pick Up||ID|||||659112|PT Bank CIMB Niaga|||BeneFirstName|1|25|
+Cash Pick-Up|240055|PT BANK Niaga-Cash Pick Up||ID|||||659112|PT Bank CIMB Niaga|||BeneIDType|1|25|
+Cash Pick-Up|240055|PT BANK Niaga-Cash Pick Up||ID|||||659112|PT Bank CIMB Niaga|||BeneIDNo|4|25|
+Cash Pick-Up|244355|customer ID||PY||||PYG|23994511|Vision Banco S.A.|||CustDateBirth|1|8|
+Cash Pick-Up|263755|MT Basic Req to US||US|||||||||BeneCountry|1|50|
+Cash Pick-Up|263755|MT Basic Req to US||US|||||||||BeneState|1|50|
+Cash Pick-Up|273355|General Payout Requirements Bahrain||BH||||BHD|||||BeneDateOfBirth|1|50|
+Cash Pick-Up|273355|General Payout Requirements Bahrain||BH||||BHD||||||1|50|
+Cash Pick-Up|273355|General Payout Requirements Bahrain||BH||||BHD|||||BeneIDNo|1|50|
+Cash Pick-Up|273355|General Payout Requirements Bahrain||BH||||BHD|||||BeneIDType|1|50|
+Cash Pick-Up|273355|General Payout Requirements Bahrain||BH||||BHD|||||BeneNationality|1|50|
+Cash Pick-Up|273355|General Payout Requirements Bahrain||BH||||BHD||||||1|50|
+Cash Pick-Up|274155|Customer on Behalf - Basic Requirements (Test)|||||||||||CustOccupation|1|100|
+Cash Pick-Up|274155|Customer on Behalf - Basic Requirements (Test)||||||||||||1|50|
+Home Delivery|120011|Beneficiary Address & Phone Number Mandatory||AM|||||18482811|Armeconombank OSJC|||BeneAddress|1|50|
+Home Delivery|120011|Beneficiary Address & Phone Number Mandatory||AM|||||18482811|Armeconombank OSJC|||BenePhoneNo|1|50|
+Home Delivery|120511|Beneficiary Address & Phone Number Mandatory||AM|||||20036311|Armeconombank OSJC Depi-Tun|||BeneAddress|1|50|
+Home Delivery|120511|Beneficiary Address & Phone Number Mandatory||AM|||||20036311|Armeconombank OSJC Depi-Tun|||BenePhoneNo|1|50|
+Home Delivery|136311|Beneficiary requirements||HU||||HUF|6105414|Novabanka|||BeneFirstName|2|20|
+Home Delivery|136311|Beneficiary requirements||HU||||HUF|6105414|Novabanka|||BeneLastName|2|20|
+Home Delivery|136311|Beneficiary requirements||HU||||HUF|6105414|Novabanka|||BeneZipCode|4|4|
+Home Delivery|136311|Beneficiary requirements||HU||||HUF|6105414|Novabanka|||BeneAddress|5|50|
+Home Delivery|229922|Home Delivery Phillipines||PH|||||||||BeneAddress|1|250|
+Home Delivery|241255|MoneyTun LLC HD req.||AM|||||43380211|MoneyTun LLC|||BeneAddress|5|50|
+Home Delivery|241255|MoneyTun LLC HD req.||AM|||||43380211|MoneyTun LLC|||BenePhoneNo|8|11|
+Home Delivery|256855|Home delivery req.||AM|||||38987811|HayPost CJSC|||BenePhoneNo|1|12|
+Home Delivery|256855|Home delivery req.||AM|||||38987811|HayPost CJSC|||BeneCity|1|50|
+Home Delivery|256855|Home delivery req.||AM|||||38987811|HayPost CJSC|||BeneAddress|10|50|
