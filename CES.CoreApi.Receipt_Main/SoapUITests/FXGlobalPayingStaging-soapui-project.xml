@@ -1,0 +1,2972 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<con:soapui-project id="47c515a6-0ba9-4d83-9a08-170c2093ad75" activeEnvironment="Default" name="FXGlobalPayingStaging" resourceRoot="" soapui-version="5.2.1" abortOnError="false" runType="SEQUENTIAL" xmlns:con="http://eviware.com/soapui/config"><con:settings/><con:interface xsi:type="con:WsdlInterface" id="a5ee6cc6-0819-4891-9dc2-34669ce47b99" wsaVersion="NONE" name="basicHttpBindingNoCert_RiaAsPayer" type="wsdl" bindingName="{http://tempuri.org/}basicHttpBindingNoCert_RiaAsPayer" soapVersion="1_1" anonymous="optional" definition="http://stagingfxglobalwebsvcnocert.riaenvia.net:9771/FXGlobalPaying.svc?wsdl" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:settings/><con:definitionCache type="TEXT" rootPart="http://stagingfxglobalwebsvcnocert.riaenvia.net:9771/FXGlobalPaying.svc?wsdl"><con:part><con:url>http://stagingfxglobalwebsvcnocert.riaenvia.net:9771/FXGlobalPaying.svc?wsdl</con:url><con:content><![CDATA[<wsdl:definitions name="FXGlobalPaying" targetNamespace="http://tempuri.org/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" xmlns:tns="http://tempuri.org/" xmlns:wsa="http://schemas.xmlsoap.org/ws/2004/08/addressing" xmlns:wsx="http://schemas.xmlsoap.org/ws/2004/09/mex" xmlns:wsap="http://schemas.xmlsoap.org/ws/2004/08/addressing/policy" xmlns:wsaw="http://www.w3.org/2006/05/addressing/wsdl" xmlns:msc="http://schemas.microsoft.com/ws/2005/12/wsdl/contract" xmlns:i0="CES.Services.FXGlobal" xmlns:wsp="http://schemas.xmlsoap.org/ws/2004/09/policy" xmlns:wsa10="http://www.w3.org/2005/08/addressing" xmlns:wsam="http://www.w3.org/2007/05/addressing/metadata">
+  <wsdl:import namespace="CES.Services.FXGlobal" location="http://stagingfxglobalwebsvcnocert.riaenvia.net:9771/FXGlobalPaying.svc?wsdl=wsdl0"/>
+  <wsdl:types/>
+  <wsdl:binding name="basicHttpBindingNoCert_RiaAsPayer" type="i0:IRiaAsPayer">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http"/>
+    <wsdl:operation name="GetCurrencies">
+      <soap:operation soapAction="CES.Services.FXGlobal/IRiaAsPayer/GetCurrencies" style="document"/>
+      <wsdl:input>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetDailyOrders">
+      <soap:operation soapAction="CES.Services.FXGlobal/IRiaAsPayer/GetDailyOrders" style="document"/>
+      <wsdl:input>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetDailyOrdersSummary">
+      <soap:operation soapAction="CES.Services.FXGlobal/IRiaAsPayer/GetDailyOrdersSummary" style="document"/>
+      <wsdl:input>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetRates">
+      <soap:operation soapAction="CES.Services.FXGlobal/IRiaAsPayer/GetRates" style="document"/>
+      <wsdl:input>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetRequirements">
+      <soap:operation soapAction="CES.Services.FXGlobal/IRiaAsPayer/GetRequirements" style="document"/>
+      <wsdl:input>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetCountriesStates">
+      <soap:operation soapAction="CES.Services.FXGlobal/IRiaAsPayer/GetCountriesStates" style="document"/>
+      <wsdl:input>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetStatesCities">
+      <soap:operation soapAction="CES.Services.FXGlobal/IRiaAsPayer/GetStatesCities" style="document"/>
+      <wsdl:input>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetCommissions">
+      <soap:operation soapAction="CES.Services.FXGlobal/IRiaAsPayer/GetCommissions" style="document"/>
+      <wsdl:input>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetOrderCommission">
+      <soap:operation soapAction="CES.Services.FXGlobal/IRiaAsPayer/GetOrderCommission" style="document"/>
+      <wsdl:input>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetLocsCurrsRates">
+      <soap:operation soapAction="CES.Services.FXGlobal/IRiaAsPayer/GetLocsCurrsRates" style="document"/>
+      <wsdl:input>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetLocationCatalogByFTP">
+      <soap:operation soapAction="CES.Services.FXGlobal/IRiaAsPayer/GetLocationCatalogByFTP" style="document"/>
+      <wsdl:input>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetBankCatalogByFTP">
+      <soap:operation soapAction="CES.Services.FXGlobal/IRiaAsPayer/GetBankCatalogByFTP" style="document"/>
+      <wsdl:input>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetCurrentOrderStatus">
+      <soap:operation soapAction="CES.Services.FXGlobal/IRiaAsPayer/GetCurrentOrderStatus" style="document"/>
+      <wsdl:input>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetPayersCustSvcMsgs">
+      <soap:operation soapAction="CES.Services.FXGlobal/IRiaAsPayer/GetPayersCustSvcMsgs" style="document"/>
+      <wsdl:input>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetOrderStatusNotices">
+      <soap:operation soapAction="CES.Services.FXGlobal/IRiaAsPayer/GetOrderStatusNotices" style="document"/>
+      <wsdl:input>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetOrdersValidated">
+      <soap:operation soapAction="CES.Services.FXGlobal/IRiaAsPayer/GetOrdersValidated" style="document"/>
+      <wsdl:input>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetOrderDetails">
+      <soap:operation soapAction="CES.Services.FXGlobal/IRiaAsPayer/GetOrderDetails" style="document"/>
+      <wsdl:input>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="InputOrders">
+      <soap:operation soapAction="CES.Services.FXGlobal/IRiaAsPayer/InputOrders" style="document"/>
+      <wsdl:input>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="InputCancelationRequests">
+      <soap:operation soapAction="CES.Services.FXGlobal/IRiaAsPayer/InputCancelationRequests" style="document"/>
+      <wsdl:input>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="InputSendersCustSvcMsgs">
+      <soap:operation soapAction="CES.Services.FXGlobal/IRiaAsPayer/InputSendersCustSvcMsgs" style="document"/>
+      <wsdl:input>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetBanks">
+      <soap:operation soapAction="CES.Services.FXGlobal/IRiaAsPayer/GetBanks" style="document"/>
+      <wsdl:input>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetBankInfo">
+      <soap:operation soapAction="CES.Services.FXGlobal/IRiaAsPayer/GetBankInfo" style="document"/>
+      <wsdl:input>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetBankBranches">
+      <soap:operation soapAction="CES.Services.FXGlobal/IRiaAsPayer/GetBankBranches" style="document"/>
+      <wsdl:input>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="InputCustomer">
+      <soap:operation soapAction="CES.Services.FXGlobal/IRiaAsPayer/InputCustomer" style="document"/>
+      <wsdl:input>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="InputBeneficiary">
+      <soap:operation soapAction="CES.Services.FXGlobal/IRiaAsPayer/InputBeneficiary" style="document"/>
+      <wsdl:input>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetCustomers">
+      <soap:operation soapAction="CES.Services.FXGlobal/IRiaAsPayer/GetCustomers" style="document"/>
+      <wsdl:input>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetAmountsAndReqs">
+      <soap:operation soapAction="CES.Services.FXGlobal/IRiaAsPayer/GetAmountsAndReqs" style="document"/>
+      <wsdl:input>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="InputOrderReleaseRequest">
+      <soap:operation soapAction="CES.Services.FXGlobal/IRiaAsPayer/InputOrderReleaseRequest" style="document"/>
+      <wsdl:input>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetUnconfirmedOrders">
+      <soap:operation soapAction="CES.Services.FXGlobal/IRiaAsPayer/GetUnconfirmedOrders" style="document"/>
+      <wsdl:input>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetEnumerationValues">
+      <soap:operation soapAction="CES.Services.FXGlobal/IRiaAsPayer/GetEnumerationValues" style="document"/>
+      <wsdl:input>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetAvailableServices">
+      <soap:operation soapAction="CES.Services.FXGlobal/IRiaAsPayer/GetAvailableServices" style="document"/>
+      <wsdl:input>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ReservePINs">
+      <soap:operation soapAction="CES.Services.FXGlobal/IRiaAsPayer/ReservePINs" style="document"/>
+      <wsdl:input>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="IsAlive">
+      <soap:operation soapAction="CES.Services.FXGlobal/IRiaAsPayer/IsAlive" style="document"/>
+      <wsdl:input>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Ping">
+      <soap:operation soapAction="CES.Services.FXGlobal/IRiaAsPayer/Ping" style="document"/>
+      <wsdl:input>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="FXGlobalPaying">
+    <wsdl:port name="basicHttpBindingNoCert_RiaAsPayer" binding="tns:basicHttpBindingNoCert_RiaAsPayer">
+      <soap:address location="http://stagingfxglobalwebsvcnocert.riaenvia.net:9771/FXGlobalPaying.svc/Binding_Basic_NoCert"/>
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>]]></con:content><con:type>http://schemas.xmlsoap.org/wsdl/</con:type></con:part><con:part><con:url>http://stagingfxglobalwebsvcnocert.riaenvia.net:9771/FXGlobalPaying.svc?wsdl=wsdl0</con:url><con:content><![CDATA[<wsdl:definitions targetNamespace="CES.Services.FXGlobal" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" xmlns:tns="CES.Services.FXGlobal" xmlns:wsa="http://schemas.xmlsoap.org/ws/2004/08/addressing" xmlns:wsx="http://schemas.xmlsoap.org/ws/2004/09/mex" xmlns:wsap="http://schemas.xmlsoap.org/ws/2004/08/addressing/policy" xmlns:wsaw="http://www.w3.org/2006/05/addressing/wsdl" xmlns:msc="http://schemas.microsoft.com/ws/2005/12/wsdl/contract" xmlns:wsp="http://schemas.xmlsoap.org/ws/2004/09/policy" xmlns:wsa10="http://www.w3.org/2005/08/addressing" xmlns:wsam="http://www.w3.org/2007/05/addressing/metadata">
+  <wsdl:types>
+    <xsd:schema targetNamespace="CES.Services.FXGlobal/Imports">
+      <xsd:import schemaLocation="http://stagingfxglobalwebsvcnocert.riaenvia.net:9771/FXGlobalPaying.svc?xsd=xsd0" namespace="CES.Services.FXGlobal"/>
+      <xsd:import schemaLocation="http://stagingfxglobalwebsvcnocert.riaenvia.net:9771/FXGlobalPaying.svc?xsd=xsd1" namespace="http://schemas.microsoft.com/2003/10/Serialization/"/>
+    </xsd:schema>
+  </wsdl:types>
+  <wsdl:message name="IRiaAsPayer_GetCurrencies_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetCurrencies"/>
+  </wsdl:message>
+  <wsdl:message name="IRiaAsPayer_GetCurrencies_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetCurrenciesResponse"/>
+  </wsdl:message>
+  <wsdl:message name="IRiaAsPayer_GetDailyOrders_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetDailyOrders"/>
+  </wsdl:message>
+  <wsdl:message name="IRiaAsPayer_GetDailyOrders_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetDailyOrdersResponse"/>
+  </wsdl:message>
+  <wsdl:message name="IRiaAsPayer_GetDailyOrdersSummary_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetDailyOrdersSummary"/>
+  </wsdl:message>
+  <wsdl:message name="IRiaAsPayer_GetDailyOrdersSummary_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetDailyOrdersSummaryResponse"/>
+  </wsdl:message>
+  <wsdl:message name="IRiaAsPayer_GetRates_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetRates"/>
+  </wsdl:message>
+  <wsdl:message name="IRiaAsPayer_GetRates_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetRatesResponse"/>
+  </wsdl:message>
+  <wsdl:message name="IRiaAsPayer_GetRequirements_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetRequirements"/>
+  </wsdl:message>
+  <wsdl:message name="IRiaAsPayer_GetRequirements_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetRequirementsResponse"/>
+  </wsdl:message>
+  <wsdl:message name="IRiaAsPayer_GetCountriesStates_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetCountriesStates"/>
+  </wsdl:message>
+  <wsdl:message name="IRiaAsPayer_GetCountriesStates_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetCountriesStatesResponse"/>
+  </wsdl:message>
+  <wsdl:message name="IRiaAsPayer_GetStatesCities_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetStatesCities"/>
+  </wsdl:message>
+  <wsdl:message name="IRiaAsPayer_GetStatesCities_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetStatesCitiesResponse"/>
+  </wsdl:message>
+  <wsdl:message name="IRiaAsPayer_GetCommissions_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetCommissions"/>
+  </wsdl:message>
+  <wsdl:message name="IRiaAsPayer_GetCommissions_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetCommissionsResponse"/>
+  </wsdl:message>
+  <wsdl:message name="IRiaAsPayer_GetOrderCommission_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetOrderCommission"/>
+  </wsdl:message>
+  <wsdl:message name="IRiaAsPayer_GetOrderCommission_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetOrderCommissionResponse"/>
+  </wsdl:message>
+  <wsdl:message name="IRiaAsPayer_GetLocsCurrsRates_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetLocsCurrsRates"/>
+  </wsdl:message>
+  <wsdl:message name="IRiaAsPayer_GetLocsCurrsRates_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetLocsCurrsRatesResponse"/>
+  </wsdl:message>
+  <wsdl:message name="IRiaAsPayer_GetLocationCatalogByFTP_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetLocationCatalogByFTP"/>
+  </wsdl:message>
+  <wsdl:message name="IRiaAsPayer_GetLocationCatalogByFTP_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetLocationCatalogByFTPResponse"/>
+  </wsdl:message>
+  <wsdl:message name="IRiaAsPayer_GetBankCatalogByFTP_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetBankCatalogByFTP"/>
+  </wsdl:message>
+  <wsdl:message name="IRiaAsPayer_GetBankCatalogByFTP_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetBankCatalogByFTPResponse"/>
+  </wsdl:message>
+  <wsdl:message name="IRiaAsPayer_GetCurrentOrderStatus_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetCurrentOrderStatus"/>
+  </wsdl:message>
+  <wsdl:message name="IRiaAsPayer_GetCurrentOrderStatus_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetCurrentOrderStatusResponse"/>
+  </wsdl:message>
+  <wsdl:message name="IRiaAsPayer_GetPayersCustSvcMsgs_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetPayersCustSvcMsgs"/>
+  </wsdl:message>
+  <wsdl:message name="IRiaAsPayer_GetPayersCustSvcMsgs_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetPayersCustSvcMsgsResponse"/>
+  </wsdl:message>
+  <wsdl:message name="IRiaAsPayer_GetOrderStatusNotices_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetOrderStatusNotices"/>
+  </wsdl:message>
+  <wsdl:message name="IRiaAsPayer_GetOrderStatusNotices_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetOrderStatusNoticesResponse"/>
+  </wsdl:message>
+  <wsdl:message name="IRiaAsPayer_GetOrdersValidated_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetOrdersValidated"/>
+  </wsdl:message>
+  <wsdl:message name="IRiaAsPayer_GetOrdersValidated_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetOrdersValidatedResponse"/>
+  </wsdl:message>
+  <wsdl:message name="IRiaAsPayer_GetOrderDetails_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetOrderDetails"/>
+  </wsdl:message>
+  <wsdl:message name="IRiaAsPayer_GetOrderDetails_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetOrderDetailsResponse"/>
+  </wsdl:message>
+  <wsdl:message name="IRiaAsPayer_InputOrders_InputMessage">
+    <wsdl:part name="parameters" element="tns:InputOrders"/>
+  </wsdl:message>
+  <wsdl:message name="IRiaAsPayer_InputOrders_OutputMessage">
+    <wsdl:part name="parameters" element="tns:InputOrdersResponse"/>
+  </wsdl:message>
+  <wsdl:message name="IRiaAsPayer_InputCancelationRequests_InputMessage">
+    <wsdl:part name="parameters" element="tns:InputCancelationRequests"/>
+  </wsdl:message>
+  <wsdl:message name="IRiaAsPayer_InputCancelationRequests_OutputMessage">
+    <wsdl:part name="parameters" element="tns:InputCancelationRequestsResponse"/>
+  </wsdl:message>
+  <wsdl:message name="IRiaAsPayer_InputSendersCustSvcMsgs_InputMessage">
+    <wsdl:part name="parameters" element="tns:InputSendersCustSvcMsgs"/>
+  </wsdl:message>
+  <wsdl:message name="IRiaAsPayer_InputSendersCustSvcMsgs_OutputMessage">
+    <wsdl:part name="parameters" element="tns:InputSendersCustSvcMsgsResponse"/>
+  </wsdl:message>
+  <wsdl:message name="IRiaAsPayer_GetBanks_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetBanks"/>
+  </wsdl:message>
+  <wsdl:message name="IRiaAsPayer_GetBanks_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetBanksResponse"/>
+  </wsdl:message>
+  <wsdl:message name="IRiaAsPayer_GetBankInfo_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetBankInfo"/>
+  </wsdl:message>
+  <wsdl:message name="IRiaAsPayer_GetBankInfo_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetBankInfoResponse"/>
+  </wsdl:message>
+  <wsdl:message name="IRiaAsPayer_GetBankBranches_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetBankBranches"/>
+  </wsdl:message>
+  <wsdl:message name="IRiaAsPayer_GetBankBranches_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetBankBranchesResponse"/>
+  </wsdl:message>
+  <wsdl:message name="IRiaAsPayer_InputCustomer_InputMessage">
+    <wsdl:part name="parameters" element="tns:InputCustomer"/>
+  </wsdl:message>
+  <wsdl:message name="IRiaAsPayer_InputCustomer_OutputMessage">
+    <wsdl:part name="parameters" element="tns:InputCustomerResponse"/>
+  </wsdl:message>
+  <wsdl:message name="IRiaAsPayer_InputBeneficiary_InputMessage">
+    <wsdl:part name="parameters" element="tns:InputBeneficiary"/>
+  </wsdl:message>
+  <wsdl:message name="IRiaAsPayer_InputBeneficiary_OutputMessage">
+    <wsdl:part name="parameters" element="tns:InputBeneficiaryResponse"/>
+  </wsdl:message>
+  <wsdl:message name="IRiaAsPayer_GetCustomers_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetCustomers"/>
+  </wsdl:message>
+  <wsdl:message name="IRiaAsPayer_GetCustomers_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetCustomersResponse"/>
+  </wsdl:message>
+  <wsdl:message name="IRiaAsPayer_GetAmountsAndReqs_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetAmountsAndReqs"/>
+  </wsdl:message>
+  <wsdl:message name="IRiaAsPayer_GetAmountsAndReqs_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetAmountsAndReqsResponse"/>
+  </wsdl:message>
+  <wsdl:message name="IRiaAsPayer_InputOrderReleaseRequest_InputMessage">
+    <wsdl:part name="parameters" element="tns:InputOrderReleaseRequest"/>
+  </wsdl:message>
+  <wsdl:message name="IRiaAsPayer_InputOrderReleaseRequest_OutputMessage">
+    <wsdl:part name="parameters" element="tns:InputOrderReleaseRequestResponse"/>
+  </wsdl:message>
+  <wsdl:message name="IRiaAsPayer_GetUnconfirmedOrders_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetUnconfirmedOrders"/>
+  </wsdl:message>
+  <wsdl:message name="IRiaAsPayer_GetUnconfirmedOrders_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetUnconfirmedOrdersResponse"/>
+  </wsdl:message>
+  <wsdl:message name="IRiaAsPayer_GetEnumerationValues_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetEnumerationValues"/>
+  </wsdl:message>
+  <wsdl:message name="IRiaAsPayer_GetEnumerationValues_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetEnumerationValuesResponse"/>
+  </wsdl:message>
+  <wsdl:message name="IRiaAsPayer_GetAvailableServices_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetAvailableServices"/>
+  </wsdl:message>
+  <wsdl:message name="IRiaAsPayer_GetAvailableServices_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetAvailableServicesResponse"/>
+  </wsdl:message>
+  <wsdl:message name="IRiaAsPayer_ReservePINs_InputMessage">
+    <wsdl:part name="parameters" element="tns:ReservePINs"/>
+  </wsdl:message>
+  <wsdl:message name="IRiaAsPayer_ReservePINs_OutputMessage">
+    <wsdl:part name="parameters" element="tns:ReservePINsResponse"/>
+  </wsdl:message>
+  <wsdl:message name="IRiaAsPayer_IsAlive_InputMessage">
+    <wsdl:part name="parameters" element="tns:IsAlive"/>
+  </wsdl:message>
+  <wsdl:message name="IRiaAsPayer_IsAlive_OutputMessage">
+    <wsdl:part name="parameters" element="tns:IsAliveResponse"/>
+  </wsdl:message>
+  <wsdl:message name="IRiaAsPayer_Ping_InputMessage">
+    <wsdl:part name="parameters" element="tns:Ping"/>
+  </wsdl:message>
+  <wsdl:message name="IRiaAsPayer_Ping_OutputMessage">
+    <wsdl:part name="parameters" element="tns:PingResponse"/>
+  </wsdl:message>
+  <wsdl:portType name="IRiaAsPayer">
+    <wsdl:operation name="GetCurrencies">
+      <wsdl:input wsaw:Action="CES.Services.FXGlobal/IRiaAsPayer/GetCurrencies" message="tns:IRiaAsPayer_GetCurrencies_InputMessage"/>
+      <wsdl:output wsaw:Action="CES.Services.FXGlobal/IRiaAsPayer/GetCurrenciesResponse" message="tns:IRiaAsPayer_GetCurrencies_OutputMessage"/>
+    </wsdl:operation>
+    <wsdl:operation name="GetDailyOrders">
+      <wsdl:input wsaw:Action="CES.Services.FXGlobal/IRiaAsPayer/GetDailyOrders" message="tns:IRiaAsPayer_GetDailyOrders_InputMessage"/>
+      <wsdl:output wsaw:Action="CES.Services.FXGlobal/IRiaAsPayer/GetDailyOrdersResponse" message="tns:IRiaAsPayer_GetDailyOrders_OutputMessage"/>
+    </wsdl:operation>
+    <wsdl:operation name="GetDailyOrdersSummary">
+      <wsdl:input wsaw:Action="CES.Services.FXGlobal/IRiaAsPayer/GetDailyOrdersSummary" message="tns:IRiaAsPayer_GetDailyOrdersSummary_InputMessage"/>
+      <wsdl:output wsaw:Action="CES.Services.FXGlobal/IRiaAsPayer/GetDailyOrdersSummaryResponse" message="tns:IRiaAsPayer_GetDailyOrdersSummary_OutputMessage"/>
+    </wsdl:operation>
+    <wsdl:operation name="GetRates">
+      <wsdl:input wsaw:Action="CES.Services.FXGlobal/IRiaAsPayer/GetRates" message="tns:IRiaAsPayer_GetRates_InputMessage"/>
+      <wsdl:output wsaw:Action="CES.Services.FXGlobal/IRiaAsPayer/GetRatesResponse" message="tns:IRiaAsPayer_GetRates_OutputMessage"/>
+    </wsdl:operation>
+    <wsdl:operation name="GetRequirements">
+      <wsdl:input wsaw:Action="CES.Services.FXGlobal/IRiaAsPayer/GetRequirements" message="tns:IRiaAsPayer_GetRequirements_InputMessage"/>
+      <wsdl:output wsaw:Action="CES.Services.FXGlobal/IRiaAsPayer/GetRequirementsResponse" message="tns:IRiaAsPayer_GetRequirements_OutputMessage"/>
+    </wsdl:operation>
+    <wsdl:operation name="GetCountriesStates">
+      <wsdl:input wsaw:Action="CES.Services.FXGlobal/IRiaAsPayer/GetCountriesStates" message="tns:IRiaAsPayer_GetCountriesStates_InputMessage"/>
+      <wsdl:output wsaw:Action="CES.Services.FXGlobal/IRiaAsPayer/GetCountriesStatesResponse" message="tns:IRiaAsPayer_GetCountriesStates_OutputMessage"/>
+    </wsdl:operation>
+    <wsdl:operation name="GetStatesCities">
+      <wsdl:input wsaw:Action="CES.Services.FXGlobal/IRiaAsPayer/GetStatesCities" message="tns:IRiaAsPayer_GetStatesCities_InputMessage"/>
+      <wsdl:output wsaw:Action="CES.Services.FXGlobal/IRiaAsPayer/GetStatesCitiesResponse" message="tns:IRiaAsPayer_GetStatesCities_OutputMessage"/>
+    </wsdl:operation>
+    <wsdl:operation name="GetCommissions">
+      <wsdl:input wsaw:Action="CES.Services.FXGlobal/IRiaAsPayer/GetCommissions" message="tns:IRiaAsPayer_GetCommissions_InputMessage"/>
+      <wsdl:output wsaw:Action="CES.Services.FXGlobal/IRiaAsPayer/GetCommissionsResponse" message="tns:IRiaAsPayer_GetCommissions_OutputMessage"/>
+    </wsdl:operation>
+    <wsdl:operation name="GetOrderCommission">
+      <wsdl:input wsaw:Action="CES.Services.FXGlobal/IRiaAsPayer/GetOrderCommission" message="tns:IRiaAsPayer_GetOrderCommission_InputMessage"/>
+      <wsdl:output wsaw:Action="CES.Services.FXGlobal/IRiaAsPayer/GetOrderCommissionResponse" message="tns:IRiaAsPayer_GetOrderCommission_OutputMessage"/>
+    </wsdl:operation>
+    <wsdl:operation name="GetLocsCurrsRates">
+      <wsdl:input wsaw:Action="CES.Services.FXGlobal/IRiaAsPayer/GetLocsCurrsRates" message="tns:IRiaAsPayer_GetLocsCurrsRates_InputMessage"/>
+      <wsdl:output wsaw:Action="CES.Services.FXGlobal/IRiaAsPayer/GetLocsCurrsRatesResponse" message="tns:IRiaAsPayer_GetLocsCurrsRates_OutputMessage"/>
+    </wsdl:operation>
+    <wsdl:operation name="GetLocationCatalogByFTP">
+      <wsdl:input wsaw:Action="CES.Services.FXGlobal/IRiaAsPayer/GetLocationCatalogByFTP" message="tns:IRiaAsPayer_GetLocationCatalogByFTP_InputMessage"/>
+      <wsdl:output wsaw:Action="CES.Services.FXGlobal/IRiaAsPayer/GetLocationCatalogByFTPResponse" message="tns:IRiaAsPayer_GetLocationCatalogByFTP_OutputMessage"/>
+    </wsdl:operation>
+    <wsdl:operation name="GetBankCatalogByFTP">
+      <wsdl:input wsaw:Action="CES.Services.FXGlobal/IRiaAsPayer/GetBankCatalogByFTP" message="tns:IRiaAsPayer_GetBankCatalogByFTP_InputMessage"/>
+      <wsdl:output wsaw:Action="CES.Services.FXGlobal/IRiaAsPayer/GetBankCatalogByFTPResponse" message="tns:IRiaAsPayer_GetBankCatalogByFTP_OutputMessage"/>
+    </wsdl:operation>
+    <wsdl:operation name="GetCurrentOrderStatus">
+      <wsdl:input wsaw:Action="CES.Services.FXGlobal/IRiaAsPayer/GetCurrentOrderStatus" message="tns:IRiaAsPayer_GetCurrentOrderStatus_InputMessage"/>
+      <wsdl:output wsaw:Action="CES.Services.FXGlobal/IRiaAsPayer/GetCurrentOrderStatusResponse" message="tns:IRiaAsPayer_GetCurrentOrderStatus_OutputMessage"/>
+    </wsdl:operation>
+    <wsdl:operation name="GetPayersCustSvcMsgs">
+      <wsdl:input wsaw:Action="CES.Services.FXGlobal/IRiaAsPayer/GetPayersCustSvcMsgs" message="tns:IRiaAsPayer_GetPayersCustSvcMsgs_InputMessage"/>
+      <wsdl:output wsaw:Action="CES.Services.FXGlobal/IRiaAsPayer/GetPayersCustSvcMsgsResponse" message="tns:IRiaAsPayer_GetPayersCustSvcMsgs_OutputMessage"/>
+    </wsdl:operation>
+    <wsdl:operation name="GetOrderStatusNotices">
+      <wsdl:input wsaw:Action="CES.Services.FXGlobal/IRiaAsPayer/GetOrderStatusNotices" message="tns:IRiaAsPayer_GetOrderStatusNotices_InputMessage"/>
+      <wsdl:output wsaw:Action="CES.Services.FXGlobal/IRiaAsPayer/GetOrderStatusNoticesResponse" message="tns:IRiaAsPayer_GetOrderStatusNotices_OutputMessage"/>
+    </wsdl:operation>
+    <wsdl:operation name="GetOrdersValidated">
+      <wsdl:input wsaw:Action="CES.Services.FXGlobal/IRiaAsPayer/GetOrdersValidated" message="tns:IRiaAsPayer_GetOrdersValidated_InputMessage"/>
+      <wsdl:output wsaw:Action="CES.Services.FXGlobal/IRiaAsPayer/GetOrdersValidatedResponse" message="tns:IRiaAsPayer_GetOrdersValidated_OutputMessage"/>
+    </wsdl:operation>
+    <wsdl:operation name="GetOrderDetails">
+      <wsdl:input wsaw:Action="CES.Services.FXGlobal/IRiaAsPayer/GetOrderDetails" message="tns:IRiaAsPayer_GetOrderDetails_InputMessage"/>
+      <wsdl:output wsaw:Action="CES.Services.FXGlobal/IRiaAsPayer/GetOrderDetailsResponse" message="tns:IRiaAsPayer_GetOrderDetails_OutputMessage"/>
+    </wsdl:operation>
+    <wsdl:operation name="InputOrders">
+      <wsdl:input wsaw:Action="CES.Services.FXGlobal/IRiaAsPayer/InputOrders" message="tns:IRiaAsPayer_InputOrders_InputMessage"/>
+      <wsdl:output wsaw:Action="CES.Services.FXGlobal/IRiaAsPayer/InputOrdersResponse" message="tns:IRiaAsPayer_InputOrders_OutputMessage"/>
+    </wsdl:operation>
+    <wsdl:operation name="InputCancelationRequests">
+      <wsdl:input wsaw:Action="CES.Services.FXGlobal/IRiaAsPayer/InputCancelationRequests" message="tns:IRiaAsPayer_InputCancelationRequests_InputMessage"/>
+      <wsdl:output wsaw:Action="CES.Services.FXGlobal/IRiaAsPayer/InputCancelationRequestsResponse" message="tns:IRiaAsPayer_InputCancelationRequests_OutputMessage"/>
+    </wsdl:operation>
+    <wsdl:operation name="InputSendersCustSvcMsgs">
+      <wsdl:input wsaw:Action="CES.Services.FXGlobal/IRiaAsPayer/InputSendersCustSvcMsgs" message="tns:IRiaAsPayer_InputSendersCustSvcMsgs_InputMessage"/>
+      <wsdl:output wsaw:Action="CES.Services.FXGlobal/IRiaAsPayer/InputSendersCustSvcMsgsResponse" message="tns:IRiaAsPayer_InputSendersCustSvcMsgs_OutputMessage"/>
+    </wsdl:operation>
+    <wsdl:operation name="GetBanks">
+      <wsdl:input wsaw:Action="CES.Services.FXGlobal/IRiaAsPayer/GetBanks" message="tns:IRiaAsPayer_GetBanks_InputMessage"/>
+      <wsdl:output wsaw:Action="CES.Services.FXGlobal/IRiaAsPayer/GetBanksResponse" message="tns:IRiaAsPayer_GetBanks_OutputMessage"/>
+    </wsdl:operation>
+    <wsdl:operation name="GetBankInfo">
+      <wsdl:input wsaw:Action="CES.Services.FXGlobal/IRiaAsPayer/GetBankInfo" message="tns:IRiaAsPayer_GetBankInfo_InputMessage"/>
+      <wsdl:output wsaw:Action="CES.Services.FXGlobal/IRiaAsPayer/GetBankInfoResponse" message="tns:IRiaAsPayer_GetBankInfo_OutputMessage"/>
+    </wsdl:operation>
+    <wsdl:operation name="GetBankBranches">
+      <wsdl:input wsaw:Action="CES.Services.FXGlobal/IRiaAsPayer/GetBankBranches" message="tns:IRiaAsPayer_GetBankBranches_InputMessage"/>
+      <wsdl:output wsaw:Action="CES.Services.FXGlobal/IRiaAsPayer/GetBankBranchesResponse" message="tns:IRiaAsPayer_GetBankBranches_OutputMessage"/>
+    </wsdl:operation>
+    <wsdl:operation name="InputCustomer">
+      <wsdl:input wsaw:Action="CES.Services.FXGlobal/IRiaAsPayer/InputCustomer" message="tns:IRiaAsPayer_InputCustomer_InputMessage"/>
+      <wsdl:output wsaw:Action="CES.Services.FXGlobal/IRiaAsPayer/InputCustomerResponse" message="tns:IRiaAsPayer_InputCustomer_OutputMessage"/>
+    </wsdl:operation>
+    <wsdl:operation name="InputBeneficiary">
+      <wsdl:input wsaw:Action="CES.Services.FXGlobal/IRiaAsPayer/InputBeneficiary" message="tns:IRiaAsPayer_InputBeneficiary_InputMessage"/>
+      <wsdl:output wsaw:Action="CES.Services.FXGlobal/IRiaAsPayer/InputBeneficiaryResponse" message="tns:IRiaAsPayer_InputBeneficiary_OutputMessage"/>
+    </wsdl:operation>
+    <wsdl:operation name="GetCustomers">
+      <wsdl:input wsaw:Action="CES.Services.FXGlobal/IRiaAsPayer/GetCustomers" message="tns:IRiaAsPayer_GetCustomers_InputMessage"/>
+      <wsdl:output wsaw:Action="CES.Services.FXGlobal/IRiaAsPayer/GetCustomersResponse" message="tns:IRiaAsPayer_GetCustomers_OutputMessage"/>
+    </wsdl:operation>
+    <wsdl:operation name="GetAmountsAndReqs">
+      <wsdl:input wsaw:Action="CES.Services.FXGlobal/IRiaAsPayer/GetAmountsAndReqs" message="tns:IRiaAsPayer_GetAmountsAndReqs_InputMessage"/>
+      <wsdl:output wsaw:Action="CES.Services.FXGlobal/IRiaAsPayer/GetAmountsAndReqsResponse" message="tns:IRiaAsPayer_GetAmountsAndReqs_OutputMessage"/>
+    </wsdl:operation>
+    <wsdl:operation name="InputOrderReleaseRequest">
+      <wsdl:input wsaw:Action="CES.Services.FXGlobal/IRiaAsPayer/InputOrderReleaseRequest" message="tns:IRiaAsPayer_InputOrderReleaseRequest_InputMessage"/>
+      <wsdl:output wsaw:Action="CES.Services.FXGlobal/IRiaAsPayer/InputOrderReleaseRequestResponse" message="tns:IRiaAsPayer_InputOrderReleaseRequest_OutputMessage"/>
+    </wsdl:operation>
+    <wsdl:operation name="GetUnconfirmedOrders">
+      <wsdl:input wsaw:Action="CES.Services.FXGlobal/IRiaAsPayer/GetUnconfirmedOrders" message="tns:IRiaAsPayer_GetUnconfirmedOrders_InputMessage"/>
+      <wsdl:output wsaw:Action="CES.Services.FXGlobal/IRiaAsPayer/GetUnconfirmedOrdersResponse" message="tns:IRiaAsPayer_GetUnconfirmedOrders_OutputMessage"/>
+    </wsdl:operation>
+    <wsdl:operation name="GetEnumerationValues">
+      <wsdl:input wsaw:Action="CES.Services.FXGlobal/IRiaAsPayer/GetEnumerationValues" message="tns:IRiaAsPayer_GetEnumerationValues_InputMessage"/>
+      <wsdl:output wsaw:Action="CES.Services.FXGlobal/IRiaAsPayer/GetEnumerationValuesResponse" message="tns:IRiaAsPayer_GetEnumerationValues_OutputMessage"/>
+    </wsdl:operation>
+    <wsdl:operation name="GetAvailableServices">
+      <wsdl:input wsaw:Action="CES.Services.FXGlobal/IRiaAsPayer/GetAvailableServices" message="tns:IRiaAsPayer_GetAvailableServices_InputMessage"/>
+      <wsdl:output wsaw:Action="CES.Services.FXGlobal/IRiaAsPayer/GetAvailableServicesResponse" message="tns:IRiaAsPayer_GetAvailableServices_OutputMessage"/>
+    </wsdl:operation>
+    <wsdl:operation name="ReservePINs">
+      <wsdl:input wsaw:Action="CES.Services.FXGlobal/IRiaAsPayer/ReservePINs" message="tns:IRiaAsPayer_ReservePINs_InputMessage"/>
+      <wsdl:output wsaw:Action="CES.Services.FXGlobal/IRiaAsPayer/ReservePINsResponse" message="tns:IRiaAsPayer_ReservePINs_OutputMessage"/>
+    </wsdl:operation>
+    <wsdl:operation name="IsAlive">
+      <wsdl:input wsaw:Action="CES.Services.FXGlobal/IRiaAsPayer/IsAlive" message="tns:IRiaAsPayer_IsAlive_InputMessage"/>
+      <wsdl:output wsaw:Action="CES.Services.FXGlobal/IRiaAsPayer/IsAliveResponse" message="tns:IRiaAsPayer_IsAlive_OutputMessage"/>
+    </wsdl:operation>
+    <wsdl:operation name="Ping">
+      <wsdl:input wsaw:Action="CES.Services.FXGlobal/IRiaAsPayer/Ping" message="tns:IRiaAsPayer_Ping_InputMessage"/>
+      <wsdl:output wsaw:Action="CES.Services.FXGlobal/IRiaAsPayer/PingResponse" message="tns:IRiaAsPayer_Ping_OutputMessage"/>
+    </wsdl:operation>
+  </wsdl:portType>
+</wsdl:definitions>]]></con:content><con:type>http://schemas.xmlsoap.org/wsdl/</con:type></con:part><con:part><con:url>http://stagingfxglobalwebsvcnocert.riaenvia.net:9771/FXGlobalPaying.svc?xsd=xsd0</con:url><con:content><![CDATA[<xs:schema elementFormDefault="qualified" targetNamespace="CES.Services.FXGlobal" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:tns="CES.Services.FXGlobal">
+  <xs:element name="GetCurrencies">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" maxOccurs="1" name="xmlDoc">
+          <xs:complexType mixed="true">
+            <xs:sequence>
+              <xs:any/>
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetCurrenciesResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" maxOccurs="1" name="GetCurrenciesResult">
+          <xs:complexType mixed="true">
+            <xs:sequence>
+              <xs:any/>
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetDailyOrders">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" maxOccurs="1" name="xmlDoc">
+          <xs:complexType mixed="true">
+            <xs:sequence>
+              <xs:any/>
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetDailyOrdersResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" maxOccurs="1" name="GetDailyOrdersResult">
+          <xs:complexType mixed="true">
+            <xs:sequence>
+              <xs:any/>
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetDailyOrdersSummary">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" maxOccurs="1" name="xmlDoc">
+          <xs:complexType mixed="true">
+            <xs:sequence>
+              <xs:any/>
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetDailyOrdersSummaryResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" maxOccurs="1" name="GetDailyOrdersSummaryResult">
+          <xs:complexType mixed="true">
+            <xs:sequence>
+              <xs:any/>
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetRates">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" maxOccurs="1" name="xmlDoc">
+          <xs:complexType mixed="true">
+            <xs:sequence>
+              <xs:any/>
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetRatesResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" maxOccurs="1" name="GetRatesResult">
+          <xs:complexType mixed="true">
+            <xs:sequence>
+              <xs:any/>
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetRequirements">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" maxOccurs="1" name="xmlDoc">
+          <xs:complexType mixed="true">
+            <xs:sequence>
+              <xs:any/>
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetRequirementsResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" maxOccurs="1" name="GetRequirementsResult">
+          <xs:complexType mixed="true">
+            <xs:sequence>
+              <xs:any/>
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetCountriesStates">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" maxOccurs="1" name="xmlDoc">
+          <xs:complexType mixed="true">
+            <xs:sequence>
+              <xs:any/>
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetCountriesStatesResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" maxOccurs="1" name="GetCountriesStatesResult">
+          <xs:complexType mixed="true">
+            <xs:sequence>
+              <xs:any/>
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetStatesCities">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" maxOccurs="1" name="xmlDoc">
+          <xs:complexType mixed="true">
+            <xs:sequence>
+              <xs:any/>
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetStatesCitiesResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" maxOccurs="1" name="GetStatesCitiesResult">
+          <xs:complexType mixed="true">
+            <xs:sequence>
+              <xs:any/>
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetCommissions">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" maxOccurs="1" name="xmlDoc">
+          <xs:complexType mixed="true">
+            <xs:sequence>
+              <xs:any/>
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetCommissionsResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" maxOccurs="1" name="GetCommissionsResult">
+          <xs:complexType mixed="true">
+            <xs:sequence>
+              <xs:any/>
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetOrderCommission">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" maxOccurs="1" name="xmlDoc">
+          <xs:complexType mixed="true">
+            <xs:sequence>
+              <xs:any/>
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetOrderCommissionResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" maxOccurs="1" name="GetOrderCommissionResult">
+          <xs:complexType mixed="true">
+            <xs:sequence>
+              <xs:any/>
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetLocsCurrsRates">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" maxOccurs="1" name="xmlDoc">
+          <xs:complexType mixed="true">
+            <xs:sequence>
+              <xs:any/>
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetLocsCurrsRatesResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" maxOccurs="1" name="GetLocsCurrsRatesResult">
+          <xs:complexType mixed="true">
+            <xs:sequence>
+              <xs:any/>
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetLocationCatalogByFTP">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" maxOccurs="1" name="xmlDoc">
+          <xs:complexType mixed="true">
+            <xs:sequence>
+              <xs:any/>
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetLocationCatalogByFTPResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" maxOccurs="1" name="GetLocationCatalogByFTPResult">
+          <xs:complexType mixed="true">
+            <xs:sequence>
+              <xs:any/>
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetBankCatalogByFTP">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" maxOccurs="1" name="xmlDoc">
+          <xs:complexType mixed="true">
+            <xs:sequence>
+              <xs:any/>
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetBankCatalogByFTPResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" maxOccurs="1" name="GetBankCatalogByFTPResult">
+          <xs:complexType mixed="true">
+            <xs:sequence>
+              <xs:any/>
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetCurrentOrderStatus">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" maxOccurs="1" name="xmlDoc">
+          <xs:complexType mixed="true">
+            <xs:sequence>
+              <xs:any/>
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetCurrentOrderStatusResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" maxOccurs="1" name="GetCurrentOrderStatusResult">
+          <xs:complexType mixed="true">
+            <xs:sequence>
+              <xs:any/>
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetPayersCustSvcMsgs">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" maxOccurs="1" name="xmlDoc">
+          <xs:complexType mixed="true">
+            <xs:sequence>
+              <xs:any/>
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetPayersCustSvcMsgsResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" maxOccurs="1" name="GetPayersCustSvcMsgsResult">
+          <xs:complexType mixed="true">
+            <xs:sequence>
+              <xs:any/>
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetOrderStatusNotices">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" maxOccurs="1" name="xmlDoc">
+          <xs:complexType mixed="true">
+            <xs:sequence>
+              <xs:any/>
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetOrderStatusNoticesResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" maxOccurs="1" name="GetOrderStatusNoticesResult">
+          <xs:complexType mixed="true">
+            <xs:sequence>
+              <xs:any/>
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetOrdersValidated">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" maxOccurs="1" name="xmlDoc">
+          <xs:complexType mixed="true">
+            <xs:sequence>
+              <xs:any/>
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetOrdersValidatedResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" maxOccurs="1" name="GetOrdersValidatedResult">
+          <xs:complexType mixed="true">
+            <xs:sequence>
+              <xs:any/>
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetOrderDetails">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" maxOccurs="1" name="xmlDoc">
+          <xs:complexType mixed="true">
+            <xs:sequence>
+              <xs:any/>
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetOrderDetailsResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" maxOccurs="1" name="GetOrderDetailsResult">
+          <xs:complexType mixed="true">
+            <xs:sequence>
+              <xs:any/>
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="InputOrders">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" maxOccurs="1" name="xmlDoc">
+          <xs:complexType mixed="true">
+            <xs:sequence>
+              <xs:any/>
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="InputOrdersResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" maxOccurs="1" name="InputOrdersResult">
+          <xs:complexType mixed="true">
+            <xs:sequence>
+              <xs:any/>
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="InputCancelationRequests">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" maxOccurs="1" name="xmlDoc">
+          <xs:complexType mixed="true">
+            <xs:sequence>
+              <xs:any/>
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="InputCancelationRequestsResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" maxOccurs="1" name="InputCancelationRequestsResult">
+          <xs:complexType mixed="true">
+            <xs:sequence>
+              <xs:any/>
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="InputSendersCustSvcMsgs">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" maxOccurs="1" name="xmlDoc">
+          <xs:complexType mixed="true">
+            <xs:sequence>
+              <xs:any/>
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="InputSendersCustSvcMsgsResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" maxOccurs="1" name="InputSendersCustSvcMsgsResult">
+          <xs:complexType mixed="true">
+            <xs:sequence>
+              <xs:any/>
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetBanks">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" maxOccurs="1" name="xmlDoc">
+          <xs:complexType mixed="true">
+            <xs:sequence>
+              <xs:any/>
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetBanksResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" maxOccurs="1" name="GetBanksResult">
+          <xs:complexType mixed="true">
+            <xs:sequence>
+              <xs:any/>
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetBankInfo">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" maxOccurs="1" name="xmlDoc">
+          <xs:complexType mixed="true">
+            <xs:sequence>
+              <xs:any/>
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetBankInfoResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" maxOccurs="1" name="GetBankInfoResult">
+          <xs:complexType mixed="true">
+            <xs:sequence>
+              <xs:any/>
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetBankBranches">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" maxOccurs="1" name="xmlDoc">
+          <xs:complexType mixed="true">
+            <xs:sequence>
+              <xs:any/>
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetBankBranchesResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" maxOccurs="1" name="GetBankBranchesResult">
+          <xs:complexType mixed="true">
+            <xs:sequence>
+              <xs:any/>
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="InputCustomer">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" maxOccurs="1" name="xmlDoc">
+          <xs:complexType mixed="true">
+            <xs:sequence>
+              <xs:any/>
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="InputCustomerResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" maxOccurs="1" name="InputCustomerResult">
+          <xs:complexType mixed="true">
+            <xs:sequence>
+              <xs:any/>
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="InputBeneficiary">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" maxOccurs="1" name="xmlDoc">
+          <xs:complexType mixed="true">
+            <xs:sequence>
+              <xs:any/>
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="InputBeneficiaryResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" maxOccurs="1" name="InputBeneficiaryResult">
+          <xs:complexType mixed="true">
+            <xs:sequence>
+              <xs:any/>
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetCustomers">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" maxOccurs="1" name="xmlDoc">
+          <xs:complexType mixed="true">
+            <xs:sequence>
+              <xs:any/>
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetCustomersResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" maxOccurs="1" name="GetCustomersResult">
+          <xs:complexType mixed="true">
+            <xs:sequence>
+              <xs:any/>
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetAmountsAndReqs">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" maxOccurs="1" name="xmlDoc">
+          <xs:complexType mixed="true">
+            <xs:sequence>
+              <xs:any/>
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetAmountsAndReqsResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" maxOccurs="1" name="GetAmountsAndReqsResult">
+          <xs:complexType mixed="true">
+            <xs:sequence>
+              <xs:any/>
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="InputOrderReleaseRequest">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" maxOccurs="1" name="xmlDoc">
+          <xs:complexType mixed="true">
+            <xs:sequence>
+              <xs:any/>
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="InputOrderReleaseRequestResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" maxOccurs="1" name="InputOrderReleaseRequestResult">
+          <xs:complexType mixed="true">
+            <xs:sequence>
+              <xs:any/>
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetUnconfirmedOrders">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" maxOccurs="1" name="xmlDoc">
+          <xs:complexType mixed="true">
+            <xs:sequence>
+              <xs:any/>
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetUnconfirmedOrdersResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" maxOccurs="1" name="GetUnconfirmedOrdersResult">
+          <xs:complexType mixed="true">
+            <xs:sequence>
+              <xs:any/>
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetEnumerationValues">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" maxOccurs="1" name="xmlDoc">
+          <xs:complexType mixed="true">
+            <xs:sequence>
+              <xs:any/>
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetEnumerationValuesResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" maxOccurs="1" name="GetEnumerationValuesResult">
+          <xs:complexType mixed="true">
+            <xs:sequence>
+              <xs:any/>
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetAvailableServices">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" maxOccurs="1" name="xmlDoc">
+          <xs:complexType mixed="true">
+            <xs:sequence>
+              <xs:any/>
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetAvailableServicesResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" maxOccurs="1" name="GetAvailableServicesResult">
+          <xs:complexType mixed="true">
+            <xs:sequence>
+              <xs:any/>
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="ReservePINs">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" maxOccurs="1" name="xmlDoc">
+          <xs:complexType mixed="true">
+            <xs:sequence>
+              <xs:any/>
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="ReservePINsResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" maxOccurs="1" name="ReservePINsResult">
+          <xs:complexType mixed="true">
+            <xs:sequence>
+              <xs:any/>
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="IsAlive">
+    <xs:complexType>
+      <xs:sequence/>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="IsAliveResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="IsAliveResult" type="xs:boolean"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="Ping">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="AgentID" type="xs:int"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="PingResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="PingResult" type="xs:int"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+</xs:schema>]]></con:content><con:type>http://www.w3.org/2001/XMLSchema</con:type></con:part><con:part><con:url>http://stagingfxglobalwebsvcnocert.riaenvia.net:9771/FXGlobalPaying.svc?xsd=xsd1</con:url><con:content><![CDATA[<xs:schema attributeFormDefault="qualified" elementFormDefault="qualified" targetNamespace="http://schemas.microsoft.com/2003/10/Serialization/" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:tns="http://schemas.microsoft.com/2003/10/Serialization/">
+  <xs:element name="anyType" nillable="true" type="xs:anyType"/>
+  <xs:element name="anyURI" nillable="true" type="xs:anyURI"/>
+  <xs:element name="base64Binary" nillable="true" type="xs:base64Binary"/>
+  <xs:element name="boolean" nillable="true" type="xs:boolean"/>
+  <xs:element name="byte" nillable="true" type="xs:byte"/>
+  <xs:element name="dateTime" nillable="true" type="xs:dateTime"/>
+  <xs:element name="decimal" nillable="true" type="xs:decimal"/>
+  <xs:element name="double" nillable="true" type="xs:double"/>
+  <xs:element name="float" nillable="true" type="xs:float"/>
+  <xs:element name="int" nillable="true" type="xs:int"/>
+  <xs:element name="long" nillable="true" type="xs:long"/>
+  <xs:element name="QName" nillable="true" type="xs:QName"/>
+  <xs:element name="short" nillable="true" type="xs:short"/>
+  <xs:element name="string" nillable="true" type="xs:string"/>
+  <xs:element name="unsignedByte" nillable="true" type="xs:unsignedByte"/>
+  <xs:element name="unsignedInt" nillable="true" type="xs:unsignedInt"/>
+  <xs:element name="unsignedLong" nillable="true" type="xs:unsignedLong"/>
+  <xs:element name="unsignedShort" nillable="true" type="xs:unsignedShort"/>
+  <xs:element name="char" nillable="true" type="tns:char"/>
+  <xs:simpleType name="char">
+    <xs:restriction base="xs:int"/>
+  </xs:simpleType>
+  <xs:element name="duration" nillable="true" type="tns:duration"/>
+  <xs:simpleType name="duration">
+    <xs:restriction base="xs:duration">
+      <xs:pattern value="\-?P(\d*D)?(T(\d*H)?(\d*M)?(\d*(\.\d*)?S)?)?"/>
+      <xs:minInclusive value="-P10675199DT2H48M5.4775808S"/>
+      <xs:maxInclusive value="P10675199DT2H48M5.4775807S"/>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:element name="guid" nillable="true" type="tns:guid"/>
+  <xs:simpleType name="guid">
+    <xs:restriction base="xs:string">
+      <xs:pattern value="[\da-fA-F]{8}-[\da-fA-F]{4}-[\da-fA-F]{4}-[\da-fA-F]{4}-[\da-fA-F]{12}"/>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:attribute name="FactoryType" type="xs:QName"/>
+  <xs:attribute name="Id" type="xs:ID"/>
+  <xs:attribute name="Ref" type="xs:IDREF"/>
+</xs:schema>]]></con:content><con:type>http://www.w3.org/2001/XMLSchema</con:type></con:part></con:definitionCache><con:endpoints><con:endpoint>http://stagingfxglobalwebsvcnocert.riaenvia.net:9771/FXGlobalPaying.svc/Binding_Basic_NoCert</con:endpoint></con:endpoints><con:operation id="81513e3e-c802-407c-a354-308fd2f766ad" isOneWay="false" action="CES.Services.FXGlobal/IRiaAsPayer/GetAmountsAndReqs" name="GetAmountsAndReqs" bindingOperationName="GetAmountsAndReqs" type="Request-Response" inputName="" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call id="f05fb8d1-7a70-4712-ba2e-314a62503e39" name="Request 1"><con:settings/><con:encoding>UTF-8</con:encoding><con:endpoint>http://stagingfxglobalwebsvcnocert.riaenvia.net:9771/FXGlobalPaying.svc/Binding_Basic_NoCert</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:ces="CES.Services.FXGlobal">\r
+   <soapenv:Header/>\r
+   <soapenv:Body>\r
+      <ces:GetAmountsAndReqs>\r
+         <!--Optional:-->\r
+         <ces:xmlDoc>\r
+            e\r
+            <!--You may enter ANY elements at this point-->\r
+            gero\r
+         </ces:xmlDoc>\r
+      </ces:GetAmountsAndReqs>\r
+   </soapenv:Body>\r
+</soapenv:Envelope>]]></con:request><con:wsaConfig mustUnderstand="NONE" version="200508" action="CES.Services.FXGlobal/IRiaAsPayer/GetAmountsAndReqs"/></con:call></con:operation><con:operation id="b69ffcce-baa5-4169-ada6-d1de0dd3233f" isOneWay="false" action="CES.Services.FXGlobal/IRiaAsPayer/GetAvailableServices" name="GetAvailableServices" bindingOperationName="GetAvailableServices" type="Request-Response" inputName="" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call id="0b37b81d-c07a-42b8-bfb7-8a81622e9b42" name="Request 1"><con:settings/><con:encoding>UTF-8</con:encoding><con:endpoint>http://stagingfxglobalwebsvcnocert.riaenvia.net:9771/FXGlobalPaying.svc/Binding_Basic_NoCert</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:ces="CES.Services.FXGlobal">\r
+   <soapenv:Header/>\r
+   <soapenv:Body>\r
+      <ces:GetAvailableServices>\r
+         <!--Optional:-->\r
+         <ces:xmlDoc>\r
+            e\r
+            <!--You may enter ANY elements at this point-->\r
+            gero\r
+         </ces:xmlDoc>\r
+      </ces:GetAvailableServices>\r
+   </soapenv:Body>\r
+</soapenv:Envelope>]]></con:request><con:wsaConfig mustUnderstand="NONE" version="200508" action="CES.Services.FXGlobal/IRiaAsPayer/GetAvailableServices"/></con:call></con:operation><con:operation id="270b5ab7-8b77-488f-a691-2e7df079c744" isOneWay="false" action="CES.Services.FXGlobal/IRiaAsPayer/GetBankBranches" name="GetBankBranches" bindingOperationName="GetBankBranches" type="Request-Response" inputName="" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call id="da088372-9787-4be5-bcd4-2e8aa2e7af6f" name="Request 1"><con:settings/><con:encoding>UTF-8</con:encoding><con:endpoint>http://stagingfxglobalwebsvcnocert.riaenvia.net:9771/FXGlobalPaying.svc/Binding_Basic_NoCert</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:ces="CES.Services.FXGlobal">\r
+   <soapenv:Header/>\r
+   <soapenv:Body>\r
+      <ces:GetBankBranches>\r
+         <!--Optional:-->\r
+         <ces:xmlDoc>\r
+            e\r
+            <!--You may enter ANY elements at this point-->\r
+            gero\r
+         </ces:xmlDoc>\r
+      </ces:GetBankBranches>\r
+   </soapenv:Body>\r
+</soapenv:Envelope>]]></con:request><con:wsaConfig mustUnderstand="NONE" version="200508" action="CES.Services.FXGlobal/IRiaAsPayer/GetBankBranches"/></con:call></con:operation><con:operation id="efe2ccc0-6fbb-492d-9e7e-ff24fb276981" isOneWay="false" action="CES.Services.FXGlobal/IRiaAsPayer/GetBankCatalogByFTP" name="GetBankCatalogByFTP" bindingOperationName="GetBankCatalogByFTP" type="Request-Response" inputName="" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call id="17717b79-a71c-4715-8a65-5e7c2867f0a8" name="Request 1"><con:settings/><con:encoding>UTF-8</con:encoding><con:endpoint>http://stagingfxglobalwebsvcnocert.riaenvia.net:9771/FXGlobalPaying.svc/Binding_Basic_NoCert</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:ces="CES.Services.FXGlobal">\r
+   <soapenv:Header/>\r
+   <soapenv:Body>\r
+      <ces:GetBankCatalogByFTP>\r
+         <!--Optional:-->\r
+         <ces:xmlDoc>\r
+            e\r
+            <!--You may enter ANY elements at this point-->\r
+            gero\r
+         </ces:xmlDoc>\r
+      </ces:GetBankCatalogByFTP>\r
+   </soapenv:Body>\r
+</soapenv:Envelope>]]></con:request><con:wsaConfig mustUnderstand="NONE" version="200508" action="CES.Services.FXGlobal/IRiaAsPayer/GetBankCatalogByFTP"/></con:call></con:operation><con:operation id="92cdf287-7c81-4504-b4a9-92126b4deed5" isOneWay="false" action="CES.Services.FXGlobal/IRiaAsPayer/GetBankInfo" name="GetBankInfo" bindingOperationName="GetBankInfo" type="Request-Response" inputName="" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call id="90bec584-b4e8-402d-ba62-4e571e02121a" name="Request 1"><con:settings/><con:encoding>UTF-8</con:encoding><con:endpoint>http://stagingfxglobalwebsvcnocert.riaenvia.net:9771/FXGlobalPaying.svc/Binding_Basic_NoCert</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:ces="CES.Services.FXGlobal">\r
+   <soapenv:Header/>\r
+   <soapenv:Body>\r
+      <ces:GetBankInfo>\r
+         <!--Optional:-->\r
+         <ces:xmlDoc>\r
+            e\r
+            <!--You may enter ANY elements at this point-->\r
+            gero\r
+         </ces:xmlDoc>\r
+      </ces:GetBankInfo>\r
+   </soapenv:Body>\r
+</soapenv:Envelope>]]></con:request><con:wsaConfig mustUnderstand="NONE" version="200508" action="CES.Services.FXGlobal/IRiaAsPayer/GetBankInfo"/></con:call></con:operation><con:operation id="f3c369d0-53bb-4f50-90a3-7344e76f4229" isOneWay="false" action="CES.Services.FXGlobal/IRiaAsPayer/GetBanks" name="GetBanks" bindingOperationName="GetBanks" type="Request-Response" inputName="" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call id="fee47193-3d8b-42cd-aa30-0f3fc307b1d5" name="Request 1"><con:settings/><con:encoding>UTF-8</con:encoding><con:endpoint>http://stagingfxglobalwebsvcnocert.riaenvia.net:9771/FXGlobalPaying.svc/Binding_Basic_NoCert</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:ces="CES.Services.FXGlobal">\r
+   <soapenv:Header/>\r
+   <soapenv:Body>\r
+      <ces:GetBanks>\r
+         <!--Optional:-->\r
+         <ces:xmlDoc>\r
+            e\r
+            <!--You may enter ANY elements at this point-->\r
+            gero\r
+         </ces:xmlDoc>\r
+      </ces:GetBanks>\r
+   </soapenv:Body>\r
+</soapenv:Envelope>]]></con:request><con:wsaConfig mustUnderstand="NONE" version="200508" action="CES.Services.FXGlobal/IRiaAsPayer/GetBanks"/></con:call></con:operation><con:operation id="3e4fa089-1f41-4563-9e38-a63b4fed0e76" isOneWay="false" action="CES.Services.FXGlobal/IRiaAsPayer/GetCommissions" name="GetCommissions" bindingOperationName="GetCommissions" type="Request-Response" inputName="" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call id="bd4e8c08-a492-47df-9ffc-66b357660c8c" name="Request 1"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>http://stagingfxglobalwebsvcnocert.riaenvia.net:9771/FXGlobalPaying.svc/Binding_Basic_NoCert</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:ces="CES.Services.FXGlobal">\r
+   <soapenv:Header/>\r
+   <soapenv:Body>\r
+      <ces:GetCommissions>\r
+         <!--Optional:-->\r
+           <ces:xmlDoc>
+           <Root>
+               <CorrespID>59470211</CorrespID>
+               <LayoutVersion>2.0</LayoutVersion>
+               <Header>
+                  <CallID>50e07864-104f-4f68-adb6-d5d7af615ffb</CallID>
+                  <CallDateTimeLocal>20170912135959</CallDateTimeLocal>
+                  <CorrespLocNo>0</CorrespLocNo>
+                  <CorrespLocNo_Ria>0</CorrespLocNo_Ria>
+                  <CorrespLocName>Main Branch</CorrespLocName>
+                  <CorrespLocCountry>CL</CorrespLocCountry>
+                  <UserID>3648587</UserID>
+                  <TerminalID>16</TerminalID>
+                  <LanguageCultureCode>es-ES</LanguageCultureCode>
+               </Header>
+               <RequestType>Commissions</RequestType>
+            </Root>
+         </ces:xmlDoc>
+      </ces:GetCommissions>\r
+   </soapenv:Body>\r
+</soapenv:Envelope>]]></con:request><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="CES.Services.FXGlobal/IRiaAsPayer/GetCommissions"/><con:wsrmConfig version="1.2"/></con:call></con:operation><con:operation id="99ef0157-833a-4561-8a0e-c16b152227d3" isOneWay="false" action="CES.Services.FXGlobal/IRiaAsPayer/GetCountriesStates" name="GetCountriesStates" bindingOperationName="GetCountriesStates" type="Request-Response" inputName="" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call id="8430b03d-e997-487c-971b-d75e8bd5fefb" name="Request 1"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>http://stagingfxglobalwebsvcnocert.riaenvia.net:9771/FXGlobalPaying.svc/Binding_Basic_NoCert</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:ces="CES.Services.FXGlobal">\r
+   <soapenv:Header/>\r
+   <soapenv:Body>\r
+      <ces:GetCountriesStates>\r
+         <!--Optional:-->\r
+         <ces:xmlDoc>\r
+           <Root>
+               <CorrespID>59470211</CorrespID>
+               <LayoutVersion>2.0</LayoutVersion>
+               <Header>
+                  <CallID>50e07864-104f-4f68-adb6-d5d7af615ffb</CallID>
+                  <CallDateTimeLocal>20170912135959</CallDateTimeLocal>
+                  <CorrespLocNo>0</CorrespLocNo>
+                  <CorrespLocNo_Ria>0</CorrespLocNo_Ria>
+                  <CorrespLocName>Main Branch</CorrespLocName>
+                  <CorrespLocCountry>CL</CorrespLocCountry>
+                  <UserID>3648587</UserID>
+                  <TerminalID>16</TerminalID>
+                  <LanguageCultureCode>es-ES</LanguageCultureCode>
+               </Header>
+               <RequestType>CountriesStates</RequestType>
+            </Root>
+         </ces:xmlDoc>\r
+      </ces:GetCountriesStates>\r
+   </soapenv:Body>\r
+</soapenv:Envelope>]]></con:request><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="CES.Services.FXGlobal/IRiaAsPayer/GetCountriesStates"/><con:wsrmConfig version="1.2"/></con:call></con:operation><con:operation id="6fb4fe80-2fb2-4f2a-a255-d2e16a472a95" isOneWay="false" action="CES.Services.FXGlobal/IRiaAsPayer/GetCurrencies" name="GetCurrencies" bindingOperationName="GetCurrencies" type="Request-Response" inputName="" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call id="703e5bc0-17c1-4285-ab7a-0e4de059bbaa" name="Request 1"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>http://stagingfxglobalwebsvcnocert.riaenvia.net:9771/FXGlobalPaying.svc/Binding_Basic_NoCert</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:ces="CES.Services.FXGlobal">\r
+   <soapenv:Header/>\r
+   <soapenv:Body>\r
+      <ces:GetCurrencies>\r
+         <ces:xmlDoc>\r
+             <Root>
+               <CorrespID>59470211</CorrespID>
+               <LayoutVersion>2.0</LayoutVersion>
+               <Header>
+                  <CallID>50e07864-104f-4f68-adb6-d5d7af615ffb</CallID>
+                  <CallDateTimeLocal>20170912135959</CallDateTimeLocal>
+                  <CorrespLocNo>0</CorrespLocNo>
+                  <CorrespLocNo_Ria>0</CorrespLocNo_Ria>
+                  <CorrespLocName>Main Branch</CorrespLocName>
+                  <CorrespLocCountry>CL</CorrespLocCountry>
+                  <UserID>3648587</UserID>
+                  <TerminalID>16</TerminalID>
+                  <LanguageCultureCode>es-ES</LanguageCultureCode>
+               </Header>
+               <RequestType>Currencies</RequestType>
+            </Root>
+         </ces:xmlDoc>\r
+      </ces:GetCurrencies>\r
+   </soapenv:Body>\r
+</soapenv:Envelope>]]></con:request><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="CES.Services.FXGlobal/IRiaAsPayer/GetCurrencies"/><con:wsrmConfig version="1.2"/></con:call><con:call id="11545cd3-5df9-458a-8461-e9c567137605" name="Copy of Request 1"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>http://stagingfxglobalwebsvcnocert.riaenvia.net:9771/FXGlobalPaying.svc/Binding_Basic_NoCert</con:endpoint><con:request><![CDATA[<s:Envelope xmlns:s="http://schemas.xmlsoap.org/soap/envelope/">\r
+   <s:Body xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">\r
+      <GetCurrenciesResponse xmlns="CES.Services.FXGlobal">\r
+         <GetCurrenciesResult>\r
+            <Root xsi:noNamespaceSchemaLocation="Currencies_2.0.xsd" xmlns="">\r
+               <ResponseLayoutVersion>2.0</ResponseLayoutVersion>\r
+               <Header>\r
+                  <MethodCalled>GetCurrencies</MethodCalled>\r
+                  <CallID_Ext>50e07864-104f-4f68-adb6-d5d7af615ffb</CallID_Ext>\r
+                  <ResponseDateTimeUTC>20171007004221</ResponseDateTimeUTC>\r
+               </Header>\r
+               <RequestType>Currencies</RequestType>\r
+               <RequestResponses>\r
+                  <Currencies>\r
+                     <Currency Code="AED" CountryName="United Arab Emirates"/>\r
+                     <Currency Code="AFN" CountryName="Afghanistan"/>\r
+                     <Currency Code="ALL" CountryName="Albania"/>\r
+                     <Currency Code="AMD" CountryName="Armenia"/>\r
+                     <Currency Code="ANG" CountryName="Curacao"/>\r
+                     <Currency Code="AOA" CountryName="Angola"/>\r
+                     <Currency Code="ARS" CountryName="Argentina"/>\r
+                     <Currency Code="AUD" CountryName="Australia"/>\r
+                     <Currency Code="AWG" CountryName="Aruba"/>\r
+                     <Currency Code="AZN" CountryName="Azerbaijan"/>\r
+                     <Currency Code="BAM" CountryName="Bosnia"/>\r
+                     <Currency Code="BBD" CountryName="Barbados"/>\r
+                     <Currency Code="BDT" CountryName="Bangladesh"/>\r
+                     <Currency Code="BGN" CountryName="Bulgaria"/>\r
+                     <Currency Code="BHD" CountryName="Bahrain"/>\r
+                     <Currency Code="BIF" CountryName="Burundi"/>\r
+                     <Currency Code="BMD" CountryName="Bermuda"/>\r
+                     <Currency Code="BND" CountryName="Brunei"/>\r
+                     <Currency Code="BOB" CountryName="Bolivia"/>\r
+                     <Currency Code="BRL" CountryName="Brazil"/>\r
+                     <Currency Code="BSD" CountryName="Bahamas"/>\r
+                     <Currency Code="BTN" CountryName="Bhutan"/>\r
+                     <Currency Code="BWP" CountryName="Botswana"/>\r
+                     <Currency Code="BYR" CountryName="Belarus"/>\r
+                     <Currency Code="BZD" CountryName="Belize"/>\r
+                     <Currency Code="CAD" CountryName="Canada"/>\r
+                     <Currency Code="CDF" CountryName="Congo Democratic"/>\r
+                     <Currency Code="CFP" CountryName="Tahiti"/>\r
+                     <Currency Code="CHF" CountryName="Switzerland"/>\r
+                     <Currency Code="CLP" CountryName="Chile"/>\r
+                     <Currency Code="CNY" CountryName="China"/>\r
+                     <Currency Code="COP" CountryName="Colombia"/>\r
+                     <Currency Code="CRC" CountryName="Costa Rica"/>\r
+                     <Currency Code="CUC" CountryName="Cuba CUC"/>\r
+                     <Currency Code="CUP" CountryName="Cuba"/>\r
+                     <Currency Code="CVE" CountryName="Cape Verde"/>\r
+                     <Currency Code="CZK" CountryName="Czech Republic"/>\r
+                     <Currency Code="DJF" CountryName="Djibouti"/>\r
+                     <Currency Code="DKK" CountryName="Denmark"/>\r
+                     <Currency Code="DOP" CountryName="Dominican Republic"/>\r
+                     <Currency Code="DZD" CountryName="Algeria"/>\r
+                     <Currency Code="ECS" CountryName="Ecuador"/>\r
+                     <Currency Code="EEK" CountryName="Estonia"/>\r
+                     <Currency Code="EGP" CountryName="Egypt"/>\r
+                     <Currency Code="ERN" CountryName="Eritrea"/>\r
+                     <Currency Code="ETB" CountryName="Ethiopia"/>\r
+                     <Currency Code="EUR" CountryName="Euro"/>\r
+                     <Currency Code="FJD" CountryName="Fiji Dollar"/>\r
+                     <Currency Code="GBP" CountryName="England"/>\r
+                     <Currency Code="GEL" CountryName="Georgia"/>\r
+                     <Currency Code="GHS" CountryName="Ghana New Cedi"/>\r
+                     <Currency Code="GIP" CountryName="Gibraltar"/>\r
+                     <Currency Code="GMD" CountryName="Gambia"/>\r
+                     <Currency Code="GNF" CountryName="Guinea Franc"/>\r
+                     <Currency Code="GTQ" CountryName="Guatemala Quetzal"/>\r
+                     <Currency Code="GYD" CountryName="Guyana"/>\r
+                     <Currency Code="HKD" CountryName="Hong Kong"/>\r
+                     <Currency Code="HNL" CountryName="Honduras"/>\r
+                     <Currency Code="HRK" CountryName="Croatia"/>\r
+                     <Currency Code="HTG" CountryName="Haiti"/>\r
+                     <Currency Code="HUF" CountryName="Hungarian Florint"/>\r
+                     <Currency Code="IDR" CountryName="Indonesia"/>\r
+                     <Currency Code="IEP" CountryName="Irish Punt"/>\r
+                     <Currency Code="ILS" CountryName="Israel"/>\r
+                     <Currency Code="INR" CountryName="India"/>\r
+                     <Currency Code="IQD" CountryName="Iraq"/>\r
+                     <Currency Code="IRR" CountryName="Iran"/>\r
+                     <Currency Code="ISK" CountryName="Iceland"/>\r
+                     <Currency Code="JMD" CountryName="Jamaica"/>\r
+                     <Currency Code="JOD" CountryName="Jordan"/>\r
+                     <Currency Code="JPY" CountryName="Japan"/>\r
+                     <Currency Code="KES" CountryName="Kenya"/>\r
+                     <Currency Code="KGS" CountryName="Kyrgyzstan"/>\r
+                     <Currency Code="KHR" CountryName="Cambodia"/>\r
+                     <Currency Code="KMF" CountryName="Comoros"/>\r
+                     <Currency Code="KPW" CountryName="Korea North"/>\r
+                     <Currency Code="KRW" CountryName="Korea"/>\r
+                     <Currency Code="KWD" CountryName="Kuwait"/>\r
+                     <Currency Code="KYD" CountryName="Cayman Islands"/>\r
+                     <Currency Code="KZT" CountryName="Kazakhstan"/>\r
+                     <Currency Code="LAK" CountryName="Laos"/>\r
+                     <Currency Code="LBP" CountryName="Lebanon"/>\r
+                     <Currency Code="LKR" CountryName="Sri Lanka"/>\r
+                     <Currency Code="LRD" CountryName="Liberia"/>\r
+                     <Currency Code="LSL" CountryName="Lesotho"/>\r
+                     <Currency Code="LTL" CountryName="Lithuania"/>\r
+                     <Currency Code="LVL" CountryName="Latvia"/>\r
+                     <Currency Code="LYD" CountryName="Libya"/>\r
+                     <Currency Code="MAD" CountryName="Morocco"/>\r
+                     <Currency Code="MDL" CountryName="Moldova"/>\r
+                     <Currency Code="MGA" CountryName="Madagascar"/>\r
+                     <Currency Code="MKD" CountryName="Macedonia"/>\r
+                     <Currency Code="MMK" CountryName="Myanmar"/>\r
+                     <Currency Code="MNT" CountryName="Mongolia"/>\r
+                     <Currency Code="MRO" CountryName="Mauritania"/>\r
+                     <Currency Code="MUR" CountryName="Mauritius"/>\r
+                     <Currency Code="MVR" CountryName="Maldives"/>\r
+                     <Currency Code="MWK" CountryName="Malawi"/>\r
+                     <Currency Code="MXN" CountryName="Mexico"/>\r
+                     <Currency Code="MYR" CountryName="Malaysia"/>\r
+                     <Currency Code="MZN" CountryName="Mozambique"/>\r
+                     <Currency Code="NGN" CountryName="Nigeria"/>\r
+                     <Currency Code="NIO" CountryName="Nicaragua"/>\r
+                     <Currency Code="NOK" CountryName="Norwegian Kroner"/>\r
+                     <Currency Code="NPR" CountryName="Nepal"/>\r
+                     <Currency Code="NZD" CountryName="New Zealand"/>\r
+                     <Currency Code="OMR" CountryName="Oman"/>\r
+                     <Currency Code="PAB" CountryName="Panama"/>\r
+                     <Currency Code="PEN" CountryName="Peru"/>\r
+                     <Currency Code="PHP" CountryName="Philippines"/>\r
+                     <Currency Code="PKR" CountryName="Pakistan"/>\r
+                     <Currency Code="PLN" CountryName="Poland"/>\r
+                     <Currency Code="PYG" CountryName="Paraguay"/>\r
+                     <Currency Code="QAR" CountryName="Qatar"/>\r
+                     <Currency Code="RON" CountryName="Romania"/>\r
+                     <Currency Code="RSD" CountryName="Serbia"/>\r
+                     <Currency Code="RUB" CountryName="Russia"/>\r
+                     <Currency Code="RWF" CountryName="Rwanda"/>\r
+                     <Currency Code="SAR" CountryName="Saudi Arabia"/>\r
+                     <Currency Code="SCR" CountryName="Seychelles"/>\r
+                     <Currency Code="SDG" CountryName="Sudan"/>\r
+                     <Currency Code="SEK" CountryName="Swedish Krona"/>\r
+                     <Currency Code="SGD" CountryName="Singapore Dollar"/>\r
+                     <Currency Code="SLL" CountryName="Sierra Leone Leone"/>\r
+                     <Currency Code="SOS" CountryName="Somalia"/>\r
+                     <Currency Code="SRD" CountryName="Suriname"/>\r
+                     <Currency Code="SVC" CountryName="El Salvador"/>\r
+                     <Currency Code="SYP" CountryName="Syria"/>\r
+                     <Currency Code="SZL" CountryName="Swaziland"/>\r
+                     <Currency Code="THB" CountryName="Thailand"/>\r
+                     <Currency Code="TJS" CountryName="Tajikistan"/>\r
+                     <Currency Code="TND" CountryName="Tunisia"/>\r
+                     <Currency Code="TOP" CountryName="Tonga Paanga"/>\r
+                     <Currency Code="TRL" CountryName="Turkey"/>\r
+                     <Currency Code="TRY" CountryName="New Turkish Lira"/>\r
+                     <Currency Code="TTD" CountryName="Trinidad"/>\r
+                     <Currency Code="TWD" CountryName="Taiwan"/>\r
+                     <Currency Code="TZS" CountryName="Tanzanian Shilling"/>\r
+                     <Currency Code="UAH" CountryName="Ukraine"/>\r
+                     <Currency Code="UGX" CountryName="Uganda"/>\r
+                     <Currency Code="USD" CountryName="United States"/>\r
+                     <Currency Code="UYU" CountryName="Uruguay"/>\r
+                     <Currency Code="UZS" CountryName="Uzbekistan"/>\r
+                     <Currency Code="VEF" CountryName="Venezuela"/>\r
+                     <Currency Code="VND" CountryName="Vietnam"/>\r
+                     <Currency Code="VUV" CountryName="Vanuatu"/>\r
+                     <Currency Code="WST" CountryName="Samoa Tala"/>\r
+                     <Currency Code="XAF" CountryName="CFA Franc BEAC"/>\r
+                     <Currency Code="XCD" CountryName="East Caribbean"/>\r
+                     <Currency Code="XOF" CountryName="Senegal"/>\r
+                     <Currency Code="YER" CountryName="Yemen"/>\r
+                     <Currency Code="ZAR" CountryName="South Africa"/>\r
+                     <Currency Code="ZMK" CountryName="Zambia"/>\r
+                     <Currency Code="ZMW" CountryName="Zambia New"/>\r
+                     <Currency Code="ZWD" CountryName="Zimbabwe"/>\r
+                  </Currencies>\r
+               </RequestResponses>\r
+               <RequestWarnings/>\r
+               <RequestErrors/>\r
+            </Root>\r
+         </GetCurrenciesResult>\r
+      </GetCurrenciesResponse>\r
+   </s:Body>\r
+</s:Envelope>]]></con:request><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="CES.Services.FXGlobal/IRiaAsPayer/GetCurrencies"/><con:wsrmConfig version="1.2"/></con:call></con:operation><con:operation id="f2873d44-bcd5-48b0-b6bb-df3dabad1e86" isOneWay="false" action="CES.Services.FXGlobal/IRiaAsPayer/GetCurrentOrderStatus" name="GetCurrentOrderStatus" bindingOperationName="GetCurrentOrderStatus" type="Request-Response" inputName="" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call id="aeb79b94-c392-477c-aff5-f21ea991ab75" name="Request 1"><con:settings/><con:encoding>UTF-8</con:encoding><con:endpoint>http://stagingfxglobalwebsvcnocert.riaenvia.net:9771/FXGlobalPaying.svc/Binding_Basic_NoCert</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:ces="CES.Services.FXGlobal">\r
+   <soapenv:Header/>\r
+   <soapenv:Body>\r
+      <ces:GetCurrentOrderStatus>\r
+         <!--Optional:-->\r
+         <ces:xmlDoc>\r
+            e\r
+            <!--You may enter ANY elements at this point-->\r
+            gero\r
+         </ces:xmlDoc>\r
+      </ces:GetCurrentOrderStatus>\r
+   </soapenv:Body>\r
+</soapenv:Envelope>]]></con:request><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="CES.Services.FXGlobal/IRiaAsPayer/GetCurrentOrderStatus"/><con:wsrmConfig version="1.2"/></con:call></con:operation><con:operation id="a159f156-0081-4361-88bf-8d3478d0aa78" isOneWay="false" action="CES.Services.FXGlobal/IRiaAsPayer/GetCustomers" name="GetCustomers" bindingOperationName="GetCustomers" type="Request-Response" inputName="" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call id="60542d74-e087-4600-8b7a-9de3c7e7e6f7" name="Request 1"><con:settings/><con:encoding>UTF-8</con:encoding><con:endpoint>http://stagingfxglobalwebsvcnocert.riaenvia.net:9771/FXGlobalPaying.svc/Binding_Basic_NoCert</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:ces="CES.Services.FXGlobal">\r
+   <soapenv:Header/>\r
+   <soapenv:Body>\r
+      <ces:GetCustomers>\r
+         <!--Optional:-->\r
+         <ces:xmlDoc>\r
+            e\r
+            <!--You may enter ANY elements at this point-->\r
+            gero\r
+         </ces:xmlDoc>\r
+      </ces:GetCustomers>\r
+   </soapenv:Body>\r
+</soapenv:Envelope>]]></con:request><con:wsaConfig mustUnderstand="NONE" version="200508" action="CES.Services.FXGlobal/IRiaAsPayer/GetCustomers"/></con:call></con:operation><con:operation id="2f87d37e-10bb-4fb2-901a-bab477874d30" isOneWay="false" action="CES.Services.FXGlobal/IRiaAsPayer/GetDailyOrders" name="GetDailyOrders" bindingOperationName="GetDailyOrders" type="Request-Response" inputName="" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call id="e7b157f6-79d5-48ed-9108-ca3ed9ae1a9d" name="Request 1"><con:settings/><con:encoding>UTF-8</con:encoding><con:endpoint>http://stagingfxglobalwebsvcnocert.riaenvia.net:9771/FXGlobalPaying.svc/Binding_Basic_NoCert</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:ces="CES.Services.FXGlobal">\r
+   <soapenv:Header/>\r
+   <soapenv:Body>\r
+      <ces:GetDailyOrders>\r
+         <!--Optional:-->\r
+         <ces:xmlDoc>\r
+            e\r
+            <!--You may enter ANY elements at this point-->\r
+            gero\r
+         </ces:xmlDoc>\r
+      </ces:GetDailyOrders>\r
+   </soapenv:Body>\r
+</soapenv:Envelope>]]></con:request><con:wsaConfig mustUnderstand="NONE" version="200508" action="CES.Services.FXGlobal/IRiaAsPayer/GetDailyOrders"/></con:call></con:operation><con:operation id="8b80907f-dde1-4e97-84d9-f940520a0156" isOneWay="false" action="CES.Services.FXGlobal/IRiaAsPayer/GetDailyOrdersSummary" name="GetDailyOrdersSummary" bindingOperationName="GetDailyOrdersSummary" type="Request-Response" inputName="" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call id="6faadf6c-081b-402c-9830-3891c0620d59" name="Request 1"><con:settings/><con:encoding>UTF-8</con:encoding><con:endpoint>http://stagingfxglobalwebsvcnocert.riaenvia.net:9771/FXGlobalPaying.svc/Binding_Basic_NoCert</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:ces="CES.Services.FXGlobal">\r
+   <soapenv:Header/>\r
+   <soapenv:Body>\r
+      <ces:GetDailyOrdersSummary>\r
+         <!--Optional:-->\r
+         <ces:xmlDoc>\r
+            e\r
+            <!--You may enter ANY elements at this point-->\r
+            gero\r
+         </ces:xmlDoc>\r
+      </ces:GetDailyOrdersSummary>\r
+   </soapenv:Body>\r
+</soapenv:Envelope>]]></con:request><con:wsaConfig mustUnderstand="NONE" version="200508" action="CES.Services.FXGlobal/IRiaAsPayer/GetDailyOrdersSummary"/></con:call></con:operation><con:operation id="b6af5dd1-dc2d-4273-8229-a95e6c97bdba" isOneWay="false" action="CES.Services.FXGlobal/IRiaAsPayer/GetEnumerationValues" name="GetEnumerationValues" bindingOperationName="GetEnumerationValues" type="Request-Response" inputName="" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call id="3118fe90-80e6-4879-9310-04d2847ed561" name="Request 1"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>http://stagingfxglobalwebsvcnocert.riaenvia.net:9771/FXGlobalPaying.svc/Binding_Basic_NoCert</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:ces="CES.Services.FXGlobal">\r
+   <soapenv:Header/>\r
+   <soapenv:Body>\r
+      <ces:GetEnumerationValues>\r
+         <!--Optional:-->\r
+         <ces:xmlDoc>\r
+            <Root>\r
+               <CorrespID>59470211</CorrespID>\r
+               <LayoutVersion>2.0</LayoutVersion>\r
+               <Header>\r
+                  <CallID>50e07864-104f-4f68-adb6-d5d7af615ffb</CallID>\r
+                  <CallDateTimeLocal>20170912135959</CallDateTimeLocal>\r
+                  <CorrespLocNo>0</CorrespLocNo>\r
+                  <CorrespLocNo_Ria>0</CorrespLocNo_Ria>\r
+                  <CorrespLocName>Main Branch</CorrespLocName>\r
+                  <CorrespLocCountry>CL</CorrespLocCountry>\r
+                  <UserID>3648587</UserID>\r
+                  <TerminalID>16</TerminalID>\r
+                  <LanguageCultureCode>en-US</LanguageCultureCode>\r
+               </Header>\r
+               <RequestType>EnumerationValues</RequestType>\r
+               <Request EnumType="IDTypes" CountryFrom="CL"/>\r
+            </Root>\r
+         </ces:xmlDoc>\r
+      </ces:GetEnumerationValues>\r
+   </soapenv:Body>\r
+</soapenv:Envelope>]]></con:request><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="CES.Services.FXGlobal/IRiaAsPayer/GetEnumerationValues"/><con:wsrmConfig version="1.2"/></con:call><con:call id="48e00317-c88d-40c1-aa17-65f6f03d75e4" name="EnumerationTransferReason"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>http://stagingfxglobalwebsvcnocert.riaenvia.net:9771/FXGlobalPaying.svc/Binding_Basic_NoCert</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:ces="CES.Services.FXGlobal">\r
+   <soapenv:Header/>\r
+   <soapenv:Body>\r
+      <ces:GetEnumerationValues>\r
+         <!--Optional:-->\r
+         <ces:xmlDoc>\r
+             <Root>
+               <CorrespID>59470211</CorrespID>
+               <LayoutVersion>2.0</LayoutVersion>
+               <Header>
+                  <CallID>50e07864-104f-4f68-adb6-d5d7af615ffb</CallID>
+                  <CallDateTimeLocal>20170912135959</CallDateTimeLocal>
+                  <CorrespLocNo>0</CorrespLocNo>
+                  <CorrespLocNo_Ria>0</CorrespLocNo_Ria>
+                  <CorrespLocName>Main Branch</CorrespLocName>
+                  <CorrespLocCountry>CL</CorrespLocCountry>
+                  <UserID>3648587</UserID>
+                  <TerminalID>16</TerminalID>
+                  <LanguageCultureCode>en-US</LanguageCultureCode>
+               </Header>
+               <RequestType>EnumerationValues</RequestType>
+               <Request EnumType="TransferReasons" CountryFrom="CL"></Request> 
+            </Root>
+         </ces:xmlDoc>\r
+      </ces:GetEnumerationValues>\r
+   </soapenv:Body>\r
+</soapenv:Envelope>]]></con:request><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="CES.Services.FXGlobal/IRiaAsPayer/GetEnumerationValues"/><con:wsrmConfig version="1.2"/></con:call><con:call id="7f282900-4566-4ee3-8e2f-520eaed88654" name="MetodosPago"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>http://stagingfxglobalwebsvcnocert.riaenvia.net:9771/FXGlobalPaying.svc/Binding_Basic_NoCert</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:ces="CES.Services.FXGlobal">\r
+   <soapenv:Header/>\r
+   <soapenv:Body>\r
+      <ces:GetEnumerationValues>\r
+         <!--Optional:-->\r
+         <ces:xmlDoc>\r
+             <Root>
+               <CorrespID>59470211</CorrespID>
+               <LayoutVersion>2.0</LayoutVersion>
+               <Header>
+                  <CallID>50e07864-104f-4f68-adb6-d5d7af615ffb</CallID>
+                  <CallDateTimeLocal>20170912135959</CallDateTimeLocal>
+                  <CorrespLocNo>0</CorrespLocNo>
+                  <CorrespLocNo_Ria>0</CorrespLocNo_Ria>
+                  <CorrespLocName>Main Branch</CorrespLocName>
+                  <CorrespLocCountry>CL</CorrespLocCountry>
+                  <UserID>3648587</UserID>
+                  <TerminalID>16</TerminalID>
+                  <LanguageCultureCode>en-US</LanguageCultureCode>
+               </Header>
+               <RequestType>EnumerationValues</RequestType>
+               <Request EnumType="CustPaymentMethods" CountryFrom="CL"></Request> 
+            </Root>
+         </ces:xmlDoc>\r
+      </ces:GetEnumerationValues>\r
+   </soapenv:Body>\r
+</soapenv:Envelope>]]></con:request><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="CES.Services.FXGlobal/IRiaAsPayer/GetEnumerationValues"/><con:wsrmConfig version="1.2"/></con:call></con:operation><con:operation id="02bee393-1fee-4cf7-871d-7550b75a19d2" isOneWay="false" action="CES.Services.FXGlobal/IRiaAsPayer/GetLocationCatalogByFTP" name="GetLocationCatalogByFTP" bindingOperationName="GetLocationCatalogByFTP" type="Request-Response" inputName="" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call id="9a9171d9-5108-4a6b-858d-3d9e1286c39c" name="Request 1"><con:settings/><con:encoding>UTF-8</con:encoding><con:endpoint>http://stagingfxglobalwebsvcnocert.riaenvia.net:9771/FXGlobalPaying.svc/Binding_Basic_NoCert</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:ces="CES.Services.FXGlobal">\r
+   <soapenv:Header/>\r
+   <soapenv:Body>\r
+      <ces:GetLocationCatalogByFTP>\r
+         <!--Optional:-->\r
+         <ces:xmlDoc>\r
+            e\r
+            <!--You may enter ANY elements at this point-->\r
+            gero\r
+         </ces:xmlDoc>\r
+      </ces:GetLocationCatalogByFTP>\r
+   </soapenv:Body>\r
+</soapenv:Envelope>]]></con:request><con:wsaConfig mustUnderstand="NONE" version="200508" action="CES.Services.FXGlobal/IRiaAsPayer/GetLocationCatalogByFTP"/></con:call></con:operation><con:operation id="f392ab3f-e472-414d-b962-772e8b895808" isOneWay="false" action="CES.Services.FXGlobal/IRiaAsPayer/GetLocsCurrsRates" name="GetLocsCurrsRates" bindingOperationName="GetLocsCurrsRates" type="Request-Response" inputName="" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call id="b8a715af-0d4c-4a36-9c5c-d65d1b88e96f" name="Request 1"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>http://stagingfxglobalwebsvcnocert.riaenvia.net:9771/FXGlobalPaying.svc/Binding_Basic_NoCert</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:ces="CES.Services.FXGlobal">\r
+   <soapenv:Header/>\r
+   <soapenv:Body>\r
+      <ces:GetLocsCurrsRates>\r
+         <!--Optional:-->\r
+         <ces:xmlDoc>\r
+            <Root>\r
+               <CorrespID>59470211</CorrespID>\r
+               <LayoutVersion>2.0</LayoutVersion>\r
+               <Header>\r
+                  <CallID>50e07864-104f-4f68-adb6-d5d7af615ffb</CallID>\r
+                  <CallDateTimeLocal>20170912135959</CallDateTimeLocal>\r
+                  <CorrespLocNo>0</CorrespLocNo>\r
+                  <CorrespLocNo_Ria>0</CorrespLocNo_Ria>\r
+                  <CorrespLocName>Main Branch</CorrespLocName>\r
+                  <CorrespLocCountry>CL</CorrespLocCountry>\r
+                  <UserID>3648587</UserID>\r
+                  <TerminalID>16</TerminalID>\r
+                  <LanguageCultureCode>en-US</LanguageCultureCode>\r
+               </Header>\r
+               <RequestType>LocsCurrsRates</RequestType>\r
+               <Requests>\r
+                  <Request CountryCode="PE" StateName="" CityName="Madre de Dios"/>\r
+               </Requests>\r
+            </Root>\r
+         </ces:xmlDoc>\r
+      </ces:GetLocsCurrsRates>\r
+   </soapenv:Body>\r
+</soapenv:Envelope>]]></con:request><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="CES.Services.FXGlobal/IRiaAsPayer/GetLocsCurrsRates"/><con:wsrmConfig version="1.2"/></con:call><con:call id="0c142b80-661e-4b46-b46b-1e7d797cc837" name="Request 2"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>http://stagingfxglobalwebsvcnocert.riaenvia.net:9771/FXGlobalPaying.svc/Binding_Basic_NoCert</con:endpoint><con:request><![CDATA[<SOAP-ENV:Envelope xmlns:SOAP-ENV="http://schemas.xmlsoap.org/soap/envelope/" xmlns:ces="CES.Services.FXGlobal">\r
+   <SOAP-ENV:Header/>\r
+   <SOAP-ENV:Body>\r
+      <ces:GetLocsCurrsRates>\r
+         <ces:xmlDoc>\r
+            <Root>\r
+               <CorrespID>59470211</CorrespID>\r
+               <LayoutVersion>2.0</LayoutVersion>\r
+               <Header>\r
+                  <CallID>50e07864-104f-4f68-adb6-d5d7af615ffb</CallID>\r
+                  <CallDateTimeLocal>20171515135959</CallDateTimeLocal>\r
+                  <CorrespLocNo>0</CorrespLocNo>\r
+                  <CorrespLocNo_Ria>0</CorrespLocNo_Ria>\r
+                  <CorrespLocName>Main Branch</CorrespLocName>\r
+                  <CorrespLocCountry>CL</CorrespLocCountry>\r
+                  <UserID>3648587</UserID>\r
+                  <TerminalID>16</TerminalID>\r
+                  <LanguageCultureCode>es-ES</LanguageCultureCode>\r
+               </Header>\r
+               <RequestType>LocsCurrsRates</RequestType>\r
+               <Requests>\r
+                  <Request CountryCode="MX" StateName="" CityName="Ciudad Acuña"/>\r
+               </Requests>\r
+            </Root>\r
+         </ces:xmlDoc>\r
+      </ces:GetLocsCurrsRates>\r
+   </SOAP-ENV:Body>\r
+</SOAP-ENV:Envelope>]]></con:request><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="CES.Services.FXGlobal/IRiaAsPayer/GetLocsCurrsRates"/><con:wsrmConfig version="1.2"/></con:call><con:call id="ddcfded7-ae6e-42a0-beb6-c71165233ac9" name="Colombia"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>http://stagingfxglobalwebsvcnocert.riaenvia.net:9771/FXGlobalPaying.svc/Binding_Basic_NoCert</con:endpoint><con:request><![CDATA[<SOAP-ENV:Envelope xmlns:SOAP-ENV="http://schemas.xmlsoap.org/soap/envelope/" xmlns:ces="CES.Services.FXGlobal">\r
+   <SOAP-ENV:Header/>\r
+   <SOAP-ENV:Body>\r
+      <ces:GetLocsCurrsRates>\r
+         <ces:xmlDoc>\r
+            <Root>\r
+               <CorrespID>59470211</CorrespID>\r
+               <LayoutVersion>2.0</LayoutVersion>\r
+               <Header>\r
+                  <CallID>50e07864-104f-4f68-adb6-d5d7af615ffb</CallID>\r
+                  <CallDateTimeLocal>20171515135959</CallDateTimeLocal>\r
+                  <CorrespLocNo>0</CorrespLocNo>\r
+                  <CorrespLocNo_Ria>0</CorrespLocNo_Ria>\r
+                  <CorrespLocName>Main Branch</CorrespLocName>\r
+                  <CorrespLocCountry>CL</CorrespLocCountry>\r
+                  <UserID>3648587</UserID>\r
+                  <TerminalID>16</TerminalID>\r
+                  <LanguageCultureCode>en-US</LanguageCultureCode>\r
+               </Header>\r
+               <RequestType>LocsCurrsRates</RequestType>\r
+               <Requests>\r
+                  <Request CountryCode="CO" StateName="" CityName="Cali"/>\r
+               </Requests>\r
+            </Root>\r
+         </ces:xmlDoc>\r
+      </ces:GetLocsCurrsRates>\r
+   </SOAP-ENV:Body>\r
+</SOAP-ENV:Envelope>]]></con:request><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="CES.Services.FXGlobal/IRiaAsPayer/GetLocsCurrsRates"/><con:wsrmConfig version="1.2"/></con:call><con:call id="78263a93-76e7-4703-a7f9-2f2d703116fb" name="Israel"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>http://stagingfxglobalwebsvcnocert.riaenvia.net:9771/FXGlobalPaying.svc/Binding_Basic_NoCert</con:endpoint><con:request><![CDATA[<SOAP-ENV:Envelope xmlns:SOAP-ENV="http://schemas.xmlsoap.org/soap/envelope/" xmlns:ces="CES.Services.FXGlobal">\r
+   <SOAP-ENV:Header/>\r
+   <SOAP-ENV:Body>\r
+      <ces:GetLocsCurrsRates>\r
+         <ces:xmlDoc>\r
+            <Root>\r
+               <CorrespID>59470211</CorrespID>\r
+               <LayoutVersion>2.0</LayoutVersion>\r
+               <Header>\r
+                  <CallID>50e07864-104f-4f68-adb6-d5d7af615ffb</CallID>\r
+                  <CallDateTimeLocal>20171515135959</CallDateTimeLocal>\r
+                  <CorrespLocNo>0</CorrespLocNo>\r
+                  <CorrespLocNo_Ria>0</CorrespLocNo_Ria>\r
+                  <CorrespLocName>Main Branch</CorrespLocName>\r
+                  <CorrespLocCountry>CL</CorrespLocCountry>\r
+                  <UserID>3648587</UserID>\r
+                  <TerminalID>16</TerminalID>\r
+                  <LanguageCultureCode>es-ES</LanguageCultureCode>\r
+               </Header>\r
+               <RequestType>LocsCurrsRates</RequestType>\r
+               <Requests>\r
+                  <Request CountryCode="IL" StateName="" CityName="Ciudad Acuña"/>\r
+               </Requests>\r
+            </Root>\r
+         </ces:xmlDoc>\r
+      </ces:GetLocsCurrsRates>\r
+   </SOAP-ENV:Body>\r
+</SOAP-ENV:Envelope>]]></con:request><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="CES.Services.FXGlobal/IRiaAsPayer/GetLocsCurrsRates"/><con:wsrmConfig version="1.2"/></con:call><con:call id="e5fcc39d-eb84-477e-9d5c-f86393ac0ac3" name="iSRA"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>http://stagingfxglobalwebsvcnocert.riaenvia.net:9771/FXGlobalPaying.svc/Binding_Basic_NoCert</con:endpoint><con:request><![CDATA[<SOAP-ENV:Envelope xmlns:SOAP-ENV="http://schemas.xmlsoap.org/soap/envelope/" xmlns:ces="CES.Services.FXGlobal">\r
+   <SOAP-ENV:Header/>\r
+   <SOAP-ENV:Body>\r
+      <ces:GetLocsCurrsRates>\r
+         <ces:xmlDoc>\r
+            <Root>\r
+               <CorrespID>59470211</CorrespID>\r
+               <LayoutVersion>2.0</LayoutVersion>\r
+               <Header>\r
+                  <CallID>50e07864-104f-4f68-adb6-d5d7af615ffb</CallID>\r
+                  <CallDateTimeLocal>20171515135959</CallDateTimeLocal>\r
+                  <CorrespLocNo>0</CorrespLocNo>\r
+                  <CorrespLocNo_Ria>0</CorrespLocNo_Ria>\r
+                  <CorrespLocName>Main Branch</CorrespLocName>\r
+                  <CorrespLocCountry>CL</CorrespLocCountry>\r
+                  <UserID>3648587</UserID>\r
+                  <TerminalID>16</TerminalID>\r
+                  <LanguageCultureCode>es-ES</LanguageCultureCode>\r
+               </Header>\r
+               <RequestType>LocsCurrsRates</RequestType>\r
+               <Requests>\r
+                  <Request CountryCode="DE" StateName="NI" CityName="Göttingen"/>\r
+               </Requests>\r
+            </Root>\r
+         </ces:xmlDoc>\r
+      </ces:GetLocsCurrsRates>\r
+   </SOAP-ENV:Body>\r
+</SOAP-ENV:Envelope>]]></con:request><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="CES.Services.FXGlobal/IRiaAsPayer/GetLocsCurrsRates"/><con:wsrmConfig version="1.2"/></con:call><con:call id="f1c8b078-c728-4d64-b9e9-af214d39d318" name="España"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>http://stagingfxglobalwebsvcnocert.riaenvia.net:9771/FXGlobalPaying.svc/Binding_Basic_NoCert</con:endpoint><con:request><![CDATA[<SOAP-ENV:Envelope xmlns:SOAP-ENV="http://schemas.xmlsoap.org/soap/envelope/" xmlns:ces="CES.Services.FXGlobal">\r
+   <SOAP-ENV:Header/>\r
+   <SOAP-ENV:Body>\r
+      <ces:GetLocsCurrsRates>\r
+         <ces:xmlDoc>\r
+            <Root>\r
+               <CorrespID>59470211</CorrespID>\r
+               <LayoutVersion>2.0</LayoutVersion>\r
+               <Header>\r
+                  <CallID>50e07864-104f-4f68-adb6-d5d7af615ffb</CallID>\r
+                  <CallDateTimeLocal>20171515135959</CallDateTimeLocal>\r
+                  <CorrespLocNo>0</CorrespLocNo>\r
+                  <CorrespLocNo_Ria>0</CorrespLocNo_Ria>\r
+                  <CorrespLocName>Main Branch</CorrespLocName>\r
+                  <CorrespLocCountry>CL</CorrespLocCountry>\r
+                  <UserID>3648587</UserID>\r
+                  <TerminalID>16</TerminalID>\r
+                  <LanguageCultureCode>es-ES</LanguageCultureCode>\r
+               </Header>\r
+               <RequestType>LocsCurrsRates</RequestType>\r
+               <Requests>\r
+                  <Request CountryCode="ES" StateName="" CityName="Madrid"/>\r
+               </Requests>\r
+            </Root>\r
+         </ces:xmlDoc>\r
+      </ces:GetLocsCurrsRates>\r
+   </SOAP-ENV:Body>\r
+</SOAP-ENV:Envelope>]]></con:request><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="CES.Services.FXGlobal/IRiaAsPayer/GetLocsCurrsRates"/><con:wsrmConfig version="1.2"/></con:call></con:operation><con:operation id="1e6d6102-6696-4a26-9e0d-1801746706c2" isOneWay="false" action="CES.Services.FXGlobal/IRiaAsPayer/GetOrderCommission" name="GetOrderCommission" bindingOperationName="GetOrderCommission" type="Request-Response" inputName="" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call id="dbf076bc-4dc8-434b-ba3c-dccfd8975a67" name="Request 1"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>http://stagingfxglobalwebsvcnocert.riaenvia.net:9771/FXGlobalPaying.svc/Binding_Basic_NoCert</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:ces="CES.Services.FXGlobal">\r
+   <soapenv:Header/>\r
+   <soapenv:Body>\r
+      <ces:GetOrderCommission>\r
+         <!--Optional:-->\r
+         <ces:xmlDoc>\r
+            <Root>\r
+               <CorrespID>59470211</CorrespID>\r
+               <LayoutVersion>2.0</LayoutVersion>\r
+               <Header>\r
+                  <CallID>123-43326-789</CallID>\r
+                  <CallDateTimeLocal>20170913015212</CallDateTimeLocal>\r
+                  <CorrespLocNo>MYHQ01</CorrespLocNo>\r
+                  <CorrespLocNo_Ria>0</CorrespLocNo_Ria>\r
+                  <CorrespLocName/>\r
+                  <CorrespLocCountry>CL</CorrespLocCountry>\r
+                  <UserID>sch_admin</UserID>\r
+                  <TerminalID/>\r
+                  <LanguageCultureCode/>\r
+               </Header>\r
+               <RequestType>OrderCommission</RequestType>\r
+               <Request DateDesired="20171020" CountryFrom="CL" CountryTo="CO" PayingCorrespID="4065111" PayingCorrespLocID="10837111" PaymentCurrency="CLP" PaymentAmount="100000" BeneficiaryCurrency="COP" BeneficiaryAmount="464700" DeliveryMethod="1"></Request>\r
+            </Root>\r
+         </ces:xmlDoc>\r
+      </ces:GetOrderCommission>\r
+   </soapenv:Body>\r
+</soapenv:Envelope>]]></con:request><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="CES.Services.FXGlobal/IRiaAsPayer/GetOrderCommission"/><con:wsrmConfig version="1.2"/></con:call></con:operation><con:operation id="f26072b7-e693-4aef-adb9-b0ef09f0fd5e" isOneWay="false" action="CES.Services.FXGlobal/IRiaAsPayer/GetOrderDetails" name="GetOrderDetails" bindingOperationName="GetOrderDetails" type="Request-Response" inputName="" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call id="c724b9ce-95ae-4b7b-a787-0a52904060dd" name="Request 1"><con:settings/><con:encoding>UTF-8</con:encoding><con:endpoint>http://stagingfxglobalwebsvcnocert.riaenvia.net:9771/FXGlobalPaying.svc/Binding_Basic_NoCert</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:ces="CES.Services.FXGlobal">\r
+   <soapenv:Header/>\r
+   <soapenv:Body>\r
+      <ces:GetOrderDetails>\r
+         <!--Optional:-->\r
+         <ces:xmlDoc>\r
+            e\r
+            <!--You may enter ANY elements at this point-->\r
+            gero\r
+         </ces:xmlDoc>\r
+      </ces:GetOrderDetails>\r
+   </soapenv:Body>\r
+</soapenv:Envelope>]]></con:request><con:wsaConfig mustUnderstand="NONE" version="200508" action="CES.Services.FXGlobal/IRiaAsPayer/GetOrderDetails"/></con:call></con:operation><con:operation id="244f7728-e6a6-4075-8ec8-c3c8675500ff" isOneWay="false" action="CES.Services.FXGlobal/IRiaAsPayer/GetOrderStatusNotices" name="GetOrderStatusNotices" bindingOperationName="GetOrderStatusNotices" type="Request-Response" inputName="" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call id="fe03d4fc-0c8a-457c-adaa-5d74cb6bff8d" name="Request 1"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>http://stagingfxglobalwebsvcnocert.riaenvia.net:9771/FXGlobalPaying.svc/Binding_Basic_NoCert</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:ces="CES.Services.FXGlobal">\r
+   <soapenv:Header/>\r
+   <soapenv:Body>\r
+      <ces:GetOrderStatusNotices>\r
+         <!--Optional:-->\r
+         <ces:xmlDoc>\r
+            <Root>\r
+               <CorrespID>59470211</CorrespID>\r
+               <LayoutVersion>2.0</LayoutVersion>\r
+               <Header>\r
+                  <CallID>50e07864-104f-4f68-adb6-d5d7af615ffb</CallID>\r
+                  <CallDateTimeLocal>20170912135959</CallDateTimeLocal>\r
+                  <CorrespLocNo>0</CorrespLocNo>\r
+                  <CorrespLocNo_Ria>0</CorrespLocNo_Ria>\r
+                  <CorrespLocName>Main Branch</CorrespLocName>\r
+                  <CorrespLocCountry>CL</CorrespLocCountry>\r
+                  <UserID>3648587</UserID>\r
+                  <TerminalID>16</TerminalID>\r
+                  <LanguageCultureCode>en-US</LanguageCultureCode>\r
+               </Header>\r
+               <RequestType>OrderStatusNotifications</RequestType>\r
+            </Root>\r
+         </ces:xmlDoc>\r
+      </ces:GetOrderStatusNotices>\r
+   </soapenv:Body>\r
+</soapenv:Envelope>]]></con:request><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="CES.Services.FXGlobal/IRiaAsPayer/GetOrderStatusNotices"/><con:wsrmConfig version="1.2"/></con:call></con:operation><con:operation id="3a191f31-b8b1-4073-9a49-d77e3cc7a9cc" isOneWay="false" action="CES.Services.FXGlobal/IRiaAsPayer/GetOrdersValidated" name="GetOrdersValidated" bindingOperationName="GetOrdersValidated" type="Request-Response" inputName="" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call id="92a737ad-b54d-4315-9eca-3642e53a357d" name="Request 1"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>http://stagingfxglobalwebsvcnocert.riaenvia.net:9771/FXGlobalPaying.svc/Binding_Basic_NoCert</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:ces="CES.Services.FXGlobal">\r
+   <soapenv:Header/>\r
+   <soapenv:Body>\r
+      <ces:GetOrdersValidated>\r
+         <!--Optional:-->\r
+         <ces:xmlDoc>\r
+            <Root>\r
+               <CorrespID>59470211</CorrespID>\r
+               <LayoutVersion>2.0</LayoutVersion>\r
+               <Header>\r
+                  <CallID>50e07864-104f-4f68-adb6-d5d7af615ffb</CallID>\r
+                  <CallDateTimeLocal>20170920135959</CallDateTimeLocal>\r
+                  <CorrespLocNo>0</CorrespLocNo>\r
+                  <CorrespLocNo_Ria>0</CorrespLocNo_Ria>\r
+                  <CorrespLocName>Main Branch</CorrespLocName>\r
+                  <CorrespLocCountry>CL</CorrespLocCountry>\r
+                  <UserID>3648587</UserID>\r
+                  <TerminalID>16</TerminalID>\r
+                  <LanguageCultureCode>es-ES</LanguageCultureCode>\r
+               </Header>\r
+               <RequestType>ValidateOrders</RequestType>\r
+               <Orders>\r
+                  <Order>\r
+                     <OrderNo>681048</OrderNo>\r
+                     <PayingCorrespSeqID>0</PayingCorrespSeqID>\r
+                     <SalesDate>20171020</SalesDate>\r
+                     <SalesTime>093224</SalesTime>\r
+                     <CountryFrom>CL</CountryFrom>\r
+                     <CountryTo>CO</CountryTo>\r
+                     <SendingCorrespBranchNo>0001</SendingCorrespBranchNo>\r
+                     <PayingCorrespID>4065111</PayingCorrespID>\r
+                     <PayingCorrespLocID>10837111</PayingCorrespLocID>\r
+                     <BeneQuestion/>\r
+                     <BeneAnswer/>\r
+                     <PmtInstruction/>\r
+                     <BeneficiaryCurrency>COP</BeneficiaryCurrency>\r
+                     <BeneficiaryAmount>464700</BeneficiaryAmount>\r
+                     <DeliveryMethod>1</DeliveryMethod>\r
+                     <PaymentCurrency>CLP</PaymentCurrency>\r
+                     <PaymentAmount>100000</PaymentAmount>\r
+                     <CommissionCurrency>CLP</CommissionCurrency>\r
+                     <CommissionAmount>1513</CommissionAmount>\r
+                     <CustChargeCurrency>CLP</CustChargeCurrency>
+                     <CustChargeAmount>2521</CustChargeAmount>
+                     <BenID>202</BenID>\r
+                     <BeneFirstName>BENE1</BeneFirstName>\r
+                     <BeneLastName>TESTE</BeneLastName>\r
+                     <BeneLastName2>TESTE</BeneLastName2>\r
+                     <BeneAddress>TEST</BeneAddress>\r
+                     <BeneCity>TEST</BeneCity>\r
+                     <BeneState>TEST</BeneState>\r
+                     <BeneZipCode>33333</BeneZipCode>\r
+                     <BeneCountry>IL</BeneCountry>\r
+                     <BenePhoneNo>5454545454</BenePhoneNo>\r
+                     <BeneMessage/>\r
+                     <CustID>83100552</CustID>\r
+                     <CustFirstName>jane</CustFirstName>\r
+                     <CustLastName>test</CustLastName>\r
+                     <CustLastName2>test</CustLastName2>\r
+                     <CustAddress>123 main ave.</CustAddress>\r
+                     <CustCity>santa ana</CustCity>\r
+                     <CustState>OAX</CustState>\r
+                     <CustZipCode>9284</CustZipCode>\r
+                     <CustCountry>MX</CustCountry>\r
+                     <CustPhoneNo>233442222</CustPhoneNo>\r
+                     <CustID1Type>CPF</CustID1Type>\r
+                     <CustID1No>24592221163</CustID1No>\r
+                     <CustID1IssuedBy>BRAZIL</CustID1IssuedBy>\r
+                     <CustID1ExpDate>20151231</CustID1ExpDate>\r
+                     <CustID2Type/>\r
+                     <CustID2No/>\r
+                     <CustID2IssuedBy/>\r
+                     <CustID2ExpDate/>\r
+                     <CustTaxID>000-00-0000</CustTaxID>\r
+                     <CustTaxCountry>BR</CustTaxCountry>\r
+                     <CustCountryOfBirth>CH</CustCountryOfBirth>\r
+                     <CustNationality>BR</CustNationality>\r
+                     <CustDateBirth>19781201</CustDateBirth>\r
+                     <CustOccupation>TY</CustOccupation>\r
+                     <CustSourceFunds>WORK</CustSourceFunds>\r
+                     <CustBeneRelationship>Brother</CustBeneRelationship>
+                     <TransferReason>DONATION</TransferReason>\r
+                     <ProviderID>0</ProviderID>\r
+                     <BankID>0</BankID>\r
+                     <BankBranchName/>\r
+                     <BankBranchNo/>\r
+                     <BankBranchCity/>\r
+                     <BankAccountCountry/>\r
+                     <!--<BankAccountType></BankAccountType>-->\r
+                     <BankAccountNo/>\r
+                     <!--<Valuetype></Valuetype>-->\r
+                     <BankRoutingCode>0</BankRoutingCode>\r
+                     <!--<BankRoutingType></BankRoutingType>-->\r
+                     <BIC_SWIFT/>\r
+                     <UnitaryBankAccountNo/>\r
+                     <!--<UnitaryType></UnitaryType>-->\r
+                     <BeneIDNo>99010112312</BeneIDNo>\r
+                     <BeneIDType>Passport</BeneIDType>\r
+                     <BeneTaxID/>\r
+                  </Order>\r
+               </Orders>\r
+            </Root>\r
+         </ces:xmlDoc>\r
+      </ces:GetOrdersValidated>\r
+   </soapenv:Body>\r
+</soapenv:Envelope>]]></con:request><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="CES.Services.FXGlobal/IRiaAsPayer/GetOrdersValidated"/><con:wsrmConfig version="1.2"/></con:call><con:call id="0e483430-ca2c-4727-b06f-8274faae204f" name="Copy of Request 1"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>http://stagingfxglobalwebsvcnocert.riaenvia.net:9771/FXGlobalPaying.svc/Binding_Basic_NoCert</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:ces="CES.Services.FXGlobal">\r
+   <soapenv:Header/>\r
+   <soapenv:Body>\r
+      <ces:GetOrdersValidated>\r
+         <!--Optional:-->\r
+         <ces:xmlDoc>\r
+            <Root>\r
+               <CorrespID>59470211</CorrespID>\r
+               <LayoutVersion>2.0</LayoutVersion>\r
+               <Header>\r
+                  <CallID>50e07864-104f-4f68-adb6-d5d7af615ffb</CallID>\r
+                  <CallDateTimeLocal>20170920135959</CallDateTimeLocal>\r
+                  <CorrespLocNo>0</CorrespLocNo>\r
+                  <CorrespLocNo_Ria>0</CorrespLocNo_Ria>\r
+                  <CorrespLocName>Main Branch</CorrespLocName>\r
+                  <CorrespLocCountry>CL</CorrespLocCountry>\r
+                  <UserID>3648587</UserID>\r
+                  <TerminalID>16</TerminalID>\r
+                  <LanguageCultureCode>en-US</LanguageCultureCode>\r
+               </Header>\r
+               <RequestType>ValidateOrders</RequestType>\r
+               <Orders>\r
+                  <Order>\r
+                     <OrderNo>681040</OrderNo>\r
+                     <PayingCorrespSeqID>0</PayingCorrespSeqID>\r
+                     <SalesDate>20170920</SalesDate>\r
+                     <SalesTime>093224</SalesTime>\r
+                     <CountryFrom>CL</CountryFrom>\r
+                     <CountryTo>CO</CountryTo>\r
+                     <SendingCorrespBranchNo>0001</SendingCorrespBranchNo>\r
+                     <PayingCorrespID>32249011</PayingCorrespID>\r
+                     <PayingCorrespLocID>39536811</PayingCorrespLocID>\r
+                     <BeneQuestion/>\r
+                     <BeneAnswer/>\r
+                     <PmtInstruction/>\r
+                     <BeneficiaryCurrency>COP</BeneficiaryCurrency>\r
+                     <BeneficiaryAmount>357330</BeneficiaryAmount>\r
+                     <DeliveryMethod>2</DeliveryMethod>\r
+                     <PaymentCurrency>CLP</PaymentCurrency>\r
+                     <PaymentAmount>100000</PaymentAmount>\r
+                     <CommissionCurrency>CLP</CommissionCurrency>\r
+                     <CommissionAmount>2000</CommissionAmount>\r
+                     <CustChargeCurrency>CLP</CustChargeCurrency>
+                     <CustChargeAmount>2521</CustChargeAmount>
+                     <BenID>202</BenID>\r
+                     <BeneFirstName>BENE1</BeneFirstName>\r
+                     <BeneLastName>TESTE</BeneLastName>\r
+                     <BeneLastName2>TESTE</BeneLastName2>\r
+                     <BeneAddress>TEST</BeneAddress>\r
+                     <BeneCity>TEST</BeneCity>\r
+                     <BeneState>TEST</BeneState>\r
+                     <BeneZipCode>33333</BeneZipCode>\r
+                     <BeneCountry>IL</BeneCountry>\r
+                     <BenePhoneNo>5454545454</BenePhoneNo>\r
+                     <BeneMessage/>\r
+                     <CustID>83100552</CustID>\r
+                     <CustFirstName>jane</CustFirstName>\r
+                     <CustLastName>test</CustLastName>\r
+                     <CustLastName2>test</CustLastName2>\r
+                     <CustAddress>123 main ave.</CustAddress>\r
+                     <CustCity>santa ana</CustCity>\r
+                     <CustState>OAX</CustState>\r
+                     <CustZipCode>92844</CustZipCode>\r
+                     <CustCountry>MX</CustCountry>\r
+                     <CustPhoneNo>233442222</CustPhoneNo>\r
+                     <CustID1Type>CPF</CustID1Type>\r
+                     <CustID1No>24592221163</CustID1No>\r
+                     <CustID1IssuedBy>BRAZIL</CustID1IssuedBy>\r
+                     <CustID1ExpDate>20151231</CustID1ExpDate>\r
+                     <CustID2Type/>\r
+                     <CustID2No/>\r
+                     <CustID2IssuedBy/>\r
+                     <CustID2ExpDate/>\r
+                     <CustTaxID>000-00-0000</CustTaxID>\r
+                     <CustTaxCountry>BR</CustTaxCountry>\r
+                     <CustCountryOfBirth>CH</CustCountryOfBirth>\r
+                     <CustNationality>BR</CustNationality>\r
+                     <CustDateBirth>19781201</CustDateBirth>\r
+                     <CustOccupation>TY</CustOccupation>\r
+                     <CustSourceFunds>WORK</CustSourceFunds>\r
+                     <TransferReason>DONATION</TransferReason>\r
+                     <ProviderID>0</ProviderID>\r
+                     <BankID>0</BankID>\r
+                     <BankBranchName/>\r
+                     <BankBranchNo/>\r
+                     <BankBranchCity/>\r
+                     <BankAccountCountry/>\r
+                     <!--<BankAccountType></BankAccountType>-->\r
+                     <BankAccountNo/>\r
+                     <!--<Valuetype></Valuetype>-->\r
+                     <BankRoutingCode>0</BankRoutingCode>\r
+                     <!--<BankRoutingType></BankRoutingType>-->\r
+                     <BIC_SWIFT/>\r
+                     <UnitaryBankAccountNo/>\r
+                     <!--<UnitaryType></UnitaryType>-->\r
+                     <BeneIDNo>99010112312</BeneIDNo>\r
+                     <BeneIDType>Passport</BeneIDType>\r
+                     <BeneTaxID/>\r
+                  </Order>\r
+               </Orders>\r
+            </Root>\r
+         </ces:xmlDoc>\r
+      </ces:GetOrdersValidated>\r
+   </soapenv:Body>\r
+</soapenv:Envelope>]]></con:request><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="CES.Services.FXGlobal/IRiaAsPayer/GetOrdersValidated"/><con:wsrmConfig version="1.2"/></con:call><con:call id="bf271d7c-cc19-4e96-83dd-be0be41b074b" name="test1"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>http://stagingfxglobalwebsvcnocert.riaenvia.net:9771/FXGlobalPaying.svc/Binding_Basic_NoCert</con:endpoint><con:request><![CDATA[<SOAP-ENV:Envelope xmlns:SOAP-ENV="http://schemas.xmlsoap.org/soap/envelope/" xmlns:ces="CES.Services.FXGlobal">\r
+   <SOAP-ENV:Header/>\r
+   <SOAP-ENV:Body>\r
+      <ces:GetOrdersValidated>\r
+         <ces:xmlDoc>\r
+            <Root>\r
+               <CorrespID>59470211</CorrespID>\r
+               <LayoutVersion>2.0</LayoutVersion>\r
+               <Header>\r
+                  <CallID>50e07864-104f-4f68-adb6-d5d7af615ffb</CallID>\r
+                  <CallDateTimeLocal>20170912135959</CallDateTimeLocal>\r
+                  <CorrespLocNo>0</CorrespLocNo>\r
+                  <CorrespLocNo_Ria>0</CorrespLocNo_Ria>\r
+                  <CorrespLocName>Main Branch</CorrespLocName>\r
+                  <CorrespLocCountry>CL</CorrespLocCountry>\r
+                  <UserID>3648587</UserID>\r
+                  <TerminalID>16</TerminalID>\r
+                  <LanguageCultureCode>es-ES</LanguageCultureCode>\r
+               </Header>\r
+               <RequestType>ValidateOrders</RequestType>\r
+               <Orders>\r
+                  <Order>\r
+                     <OrderNo>681024</OrderNo>\r
+                     <PayingCorrespSeqID>0</PayingCorrespSeqID>\r
+                     <SalesDate>20170920</SalesDate>\r
+                     <SalesTime>093224</SalesTime>\r
+                     <CountryFrom>CL</CountryFrom>\r
+                     <CountryTo>CO</CountryTo>\r
+                     <SendingCorrespBranchNo>0001</SendingCorrespBranchNo>\r
+                     <PayingCorrespID>32249011</PayingCorrespID>\r
+                     <PayingCorrespLocID>39536811</PayingCorrespLocID>\r
+                     <BeneQuestion/>\r
+                     <BeneAnswer/>\r
+                     <PmtInstruction/>\r
+                     <BeneficiaryCurrency>COP</BeneficiaryCurrency>\r
+                     <BeneficiaryAmount>357330</BeneficiaryAmount>\r
+                     <DeliveryMethod>2</DeliveryMethod>\r
+                     <PaymentCurrency>CLP</PaymentCurrency>\r
+                     <PaymentAmount>100000</PaymentAmount>\r
+                     <CommissionCurrency>CLP</CommissionCurrency>\r
+                     <CommissionAmount>2000</CommissionAmount>\r
+                     <CustChargeCurrency>CLP</CustChargeCurrency>\r
+                     <CustChargeAmount>2521</CustChargeAmount>\r
+                     <BenID>202</BenID>\r
+                     <BeneFirstName>BENE1</BeneFirstName>\r
+                     <BeneLastName>TESTE</BeneLastName>\r
+                     <BeneLastName2>TESTE</BeneLastName2>\r
+                     <BeneAddress>TEST</BeneAddress>\r
+                     <BeneCity>TEST</BeneCity>\r
+                     <BeneState>TEST</BeneState>\r
+                     <BeneZipCode>33333</BeneZipCode>\r
+                     <BeneCountry>IL</BeneCountry>\r
+                     <BenePhoneNo>5454545454</BenePhoneNo>\r
+                     <BeneMessage/>\r
+                     <CustID>83100552</CustID>\r
+                     <CustFirstName>jane</CustFirstName>\r
+                     <CustLastName>test</CustLastName>\r
+                     <CustLastName2>test</CustLastName2>\r
+                     <CustAddress>123 main ave.</CustAddress>\r
+                     <CustCity>santa ana</CustCity>\r
+                     <CustState>OAX</CustState>\r
+                     <CustZipCode>92844</CustZipCode>\r
+                     <CustCountry>MX</CustCountry>\r
+                     <CustPhoneNo>233442222</CustPhoneNo>\r
+                     <CustID1Type>CPF</CustID1Type>\r
+                     <CustID1No>24592221163</CustID1No>\r
+                     <CustID1IssuedBy>BRAZIL</CustID1IssuedBy>\r
+                     <CustID1ExpDate>20151231</CustID1ExpDate>\r
+                     <CustID2Type/>\r
+                     <CustID2No/>\r
+                     <CustID2IssuedBy/>\r
+                     <CustID2ExpDate/>\r
+                     <CustTaxID>000-00-0000</CustTaxID>\r
+                     <CustTaxCountry>BR</CustTaxCountry>\r
+                     <CustCountryOfBirth>CH</CustCountryOfBirth>\r
+                     <CustNationality>BR</CustNationality>\r
+                     <CustDateBirth>19781201</CustDateBirth>\r
+                     <CustOccupation>TY</CustOccupation>\r
+                     <CustSourceFunds>WORK</CustSourceFunds>\r
+                     <TransferReason>DONATION</TransferReason>\r
+                     <ProviderID>0</ProviderID>\r
+                     <BankID>0</BankID>\r
+                     <BankBranchName/>\r
+                     <BankBranchNo/>\r
+                     <BankBranchCity/>\r
+                     <BankAccountCountry/>\r
+                     <BankAccountNo/>\r
+                     <BIC_SWIFT/>\r
+                     <BeneIDNo>99010112312</BeneIDNo>\r
+                     <BeneIDType>Passport</BeneIDType>\r
+                     <BeneTaxID/>\r
+                  </Order>\r
+               </Orders>\r
+            </Root>\r
+         </ces:xmlDoc>\r
+      </ces:GetOrdersValidated>\r
+   </SOAP-ENV:Body>\r
+</SOAP-ENV:Envelope>]]></con:request><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="CES.Services.FXGlobal/IRiaAsPayer/GetOrdersValidated"/><con:wsrmConfig version="1.2"/></con:call><con:call id="1b0a7e3f-1fa0-408e-8da7-b37f33d67242" name="Request 4"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>http://stagingfxglobalwebsvcnocert.riaenvia.net:9771/FXGlobalPaying.svc/Binding_Basic_NoCert</con:endpoint><con:request><![CDATA[<SOAP-ENV:Envelope xmlns:SOAP-ENV="http://schemas.xmlsoap.org/soap/envelope/" xmlns:ces="CES.Services.FXGlobal">\r
+   <SOAP-ENV:Header/>\r
+   <SOAP-ENV:Body>\r
+      <ces:GetOrdersValidated>\r
+         <ces:xmlDoc>\r
+            <Root>\r
+               <CorrespID>59470211</CorrespID>\r
+               <LayoutVersion>2.0</LayoutVersion>\r
+               <Header>\r
+                  <CallID>50e07864-104f-4f68-adb6-d5d7af615ffb</CallID>\r
+                  <CallDateTimeLocal>20170912135959</CallDateTimeLocal>\r
+                  <CorrespLocNo>0</CorrespLocNo>\r
+                  <CorrespLocNo_Ria>0</CorrespLocNo_Ria>\r
+                  <CorrespLocName>Main Branch</CorrespLocName>\r
+                  <CorrespLocCountry>CL</CorrespLocCountry>\r
+                  <UserID>3648587</UserID>\r
+                  <TerminalID>16</TerminalID>\r
+                  <LanguageCultureCode>es-ES</LanguageCultureCode>\r
+               </Header>\r
+               <RequestType>ValidateOrders</RequestType>\r
+               <Orders>\r
+                  <Order>\r
+                     <OrderNo>681043</OrderNo>\r
+                     <PayingCorrespSeqID>0</PayingCorrespSeqID>\r
+                     <SalesDate>20171020</SalesDate>\r
+                     <SalesTime>093224</SalesTime>\r
+                     <CountryFrom>CL</CountryFrom>\r
+                     <CountryTo>CO</CountryTo>\r
+                     <SendingCorrespBranchNo>0001</SendingCorrespBranchNo>\r
+                     <PayingCorrespID>4065111</PayingCorrespID>\r
+                     <PayingCorrespLocID>10837111</PayingCorrespLocID>\r
+                     <BeneQuestion/>\r
+                     <BeneAnswer/>\r
+                     <PmtInstruction/>\r
+                     <BeneficiaryCurrency>COP</BeneficiaryCurrency>\r
+                     <BeneficiaryAmount>464700</BeneficiaryAmount>\r
+                     <DeliveryMethod>1</DeliveryMethod>\r
+                     <PaymentCurrency>CLP</PaymentCurrency>\r
+                     <PaymentAmount>100000</PaymentAmount>\r
+                     <CommissionCurrency>CLP</CommissionCurrency>\r
+                     <CommissionAmount>1513</CommissionAmount>\r
+                     <CustChargeCurrency>CLP</CustChargeCurrency>\r
+                     <CustChargeAmount>2521</CustChargeAmount>\r
+                     <BenID>202</BenID>\r
+                     <BeneFirstName>BENE1</BeneFirstName>\r
+                     <BeneLastName>TESTE</BeneLastName>\r
+                     <BeneLastName2>TESTE</BeneLastName2>\r
+                     <BeneAddress>TEST</BeneAddress>\r
+                     <BeneCity>TEST</BeneCity>\r
+                     <BeneState>TEST</BeneState>\r
+                     <BeneZipCode>33333</BeneZipCode>\r
+                     <BeneCountry>IL</BeneCountry>\r
+                     <BenePhoneNo>5454545454</BenePhoneNo>\r
+                     <BeneMessage/>\r
+                     <CustID>83100552</CustID>\r
+                     <CustFirstName>jane</CustFirstName>\r
+                     <CustLastName>test</CustLastName>\r
+                     <CustLastName2>test</CustLastName2>\r
+                     <CustAddress>123 main ave.</CustAddress>\r
+                     <CustCity>santa ana</CustCity>\r
+                     <CustState>OAX</CustState>\r
+                     <CustZipCode>92844</CustZipCode>\r
+                     <CustCountry>MX</CustCountry>\r
+                     <CustPhoneNo>233442222</CustPhoneNo>\r
+                     <CustID1Type>CPF</CustID1Type>\r
+                     <CustID1No>24592221163</CustID1No>\r
+                     <CustID1IssuedBy>BRAZIL</CustID1IssuedBy>\r
+                     <CustID1ExpDate>20151231</CustID1ExpDate>\r
+                     <CustID2Type/>\r
+                     <CustID2No/>\r
+                     <CustID2IssuedBy/>\r
+                     <CustID2ExpDate/>\r
+                     <CustTaxID>000-00-0000</CustTaxID>\r
+                     <CustTaxCountry>BR</CustTaxCountry>\r
+                     <CustCountryOfBirth>CH</CustCountryOfBirth>\r
+                     <CustNationality>BR</CustNationality>\r
+                     <CustDateBirth>19781201</CustDateBirth>\r
+                     <CustOccupation>TY</CustOccupation>\r
+                     <CustSourceFunds>WORK</CustSourceFunds>\r
+                     <TransferReason>DONATION</TransferReason>\r
+                     <ProviderID>0</ProviderID>\r
+                     <BankID>0</BankID>\r
+                     <BankBranchName/>\r
+                     <BankBranchNo/>\r
+                     <BankBranchCity/>\r
+                     <BankAccountCountry/>\r
+                     <BankAccountNo/>\r
+                     <BankRoutingCode>0</BankRoutingCode>\r
+                     <BIC_SWIFT/>\r
+                     <BeneIDNo>99010112312</BeneIDNo>\r
+                     <BeneIDType>Passport</BeneIDType>\r
+                     <BeneTaxID/>\r
+                  </Order>\r
+               </Orders>\r
+            </Root>\r
+         </ces:xmlDoc>\r
+      </ces:GetOrdersValidated>\r
+   </SOAP-ENV:Body>\r
+</SOAP-ENV:Envelope>]]></con:request><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="CES.Services.FXGlobal/IRiaAsPayer/GetOrdersValidated"/><con:wsrmConfig version="1.2"/></con:call><con:call id="96ba7505-fe8e-4acc-abc3-9890d540818d" name="Request 5"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>http://stagingfxglobalwebsvcnocert.riaenvia.net:9771/FXGlobalPaying.svc/Binding_Basic_NoCert</con:endpoint><con:request><![CDATA[<SOAP-ENV:Envelope xmlns:SOAP-ENV="http://schemas.xmlsoap.org/soap/envelope/" xmlns:ces="CES.Services.FXGlobal">\r
+   <SOAP-ENV:Header/>\r
+   <SOAP-ENV:Body>\r
+      <ces:GetOrdersValidated>\r
+         <ces:xmlDoc>\r
+            <Root>\r
+               <CorrespID>59470211</CorrespID>\r
+               <LayoutVersion>2.0</LayoutVersion>\r
+               <Header>\r
+                  <CallID>50e07864-104f-4f68-adb6-d5d7af615ffb</CallID>\r
+                  <CallDateTimeLocal>20170912135959</CallDateTimeLocal>\r
+                  <CorrespLocNo>0</CorrespLocNo>\r
+                  <CorrespLocNo_Ria>0</CorrespLocNo_Ria>\r
+                  <CorrespLocName>Main Branch</CorrespLocName>\r
+                  <CorrespLocCountry>CL</CorrespLocCountry>\r
+                  <UserID>3648587</UserID>\r
+                  <TerminalID>16</TerminalID>\r
+                  <LanguageCultureCode>es-ES</LanguageCultureCode>\r
+               </Header>\r
+               <RequestType>ValidateOrders</RequestType>\r
+               <Orders>\r
+                  <Order>\r
+                     <OrderNo>999999</OrderNo>\r
+                     <PayingCorrespSeqID>0</PayingCorrespSeqID>\r
+                     <SalesDate>20171023</SalesDate>\r
+                     <SalesTime>093220</SalesTime>\r
+                     <CountryFrom>CL</CountryFrom>\r
+                     <CountryTo>CO</CountryTo>\r
+                     <SendingCorrespBranchNo>0001</SendingCorrespBranchNo>\r
+                     <PayingCorrespID>32249011</PayingCorrespID>\r
+                     <PayingCorrespLocID>39536811</PayingCorrespLocID>\r
+                     <BeneQuestion/>\r
+                     <BeneAnswer/>\r
+                     <PmtInstruction/>\r
+                     <BeneficiaryCurrency>COP</BeneficiaryCurrency>\r
+                     <BeneficiaryAmount>459280</BeneficiaryAmount>\r
+                     <DeliveryMethod>2</DeliveryMethod>\r
+                     <PaymentCurrency>CLP</PaymentCurrency>\r
+                     <PaymentAmount>100000</PaymentAmount>\r
+                     <CommissionCurrency>CLP</CommissionCurrency>\r
+                     <CommissionAmount>1513</CommissionAmount>\r
+                     <CustChargeCurrency>CLP</CustChargeCurrency>\r
+                     <CustChargeAmount>3000</CustChargeAmount>\r
+                     <BenID>202</BenID>\r
+                     <BeneFirstName>BENE1</BeneFirstName>\r
+                     <BeneLastName>TESTE</BeneLastName>\r
+                     <BeneLastName2>TESTE</BeneLastName2>\r
+                     <BeneAddress>TEST</BeneAddress>\r
+                     <BeneCity>TEST</BeneCity>\r
+                     <BeneState>TEST</BeneState>\r
+                     <BeneZipCode>33333</BeneZipCode>\r
+                     <BeneCountry>IL</BeneCountry>\r
+                     <BenePhoneNo>5454545454</BenePhoneNo>\r
+                     <BeneMessage/>\r
+                     <CustID>83100552</CustID>\r
+                     <CustFirstName>jane</CustFirstName>\r
+                     <CustLastName>test</CustLastName>\r
+                     <CustLastName2>test</CustLastName2>\r
+                     <CustAddress>123 main ave.</CustAddress>\r
+                     <CustCity>santa ana</CustCity>\r
+                     <CustState>OAX</CustState>\r
+                     <CustZipCode>9284</CustZipCode>\r
+                     <CustCountry>MX</CustCountry>\r
+                     <CustPhoneNo>233442222</CustPhoneNo>\r
+                     <CustID1Type>CPF</CustID1Type>\r
+                     <CustID1No>24592221163</CustID1No>\r
+                     <CustID1IssuedBy>BRAZIL</CustID1IssuedBy>\r
+                     <CustID1ExpDate>20151231</CustID1ExpDate>\r
+                     <CustID2Type/>\r
+                     <CustID2No/>\r
+                     <CustID2IssuedBy/>\r
+                     <CustID2ExpDate/>\r
+                     <CustTaxID>000-00-0000</CustTaxID>\r
+                     <CustTaxCountry>BR</CustTaxCountry>\r
+                     <CustCountryOfBirth>CH</CustCountryOfBirth>\r
+                     <CustNationality>BR</CustNationality>\r
+                     <CustDateBirth>19781201</CustDateBirth>\r
+                     <CustOccupation>TY</CustOccupation>\r
+                     <CustSourceFunds>WORK</CustSourceFunds>\r
+                     <CustPaymentMethod>Cash</CustPaymentMethod>
+                     <CustBeneRelationship>Brother</CustBeneRelationship>\r
+                     <TransferReason>DONATION</TransferReason>\r
+                     <!--ProviderID>0</ProviderID-->\r
+                     <!--BankID>0</BankID-->\r
+                     <BankBranchName/>\r
+                     <BankBranchNo/>\r
+                     <BankBranchCity/>\r
+                     <BankAccountCountry/>\r
+                     <BankAccountNo/>\r
+                     <BIC_SWIFT/>\r
+                     <BeneIDNo>99010112312</BeneIDNo>\r
+                     <BeneIDType>Passport</BeneIDType>\r
+                     <BeneTaxID/>\r
+                  </Order>\r
+               </Orders>\r
+            </Root>\r
+         </ces:xmlDoc>\r
+      </ces:GetOrdersValidated>\r
+   </SOAP-ENV:Body>\r
+</SOAP-ENV:Envelope>]]></con:request><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="CES.Services.FXGlobal/IRiaAsPayer/GetOrdersValidated"/><con:wsrmConfig version="1.2"/></con:call></con:operation><con:operation id="b99dc4cb-7432-49f5-be67-efbc3c92d15a" isOneWay="false" action="CES.Services.FXGlobal/IRiaAsPayer/GetPayersCustSvcMsgs" name="GetPayersCustSvcMsgs" bindingOperationName="GetPayersCustSvcMsgs" type="Request-Response" inputName="" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call id="1513a75e-e100-4192-9fdb-1f18dd901ea4" name="Request 1"><con:settings/><con:encoding>UTF-8</con:encoding><con:endpoint>http://stagingfxglobalwebsvcnocert.riaenvia.net:9771/FXGlobalPaying.svc/Binding_Basic_NoCert</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:ces="CES.Services.FXGlobal">\r
+   <soapenv:Header/>\r
+   <soapenv:Body>\r
+      <ces:GetPayersCustSvcMsgs>\r
+         <!--Optional:-->\r
+         <ces:xmlDoc>\r
+            e\r
+            <!--You may enter ANY elements at this point-->\r
+            gero\r
+         </ces:xmlDoc>\r
+      </ces:GetPayersCustSvcMsgs>\r
+   </soapenv:Body>\r
+</soapenv:Envelope>]]></con:request><con:wsaConfig mustUnderstand="NONE" version="200508" action="CES.Services.FXGlobal/IRiaAsPayer/GetPayersCustSvcMsgs"/></con:call></con:operation><con:operation id="ee466fcd-c0fc-47e8-8c28-a4d20e9e7c6b" isOneWay="false" action="CES.Services.FXGlobal/IRiaAsPayer/GetRates" name="GetRates" bindingOperationName="GetRates" type="Request-Response" inputName="" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call id="a2f524fd-6f3b-45fe-958b-716c9d4e7f20" name="Request 1"><con:settings/><con:encoding>UTF-8</con:encoding><con:endpoint>http://stagingfxglobalwebsvcnocert.riaenvia.net:9771/FXGlobalPaying.svc/Binding_Basic_NoCert</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:ces="CES.Services.FXGlobal">\r
+   <soapenv:Header/>\r
+   <soapenv:Body>\r
+      <ces:GetRates>\r
+         <!--Optional:-->\r
+         <ces:xmlDoc>\r
+            e\r
+            <!--You may enter ANY elements at this point-->\r
+            gero\r
+         </ces:xmlDoc>\r
+      </ces:GetRates>\r
+   </soapenv:Body>\r
+</soapenv:Envelope>]]></con:request><con:wsaConfig mustUnderstand="NONE" version="200508" action="CES.Services.FXGlobal/IRiaAsPayer/GetRates"/></con:call></con:operation><con:operation id="95b25884-3095-4fb2-8a1f-7851e865bd09" isOneWay="false" action="CES.Services.FXGlobal/IRiaAsPayer/GetRequirements" name="GetRequirements" bindingOperationName="GetRequirements" type="Request-Response" inputName="" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call id="19e81dcf-5ab6-4695-a2ee-ff56bbbe87b0" name="Request 1"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>http://stagingfxglobalwebsvcnocert.riaenvia.net:9771/FXGlobalPaying.svc/Binding_Basic_NoCert</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:ces="CES.Services.FXGlobal">\r
+   <soapenv:Header/>\r
+   <soapenv:Body>\r
+      <ces:GetRequirements>\r
+         <!--Optional:-->\r
+         <ces:xmlDoc>\r
+            <Root>\r
+               <CorrespID>59470211</CorrespID>\r
+               <LayoutVersion>2.0</LayoutVersion>\r
+               <Header>\r
+                  <CallID>50e07864-104f-4f68-adb6-d5d7af615ffb</CallID>\r
+                  <CallDateTimeLocal>20170912135959</CallDateTimeLocal>\r
+                  <CorrespLocNo>0</CorrespLocNo>\r
+                  <CorrespLocNo_Ria>0</CorrespLocNo_Ria>\r
+                  <CorrespLocName>Main Branch</CorrespLocName>\r
+                  <CorrespLocCountry>CL</CorrespLocCountry>\r
+                  <UserID>3648587</UserID>\r
+                  <TerminalID>16</TerminalID>\r
+                  <LanguageCultureCode>en-US</LanguageCultureCode>\r
+               </Header>\r
+               <RequestType>Requirements</RequestType>\r
+            </Root>\r
+         </ces:xmlDoc>\r
+      </ces:GetRequirements>\r
+   </soapenv:Body>\r
+</soapenv:Envelope>]]></con:request><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="CES.Services.FXGlobal/IRiaAsPayer/GetRequirements"/><con:wsrmConfig version="1.2"/></con:call></con:operation><con:operation id="549528b7-a8c2-4a62-b7ab-defb9d7b7266" isOneWay="false" action="CES.Services.FXGlobal/IRiaAsPayer/GetStatesCities" name="GetStatesCities" bindingOperationName="GetStatesCities" type="Request-Response" inputName="" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call id="7ed57975-1c8a-4614-965c-e0115d45b1ee" name="Request 1"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>http://stagingfxglobalwebsvcnocert.riaenvia.net:9771/FXGlobalPaying.svc/Binding_Basic_NoCert</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:ces="CES.Services.FXGlobal">\r
+   <soapenv:Header/>\r
+   <soapenv:Body>\r
+      <ces:GetStatesCities>\r
+         <ces:xmlDoc>\r
+           <Root>
+               <CorrespID>59470211</CorrespID>
+               <LayoutVersion>2.0</LayoutVersion>
+               <Header>
+                  <CallID>50e07864-104f-4f68-adb6-d5d7af615ffb</CallID>
+                  <CallDateTimeLocal>20170912135959</CallDateTimeLocal>
+                  <CorrespLocNo>0</CorrespLocNo>
+                  <CorrespLocNo_Ria>0</CorrespLocNo_Ria>
+                  <CorrespLocName>Main Branch</CorrespLocName>
+                  <CorrespLocCountry>CL</CorrespLocCountry>
+                  <UserID>3648587</UserID>
+                  <TerminalID>16</TerminalID>
+                  <LanguageCultureCode>es-ES</LanguageCultureCode>
+               </Header>
+               <RequestType>StatesCities</RequestType>
+               <Request CountryCode="DE" StateName="Niedersachsen" ></Request>
+            </Root>
+         </ces:xmlDoc>\r
+      </ces:GetStatesCities>\r
+   </soapenv:Body>\r
+</soapenv:Envelope>]]></con:request><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="CES.Services.FXGlobal/IRiaAsPayer/GetStatesCities"/><con:wsrmConfig version="1.2"/></con:call><con:call id="292e7790-869d-4e35-8648-d5e5a6f9aec5" name="Copy of Request 1"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>http://stagingfxglobalwebsvcnocert.riaenvia.net:9771/FXGlobalPaying.svc/Binding_Basic_NoCert</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:ces="CES.Services.FXGlobal">\r
+   <soapenv:Header/>\r
+   <soapenv:Body>\r
+      <ces:GetStatesCities>\r
+         <ces:xmlDoc>\r
+           <Root>
+               <CorrespID>59470211</CorrespID>
+               <LayoutVersion>2.0</LayoutVersion>
+               <Header>
+                  <CallID>50e07864-104f-4f68-adb6-d5d7af615ffb</CallID>
+                  <CallDateTimeLocal>20170912135959</CallDateTimeLocal>
+                  <CorrespLocNo>0</CorrespLocNo>
+                  <CorrespLocNo_Ria>0</CorrespLocNo_Ria>
+                  <CorrespLocName>Main Branch</CorrespLocName>
+                  <CorrespLocCountry>CL</CorrespLocCountry>
+                  <UserID>3648587</UserID>
+                  <TerminalID>16</TerminalID>
+                  <LanguageCultureCode>es-ES</LanguageCultureCode>
+               </Header>
+               <RequestType>StatesCities</RequestType>
+               <Request CountryCode="MX" StateName="COAH" ></Request>
+            </Root>
+         </ces:xmlDoc>\r
+      </ces:GetStatesCities>\r
+   </soapenv:Body>\r
+</soapenv:Envelope>]]></con:request><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="CES.Services.FXGlobal/IRiaAsPayer/GetStatesCities"/><con:wsrmConfig version="1.2"/></con:call></con:operation><con:operation id="a3d5c814-48f2-4c43-ba80-278b5463879d" isOneWay="false" action="CES.Services.FXGlobal/IRiaAsPayer/GetUnconfirmedOrders" name="GetUnconfirmedOrders" bindingOperationName="GetUnconfirmedOrders" type="Request-Response" inputName="" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call id="42ce5abf-7946-49d7-a415-ce636b6a85ad" name="Request 1"><con:settings/><con:encoding>UTF-8</con:encoding><con:endpoint>http://stagingfxglobalwebsvcnocert.riaenvia.net:9771/FXGlobalPaying.svc/Binding_Basic_NoCert</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:ces="CES.Services.FXGlobal">\r
+   <soapenv:Header/>\r
+   <soapenv:Body>\r
+      <ces:GetUnconfirmedOrders>\r
+         <!--Optional:-->\r
+         <ces:xmlDoc>\r
+            e\r
+            <!--You may enter ANY elements at this point-->\r
+            gero\r
+         </ces:xmlDoc>\r
+      </ces:GetUnconfirmedOrders>\r
+   </soapenv:Body>\r
+</soapenv:Envelope>]]></con:request><con:wsaConfig mustUnderstand="NONE" version="200508" action="CES.Services.FXGlobal/IRiaAsPayer/GetUnconfirmedOrders"/></con:call></con:operation><con:operation id="443e124c-ae63-4fd7-bb38-b95d0b77feef" isOneWay="false" action="CES.Services.FXGlobal/IRiaAsPayer/InputBeneficiary" name="InputBeneficiary" bindingOperationName="InputBeneficiary" type="Request-Response" inputName="" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call id="fd33ce13-aa57-4a12-842a-295bfa7415a4" name="Request 1"><con:settings/><con:encoding>UTF-8</con:encoding><con:endpoint>http://stagingfxglobalwebsvcnocert.riaenvia.net:9771/FXGlobalPaying.svc/Binding_Basic_NoCert</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:ces="CES.Services.FXGlobal">\r
+   <soapenv:Header/>\r
+   <soapenv:Body>\r
+      <ces:InputBeneficiary>\r
+         <!--Optional:-->\r
+         <ces:xmlDoc>\r
+            e\r
+            <!--You may enter ANY elements at this point-->\r
+            gero\r
+         </ces:xmlDoc>\r
+      </ces:InputBeneficiary>\r
+   </soapenv:Body>\r
+</soapenv:Envelope>]]></con:request><con:wsaConfig mustUnderstand="NONE" version="200508" action="CES.Services.FXGlobal/IRiaAsPayer/InputBeneficiary"/></con:call></con:operation><con:operation id="8753d275-56d9-4841-b90d-46abcd819ac2" isOneWay="false" action="CES.Services.FXGlobal/IRiaAsPayer/InputCancelationRequests" name="InputCancelationRequests" bindingOperationName="InputCancelationRequests" type="Request-Response" inputName="" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call id="314c6efa-b3e2-43c5-824c-ebbb18e6b4e1" name="Request 1"><con:settings/><con:encoding>UTF-8</con:encoding><con:endpoint>http://stagingfxglobalwebsvcnocert.riaenvia.net:9771/FXGlobalPaying.svc/Binding_Basic_NoCert</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:ces="CES.Services.FXGlobal">\r
+   <soapenv:Header/>\r
+   <soapenv:Body>\r
+      <ces:InputCancelationRequests>\r
+         <!--Optional:-->\r
+         <ces:xmlDoc>\r
+            e\r
+            <!--You may enter ANY elements at this point-->\r
+            gero\r
+         </ces:xmlDoc>\r
+      </ces:InputCancelationRequests>\r
+   </soapenv:Body>\r
+</soapenv:Envelope>]]></con:request><con:wsaConfig mustUnderstand="NONE" version="200508" action="CES.Services.FXGlobal/IRiaAsPayer/InputCancelationRequests"/></con:call></con:operation><con:operation id="8b31b072-f21d-45da-b185-58c05ed10014" isOneWay="false" action="CES.Services.FXGlobal/IRiaAsPayer/InputCustomer" name="InputCustomer" bindingOperationName="InputCustomer" type="Request-Response" inputName="" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call id="9618fc1b-f0d0-44e0-a355-b125d338fac9" name="Request 1"><con:settings/><con:encoding>UTF-8</con:encoding><con:endpoint>http://stagingfxglobalwebsvcnocert.riaenvia.net:9771/FXGlobalPaying.svc/Binding_Basic_NoCert</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:ces="CES.Services.FXGlobal">\r
+   <soapenv:Header/>\r
+   <soapenv:Body>\r
+      <ces:InputCustomer>\r
+         <!--Optional:-->\r
+         <ces:xmlDoc>\r
+            e\r
+            <!--You may enter ANY elements at this point-->\r
+            gero\r
+         </ces:xmlDoc>\r
+      </ces:InputCustomer>\r
+   </soapenv:Body>\r
+</soapenv:Envelope>]]></con:request><con:wsaConfig mustUnderstand="NONE" version="200508" action="CES.Services.FXGlobal/IRiaAsPayer/InputCustomer"/></con:call></con:operation><con:operation id="d659febc-d4e4-4ab8-b28d-e8d57a4b0e1a" isOneWay="false" action="CES.Services.FXGlobal/IRiaAsPayer/InputOrderReleaseRequest" name="InputOrderReleaseRequest" bindingOperationName="InputOrderReleaseRequest" type="Request-Response" inputName="" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call id="46f246e1-c577-413a-b7a2-7333fbc8a566" name="Request 1"><con:settings/><con:encoding>UTF-8</con:encoding><con:endpoint>http://stagingfxglobalwebsvcnocert.riaenvia.net:9771/FXGlobalPaying.svc/Binding_Basic_NoCert</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:ces="CES.Services.FXGlobal">\r
+   <soapenv:Header/>\r
+   <soapenv:Body>\r
+      <ces:InputOrderReleaseRequest>\r
+         <!--Optional:-->\r
+         <ces:xmlDoc>\r
+            e\r
+            <!--You may enter ANY elements at this point-->\r
+            gero\r
+         </ces:xmlDoc>\r
+      </ces:InputOrderReleaseRequest>\r
+   </soapenv:Body>\r
+</soapenv:Envelope>]]></con:request><con:wsaConfig mustUnderstand="NONE" version="200508" action="CES.Services.FXGlobal/IRiaAsPayer/InputOrderReleaseRequest"/></con:call></con:operation><con:operation id="8eb4b8c7-ef16-4bff-a935-9f85846101e7" isOneWay="false" action="CES.Services.FXGlobal/IRiaAsPayer/InputOrders" name="InputOrders" bindingOperationName="InputOrders" type="Request-Response" inputName="" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call id="eb94c995-8fcc-4bf4-8600-2ba25b46b12c" name="Request 1"><con:settings/><con:encoding>UTF-8</con:encoding><con:endpoint>http://stagingfxglobalwebsvcnocert.riaenvia.net:9771/FXGlobalPaying.svc/Binding_Basic_NoCert</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:ces="CES.Services.FXGlobal">\r
+   <soapenv:Header/>\r
+   <soapenv:Body>\r
+      <ces:InputOrders>\r
+         <!--Optional:-->\r
+         <ces:xmlDoc>\r
+            e\r
+            <!--You may enter ANY elements at this point-->\r
+            gero\r
+         </ces:xmlDoc>\r
+      </ces:InputOrders>\r
+   </soapenv:Body>\r
+</soapenv:Envelope>]]></con:request><con:wsaConfig mustUnderstand="NONE" version="200508" action="CES.Services.FXGlobal/IRiaAsPayer/InputOrders"/></con:call></con:operation><con:operation id="05dd2665-8b9b-48c9-967a-239794df95b4" isOneWay="false" action="CES.Services.FXGlobal/IRiaAsPayer/InputSendersCustSvcMsgs" name="InputSendersCustSvcMsgs" bindingOperationName="InputSendersCustSvcMsgs" type="Request-Response" inputName="" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call id="0c3e1074-f816-4270-a4ee-71cb75bac1e8" name="Request 1"><con:settings/><con:encoding>UTF-8</con:encoding><con:endpoint>http://stagingfxglobalwebsvcnocert.riaenvia.net:9771/FXGlobalPaying.svc/Binding_Basic_NoCert</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:ces="CES.Services.FXGlobal">\r
+   <soapenv:Header/>\r
+   <soapenv:Body>\r
+      <ces:InputSendersCustSvcMsgs>\r
+         <!--Optional:-->\r
+         <ces:xmlDoc>\r
+            e\r
+            <!--You may enter ANY elements at this point-->\r
+            gero\r
+         </ces:xmlDoc>\r
+      </ces:InputSendersCustSvcMsgs>\r
+   </soapenv:Body>\r
+</soapenv:Envelope>]]></con:request><con:wsaConfig mustUnderstand="NONE" version="200508" action="CES.Services.FXGlobal/IRiaAsPayer/InputSendersCustSvcMsgs"/></con:call></con:operation><con:operation id="ccdb24e9-c50a-41eb-9643-784488eb8037" isOneWay="false" action="CES.Services.FXGlobal/IRiaAsPayer/IsAlive" name="IsAlive" bindingOperationName="IsAlive" type="Request-Response" inputName="" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call id="f32af9ac-b67d-49e8-b861-cf6e0a93d6ae" name="Request 1"><con:settings/><con:encoding>UTF-8</con:encoding><con:endpoint>http://stagingfxglobalwebsvcnocert.riaenvia.net:9771/FXGlobalPaying.svc/Binding_Basic_NoCert</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:ces="CES.Services.FXGlobal">\r
+   <soapenv:Header/>\r
+   <soapenv:Body>\r
+      <ces:IsAlive/>\r
+   </soapenv:Body>\r
+</soapenv:Envelope>]]></con:request><con:wsaConfig mustUnderstand="NONE" version="200508" action="CES.Services.FXGlobal/IRiaAsPayer/IsAlive"/></con:call></con:operation><con:operation id="4ac93c82-6dc7-4266-b800-c1f2178d1a3e" isOneWay="false" action="CES.Services.FXGlobal/IRiaAsPayer/Ping" name="Ping" bindingOperationName="Ping" type="Request-Response" inputName="" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call id="d21d764d-987f-46f3-86b1-80d31ad0c8cc" name="Request 1"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>http://stagingfxglobalwebsvcnocert.riaenvia.net:9771/FXGlobalPaying.svc/Binding_Basic_NoCert</con:endpoint><con:request><![CDATA[<SOAP-ENV:Envelope xmlns:SOAP-ENV="http://schemas.xmlsoap.org/soap/envelope/" xmlns:ces="CES.Services.FXGlobal">
+   <SOAP-ENV:Header/>
+   <SOAP-ENV:Body>
+      <ces:Ping>
+         <ces:AgentID>59470211</ces:AgentID>
+      </ces:Ping>
+   </SOAP-ENV:Body>
+</SOAP-ENV:Envelope>]]></con:request><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="CES.Services.FXGlobal/IRiaAsPayer/Ping"/><con:wsrmConfig version="1.2"/></con:call><con:call id="b668d18a-bf27-4520-92b7-1547ad7054b8" name="Request 2"><con:settings/><con:encoding>UTF-8</con:encoding><con:endpoint>http://stagingfxglobalwebsvcnocert.riaenvia.net:9771/FXGlobalPaying.svc/Binding_Basic_NoCert</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:ces="CES.Services.FXGlobal">\r
+   <soapenv:Header/>\r
+   <soapenv:Body>\r
+      <ces:Ping>\r
+         <!--Optional:-->\r
+         <ces:AgentID>?</ces:AgentID>\r
+      </ces:Ping>\r
+   </soapenv:Body>\r
+</soapenv:Envelope>]]></con:request><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="CES.Services.FXGlobal/IRiaAsPayer/Ping"/><con:wsrmConfig version="1.2"/></con:call></con:operation><con:operation id="1534f1ff-1da2-4074-b843-62f55880ef40" isOneWay="false" action="CES.Services.FXGlobal/IRiaAsPayer/ReservePINs" name="ReservePINs" bindingOperationName="ReservePINs" type="Request-Response" inputName="" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call id="8ef549c3-a13f-46d4-aa78-2c6a03568f1c" name="Request 1"><con:settings/><con:encoding>UTF-8</con:encoding><con:endpoint>http://stagingfxglobalwebsvcnocert.riaenvia.net:9771/FXGlobalPaying.svc/Binding_Basic_NoCert</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:ces="CES.Services.FXGlobal">\r
+   <soapenv:Header/>\r
+   <soapenv:Body>\r
+      <ces:ReservePINs>\r
+         <!--Optional:-->\r
+         <ces:xmlDoc>\r
+            e\r
+            <!--You may enter ANY elements at this point-->\r
+            gero\r
+         </ces:xmlDoc>\r
+      </ces:ReservePINs>\r
+   </soapenv:Body>\r
+</soapenv:Envelope>]]></con:request><con:wsaConfig mustUnderstand="NONE" version="200508" action="CES.Services.FXGlobal/IRiaAsPayer/ReservePINs"/></con:call></con:operation></con:interface><con:properties/><con:wssContainer/><con:oAuth2ProfileContainer/><con:oAuth1ProfileContainer/><con:sensitiveInformation/></con:soapui-project>

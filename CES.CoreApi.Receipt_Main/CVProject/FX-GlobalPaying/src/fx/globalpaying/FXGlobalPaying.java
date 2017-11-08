@@ -29,12 +29,7 @@ public class FXGlobalPaying {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        
-        // String s = "canción de niños, católicos, vía láctea, cúneo, épsilon";
-        //String s = "";
-        //String s1 =  stripAccents(s);
-        // System.out.println(s1);       
-       
+      
         if (args.length < 4 || (args.length > 3 && (args[2] == null || args[2].split(";").length < 9))) {
             System.out.println("Error: argumentos inválidos o faltantes");
             return;

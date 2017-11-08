@@ -1,0 +1,955 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<con:soapui-project id="316c7c12-c1b5-4c87-93fc-85b9197ca3d6" activeEnvironment="Default" name="FXGlobalSending" resourceRoot="" soapui-version="5.2.1" xmlns:con="http://eviware.com/soapui/config"><con:settings/><con:interface xsi:type="con:WsdlInterface" id="fa11d270-ebef-408a-bc19-e1aad3d02560" wsaVersion="NONE" name="basicHttpBindingNoCert_RiaAsSender" type="wsdl" bindingName="{http://tempuri.org/}basicHttpBindingNoCert_RiaAsSender" soapVersion="1_1" anonymous="optional" definition="http://stagingfxglobalwebsvcnocert.riaenvia.net:9771/FXGlobalSending.svc?wsdl" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:settings/><con:definitionCache type="TEXT" rootPart="http://stagingfxglobalwebsvcnocert.riaenvia.net:9771/FXGlobalSending.svc?wsdl"><con:part><con:url>http://stagingfxglobalwebsvcnocert.riaenvia.net:9771/FXGlobalSending.svc?wsdl</con:url><con:content><![CDATA[<wsdl:definitions name="FXGlobalSending" targetNamespace="http://tempuri.org/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" xmlns:tns="http://tempuri.org/" xmlns:wsa="http://schemas.xmlsoap.org/ws/2004/08/addressing" xmlns:wsx="http://schemas.xmlsoap.org/ws/2004/09/mex" xmlns:wsap="http://schemas.xmlsoap.org/ws/2004/08/addressing/policy" xmlns:wsaw="http://www.w3.org/2006/05/addressing/wsdl" xmlns:msc="http://schemas.microsoft.com/ws/2005/12/wsdl/contract" xmlns:i0="CES.Services.FXGlobal" xmlns:wsp="http://schemas.xmlsoap.org/ws/2004/09/policy" xmlns:wsa10="http://www.w3.org/2005/08/addressing" xmlns:wsam="http://www.w3.org/2007/05/addressing/metadata">
+  <wsdl:import namespace="CES.Services.FXGlobal" location="http://stagingfxglobalwebsvcnocert.riaenvia.net:9771/FXGlobalSending.svc?wsdl=wsdl0"/>
+  <wsdl:types/>
+  <wsdl:binding name="basicHttpBindingNoCert_RiaAsSender" type="i0:IRiaAsSender">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http"/>
+    <wsdl:operation name="OP_VerifyOrderForPayout">
+      <soap:operation soapAction="CES.Services.FXGlobal/IRiaAsSender/OP_VerifyOrderForPayout" style="document"/>
+      <wsdl:input>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="OP_ConfirmOrderPaid">
+      <soap:operation soapAction="CES.Services.FXGlobal/IRiaAsSender/OP_ConfirmOrderPaid" style="document"/>
+      <wsdl:input>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="OP_VoidOrderPaidConfirmation">
+      <soap:operation soapAction="CES.Services.FXGlobal/IRiaAsSender/OP_VoidOrderPaidConfirmation" style="document"/>
+      <wsdl:input>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="OP_ListOrdersByName">
+      <soap:operation soapAction="CES.Services.FXGlobal/IRiaAsSender/OP_ListOrdersByName" style="document"/>
+      <wsdl:input>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetSendersCustSvcMsgs">
+      <soap:operation soapAction="CES.Services.FXGlobal/IRiaAsSender/GetSendersCustSvcMsgs" style="document"/>
+      <wsdl:input>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetCancellationRequests">
+      <soap:operation soapAction="CES.Services.FXGlobal/IRiaAsSender/GetCancellationRequests" style="document"/>
+      <wsdl:input>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetOrdersForDownload">
+      <soap:operation soapAction="CES.Services.FXGlobal/IRiaAsSender/GetOrdersForDownload" style="document"/>
+      <wsdl:input>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="InputPayersCustSvcMsgs">
+      <soap:operation soapAction="CES.Services.FXGlobal/IRiaAsSender/InputPayersCustSvcMsgs" style="document"/>
+      <wsdl:input>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="InputOrderStatusNotices">
+      <soap:operation soapAction="CES.Services.FXGlobal/IRiaAsSender/InputOrderStatusNotices" style="document"/>
+      <wsdl:input>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="InputCancelRequestResponses">
+      <soap:operation soapAction="CES.Services.FXGlobal/IRiaAsSender/InputCancelRequestResponses" style="document"/>
+      <wsdl:input>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetDailyOrders">
+      <soap:operation soapAction="CES.Services.FXGlobal/IRiaAsSender/GetDailyOrders" style="document"/>
+      <wsdl:input>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetDailyOrdersSummary">
+      <soap:operation soapAction="CES.Services.FXGlobal/IRiaAsSender/GetDailyOrdersSummary" style="document"/>
+      <wsdl:input>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetOrderDetails">
+      <soap:operation soapAction="CES.Services.FXGlobal/IRiaAsSender/GetOrderDetails" style="document"/>
+      <wsdl:input>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetEnumerationValues">
+      <soap:operation soapAction="CES.Services.FXGlobal/IRiaAsSender/GetEnumerationValues" style="document"/>
+      <wsdl:input>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="IsAlive">
+      <soap:operation soapAction="CES.Services.FXGlobal/IRiaAsSender/IsAlive" style="document"/>
+      <wsdl:input>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Ping">
+      <soap:operation soapAction="CES.Services.FXGlobal/IRiaAsSender/Ping" style="document"/>
+      <wsdl:input>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="FXGlobalSending">
+    <wsdl:port name="basicHttpBindingNoCert_RiaAsSender" binding="tns:basicHttpBindingNoCert_RiaAsSender">
+      <soap:address location="http://stagingfxglobalwebsvcnocert.riaenvia.net:9771/FXGlobalSending.svc/Binding_Basic_NoCert"/>
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>]]></con:content><con:type>http://schemas.xmlsoap.org/wsdl/</con:type></con:part><con:part><con:url>http://stagingfxglobalwebsvcnocert.riaenvia.net:9771/FXGlobalSending.svc?wsdl=wsdl0</con:url><con:content><![CDATA[<wsdl:definitions targetNamespace="CES.Services.FXGlobal" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" xmlns:tns="CES.Services.FXGlobal" xmlns:wsa="http://schemas.xmlsoap.org/ws/2004/08/addressing" xmlns:wsx="http://schemas.xmlsoap.org/ws/2004/09/mex" xmlns:wsap="http://schemas.xmlsoap.org/ws/2004/08/addressing/policy" xmlns:wsaw="http://www.w3.org/2006/05/addressing/wsdl" xmlns:msc="http://schemas.microsoft.com/ws/2005/12/wsdl/contract" xmlns:wsp="http://schemas.xmlsoap.org/ws/2004/09/policy" xmlns:wsa10="http://www.w3.org/2005/08/addressing" xmlns:wsam="http://www.w3.org/2007/05/addressing/metadata">
+  <wsdl:types>
+    <xsd:schema targetNamespace="CES.Services.FXGlobal/Imports">
+      <xsd:import schemaLocation="http://stagingfxglobalwebsvcnocert.riaenvia.net:9771/FXGlobalSending.svc?xsd=xsd0" namespace="CES.Services.FXGlobal"/>
+      <xsd:import schemaLocation="http://stagingfxglobalwebsvcnocert.riaenvia.net:9771/FXGlobalSending.svc?xsd=xsd1" namespace="http://schemas.microsoft.com/2003/10/Serialization/"/>
+    </xsd:schema>
+  </wsdl:types>
+  <wsdl:message name="IRiaAsSender_OP_VerifyOrderForPayout_InputMessage">
+    <wsdl:part name="parameters" element="tns:OP_VerifyOrderForPayout"/>
+  </wsdl:message>
+  <wsdl:message name="IRiaAsSender_OP_VerifyOrderForPayout_OutputMessage">
+    <wsdl:part name="parameters" element="tns:OP_VerifyOrderForPayoutResponse"/>
+  </wsdl:message>
+  <wsdl:message name="IRiaAsSender_OP_ConfirmOrderPaid_InputMessage">
+    <wsdl:part name="parameters" element="tns:OP_ConfirmOrderPaid"/>
+  </wsdl:message>
+  <wsdl:message name="IRiaAsSender_OP_ConfirmOrderPaid_OutputMessage">
+    <wsdl:part name="parameters" element="tns:OP_ConfirmOrderPaidResponse"/>
+  </wsdl:message>
+  <wsdl:message name="IRiaAsSender_OP_VoidOrderPaidConfirmation_InputMessage">
+    <wsdl:part name="parameters" element="tns:OP_VoidOrderPaidConfirmation"/>
+  </wsdl:message>
+  <wsdl:message name="IRiaAsSender_OP_VoidOrderPaidConfirmation_OutputMessage">
+    <wsdl:part name="parameters" element="tns:OP_VoidOrderPaidConfirmationResponse"/>
+  </wsdl:message>
+  <wsdl:message name="IRiaAsSender_OP_ListOrdersByName_InputMessage">
+    <wsdl:part name="parameters" element="tns:OP_ListOrdersByName"/>
+  </wsdl:message>
+  <wsdl:message name="IRiaAsSender_OP_ListOrdersByName_OutputMessage">
+    <wsdl:part name="parameters" element="tns:OP_ListOrdersByNameResponse"/>
+  </wsdl:message>
+  <wsdl:message name="IRiaAsSender_GetSendersCustSvcMsgs_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetSendersCustSvcMsgs"/>
+  </wsdl:message>
+  <wsdl:message name="IRiaAsSender_GetSendersCustSvcMsgs_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetSendersCustSvcMsgsResponse"/>
+  </wsdl:message>
+  <wsdl:message name="IRiaAsSender_GetCancellationRequests_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetCancellationRequests"/>
+  </wsdl:message>
+  <wsdl:message name="IRiaAsSender_GetCancellationRequests_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetCancellationRequestsResponse"/>
+  </wsdl:message>
+  <wsdl:message name="IRiaAsSender_GetOrdersForDownload_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetOrdersForDownload"/>
+  </wsdl:message>
+  <wsdl:message name="IRiaAsSender_GetOrdersForDownload_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetOrdersForDownloadResponse"/>
+  </wsdl:message>
+  <wsdl:message name="IRiaAsSender_InputPayersCustSvcMsgs_InputMessage">
+    <wsdl:part name="parameters" element="tns:InputPayersCustSvcMsgs"/>
+  </wsdl:message>
+  <wsdl:message name="IRiaAsSender_InputPayersCustSvcMsgs_OutputMessage">
+    <wsdl:part name="parameters" element="tns:InputPayersCustSvcMsgsResponse"/>
+  </wsdl:message>
+  <wsdl:message name="IRiaAsSender_InputOrderStatusNotices_InputMessage">
+    <wsdl:part name="parameters" element="tns:InputOrderStatusNotices"/>
+  </wsdl:message>
+  <wsdl:message name="IRiaAsSender_InputOrderStatusNotices_OutputMessage">
+    <wsdl:part name="parameters" element="tns:InputOrderStatusNoticesResponse"/>
+  </wsdl:message>
+  <wsdl:message name="IRiaAsSender_InputCancelRequestResponses_InputMessage">
+    <wsdl:part name="parameters" element="tns:InputCancelRequestResponses"/>
+  </wsdl:message>
+  <wsdl:message name="IRiaAsSender_InputCancelRequestResponses_OutputMessage">
+    <wsdl:part name="parameters" element="tns:InputCancelRequestResponsesResponse"/>
+  </wsdl:message>
+  <wsdl:message name="IRiaAsSender_GetDailyOrders_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetDailyOrders"/>
+  </wsdl:message>
+  <wsdl:message name="IRiaAsSender_GetDailyOrders_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetDailyOrdersResponse"/>
+  </wsdl:message>
+  <wsdl:message name="IRiaAsSender_GetDailyOrdersSummary_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetDailyOrdersSummary"/>
+  </wsdl:message>
+  <wsdl:message name="IRiaAsSender_GetDailyOrdersSummary_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetDailyOrdersSummaryResponse"/>
+  </wsdl:message>
+  <wsdl:message name="IRiaAsSender_GetOrderDetails_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetOrderDetails"/>
+  </wsdl:message>
+  <wsdl:message name="IRiaAsSender_GetOrderDetails_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetOrderDetailsResponse"/>
+  </wsdl:message>
+  <wsdl:message name="IRiaAsSender_GetEnumerationValues_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetEnumerationValues"/>
+  </wsdl:message>
+  <wsdl:message name="IRiaAsSender_GetEnumerationValues_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetEnumerationValuesResponse"/>
+  </wsdl:message>
+  <wsdl:message name="IRiaAsSender_IsAlive_InputMessage">
+    <wsdl:part name="parameters" element="tns:IsAlive"/>
+  </wsdl:message>
+  <wsdl:message name="IRiaAsSender_IsAlive_OutputMessage">
+    <wsdl:part name="parameters" element="tns:IsAliveResponse"/>
+  </wsdl:message>
+  <wsdl:message name="IRiaAsSender_Ping_InputMessage">
+    <wsdl:part name="parameters" element="tns:Ping"/>
+  </wsdl:message>
+  <wsdl:message name="IRiaAsSender_Ping_OutputMessage">
+    <wsdl:part name="parameters" element="tns:PingResponse"/>
+  </wsdl:message>
+  <wsdl:portType name="IRiaAsSender">
+    <wsdl:operation name="OP_VerifyOrderForPayout">
+      <wsdl:input wsaw:Action="CES.Services.FXGlobal/IRiaAsSender/OP_VerifyOrderForPayout" message="tns:IRiaAsSender_OP_VerifyOrderForPayout_InputMessage"/>
+      <wsdl:output wsaw:Action="CES.Services.FXGlobal/IRiaAsSender/OP_VerifyOrderForPayoutResponse" message="tns:IRiaAsSender_OP_VerifyOrderForPayout_OutputMessage"/>
+    </wsdl:operation>
+    <wsdl:operation name="OP_ConfirmOrderPaid">
+      <wsdl:input wsaw:Action="CES.Services.FXGlobal/IRiaAsSender/OP_ConfirmOrderPaid" message="tns:IRiaAsSender_OP_ConfirmOrderPaid_InputMessage"/>
+      <wsdl:output wsaw:Action="CES.Services.FXGlobal/IRiaAsSender/OP_ConfirmOrderPaidResponse" message="tns:IRiaAsSender_OP_ConfirmOrderPaid_OutputMessage"/>
+    </wsdl:operation>
+    <wsdl:operation name="OP_VoidOrderPaidConfirmation">
+      <wsdl:input wsaw:Action="CES.Services.FXGlobal/IRiaAsSender/OP_VoidOrderPaidConfirmation" message="tns:IRiaAsSender_OP_VoidOrderPaidConfirmation_InputMessage"/>
+      <wsdl:output wsaw:Action="CES.Services.FXGlobal/IRiaAsSender/OP_VoidOrderPaidConfirmationResponse" message="tns:IRiaAsSender_OP_VoidOrderPaidConfirmation_OutputMessage"/>
+    </wsdl:operation>
+    <wsdl:operation name="OP_ListOrdersByName">
+      <wsdl:input wsaw:Action="CES.Services.FXGlobal/IRiaAsSender/OP_ListOrdersByName" message="tns:IRiaAsSender_OP_ListOrdersByName_InputMessage"/>
+      <wsdl:output wsaw:Action="CES.Services.FXGlobal/IRiaAsSender/OP_ListOrdersByNameResponse" message="tns:IRiaAsSender_OP_ListOrdersByName_OutputMessage"/>
+    </wsdl:operation>
+    <wsdl:operation name="GetSendersCustSvcMsgs">
+      <wsdl:input wsaw:Action="CES.Services.FXGlobal/IRiaAsSender/GetSendersCustSvcMsgs" message="tns:IRiaAsSender_GetSendersCustSvcMsgs_InputMessage"/>
+      <wsdl:output wsaw:Action="CES.Services.FXGlobal/IRiaAsSender/GetSendersCustSvcMsgsResponse" message="tns:IRiaAsSender_GetSendersCustSvcMsgs_OutputMessage"/>
+    </wsdl:operation>
+    <wsdl:operation name="GetCancellationRequests">
+      <wsdl:input wsaw:Action="CES.Services.FXGlobal/IRiaAsSender/GetCancellationRequests" message="tns:IRiaAsSender_GetCancellationRequests_InputMessage"/>
+      <wsdl:output wsaw:Action="CES.Services.FXGlobal/IRiaAsSender/GetCancellationRequestsResponse" message="tns:IRiaAsSender_GetCancellationRequests_OutputMessage"/>
+    </wsdl:operation>
+    <wsdl:operation name="GetOrdersForDownload">
+      <wsdl:input wsaw:Action="CES.Services.FXGlobal/IRiaAsSender/GetOrdersForDownload" message="tns:IRiaAsSender_GetOrdersForDownload_InputMessage"/>
+      <wsdl:output wsaw:Action="CES.Services.FXGlobal/IRiaAsSender/GetOrdersForDownloadResponse" message="tns:IRiaAsSender_GetOrdersForDownload_OutputMessage"/>
+    </wsdl:operation>
+    <wsdl:operation name="InputPayersCustSvcMsgs">
+      <wsdl:input wsaw:Action="CES.Services.FXGlobal/IRiaAsSender/InputPayersCustSvcMsgs" message="tns:IRiaAsSender_InputPayersCustSvcMsgs_InputMessage"/>
+      <wsdl:output wsaw:Action="CES.Services.FXGlobal/IRiaAsSender/InputPayersCustSvcMsgsResponse" message="tns:IRiaAsSender_InputPayersCustSvcMsgs_OutputMessage"/>
+    </wsdl:operation>
+    <wsdl:operation name="InputOrderStatusNotices">
+      <wsdl:input wsaw:Action="CES.Services.FXGlobal/IRiaAsSender/InputOrderStatusNotices" message="tns:IRiaAsSender_InputOrderStatusNotices_InputMessage"/>
+      <wsdl:output wsaw:Action="CES.Services.FXGlobal/IRiaAsSender/InputOrderStatusNoticesResponse" message="tns:IRiaAsSender_InputOrderStatusNotices_OutputMessage"/>
+    </wsdl:operation>
+    <wsdl:operation name="InputCancelRequestResponses">
+      <wsdl:input wsaw:Action="CES.Services.FXGlobal/IRiaAsSender/InputCancelRequestResponses" message="tns:IRiaAsSender_InputCancelRequestResponses_InputMessage"/>
+      <wsdl:output wsaw:Action="CES.Services.FXGlobal/IRiaAsSender/InputCancelRequestResponsesResponse" message="tns:IRiaAsSender_InputCancelRequestResponses_OutputMessage"/>
+    </wsdl:operation>
+    <wsdl:operation name="GetDailyOrders">
+      <wsdl:input wsaw:Action="CES.Services.FXGlobal/IRiaAsSender/GetDailyOrders" message="tns:IRiaAsSender_GetDailyOrders_InputMessage"/>
+      <wsdl:output wsaw:Action="CES.Services.FXGlobal/IRiaAsSender/GetDailyOrdersResponse" message="tns:IRiaAsSender_GetDailyOrders_OutputMessage"/>
+    </wsdl:operation>
+    <wsdl:operation name="GetDailyOrdersSummary">
+      <wsdl:input wsaw:Action="CES.Services.FXGlobal/IRiaAsSender/GetDailyOrdersSummary" message="tns:IRiaAsSender_GetDailyOrdersSummary_InputMessage"/>
+      <wsdl:output wsaw:Action="CES.Services.FXGlobal/IRiaAsSender/GetDailyOrdersSummaryResponse" message="tns:IRiaAsSender_GetDailyOrdersSummary_OutputMessage"/>
+    </wsdl:operation>
+    <wsdl:operation name="GetOrderDetails">
+      <wsdl:input wsaw:Action="CES.Services.FXGlobal/IRiaAsSender/GetOrderDetails" message="tns:IRiaAsSender_GetOrderDetails_InputMessage"/>
+      <wsdl:output wsaw:Action="CES.Services.FXGlobal/IRiaAsSender/GetOrderDetailsResponse" message="tns:IRiaAsSender_GetOrderDetails_OutputMessage"/>
+    </wsdl:operation>
+    <wsdl:operation name="GetEnumerationValues">
+      <wsdl:input wsaw:Action="CES.Services.FXGlobal/IRiaAsSender/GetEnumerationValues" message="tns:IRiaAsSender_GetEnumerationValues_InputMessage"/>
+      <wsdl:output wsaw:Action="CES.Services.FXGlobal/IRiaAsSender/GetEnumerationValuesResponse" message="tns:IRiaAsSender_GetEnumerationValues_OutputMessage"/>
+    </wsdl:operation>
+    <wsdl:operation name="IsAlive">
+      <wsdl:input wsaw:Action="CES.Services.FXGlobal/IRiaAsSender/IsAlive" message="tns:IRiaAsSender_IsAlive_InputMessage"/>
+      <wsdl:output wsaw:Action="CES.Services.FXGlobal/IRiaAsSender/IsAliveResponse" message="tns:IRiaAsSender_IsAlive_OutputMessage"/>
+    </wsdl:operation>
+    <wsdl:operation name="Ping">
+      <wsdl:input wsaw:Action="CES.Services.FXGlobal/IRiaAsSender/Ping" message="tns:IRiaAsSender_Ping_InputMessage"/>
+      <wsdl:output wsaw:Action="CES.Services.FXGlobal/IRiaAsSender/PingResponse" message="tns:IRiaAsSender_Ping_OutputMessage"/>
+    </wsdl:operation>
+  </wsdl:portType>
+</wsdl:definitions>]]></con:content><con:type>http://schemas.xmlsoap.org/wsdl/</con:type></con:part><con:part><con:url>http://stagingfxglobalwebsvcnocert.riaenvia.net:9771/FXGlobalSending.svc?xsd=xsd0</con:url><con:content><![CDATA[<xs:schema elementFormDefault="qualified" targetNamespace="CES.Services.FXGlobal" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:tns="CES.Services.FXGlobal">
+  <xs:element name="OP_VerifyOrderForPayout">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" maxOccurs="1" name="xmlDoc">
+          <xs:complexType mixed="true">
+            <xs:sequence>
+              <xs:any/>
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="OP_VerifyOrderForPayoutResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" maxOccurs="1" name="OP_VerifyOrderForPayoutResult">
+          <xs:complexType mixed="true">
+            <xs:sequence>
+              <xs:any/>
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="OP_ConfirmOrderPaid">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" maxOccurs="1" name="xmlDoc">
+          <xs:complexType mixed="true">
+            <xs:sequence>
+              <xs:any/>
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="OP_ConfirmOrderPaidResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" maxOccurs="1" name="OP_ConfirmOrderPaidResult">
+          <xs:complexType mixed="true">
+            <xs:sequence>
+              <xs:any/>
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="OP_VoidOrderPaidConfirmation">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" maxOccurs="1" name="xmlDoc">
+          <xs:complexType mixed="true">
+            <xs:sequence>
+              <xs:any/>
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="OP_VoidOrderPaidConfirmationResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" maxOccurs="1" name="OP_VoidOrderPaidConfirmationResult">
+          <xs:complexType mixed="true">
+            <xs:sequence>
+              <xs:any/>
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="OP_ListOrdersByName">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" maxOccurs="1" name="xmlDoc">
+          <xs:complexType mixed="true">
+            <xs:sequence>
+              <xs:any/>
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="OP_ListOrdersByNameResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" maxOccurs="1" name="OP_ListOrdersByNameResult">
+          <xs:complexType mixed="true">
+            <xs:sequence>
+              <xs:any/>
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetSendersCustSvcMsgs">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" maxOccurs="1" name="xmlDoc">
+          <xs:complexType mixed="true">
+            <xs:sequence>
+              <xs:any/>
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetSendersCustSvcMsgsResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" maxOccurs="1" name="GetSendersCustSvcMsgsResult">
+          <xs:complexType mixed="true">
+            <xs:sequence>
+              <xs:any/>
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetCancellationRequests">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" maxOccurs="1" name="xmlDoc">
+          <xs:complexType mixed="true">
+            <xs:sequence>
+              <xs:any/>
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetCancellationRequestsResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" maxOccurs="1" name="GetCancellationRequestsResult">
+          <xs:complexType mixed="true">
+            <xs:sequence>
+              <xs:any/>
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetOrdersForDownload">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" maxOccurs="1" name="xmlDoc">
+          <xs:complexType mixed="true">
+            <xs:sequence>
+              <xs:any/>
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetOrdersForDownloadResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" maxOccurs="1" name="GetOrdersForDownloadResult">
+          <xs:complexType mixed="true">
+            <xs:sequence>
+              <xs:any/>
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="InputPayersCustSvcMsgs">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" maxOccurs="1" name="xmlDoc">
+          <xs:complexType mixed="true">
+            <xs:sequence>
+              <xs:any/>
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="InputPayersCustSvcMsgsResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" maxOccurs="1" name="InputPayersCustSvcMsgsResult">
+          <xs:complexType mixed="true">
+            <xs:sequence>
+              <xs:any/>
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="InputOrderStatusNotices">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" maxOccurs="1" name="xmlDoc">
+          <xs:complexType mixed="true">
+            <xs:sequence>
+              <xs:any/>
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="InputOrderStatusNoticesResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" maxOccurs="1" name="InputOrderStatusNoticesResult">
+          <xs:complexType mixed="true">
+            <xs:sequence>
+              <xs:any/>
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="InputCancelRequestResponses">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" maxOccurs="1" name="xmlDoc">
+          <xs:complexType mixed="true">
+            <xs:sequence>
+              <xs:any/>
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="InputCancelRequestResponsesResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" maxOccurs="1" name="InputCancelRequestResponsesResult">
+          <xs:complexType mixed="true">
+            <xs:sequence>
+              <xs:any/>
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetDailyOrders">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" maxOccurs="1" name="xmlDoc">
+          <xs:complexType mixed="true">
+            <xs:sequence>
+              <xs:any/>
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetDailyOrdersResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" maxOccurs="1" name="GetDailyOrdersResult">
+          <xs:complexType mixed="true">
+            <xs:sequence>
+              <xs:any/>
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetDailyOrdersSummary">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" maxOccurs="1" name="xmlDoc">
+          <xs:complexType mixed="true">
+            <xs:sequence>
+              <xs:any/>
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetDailyOrdersSummaryResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" maxOccurs="1" name="GetDailyOrdersSummaryResult">
+          <xs:complexType mixed="true">
+            <xs:sequence>
+              <xs:any/>
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetOrderDetails">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" maxOccurs="1" name="xmlDoc">
+          <xs:complexType mixed="true">
+            <xs:sequence>
+              <xs:any/>
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetOrderDetailsResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" maxOccurs="1" name="GetOrderDetailsResult">
+          <xs:complexType mixed="true">
+            <xs:sequence>
+              <xs:any/>
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetEnumerationValues">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" maxOccurs="1" name="xmlDoc">
+          <xs:complexType mixed="true">
+            <xs:sequence>
+              <xs:any/>
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetEnumerationValuesResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" maxOccurs="1" name="GetEnumerationValuesResult">
+          <xs:complexType mixed="true">
+            <xs:sequence>
+              <xs:any/>
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="IsAlive">
+    <xs:complexType>
+      <xs:sequence/>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="IsAliveResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="IsAliveResult" type="xs:boolean"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="Ping">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="AgentID" type="xs:int"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="PingResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="PingResult" type="xs:int"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+</xs:schema>]]></con:content><con:type>http://www.w3.org/2001/XMLSchema</con:type></con:part><con:part><con:url>http://stagingfxglobalwebsvcnocert.riaenvia.net:9771/FXGlobalSending.svc?xsd=xsd1</con:url><con:content><![CDATA[<xs:schema attributeFormDefault="qualified" elementFormDefault="qualified" targetNamespace="http://schemas.microsoft.com/2003/10/Serialization/" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:tns="http://schemas.microsoft.com/2003/10/Serialization/">
+  <xs:element name="anyType" nillable="true" type="xs:anyType"/>
+  <xs:element name="anyURI" nillable="true" type="xs:anyURI"/>
+  <xs:element name="base64Binary" nillable="true" type="xs:base64Binary"/>
+  <xs:element name="boolean" nillable="true" type="xs:boolean"/>
+  <xs:element name="byte" nillable="true" type="xs:byte"/>
+  <xs:element name="dateTime" nillable="true" type="xs:dateTime"/>
+  <xs:element name="decimal" nillable="true" type="xs:decimal"/>
+  <xs:element name="double" nillable="true" type="xs:double"/>
+  <xs:element name="float" nillable="true" type="xs:float"/>
+  <xs:element name="int" nillable="true" type="xs:int"/>
+  <xs:element name="long" nillable="true" type="xs:long"/>
+  <xs:element name="QName" nillable="true" type="xs:QName"/>
+  <xs:element name="short" nillable="true" type="xs:short"/>
+  <xs:element name="string" nillable="true" type="xs:string"/>
+  <xs:element name="unsignedByte" nillable="true" type="xs:unsignedByte"/>
+  <xs:element name="unsignedInt" nillable="true" type="xs:unsignedInt"/>
+  <xs:element name="unsignedLong" nillable="true" type="xs:unsignedLong"/>
+  <xs:element name="unsignedShort" nillable="true" type="xs:unsignedShort"/>
+  <xs:element name="char" nillable="true" type="tns:char"/>
+  <xs:simpleType name="char">
+    <xs:restriction base="xs:int"/>
+  </xs:simpleType>
+  <xs:element name="duration" nillable="true" type="tns:duration"/>
+  <xs:simpleType name="duration">
+    <xs:restriction base="xs:duration">
+      <xs:pattern value="\-?P(\d*D)?(T(\d*H)?(\d*M)?(\d*(\.\d*)?S)?)?"/>
+      <xs:minInclusive value="-P10675199DT2H48M5.4775808S"/>
+      <xs:maxInclusive value="P10675199DT2H48M5.4775807S"/>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:element name="guid" nillable="true" type="tns:guid"/>
+  <xs:simpleType name="guid">
+    <xs:restriction base="xs:string">
+      <xs:pattern value="[\da-fA-F]{8}-[\da-fA-F]{4}-[\da-fA-F]{4}-[\da-fA-F]{4}-[\da-fA-F]{12}"/>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:attribute name="FactoryType" type="xs:QName"/>
+  <xs:attribute name="Id" type="xs:ID"/>
+  <xs:attribute name="Ref" type="xs:IDREF"/>
+</xs:schema>]]></con:content><con:type>http://www.w3.org/2001/XMLSchema</con:type></con:part></con:definitionCache><con:endpoints><con:endpoint>http://stagingfxglobalwebsvcnocert.riaenvia.net:9771/FXGlobalSending.svc/Binding_Basic_NoCert</con:endpoint></con:endpoints><con:operation id="d539eef8-5c15-4c6f-96f2-db7ea0c1041c" isOneWay="false" action="CES.Services.FXGlobal/IRiaAsSender/GetCancellationRequests" name="GetCancellationRequests" bindingOperationName="GetCancellationRequests" type="Request-Response" inputName="" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call id="3b2de79f-0a4a-4434-a696-d69974a2b9a0" name="Request 1"><con:settings/><con:encoding>UTF-8</con:encoding><con:endpoint>http://stagingfxglobalwebsvcnocert.riaenvia.net:9771/FXGlobalSending.svc/Binding_Basic_NoCert</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:ces="CES.Services.FXGlobal">\r
+   <soapenv:Header/>\r
+   <soapenv:Body>\r
+      <ces:GetCancellationRequests>\r
+         <!--Optional:-->\r
+         <ces:xmlDoc>\r
+            e\r
+            <!--You may enter ANY elements at this point-->\r
+            gero\r
+         </ces:xmlDoc>\r
+      </ces:GetCancellationRequests>\r
+   </soapenv:Body>\r
+</soapenv:Envelope>]]></con:request><con:wsaConfig mustUnderstand="NONE" version="200508" action="CES.Services.FXGlobal/IRiaAsSender/GetCancellationRequests"/></con:call></con:operation><con:operation id="8bf2f80a-1520-4242-aa53-0f01ff389a2f" isOneWay="false" action="CES.Services.FXGlobal/IRiaAsSender/GetDailyOrders" name="GetDailyOrders" bindingOperationName="GetDailyOrders" type="Request-Response" inputName="" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call id="9cdce61a-aba1-4678-84b7-2ada1bddf307" name="Request 1"><con:settings/><con:encoding>UTF-8</con:encoding><con:endpoint>http://stagingfxglobalwebsvcnocert.riaenvia.net:9771/FXGlobalSending.svc/Binding_Basic_NoCert</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:ces="CES.Services.FXGlobal">\r
+   <soapenv:Header/>\r
+   <soapenv:Body>\r
+      <ces:GetDailyOrders>\r
+         <!--Optional:-->\r
+         <ces:xmlDoc>\r
+            e\r
+            <!--You may enter ANY elements at this point-->\r
+            gero\r
+         </ces:xmlDoc>\r
+      </ces:GetDailyOrders>\r
+   </soapenv:Body>\r
+</soapenv:Envelope>]]></con:request><con:wsaConfig mustUnderstand="NONE" version="200508" action="CES.Services.FXGlobal/IRiaAsSender/GetDailyOrders"/></con:call></con:operation><con:operation id="d0f39833-678a-43d2-8bf2-108fd04a2547" isOneWay="false" action="CES.Services.FXGlobal/IRiaAsSender/GetDailyOrdersSummary" name="GetDailyOrdersSummary" bindingOperationName="GetDailyOrdersSummary" type="Request-Response" inputName="" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call id="a2da14cc-382c-4ec8-bd12-81cb5034a927" name="Request 1"><con:settings/><con:encoding>UTF-8</con:encoding><con:endpoint>http://stagingfxglobalwebsvcnocert.riaenvia.net:9771/FXGlobalSending.svc/Binding_Basic_NoCert</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:ces="CES.Services.FXGlobal">\r
+   <soapenv:Header/>\r
+   <soapenv:Body>\r
+      <ces:GetDailyOrdersSummary>\r
+         <!--Optional:-->\r
+         <ces:xmlDoc>\r
+            e\r
+            <!--You may enter ANY elements at this point-->\r
+            gero\r
+         </ces:xmlDoc>\r
+      </ces:GetDailyOrdersSummary>\r
+   </soapenv:Body>\r
+</soapenv:Envelope>]]></con:request><con:wsaConfig mustUnderstand="NONE" version="200508" action="CES.Services.FXGlobal/IRiaAsSender/GetDailyOrdersSummary"/></con:call></con:operation><con:operation id="a9b3f91b-f7ea-4d4d-9e7e-723176fbe516" isOneWay="false" action="CES.Services.FXGlobal/IRiaAsSender/GetEnumerationValues" name="GetEnumerationValues" bindingOperationName="GetEnumerationValues" type="Request-Response" inputName="" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call id="7cc627d8-6ed2-4b4c-99c6-d59cc069aa5d" name="Request 1"><con:settings/><con:encoding>UTF-8</con:encoding><con:endpoint>http://stagingfxglobalwebsvcnocert.riaenvia.net:9771/FXGlobalSending.svc/Binding_Basic_NoCert</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:ces="CES.Services.FXGlobal">\r
+   <soapenv:Header/>\r
+   <soapenv:Body>\r
+      <ces:GetEnumerationValues>\r
+         <!--Optional:-->\r
+         <ces:xmlDoc>\r
+            e\r
+            <!--You may enter ANY elements at this point-->\r
+            gero\r
+         </ces:xmlDoc>\r
+      </ces:GetEnumerationValues>\r
+   </soapenv:Body>\r
+</soapenv:Envelope>]]></con:request><con:wsaConfig mustUnderstand="NONE" version="200508" action="CES.Services.FXGlobal/IRiaAsSender/GetEnumerationValues"/></con:call></con:operation><con:operation id="c995906c-d74f-46f1-8e71-33d5cb7f093d" isOneWay="false" action="CES.Services.FXGlobal/IRiaAsSender/GetOrderDetails" name="GetOrderDetails" bindingOperationName="GetOrderDetails" type="Request-Response" inputName="" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call id="43f482de-b6fd-4cb4-80e5-7fb954cd7de5" name="Request 1"><con:settings/><con:encoding>UTF-8</con:encoding><con:endpoint>http://stagingfxglobalwebsvcnocert.riaenvia.net:9771/FXGlobalSending.svc/Binding_Basic_NoCert</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:ces="CES.Services.FXGlobal">\r
+   <soapenv:Header/>\r
+   <soapenv:Body>\r
+      <ces:GetOrderDetails>\r
+         <!--Optional:-->\r
+         <ces:xmlDoc>\r
+            e\r
+            <!--You may enter ANY elements at this point-->\r
+            gero\r
+         </ces:xmlDoc>\r
+      </ces:GetOrderDetails>\r
+   </soapenv:Body>\r
+</soapenv:Envelope>]]></con:request><con:wsaConfig mustUnderstand="NONE" version="200508" action="CES.Services.FXGlobal/IRiaAsSender/GetOrderDetails"/></con:call></con:operation><con:operation id="311fc6b7-2d3a-4a42-95e6-037c8ddbaa95" isOneWay="false" action="CES.Services.FXGlobal/IRiaAsSender/GetOrdersForDownload" name="GetOrdersForDownload" bindingOperationName="GetOrdersForDownload" type="Request-Response" inputName="" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call id="73217c9a-d9c5-4485-9d60-c56d03fa0cca" name="Request 1"><con:settings/><con:encoding>UTF-8</con:encoding><con:endpoint>http://stagingfxglobalwebsvcnocert.riaenvia.net:9771/FXGlobalSending.svc/Binding_Basic_NoCert</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:ces="CES.Services.FXGlobal">\r
+   <soapenv:Header/>\r
+   <soapenv:Body>\r
+      <ces:GetOrdersForDownload>\r
+         <!--Optional:-->\r
+         <ces:xmlDoc>\r
+            e\r
+            <!--You may enter ANY elements at this point-->\r
+            gero\r
+         </ces:xmlDoc>\r
+      </ces:GetOrdersForDownload>\r
+   </soapenv:Body>\r
+</soapenv:Envelope>]]></con:request><con:wsaConfig mustUnderstand="NONE" version="200508" action="CES.Services.FXGlobal/IRiaAsSender/GetOrdersForDownload"/></con:call></con:operation><con:operation id="a8301220-68b5-4e21-a53e-246a86d3555b" isOneWay="false" action="CES.Services.FXGlobal/IRiaAsSender/GetSendersCustSvcMsgs" name="GetSendersCustSvcMsgs" bindingOperationName="GetSendersCustSvcMsgs" type="Request-Response" inputName="" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call id="1b045580-6224-4cdd-9ea9-be7541b5752b" name="Request 1"><con:settings/><con:encoding>UTF-8</con:encoding><con:endpoint>http://stagingfxglobalwebsvcnocert.riaenvia.net:9771/FXGlobalSending.svc/Binding_Basic_NoCert</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:ces="CES.Services.FXGlobal">\r
+   <soapenv:Header/>\r
+   <soapenv:Body>\r
+      <ces:GetSendersCustSvcMsgs>\r
+         <!--Optional:-->\r
+         <ces:xmlDoc>\r
+            e\r
+            <!--You may enter ANY elements at this point-->\r
+            gero\r
+         </ces:xmlDoc>\r
+      </ces:GetSendersCustSvcMsgs>\r
+   </soapenv:Body>\r
+</soapenv:Envelope>]]></con:request><con:wsaConfig mustUnderstand="NONE" version="200508" action="CES.Services.FXGlobal/IRiaAsSender/GetSendersCustSvcMsgs"/></con:call></con:operation><con:operation id="8d1fc2d0-b32c-4edb-8f94-de009a960746" isOneWay="false" action="CES.Services.FXGlobal/IRiaAsSender/InputCancelRequestResponses" name="InputCancelRequestResponses" bindingOperationName="InputCancelRequestResponses" type="Request-Response" inputName="" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call id="84e7dcc3-5012-498e-8d6a-c324587f2a9b" name="Request 1"><con:settings/><con:encoding>UTF-8</con:encoding><con:endpoint>http://stagingfxglobalwebsvcnocert.riaenvia.net:9771/FXGlobalSending.svc/Binding_Basic_NoCert</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:ces="CES.Services.FXGlobal">\r
+   <soapenv:Header/>\r
+   <soapenv:Body>\r
+      <ces:InputCancelRequestResponses>\r
+         <!--Optional:-->\r
+         <ces:xmlDoc>\r
+            e\r
+            <!--You may enter ANY elements at this point-->\r
+            gero\r
+         </ces:xmlDoc>\r
+      </ces:InputCancelRequestResponses>\r
+   </soapenv:Body>\r
+</soapenv:Envelope>]]></con:request><con:wsaConfig mustUnderstand="NONE" version="200508" action="CES.Services.FXGlobal/IRiaAsSender/InputCancelRequestResponses"/></con:call></con:operation><con:operation id="e887d582-23ce-45d5-800a-40ba6e9eb8b1" isOneWay="false" action="CES.Services.FXGlobal/IRiaAsSender/InputOrderStatusNotices" name="InputOrderStatusNotices" bindingOperationName="InputOrderStatusNotices" type="Request-Response" inputName="" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call id="77de1bea-8dd6-46d5-97c9-78e906eed922" name="Request 1"><con:settings/><con:encoding>UTF-8</con:encoding><con:endpoint>http://stagingfxglobalwebsvcnocert.riaenvia.net:9771/FXGlobalSending.svc/Binding_Basic_NoCert</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:ces="CES.Services.FXGlobal">\r
+   <soapenv:Header/>\r
+   <soapenv:Body>\r
+      <ces:InputOrderStatusNotices>\r
+         <!--Optional:-->\r
+         <ces:xmlDoc>\r
+            e\r
+            <!--You may enter ANY elements at this point-->\r
+            gero\r
+         </ces:xmlDoc>\r
+      </ces:InputOrderStatusNotices>\r
+   </soapenv:Body>\r
+</soapenv:Envelope>]]></con:request><con:wsaConfig mustUnderstand="NONE" version="200508" action="CES.Services.FXGlobal/IRiaAsSender/InputOrderStatusNotices"/></con:call></con:operation><con:operation id="0177259d-bcba-46a5-950c-1f49cae0ab86" isOneWay="false" action="CES.Services.FXGlobal/IRiaAsSender/InputPayersCustSvcMsgs" name="InputPayersCustSvcMsgs" bindingOperationName="InputPayersCustSvcMsgs" type="Request-Response" inputName="" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call id="d63c368d-c7b1-42f2-a95f-920151b70f5b" name="Request 1"><con:settings/><con:encoding>UTF-8</con:encoding><con:endpoint>http://stagingfxglobalwebsvcnocert.riaenvia.net:9771/FXGlobalSending.svc/Binding_Basic_NoCert</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:ces="CES.Services.FXGlobal">\r
+   <soapenv:Header/>\r
+   <soapenv:Body>\r
+      <ces:InputPayersCustSvcMsgs>\r
+         <!--Optional:-->\r
+         <ces:xmlDoc>\r
+            e\r
+            <!--You may enter ANY elements at this point-->\r
+            gero\r
+         </ces:xmlDoc>\r
+      </ces:InputPayersCustSvcMsgs>\r
+   </soapenv:Body>\r
+</soapenv:Envelope>]]></con:request><con:wsaConfig mustUnderstand="NONE" version="200508" action="CES.Services.FXGlobal/IRiaAsSender/InputPayersCustSvcMsgs"/></con:call></con:operation><con:operation id="e8086733-9b68-4973-a84a-4b5a1dc7d171" isOneWay="false" action="CES.Services.FXGlobal/IRiaAsSender/IsAlive" name="IsAlive" bindingOperationName="IsAlive" type="Request-Response" inputName="" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call id="56029d8e-d0d8-4e04-ad37-b56bf921caf0" name="Request 1"><con:settings/><con:encoding>UTF-8</con:encoding><con:endpoint>http://stagingfxglobalwebsvcnocert.riaenvia.net:9771/FXGlobalSending.svc/Binding_Basic_NoCert</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:ces="CES.Services.FXGlobal">\r
+   <soapenv:Header/>\r
+   <soapenv:Body>\r
+      <ces:IsAlive/>\r
+   </soapenv:Body>\r
+</soapenv:Envelope>]]></con:request><con:wsaConfig mustUnderstand="NONE" version="200508" action="CES.Services.FXGlobal/IRiaAsSender/IsAlive"/></con:call></con:operation><con:operation id="1e6cb27a-5eec-4d72-89f9-78f8493d6ea1" isOneWay="false" action="CES.Services.FXGlobal/IRiaAsSender/OP_ConfirmOrderPaid" name="OP_ConfirmOrderPaid" bindingOperationName="OP_ConfirmOrderPaid" type="Request-Response" inputName="" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call id="0a4e9373-1a1b-4cb8-9f90-1882f6b253f0" name="Request 1"><con:settings/><con:encoding>UTF-8</con:encoding><con:endpoint>http://stagingfxglobalwebsvcnocert.riaenvia.net:9771/FXGlobalSending.svc/Binding_Basic_NoCert</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:ces="CES.Services.FXGlobal">\r
+   <soapenv:Header/>\r
+   <soapenv:Body>\r
+      <ces:OP_ConfirmOrderPaid>\r
+         <!--Optional:-->\r
+         <ces:xmlDoc>\r
+            e\r
+            <!--You may enter ANY elements at this point-->\r
+            gero\r
+         </ces:xmlDoc>\r
+      </ces:OP_ConfirmOrderPaid>\r
+   </soapenv:Body>\r
+</soapenv:Envelope>]]></con:request><con:wsaConfig mustUnderstand="NONE" version="200508" action="CES.Services.FXGlobal/IRiaAsSender/OP_ConfirmOrderPaid"/></con:call></con:operation><con:operation id="e3d267fa-73eb-49a9-96ac-e6757895ad5b" isOneWay="false" action="CES.Services.FXGlobal/IRiaAsSender/OP_ListOrdersByName" name="OP_ListOrdersByName" bindingOperationName="OP_ListOrdersByName" type="Request-Response" inputName="" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call id="2b95df47-d24f-4b7e-ac1e-23bfba1a9c54" name="Request 1"><con:settings/><con:encoding>UTF-8</con:encoding><con:endpoint>http://stagingfxglobalwebsvcnocert.riaenvia.net:9771/FXGlobalSending.svc/Binding_Basic_NoCert</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:ces="CES.Services.FXGlobal">\r
+   <soapenv:Header/>\r
+   <soapenv:Body>\r
+      <ces:OP_ListOrdersByName>\r
+         <!--Optional:-->\r
+         <ces:xmlDoc>\r
+            e\r
+            <!--You may enter ANY elements at this point-->\r
+            gero\r
+         </ces:xmlDoc>\r
+      </ces:OP_ListOrdersByName>\r
+   </soapenv:Body>\r
+</soapenv:Envelope>]]></con:request><con:wsaConfig mustUnderstand="NONE" version="200508" action="CES.Services.FXGlobal/IRiaAsSender/OP_ListOrdersByName"/></con:call></con:operation><con:operation id="dd1fd2b0-35ab-44b4-b1e6-4d171507f639" isOneWay="false" action="CES.Services.FXGlobal/IRiaAsSender/OP_VerifyOrderForPayout" name="OP_VerifyOrderForPayout" bindingOperationName="OP_VerifyOrderForPayout" type="Request-Response" inputName="" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call id="fd6a88bc-e46a-4dfe-8905-c7ad7702533e" name="Request 1"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>http://stagingfxglobalwebsvcnocert.riaenvia.net:9771/FXGlobalSending.svc/Binding_Basic_NoCert</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:ces="CES.Services.FXGlobal">
+  <soapenv:Header/>
+  <soapenv:Body>
+    <ces:OP_VerifyOrderForPayout>
+      <!--Optional:-->
+      <ces:xmlDoc>
+        <Root>
+          <CorrespID>59470211</CorrespID>
+          <LayoutVersion>2.0</LayoutVersion>
+          <Header>
+            <CallID>50e07864-104f-4f68-adb6-d5d7af615ffb</CallID>
+            <CallDateTimeLocal>20170912135959</CallDateTimeLocal>
+            <CorrespLocNo>0</CorrespLocNo>
+            <CorrespLocNo_Ria>0</CorrespLocNo_Ria>
+            <CorrespLocName>Main Branch</CorrespLocName>
+            <CorrespLocCountry>CL</CorrespLocCountry>
+            <UserID>3648587</UserID>
+            <TerminalID>16</TerminalID>
+            <LanguageCultureCode>en-US</LanguageCultureCode>
+          </Header>
+          <DateTimeLocal>20170927135959</DateTimeLocal>
+          <DateTimeUTC>20170927151612</DateTimeUTC>
+          <PIN>11470087617</PIN>
+          <BeneAmount>74679</BeneAmount>
+          <CorrespLocID>001</CorrespLocID>
+        </Root>
+      </ces:xmlDoc>
+    </ces:OP_VerifyOrderForPayout>
+  </soapenv:Body>
+</soapenv:Envelope>]]></con:request><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="CES.Services.FXGlobal/IRiaAsSender/OP_VerifyOrderForPayout"/><con:wsrmConfig version="1.2"/></con:call></con:operation><con:operation id="1ee68a64-6866-4424-9523-bf6e130b6034" isOneWay="false" action="CES.Services.FXGlobal/IRiaAsSender/OP_VoidOrderPaidConfirmation" name="OP_VoidOrderPaidConfirmation" bindingOperationName="OP_VoidOrderPaidConfirmation" type="Request-Response" inputName="" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call id="50d176b9-5c64-4445-a03d-886bb64106f5" name="Request 1"><con:settings/><con:encoding>UTF-8</con:encoding><con:endpoint>http://stagingfxglobalwebsvcnocert.riaenvia.net:9771/FXGlobalSending.svc/Binding_Basic_NoCert</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:ces="CES.Services.FXGlobal">\r
+   <soapenv:Header/>\r
+   <soapenv:Body>\r
+      <ces:OP_VoidOrderPaidConfirmation>\r
+         <!--Optional:-->\r
+         <ces:xmlDoc>\r
+            e\r
+            <!--You may enter ANY elements at this point-->\r
+            gero\r
+         </ces:xmlDoc>\r
+      </ces:OP_VoidOrderPaidConfirmation>\r
+   </soapenv:Body>\r
+</soapenv:Envelope>]]></con:request><con:wsaConfig mustUnderstand="NONE" version="200508" action="CES.Services.FXGlobal/IRiaAsSender/OP_VoidOrderPaidConfirmation"/></con:call></con:operation><con:operation id="51193e16-44de-4d70-80df-4f749f5ff1e6" isOneWay="false" action="CES.Services.FXGlobal/IRiaAsSender/Ping" name="Ping" bindingOperationName="Ping" type="Request-Response" inputName="" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call id="70d5ba5f-1066-4f52-9f84-159d59fbf8c6" name="Request 1"><con:settings/><con:encoding>UTF-8</con:encoding><con:endpoint>http://stagingfxglobalwebsvcnocert.riaenvia.net:9771/FXGlobalSending.svc/Binding_Basic_NoCert</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:ces="CES.Services.FXGlobal">\r
+   <soapenv:Header/>\r
+   <soapenv:Body>\r
+      <ces:Ping>\r
+         <!--Optional:-->\r
+         <ces:AgentID>?</ces:AgentID>\r
+      </ces:Ping>\r
+   </soapenv:Body>\r
+</soapenv:Envelope>]]></con:request><con:wsaConfig mustUnderstand="NONE" version="200508" action="CES.Services.FXGlobal/IRiaAsSender/Ping"/></con:call></con:operation></con:interface><con:properties/><con:wssContainer/><con:oAuth2ProfileContainer/></con:soapui-project>
