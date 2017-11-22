@@ -10,11 +10,11 @@ namespace CES.CoreApi.Receipt_Main.Domain.Core.Repositories
 {
     public interface IDocumentDetailRepository
     {
-        systblApp_CoreAPI_DocumentDetail find(string id);
-        IEnumerable<systblApp_CoreAPI_DocumentDetail> find(Expression<Func<systblApp_CoreAPI_DocumentDetail, bool>> where);
-        void CreateDocumentDetail(systblApp_CoreAPI_DocumentDetail obj);
-        void UpdateDocumentDetail(systblApp_CoreAPI_DocumentDetail obj);
-        void RemoveDocumentDetail(systblApp_CoreAPI_DocumentDetail obj);
+        actblTaxDocument_Detail find(string id);
+        IEnumerable<actblTaxDocument_Detail> find(Expression<Func<actblTaxDocument_Detail, bool>> where);
+        void CreateDocumentDetail(actblTaxDocument_Detail obj);
+        void UpdateDocumentDetail(actblTaxDocument_Detail obj);
+        void RemoveDocumentDetail(actblTaxDocument_Detail obj);
         void SaveChanges();
     }
 }

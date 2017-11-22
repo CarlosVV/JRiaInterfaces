@@ -44,7 +44,9 @@ public class VerifyOrderForPayoutService {
         WarningMsg = "";
         ErrorMsg = "";
     }
+
     private static final String SOAP_ACTION = "CES.Services.FXGlobal/IRiaAsSender/OP_VerifyOrderForPayout";
+
     private static final String OPERATION = "OP_VerifyOrderForPayout";
 
     private boolean isParsableAsLong(final String s) {
@@ -52,7 +54,6 @@ public class VerifyOrderForPayoutService {
             Long.valueOf(s);
             return true;
         } catch (NumberFormatException numberFormatException) {
-            numberFormatException.printStackTrace();
             return false;
         }
     }
@@ -138,7 +139,7 @@ public class VerifyOrderForPayoutService {
 
         //  <BeneAmount>74679</BeneAmount>
         SOAPElement beneAmount = root.addChildElement("BeneAmount");
-        beneAmount.addTextNode(Long.toString(request.getBeneAmount()));
+        beneAmount.addTextNode(request.getBeneAmount());
 
         //  <CorrespLocID>001</CorrespLocID>
         SOAPElement correspLocID = root.addChildElement("CorrespLocID");
@@ -191,187 +192,97 @@ public class VerifyOrderForPayoutService {
                                     if ("VerifyOrderResponse".equals(element5.getElementName().getLocalName())) {
                                         Iterator it6 = element5.getChildElements();
                                         while (it6.hasNext()) {
-
                                             SOAPElement element7 = (SOAPElement) it6.next();
                                             if ("TransRefID".equals(element7.getElementName().getLocalName())) {
-
                                                 response.setTransRefID(element7.getTextContent());
-
                                             }
-
                                             if ("OrderFound".equals(element7.getElementName().getLocalName())) {
-
                                                 response.setOrderFound(element7.getTextContent());
-
                                             }
-
                                             if ("PIN".equals(element7.getElementName().getLocalName())) {
-
                                                 response.setPIN(element7.getTextContent());
-
                                             }
-
                                             if ("OrderNo".equals(element7.getElementName().getLocalName())) {
-
                                                 response.setOrderNo(element7.getTextContent());
-
                                             }
-
                                             if ("SeqIDRA".equals(element7.getElementName().getLocalName())) {
-
                                                 response.setSeqIDRA(element7.getTextContent());
-
                                             }
-
                                             if ("SeqIDPA".equals(element7.getElementName().getLocalName())) {
-
                                                 response.setSeqIDPA(element7.getTextContent());
-
                                             }
-
                                             if ("OrderDate".equals(element7.getElementName().getLocalName())) {
-
                                                 response.setOrderDate(element7.getTextContent());
-
                                             }
-
                                             if ("CountryFrom".equals(element7.getElementName().getLocalName())) {
-
                                                 response.setCountryFrom(element7.getTextContent());
-
                                             }
-
                                             if ("CustNameFirst".equals(element7.getElementName().getLocalName())) {
-
                                                 response.setCustNameFirst(element7.getTextContent());
-
                                             }
-
                                             if ("CustNameLast1".equals(element7.getElementName().getLocalName())) {
-
                                                 response.setCustNameLast1(element7.getTextContent());
-
                                             }
-
                                             if ("CustAddress".equals(element7.getElementName().getLocalName())) {
-
                                                 response.setCustAddress(element7.getTextContent());
-
                                             }
-
                                             if ("CustCity".equals(element7.getElementName().getLocalName())) {
-
                                                 response.setCustCity(element7.getTextContent());
-
                                             }
-
                                             if ("CustState".equals(element7.getElementName().getLocalName())) {
-
                                                 response.setCustState(element7.getTextContent());
-
                                             }
-
                                             if ("CustCountry".equals(element7.getElementName().getLocalName())) {
-
                                                 response.setCustCountry(element7.getTextContent());
-
                                             }
-
                                             if ("CustTelNo".equals(element7.getElementName().getLocalName())) {
-
                                                 response.setCustTelNo(element7.getTextContent());
-
                                             }
-
                                             if ("BeneNameFirst".equals(element7.getElementName().getLocalName())) {
-
                                                 response.setBeneNameFirst(element7.getTextContent());
-
                                             }
-
                                             if ("BeneNameMiddle".equals(element7.getElementName().getLocalName())) {
-
                                                 response.setBeneNameMiddle(element7.getTextContent());
-
                                             }
-
                                             if ("BeneNameLast1".equals(element7.getElementName().getLocalName())) {
-
                                                 response.setBeneNameLast1(element7.getTextContent());
-
                                             }
-
                                             if ("BeneAddress".equals(element7.getElementName().getLocalName())) {
-
                                                 response.setBeneAddress(element7.getTextContent());
-
                                             }
-
                                             if ("BeneCity".equals(element7.getElementName().getLocalName())) {
-
                                                 response.setBeneCity(element7.getTextContent());
-
                                             }
-
                                             if ("BeneState".equals(element7.getElementName().getLocalName())) {
-
                                                 response.setBeneState(element7.getTextContent());
-
                                             }
-
                                             if ("BeneCountry".equals(element7.getElementName().getLocalName())) {
-
                                                 response.setBeneCountry(element7.getTextContent());
-
                                             }
-
                                             if ("BeneZip".equals(element7.getElementName().getLocalName())) {
-
                                                 response.setBeneZip(element7.getTextContent());
-
                                             }
-
                                             if ("BeneTelNo".equals(element7.getElementName().getLocalName())) {
-
                                                 response.setBeneTelNo(element7.getTextContent());
-
                                             }
-
                                             if ("BeneCurrency".equals(element7.getElementName().getLocalName())) {
-
                                                 response.setBeneCurrency(element7.getTextContent());
-
                                             }
-
                                             if ("BeneAmount".equals(element7.getElementName().getLocalName())) {
-
                                                 response.setBeneAmount(element7.getTextContent());
-
                                             }
-
                                             if ("TransferReason".equals(element7.getElementName().getLocalName())) {
                                                 response.setTransferReason(element7.getTextContent());
-
                                             }
-
                                             if ("ResponseDateTimeUTC".equals(element7.getElementName().getLocalName())) {
-
                                                 response.setResponseDateTimeUTC(element7.getTextContent());
-
                                             }
-
                                             if ("ResponseCode".equals(element7.getElementName().getLocalName())) {
-
                                                 response.setResponseCode(element7.getTextContent());
-
                                             }
-
                                             if ("ResponseText".equals(element7.getElementName().getLocalName())) {
-
-                                                response.setResponseText(element7.getTextContent());
-
+                                                response.setResponseText(element7.getTextContent().replace("\r\n", " ").replace("\n", " "));
                                             }
-
                                         }
                                     }
                                 }
@@ -395,7 +306,7 @@ public class VerifyOrderForPayoutService {
                         }
                     }
                 }
-            }    
+            }
         } catch (Exception e) {
             System.err.println("\nError occurred while sending SOAP Request to Server!\nMake sure you have the correct endpoint URL and SOAPAction!\n");
             e.printStackTrace();
@@ -426,7 +337,7 @@ public class VerifyOrderForPayoutService {
         String dateTimeLocal = params[1];
         String dateTimeUTC = params[2];
         String pin = params[3];
-        long beneAmount = isParsableAsLong(params[4]) ? Long.parseLong(params[4]) : 0;
+        String beneAmount = "-".equals(params[4].trim()) ? "" : params[4];
         String correspLocID = params[5];
 
         request.setDateTimeLocal(dateTimeLocal);
@@ -466,7 +377,7 @@ public class VerifyOrderForPayoutService {
             if ("false".equals(response.getOrderFound())) {
                 System.out.println("99|" + response.getResponseText());
             }
-            
+
             System.out.println(response);
 
         } catch (Exception e) {

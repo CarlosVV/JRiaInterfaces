@@ -11,7 +11,7 @@ namespace CES.CoreApi.Receipt_Main.UI.WPF.ViewModel
         private string _docType;
         private string _start;
         private string _end;
-        private Document_Type _selectedDocumentTypeValue;
+        private DocumentType _selectedDocumentTypeValue;
         private string _selectedRangeTypeValue;
         public NewDocumentToDownloadViewModel()
         {
@@ -62,7 +62,7 @@ namespace CES.CoreApi.Receipt_Main.UI.WPF.ViewModel
             }
         }
 
-        public Document_Type SelectedDocumentTypeValue
+        public DocumentType SelectedDocumentTypeValue
         {
             get { return _selectedDocumentTypeValue; }
             set
@@ -82,7 +82,7 @@ namespace CES.CoreApi.Receipt_Main.UI.WPF.ViewModel
             }
         }
 
-        public IList<Document_Type> DocumentTypeList { get; }
+        public IList<DocumentType> DocumentTypeList { get; }
         public IList<string> RangeTypeList { get; }
     }
 }

@@ -8,19 +8,18 @@ namespace CES.CoreApi.Receipt_Main.Domain.Core.Contracts.Models
 {
     public class TaxAddress
     {
-        public int fTaxAddressId { get; set; }
+        public int fAddressID { get; set; }
 
-        public int? fTaxEntityId { get; set; }
+        public int fEntityID { get; set; }
 
         public string fAddress { get; set; }
 
-        public string fComuna { get; set; }
+        public string fCounty { get; set; }
 
         public string fCity { get; set; }
 
         public string fState { get; set; }
 
-        public string fCountryId { get; set; }
-       
+        public int fCountryId { get; set; }
     }
 }

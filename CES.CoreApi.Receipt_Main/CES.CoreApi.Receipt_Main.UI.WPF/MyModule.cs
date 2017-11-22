@@ -41,7 +41,7 @@ namespace CES.CoreApi.Receipt_Main.UI.WPF
             Bind<ITaxAddressRepository>().To<TaxAddressRepository>();
 
             Bind<ISequenceService>().To<SequenceService>();
-            Bind<ISequenceRepository>().To<SequenceRepository>();
+            //Bind<ISequenceRepository>().To<SequenceRepository>();
 
             Bind<IStoreService>().To<StoreService>();
             Bind<IStoreRepository>().To<StoreRepository>();

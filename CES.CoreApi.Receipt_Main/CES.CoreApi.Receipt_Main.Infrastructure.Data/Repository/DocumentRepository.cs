@@ -11,32 +11,32 @@ using System.Threading.Tasks;
 
 namespace CES.CoreApi.Receipt_Main.Infrastructure.Data.Repository
 {
-    public class DocumentRepository : BaseRepository<systblApp_CoreAPI_Document>, IDocumentRepository
+    public class DocumentRepository : BaseRepository<actblTaxDocument>, IDocumentRepository
     {
         public DocumentRepository(DbContext _dbContext)
             : base(_dbContext)
         {
         }
 
-        public systblApp_CoreAPI_Document find(string id)
+        public actblTaxDocument find(string id)
         {
-            return this.Get(p => p.fDocumentId.ToString() == id);
+            return this.Get(p => p.fDocumentID.ToString() == id);
         }
 
-        public IEnumerable<systblApp_CoreAPI_Document> find(Expression<Func<systblApp_CoreAPI_Document, bool>> where)
+        public IEnumerable<actblTaxDocument> find(Expression<Func<actblTaxDocument, bool>> where)
         {
             return this.GetWhere(where);
         }
 
-        public void CreateDocument(systblApp_CoreAPI_Document obj)
+        public void CreateDocument(actblTaxDocument obj)
         {
             this.Add(obj);
         }
-        public void UpdateDocument(systblApp_CoreAPI_Document obj)
+        public void UpdateDocument(actblTaxDocument obj)
         {
             this.Update(obj);
         }
-        public void RemoveDocument(systblApp_CoreAPI_Document obj)
+        public void RemoveDocument(actblTaxDocument obj)
         {
             this.Delete(obj);
         }

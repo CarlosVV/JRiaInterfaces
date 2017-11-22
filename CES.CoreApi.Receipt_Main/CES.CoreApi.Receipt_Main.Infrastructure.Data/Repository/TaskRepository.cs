@@ -20,7 +20,7 @@ namespace CES.CoreApi.Receipt_Main.Infrastructure.Data.Repository
 
         public systblApp_CoreAPI_Task find(string id)
         {
-            return this.Get(p => p.fTaskId.ToString() == id);
+            return this.Get(p => p.fTaskID.ToString() == id);
         }
 
         public IEnumerable<systblApp_CoreAPI_Task> find(Expression<Func<systblApp_CoreAPI_Task, bool>> where)

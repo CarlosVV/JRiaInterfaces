@@ -11,32 +11,32 @@ using System.Threading.Tasks;
 
 namespace CES.CoreApi.Receipt_Main.Infrastructure.Data.Repository
 {
-    public class TaxEntityRepository : BaseRepository<systblApp_CoreAPI_TaxEntity>, ITaxEntityRepository
+    public class TaxEntityRepository : BaseRepository<actblTaxDocument_Entity>, ITaxEntityRepository
     {
         public TaxEntityRepository(DbContext _dbContext)
             : base(_dbContext)
         {
         }
 
-        public systblApp_CoreAPI_TaxEntity find(string id)
+        public actblTaxDocument_Entity find(string id)
         {
-            return this.Get(p => p.fTaxEntityId.ToString() == id);
+            return this.Get(p => p.fEntityID.ToString() == id);
         }
 
-        public IEnumerable<systblApp_CoreAPI_TaxEntity> find(Expression<Func<systblApp_CoreAPI_TaxEntity, bool>> where)
+        public IEnumerable<actblTaxDocument_Entity> find(Expression<Func<actblTaxDocument_Entity, bool>> where)
         {
             return this.GetAll(where);
         }
 
-        public void CreateTaxEntity(systblApp_CoreAPI_TaxEntity obj)
+        public void CreateTaxEntity(actblTaxDocument_Entity obj)
         {
             this.Add(obj);
         }
-        public void UpdateTaxEntity(systblApp_CoreAPI_TaxEntity obj)
+        public void UpdateTaxEntity(actblTaxDocument_Entity obj)
         {
             this.Update(obj);
         }
-        public void RemoveTaxEntity(systblApp_CoreAPI_TaxEntity obj)
+        public void RemoveTaxEntity(actblTaxDocument_Entity obj)
         {
             this.Delete(obj);
         }

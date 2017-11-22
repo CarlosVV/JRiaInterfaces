@@ -1,4 +1,4 @@
-﻿using CES.CoreApi.Receipt_Main.Domain.Core.Documents;
+﻿using CES.CoreApi.Receipt_Main.Domain.Core.Contracts.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,6 +8,6 @@ namespace CES.CoreApi.Receipt_Main.Service.Models
 {
     public class TaxCreateDocumentRequest : BaseRequestModel
     {
-        public systblApp_CoreAPI_Document Document { get; set; }
+        public TaxDocument Document { get; set; }
     }
 }

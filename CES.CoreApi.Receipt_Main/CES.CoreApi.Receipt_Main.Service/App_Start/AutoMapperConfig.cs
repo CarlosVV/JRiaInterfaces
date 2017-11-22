@@ -50,11 +50,11 @@ namespace CES.CoreApi.Receipt_Main.Service.App_Start
             Mapper.CreateMap<TaxSIIGetDocumentBatchResponse, ServiceTaxSIIGetDocumentBatchResponseViewModel>();
 
             //Map EF Entities to Response Classes
-            Mapper.CreateMap<systblApp_CoreAPI_Document, TaxDocument>();
-            Mapper.CreateMap<systblApp_CoreAPI_DocumentDetail, TaxDocumentDetail>();
-            Mapper.CreateMap<systblApp_CoreAPI_DocumentReference, TaxDocumentReference>();
-            Mapper.CreateMap<systblApp_CoreAPI_TaxAddress, TaxAddress>();
-            Mapper.CreateMap<systblApp_CoreAPI_TaxEntity, TaxEntity>();
+            Mapper.CreateMap<actblTaxDocument, TaxDocument>();
+            Mapper.CreateMap<actblTaxDocument_Detail, TaxDocumentDetail>();
+            Mapper.CreateMap<actblTaxDocument_Reference, TaxDocumentReference>();
+            Mapper.CreateMap<actblTaxDocument_Entity_Address, TaxAddress>();
+            Mapper.CreateMap<actblTaxDocument_Entity, TaxEntity>();
         }
     }
 }

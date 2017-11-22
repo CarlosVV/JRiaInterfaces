@@ -9,10 +9,10 @@ namespace CES.CoreApi.Receipt_Main.Domain.Core.Services
 {
     public interface IDocumentReferenceService
     {
-        List<systblApp_CoreAPI_DocumentReference> GetAllDocumentReferences();
-        void CreateDocumentReference(systblApp_CoreAPI_DocumentReference objectEntry);
-        void UpdateDocumentReference(systblApp_CoreAPI_DocumentReference objectEntry);
-        void RemoveDocumentReference(systblApp_CoreAPI_DocumentReference objectEntry);
+        List<actblTaxDocument_Reference> GetAllDocumentReferences();
+        void CreateDocumentReference(actblTaxDocument_Reference objectEntry);
+        void UpdateDocumentReference(actblTaxDocument_Reference objectEntry);
+        void RemoveDocumentReference(actblTaxDocument_Reference objectEntry);
         void SaveChanges();
     }
 }

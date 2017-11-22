@@ -11,32 +11,32 @@ using System.Threading.Tasks;
 
 namespace CES.CoreApi.Receipt_Main.Infrastructure.Data.Repository
 {
-    public class TaxAddressRepository : BaseRepository<systblApp_CoreAPI_TaxAddress>, ITaxAddressRepository
+    public class TaxAddressRepository : BaseRepository<actblTaxDocument_Entity_Address>, ITaxAddressRepository
     {
         public TaxAddressRepository(DbContext _dbContext)
             : base(_dbContext)
         {
         }
 
-        public systblApp_CoreAPI_TaxAddress find(string id)
+        public actblTaxDocument_Entity_Address find(string id)
         {
-            return this.Get(p => p.fTaxAddressId.ToString() == id);
+            return this.Get(p => p.fAddressID.ToString() == id);
         }
 
-        public IEnumerable<systblApp_CoreAPI_TaxAddress> find(Expression<Func<systblApp_CoreAPI_TaxAddress, bool>> where)
+        public IEnumerable<actblTaxDocument_Entity_Address> find(Expression<Func<actblTaxDocument_Entity_Address, bool>> where)
         {
             return this.GetAll(where);
         }
 
-        public void CreateTaxAddress(systblApp_CoreAPI_TaxAddress obj)
+        public void CreateTaxAddress(actblTaxDocument_Entity_Address obj)
         {
             this.Add(obj);
         }
-        public void UpdateTaxAddress(systblApp_CoreAPI_TaxAddress obj)
+        public void UpdateTaxAddress(actblTaxDocument_Entity_Address obj)
         {
             this.Update(obj);
         }
-        public void RemoveTaxAddress(systblApp_CoreAPI_TaxAddress obj)
+        public void RemoveTaxAddress(actblTaxDocument_Entity_Address obj)
         {
             this.Delete(obj);
         }

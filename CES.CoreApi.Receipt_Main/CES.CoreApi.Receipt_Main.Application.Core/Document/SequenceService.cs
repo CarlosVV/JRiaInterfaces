@@ -12,32 +12,40 @@ namespace CES.CoreApi.Receipt_Main.Application.Core
     public class SequenceService : ISequenceService
     {
         private ISequenceRepository repo;
+        public SequenceService()
+        {
+
+        }
         public SequenceService(ISequenceRepository repository)
         {
             repo = repository;
         }
-        public List<systblApp_CoreApi_Sequence> GetAllSequences()
+        public int GetSequence()
+        {
+            return 0;
+        }
+        /*public List<actblTaxDocument_TableSeq> GetAllSequences()
         {
             var results = repo.find(p => p.fCurrentId == p.fCurrentId).ToList();
             return results;
         }     
 
-        public void CreateSequence(systblApp_CoreApi_Sequence objectEntry)
+        public void CreateSequence(actblTaxDocument_TableSeq objectEntry)
         {
             this.repo.CreateSequence(objectEntry);
         }
-        public void UpdateSequence(systblApp_CoreApi_Sequence objectEntry)
+        public void UpdateSequence(actblTaxDocument_TableSeq objectEntry)
         {
             this.repo.UpdateSequence(objectEntry);
         }
-        public void RemoveSequence(systblApp_CoreApi_Sequence objectEntry)
+        public void RemoveSequence(actblTaxDocument_TableSeq objectEntry)
         {
             this.repo.RemoveSequence(objectEntry);
-        }
+        }*/
 
-        public void SaveChanges()
-        {
-            this.repo.SaveChanges();
-        }
+        //public void SaveChanges()
+        //{
+        //    this.repo.SaveChanges();
+        //}
     }
 }

@@ -17,20 +17,20 @@ namespace CES.CoreApi.Receipt_Main.Application.Core
         {
             repo = repository;
         }
-        public List<systblApp_CoreAPI_TaskDetail> GetAllTaskDetails()
+        public List<systblApp_CoreAPI_Task_Detail> GetAllTaskDetails()
         {
             return repo.find(c => !c.fDisabled.Value && !c.fDelete.Value).ToList();
         }
 
-        public void CreateTaskDetail(systblApp_CoreAPI_TaskDetail objectEntry)
+        public void CreateTaskDetail(systblApp_CoreAPI_Task_Detail objectEntry)
         {
             this.repo.CreateTaskDetail(objectEntry);       
         }
-        public void UpdateTaskDetail(systblApp_CoreAPI_TaskDetail objectEntry)
+        public void UpdateTaskDetail(systblApp_CoreAPI_Task_Detail objectEntry)
         {
             this.repo.UpdateTaskDetail(objectEntry);           
         }
-        public void RemoveTaskDetail(systblApp_CoreAPI_TaskDetail objectEntry)
+        public void RemoveTaskDetail(systblApp_CoreAPI_Task_Detail objectEntry)
         {
             this.repo.RemoveTaskDetail(objectEntry);
            

@@ -9,7 +9,7 @@ namespace CES.CoreApi.Receipt_Main.Service.Models
 {
     public class TaxGenerateReceiptResponse
     {
-        public systblApp_CoreAPI_Document Document { get; set; }
+        public actblTaxDocument Document { get; set; }
         public byte[] PDF { get; set; }
         public DateTime TransferDate { get; set; }
         public ReturnInfo ReturnInfo { get; set; }

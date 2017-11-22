@@ -9,10 +9,11 @@ namespace CES.CoreApi.Receipt_Main.Domain.Core.Services
 {
     public interface ISequenceService
     {
-        List<systblApp_CoreApi_Sequence> GetAllSequences();
-        void CreateSequence(systblApp_CoreApi_Sequence objectEntry);
-        void UpdateSequence(systblApp_CoreApi_Sequence objectEntry);
-        void RemoveSequence(systblApp_CoreApi_Sequence objectEntry);
-        void SaveChanges();
+        /*List<actblTaxDocument_TableSeq> GetAllSequences();
+        void CreateSequence(actblTaxDocument_TableSeq objectEntry);
+        void UpdateSequence(actblTaxDocument_TableSeq objectEntry);
+        void RemoveSequence(actblTaxDocument_TableSeq objectEntry);*/
+        int GetSequence();
+        //void SaveChanges();
     }
 }

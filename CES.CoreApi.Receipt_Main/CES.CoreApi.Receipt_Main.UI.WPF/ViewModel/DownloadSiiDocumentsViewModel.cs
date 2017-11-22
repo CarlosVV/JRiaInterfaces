@@ -21,6 +21,8 @@ using CES.CoreApi.Receipt_Main.Infrastructure.Data.Repository;
 using CES.CoreApi.Receipt_Main.Repository.Repository;
 using CES.CoreApi.Receipt_Main.UI.WPF.Helpers;
 using CES.CoreApi.Receipt_Main.UI.WPF.View;
+using CES.CoreApi.Receipt_Main.Infrastructure.Extensions;
+
 
 namespace CES.CoreApi.Receipt_Main.UI.WPF.ViewModel
 {
@@ -54,7 +56,7 @@ namespace CES.CoreApi.Receipt_Main.UI.WPF.ViewModel
         private DateTime _endDate;
         private List<Tuple<int, int>> _intervalList;
         private DocumentHandlerService _documentHelper;
-        private Document_Type _selectedDocumentTypeValue;
+        private DocumentType _selectedDocumentTypeValue;
         private string _status;
         private string _documentsToDownloadQuantityMessage;
         private IParameterService parameterService;
@@ -138,7 +140,7 @@ namespace CES.CoreApi.Receipt_Main.UI.WPF.ViewModel
 
         public ObservableCollection<DocumentSearchToDownloadSelectableViewModel> DocumentsToDownload { get; set; }
         public CollectionViewSource ViewSource { get; set; }
-        public Document_Type SelectedDocumentTypeValue
+        public DocumentType SelectedDocumentTypeValue
         {
             get { return _selectedDocumentTypeValue; }
             set
@@ -147,7 +149,7 @@ namespace CES.CoreApi.Receipt_Main.UI.WPF.ViewModel
                 NotifyPropertyChanged();
             }
         }
-        public IList<Document_Type> DocumentTypeList { get; }
+        public IList<DocumentType> DocumentTypeList { get; }
         public DateTime StartDate
         {
             get { return _startDate; }
@@ -507,8 +509,8 @@ namespace CES.CoreApi.Receipt_Main.UI.WPF.ViewModel
 
             var folioInicio = documentList.Min();
             var folioFinal = documentList.Max();
-            var initialIds = Enumerable.Range(folioInicio, folioFinal - folioInicio + 1).AsParallel().ToArray();
-            var finalGapIds = initialIds.Except(documentList).AsParallel().ToArray();
+            var initialIds = Enumerable.Range(int.Parse( folioInicio), int.Parse(folioFinal) - int.Parse(folioInicio) + 1).AsParallel().ToArray();
+            var finalGapIds = initialIds.Except(documentList.Select(m=> int.Parse(m))).AsParallel().ToArray();
 
             iProgress = iProgress + 30;
             backgroundWorker.ReportProgress(iProgress);
@@ -526,7 +528,7 @@ namespace CES.CoreApi.Receipt_Main.UI.WPF.ViewModel
             backgroundWorker.ReportProgress(iProgress);
 
             _intervalList = GroupIntervals(differenceList);
-            _intervalList = FixFolioRangesWhenExistInDatabase(_intervalList, documentListGlobal);
+            _intervalList = FixFolioRangesWhenExistInDatabase(_intervalList, documentListGlobal.Select(m=>int.Parse(m)));
 
             iProgress = 100;
             backgroundWorker.ReportProgress(iProgress);
@@ -659,13 +661,13 @@ namespace CES.CoreApi.Receipt_Main.UI.WPF.ViewModel
         private int GetNumberOfDocsInDb(int folioinicio, int foliofin)
         {
             var _documentServiceForSearch = new DocumentService(new DocumentRepository(new ReceiptDbContext()));
-            return _documentServiceForSearch.GetAllDocuments().Where(f => f.fFolio >= folioinicio && f.fFolio <= foliofin).Count();
+            return _documentServiceForSearch.GetAllDocuments().Where(f => f.fAuthorizationNumber.ToI() >= folioinicio && f.fAuthorizationNumber.ToI() <= foliofin).Count();
         }
 
         private bool ExistFolioInDb(int folio)
         {
             var _documentServiceForSearch = new DocumentService(new DocumentRepository(new ReceiptDbContext()));
-            return _documentServiceForSearch.GetAllDocuments().Where(f => f.fFolio == folio).Any();
+            return _documentServiceForSearch.GetAllDocuments().Where(f => f.fAuthorizationNumber.ToI() == folio).Any();
         }
 
         private void workerDownload_ProgressChanged(object sender, ProgressChangedEventArgs e)

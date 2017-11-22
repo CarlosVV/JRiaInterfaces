@@ -10,13 +10,14 @@ namespace CES.CoreApi.Receipt_Main.Domain.Core.Tasks
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public systblApp_CoreAPI_Task()
         {
-            TaskDetail = new HashSet<systblApp_CoreAPI_TaskDetail>();
+            TaskDetail = new HashSet<systblApp_CoreAPI_Task_Detail>();
         }
+
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.None)]
-        public int fTaskId { get; set; }
+        public long fTaskID { get; set; }
 
-        public int fTaskType { get; set; }
+        public int fTypeID { get; set; }
 
         [StringLength(120)]
         public string fMethod { get; set; }
@@ -49,6 +50,6 @@ namespace CES.CoreApi.Receipt_Main.Domain.Core.Tasks
         public int? fModifiedID { get; set; }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<systblApp_CoreAPI_TaskDetail> TaskDetail { get; set; }
+        public virtual ICollection<systblApp_CoreAPI_Task_Detail> TaskDetail { get; set; }
     }
 }

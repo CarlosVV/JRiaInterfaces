@@ -23,7 +23,7 @@ namespace CES.CoreApi.Receipt_Main.UI.WPF.ViewModel
 {
     public class CafManagementViewModel : ViewModelBase
     {
-        private Document_Type _selectedDocumentTypeValue;
+        private DocumentType _selectedDocumentTypeValue;
         private systblApp_TaxReceipt_Store _selectedStoreValue;
         private CafApiService _cafApiService = null;
         private readonly IDialogService dialogService;
@@ -39,7 +39,7 @@ namespace CES.CoreApi.Receipt_Main.UI.WPF.ViewModel
             _cafApiService = new CafApiService();
 
             DocumentTypeList = DocumentTypeHelper.GetDocumenTypes();
-            DocumentTypeList.Insert(0, new Document_Type() { Code = "0", Description = "--Seleccione una Tipo --" });
+            DocumentTypeList.Insert(0, new DocumentType() { Code = "0", Description = "--Seleccione una Tipo --" });
             SelectedDocumentTypeValue = DocumentTypeList.FirstOrDefault();
 
             this.storeService = storeService;
@@ -67,7 +67,7 @@ namespace CES.CoreApi.Receipt_Main.UI.WPF.ViewModel
         }
         private void ShowDialogAction(object obj)
         {
-            var cafObject = new systblApp_CoreAPI_Caf();
+            var cafObject = new actblTaxDocument_AuthCode();
             if (obj != null)
             {
                 var cafGridItem = obj as CafResultSelectableViewModel;
@@ -184,7 +184,7 @@ namespace CES.CoreApi.Receipt_Main.UI.WPF.ViewModel
             }
         }
 
-        public Document_Type SelectedDocumentTypeValue
+        public DocumentType SelectedDocumentTypeValue
         {
             get { return _selectedDocumentTypeValue; }
             set
@@ -212,7 +212,7 @@ namespace CES.CoreApi.Receipt_Main.UI.WPF.ViewModel
                 NotifyPropertyChanged();
             }
         }
-        public IList<Document_Type> DocumentTypeList { get; }
+        public IList<DocumentType> DocumentTypeList { get; }
         public IList<systblApp_TaxReceipt_Store> StoreList { get; }
         public ObservableCollection<CafResultSelectableViewModel> CafResults { get; set; }
 
@@ -221,7 +221,7 @@ namespace CES.CoreApi.Receipt_Main.UI.WPF.ViewModel
             FolioStartNumber = 0;
             FolioEndNumber = 0;
             FolioCurrentNumber = 0;
-            SelectedDocumentTypeValue = new Document_Type() { Code = "0", Description = "--Seleccione Tipo Documento --" };
+            SelectedDocumentTypeValue = new DocumentType() { Code = "0", Description = "--Seleccione Tipo Documento --" };
             SelectedStoreValue = new systblApp_TaxReceipt_Store() { fStoreId = 0, fName = "--Seleccione Tienda --" };
         }
 
@@ -267,14 +267,14 @@ namespace CES.CoreApi.Receipt_Main.UI.WPF.ViewModel
                 {
                     CafResults.Add(new CafResultSelectableViewModel
                     {
-                        Id = $"{item.fCafId}",
-                        Start = $"{item.fFolioStartNumber}",
-                        End = $"{item.fFolioEndNumber}",
-                        Current = $"{item.fFolioCurrentNumber}",
-                        Date = $"{item.fAuthorizationDate.ToShortDateString()}",
-                        Type = DocumentTypeList.Where(m => m.Code == item.fDocumentType.ToString()).FirstOrDefault().Description,
-                        Store = item.fRecAgent == 0 ? string.Empty : StoreList.Where(m => m.fStoreId == item.fRecAgent).FirstOrDefault().fName,
-                        Disabled = item.fDisabled.HasValue ? item.fDisabled.Value : false,
+                        Id = $"{item.fAuthCodeID}",
+                        Start =  item.fStartNumber,
+                        End = item.fEndNumber,
+                        Current = item.fCurrentNumber,
+                        Date = item.fAuthorizationDate.ToShortDateString(),
+                        Type = DocumentTypeList.Where(m => m.Code == item.fDocumentTypeID.ToString()).FirstOrDefault().Description,
+                        Store = item.fRecAgentID == 0 ? string.Empty : StoreList.Where(m => m.fStoreId == item.fRecAgentID).FirstOrDefault().fName,
+                        Disabled = item.fDisabled ? item.fDisabled : false,
                         AuthorizationDate = item.fAuthorizationDate,
                         IsViewEditVisible = true
                     });

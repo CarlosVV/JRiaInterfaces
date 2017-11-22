@@ -13,7 +13,7 @@ namespace CES.CoreApi.Receipt_Main.Service.Models
         public ReturnInfo ReturnInfo { get; set; }
         public DateTime ResponseTime { get; set; }
         public DateTime ResponseTimeUTC { get; set; }
-        public List<systblApp_CoreAPI_Caf> Results;
+        public List<actblTaxDocument_AuthCode> Results;
         public bool ProcessResult { get; set; }
     }
 }

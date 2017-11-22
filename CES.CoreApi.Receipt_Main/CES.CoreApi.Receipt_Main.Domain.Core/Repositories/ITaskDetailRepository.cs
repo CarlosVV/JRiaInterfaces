@@ -11,11 +11,11 @@ namespace CES.CoreApi.Receipt_Main.Domain.Core.Repositories
 {
     public interface ITaskDetailRepository
     {
-        systblApp_CoreAPI_TaskDetail find(string id);
-        IEnumerable<systblApp_CoreAPI_TaskDetail> find(Expression<Func<systblApp_CoreAPI_TaskDetail, bool>> where);
-        void CreateTaskDetail(systblApp_CoreAPI_TaskDetail obj);
-        void UpdateTaskDetail(systblApp_CoreAPI_TaskDetail obj);
-        void RemoveTaskDetail(systblApp_CoreAPI_TaskDetail obj);
+        systblApp_CoreAPI_Task_Detail find(string id);
+        IEnumerable<systblApp_CoreAPI_Task_Detail> find(Expression<Func<systblApp_CoreAPI_Task_Detail, bool>> where);
+        void CreateTaskDetail(systblApp_CoreAPI_Task_Detail obj);
+        void UpdateTaskDetail(systblApp_CoreAPI_Task_Detail obj);
+        void RemoveTaskDetail(systblApp_CoreAPI_Task_Detail obj);
         void SaveChanges();
     }
 }

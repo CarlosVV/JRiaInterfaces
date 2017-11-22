@@ -35,12 +35,13 @@ namespace CES.CoreApi.Receipt_Main.Service.Jobs
             _documentService = new DocumentService(new DocumentRepository(new ReceiptDbContext()));
             _taxEntityService = new TaxEntityService(new TaxEntityRepository(new ReceiptDbContext()));
             _taxAddressService = new TaxAddressService(new TaxAddressRepository(new ReceiptDbContext()));
-            _sequenceService = new SequenceService(new SequenceRepository(new ReceiptDbContext()));
+            //_sequenceService = new SequenceService(new SequenceRepository(new ReceiptDbContext()));
+            _sequenceService = new SequenceService();
             _storeService = new StoreService(new StoreRepository(new ReceiptDbContext()));
 
             var docType = "39";
 
-            var task = _taskService.GetAllTasks().Where(m => m.fTaskId == taskId).FirstOrDefault();
+            var task = _taskService.GetAllTasks().Where(m => m.fTaskID == taskId).FirstOrDefault();
 
             if (task == null) return;
 
@@ -109,7 +110,7 @@ namespace CES.CoreApi.Receipt_Main.Service.Jobs
         private void UpdateTaskStatus(int taskId)
         {
             var taskService = new TaskService(new TaskRepository(new ReceiptDbContext()));
-            var task = taskService.GetAllTasks().Where(m => m.fTaskId == taskId).FirstOrDefault();
+            var task = taskService.GetAllTasks().Where(m => m.fTaskID == taskId).FirstOrDefault();
 
             if (task == null) return;
 
@@ -126,7 +127,7 @@ namespace CES.CoreApi.Receipt_Main.Service.Jobs
         private void UpdateTaskResult(int taskId)
         {
             var taskService = new TaskService(new TaskRepository(new ReceiptDbContext()));
-            var task = taskService.GetAllTasks().Where(m => m.fTaskId == taskId).FirstOrDefault();
+            var task = taskService.GetAllTasks().Where(m => m.fTaskID == taskId).FirstOrDefault();
 
             if (task == null) return;
 
@@ -137,76 +138,78 @@ namespace CES.CoreApi.Receipt_Main.Service.Jobs
             taskService.SaveChanges();
         }
 
-        private void UpdateTaskDetailResultForDocumentCreation(int taskDetailId, int folio, int documentId)
+        private void UpdateTaskDetailResultForDocumentCreation(long taskDetailId, int folio, int documentId)
         {
             var taskDetailService = new TaskDetailService(new TaskDetailRepository(new ReceiptDbContext()));
-            var taskDetail = taskDetailService.GetAllTaskDetails().Where(m => m.fTaskDetailId == taskDetailId).FirstOrDefault();
+            var taskDetail = taskDetailService.GetAllTaskDetails().Where(m => m.fDetailID == taskDetailId).FirstOrDefault();
 
             if (taskDetail == null) return;
 
             taskDetail.fResultObject = $"Folio: {folio} descargado, DocumentId: {documentId} creado";
             taskDetail.fModified = DateTime.Now;
-            taskDetail.fDocumentId = documentId;
+            taskDetail.fDocumentID = documentId;
             taskDetailService.UpdateTaskDetail(taskDetail);
             taskDetailService.SaveChanges();
         }
 
-        private void UpdateTaskDetailForExistingFolio(int taskDetailId, int folio)
+        private void UpdateTaskDetailForExistingFolio(long taskDetailId, int folio)
         {
             var taskDetailService = new TaskDetailService(new TaskDetailRepository(new ReceiptDbContext()));
-            var taskDetail = taskDetailService.GetAllTaskDetails().Where(m => m.fTaskDetailId == taskDetailId).FirstOrDefault();
+            var taskDetail = taskDetailService.GetAllTaskDetails().Where(m => m.fDetailID == taskDetailId).FirstOrDefault();
 
             if (taskDetail == null) return;
 
-            taskDetail.fDocumentId = 0;
+            taskDetail.fDocumentID = 0;
             taskDetail.fModified = DateTime.Now;
             taskDetail.fResultObject = $"Folio {folio} existe en BD";
             taskDetailService.UpdateTaskDetail(taskDetail);
             taskDetailService.SaveChanges();
         }
 
-        private void UpdateTaskDetailForNotFoundDocument(int taskDetailId, int folio)
+        private void UpdateTaskDetailForNotFoundDocument(long taskDetailId, int folio)
         {
             var taskDetailService = new TaskDetailService(new TaskDetailRepository(new ReceiptDbContext()));
-            var taskDetail = taskDetailService.GetAllTaskDetails().Where(m => m.fTaskDetailId == taskDetailId).FirstOrDefault();
+            var taskDetail = taskDetailService.GetAllTaskDetails().Where(m => m.fDetailID == taskDetailId).FirstOrDefault();
 
             if (taskDetail == null) return;
 
-            taskDetail.fDocumentId = 0;
+            taskDetail.fDocumentID = 0;
             taskDetail.fModified = DateTime.Now;
             taskDetail.fResultObject = $"Folio {folio} cannot be downloaded. Maximum quantity of attempts reached: {_maximum_quantity_of_document_errors}";
             taskDetailService.UpdateTaskDetail(taskDetail);
             taskDetailService.SaveChanges();
         }
 
-        private int CreateTaskDetail(int taskId, int folio)
+        private long CreateTaskDetail(long taskId, int folio)
         {
             var taskDetailService = new TaskDetailService(new TaskDetailRepository(new ReceiptDbContext()));
             var taskIdDetailId = taskDetailService.GetAllTaskDetails().Count() + 1;
-            var taskDetail = new Domain.Core.Tasks.systblApp_CoreAPI_TaskDetail
+            var taskDetail = new Domain.Core.Tasks.systblApp_CoreAPI_Task_Detail
             {
-                fTaskDetailId = taskIdDetailId,
-                fTaskId = taskId,
+                fDetailID = taskIdDetailId,
+                fTaskID = taskId,
                 fStateObject = $"Folio: {folio}",
 
             };
 
             taskDetailService.CreateTaskDetail(taskDetail);
             taskDetailService.SaveChanges();
-            return taskDetail.fTaskDetailId;
+            return taskDetail.fDetailID;
         }
 
         private bool ExistsFolioInDB(int folio)
         {
+            var folioNumber = folio.ToString();
             var _documentServiceToSearch = new DocumentService(new DocumentRepository(new ReceiptDbContext()));
-            return _documentServiceToSearch.GetAllDocuments().Any(m => m.fFolio == folio);
+            return _documentServiceToSearch.GetAllDocuments().Any(m => m.fAuthorizationNumber == folioNumber);
         }
 
         private int GetDocumentId(int folio)
         {
+            var folioNumber = folio.ToString();
             var _documentServiceToSearch = new DocumentService(new DocumentRepository(new ReceiptDbContext()));
-            var obj = _documentServiceToSearch.GetAllDocuments().FirstOrDefault(m => m.fFolio == folio);
-            return obj != null ? obj.fDocumentId : 0;
+            var obj = _documentServiceToSearch.GetAllDocuments().FirstOrDefault(m => m.fAuthorizationNumber == folioNumber);
+            return obj != null ? obj.fDocumentID : 0;
         }
     }
 }

@@ -5,36 +5,47 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace CES.CoreApi.Receipt_Main.Domain.Core.Documents
 {
-    public partial class systblApp_CoreAPI_TaxEntity
+    public partial class actblTaxDocument_Entity
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public systblApp_CoreAPI_TaxEntity()
+        public actblTaxDocument_Entity()
         {
-            Senders = new HashSet<systblApp_CoreAPI_Document>();
-            Receivers = new HashSet<systblApp_CoreAPI_Document>();
-            TaxAddresses = new HashSet<systblApp_CoreAPI_TaxAddress>();
+            EntityFroms = new HashSet<actblTaxDocument>();
+            EntityTos = new HashSet<actblTaxDocument>();
+            TaxAddresses = new HashSet<actblTaxDocument_Entity_Address>();
         }
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.None)]
-        public int fTaxEntityId { get; set; }
+        public int fEntityID { get; set; }
+
+        public int fCountryID { get; set; }
 
         [Required]
-        [StringLength(15)]
-        public string fRUT { get; set; }
+        [StringLength(20)]
+        public string fTaxID { get; set; }
+
+        public int fEntityTypeID { get; set; }
+
+        [StringLength(50)]
+        public string fCompanyLegalName { get; set; }
 
         [Required]
         [StringLength(50)]
         public string fFirstName { get; set; }
 
+        [Required]
         [StringLength(50)]
         public string fMiddleName { get; set; }
 
+        [Required]
         [StringLength(50)]
         public string fLastName1 { get; set; }
 
+        [Required]
         [StringLength(50)]
         public string fLastName2 { get; set; }
 
+        [Required]
         [StringLength(200)]
         public string fFullName { get; set; }
 
@@ -44,7 +55,7 @@ namespace CES.CoreApi.Receipt_Main.Domain.Core.Documents
         [StringLength(200)]
         public string fOccupation { get; set; }
 
-        [Column(TypeName = "Date")]
+        [Column(TypeName = "date")]
         public DateTime? fDateOfBirth { get; set; }
 
         [StringLength(2)]
@@ -80,12 +91,12 @@ namespace CES.CoreApi.Receipt_Main.Domain.Core.Documents
         public int? fModifiedID { get; set; }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<systblApp_CoreAPI_Document> Senders { get; set; }
+        public virtual ICollection<actblTaxDocument> EntityFroms { get; set; }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<systblApp_CoreAPI_Document> Receivers { get; set; }
+        public virtual ICollection<actblTaxDocument> EntityTos { get; set; }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<systblApp_CoreAPI_TaxAddress> TaxAddresses { get; set; }
+        public virtual ICollection<actblTaxDocument_Entity_Address> TaxAddresses { get; set; }
     }
 }

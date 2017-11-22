@@ -11,38 +11,38 @@ using System.Threading.Tasks;
 
 namespace CES.CoreApi.Receipt_Main.Infrastructure.Data.Repository
 {
-    public class SequenceRepository : BaseRepository<systblApp_CoreApi_Sequence>, ISequenceRepository
+    public class SequenceRepository //: BaseRepository<actblTaxDocument_TableSeq>, ISequenceRepository
     {
-        public SequenceRepository(DbContext _dbContext)
+       /* public SequenceRepository(DbContext _dbContext)
             : base(_dbContext)
         {
-        }
+        }*/
 
-        public systblApp_CoreApi_Sequence find(string entityName)
+       /* public actblTaxDocument_TableSeq find(string entityName)
         {
             return this.Get(p => p.fEntityName == entityName);
         }
 
-        public IEnumerable<systblApp_CoreApi_Sequence> find(Expression<Func<systblApp_CoreApi_Sequence, bool>> where)
+        public IEnumerable<actblTaxDocument_TableSeq> find(Expression<Func<actblTaxDocument_TableSeq, bool>> where)
         {
             return this.GetAll(where);
         }
 
-        public void CreateSequence(systblApp_CoreApi_Sequence obj)
+        public void CreateSequence(actblTaxDocument_TableSeq obj)
         {
             this.Add(obj);
         }
-        public void UpdateSequence(systblApp_CoreApi_Sequence obj)
+        public void UpdateSequence(actblTaxDocument_TableSeq obj)
         {
             this.Update(obj);
         }
-        public void RemoveSequence(systblApp_CoreApi_Sequence obj)
+        public void RemoveSequence(actblTaxDocument_TableSeq obj)
         {
             this.Delete(obj);
-        }
+        }*/
         public void SaveChanges()
         {
-            this.Save();
+           // this.Save();
         }   
     }
 }

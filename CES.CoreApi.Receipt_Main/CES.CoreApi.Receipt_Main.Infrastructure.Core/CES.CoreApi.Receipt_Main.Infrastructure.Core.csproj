@@ -66,6 +66,7 @@
     <Compile Include="CAFUtilities\CAFObject.cs" />
     <Compile Include="CAFUtilities\CAFParser.cs" />
     <Compile Include="DocumentDownloader.cs" />
+    <Compile Include="Extensions\StringExtensions.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Security\AnonymousIdentity.cs" />
     <Compile Include="Security\AuthenticationService.cs" />

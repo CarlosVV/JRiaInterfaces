@@ -7,6 +7,7 @@ namespace CES.CoreApi.Receipt_Main.Service.Models
 {
     public class TaxSIIGetDocumentRequest : BaseRequestModel
     {
+        public object DocumentTypeID { get; internal set; }
         public int Folio { get; set; }     
     }
 }

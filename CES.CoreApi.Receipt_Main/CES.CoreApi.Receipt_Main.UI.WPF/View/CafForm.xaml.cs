@@ -24,7 +24,7 @@ namespace CES.CoreApi.Receipt_Main.UI.WPF.View
     /// </summary>
     public partial class CafForm : UserControl
     {
-        public CafForm(IStoreService storeService, IDialogService dialogService, systblApp_CoreAPI_Caf obj = null)
+        public CafForm(IStoreService storeService, IDialogService dialogService, actblTaxDocument_AuthCode obj = null)
         {
             InitializeComponent();
             DataContext = new CafFormViewModel(storeService, dialogService, obj);

@@ -46,24 +46,31 @@ namespace CES.CoreApi.Receipt_Main.Service.Filters
 
                 _apiResponse = new ApiResponse(_persistenceHelper, persistenceID);
 
-                var errors = _errorManager.ValidateHeaders(client);
-
-                if (errors.Count > 0)
+                if(request.Method.Method == "GET" && request.RequestUri.ToString().ToLower().Contains("swagger"))
                 {
-                    var jsonContentRequest = request.Content.ReadAsStringAsync().Result;
-                    _logService.LogInfo($"Exception: Invalid Headers. {jsonContentRequest}");
-                    _persistenceHelper.CreatePersistence<string>(jsonContentRequest, persistenceID, PersistenceEventType.InvalidRequestModel);
-
-                    errorResponse = new ErrorResponse("The headers values were not sent", (int)HttpStatusCode.BadRequest, errors, request.GetCorrelationId(), persistenceID);
-                    _persistenceHelper.CreatePersistence<ErrorResponse>(errorResponse, persistenceID, PersistenceEventType.ErrorResponse);
-                    _logService.LogInfoObjectToJson("Error Response: ", errorResponse);
-
-                    Logging.Log.Info("------End Calling----" + Environment.NewLine);
-
-                    return request.CreateResponse(System.Net.HttpStatusCode.InternalServerError, errorResponse);
+                    isValid = true;
                 }
+                else
+                {
+                    var errors = _errorManager.ValidateHeaders(client);
 
-                AssignHeaderValues(client);
+                    if (errors.Count > 0)
+                    {
+                        var jsonContentRequest = request.Content.ReadAsStringAsync().Result;
+                        _logService.LogInfo($"Exception: Invalid Headers. {jsonContentRequest}");
+                        _persistenceHelper.CreatePersistence<string>(jsonContentRequest, persistenceID, PersistenceEventType.InvalidRequestModel);
+
+                        errorResponse = new ErrorResponse("The headers values were not sent", (int)HttpStatusCode.BadRequest, errors, request.GetCorrelationId(), persistenceID);
+                        _persistenceHelper.CreatePersistence<ErrorResponse>(errorResponse, persistenceID, PersistenceEventType.ErrorResponse);
+                        _logService.LogInfoObjectToJson("Error Response: ", errorResponse);
+
+                        Logging.Log.Info("------End Calling----" + Environment.NewLine);
+
+                        return request.CreateResponse(System.Net.HttpStatusCode.InternalServerError, errorResponse);
+                    }
+
+                    AssignHeaderValues(client);
+                }
 
                 if (isValid && request.Content != null)
                 {

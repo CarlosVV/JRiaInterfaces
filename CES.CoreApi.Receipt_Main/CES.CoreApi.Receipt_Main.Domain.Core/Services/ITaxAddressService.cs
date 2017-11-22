@@ -9,10 +9,10 @@ namespace CES.CoreApi.Receipt_Main.Domain.Core.Services
 {
     public interface ITaxAddressService
     {
-        List<systblApp_CoreAPI_TaxAddress> GetAllTaxAddresss();
-        void CreateTaxAddress(systblApp_CoreAPI_TaxAddress objectEntry);
-        void UpdateTaxAddress(systblApp_CoreAPI_TaxAddress objectEntry);
-        void RemoveTaxAddress(systblApp_CoreAPI_TaxAddress objectEntry);
+        List<actblTaxDocument_Entity_Address> GetAllTaxAddresss();
+        void CreateTaxAddress(actblTaxDocument_Entity_Address objectEntry);
+        void UpdateTaxAddress(actblTaxDocument_Entity_Address objectEntry);
+        void RemoveTaxAddress(actblTaxDocument_Entity_Address objectEntry);
         void SaveChanges();
     }
 }

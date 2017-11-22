@@ -19,10 +19,10 @@ namespace CES.CoreApi.Receipt_Main.UI.WPF.ViewModel
 {
     public class CafFormViewModel : ViewModelBase, IModalDialogViewModel
     {
-        private int _folioCurrentNumber;
-        private int _folioStartNumber;
-        private int _folioEndNumber;
-        private Document_Type _selectedDocumentTypeValue;
+        private string _folioCurrentNumber;
+        private string _folioStartNumber;
+        private string _folioEndNumber;
+        private DocumentType _selectedDocumentTypeValue;
         private systblApp_TaxReceipt_Store _selectedStoreValue;
         private CafApiService _cafApiService = null;
         private readonly IDialogService _dialogService;
@@ -32,12 +32,12 @@ namespace CES.CoreApi.Receipt_Main.UI.WPF.ViewModel
         private bool _disabled;
         private string _status;
         private bool? dialogResult;
-        private systblApp_CoreAPI_Caf cafObjectModel;
+        private actblTaxDocument_AuthCode cafObjectModel;
         private DateTime _authorizationDate;
 
-        public CafFormViewModel(IStoreService storeService, IDialogService dialogService, systblApp_CoreAPI_Caf cafObjectModel = null)
+        public CafFormViewModel(IStoreService storeService, IDialogService dialogService, actblTaxDocument_AuthCode cafObjectModel = null)
         {
-            _cafApiService = new CafApiService(); 
+            _cafApiService = new CafApiService();
 
             DocumentTypeList = DocumentTypeHelper.GetDocumenTypes();
             SelectedDocumentTypeValue = DocumentTypeList.FirstOrDefault();
@@ -58,14 +58,14 @@ namespace CES.CoreApi.Receipt_Main.UI.WPF.ViewModel
 
             if (cafObjectModel != null)
             {
-                ID = cafObjectModel.fCafId;
-                FolioStartNumber = cafObjectModel.fFolioStartNumber;
-                FolioEndNumber = cafObjectModel.fFolioEndNumber;
-                FolioCurrentNumber = cafObjectModel.fFolioCurrentNumber;
+                ID = cafObjectModel.fAuthCodeID;
+                FolioStartNumber = cafObjectModel.fStartNumber;
+                FolioEndNumber = cafObjectModel.fEndNumber;
+                FolioCurrentNumber = cafObjectModel.fCurrentNumber;
                 XmlContent = cafObjectModel.fFileContent;
-                Disabled = cafObjectModel.fDisabled.HasValue  ? cafObjectModel.fDisabled.Value : false;
-                SelectedStoreValue = storeService.GetAllStores().Where(s => s.fStoreId == cafObjectModel.fRecAgent).FirstOrDefault();
-                SelectedDocumentTypeValue = DocumentTypeList.Where(m=> m.Code == cafObjectModel.fDocumentType.ToString()).FirstOrDefault();
+                Disabled = cafObjectModel.fDisabled;
+                SelectedStoreValue = storeService.GetAllStores().Where(s => s.fStoreId == cafObjectModel.fRecAgentID).FirstOrDefault();
+                SelectedDocumentTypeValue = DocumentTypeList.Where(m => m.Code == cafObjectModel.fDocumentTypeID.ToString()).FirstOrDefault();
                 AuthorizationDate = cafObjectModel.fAuthorizationDate;
             }
 
@@ -139,8 +139,8 @@ namespace CES.CoreApi.Receipt_Main.UI.WPF.ViewModel
                 }
                 var parser = new XmlDocumentParser<AUTORIZACION>();
                 var xmlobject = parser.GetDocumentObjectFromString(_xmlContent);
-                FolioStartNumber = xmlobject.CAF.DA.RNG.D;
-                FolioEndNumber = xmlobject.CAF.DA.RNG.H;
+                FolioStartNumber = xmlobject.CAF.DA.RNG.D.ToString();
+                FolioEndNumber = xmlobject.CAF.DA.RNG.H.ToString();
                 SelectedDocumentTypeValue = DocumentTypeList.Where(m => m.Code == xmlobject.CAF.DA.TD.ToString()).FirstOrDefault();
                 Disabled = false;
             }
@@ -151,8 +151,11 @@ namespace CES.CoreApi.Receipt_Main.UI.WPF.ViewModel
 
             var storeid = 0;
             var doctype = "39";
+            var currentNumber = int.Parse(FolioCurrentNumber);
+            var startNumber = int.Parse(FolioStartNumber);
+            var endNumber = int.Parse(FolioEndNumber);
 
-            if (FolioCurrentNumber < FolioStartNumber || FolioCurrentNumber > FolioEndNumber)
+            if (currentNumber < startNumber || currentNumber > endNumber)
             {
                 Status = "Folio Actual debe ser mayor o igual al folio inicial y menor o igual al folio final";
                 return;
@@ -166,27 +169,29 @@ namespace CES.CoreApi.Receipt_Main.UI.WPF.ViewModel
             if (SelectedStoreValue != null)
             {
                 storeid = SelectedStoreValue.fStoreId;
-            }           
+            }
 
             try
             {
-                systblApp_CoreAPI_Caf caf = null;
+                actblTaxDocument_AuthCode caf = null;
 
-                if(ID <= 0)
+                if (ID <= 0)
                 {
-                    caf = cafService.CreateCaf(XmlContent, doctype, FolioStartNumber, FolioEndNumber,  FolioCurrentNumber, storeid);
+                    caf = cafService.CreateCaf(XmlContent, doctype, int.Parse(FolioStartNumber), int.Parse(FolioEndNumber),
+                        int.Parse(FolioCurrentNumber), storeid);
                     if (caf != null)
                     {
-                        this.ID = caf.fCafId;
+                        this.ID = caf.fAuthCodeID;
                         this.AuthorizationDate = caf.fAuthorizationDate;
-                        this.SelectedStoreValue = StoreList.Where(s => s.fStoreId == caf.fRecAgent).FirstOrDefault();
-                        this.SelectedDocumentTypeValue = DocumentTypeList.Where(m => m.Code == caf.fDocumentType.ToString()).FirstOrDefault();
+                        this.SelectedStoreValue = StoreList.Where(s => s.fStoreId == caf.fRecAgentID).FirstOrDefault();
+                        this.SelectedDocumentTypeValue = DocumentTypeList.Where(m => m.Code == caf.fDocumentTypeID.ToString()).FirstOrDefault();
                     }
                 }
                 else
                 {
-                    caf = cafService.UpdateCaf(ID, XmlContent, doctype, FolioStartNumber, FolioEndNumber, FolioCurrentNumber, storeid, Disabled);
-                  
+                    caf = cafService.UpdateCaf(ID, XmlContent, doctype, int.Parse(FolioStartNumber), int.Parse(FolioEndNumber),
+                        int.Parse(FolioCurrentNumber), storeid, Disabled);
+
                 }
 
                 Status = "Grabación exitosa en Base de Datos";
@@ -200,15 +205,15 @@ namespace CES.CoreApi.Receipt_Main.UI.WPF.ViewModel
         }
         private void Clear(object obj)
         {
-            FolioStartNumber = 0;
-            FolioEndNumber = 0;
-            FolioCurrentNumber = 0;
-            SelectedDocumentTypeValue = new Document_Type() { Code = "0", Description = "--Seleccione Tipo Documento --" };
+            FolioStartNumber = "0";
+            FolioEndNumber = "0";
+            FolioCurrentNumber = "0";
+            SelectedDocumentTypeValue = new DocumentType() { Code = "0", Description = "--Seleccione Tipo Documento --" };
             SelectedStoreValue = new systblApp_TaxReceipt_Store() { fStoreId = 0, fName = "--Seleccione Tienda --" };
             Disabled = false;
             XmlContent = string.Empty;
         }
-       public Document_Type SelectedDocumentTypeValue
+        public DocumentType SelectedDocumentTypeValue
         {
             get { return _selectedDocumentTypeValue; }
             set
@@ -217,9 +222,9 @@ namespace CES.CoreApi.Receipt_Main.UI.WPF.ViewModel
                 NotifyPropertyChanged();
             }
         }
-        public IList<Document_Type> DocumentTypeList { get; }
+        public IList<DocumentType> DocumentTypeList { get; }
         public IList<systblApp_TaxReceipt_Store> StoreList { get; }
-        public int FolioCurrentNumber
+        public string FolioCurrentNumber
         {
             get
             {
@@ -233,7 +238,7 @@ namespace CES.CoreApi.Receipt_Main.UI.WPF.ViewModel
             }
         }
 
-        public int FolioStartNumber
+        public string FolioStartNumber
         {
             get
             {
@@ -247,7 +252,7 @@ namespace CES.CoreApi.Receipt_Main.UI.WPF.ViewModel
             }
         }
 
-        public int FolioEndNumber
+        public string FolioEndNumber
         {
             get
             {

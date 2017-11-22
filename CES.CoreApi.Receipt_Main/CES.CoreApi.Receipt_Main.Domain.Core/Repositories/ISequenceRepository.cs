@@ -10,11 +10,11 @@ namespace CES.CoreApi.Receipt_Main.Domain.Core.Repositories
 {
     public interface ISequenceRepository
     {
-        systblApp_CoreApi_Sequence find(string id);
-        IEnumerable<systblApp_CoreApi_Sequence> find(Expression<Func<systblApp_CoreApi_Sequence, bool>> where);
-        void CreateSequence(systblApp_CoreApi_Sequence obj);
-        void UpdateSequence(systblApp_CoreApi_Sequence obj);
-        void RemoveSequence(systblApp_CoreApi_Sequence obj);
-        void SaveChanges();
+        //actblTaxDocument_TableSeq find(string id);
+        //IEnumerable<actblTaxDocument_TableSeq> find(Expression<Func<actblTaxDocument_TableSeq, bool>> where);
+        //void CreateSequence(actblTaxDocument_TableSeq obj);
+        //void UpdateSequence(actblTaxDocument_TableSeq obj);
+        //void RemoveSequence(actblTaxDocument_TableSeq obj);
+        //void SaveChanges();
     }
 }

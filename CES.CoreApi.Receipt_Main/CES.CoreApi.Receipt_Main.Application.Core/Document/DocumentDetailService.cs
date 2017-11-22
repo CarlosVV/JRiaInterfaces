@@ -16,22 +16,22 @@ namespace CES.CoreApi.Receipt_Main.Application.Core
         {
             repo = repository;
         }
-        public List<systblApp_CoreAPI_DocumentDetail> GetAllDocumentDetails()
+        public List<actblTaxDocument_Detail> GetAllDocumentDetails()
         {
-            return repo.find(c => !c.fDisabled.Value && !c.fDelete.Value).ToList();
+            return repo.find(c => !c.fDisabled && !c.fDelete).ToList();
         }
 
-        public void CreateDocumentDetail(systblApp_CoreAPI_DocumentDetail objectEntry)
+        public void CreateDocumentDetail(actblTaxDocument_Detail objectEntry)
         {
             this.repo.CreateDocumentDetail(objectEntry);
       
         }
-        public void UpdateDocumentDetail(systblApp_CoreAPI_DocumentDetail objectEntry)
+        public void UpdateDocumentDetail(actblTaxDocument_Detail objectEntry)
         {
             this.repo.UpdateDocumentDetail(objectEntry);
 
         }
-        public void RemoveDocumentDetail(systblApp_CoreAPI_DocumentDetail objectEntry)
+        public void RemoveDocumentDetail(actblTaxDocument_Detail objectEntry)
         {
             this.repo.RemoveDocumentDetail(objectEntry);
 

@@ -9,10 +9,10 @@ namespace CES.CoreApi.Receipt_Main.Domain.Core.Services
 {
     public interface IDocumentDetailService
     {
-        List<systblApp_CoreAPI_DocumentDetail> GetAllDocumentDetails();
-        void CreateDocumentDetail(systblApp_CoreAPI_DocumentDetail objectEntry);
-        void UpdateDocumentDetail(systblApp_CoreAPI_DocumentDetail objectEntry);
-        void RemoveDocumentDetail(systblApp_CoreAPI_DocumentDetail objectEntry);
+        List<actblTaxDocument_Detail> GetAllDocumentDetails();
+        void CreateDocumentDetail(actblTaxDocument_Detail objectEntry);
+        void UpdateDocumentDetail(actblTaxDocument_Detail objectEntry);
+        void RemoveDocumentDetail(actblTaxDocument_Detail objectEntry);
         void SaveChanges();
     }
 }

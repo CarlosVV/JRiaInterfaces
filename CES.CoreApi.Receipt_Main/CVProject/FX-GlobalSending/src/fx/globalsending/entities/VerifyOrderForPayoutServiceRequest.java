@@ -14,7 +14,7 @@ public class VerifyOrderForPayoutServiceRequest extends BaseRequestEntity {
     private String dateTimeLocal;
     private String dateTimeUTC;
     private String pin;
-    private long beneAmount;
+    private String beneAmount;
     private String correspLocID;
 
     public void setDateTimeLocal(String dateTimeLocal) {
@@ -41,11 +41,11 @@ public class VerifyOrderForPayoutServiceRequest extends BaseRequestEntity {
         return pin;
     }
 
-    public void setBeneAmount(long beneAmount) {
+    public void setBeneAmount(String beneAmount) {
         this.beneAmount = beneAmount;
     }
 
-    public long getBeneAmount() {
+    public String getBeneAmount() {
         return beneAmount;
     }
 

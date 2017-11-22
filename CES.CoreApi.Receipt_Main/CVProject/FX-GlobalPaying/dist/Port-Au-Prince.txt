@@ -1,0 +1,79 @@
+00|OK|t1=2|t2=0|
+50509|22272311|Federation Hatiennes Le Levier|22818911|EB0806|Credit Union - CPSA -Port -au-prince|144, Rue De L Enterrement||Port-Au-Prince|OU|6110|HT|(509) 2813-0031|||||USD|0|3000|0||CLP|0.001557||1|Office Pickup|||
+50509|22272311|Federation Hatiennes Le Levier|24653511|EB0813|Credit Union - KOTELAM - Port -au-prince|165, Angle des Rues Magloire|Ambroise et Fequiere|Port-Au-Prince|OU|6110|HT|DG 3702-1862|||||USD|0|3000|0||CLP|0.001557||1|Office Pickup|||
+50509|22272311|Federation Hatiennes Le Levier|24654311|EB0819|Credit Union - KOFAS- Port -au-prince|81, Rue Manigat, Martissant 19||Port-Au-Prince|OU|6110|HT|DG 2 221 5244|||||USD|0|3000|0||CLP|0.001557||1|Office Pickup|||
+50509|22272311|Federation Hatiennes Le Levier|25424411|EB0853|Credit Union - MAMEV - Gressier|Gressier Route Nationale 2||Port-Au-Prince|OU|6160|HT|DG 3741-9039|||||USD|0|3000|0||CLP|0.001557||1|Office Pickup|||
+50509|22272311|Federation Hatiennes Le Levier|62979611|EB0808|Credit Union - CPSA - Carrefour|Complexe Carona en face du Marche|de Carrefour|Port-Au-Prince|OU|6136|HT|(509) 3813-1132|||||USD|0|3000|0||CLP|0.001557||1|Office Pickup|||
+50509|22272311|Federation Hatiennes Le Levier|62980411|EB0859|Credit Union - KOTELAM - PV|62, Rue Rebecca|Petion-Ville|Port-Au-Prince|OU|6140|HT||||||USD|0|3000|0||CLP|0.001557||1|Office Pickup|||
+50509|22272311|Federation Hatiennes Le Levier|62981211|EB0867|Credit Union - MAMEV - Siege|Rte Nationale No.2 La Colline||Port-Au-Prince|OU|6160|HT|3411-9451|||||USD|0|3000|0||CLP|0.001557||1|Office Pickup|||
+963|2314711|Unitransfer S.A. Haiti|1655811|UBBOU|Unibank De Bourdon|Catagena No. 12||Port-Au-Prince|OU|00000|HT|29407181 / 28130979|||Mon-Fr: 08:00-18:00, Sat: 08:00-18:00. PLEASE INCLUDE SECURITY QUESTION & ANSWER IN MESSAGE FIELD IF BENEFICIARY HAS NO IDENTIFICATION AVAILABLE.|Service: Office Pick Up. Currency: USD. Limit: no limit. Req:  PIN e ID valido. Order of $2000 USD or more send copy of sender ID. Port AU Prince- 2 - 48 hours.Central Bank has imposed a surcharge of $1.50 per transaction that will be deducted from benef|USD|0|0|0||CLP|0.001557||1|Office Pickup|||
+963|2314711|Unitransfer S.A. Haiti|46459111|FLBAR|Floye Bar Restaurant|Angle Rue Capois Et Rue Roy||Port-Au-Prince|OU|00000|HT|37187937 / 31260843|||||USD|0|0|0||CLP|0.001557||1|Office Pickup|||
+963|2314711|Unitransfer S.A. Haiti|46466211|NETLUX|Netlux Agent|Angle 1Ere Ruelle Riviere Bourdon||Port-Au-Prince|OU|00000|HT|37239244|||||USD|0|0|0||CLP|0.001557||1|Office Pickup|||
+963|2314711|Unitransfer S.A. Haiti|46467611|RCOM2|Renel Communication Centreville|Rue Mgr Guilloux Et O Durand No. 69||Port-Au-Prince|OU|00000|HT|37543030|||||USD|0|0|0||CLP|0.001557||1|Office Pickup|||
+963|2314711|Unitransfer S.A. Haiti|46469111|SEIGNEUR|Seigneur Devant Multi Services|Rue Emaus and Titus Pont Tifour No. 4|Bis Apres Brochette|Port-Au-Prince|OU|00000|HT|48208598 / 22307492|||||USD|0|0|0||CLP|0.001557||1|Office Pickup|||
+963|2314711|Unitransfer S.A. Haiti|46470011|STANT|Station National Portail Leogane|Blv Jean Jacques Dessalines No. 654||Port-Au-Prince|OU|00000|HT|48934253 / 29480101|||||USD|0|0|0||CLP|0.001557||1|Office Pickup|||
+963|2314711|Unitransfer S.A. Haiti|46470511|TARGET|Tag Super Market|Bois Patate Et Faustin 1Er||Port-Au-Prince|OU|00000|HT|37224100|||||USD|0|0|0||CLP|0.001557||1|Office Pickup|||
+963|2314711|Unitransfer S.A. Haiti|46471111|VIPCOM|VIP Communication Bolosse|Avenue Bolosse No. 46||Port-Au-Prince|OU|00000|HT|36080016|||||USD|0|0|0||CLP|0.001557||1|Office Pickup|||
+963|2314711|Unitransfer S.A. Haiti|46471211|VIPCOM3|VIP Communication Ambroise|Ave Magloire Prolonge||Port-Au-Prince|OU|00000|HT|37488465|||||USD|0|0|0||CLP|0.001557||1|Office Pickup|||
+963|2314711|Unitransfer S.A. Haiti|46471711|YVANNET|Yvannet Multi Services|Rte Des Dalles No. 20||Port-Au-Prince|OU|00000|HT|37709309|||||USD|0|0|0||CLP|0.001557||1|Office Pickup|||
+963|2314711|Unitransfer S.A. Haiti|56065311|UBCHRIST|Unibank Avenue Christophe|Rte Nationale St Marc||Port-Au-Prince|OU|00000|HT|44900228 / 44900229|||||USD|0|0|0||CLP|0.001557||1|Office Pickup|||
+963|2314711|Unitransfer S.A. Haiti|56065411|UBTGE|Unibank De Turgeau|Avenue Martin Luther King No. 183||Port-Au-Prince|OU|00000|HT|28131948|||||USD|0|0|0||CLP|0.001557||1|Office Pickup|||
+963|2314711|Unitransfer S.A. Haiti|56065511|UBLLU|Unibank Lalue|Angle Rue Lamarre and Jonh Bwon Ht 6110 Pap||Port-Au-Prince|OU|00000|HT|29407705 / 28161765|||||USD|0|0|0||CLP|0.001557||1|Office Pickup|||
+963|2314711|Unitransfer S.A. Haiti|56065611|UBPTL|Unibank Portail Leogane|Blvd Jn Jaques Dessalines No.668||Port-Au-Prince|OU|00000|HT|29400848 / 28161763|||||USD|0|0|0||CLP|0.001557||1|Office Pickup|||
+963|2314711|Unitransfer S.A. Haiti|56065711|UTCHRIST|Unitransfer Avenue Christophe|Avenue Christophe||Port-Au-Prince|OU|00000|HT|36810844 / 40790844|||||USD|0|0|0||CLP|0.001557||1|Office Pickup|||
+963|2314711|Unitransfer S.A. Haiti|56065811|UTCANAPVER|Unitransfer Blablablacel Du Canapeve Vert|Rue Rosa Canape Vert||Port-Au-Prince|OU|00000|HT|46432408|||||USD|0|0|0||CLP|0.001557||1|Office Pickup|||
+963|2314711|Unitransfer S.A. Haiti|59860211|BONBERGER|Le Bon Berger Multi Services|Carrefour Feuilles Ave Fouchard No. 37||Port-Au-Prince|OU|00000|HT|37057102|||||USD|0|0|0||CLP|0.001557||0||||
+963|2314711|Unitransfer S.A. Haiti|59860211|BONBERGER|Le Bon Berger Multi Services|Carrefour Feuilles Ave Fouchard No. 37||Port-Au-Prince|OU|00000|HT|37057102|||||USD|0|0|0||CLP|0.001557||1|Office Pickup|||
+963|2314711|Unitransfer S.A. Haiti|59860911|CARLNET|Carlnet Depot|Rue Nord Alexis No. 8 Lalue||Port-Au-Prince|OU|00000|HT|33872042|||||USD|0|0|0||CLP|0.001557||0||||
+963|2314711|Unitransfer S.A. Haiti|59860911|CARLNET|Carlnet Depot|Rue Nord Alexis No. 8 Lalue||Port-Au-Prince|OU|00000|HT|33872042|||||USD|0|0|0||CLP|0.001557||1|Office Pickup|||
+963|2314711|Unitransfer S.A. Haiti|59863111|CORRECTE|Marche Correcte Multi Services|Route De L Aeroport Rue Jean Gilles|Prolongee No. 03, Delmas|Port-Au-Prince|OU|00000|HT|47246424 / 31009797|||||USD|0|0|0||CLP|0.001557||0||||
+963|2314711|Unitransfer S.A. Haiti|59863111|CORRECTE|Marche Correcte Multi Services|Route De L Aeroport Rue Jean Gilles|Prolongee No. 03, Delmas|Port-Au-Prince|OU|00000|HT|47246424 / 31009797|||||USD|0|0|0||CLP|0.001557||1|Office Pickup|||
+963|2314711|Unitransfer S.A. Haiti|59865211|EXPRESS|Express Communication|Entre Delmas 18 Et 20 No. 94|Delmas|Port-Au-Prince|OU|00000|HT|34073000 / 48162338|||||USD|0|0|0||CLP|0.001557||0||||
+963|2314711|Unitransfer S.A. Haiti|59865211|EXPRESS|Express Communication|Entre Delmas 18 Et 20 No. 94|Delmas|Port-Au-Prince|OU|00000|HT|34073000 / 48162338|||||USD|0|0|0||CLP|0.001557||1|Office Pickup|||
+963|2314711|Unitransfer S.A. Haiti|59866211|FISHEQUIPE|Fish Equipement|2 Eme Impasse Herard No. 3|Delmas|Port-Au-Prince|OU|00000|HT|37023006 / 44526961|||||USD|0|0|0||CLP|0.001557||0||||
+963|2314711|Unitransfer S.A. Haiti|59866211|FISHEQUIPE|Fish Equipement|2 Eme Impasse Herard No. 3|Delmas|Port-Au-Prince|OU|00000|HT|37023006 / 44526961|||||USD|0|0|0||CLP|0.001557||1|Office Pickup|||
+963|2314711|Unitransfer S.A. Haiti|59866511|FOODN|Food N Plus|Nazon Angle Rue Martin Luther King No. 26||Port-Au-Prince|OU|00000|HT|44382120|||||USD|0|0|0||CLP|0.001557||0||||
+963|2314711|Unitransfer S.A. Haiti|59866511|FOODN|Food N Plus|Nazon Angle Rue Martin Luther King No. 26||Port-Au-Prince|OU|00000|HT|44382120|||||USD|0|0|0||CLP|0.001557||1|Office Pickup|||
+963|2314711|Unitransfer S.A. Haiti|59867511|GEE|Gee Depot|Auto Route De Delmas No. 345|En Face De La Bnc, Delmas|Port-Au-Prince|OU|00000|HT|46077106 / 46432426|||||USD|0|0|0||CLP|0.001557||0||||
+963|2314711|Unitransfer S.A. Haiti|59867511|GEE|Gee Depot|Auto Route De Delmas No. 345|En Face De La Bnc, Delmas|Port-Au-Prince|OU|00000|HT|46077106 / 46432426|||||USD|0|0|0||CLP|0.001557||1|Office Pickup|||
+963|2314711|Unitransfer S.A. Haiti|59867811|GOODF|Good Friend Jacquet Tybull|Jacquet Thybull Rue Oreste Chery|No. 17 Bis, Delmas|Port-Au-Prince|OU|00000|HT|36815136|||||USD|0|0|0||CLP|0.001557||0||||
+963|2314711|Unitransfer S.A. Haiti|59867811|GOODF|Good Friend Jacquet Tybull|Jacquet Thybull Rue Oreste Chery|No. 17 Bis, Delmas|Port-Au-Prince|OU|00000|HT|36815136|||||USD|0|0|0||CLP|0.001557||1|Office Pickup|||
+963|2314711|Unitransfer S.A. Haiti|59867911|GOODF 2|Good Friend Puits Blain|Rue Fragniovil No. 32|Delmas|Port-Au-Prince|OU|00000|HT|36815136|||||USD|0|0|0||CLP|0.001557||0||||
+963|2314711|Unitransfer S.A. Haiti|59867911|GOODF 2|Good Friend Puits Blain|Rue Fragniovil No. 32|Delmas|Port-Au-Prince|OU|00000|HT|36815136|||||USD|0|0|0||CLP|0.001557||1|Office Pickup|||
+963|2314711|Unitransfer S.A. Haiti|59868611|HOME|Globalhome And Office Smart|Bois Verna Ave Lamartiniere No. 10||Port-Au-Prince|OU|00000|HT|38891016 / 28121016|||||USD|0|0|0||CLP|0.001557||0||||
+963|2314711|Unitransfer S.A. Haiti|59868611|HOME|Globalhome And Office Smart|Bois Verna Ave Lamartiniere No. 10||Port-Au-Prince|OU|00000|HT|38891016 / 28121016|||||USD|0|0|0||CLP|0.001557||1|Office Pickup|||
+963|2314711|Unitransfer S.A. Haiti|59869211|JINSBEAUTY|Jin S Beauty Supply|Auto Route De Delmas No. 394|Delmas|Port-Au-Prince|OU|00000|HT|37838360 / 37010568|||||USD|0|0|0||CLP|0.001557||0||||
+963|2314711|Unitransfer S.A. Haiti|59869211|JINSBEAUTY|Jin S Beauty Supply|Auto Route De Delmas No. 394|Delmas|Port-Au-Prince|OU|00000|HT|37838360 / 37010568|||||USD|0|0|0||CLP|0.001557||1|Office Pickup|||
+963|2314711|Unitransfer S.A. Haiti|59873711|MGDISTRI|Mg Distribution|Angle Rues Cameau y Magloire Ambroise||Port-Au-Prince|OU|00000|HT|48173226 / 31393023|||||USD|0|0|0||CLP|0.001557||0||||
+963|2314711|Unitransfer S.A. Haiti|59873711|MGDISTRI|Mg Distribution|Angle Rues Cameau y Magloire Ambroise||Port-Au-Prince|OU|00000|HT|48173226 / 31393023|||||USD|0|0|0||CLP|0.001557||1|Office Pickup|||
+963|2314711|Unitransfer S.A. Haiti|59874511|NELIODART|Nelio Travaux D Art|Delmas 33 Rue Jean Romain|Delmas|Port-Au-Prince|OU|00000|HT|34480864 / 31199922|||||USD|0|0|0||CLP|0.001557||0||||
+963|2314711|Unitransfer S.A. Haiti|59874511|NELIODART|Nelio Travaux D Art|Delmas 33 Rue Jean Romain|Delmas|Port-Au-Prince|OU|00000|HT|34480864 / 31199922|||||USD|0|0|0||CLP|0.001557||1|Office Pickup|||
+963|2314711|Unitransfer S.A. Haiti|59874911|ODYSSEY|Odyssey Beauty Salon|Delmas 19 Rue Casimir No. 8|Delmas|Port-Au-Prince|OU|00000|HT|38807251|||||USD|0|0|0||CLP|0.001557||0||||
+963|2314711|Unitransfer S.A. Haiti|59874911|ODYSSEY|Odyssey Beauty Salon|Delmas 19 Rue Casimir No. 8|Delmas|Port-Au-Prince|OU|00000|HT|38807251|||||USD|0|0|0||CLP|0.001557||1|Office Pickup|||
+963|2314711|Unitransfer S.A. Haiti|59875611|PHOTOGENIE|Photogenie|Avenue Mais Gate No. 8|Delmas|Port-Au-Prince|OU|00000|HT|36379638 / 34334224|||||USD|0|0|0||CLP|0.001557||0||||
+963|2314711|Unitransfer S.A. Haiti|59875611|PHOTOGENIE|Photogenie|Avenue Mais Gate No. 8|Delmas|Port-Au-Prince|OU|00000|HT|36379638 / 34334224|||||USD|0|0|0||CLP|0.001557||1|Office Pickup|||
+963|2314711|Unitransfer S.A. Haiti|59876611|RCOM3|Renel Communication Delmas 31|Delmas 31 Rue Jacques 1Er No. 54|Delmas|Port-Au-Prince|OU|00000|HT|37543030 / 48440505|||||USD|0|0|0||CLP|0.001557||0||||
+963|2314711|Unitransfer S.A. Haiti|59876611|RCOM3|Renel Communication Delmas 31|Delmas 31 Rue Jacques 1Er No. 54|Delmas|Port-Au-Prince|OU|00000|HT|37543030 / 48440505|||||USD|0|0|0||CLP|0.001557||1|Office Pickup|||
+963|2314711|Unitransfer S.A. Haiti|59876911|RELOCOMMUN|Relocommunication Capois|Rue Capois No.114||Port-Au-Prince|OU|00000|HT|34076281 / 32516231|||||USD|0|0|0||CLP|0.001557||0||||
+963|2314711|Unitransfer S.A. Haiti|59876911|RELOCOMMUN|Relocommunication Capois|Rue Capois No.114||Port-Au-Prince|OU|00000|HT|34076281 / 32516231|||||USD|0|0|0||CLP|0.001557||1|Office Pickup|||
+963|2314711|Unitransfer S.A. Haiti|59877511|SAHADD2|Sahaddia Articles Divers Del 33|Delmas 33 No. 102|Delmas|Port-Au-Prince|OU|00000|HT|37519126 / 37578379|||||USD|0|0|0||CLP|0.001557||0||||
+963|2314711|Unitransfer S.A. Haiti|59877511|SAHADD2|Sahaddia Articles Divers Del 33|Delmas 33 No. 102|Delmas|Port-Au-Prince|OU|00000|HT|37519126 / 37578379|||||USD|0|0|0||CLP|0.001557||1|Office Pickup|||
+963|2314711|Unitransfer S.A. Haiti|59877711|SAHADDIA3|Sahaddia Articles Divers Ave Christophe|Avenue Christophe No. 95||Port-Au-Prince|OU|00000|HT|37519126|||||USD|0|0|0||CLP|0.001557||0||||
+963|2314711|Unitransfer S.A. Haiti|59877711|SAHADDIA3|Sahaddia Articles Divers Ave Christophe|Avenue Christophe No. 95||Port-Au-Prince|OU|00000|HT|37519126|||||USD|0|0|0||CLP|0.001557||1|Office Pickup|||
+963|2314711|Unitransfer S.A. Haiti|59878311|SHALOM|Radio Tele Shalom|Delmas 33 Rue Shalom No. 8|Delmas|Port-Au-Prince|OU|00000|HT|44459595 / 44129797|||||USD|0|0|0||CLP|0.001557||0||||
+963|2314711|Unitransfer S.A. Haiti|59878311|SHALOM|Radio Tele Shalom|Delmas 33 Rue Shalom No. 8|Delmas|Port-Au-Prince|OU|00000|HT|44459595 / 44129797|||||USD|0|0|0||CLP|0.001557||1|Office Pickup|||
+963|2314711|Unitransfer S.A. Haiti|59879311|SPEEDY|Speedy Services|Rte De L Aeroport No. 14|Delmas|Port-Au-Prince|OU|00000|HT|34448479 / 37346214|||||USD|0|0|0||CLP|0.001557||0||||
+963|2314711|Unitransfer S.A. Haiti|59879311|SPEEDY|Speedy Services|Rte De L Aeroport No. 14|Delmas|Port-Au-Prince|OU|00000|HT|34448479 / 37346214|||||USD|0|0|0||CLP|0.001557||1|Office Pickup|||
+963|2314711|Unitransfer S.A. Haiti|59879911|TASSYCOMMU|Tassy Communication Rue Enterrement|Rue De L Enterrement No. 102||Port-Au-Prince|OU|00000|HT|32491548 / 34595959|||||USD|0|0|0||CLP|0.001557||0||||
+963|2314711|Unitransfer S.A. Haiti|59879911|TASSYCOMMU|Tassy Communication Rue Enterrement|Rue De L Enterrement No. 102||Port-Au-Prince|OU|00000|HT|32491548 / 34595959|||||USD|0|0|0||CLP|0.001557||1|Office Pickup|||
+963|2314711|Unitransfer S.A. Haiti|59880111|TASSYSHADA|Tassy Communication Shada|Carrefour Shada Plaine||Port-Au-Prince|OU|00000|HT|37626333 / 34595959|||||USD|0|0|0||CLP|0.001557||0||||
+963|2314711|Unitransfer S.A. Haiti|59880111|TASSYSHADA|Tassy Communication Shada|Carrefour Shada Plaine||Port-Au-Prince|OU|00000|HT|37626333 / 34595959|||||USD|0|0|0||CLP|0.001557||1|Office Pickup|||
+963|2314711|Unitransfer S.A. Haiti|59881611|UTMGX2|Bureau Mgx2|115 Rue Monseigneur Guilloux||Port-Au-Prince|OU|00000|HT|48954754|||||USD|0|0|0||CLP|0.001557||0||||
+963|2314711|Unitransfer S.A. Haiti|59881611|UTMGX2|Bureau Mgx2|115 Rue Monseigneur Guilloux||Port-Au-Prince|OU|00000|HT|48954754|||||USD|0|0|0||CLP|0.001557||1|Office Pickup|||
+963|2314711|Unitransfer S.A. Haiti|59882311|VMJPHARM|Vmjpharma|Angle Ave Christophe Et Cameau No. 70||Port-Au-Prince|OU|00000|HT|37019421|||||USD|0|0|0||CLP|0.001557||0||||
+963|2314711|Unitransfer S.A. Haiti|59882311|VMJPHARM|Vmjpharma|Angle Ave Christophe Et Cameau No. 70||Port-Au-Prince|OU|00000|HT|37019421|||||USD|0|0|0||CLP|0.001557||1|Office Pickup|||
+963|2314711|Unitransfer S.A. Haiti|59882511|VOXDEI|Vox Dei Pharma|Rue Fragneau Ville No. 252 Delmas 75|Delmas|Port-Au-Prince|OU|00000|HT|32248311 / 31720577|||||USD|0|0|0||CLP|0.001557||0||||
+963|2314711|Unitransfer S.A. Haiti|59882511|VOXDEI|Vox Dei Pharma|Rue Fragneau Ville No. 252 Delmas 75|Delmas|Port-Au-Prince|OU|00000|HT|32248311 / 31720577|||||USD|0|0|0||CLP|0.001557||1|Office Pickup|||
+963|2314711|Unitransfer S.A. Haiti|68039811|UBNZN5|Unibank Nazon|Nazon Ave Martin Lutter|King No 23|Port-Au-Prince|OU|00000|HT|28114777 / 28114778|||||USD|0|0|0||CLP|0.001557||0||||
+963|2314711|Unitransfer S.A. Haiti|68039811|UBNZN5|Unibank Nazon|Nazon Ave Martin Lutter|King No 23|Port-Au-Prince|OU|00000|HT|28114777 / 28114778|||||USD|0|0|0||CLP|0.001557||1|Office Pickup|||
+EOF|t3=0

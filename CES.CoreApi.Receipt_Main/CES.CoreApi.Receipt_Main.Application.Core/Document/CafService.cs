@@ -16,21 +16,21 @@ namespace CES.CoreApi.Receipt_Main.Application.Core
         {
             _repo = repository;
         }
-        public List<systblApp_CoreAPI_Caf> GetAllCafs()
+        public List<actblTaxDocument_AuthCode> GetAllCafs()
         {
-            return _repo.find(c => !c.fDisabled.Value && !c.fDelete.Value).ToList();
+            return _repo.find(c => !c.fDisabled && !c.fDelete).ToList();
         }
 
-        public void CreateCaf(systblApp_CoreAPI_Caf objectEntry)
+        public void CreateCaf(actblTaxDocument_AuthCode objectEntry)
         {
-            objectEntry.fCafId = GetNewId();
+            objectEntry.fAuthCodeID = GetNewId();
             this._repo.CreateCaf(objectEntry);
         }
-        public void UpdateCaf(systblApp_CoreAPI_Caf objectEntry)
+        public void UpdateCaf(actblTaxDocument_AuthCode objectEntry)
         {
             this._repo.UpdateCaf(objectEntry);
         }
-        public void RemoveCaf(systblApp_CoreAPI_Caf objectEntry)
+        public void RemoveCaf(actblTaxDocument_AuthCode objectEntry)
         {
             this._repo.RemoveCaf(objectEntry);
         }
@@ -45,7 +45,7 @@ namespace CES.CoreApi.Receipt_Main.Application.Core
             var max = 0;
             if (query != null && query.Count() > 0)
             {
-                max = query.Max(p => p.fCafId);
+                max = query.Max(p => p.fAuthCodeID);
             }
             newid = max + 1;
             return newid;

@@ -6,19 +6,21 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace CES.CoreApi.Receipt_Main.Domain.Core.Tasks
 {
-    public partial class systblApp_CoreAPI_TaskDetail
+    public partial class systblApp_CoreAPI_Task_Detail
     {
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.None)]
-        public int fTaskDetailId { get; set; }
+        public long fDetailID { get; set; }
 
-        public int? fTaskId { get; set; }
+        public long? fTaskID { get; set; }
 
+        [StringLength(8000)]
         public string fStateObject { get; set; }
 
+        [StringLength(8000)]
         public string fResultObject { get; set; }
 
-        public int fDocumentId { get; set; }
+        public int fDocumentID { get; set; }
 
         public bool? fDisabled { get; set; }
 
@@ -32,7 +34,7 @@ namespace CES.CoreApi.Receipt_Main.Domain.Core.Tasks
 
         public int? fModifiedID { get; set; }
 
-        public virtual systblApp_CoreAPI_Document Document { get; set; }
+        public virtual actblTaxDocument Document { get; set; }
 
         public virtual systblApp_CoreAPI_Task Task { get; set; }
     }

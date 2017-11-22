@@ -23,9 +23,9 @@ namespace CES.CoreApi.Receipt_Main.UI.WPF.Helpers
         private const string _url_caf_new_update = "receipt/tax/caf";
         private const string _url_caf_delete = "receipt/tax/caf/delete";
         public static readonly string _url = AppSettings.ApiReceiptServiceUrl;
-        public systblApp_CoreAPI_Caf CreateCaf(string cafcontent, string documentType, int folioStartNumber, int folioEndNumber, int folioCurrentNumber, int recAgent, bool disable = false)
+        public actblTaxDocument_AuthCode CreateCaf(string cafcontent, string documentType, int folioStartNumber, int folioEndNumber, int folioCurrentNumber, int recAgent, bool disable = false)
         {
-            systblApp_CoreAPI_Caf obj = null;
+            actblTaxDocument_AuthCode obj = null;
             using (var client = new HttpClient())
             {
                 var caf = new ServiceTaxCreateCAFRequestViewModel();
@@ -53,15 +53,15 @@ namespace CES.CoreApi.Receipt_Main.UI.WPF.Helpers
 
                     if (responseObject.ProcessResult)
                     {
-                        obj = new systblApp_CoreAPI_Caf
+                        obj = new actblTaxDocument_AuthCode
                         {
-                            fCafId = responseObject.CAF.fCafId,
+                            fAuthCodeID = responseObject.CAF.fAuthCodeID,
                             fCompanyLegalName = responseObject.CAF.fCompanyLegalName,
-                            fCompanyRUT = responseObject.CAF.fCompanyLegalName,
-                            fDocumentType = responseObject.CAF.fDocumentType,
-                            fFolioStartNumber = responseObject.CAF.fFolioStartNumber,
-                            fFolioEndNumber = responseObject.CAF.fFolioEndNumber,
-                            fFolioCurrentNumber = responseObject.CAF.fFolioCurrentNumber,
+                            fCompanyTaxID = responseObject.CAF.fCompanyLegalName,
+                            fDocumentTypeID = responseObject.CAF.fDocumentTypeID,
+                            fStartNumber = responseObject.CAF.fStartNumber,
+                            fEndNumber = responseObject.CAF.fEndNumber,
+                            fCurrentNumber = responseObject.CAF.fCurrentNumber,
                             fAuthorizationDate = responseObject.CAF.fAuthorizationDate,
                             fFileContent = responseObject.CAF.fFileContent,
                             fChanged = responseObject.CAF.fChanged,
@@ -83,9 +83,9 @@ namespace CES.CoreApi.Receipt_Main.UI.WPF.Helpers
             return obj;
         }
 
-        public systblApp_CoreAPI_Caf UpdateCaf(int id, string cafcontent, string documentType, int folioStartNumber, int folioEndNumber, int folioCurrentNumber, int recAgent, bool disabled = false)
+        public actblTaxDocument_AuthCode UpdateCaf(int id, string cafcontent, string documentType, int folioStartNumber, int folioEndNumber, int folioCurrentNumber, int recAgent, bool disabled = false)
         {
-            systblApp_CoreAPI_Caf obj = null;
+            actblTaxDocument_AuthCode obj = null;
             using (var client = new HttpClient())
             {
                 var caf = new ServiceTaxUpdateCAFRequestViewModel();
@@ -116,15 +116,15 @@ namespace CES.CoreApi.Receipt_Main.UI.WPF.Helpers
 
                     if (responseObject.ProcessResult)
                     {
-                        obj = new systblApp_CoreAPI_Caf
+                        obj = new actblTaxDocument_AuthCode
                         {
-                            fCafId = responseObject.CAF.fCafId,
+                            fAuthCodeID = responseObject.CAF.fAuthCodeID,
                             fCompanyLegalName = responseObject.CAF.fCompanyLegalName,
-                            fCompanyRUT = responseObject.CAF.fCompanyLegalName,
-                            fDocumentType = responseObject.CAF.fDocumentType,
-                            fFolioStartNumber = responseObject.CAF.fFolioStartNumber,
-                            fFolioEndNumber = responseObject.CAF.fFolioEndNumber,
-                            fFolioCurrentNumber = responseObject.CAF.fFolioCurrentNumber,
+                            fCompanyTaxID = responseObject.CAF.fCompanyLegalName,
+                            fDocumentTypeID = responseObject.CAF.fDocumentTypeID,
+                            fStartNumber = responseObject.CAF.fStartNumber,
+                            fEndNumber = responseObject.CAF.fEndNumber,
+                            fCurrentNumber = responseObject.CAF.fCurrentNumber,
                             fAuthorizationDate = responseObject.CAF.fAuthorizationDate,
                             fFileContent = responseObject.CAF.fFileContent,
                             fChanged = responseObject.CAF.fChanged,
@@ -176,9 +176,9 @@ namespace CES.CoreApi.Receipt_Main.UI.WPF.Helpers
                 }
             }
         }
-        public List<systblApp_CoreAPI_Caf> SearchCafs(int id, string documentType, int folioStartNumber, int folioEndNumber, int folioCurrentNumber, int recAgent)
+        public List<actblTaxDocument_AuthCode> SearchCafs(int id, string documentType, int folioStartNumber, int folioEndNumber, int folioCurrentNumber, int recAgent)
         {
-            List<systblApp_CoreAPI_Caf> objList = null;
+            List<actblTaxDocument_AuthCode> objList = null;
             using (var client = new HttpClient())
             {
                 var cafSearchRequest = new ServiceTaxSearchCAFByTypeRequestViewModel();

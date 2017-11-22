@@ -92,12 +92,12 @@ namespace CES.CoreApi.Receipt_Main.Service.Services
         {
             var response = new TaxSearchCAFByTypeResponse();
             var results = from item in  _cafdomain.GetAllCafs() where
-                          (request.Id == 0 || request.Id == item.fCafId) &&
-                          (string.IsNullOrWhiteSpace(request.DocumentType) || request.DocumentType == "0" || request.DocumentType == item.fDocumentType.ToString()) &&
-                          (!request.FolioStartNumber.HasValue  || request.FolioStartNumber.Value == 0 || request.FolioStartNumber.Value == item.fFolioStartNumber) &&
-                          (!request.FolioEndNumber.HasValue || request.FolioEndNumber.Value == 0 || request.FolioEndNumber.Value == item.fFolioEndNumber) &&
-                          (!request.FolioCurrentNumber.HasValue || request.FolioCurrentNumber.Value == 0 || request.FolioCurrentNumber.Value == item.fFolioCurrentNumber) &&
-                           (!request.RecAgent.HasValue || request.RecAgent.Value == 0 || request.RecAgent.Value == item.fRecAgent) 
+                          (request.Id == 0 || request.Id == item.fAuthCodeID) &&
+                          (request.DocumentTypeID.HasValue || request.DocumentTypeID == 0 || request.DocumentTypeID == item.fDocumentTypeID) &&
+                          (!request.StartNumber.HasValue  || request.StartNumber.Value == 0 || request.StartNumber.Value.ToString() == item.fStartNumber) &&
+                          (!request.EndNumber.HasValue || request.EndNumber.Value == 0 || request.EndNumber.Value.ToString() == item.fEndNumber) &&
+                          (!request.CurrentNumber.HasValue || request.CurrentNumber.Value == 0 || request.CurrentNumber.Value.ToString() == item.fCurrentNumber) &&
+                           (!request.RecAgentID.HasValue || request.RecAgentID.Value == 0 || request.RecAgentID.Value == item.fRecAgentID) 
                           select item;
 
             if (results != null)
@@ -163,7 +163,7 @@ namespace CES.CoreApi.Receipt_Main.Service.Services
             try
             {
                 Logging.Log.Info("Deleting CAF in DB");
-                var caf = _cafdomain.GetAllCafs().Where(m => m.fCafId == request.Id).First();
+                var caf = _cafdomain.GetAllCafs().Where(m => m.fAuthCodeID == request.Id).First();
                 _cafdomain.RemoveCaf(caf);
                 _cafdomain.SaveChanges();
                 response.ReturnInfo = new ReturnInfo() { ErrorCode = 56, ErrorMessage = ErrorMessage, ResultProcess = true };
@@ -189,9 +189,9 @@ namespace CES.CoreApi.Receipt_Main.Service.Services
                 Logging.Log.Info("Getting Folio in DB");
 
                 var result = _cafdomain.GetAllCafs().Where(m =>
-                       request.Id == m.fCafId &&
-                       request.DocumentType == m.fDocumentType.ToString() &&
-                       request.FolioCurrentNumber == m.fFolioCurrentNumber
+                       request.Id == m.fAuthCodeID &&
+                       request.DocumentTypeID == m.fDocumentTypeID.ToString() &&
+                       request.CurrentNumber == m.fCurrentNumber
                 );
 
                 if (result == null && result.Count() == 0)
@@ -206,7 +206,7 @@ namespace CES.CoreApi.Receipt_Main.Service.Services
                 var objDbCAF = result.OrderByDescending(m => m.fAuthorizationDate).FirstOrDefault();
                 var objXmlCAF = _parser.GetCAFObjectFromString(objDbCAF.fFileContent);
 
-                response.NextFolioNumber = objDbCAF.fFolioCurrentNumber + 1;
+                response.NextFolioNumber = int.Parse(objDbCAF.fCurrentNumber) + 1;
                 response.CAF = objDbCAF;
                 response.ReturnInfo = new ReturnInfo() { ErrorCode = 1, ErrorMessage = "Process done", ResultProcess = true };
                 response.ResponseTime = DateTime.Today;
@@ -240,7 +240,7 @@ namespace CES.CoreApi.Receipt_Main.Service.Services
                     return response;
                 }
 
-                var results = _cafdomain.GetAllCafs().Where(m => m.fCafId == request.Id && m.fDocumentType.ToString() == request.DocumentType && m.fFolioCurrentNumber == folioCurrentNumber); //m. request.DocumentType, folioCurrentNumber, null, null);
+                var results = _cafdomain.GetAllCafs().Where(m => m.fAuthCodeID == request.Id && m.fDocumentTypeID.ToString() == request.DocumentType && m.fCurrentNumber == folioCurrentNumber.ToString());
 
                 if (results == null && results.Count() == 0)
                 {
@@ -253,7 +253,7 @@ namespace CES.CoreApi.Receipt_Main.Service.Services
                 var objDbCaf = results.OrderByDescending(m => m.fAuthorizationDate).FirstOrDefault();
                 var objXmlCAF = _parser.GetCAFObjectFromString(objDbCaf.fFileContent);
 
-                objDbCaf.fFolioCurrentNumber = request.NextFolioNumber.Value;
+                objDbCaf.fCurrentNumber = request.NextFolioNumber.Value.ToString();
 
                 _cafdomain.UpdateCaf(objDbCaf);
                 Successful = true;
@@ -272,16 +272,16 @@ namespace CES.CoreApi.Receipt_Main.Service.Services
 
             return response;
         }
-        private bool ValidateCaf(systblApp_CoreAPI_Caf objCaf)
+        private bool ValidateCaf(actblTaxDocument_AuthCode objCaf)
         {
             var query = _cafdomain.GetAllCafs();
             if (query != null && query.Count() > 0)
             {
                 var search = query.Where(m =>
-                m.fFolioStartNumber == objCaf.fFolioStartNumber &&
-                m.fFolioEndNumber == objCaf.fFolioEndNumber &&
-                m.fDocumentType == objCaf.fDocumentType &&
-                m.fRecAgent == objCaf.fRecAgent).FirstOrDefault();
+                m.fStartNumber == objCaf.fStartNumber &&
+                m.fEndNumber == objCaf.fEndNumber &&
+                m.fDocumentTypeID == objCaf.fDocumentTypeID &&
+                m.fRecAgentID == objCaf.fRecAgentID).FirstOrDefault();
 
                 if (search != null)
                 {
@@ -290,19 +290,19 @@ namespace CES.CoreApi.Receipt_Main.Service.Services
             }
             return true;
         }
-        private systblApp_CoreAPI_Caf CreateCAFModel(int? foliostartnumber, int? folioendnumber, int? foliocurrentnumber, int? recAgent, string xml, AUTORIZACION objCAF, int id = 0)
+        private actblTaxDocument_AuthCode CreateCAFModel(int? foliostartnumber, int? folioendnumber, int? foliocurrentnumber, int? recAgent, string xml, AUTORIZACION objCAF, int id = 0)
         {
-            return new systblApp_CoreAPI_Caf
+            return new actblTaxDocument_AuthCode
             {
-                fCafId = id,
-                fCompanyRUT = objCAF.CAF.DA.RE,
+                fAuthCodeID = id,
+                fCompanyTaxID = objCAF.CAF.DA.RE,
                 fCompanyLegalName = objCAF.CAF.DA.RS,
                 fAuthorizationDate = objCAF.CAF.DA.FA,
-                fDocumentType = $"{objCAF.CAF.DA.TD}",
-                fFolioStartNumber = foliostartnumber == null ? objCAF.CAF.DA.RNG.D : foliostartnumber.Value,
-                fFolioEndNumber = folioendnumber == null ? objCAF.CAF.DA.RNG.H : folioendnumber.Value,
-                fFolioCurrentNumber = foliocurrentnumber == null ? 0 : foliocurrentnumber.Value,
-                fRecAgent = recAgent == null ? 0 : recAgent.Value,
+                fDocumentTypeID = objCAF.CAF.DA.TD,
+                fStartNumber = foliostartnumber == null ? objCAF.CAF.DA.RNG.D.ToString() : foliostartnumber.Value.ToString(),
+                fEndNumber = folioendnumber == null ? objCAF.CAF.DA.RNG.H.ToString() : folioendnumber.Value.ToString(),
+                fCurrentNumber = foliocurrentnumber == null ? "0" : foliocurrentnumber.Value.ToString(),
+                fRecAgentID = recAgent == null ? 0 : recAgent.Value,
                 fFileContent = xml
             };
         }
