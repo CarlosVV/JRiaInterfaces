@@ -10,7 +10,7 @@ namespace CES.CoreApi.Receipt_Main.Domain.Core.Contracts.Models
     {
         public TaxEntity()
         {
-            TaxAddresses = new HashSet<TaxAddress>();
+            TaxAddresses = new List<TaxAddress>();
         }
     
         public int fEntityID { get; set; }
@@ -51,20 +51,8 @@ namespace CES.CoreApi.Receipt_Main.Domain.Core.Contracts.Models
                 
         public string fLineOfBusiness { get; set; }
 
-        public int? fEconomicActivity { get; set; }
-
-        public bool fDisabled { get; set; }
-
-        public bool fDelete { get; set; }
-
-        public bool fChanged { get; set; }
-
-        public DateTime fTime { get; set; }
-
-        public DateTime fModified { get; set; }
-
-        public int fModifiedID { get; set; }
+        public int? fEconomicActivity { get; set; }        
        
-        public ICollection<TaxAddress> TaxAddresses { get; set; }
+        public List<TaxAddress> TaxAddresses { get; set; }
     }
 }

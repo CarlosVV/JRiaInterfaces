@@ -264,10 +264,10 @@ namespace CES.CoreApi.Receipt_Main.Application.Core.Document
                 fOccupation = string.Empty,
                 fPhone = string.Empty,
                 fGender = string.Empty,
-                fChanged = null,
+                fChanged = false,
                 fDelete = false,
                 fDisabled = false,
-                fModified = null,
+                fModified = DateTime.UtcNow,
                 fModifiedID = 69,
                 fTime = DateTime.Now,
             };
@@ -295,10 +295,10 @@ namespace CES.CoreApi.Receipt_Main.Application.Core.Document
                 fOccupation = string.Empty,
                 fGender = string.Empty,
                 fPhone = string.Empty,
-                fChanged = null,
+                fChanged = false,
                 fDelete = false,
                 fDisabled = false,
-                fModified = null,
+                fModified = DateTime.UtcNow,
                 fModifiedID = 69,
                 fTime = DateTime.Now,
             };
@@ -415,7 +415,7 @@ namespace CES.CoreApi.Receipt_Main.Application.Core.Document
             }
 
             _taxEntityService = new TaxEntityService(new TaxEntityRepository(new ReceiptDbContext()));
-            entity = _taxEntityService.GetAllTaxEntitys().Where(m => m.fTaxID.Equals(rut)).FirstOrDefault();
+            entity = _taxEntityService.GetAllTaxEntities().Where(m => m.fTaxID.Equals(rut)).FirstOrDefault();
             id = null;
 
             if (entity != null)

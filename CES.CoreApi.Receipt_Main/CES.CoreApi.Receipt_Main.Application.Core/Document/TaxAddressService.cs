@@ -16,7 +16,7 @@ namespace CES.CoreApi.Receipt_Main.Application.Core
         {
             repo = repository;
         }
-        public List<actblTaxDocument_Entity_Address> GetAllTaxAddresss()
+        public List<actblTaxDocument_Entity_Address> GetAllTaxAddresses()
         {
             return repo.find(c => !c.fDisabled && !c.fDelete).ToList();
         }

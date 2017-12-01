@@ -35,6 +35,11 @@ namespace CES.CoreApi.Receipt_Main.Service.Filters
 
             try
             {
+                if (request.Content.Headers != null && request.Content.Headers.ContentType != null)
+                {
+                    request.Content.Headers.ContentType.CharSet = request.Content.Headers.ContentType.CharSet.ToSafeDbString("ISO-8859-1");
+                }
+
                 IClient client = ClientFactory.GetClient();
 
                 id = client.GetCorrelationId(request);
@@ -78,7 +83,7 @@ namespace CES.CoreApi.Receipt_Main.Service.Filters
                     {
                         if (request.Content.Headers != null && request.Content.Headers.ContentType != null)
                         {
-                            request.Content.Headers.ContentType.CharSet = request.Content.Headers.ContentType.CharSet.ToSafeDbString("iso-8859-1");
+                            request.Content.Headers.ContentType.CharSet = request.Content.Headers.ContentType.CharSet.ToSafeDbString("ISO-8859-1");
                         }
 
                         if (request.Method.Method == "GET")

@@ -8,7 +8,12 @@ namespace CES.CoreApi.Receipt_Main.Domain.Core.Contracts.Models
 {
     public class TaxDocumentDetail
     {
-        public int fDocumentDetailID { get; set; }
+        public TaxDocumentDetail()
+        {
+
+        }
+
+        public int fDetailID { get; set; }
         public int fDocumentID { get; set; }
         public int fLineNumber { get; set; }
         public string fDocRefFolio { get; set; }

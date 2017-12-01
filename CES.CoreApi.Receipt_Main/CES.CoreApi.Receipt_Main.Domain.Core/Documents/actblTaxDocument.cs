@@ -14,8 +14,7 @@ namespace CES.CoreApi.Receipt_Main.Domain.Core.Documents
         {
             DocumentDetails = new HashSet<actblTaxDocument_Detail>();
             DocumentReferences = new HashSet<actblTaxDocument_Reference>();
-            TaskDetails = new HashSet<systblApp_CoreAPI_Task_Detail>();
-            //Activity = new HashSet<systblApp_TaxReceipt_Activity>();
+            TaskDetails = new HashSet<systblApp_CoreAPI_Task_Detail>();           
         }
 
         [Key]

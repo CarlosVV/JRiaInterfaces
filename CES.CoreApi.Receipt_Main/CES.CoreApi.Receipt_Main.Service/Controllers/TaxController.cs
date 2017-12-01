@@ -6,7 +6,9 @@ using CES.CoreApi.Receipt_Main.Service.Utilities;
 using CES.CoreApi.Receipt_Main.Service.Validators;
 using CES.CoreApi.Shared.Persistence.Interfaces;
 using CES.CoreApi.Shared.Persistence.Model;
+using Newtonsoft.Json;
 using System;
+using System.Linq;
 using System.Net;
 using System.Web.Http;
 
@@ -275,10 +277,16 @@ namespace CES.CoreApi.Receipt_Main.Service.Controllers
             _logService.LogInfoObjectToJson("Request", request);
             Logging.Log.Info("Generating request...");
 
+            if (!ModelState.IsValid)
+            {
+                return Content(HttpStatusCode.BadRequest, ModelState);
+            }
+
             var results = new ServiceTaxCreateDocumentRequestViewModelValidator().Validate(request);
 
             if (!results.IsValid)
             {
+                
                 return Content(HttpStatusCode.BadRequest, results);
             }
 

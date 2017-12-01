@@ -10,8 +10,8 @@ namespace CES.CoreApi.Receipt_Main.Domain.Core.Contracts.Models
     {
         public TaxDocument()
         {
-            DocumentDetails = new HashSet<TaxDocumentDetail>();
-            DocumentReferences = new HashSet<TaxDocumentReference>();
+            DocumentDetails = new List<TaxDocumentDetail>();
+            DocumentReferences = new List<TaxDocumentReference>();
         }
 
         public int fDocumentID { get; set; }
@@ -19,6 +19,7 @@ namespace CES.CoreApi.Receipt_Main.Domain.Core.Contracts.Models
         public int fServiceID { get; set; }
 
         public int fTransactionID { get; set; }
+
         public string fTransactionNo { get; set; }
 
         public int fDocumentTypeID { get; set; }
@@ -81,13 +82,13 @@ namespace CES.CoreApi.Receipt_Main.Domain.Core.Contracts.Models
 
         public int fModifiedID { get; set; }
 
-        public virtual TaxEntity EntityFrom { get; set; }
+        public TaxEntity EntityFrom { get; set; }
 
-        public virtual TaxEntity EntityTo { get; set; }
+        public TaxEntity EntityTo { get; set; }
 
-        public ICollection<TaxDocumentDetail> DocumentDetails { get; set; }
+        public List<TaxDocumentDetail> DocumentDetails { get; set; }
 
-        public ICollection<TaxDocumentReference> DocumentReferences { get; set; }
+        public List<TaxDocumentReference> DocumentReferences { get; set; }
 
     }
 }

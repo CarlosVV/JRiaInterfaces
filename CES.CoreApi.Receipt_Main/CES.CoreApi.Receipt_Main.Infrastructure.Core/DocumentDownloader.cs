@@ -21,7 +21,7 @@ namespace CES.CoreApi.Receipt_Main.Infrastructure.Core
             var apiURL = ConfigurationManager.AppSettings["ApiURL"]; //"http://<DTEBox IP>/api/Core.svc/Core";
             var apiAuth = ConfigurationManager.AppSettings["apiAuth"];//"<Llave de autenticación>";            
             var service = new DTEBoxCliente.Servicio(apiURL, apiAuth);
-            var resultado = service.RecuperarXml(ambiente, _rut, tipoDocumento, folio);
+            var resultado = service.RecuperarXml(ambiente,DTEBoxCliente.GrupoBusqueda.Emitidos, _rut, tipo, folio, false);
             #endregion
 
             #region Procesamiento de la respuesta

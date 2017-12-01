@@ -16,9 +16,9 @@ namespace CES.CoreApi.Receipt_Main.Application.Core
         {
             repo = repository;
         }
-        public List<actblTaxDocument_Entity> GetAllTaxEntitys()
+        public List<actblTaxDocument_Entity> GetAllTaxEntities()
         {
-            return repo.find(c => !c.fDisabled.Value && !c.fDelete.Value).ToList();
+            return repo.find(c => !c.fDisabled && !c.fDelete).ToList();
         }
 
         public void CreateTaxEntity(actblTaxDocument_Entity objectEntry)

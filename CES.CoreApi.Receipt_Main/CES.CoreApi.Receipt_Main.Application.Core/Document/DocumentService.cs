@@ -2,6 +2,7 @@
 using CES.CoreApi.Receipt_Main.Domain.Core.Repositories;
 using CES.CoreApi.Receipt_Main.Domain.Core.Services;
 using CES.CoreApi.Receipt_Main.Infrastructure.Data;
+using CES.CoreApi.Receipt_Main.Repository;
 using System;
 using System.Collections.Generic;
 using System.Data.Entity.Core.Objects;
@@ -77,6 +78,7 @@ namespace CES.CoreApi.Receipt_Main.Application.Core
             parameters[7].Value = "CL";
             parameters[8].Value = 1;
             parameters[9].Value = "RM";
+
             if (orderId.HasValue)
             {
                 parameters[10].Value = orderId.Value;
@@ -96,7 +98,7 @@ namespace CES.CoreApi.Receipt_Main.Application.Core
             }
            
 
-            using (var db = new ReceiptDbContext())
+            using (var db = new MainDbContext())
             {
                 db.Database.Initialize(force: false);
                 var cmd = db.Database.Connection.CreateCommand();

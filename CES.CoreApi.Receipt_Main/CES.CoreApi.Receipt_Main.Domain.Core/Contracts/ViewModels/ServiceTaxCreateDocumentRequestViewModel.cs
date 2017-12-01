@@ -8,6 +8,10 @@ namespace CES.CoreApi.Receipt_Main.Domain.Core.Contracts.ViewModels
 {
     public class ServiceTaxCreateDocumentRequestViewModel
     {
+        public ServiceTaxCreateDocumentRequestViewModel()
+        {
+            this.Document = new TaxDocument();
+        }       
         public TaxDocument Document { get; set; }
     }
 }

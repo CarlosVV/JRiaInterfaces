@@ -8,6 +8,10 @@ namespace CES.CoreApi.Receipt_Main.Service.Models
 {
     public class TaxCreateDocumentRequest : BaseRequestModel
     {
+        public TaxCreateDocumentRequest()
+        {
+            this.Document = new TaxDocument();
+        }
         public TaxDocument Document { get; set; }
     }
 }

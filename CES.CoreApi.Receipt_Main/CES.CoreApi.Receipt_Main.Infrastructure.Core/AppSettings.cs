@@ -48,5 +48,11 @@ namespace CES.CoreApi.Receipt_Main.Infrastructure.Core
         {
             get { return System.Diagnostics.Process.GetCurrentProcess().ProcessName.Contains("CES.CoreApi.Receipt_Main.UI.WPF"); }
         }
+
+        public static string TempFolder
+        {
+            get { return ConfigurationManager.AppSettings["TempFolder"]; }
+        }
     }
+    
 }

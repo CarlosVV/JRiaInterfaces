@@ -14,6 +14,7 @@ namespace CES.CoreApi.Receipt_Main.Domain.Core.Documents
             EntityTos = new HashSet<actblTaxDocument>();
             TaxAddresses = new HashSet<actblTaxDocument_Entity_Address>();
         }
+
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.None)]
         public int fEntityID { get; set; }
@@ -78,17 +79,17 @@ namespace CES.CoreApi.Receipt_Main.Domain.Core.Documents
 
         public int? fEconomicActivity { get; set; }
 
-        public bool? fDisabled { get; set; }
+        public bool fDisabled { get; set; }
 
-        public bool? fDelete { get; set; }
+        public bool fDelete { get; set; }
 
-        public bool? fChanged { get; set; }
+        public bool fChanged { get; set; }
 
-        public DateTime? fTime { get; set; }
+        public DateTime fTime { get; set; }
 
-        public DateTime? fModified { get; set; }
+        public DateTime fModified { get; set; }
 
-        public int? fModifiedID { get; set; }
+        public int fModifiedID { get; set; }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<actblTaxDocument> EntityFroms { get; set; }

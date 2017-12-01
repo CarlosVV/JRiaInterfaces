@@ -303,7 +303,9 @@ namespace CES.CoreApi.Receipt_Main.Service.Services
                 fEndNumber = folioendnumber == null ? objCAF.CAF.DA.RNG.H.ToString() : folioendnumber.Value.ToString(),
                 fCurrentNumber = foliocurrentnumber == null ? "0" : foliocurrentnumber.Value.ToString(),
                 fRecAgentID = recAgent == null ? 0 : recAgent.Value,
-                fFileContent = xml
+                fFileContent = xml,
+                fTime = DateTime.UtcNow,
+                fModified = DateTime.UtcNow
             };
         }
 

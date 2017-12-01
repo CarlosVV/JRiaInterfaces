@@ -8,7 +8,12 @@ namespace CES.CoreApi.Receipt_Main.Domain.Core.Contracts.Models
 {
     public class TaxDocumentReference
     {
-        public int fDocumentReferenceID { get; set; }
+        public TaxDocumentReference()
+        {
+
+        }
+
+        public int fReferenceID { get; set; }
 
         public int fDocumentID { get; set; }
 
