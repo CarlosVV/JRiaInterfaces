@@ -63,6 +63,9 @@ namespace CES.CoreApi.Receipt_Main.Service.App_Start
             Mapper.CreateMap<actblTaxDocument_Entity, TaxEntity>();
             Mapper.CreateMap<TaxEntity, actblTaxDocument_Entity>();
 
+            Mapper.CreateMap<actblTaxDocument_Entity, actblTaxDocument_Entity>();
+            Mapper.CreateMap<actblTaxDocument_Entity_Address, actblTaxDocument_Entity_Address>();
+
 
             //Map CAF
             Mapper.CreateMap<AUTORIZACIONCAF, DocumentoDTE.SiiDte.CAF>();

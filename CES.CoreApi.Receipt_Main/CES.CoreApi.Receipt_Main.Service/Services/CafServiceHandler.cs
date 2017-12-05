@@ -305,6 +305,7 @@ namespace CES.CoreApi.Receipt_Main.Service.Services
                 fRecAgentID = recAgent == null ? 0 : recAgent.Value,
                 fFileContent = xml,
                 fTime = DateTime.UtcNow,
+                fCountryID = 604,
                 fModified = DateTime.UtcNow
             };
         }

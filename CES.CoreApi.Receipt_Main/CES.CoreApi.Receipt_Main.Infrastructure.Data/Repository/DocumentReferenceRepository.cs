@@ -21,32 +21,32 @@ namespace CES.CoreApi.Receipt_Main.Repository.Repository
 
         public void CreateDocumentReference(actblTaxDocument_Reference obj)
         {
-            throw new NotImplementedException();
+            this.Add(obj);
         }
 
         public IEnumerable<actblTaxDocument_Reference> find(Expression<Func<actblTaxDocument_Reference, bool>> where)
         {
-            throw new NotImplementedException();
+            return this.GetAll(where);
         }
 
         public actblTaxDocument_Reference find(string id)
         {
-            throw new NotImplementedException();
+            return this.Get(p => p.fReferenceID.ToString() == id);
         }
 
         public void RemoveDocumentReference(actblTaxDocument_Reference obj)
         {
-            throw new NotImplementedException();
+            this.Delete(obj);
         }
 
         public void SaveChanges()
         {
-            throw new NotImplementedException();
+            this.Save();
         }
 
         public void UpdateDocumentReference(actblTaxDocument_Reference obj)
         {
-            throw new NotImplementedException();
+            this.Update(obj);
         }
     }
 }
