@@ -6,6 +6,9 @@
 package fx.globalpaying;
 
 import static fx.globalpaying.FXGlobalPaying.soapEndpointUrl;
+import fx.globalpaying.entities.GetBankBranchesRequestEntity;
+import fx.globalpaying.entities.GetBankInfoRequestEntity;
+import fx.globalpaying.entities.GetBanksRequestEntity;
 import fx.globalpaying.entities.GetCommissionsRequestEntity;
 import fx.globalpaying.entities.GetCountriesStatesRequestEntity;
 import fx.globalpaying.entities.GetCurrenciesRequestEntity;
@@ -17,6 +20,9 @@ import fx.globalpaying.entities.GetOrdersValidatedRequestEntity;
 import fx.globalpaying.entities.GetRequirementsRequestEntity;
 import fx.globalpaying.entities.GetStatesCitiesRequestEntity;
 import fx.globalpaying.entities.GetStatesCitiesResponseEntity;
+import fx.globalpaying.interfaces.BankBranches;
+import fx.globalpaying.interfaces.BankInfo;
+import fx.globalpaying.interfaces.Banks;
 import fx.globalpaying.interfaces.Commissions;
 import fx.globalpaying.interfaces.OrderCommission;
 import fx.globalpaying.interfaces.CountriesStates;
@@ -50,7 +56,10 @@ public class ServiceManager {
         Requirements,
         LocsCurrsRates,
         OrderCommission,
-        OrdersValidated
+        OrdersValidated,
+        Banks,
+        BankInfo,
+        BankBranches
     }
 
     public static Object ExecuteWebMethod(RequestTypeEnum requestType, String[] args) {
@@ -168,7 +177,7 @@ public class ServiceManager {
                     //System.out.println(hitCity);
                     city = hitCity;
                 }
-                
+
                 ((GetLocsCurrsRatesRequestEntity) request).getRequests().get(0).setCityName(city);
                 LocsCurrsRates.callSoapWebService(soapEndpointUrl, (GetLocsCurrsRatesRequestEntity) request);
                 break;
@@ -179,6 +188,18 @@ public class ServiceManager {
             case OrdersValidated:
                 request = OrdersValidated.parseInputArgsToRequest(args);
                 OrdersValidated.callSoapWebService(soapEndpointUrl, (GetOrdersValidatedRequestEntity) request, true);
+                break;
+            case Banks:
+                request = Banks.parseInputArgsToRequest(args);
+                Banks.callSoapWebService(soapEndpointUrl, (GetBanksRequestEntity) request, true);
+                break;
+            case BankInfo:
+                request = BankInfo.parseInputArgsToRequest(args);
+                BankInfo.callSoapWebService(soapEndpointUrl, (GetBankInfoRequestEntity) request, true);
+                break;
+            case BankBranches:
+                request = BankBranches.parseInputArgsToRequest(args);
+                BankBranches.callSoapWebService(soapEndpointUrl, (GetBankBranchesRequestEntity) request, true);
                 break;
         }
         return response;

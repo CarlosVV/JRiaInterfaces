@@ -12,9 +12,18 @@ import java.text.Normalizer;
  * @author cvalderrama
  */
 public class Utils {
+
     public static String stripAccents(String s) {
         s = Normalizer.normalize(s, Normalizer.Form.NFD);
         s = s.replaceAll("[\\p{InCombiningDiacriticalMarks}]", "");
         return s;
+    }
+
+    public static int stringToInt(String param) {
+        try {
+            return Integer.valueOf(param);
+        } catch (NumberFormatException e) {
+            return 0;
+        }
     }
 }
