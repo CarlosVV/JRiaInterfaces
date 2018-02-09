@@ -287,13 +287,6 @@ public class Banks {
             }
 
             if (generateToStdOut) {
-                if (WarningMsg.length() == 0 && ErrorMsg.length() == 0 && !getBanksInStringReturn.isEmpty()) {
-                    System.out.println("00|OK");
-                }
-
-                if (WarningMsg.length() > 0 || ErrorMsg.length() > 0 || getBanksInStringReturn.isEmpty()) {
-                    System.out.println("99|" + WarningMsg + ErrorMsg);
-                }
                 getBanksInStringReturn = "";
                 for (BankEntity bank : bankEntityList) {
                     getBanksInStringReturn = getBanksInStringReturn + inputParamsText + "|" + pagesAvailableText + "|"
@@ -302,6 +295,14 @@ public class Banks {
                             + bank.getBankState() + "|"
                             + "\n";
                 }
+                if (WarningMsg.length() == 0 && ErrorMsg.length() == 0 && !getBanksInStringReturn.isEmpty()) {
+                    System.out.println("00|OK");
+                }
+
+                if (WarningMsg.length() > 0 || ErrorMsg.length() > 0 || getBanksInStringReturn.isEmpty()) {
+                    System.out.println("99|" + WarningMsg + ErrorMsg);
+                }
+
                 System.out.println(getBanksInStringReturn);
             }
 

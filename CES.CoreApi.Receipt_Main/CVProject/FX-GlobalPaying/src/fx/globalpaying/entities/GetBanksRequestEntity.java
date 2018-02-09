@@ -10,92 +10,19 @@ package fx.globalpaying.entities;
  * @author cvalderrama
  */
 public class GetBanksRequestEntity extends BaseRequestEntity {
-   
-    private String dateDesired;   
     private String countryCode;
-    private String payingCorrespID;
-    private String payingCorrespLocID;
-    private String paymentCurrency;
-    private String paymentAmount;
-    private String beneficiaryCurrency;
-    private String beneficiaryAmount;
-    private String deliveryMethod;
     private String searchCriteria;
     private int itemsPerPage;
     private int pageNoDesired;
 
-    public String getDateDesired() {
-        return dateDesired;
-    }
-
-    public void setDateDesired(String dateDesired) {
-        this.dateDesired = dateDesired;
-    }
-
-    public String getCountryCode() {
+       public String getCountryCode() {
         return countryCode;
     }
 
     public void setCountryCode(String countryCode) {
         this.countryCode = countryCode;
     }   
-
-    public String getPayingCorrespID() {
-        return payingCorrespID;
-    }
-
-    public void setPayingCorrespID(String payingCorrespID) {
-        this.payingCorrespID = payingCorrespID;
-    }
-
-    public String getPayingCorrespLocID() {
-        return payingCorrespLocID;
-    }
-
-    public void setPayingCorrespLocID(String payingCorrespLocID) {
-        this.payingCorrespLocID = payingCorrespLocID;
-    }
-
-    public String getPaymentCurrency() {
-        return paymentCurrency;
-    }
-
-    public void setPaymentCurrency(String paymentCurrency) {
-        this.paymentCurrency = paymentCurrency;
-    }
-
-    public String getPaymentAmount() {
-        return paymentAmount;
-    }
-
-    public void setPaymentAmount(String paymentAmount) {
-        this.paymentAmount = paymentAmount;
-    }
-
-    public String getBeneficiaryCurrency() {
-        return beneficiaryCurrency;
-    }
-
-    public void setBeneficiaryCurrency(String beneficiaryCurrency) {
-        this.beneficiaryCurrency = beneficiaryCurrency;
-    }
-
-    public String getBeneficiaryAmount() {
-        return beneficiaryAmount;
-    }
-
-    public void setBeneficiaryAmount(String beneficiaryAmount) {
-        this.beneficiaryAmount = beneficiaryAmount;
-    }
-
-    public String getDeliveryMethod() {
-        return deliveryMethod;
-    }
-
-    public void setDeliveryMethod(String deliveryMethod) {
-        this.deliveryMethod = deliveryMethod;
-    }
-
+   
     /**
      * @return the searchCriteria
      */

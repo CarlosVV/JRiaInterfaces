@@ -5,14 +5,39 @@
  */
 package fx.globalpaying.entities;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  *
  * @author cvalderrama
  */
 public class BankEntity {
-    private String bankID;
-    private String bankName;
-    private String bankState;
+
+    public BankEntity() {     
+        this.currencyList = new ArrayList<CurrencyEntity>();
+    }
+    
+     public BankEntity(String bankID, String bankName, String bankState, List<CurrencyEntity> currencyList) {
+        this.bankID = bankID;
+        this.bankName = bankName;
+        this.bankState = bankState;
+        this.currencyList = currencyList;
+    }
+
+    /**
+     * @return the currencyList
+     */
+    public List<CurrencyEntity> getCurrencyList() {
+        return currencyList;
+    }
+
+    /**
+     * @param currencyList the currencyList to set
+     */
+    public void setCurrencyList(List<CurrencyEntity> currencyList) {
+        this.currencyList = currencyList;
+    }
 
     /**
      * @return the bankID
@@ -55,4 +80,9 @@ public class BankEntity {
     public void setBankState(String bankState) {
         this.bankState = bankState;
     }
+
+    private String bankID;
+    private String bankName;
+    private String bankState;
+    private List<CurrencyEntity> currencyList;
 }

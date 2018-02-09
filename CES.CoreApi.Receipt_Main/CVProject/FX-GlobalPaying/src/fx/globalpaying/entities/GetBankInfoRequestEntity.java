@@ -11,94 +11,34 @@ package fx.globalpaying.entities;
  */
 public class GetBankInfoRequestEntity extends BaseRequestEntity {
 
-    private String dateDesired;
-    private String countryFrom;
-    private String countryTo;
-    private String payingCorrespID;
-    private String payingCorrespLocID;
-    private String paymentCurrency;
-    private String paymentAmount;
-    private String beneficiaryCurrency;
-    private String beneficiaryAmount;
-    private String deliveryMethod;
+    private String bankID;
+    private String countryCode;
 
-    public String getDateDesired() {
-        return dateDesired;
+    /**
+     * @return the bankID
+     */
+    public String getBankID() {
+        return bankID;
     }
 
-    public void setDateDesired(String dateDesired) {
-        this.dateDesired = dateDesired;
+    /**
+     * @param bankID the bankID to set
+     */
+    public void setBankID(String bankID) {
+        this.bankID = bankID;
     }
 
-    public String getCountryFrom() {
-        return countryFrom;
+    /**
+     * @return the countryCode
+     */
+    public String getCountryCode() {
+        return countryCode;
     }
 
-    public void setCountryFrom(String countryFrom) {
-        this.countryFrom = countryFrom;
-    }
-
-    public String getCountryTo() {
-        return countryTo;
-    }
-
-    public void setCountryTo(String countryTo) {
-        this.countryTo = countryTo;
-    }
-
-    public String getPayingCorrespID() {
-        return payingCorrespID;
-    }
-
-    public void setPayingCorrespID(String payingCorrespID) {
-        this.payingCorrespID = payingCorrespID;
-    }
-
-    public String getPayingCorrespLocID() {
-        return payingCorrespLocID;
-    }
-
-    public void setPayingCorrespLocID(String payingCorrespLocID) {
-        this.payingCorrespLocID = payingCorrespLocID;
-    }
-
-    public String getPaymentCurrency() {
-        return paymentCurrency;
-    }
-
-    public void setPaymentCurrency(String paymentCurrency) {
-        this.paymentCurrency = paymentCurrency;
-    }
-
-    public String getPaymentAmount() {
-        return paymentAmount;
-    }
-
-    public void setPaymentAmount(String paymentAmount) {
-        this.paymentAmount = paymentAmount;
-    }
-
-    public String getBeneficiaryCurrency() {
-        return beneficiaryCurrency;
-    }
-
-    public void setBeneficiaryCurrency(String beneficiaryCurrency) {
-        this.beneficiaryCurrency = beneficiaryCurrency;
-    }
-
-    public String getBeneficiaryAmount() {
-        return beneficiaryAmount;
-    }
-
-    public void setBeneficiaryAmount(String beneficiaryAmount) {
-        this.beneficiaryAmount = beneficiaryAmount;
-    }
-
-    public String getDeliveryMethod() {
-        return deliveryMethod;
-    }
-
-    public void setDeliveryMethod(String deliveryMethod) {
-        this.deliveryMethod = deliveryMethod;
+    /**
+     * @param countryCode the countryCode to set
+     */
+    public void setCountryCode(String countryCode) {
+        this.countryCode = countryCode;
     }
 }

@@ -5,46 +5,51 @@
  */
 package fx.globalpaying.entities;
 
+import java.util.List;
+
 /**
  *
  * @author cvalderrama
  */
 public class GetBankInfoResponseEntity {
 
-    private String ctryCode;
-    private String ctryName;
-    private String stateCode;
-    private String stateName;
+    public GetBankInfoResponseEntity() {    
+        this.bankEntity = new BankEntity();
+    }
 
-    public String getCtryCode() {
-        return ctryCode;
+    public GetBankInfoResponseEntity(String inputParams, BankEntity bankEntity) {
+        this.inputParams = inputParams;
+        this.bankEntity = bankEntity;
     }
-    
-    public void setCtryCode(String ctryCode) {
-        this.ctryCode = ctryCode;
+
+    /**
+     * @return the inputParams
+     */
+    public String getInputParams() {
+        return inputParams;
     }
-    
-    public String getCtryName() {
-        return ctryName;
+
+    /**
+     * @param inputParams the inputParams to set
+     */
+    public void setInputParams(String inputParams) {
+        this.inputParams = inputParams;
     }
-    
-    public void setCtryName(String ctryName) {
-        this.ctryName = ctryName;
+
+    /**
+     * @return the bankEntity
+     */
+    public BankEntity getBankEntity() {
+        return bankEntity;
     }
-    
-    public String getStateCode() {
-        return stateCode;
+
+    /**
+     * @param bankEntity the bankEntity to set
+     */
+    public void setBankEntity(BankEntity bankEntity) {
+        this.bankEntity = bankEntity;
     }
-    
-    public void setStateCode(String stateCode) {
-        this.stateCode = stateCode;
-    }
-    
-    public String getStateName() {
-        return stateName;
-    }
-    
-    public void setStateName(String stateName) {
-        this.stateName = stateName;
-    }
+
+    private String inputParams;
+    private BankEntity bankEntity;
 }

@@ -5,9 +5,15 @@
  */
 package fx.globalpaying.interfaces;
 
+import fx.globalpaying.entities.BankEntity;
+import fx.globalpaying.entities.CurrencyEntity;
 import fx.globalpaying.entities.GetBankInfoRequestEntity;
+import fx.globalpaying.entities.GetBankInfoResponseEntity;
 import fx.globalpaying.entities.HeaderEntity;
+import fx.globalpaying.entities.RequiredField;
+import java.util.ArrayList;
 import java.util.Iterator;
+import java.util.List;
 import javax.xml.namespace.QName;
 import javax.xml.soap.MessageFactory;
 import javax.xml.soap.MimeHeaders;
@@ -29,14 +35,14 @@ public class BankInfo {
 
     private static final String XML_DOC = "xmlDoc";
     private static final String ROOT = "Root";
-    private static final String ORDER_COMMISSION = "GetOrderCommission";
-    private static final String SOAP_ACTION = "CES.Services.FXGlobal/IRiaAsPayer/GetOrderCommission";
+    private static final String GET_BANK_INFO_METHOD = "GetBankInfo";
+    private static final String SOAP_ACTION = "CES.Services.FXGlobal/IRiaAsPayer/GetBankInfo";
     private static boolean generateToStdOut = false;
     private static final boolean IS_DEBUG = false;
-    private static String orderCommission;
+    private static String getBankInfoStringReturn;
 
-    public static String getOrderCommission() {
-        return orderCommission;
+    public static String getGetBankInfoStringReturn() {
+        return getBankInfoStringReturn;
     }
 
     public static GetBankInfoRequestEntity parseInputArgsToRequest(String[] args) {
@@ -58,47 +64,14 @@ public class BankInfo {
 
         if (args[3] != null) {
             String[] requestArray = args[3].split(";", -1);
-            if (requestArray.length >= 11) {
-                request.setRequestType("OrderCommission");
+            if (requestArray.length >= 3) {
+                request.setRequestType("BankInfo");
                 if (!"-".equals(requestArray[1])) {
-                    request.setDateDesired(requestArray[1]);
+                    request.setBankID(requestArray[1]);
                 }
 
                 if (!"-".equals(requestArray[2])) {
-                    request.setCountryFrom(requestArray[2]);
-
-                }
-
-                if (!"-".equals(requestArray[3])) {
-                    request.setCountryTo(requestArray[3]);
-
-                }
-                if (!"-".equals(requestArray[4])) {
-                    request.setPayingCorrespID(requestArray[4]);
-
-                }
-                if (!"-".equals(requestArray[5])) {
-                    request.setPayingCorrespLocID(requestArray[5]);
-
-                }
-                if (!"-".equals(requestArray[6])) {
-                    request.setPaymentCurrency(requestArray[6]);
-
-                }
-                if (!"-".equals(requestArray[7])) {
-                    request.setPaymentAmount(requestArray[7]);
-
-                }
-                if (!"-".equals(requestArray[8])) {
-                    request.setBeneficiaryCurrency(requestArray[8]);
-
-                }
-                if (!"-".equals(requestArray[9])) {
-                    request.setBeneficiaryAmount(requestArray[9]);
-
-                }
-                if (!"-".equals(requestArray[10])) {
-                    request.setDeliveryMethod(requestArray[10]);
+                    request.setCountryCode(requestArray[2]);
                 }
             }
         }
@@ -154,7 +127,7 @@ public class BankInfo {
         SOAPBody soapBody = envelope.getBody();
 
         // <ces:GetCurrencies>
-        SOAPElement getCurrenciesElem = soapBody.addChildElement(ORDER_COMMISSION, cesNamespace);
+        SOAPElement getCurrenciesElem = soapBody.addChildElement(GET_BANK_INFO_METHOD, cesNamespace);
 
         // <ces:xmlDoc>
         SOAPElement xmlDoc = getCurrenciesElem.addChildElement(XML_DOC, cesNamespace);
@@ -213,26 +186,21 @@ public class BankInfo {
         SOAPElement requestType = root.addChildElement("RequestType");
         requestType.addTextNode(request.getRequestType());
 
-        //  <Request CountryCode="CO" StateName="ANT" ></Request>
+        //  <Request BankID="5884101" CountryCode="IN"/>
         SOAPElement requestElement = root.addChildElement("Request");
 
-        requestElement.addAttribute(new QName("", "DateDesired"), request.getDateDesired());
-        requestElement.addAttribute(new QName("", "CountryFrom"), request.getCountryFrom());
-        requestElement.addAttribute(new QName("", "CountryTo"), request.getCountryTo());
-        requestElement.addAttribute(new QName("", "PayingCorrespID"), request.getPayingCorrespID());
-        requestElement.addAttribute(new QName("", "PayingCorrespLocID"), request.getPayingCorrespLocID());
-        requestElement.addAttribute(new QName("", "PaymentCurrency"), request.getPaymentCurrency());
-        requestElement.addAttribute(new QName("", "PaymentAmount"), request.getPaymentAmount());
-        requestElement.addAttribute(new QName("", "BeneficiaryCurrency"), request.getBeneficiaryCurrency());
-        requestElement.addAttribute(new QName("", "BeneficiaryAmount"), request.getBeneficiaryAmount());
-        requestElement.addAttribute(new QName("", "DeliveryMethod"), request.getDeliveryMethod());
+        requestElement.addAttribute(new QName("", "BankID"), request.getBankID());
+        requestElement.addAttribute(new QName("", "CountryCode"), request.getCountryCode());
     }
 
     private static void parseAndReturnResponse(SOAPMessage soapResponse) {
+        GetBankInfoResponseEntity response = new GetBankInfoResponseEntity();
+        getBankInfoStringReturn = "";
+        String WarningMsg = "";
+        String ErrorMsg = "";
+
         try {
-            orderCommission = "";
-            String WarningMsg = "";
-            String ErrorMsg = "";
+
             SOAPPart sp = soapResponse.getSOAPPart();
             SOAPEnvelope se = sp.getEnvelope();
             SOAPBody sb = se.getBody();
@@ -253,24 +221,46 @@ public class BankInfo {
                                 Iterator it5 = element4.getChildElements();
                                 while (it5.hasNext()) {
                                     SOAPElement element5 = (SOAPElement) it5.next();
+                                    // BankInfoResponse
+                                    response.setInputParams(element5.getAttribute("InputParams"));
+
                                     Iterator it6 = element5.getChildElements();
                                     while (it6.hasNext()) {
                                         SOAPElement element6 = (SOAPElement) it6.next();
+                                        // <Currency Symbol="INR" Name="India">
+                                        response.setBankEntity(new BankEntity());
+                                        response.getBankEntity().setBankID(element6.getAttribute("BankID"));
+                                        response.getBankEntity().setBankName(element6.getAttribute("BankName"));
+
+                                        // <Currencies>
                                         Iterator it7 = element6.getChildElements();
-                                        String CommissionCurrency = "";
-                                        String CommissionAmount = "";
-                                        orderCommission = "";
+                                        CurrencyEntity currency = new CurrencyEntity();
                                         while (it7.hasNext()) {
                                             SOAPElement element7 = (SOAPElement) it7.next();
-                                            if ("CommissionCurrency".equals(element7.getElementName().getLocalName())) {
-                                                CommissionCurrency = element7.getTextContent();
+                                            //  <Currency Symbol="INR" Name="India">
+                                            Iterator it8 = element7.getChildElements();
+                                            while (it8.hasNext()) {
+                                                SOAPElement element8 = (SOAPElement) it8.next();
+                                                currency.setSymbol(element8.getAttribute("Symbol"));
+                                                currency.setName(element8.getAttribute("Name"));
+                                                // <RequiredFields>
+                                                Iterator it9 = element8.getChildElements();
+                                                while (it9.hasNext()) {
+                                                    SOAPElement element9 = (SOAPElement) it9.next();
+                                                    //  <RequiredField maxLength="0" minLength="0" FieldName="BankAccountNo"/>
+                                                    Iterator it10 = element9.getChildElements();
+                                                    while (it10.hasNext()) {
+                                                        SOAPElement element10 = (SOAPElement) it10.next();
+                                                        RequiredField requiredFieldEntity = new RequiredField();
+                                                        requiredFieldEntity.setMaxLength(element10.getAttribute("maxLength"));
+                                                        requiredFieldEntity.setMinLength(element10.getAttribute("minLength"));
+                                                        requiredFieldEntity.setFieldName(element10.getAttribute("FieldName"));
+                                                        currency.getRequiredFields().add(requiredFieldEntity);
+                                                    }                                                    
+                                                }
                                             }
-                                            if ("CommissionAmount".equals(element7.getElementName().getLocalName())) {
-                                                CommissionAmount = element7.getTextContent();
-                                            }
-
                                         }
-                                        orderCommission = CommissionCurrency + "|" + CommissionAmount + "|";
+                                        response.getBankEntity().getCurrencyList().add((currency));
                                     }
                                 }
                             }
@@ -296,14 +286,35 @@ public class BankInfo {
             }
 
             if (generateToStdOut) {
-                if (WarningMsg.length() == 0 && ErrorMsg.length() == 0 && !orderCommission.isEmpty()) {
+                getBankInfoStringReturn = "";
+                for (CurrencyEntity cur : response.getBankEntity().getCurrencyList()) {
+                    
+                    for (RequiredField rf : cur.getRequiredFields()) {
+                        getBankInfoStringReturn = getBankInfoStringReturn
+                            + response.getInputParams() + "|"
+                            + response.getBankEntity().getBankID() + "|"
+                            + response.getBankEntity().getBankName() + "|"
+                            + cur.getSymbol() + "|"
+                            + cur.getName() + "|";
+
+                        getBankInfoStringReturn = getBankInfoStringReturn  + rf.getMinLength() + "|"
+                                + rf.getMaxLength() + "|"
+                                + rf.getFieldName() + "|" ;
+                        
+                        getBankInfoStringReturn = getBankInfoStringReturn + "\n";
+                    }
+                    
+                    
+                }
+                if (WarningMsg.length() == 0 && ErrorMsg.length() == 0 && !getBankInfoStringReturn.isEmpty()) {
                     System.out.println("00|OK");
                 }
 
-                if (WarningMsg.length() > 0 || ErrorMsg.length() > 0 || orderCommission.isEmpty()) {
+                if (WarningMsg.length() > 0 || ErrorMsg.length() > 0 || getBankInfoStringReturn.isEmpty()) {
                     System.out.println("99|" + WarningMsg + ErrorMsg);
                 }
-                System.out.println(orderCommission);
+
+                System.out.println(getBankInfoStringReturn);
             }
 
         } catch (Exception e) {
