@@ -5,8 +5,13 @@
  */
 package fx.globalpaying.interfaces;
 
+import fx.globalpaying.entities.BankEntity;
+import fx.globalpaying.entities.BranchEntity;
+import fx.globalpaying.entities.CurrencyEntity;
 import fx.globalpaying.entities.GetBankBranchesRequestEntity;
+import fx.globalpaying.entities.GetBankBranchesResponseEntity;
 import fx.globalpaying.entities.HeaderEntity;
+import fx.globalpaying.entities.RequiredField;
 import java.util.Iterator;
 import javax.xml.namespace.QName;
 import javax.xml.soap.MessageFactory;
@@ -29,14 +34,14 @@ public class BankBranches {
 
     private static final String XML_DOC = "xmlDoc";
     private static final String ROOT = "Root";
-    private static final String ORDER_COMMISSION = "GetOrderCommission";
-    private static final String SOAP_ACTION = "CES.Services.FXGlobal/IRiaAsPayer/GetOrderCommission";
+    private static final String GET_BANK_BRANCHES_METHOD = "GetBankBranches";
+    private static final String SOAP_ACTION = "CES.Services.FXGlobal/IRiaAsPayer/GetBankBranches";
     private static boolean generateToStdOut = false;
     private static final boolean IS_DEBUG = false;
-    private static String orderCommission;
+    private static String getBankBranchesStringReturn;
 
-    public static String getOrderCommission() {
-        return orderCommission;
+    public static String getGetBankBranchesStringReturn() {
+        return getBankBranchesStringReturn;
     }
 
     public static GetBankBranchesRequestEntity parseInputArgsToRequest(String[] args) {
@@ -58,47 +63,40 @@ public class BankBranches {
 
         if (args[3] != null) {
             String[] requestArray = args[3].split(";", -1);
-            if (requestArray.length >= 11) {
-                request.setRequestType("OrderCommission");
+            if (requestArray.length >= 9) {
+                request.setRequestType("BankBranches");
                 if (!"-".equals(requestArray[1])) {
-                    request.setDateDesired(requestArray[1]);
+                    request.setCountryCode(requestArray[1]);
                 }
 
                 if (!"-".equals(requestArray[2])) {
-                    request.setCountryFrom(requestArray[2]);
+                    request.setRoutingCode(requestArray[2]);
 
                 }
 
                 if (!"-".equals(requestArray[3])) {
-                    request.setCountryTo(requestArray[3]);
+                    request.setRequestType(requestArray[3]);
 
                 }
                 if (!"-".equals(requestArray[4])) {
-                    request.setPayingCorrespID(requestArray[4]);
+                    request.setBankID(requestArray[4]);
 
                 }
                 if (!"-".equals(requestArray[5])) {
-                    request.setPayingCorrespLocID(requestArray[5]);
+                    request.setBranchNumber(requestArray[5]);
 
                 }
                 if (!"-".equals(requestArray[6])) {
-                    request.setPaymentCurrency(requestArray[6]);
+                    request.setBranchAddress(requestArray[6]);
 
                 }
                 if (!"-".equals(requestArray[7])) {
-                    request.setPaymentAmount(requestArray[7]);
+                    request.setBranchCity(requestArray[7]);
 
                 }
                 if (!"-".equals(requestArray[8])) {
-                    request.setBeneficiaryCurrency(requestArray[8]);
+                    request.setBranchState(requestArray[8]);
 
-                }
-                if (!"-".equals(requestArray[9])) {
-                    request.setBeneficiaryAmount(requestArray[9]);
-
-                }
-                if (!"-".equals(requestArray[10])) {
-                    request.setDeliveryMethod(requestArray[10]);
                 }
             }
         }
@@ -154,7 +152,7 @@ public class BankBranches {
         SOAPBody soapBody = envelope.getBody();
 
         // <ces:GetCurrencies>
-        SOAPElement getCurrenciesElem = soapBody.addChildElement(ORDER_COMMISSION, cesNamespace);
+        SOAPElement getCurrenciesElem = soapBody.addChildElement(GET_BANK_BRANCHES_METHOD, cesNamespace);
 
         // <ces:xmlDoc>
         SOAPElement xmlDoc = getCurrenciesElem.addChildElement(XML_DOC, cesNamespace);
@@ -213,24 +211,24 @@ public class BankBranches {
         SOAPElement requestType = root.addChildElement("RequestType");
         requestType.addTextNode(request.getRequestType());
 
-        //  <Request CountryCode="CO" StateName="ANT" ></Request>
+        //  <Request CountryCode="CO" RoutingCode="" RoutingType="" BankID="2718301" 
+        //        BranchNumber="" BranchAddress="" BranchCity="" BranchState=""/>
         SOAPElement requestElement = root.addChildElement("Request");
 
-        requestElement.addAttribute(new QName("", "DateDesired"), request.getDateDesired());
-        requestElement.addAttribute(new QName("", "CountryFrom"), request.getCountryFrom());
-        requestElement.addAttribute(new QName("", "CountryTo"), request.getCountryTo());
-        requestElement.addAttribute(new QName("", "PayingCorrespID"), request.getPayingCorrespID());
-        requestElement.addAttribute(new QName("", "PayingCorrespLocID"), request.getPayingCorrespLocID());
-        requestElement.addAttribute(new QName("", "PaymentCurrency"), request.getPaymentCurrency());
-        requestElement.addAttribute(new QName("", "PaymentAmount"), request.getPaymentAmount());
-        requestElement.addAttribute(new QName("", "BeneficiaryCurrency"), request.getBeneficiaryCurrency());
-        requestElement.addAttribute(new QName("", "BeneficiaryAmount"), request.getBeneficiaryAmount());
-        requestElement.addAttribute(new QName("", "DeliveryMethod"), request.getDeliveryMethod());
+        requestElement.addAttribute(new QName("", "CountryCode"), request.getCountryCode());
+        requestElement.addAttribute(new QName("", "RoutingCode"), request.getRoutingCode());
+        requestElement.addAttribute(new QName("", "RoutingType"), request.getRoutingType());
+        requestElement.addAttribute(new QName("", "BankID"), request.getBankID());
+        requestElement.addAttribute(new QName("", "BranchNumber"), request.getBranchNumber());
+        requestElement.addAttribute(new QName("", "BranchAddress"), request.getBranchAddress());
+        requestElement.addAttribute(new QName("", "BranchCity"), request.getBranchCity());
+        requestElement.addAttribute(new QName("", "BranchState"), request.getBranchState());
     }
 
     private static void parseAndReturnResponse(SOAPMessage soapResponse) {
         try {
-            orderCommission = "";
+            GetBankBranchesResponseEntity response = new GetBankBranchesResponseEntity();
+            getBankBranchesStringReturn = "";
             String WarningMsg = "";
             String ErrorMsg = "";
             SOAPPart sp = soapResponse.getSOAPPart();
@@ -253,24 +251,26 @@ public class BankBranches {
                                 Iterator it5 = element4.getChildElements();
                                 while (it5.hasNext()) {
                                     SOAPElement element5 = (SOAPElement) it5.next();
+                                    //<BankBranches InputParams="BankID='2718301';CountryCode='CO';BranchNumber='';BranchAddress='';BranchCity='';BranchState='';RoutingType='';RoutingCode='';">
+                                    response.setInputParams(element5.getAttribute("InputParams"));
+
+                                    //<Branch BankID="2718301" BankName="BANCO DAVIVIENDA S.A." BranchID="21323402" BranchName="BANCO DAVIVIENDA S.A." BranchNo="" BranchState="" BranchCity="Armenia" BranchPostalCode="" BranchAddress="" BranchRoutingType="" BranchRoutingCode=""/>
                                     Iterator it6 = element5.getChildElements();
                                     while (it6.hasNext()) {
                                         SOAPElement element6 = (SOAPElement) it6.next();
-                                        Iterator it7 = element6.getChildElements();
-                                        String CommissionCurrency = "";
-                                        String CommissionAmount = "";
-                                        orderCommission = "";
-                                        while (it7.hasNext()) {
-                                            SOAPElement element7 = (SOAPElement) it7.next();
-                                            if ("CommissionCurrency".equals(element7.getElementName().getLocalName())) {
-                                                CommissionCurrency = element7.getTextContent();
-                                            }
-                                            if ("CommissionAmount".equals(element7.getElementName().getLocalName())) {
-                                                CommissionAmount = element7.getTextContent();
-                                            }
-
-                                        }
-                                        orderCommission = CommissionCurrency + "|" + CommissionAmount + "|";
+                                        BranchEntity branch = new BranchEntity();
+                                        branch.setBankID(element6.getAttribute("BankID"));
+                                        branch.setBankName(element6.getAttribute("BankName"));
+                                        branch.setBranchID(element6.getAttribute("BranchID"));
+                                        branch.setBranchName(element6.getAttribute("BranchName"));
+                                        branch.setBranchNo(element6.getAttribute("BranchNo"));
+                                        branch.setBranchState(element6.getAttribute("BranchState"));
+                                        branch.setBranchCity(element6.getAttribute("BranchCity"));
+                                        branch.setBranchPostalCode(element6.getAttribute("BranchPostalCode"));
+                                        branch.setBranchAddress(element6.getAttribute("BranchAddress"));
+                                        branch.setBranchRoutingType(element6.getAttribute("BranchRoutingType"));
+                                        branch.setBranchRoutingCode(element6.getAttribute("BranchRoutingCode"));
+                                        response.getBranchList().add(branch);
                                     }
                                 }
                             }
@@ -296,14 +296,30 @@ public class BankBranches {
             }
 
             if (generateToStdOut) {
-                if (WarningMsg.length() == 0 && ErrorMsg.length() == 0 && !orderCommission.isEmpty()) {
+                getBankBranchesStringReturn = "";
+                for (BranchEntity branch : response.getBranchList()) {
+                    getBankBranchesStringReturn = getBankBranchesStringReturn + response.getInputParams() + "|"
+                            + branch.getBankID() + "|"
+                            + branch.getBankName() + "|"
+                            + branch.getBranchID() + "|"
+                            + branch.getBranchName() + "|"
+                            + branch.getBranchNo() + "|"
+                            + branch.getBranchState() + "|"
+                            + branch.getBranchCity() + "|"
+                            + branch.getBranchPostalCode() + "|"
+                            + branch.getBranchAddress() + "|"
+                            + branch.getBranchRoutingType() + "|"
+                            + branch.getBranchRoutingCode() + "|" + "\n";
+                }
+
+                if (WarningMsg.length() == 0 && ErrorMsg.length() == 0 && !getBankBranchesStringReturn.isEmpty()) {
                     System.out.println("00|OK");
                 }
 
-                if (WarningMsg.length() > 0 || ErrorMsg.length() > 0 || orderCommission.isEmpty()) {
+                if (WarningMsg.length() > 0 || ErrorMsg.length() > 0 || getBankBranchesStringReturn.isEmpty()) {
                     System.out.println("99|" + WarningMsg + ErrorMsg);
                 }
-                System.out.println(orderCommission);
+                System.out.println(getBankBranchesStringReturn);
             }
 
         } catch (Exception e) {

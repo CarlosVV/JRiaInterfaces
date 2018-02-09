@@ -11,94 +11,125 @@ package fx.globalpaying.entities;
  */
 public class GetBankBranchesRequestEntity extends BaseRequestEntity {
 
-    private String dateDesired;
-    private String countryFrom;
-    private String countryTo;
-    private String payingCorrespID;
-    private String payingCorrespLocID;
-    private String paymentCurrency;
-    private String paymentAmount;
-    private String beneficiaryCurrency;
-    private String beneficiaryAmount;
-    private String deliveryMethod;
-
-    public String getDateDesired() {
-        return dateDesired;
+    /**
+     * @return the routingCode
+     */
+    public String getRoutingCode() {
+        return routingCode;
     }
 
-    public void setDateDesired(String dateDesired) {
-        this.dateDesired = dateDesired;
+    /**
+     * @param routingCode the routingCode to set
+     */
+    public void setRoutingCode(String routingCode) {
+        this.routingCode = routingCode;
     }
 
-    public String getCountryFrom() {
-        return countryFrom;
+    /**
+     * @return the routingType
+     */
+    public String getRoutingType() {
+        return routingType;
     }
 
-    public void setCountryFrom(String countryFrom) {
-        this.countryFrom = countryFrom;
+    /**
+     * @param routingType the routingType to set
+     */
+    public void setRoutingType(String routingType) {
+        this.routingType = routingType;
     }
 
-    public String getCountryTo() {
-        return countryTo;
+    /**
+     * @return the branchNumber
+     */
+    public String getBranchNumber() {
+        return branchNumber;
     }
 
-    public void setCountryTo(String countryTo) {
-        this.countryTo = countryTo;
+    /**
+     * @param branchNumber the branchNumber to set
+     */
+    public void setBranchNumber(String branchNumber) {
+        this.branchNumber = branchNumber;
     }
 
-    public String getPayingCorrespID() {
-        return payingCorrespID;
+    /**
+     * @return the branchAddress
+     */
+    public String getBranchAddress() {
+        return branchAddress;
     }
 
-    public void setPayingCorrespID(String payingCorrespID) {
-        this.payingCorrespID = payingCorrespID;
+    /**
+     * @param branchAddress the branchAddress to set
+     */
+    public void setBranchAddress(String branchAddress) {
+        this.branchAddress = branchAddress;
     }
 
-    public String getPayingCorrespLocID() {
-        return payingCorrespLocID;
+    /**
+     * @return the branchCity
+     */
+    public String getBranchCity() {
+        return branchCity;
     }
 
-    public void setPayingCorrespLocID(String payingCorrespLocID) {
-        this.payingCorrespLocID = payingCorrespLocID;
+    /**
+     * @param branchCity the branchCity to set
+     */
+    public void setBranchCity(String branchCity) {
+        this.branchCity = branchCity;
     }
 
-    public String getPaymentCurrency() {
-        return paymentCurrency;
+    /**
+     * @return the branchState
+     */
+    public String getBranchState() {
+        return branchState;
     }
 
-    public void setPaymentCurrency(String paymentCurrency) {
-        this.paymentCurrency = paymentCurrency;
+    /**
+     * @param branchState the branchState to set
+     */
+    public void setBranchState(String branchState) {
+        this.branchState = branchState;
     }
 
-    public String getPaymentAmount() {
-        return paymentAmount;
+    private String countryCode;
+    private String routingCode;
+    private String routingType;
+    private String bankID;
+    private String branchNumber;
+    private String branchAddress;
+    private String branchCity;
+    private String branchState;
+
+    /**
+     * @return the bankID
+     */
+    public String getBankID() {
+        return bankID;
     }
 
-    public void setPaymentAmount(String paymentAmount) {
-        this.paymentAmount = paymentAmount;
+    /**
+     * @param bankID the bankID to set
+     */
+    public void setBankID(String bankID) {
+        this.bankID = bankID;
     }
 
-    public String getBeneficiaryCurrency() {
-        return beneficiaryCurrency;
+    /**
+     * @return the countryCode
+     */
+    public String getCountryCode() {
+        return countryCode;
     }
 
-    public void setBeneficiaryCurrency(String beneficiaryCurrency) {
-        this.beneficiaryCurrency = beneficiaryCurrency;
+    /**
+     * @param countryCode the countryCode to set
+     */
+    public void setCountryCode(String countryCode) {
+        this.countryCode = countryCode;
     }
 
-    public String getBeneficiaryAmount() {
-        return beneficiaryAmount;
-    }
-
-    public void setBeneficiaryAmount(String beneficiaryAmount) {
-        this.beneficiaryAmount = beneficiaryAmount;
-    }
-
-    public String getDeliveryMethod() {
-        return deliveryMethod;
-    }
-
-    public void setDeliveryMethod(String deliveryMethod) {
-        this.deliveryMethod = deliveryMethod;
-    }
 }

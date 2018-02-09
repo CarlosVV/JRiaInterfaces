@@ -5,46 +5,47 @@
  */
 package fx.globalpaying.entities;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  *
  * @author cvalderrama
  */
 public class GetBankBranchesResponseEntity {
 
-    private String ctryCode;
-    private String ctryName;
-    private String stateCode;
-    private String stateName;
+    public GetBankBranchesResponseEntity() {    
+        this.branchList = new ArrayList<BranchEntity>();
+    }   
 
-    public String getCtryCode() {
-        return ctryCode;
+    /**
+     * @return the branchList
+     */
+    public List<BranchEntity> getBranchList() {
+        return branchList;
+    }
+
+    /**
+     * @param branchList the branchList to set
+     */
+    public void setBranchList(List<BranchEntity> branchList) {
+        this.branchList = branchList;
+    }
+
+    /**
+     * @return the inputParams
+     */
+    public String getInputParams() {
+        return inputParams;
+    }
+
+    /**
+     * @param inputParams the inputParams to set
+     */
+    public void setInputParams(String inputParams) {
+        this.inputParams = inputParams;
     }
     
-    public void setCtryCode(String ctryCode) {
-        this.ctryCode = ctryCode;
-    }
-    
-    public String getCtryName() {
-        return ctryName;
-    }
-    
-    public void setCtryName(String ctryName) {
-        this.ctryName = ctryName;
-    }
-    
-    public String getStateCode() {
-        return stateCode;
-    }
-    
-    public void setStateCode(String stateCode) {
-        this.stateCode = stateCode;
-    }
-    
-    public String getStateName() {
-        return stateName;
-    }
-    
-    public void setStateName(String stateName) {
-        this.stateName = stateName;
-    }
+    private String inputParams;
+    private List<BranchEntity> branchList;
 }
