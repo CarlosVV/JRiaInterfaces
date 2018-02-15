@@ -17,12 +17,16 @@ import fx.globalpaying.entities.GetLocsCurrsRatesRequestEntity;
 import fx.globalpaying.entities.GetOrderCommissionRequestEntity;
 import fx.globalpaying.entities.GetOrderStatusNoticesRequestEntity;
 import fx.globalpaying.entities.GetOrdersValidatedRequestEntity;
+import fx.globalpaying.entities.GetPayersCustSvcMsgsRequestEntity;
 import fx.globalpaying.entities.GetRequirementsRequestEntity;
 import fx.globalpaying.entities.GetStatesCitiesRequestEntity;
 import fx.globalpaying.entities.GetStatesCitiesResponseEntity;
+import fx.globalpaying.entities.InputCancelationRequestsRequestEntity;
+import fx.globalpaying.entities.InputSendersCustSvcMsgsRequestEntity;
 import fx.globalpaying.interfaces.BankBranches;
 import fx.globalpaying.interfaces.BankInfo;
 import fx.globalpaying.interfaces.Banks;
+import fx.globalpaying.interfaces.CancellationRequests;
 import fx.globalpaying.interfaces.Commissions;
 import fx.globalpaying.interfaces.OrderCommission;
 import fx.globalpaying.interfaces.CountriesStates;
@@ -31,7 +35,9 @@ import fx.globalpaying.interfaces.EnumerationValues;
 import fx.globalpaying.interfaces.LocsCurrsRates;
 import fx.globalpaying.interfaces.OrderStatusNotices;
 import fx.globalpaying.interfaces.OrdersValidated;
+import fx.globalpaying.interfaces.PayerCustSvcMsgs;
 import fx.globalpaying.interfaces.Requirements;
+import fx.globalpaying.interfaces.SendersCustSvcMsgs;
 import fx.globalpaying.interfaces.StatesCities;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -59,7 +65,10 @@ public class ServiceManager {
         OrdersValidated,
         Banks,
         BankInfo,
-        BankBranches
+        BankBranches,
+        PayerCustSvcMsgs,
+        CancellationRequests,
+        SendersCustSvcMsgs
     }
 
     public static Object ExecuteWebMethod(RequestTypeEnum requestType, String[] args) {
@@ -148,11 +157,8 @@ public class ServiceManager {
                 String country = ((GetLocsCurrsRatesRequestEntity) request).getRequests().get(0).getCtryCode();
                 String state = ((GetLocsCurrsRatesRequestEntity) request).getRequests().get(0).getStateCode();
                 String city = ((GetLocsCurrsRatesRequestEntity) request).getRequests().get(0).getCityName();
-                // "[a-zA-Z]+\\.?"  "\\w+\\.?"
                 String valid_pattern = "[a-zA-ZñÑáéíóúÁÉÍÓÚ\\-\\s\\.]+";
                 String invalid_pattern = "[^a-zA-ZñÑáéíóúÁÉÍÓÚ\\-\\s\\.]+";
-                //String pattern = "\\w+\\-\\s\\.+";
-                //System.out.println(city);
                 if (!city.matches(valid_pattern)) {
                     String searchCityName = city.replaceAll(invalid_pattern, ".");
                     //System.out.println(searchCityName);
@@ -174,10 +180,8 @@ public class ServiceManager {
                             break;
                         }
                     }
-                    //System.out.println(hitCity);
                     city = hitCity;
                 }
-
                 ((GetLocsCurrsRatesRequestEntity) request).getRequests().get(0).setCityName(city);
                 LocsCurrsRates.callSoapWebService(soapEndpointUrl, (GetLocsCurrsRatesRequestEntity) request);
                 break;
@@ -200,6 +204,18 @@ public class ServiceManager {
             case BankBranches:
                 request = BankBranches.parseInputArgsToRequest(args);
                 BankBranches.callSoapWebService(soapEndpointUrl, (GetBankBranchesRequestEntity) request, true);
+                break;
+            case PayerCustSvcMsgs:
+                request = PayerCustSvcMsgs.parseInputArgsToRequest(args);
+                PayerCustSvcMsgs.callSoapWebService(soapEndpointUrl, (GetPayersCustSvcMsgsRequestEntity) request, true);
+                break;
+            case CancellationRequests:
+                request = CancellationRequests.parseInputArgsToRequest(args);
+                CancellationRequests.callSoapWebService(soapEndpointUrl, (InputCancelationRequestsRequestEntity) request, true);
+                break;
+            case SendersCustSvcMsgs:
+                request = SendersCustSvcMsgs.parseInputArgsToRequest(args);
+                SendersCustSvcMsgs.callSoapWebService(soapEndpointUrl, (InputSendersCustSvcMsgsRequestEntity) request, true);
                 break;
         }
         return response;
