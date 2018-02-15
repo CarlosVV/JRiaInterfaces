@@ -5,9 +5,12 @@
  */
 package fx.globalsending;
 
+import fx.globalsending.entities.InputPayersCustSvcMsgsRequestEntity;
+import fx.globalsending.entities.InputPayersCustSvcMsgsResponseEntity;
 import fx.globalsending.entities.VerifyOrderForPayoutServiceRequest;
 import fx.globalsending.entities.VerifyOrderForPayoutServiceResponse;
 import fx.globalsending.interfaces.Configurations;
+import fx.globalsending.interfaces.InputPayersCustSvcMsgsService;
 import fx.globalsending.interfaces.VerifyOrderForPayoutService;
 
 /**
@@ -38,6 +41,12 @@ public class FXGlobalSending {
             VerifyOrderForPayoutService service = new VerifyOrderForPayoutService(config);
             VerifyOrderForPayoutServiceRequest request = service.parseInputArgsToRequest(args);
             VerifyOrderForPayoutServiceResponse response = service.invoke(request);
+        }
+        
+        if("InputPayersCustSvcMsgs".equals(requestType)){
+            InputPayersCustSvcMsgsService service = new InputPayersCustSvcMsgsService(config);
+            InputPayersCustSvcMsgsRequestEntity request = service.parseInputArgsToRequest(args);
+            InputPayersCustSvcMsgsResponseEntity response = service.invoke(request);
         }
     }
     
