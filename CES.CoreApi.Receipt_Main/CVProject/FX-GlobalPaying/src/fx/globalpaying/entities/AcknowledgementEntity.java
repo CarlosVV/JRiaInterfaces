@@ -14,6 +14,20 @@ import java.util.List;
 public class AcknowledgementEntity {
 
     /**
+     * @return the scMessageID
+     */
+    public String getScMessageID() {
+        return scMessageID;
+    }
+
+    /**
+     * @param scMessageID the scMessageID to set
+     */
+    public void setScMessageID(String scMessageID) {
+        this.scMessageID = scMessageID;
+    }
+
+    /**
      * @return the scOrderNo
      */
     public String getScOrderNo() {
@@ -83,6 +97,7 @@ public class AcknowledgementEntity {
         this.notificationDesc = notificationDesc;
     }
    private String scOrderNo;
+   private String scMessageID;
    private String processDate;
    private String processTime;
    private String notificationCode;

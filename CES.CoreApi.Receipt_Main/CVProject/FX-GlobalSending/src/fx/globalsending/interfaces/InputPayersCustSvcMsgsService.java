@@ -42,7 +42,7 @@ public class InputPayersCustSvcMsgsService {
 
     public InputPayersCustSvcMsgsService(Configurations configurations) {
         this.configurations = configurations;
-        isDebug = true;
+        isDebug = false;
         cesNamespace = "ces";
         fxGlobalNamespaceURI = "CES.Services.FXGlobal";
         WarningMsg = "";
@@ -52,15 +52,6 @@ public class InputPayersCustSvcMsgsService {
     private static final String SOAP_ACTION = "CES.Services.FXGlobal/IRiaAsSender/InputPayersCustSvcMsgs";
 
     private static final String OPERATION = "InputPayersCustSvcMsgs";
-
-    private boolean isParsableAsLong(final String s) {
-        try {
-            Long.valueOf(s);
-            return true;
-        } catch (NumberFormatException numberFormatException) {
-            return false;
-        }
-    }
 
     private void createSoapEnvelope(SOAPMessage soapMessage,
             InputPayersCustSvcMsgsRequestEntity request) throws SOAPException {
@@ -116,19 +107,19 @@ public class InputPayersCustSvcMsgsService {
 
         for (int i = 0; i < request.getMessages().size(); i++) {
             SOAPElement csMessageElement = csMessagesElement.addChildElement("CSMessage");
-            
+
             SOAPElement pcOrderNoElement = csMessageElement.addChildElement("PCOrderNo");
             pcOrderNoElement.addTextNode(request.getMessages().get(i).getPcOrderNo());
-            
+
             SOAPElement scOrderNoElement = csMessageElement.addChildElement("SCOrderNo");
             scOrderNoElement.addTextNode(request.getMessages().get(i).getScOrderNo());
-            
+
             SOAPElement messageIDElement = csMessageElement.addChildElement("MessageID");
             messageIDElement.addTextNode(request.getMessages().get(i).getMessageID());
-            
+
             SOAPElement messageTextElement = csMessageElement.addChildElement("MessageText");
             messageTextElement.addTextNode(request.getMessages().get(i).getMessageText());
-            
+
             SOAPElement enteredByElement = csMessageElement.addChildElement("EnteredBy");
             enteredByElement.addTextNode(request.getMessages().get(i).getEnteredBy());
         }
@@ -239,6 +230,7 @@ public class InputPayersCustSvcMsgsService {
                 inputPayersCustSvcStringReturn = "";
                 for (CSMessageAcknowledgementEntity ack : response.getAcknowledgements()) {
                     inputPayersCustSvcStringReturn = inputPayersCustSvcStringReturn
+                            + ack.getPcOrderNo() + "|"
                             + ack.getScOrderNo() + "|"
                             + ack.getProcessDate() + "|"
                             + ack.getProcessTime() + "|"
@@ -329,7 +321,7 @@ public class InputPayersCustSvcMsgsService {
             }
 
             soapConnection.close();
-            
+
         } catch (Exception e) {
             System.err.println("\nError occurred while sending SOAP Request to Server!\nMake sure you have the correct endpoint URL and SOAPAction!\n");
             e.printStackTrace();

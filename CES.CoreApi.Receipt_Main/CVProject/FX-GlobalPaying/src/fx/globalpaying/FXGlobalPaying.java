@@ -6,15 +6,6 @@
 package fx.globalpaying;
 
 import fx.globalpaying.ServiceManager.RequestTypeEnum;
-import static fx.globalpaying.Utils.stripAccents;
-import java.io.StringReader;
-import java.text.Normalizer;
-import javax.xml.parsers.DocumentBuilder;
-import javax.xml.parsers.DocumentBuilderFactory;
-import org.w3c.dom.Document;
-import org.w3c.dom.Element;
-import org.w3c.dom.NodeList;
-import org.xml.sax.InputSource;
 
 /**
  *

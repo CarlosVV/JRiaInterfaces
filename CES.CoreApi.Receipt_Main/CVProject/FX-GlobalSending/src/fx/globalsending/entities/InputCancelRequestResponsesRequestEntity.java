@@ -5,55 +5,32 @@
  */
 package fx.globalsending.entities;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  *
  * @author cvalderrama
  */
 public class InputCancelRequestResponsesRequestEntity extends BaseRequestEntity {
 
-    private String dateTimeLocal;
-    private String dateTimeUTC;
-    private String pin;
-    private String beneAmount;
-    private String correspLocID;
-
-    public void setDateTimeLocal(String dateTimeLocal) {
-        this.dateTimeLocal = dateTimeLocal;
+    public InputCancelRequestResponsesRequestEntity() {
+        cancelRequestResponses = new ArrayList<CancelRequestResponseEntity>();
     }
 
-    public String getDateTimeLocal() {
-        return dateTimeLocal;
+    private List<CancelRequestResponseEntity> cancelRequestResponses;
+
+    /**
+     * @return the cancelRequestResponses
+     */
+    public List<CancelRequestResponseEntity> getCancelRequestResponses() {
+        return cancelRequestResponses;
     }
 
-    public void setDateTimeUTC(String dateTimeUTC) {
-        this.dateTimeUTC = dateTimeUTC;
-    }
-
-    public String getDateTimeUTC() {
-        return dateTimeUTC;
-    }
-
-    public void setPin(String pin) {
-        this.pin = pin;
-    }
-
-    public String getPin() {
-        return pin;
-    }
-
-    public void setBeneAmount(String beneAmount) {
-        this.beneAmount = beneAmount;
-    }
-
-    public String getBeneAmount() {
-        return beneAmount;
-    }
-
-    public void setCorrespLocID(String correspLocID) {
-        this.correspLocID = correspLocID;
-    }
-
-    public String getCorrespLocID() {
-        return correspLocID;
+    /**
+     * @param cancelRequestResponses the cancelRequestResponses to set
+     */
+    public void setCancelRequestResponses(List<CancelRequestResponseEntity> cancelRequestResponses) {
+        this.cancelRequestResponses = cancelRequestResponses;
     }
 }

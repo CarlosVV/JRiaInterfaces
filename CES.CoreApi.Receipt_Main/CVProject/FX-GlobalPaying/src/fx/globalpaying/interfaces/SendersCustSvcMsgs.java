@@ -67,24 +67,22 @@ public class SendersCustSvcMsgs {
         if (args[3] != null) {
             String[] requestArray = args[3].split(";", -1);
             if (requestArray.length >= 1) {
-                //for (int i = 1; i < requestArray.length; i++) {
-                    //String[] subRequestArray = requestArray[i].split("|", -1);
-                    CSMessageEntity requestEntity = new CSMessageEntity();
-                    if (requestArray.length >= 2) {
-                        requestEntity.setScOrderNo(requestArray[1]);
-                    }
-                    if (requestArray.length >= 3) {
-                        requestEntity.setMessageID(requestArray[2]);
-                    }
-                    if (requestArray.length >= 4) {
-                        requestEntity.setMessageText(requestArray[3]);
-                    }
-                    if (requestArray.length >= 5) {
-                        requestEntity.setEnteredBy(requestArray[4]);
-                    }
 
-                    request.getRequests().add(requestEntity);
-               // }
+                CSMessageEntity requestEntity = new CSMessageEntity();
+                if (requestArray.length >= 2) {
+                    requestEntity.setScOrderNo(requestArray[1]);
+                }
+                if (requestArray.length >= 3) {
+                    requestEntity.setMessageID(requestArray[2]);
+                }
+                if (requestArray.length >= 4) {
+                    requestEntity.setMessageText(requestArray[3]);
+                }
+                if (requestArray.length >= 5) {
+                    requestEntity.setEnteredBy(requestArray[4]);
+                }
+                
+                request.getRequests().add(requestEntity);
             }
         }
 
@@ -240,7 +238,7 @@ public class SendersCustSvcMsgs {
                                 while (it5.hasNext()) {
                                     SOAPElement element5 = (SOAPElement) it5.next();
 
-                                    if ("CancellationRequestAcknowledgement".equals(element5.getElementName().getLocalName())) {
+                                    if ("CSMessageAcknowledgement".equals(element5.getElementName().getLocalName())) {
                                         Iterator it6 = element5.getChildElements();
 
                                         AcknowledgementEntity cre = new AcknowledgementEntity();
@@ -248,6 +246,9 @@ public class SendersCustSvcMsgs {
                                             SOAPElement element6 = (SOAPElement) it6.next();
                                             if ("SCOrderNo".equals(element6.getElementName().getLocalName())) {
                                                 cre.setScOrderNo(element6.getTextContent());
+                                            }
+                                            if ("SCMessageID".equals(element6.getElementName().getLocalName())) {
+                                                cre.setScMessageID(element6.getTextContent());
                                             }
                                             if ("ProcessDate".equals(element6.getElementName().getLocalName())) {
                                                 cre.setProcessDate(element6.getTextContent());
@@ -291,8 +292,9 @@ public class SendersCustSvcMsgs {
             if (generateToStdOut) {
                 inputSendersCustSvcMsgsStringReturn = "";
                 for (AcknowledgementEntity ack : response.getAcknowledgements()) {
-                    inputSendersCustSvcMsgsStringReturn = inputSendersCustSvcMsgsStringReturn  
-                               + ack.getScOrderNo() + "|"
+                    inputSendersCustSvcMsgsStringReturn = inputSendersCustSvcMsgsStringReturn
+                            + ack.getScOrderNo() + "|"
+                            + ack.getScMessageID() + "|"
                             + ack.getProcessDate() + "|"
                             + ack.getProcessTime() + "|"
                             + ack.getNotificationCode() + "|"
